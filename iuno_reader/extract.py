@@ -27,6 +27,34 @@ ABBREV = {
 }
 
 
+_FLOAT_RE = re.compile(r"^\s*(Figure|Fig\.|Table|Tab\.)\s*(\d+)", re.I)
+FLOAT_KINDS = ("caption", "table", "footnote")
+
+
+def float_ref_pattern(seg):
+    """图注、表题、脚注片段 → 用来在正文里找「谁引用了它」的正则；不是这类片段返回 None。"""
+    if seg["kind"] == "footnote":
+        return re.compile(re.escape("{fn%s}" % seg.get("footnote")))
+    if seg["kind"] not in ("caption", "table"):
+        return None
+    m = _FLOAT_RE.match(seg["en"])
+    if not m:
+        return None
+    word = r"(?:Tables?|Tab\.)" if m.group(1).lower().startswith("tab") else r"(?:Figures?|Figs?\.)"
+    return re.compile(rf"\b{word}\s*{m.group(2)}\b")
+
+
+def referenced_floats(segments, main_ids):
+    """返回被 main_ids 这些正文片段引用到的图、表、脚注的 id。"""
+    main = [s for s in segments if s["id"] in main_ids and s["kind"] not in FLOAT_KINDS]
+    out = set()
+    for f in segments:
+        pat = float_ref_pattern(f)
+        if pat and any(pat.search(s["en"]) for s in main):
+            out.add(f["id"])
+    return out
+
+
 class Ctx:
     def __init__(self):
         self.footnotes = []  # (n, Tag)
@@ -167,13 +195,21 @@ def extract(html, arxiv_id, base_url="https://arxiv.org/html/"):
             if el.get("id") in seen_fig or el.find_parent("figure"):
                 continue
             seen_fig.add(el.get("id"))
-            cap = el.find("figcaption", recursive=True)
-            img = el.find("img")
-            image = base_url + img["src"] if img and img.get("src") and not img["src"].startswith("http") else (img["src"] if img else None)
+            # 图注取最外层 figure 自己的 figcaption（子图的小标题不算）
+            caps = [c for c in el.find_all("figcaption") if c.find_parent("figure") is el]
+            cap = caps[-1] if caps else el.find("figcaption")
+            images = []
+            for g in el.find_all(["img", "object"]):  # arXiv HTML 里的图常用 <object data="...svg">
+                src = g.get("src") if g.name == "img" else g.get("data")
+                if not src:
+                    continue
+                url = src if src.startswith("http") else base_url + src.lstrip("/")
+                if url not in images:
+                    images.append(url)
             kind = "table" if "ltx_table" in cls else "caption"
             if cap:
                 _seg(segs, el.get("id") or f"fig{len(seen_fig)}", kind, section, subsection,
-                     _text_of(cap, ctx), image=image)
+                     _text_of(cap, ctx), image=images[0] if images else None, images=images)
             _flush_footnotes(segs, ctx, section, subsection, fn_done)
             continue
         if el.name == "div" and "ltx_para" in cls:

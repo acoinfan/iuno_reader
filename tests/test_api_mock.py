@@ -37,22 +37,35 @@ out = eng.translate(task, retries=2)
 assert all(s["zh"] == "" and s["conf"] == "low" for s in out["sentences"]), out
 print("翻译：失败兜底 通过")
 
-# 3. 回译审校：先回译，再比对
-rv = ApiReviewer()
+# 3. 回译审校：先回译，再比对；回译那一步收到的内容里不能有英文原文
+seen = []
+
+
+def spy_chat(self, messages):
+    seen.append((self.role, messages[-1]["content"]))
+    return replies.pop(0)
+
+
+T.OpenAICompatible._chat = spy_chat
+rv = ApiReviewer("backtranslate")
 rtask = {"section": "S", "pairs": [{"en": "Models do not use it.", "zh": "模型使用它。"},
                                    {"en": "It works.", "zh": "它有效。"}]}
 replies[:] = [json.dumps({"sentences": ["Models use it.", "It works."]}),
               json.dumps({"reviews": [{"verdict": "major", "category": ["negation"], "issue": "否定丢失"},
                                       {"verdict": "ok", "category": [], "issue": ""}]})]
-r = rv.backtranslate(rtask)
+r = rv.review(rtask)
 assert r["mode"] == "backtranslate" and r["reviews"][0]["backtranslation"] == "Models use it.", r
 assert r["reviews"][0]["verdict"] == "major" and r["reviews"][1]["verdict"] == "ok"
-print("回译审校：两步流程 通过")
+assert r["reviews"][0]["zh_reviewed"] == "模型使用它。"
+assert seen[0][0] == "backtranslator" and "Models do not use it." not in seen[0][1], seen[0]
+assert seen[1][0] == "bt_judge" and "模型使用它" not in seen[1][1], seen[1]
+print("回译审校：两步流程、回译看不到原文、比对看不到中文 通过")
 
 # 4. 盲审
+rv = ApiReviewer("blind")
 replies[:] = [json.dumps({"reviews": [{"verdict": "minor", "category": ["hedge"], "issue": "语气", "suggestion": "x"},
                                       {"verdict": "ok", "category": [], "issue": "", "suggestion": ""}]})]
-r = rv.blind(rtask)
+r = rv.review(rtask)
 assert r["mode"] == "blind" and r["reviews"][0]["verdict"] == "minor"
 print("盲审：通过")
 print("接口流程（模拟）测试全部通过")

@@ -1,5 +1,7 @@
 {
+ "__meta__": {"translator": "claude-opus-5.5（尤诺，按 tasks 清单人工逐句翻译）"},
  "__sections__": {
+  "__title__": "语言模型难以使用在上下文中学到的表示",
   "1 Introduction": "1 引言",
   "2 Preliminaries: In-Context Representation Learning": "2 预备知识：上下文表示学习",
   "Graph Tracing Task": "图追踪任务",

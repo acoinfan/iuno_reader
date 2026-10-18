@@ -4,11 +4,30 @@ arXiv 论文的**逐句双语对照**阅读工具：每段英文下面紧跟中�
 
 不翻译 PDF。PDF 翻译要先拆版面再重新排版，这一步可能会悄悄丢掉整段文字（例如 BabelDOC 的 issue #620、#613）。这里直接用 arXiv 的 HTML 版（由作者上传的 LaTeX 生成），段落和公式都是原样的，译文和原文可以逐句对齐、逐句检查。
 
-## 输出长什么样
+## 流水线：一条命令
 
-- `out/<id>.md`：给 Obsidian 读。每段先是英文，下面是 **译** 开头的中文；有问题的句子按颜色高亮，鼠标悬停能看到原因；每段下面有一个默认折叠的框，把被标出的句子的原文和译文并排列出。
-- `out/<id>.html`：左右两栏，左英右中，鼠标移到一句上，两边对应的句子会同时被框出来。用浏览器打开（公式需要联网加载 MathJax）。
-- `out/<id>.checked.json`：核对结果的原始数据。
+```bash
+cd /home/a_coin_fan/work/iuno_reader
+.venv/bin/python -m iuno_reader run 2602.04212 [更多编号...] [--sections abs,2,3,4] [--export <目录>]
+```
+
+自动完成：下载 arXiv HTML → 拆成段落和句子 → 翻译 → 审校 → 规则核对 → 渲染 → 写出 `out/<id>/`。
+
+- 配了接口（见下文「接口配置」），翻译和审校自动完成。
+- 没配接口时不会失败：流水线生成任务清单和写给 agent 的说明（`AGENT_TRANSLATE.md`、`AGENT_REVIEW.md`），状态停在 `awaiting_translation` 或 `awaiting_review`。agent 按说明完成后再运行一次 `run`，会从中断处接着做。
+- `--translate auto|api|agent`、`--review auto|blind|backtranslate|agent|none` 可以指定方式。
+- 给其他 agent 的使用说明见 [AGENTS.md](AGENTS.md)。
+
+## 输出 out/<id>/
+
+| 文件 | 内容 |
+|---|---|
+| `manifest.json` | 每一步的状态、句数和标记统计、译者和审校者及独立性、各文件路径、下一步该做什么 |
+| `paper.zh.md` | 给 Obsidian 读：每段英文下面是 **译** 开头的中文；有问题的句子按颜色高亮，悬停看原因；每段下面有默认折叠的逐句对照框 |
+| `paper.zh.html` | 浏览器打开，左英右中，鼠标移到一句上两边同时框出（公式需联网加载 MathJax） |
+| `paper.en.md` | 英文全文，保留章节、图注、公式、脚注，给 agent 引用和整理 |
+| `flags.md` | 所有被标记的句子：原文、译文、原因 |
+| `checked.json` | 完整核对数据 |
 
 ## 颜色
 
@@ -21,7 +40,7 @@ arXiv 论文的**逐句双语对照**阅读工具：每段英文下面紧跟中�
 
 **这些标记只是提醒。** 标出来的句子要看一眼；没标出来的句子，也不保证完全正确。规则都是启发式的，例如「否定词」只检查译文里有没有任何否定表达，不检查否定的是不是同一件事。
 
-## 用法
+## 分步命令（调试用）
 
 ```bash
 cd /home/a_coin_fan/work/iuno_reader
@@ -34,6 +53,20 @@ cd /home/a_coin_fan/work/iuno_reader
 
 - `--sections`：只处理某几节，例如 `abs,2,3,4`（`abs` 是摘要）或附录 `A,B`。
 - `--translated-only`：渲染时只输出已经翻译的片段。
+
+### 四个角色，互不交叉
+
+翻译、盲审、回译、回译比对各有一份提示词（`prompts/`），每份都写明「能看到什么、看不到什么」。接口模式下由 `iuno_reader/roles.py` 的白名单强制执行：回译只看得到中文、回译比对只看得到英文原文和回译、盲审看不到译者备注；每次调用都是一段新对话，不共享历史。各角色的模型分开配置，审校结果会记录它和译者是不是同一个模型（`independence`），同模型会在图例和 manifest 里注明「独立性不足」。详见 [AGENTS.md](AGENTS.md) 的表格。
+
+### 接口配置
+
+```bash
+export IUNO_TRANSLATE_BASE_URL=... IUNO_TRANSLATE_MODEL=... IUNO_TRANSLATE_API_KEY=...   # 翻译（未设则用 IUNO_READER_*）
+export IUNO_REVIEW_BASE_URL=...    IUNO_REVIEW_MODEL=...    IUNO_REVIEW_API_KEY=...      # 盲审与回译比对，建议换一家模型
+export IUNO_BT_BASE_URL=...        IUNO_BT_MODEL=...        IUNO_BT_API_KEY=...          # 回译（未设则用 IUNO_REVIEW_*）
+```
+
+密钥不要写进仓库。
 
 ### 两种翻译方式
 

@@ -6,4 +6,6 @@ cache/
 out/
 data/*/doc.json
 data/*/tasks.json
+data/*/review_tasks.json
+data/*/*.raw.json
 # 译文 data/*/translation.json 要进 git

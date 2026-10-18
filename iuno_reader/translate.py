@@ -2,33 +2,21 @@
 
 translation.json：
 {
-  "<片段 id>": {
-    "zh_title": "（可选）所在小节的中文标题",
-    "sentences": [{"zh": "译文", "conf": "high|mid|low", "note": "为什么没把握"}, ...]
-  }
+  "__meta__": {"translator": "谁翻的（模型名或人）"},
+  "__sections__": {"英文节标题": "中文节标题"},
+  "<片段 id>": {"sentences": [{"zh": "译文", "conf": "high|mid|low", "note": "为什么没把握"}, ...]}
 }
 
 1. 人工 / Agent 翻译：用 `tasks` 命令导出待译清单（含上下文和相关术语），译好后写成上面的格式。
-2. 自动翻译：OpenAI 兼容接口（DeepSeek、OpenAI 等）。配置见 README。
+2. 自动翻译：OpenAI 兼容接口，角色 translator，提示词见 prompts/translator.md，模型配置见 roles.py。
 """
 import json
-import os
 import re
 import time
 import urllib.request
 
 from .glossary import terms_in
-
-RULES = """你是严谨的学术翻译，把英文论文逐句译成中文，供研究者对照原文精读。必须遵守：
-1. 逐句翻译，输出的句数必须与输入完全相同，顺序一一对应，不合并、不拆分、不省略。
-2. 准确优先于通顺：不增加原文没有的信息，不省略任何修饰语、限定条件和转折。
-3. 限定词按强弱译，不能加强或减弱语气：suggest/indicate 译「表明」「提示」，不能译「证明」；may/might 译「可能」；largely 译「大多」「很大程度上」；partially 译「部分」；somewhat 译「有些」「一定程度上」；approximately 译「约」。
-4. 否定词、数字、比较级、范围（at least、up to、more than）必须完整保留。
-5. 公式 $...$ 和 $$...$$、反引号里的代码和专名、脚注标记 {fn1} 等占位符，原样照抄，不翻译、不改动。
-6. 引用（如 Park et al. (2025a)）保留原文，不翻译人名和年份。
-7. 术语按给定术语表翻译；关键术语第一次出现时可写成「中文（English）」。
-8. 每句给出置信度 conf：high＝确定；mid＝基本确定但有可商榷之处；low＝有歧义、句子结构复杂、术语没把握或可能误读。conf 不是 high 时，用一句中文写明原因 note。
-只输出 JSON：{"sentences": [{"zh": "...", "conf": "high|mid|low", "note": "..."}]}"""
+from .roles import load_prompt, model_config, payload_translator
 
 
 def build_task(seg, prev_en, doc_title, terms, hedges):
@@ -46,10 +34,12 @@ def build_task(seg, prev_en, doc_title, terms, hedges):
 
 
 def select_segments(doc, sections=None):
-    """sections 例：["abs", "2", "3", "4", "A"]；None 表示全部。"""
+    """sections 例：["abs", "2", "3", "4", "A"]；None 表示全部。
+    选中的正文引用到的图、表、脚注也会一起选上，即使它们在 HTML 里属于别的节（图常浮动到前面）。"""
     if not sections:
         return [s for s in doc["segments"] if s["kind"] != "equation"]
-    out = []
+    from .extract import referenced_floats
+    chosen = set()
     for s in doc["segments"]:
         if s["kind"] == "equation":
             continue
@@ -58,8 +48,9 @@ def select_segments(doc, sections=None):
         if sec.startswith("Appendix "):
             key = sec.split()[1]
         if key in sections:
-            out.append(s)
-    return out
+            chosen.add(s["id"])
+    chosen |= referenced_floats(doc["segments"], chosen)
+    return [s for s in doc["segments"] if s["id"] in chosen]
 
 
 def make_tasks(doc, terms, hedges, sections=None):
@@ -74,20 +65,19 @@ def make_tasks(doc, terms, hedges, sections=None):
 
 
 class OpenAICompatible:
-    """最小实现，只用标准库。环境变量：
-    IUNO_READER_BASE_URL（例 https://api.deepseek.com/v1）
-    IUNO_READER_MODEL（例 deepseek-chat）
-    IUNO_READER_API_KEY
-    """
+    """最小实现，只用标准库。每个实例绑定一个角色，模型配置按角色从环境变量读取（见 roles.py）。
+    每次 chat 都是全新的一段对话，不保留历史。"""
 
-    def __init__(self, base_url=None, model=None, api_key=None, temperature=0.1, timeout=120):
-        self.base_url = (base_url or os.environ.get("IUNO_READER_BASE_URL", "")).rstrip("/")
-        self.model = model or os.environ.get("IUNO_READER_MODEL", "")
-        self.api_key = api_key or os.environ.get("IUNO_READER_API_KEY", "")
+    def __init__(self, role="translator", base_url=None, model=None, api_key=None, temperature=0.1, timeout=120):
+        cfg = model_config(role)
+        self.role = role
+        self.base_url = (base_url or cfg[0]).rstrip("/")
+        self.model = model or cfg[1]
+        self.api_key = api_key or cfg[2]
         self.temperature = temperature
         self.timeout = timeout
         if not (self.base_url and self.model and self.api_key):
-            raise SystemExit("缺少接口配置：请设置 IUNO_READER_BASE_URL、IUNO_READER_MODEL、IUNO_READER_API_KEY")
+            raise SystemExit(f"角色 {role} 缺少接口配置，请设置环境变量（见 roles.py 的说明）")
 
     def _chat(self, messages):
         body = json.dumps({"model": self.model, "messages": messages, "temperature": self.temperature,
@@ -98,25 +88,30 @@ class OpenAICompatible:
             data = json.load(r)
         return data["choices"][0]["message"]["content"]
 
-    def translate(self, task, retries=2):
-        user = json.dumps({k: task[k] for k in ("paper", "section", "subsection", "previous_paragraph",
-                                                 "terms", "sentences")}, ensure_ascii=False)
-        messages = [{"role": "system", "content": RULES}, {"role": "user", "content": user}]
-        last_err = ""
+    def ask_json(self, system, payload, key, n, retries=2):
+        """发一段新对话，要求返回 {key: [...]} 且条数为 n；不对就带着错误原因重试。"""
+        messages = [{"role": "system", "content": system},
+                    {"role": "user", "content": json.dumps(payload, ensure_ascii=False)}]
+        err = ""
         for attempt in range(retries + 1):
-            if last_err:
-                messages.append({"role": "user", "content": f"上一次输出有问题：{last_err}。请重新输出，句数必须是 {len(task['sentences'])}。"})
+            if err:
+                messages.append({"role": "user", "content": f"上一次输出有问题：{err}。请重新输出，条数必须是 {n}。"})
             try:
-                content = self._chat(messages)
-                content = re.sub(r"^```(?:json)?|```$", "", content.strip()).strip()
-                out = json.loads(content)["sentences"]
-                if len(out) != len(task["sentences"]):
-                    last_err = f"句数 {len(out)} 与输入 {len(task['sentences'])} 不一致"
-                    continue
-                return {"sentences": [{"zh": o.get("zh", ""), "conf": o.get("conf", "mid"),
-                                       "note": o.get("note", "")} for o in out]}
+                content = re.sub(r"^```(?:json)?|```$", "", self._chat(messages).strip()).strip()
+                out = json.loads(content)[key]
+                if len(out) == n:
+                    return out
+                err = f"条数 {len(out)} 与输入 {n} 不一致"
             except Exception as e:  # 网络或解析错误：稍等后重试
-                last_err = f"{type(e).__name__}: {e}"
+                err = f"{type(e).__name__}: {e}"
                 time.sleep(2 * (attempt + 1))
-        return {"sentences": [{"zh": "", "conf": "low", "note": f"自动翻译失败：{last_err}"}
-                              for _ in task["sentences"]]}
+        raise RuntimeError(err)
+
+    def translate(self, task, retries=2):
+        n = len(task["sentences"])
+        try:
+            out = self.ask_json(load_prompt("translator"), payload_translator(task), "sentences", n, retries)
+        except RuntimeError as e:
+            return {"sentences": [{"zh": "", "conf": "low", "note": f"自动翻译失败：{e}"} for _ in range(n)]}
+        return {"sentences": [{"zh": o.get("zh", ""), "conf": o.get("conf", "mid"), "note": o.get("note", "")}
+                              for o in out]}

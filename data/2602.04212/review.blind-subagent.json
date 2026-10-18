@@ -952,5 +952,14 @@
     "zh_reviewed": "综合来看，这些结果进一步支持了这一观点：在上下文中学到的表示大多是惰性的（即无法用于完成下游任务）。"
    }
   ]
+ },
+ "__meta__": {
+  "reviewer": "blind-subagent",
+  "mode": "blind",
+  "models": {
+   "reviewer": "claude-opus-5.5（子代理，能读到和译者相同的人设）"
+  },
+  "translator": "claude-opus-5.5（尤诺，按 tasks 清单人工逐句翻译）",
+  "independence": "same-model"
  }
 }
