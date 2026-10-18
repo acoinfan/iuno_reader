@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+*.pyc
+# 可重新生成的中间文件和输出
+cache/
+out/
+data/*/doc.json
+data/*/tasks.json
+# 译文 data/*/translation.json 要进 git

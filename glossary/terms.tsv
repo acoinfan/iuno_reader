@@ -1,0 +1,55 @@
+# 英文	中文（可接受译法用 / 分隔）	备注
+ablation	消融	来自 Research-KB glossary.md
+activation patching	激活修补	来自 Research-KB glossary.md
+adaptive world modeling	自适应世界建模	来自 Research-KB glossary.md
+attested	出现过的/有记录的	来自 Research-KB glossary.md
+AWM	自适应世界建模	来自 Research-KB glossary.md
+baseline	基线	来自 Research-KB glossary.md
+CI	置信区间	来自 Research-KB glossary.md
+confidence interval	置信区间	来自 Research-KB glossary.md
+conform to	贴合/符合	来自 Research-KB glossary.md
+DC	距离相关	来自 Research-KB glossary.md
+DE	狄利克雷能量	来自 Research-KB glossary.md
+demonstration	示例	来自 Research-KB glossary.md
+deployable	可部署的	来自 Research-KB glossary.md
+Dirichlet Energy	狄利克雷能量	来自 Research-KB glossary.md
+disparity	差距	来自 Research-KB glossary.md
+Distance Correlation	距离相关	来自 Research-KB glossary.md
+downstream task	下游任务	来自 Research-KB glossary.md
+erasure	擦除	来自 Research-KB glossary.md
+few-shot	少量示例	来自 Research-KB glossary.md
+fidelity	保真度/质量	来自 Research-KB glossary.md
+flexibly deployable	可灵活部署的	来自 Research-KB glossary.md
+gradient attribution	梯度归因	来自 Research-KB glossary.md
+graph tracing	图追踪	来自 Research-KB glossary.md
+graph tracking	图追踪	来自 Research-KB glossary.md
+held-out	留出的/没参与训练或示例的	来自 Research-KB glossary.md
+hidden state	隐藏状态	来自 Research-KB glossary.md
+ICL	上下文学习	来自 Research-KB glossary.md
+in-context learning	上下文学习	来自 Research-KB glossary.md
+in-context representation learning	上下文表示学习	来自 Research-KB glossary.md
+in-context world modeling	上下文世界建模	来自 Research-KB glossary.md
+induce	归纳出	来自 Research-KB glossary.md
+inert	惰性的	来自 Research-KB glossary.md
+linear probe	线性探针	来自 Research-KB glossary.md
+nontrivial	非平凡的	来自 Research-KB glossary.md
+prefilled	预填充	来自 Research-KB glossary.md
+probing	线性探针	来自 Research-KB glossary.md
+query	查询	来自 Research-KB glossary.md
+random walk	随机游走	来自 Research-KB glossary.md
+readout	读出	来自 Research-KB glossary.md
+recapitulate	重现/再现	来自 Research-KB glossary.md
+replicate	复现	来自 Research-KB glossary.md
+residual stream	残差流	来自 Research-KB glossary.md
+rule out	排除	来自 Research-KB glossary.md
+salient	显著的/突出的	来自 Research-KB glossary.md
+shot	示例	来自 Research-KB glossary.md
+state space	状态空间	来自 Research-KB glossary.md
+steering	导向	来自 Research-KB glossary.md
+subspace	子空间	来自 Research-KB glossary.md
+taken together	综合来看	来自 Research-KB glossary.md
+topology	拓扑	来自 Research-KB glossary.md
+trivial	平凡的	来自 Research-KB glossary.md
+world model	世界模型	来自 Research-KB glossary.md
+world representation	世界表示	来自 Research-KB glossary.md
+zero-shot	零样本	来自 Research-KB glossary.md

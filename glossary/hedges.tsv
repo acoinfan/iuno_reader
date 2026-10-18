@@ -1,0 +1,19 @@
+# 英文正则	可接受的中文（/ 分隔）	禁止的中文（语气被加强，/ 分隔）	说明
+may|might	可能/或许/也许/或可/未必	一定/必然/必定	情态：可能性
+could	可能/能够/可以/或许/能		情态：可能性或能力
+suggests?|suggested|suggesting	表明/提示/暗示/说明/意味着/显示/提出	证明/证实/确定	证据强度：中，不能译成「证明」
+indicates?|indicated|indicating	表明/显示/说明/提示/指出/意味着	证明/证实	证据强度：中
+seems?|seemed|appears? to|appeared to	似乎/看起来/显得/好像/看上去		主观判断
+likely|unlikely	可能/很可能/大概/不太可能/未必	一定/必然	概率
+largely	大多/很大程度/主要/大体/基本/大部分	完全/全部	程度：不是全部
+partial|partially	部分/局部/不完全	完全/全部	程度：部分
+somewhat|slightly	有些/有点/略/稍/一定程度/某种程度	明显/显著	程度：弱
+approximately|roughly|around|about(?= \$?\d)	约/大约/大致/左右/近/上下		数值近似
+often|frequently	常/往往/经常/通常/多数时候/时常	总是/一直	频率
+sometimes|occasionally	有时/偶尔/有些时候	总是/经常	频率
+generally|typically|usually	一般/通常/往往/大体/大多	总是/一定	频率
+tend(?:s|ed)? to	往往/倾向/通常/容易		倾向
+at least in part	至少部分/在一定程度上/部分	完全	程度
+nearly|almost	几乎/接近/差不多/近乎	完全/全部	程度
+limited	有限/不大/一定	显著/巨大	程度
+reliably|robustly	可靠/稳定/稳健/一贯		程度（常与否定连用）
