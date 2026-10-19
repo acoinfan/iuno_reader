@@ -1,0 +1,2507 @@
+{
+ "__meta__": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "models": {
+   "reviewer": "deepseek-v4-pro"
+  },
+  "translator": "claude-opus-5.5（尤诺，按 tasks 清单人工逐句翻译） + deepseek-v4-pro",
+  "independence": "same-model",
+  "usage": {
+   "calls": 86,
+   "prompt_tokens": 77195,
+   "completion_tokens": 78212,
+   "seconds": 959.1
+  }
+ },
+ "abs.p1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "尽管语言模型（LMs）已在广泛多样的任务中取得了巨大成功，但它们似乎仍未达到人工智能研究更高远的目标之一：创建一个在部署时能使其行为适应全新情境的人工系统（Shi et al., 2024）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "迈向这一目标的重要一步是创建这样的系统：它们能够归纳出在上下文中看到的数据的丰富表示，然后灵活地运用这些表示来实现目标（Lampinen et al., 2024）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "最近，Park et al. (2025a) 证实，当前的语言模型确实能够从上下文中归纳出这样的表示（即上下文表示学习）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "本研究考察语言模型能否利用这些表示来完成简单的下游任务。"
+   }
+  ]
+ },
+ "abs.p2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们首先评估开放权重语言模型是否能够利用上下文内表示进行下一 token 预测，然后使用一项新任务——**自适应世界建模**——来探测模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在这两项任务中，我们发现证据表明，开放权重语言模型难以部署在上下文中定义的新语义的表示，即使它们在其潜在表示中编码了这些语义。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此外，我们在自适应世界建模任务上评估了闭源、最先进的推理模型，并证明即使性能最强的语言模型也无法可靠地利用上下文中呈现的新模式。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "总体而言，本研究旨在启发新方法，促使模型不仅编码上下文中呈现的信息，而且以支持灵活部署这些信息的方式来进行编码。{fn1}"
+   }
+  ]
+ },
+ "fn1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "代码发布于此处。"
+   }
+  ]
+ },
+ "S1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "基于Transformer的语言模型（LM）的出现，彻底改变了我们对深度神经网络能力的看法。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "曾经看似遥不可及的任务，例如竞赛数学（Luong et al., 2025）、多语言问答（Comanici et al., 2025）和专家级科学推理（Rein et al., 2024），都因语言模型的进步而取得了实质性进展。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些先进能力推动了一项持续进行的调查：经过下一词预测训练的Transformer是否编码了生成其训练数据的因果过程的内在模型（即“世界模型”），一种可能支持此类推理的内在模型（Li et al., 2021; Toshniwal et al., 2022; Li et al., 2023; Vafa et al., 2024; Vafa et al., 2025）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "被赋予这种内在世界模型的人工智能体最终可能被证明更具自一致性（Wong et al., 2025），产生更少幻觉（Wong et al., 2023），并更好地泛化到其训练分布之外（Wu et al., 2024; McCoy et al., 2024; Gupta et al., 2025）。"
+   }
+  ]
+ },
+ "S1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了确保模型无需重新训练便能在动态世界中运作，我们更希望人工智能体在部署后能够适应不同环境。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "语言模型已展现出这种能力的一种形式，其典型表现是上下文学习（ICL；Brown et al. 2020）的出现。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "上下文学习使预训练语言模型能够根据上下文中提供的示例或描述临时采用新行为，而无需更新模型参数（Davidson et al., 2025）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "一个完全实现的适应性智能体将能够学会表示那些完全在上下文中定义的丰富、结构化的表征，并灵活地部署{fn2}这些表征来解决下游任务（Lampinen et al., 2024）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "换句话说，这样的智能体将能够构建一个上下文世界模型。"
+   }
+  ]
+ },
+ "fn2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如果一个表示在回应某个特定上下文时起到因果作用，我们就认为它对该上下文是**可部署的**（deployable）；否则（例如，这个表示可以被解码，但没有被使用；Decharms and Zador (2000)），我们就认为它对该上下文是**惰性的**（inert）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如果一个表示在不同于产生它的那个上下文的场景中（例如下游任务）也是可部署的，它就是**可灵活部署的**（flexibly deployable）。"
+   }
+  ]
+ },
+ "S1.F1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图1：一种在上下文中学习到、但不可灵活部署的结构化表示的示意图。"
+   },
+   {
+    "verdict": "major",
+    "category": [
+     "scope"
+    ],
+    "issue": "译文将括号中“以绿色表示”的修饰对象从“拓扑”（topology）转移到了“词序列”，而原文括号紧跟 topology，且后文提示词元另有颜色，绿色应指拓扑。",
+    "suggestion": "在下一词元预测任务中，我们向模型呈现由以绿色表示的拓扑上的随机游走生成的任意词序列，并要求模型生成一个 [ANSWER] 词元，随后生成下一个词元。",
+    "zh_reviewed": "在下一词元预测任务中，我们向模型呈现由拓扑上的随机游走生成的任意词序列（以绿色表示），并要求模型生成一个 [ANSWER] 词元，随后生成下一个词元。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "提示词元以黑色表示，模型生成的词元以蓝色表示。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "给定这样的序列，语言模型可能在若干层之后，在其某些隐藏状态中编码出该拓扑的表示。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，在后续生成响应需要该表示时，模型可能无法恰当地部署该表示。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在这项工作中，我们发现，在上下文中学习到的表示往往不能灵活部署。"
+   }
+  ]
+ },
+ "S1.F2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图 2：**（左上）**用来生成随机游走的 N×N 状态空间拓扑示例。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "原文用“or”表示两种条件中的任一种，译文用“和”连接，逻辑关系从选择变为并列，但没有实质影响。",
+    "suggestion": "**（右）**在**指令**（Instruction）条件或**预填充**（Prefilled）条件下的下一词预测提示词示例。",
+    "zh_reviewed": "**（右）** **指令**（Instruction）条件和**预填充**（Prefilled）条件下的下一词预测提示词示例。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了便于阅读，提示词里的格式标记没有加粗。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在指令条件下，模型需要在间隔若干个 token 之后部署在随机游走（彩色 token）中形成的上下文表示，才能预测一个合法的下一个词。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在预填充条件下，上下文表示是立即被部署的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**（左下）**自适应世界建模提示词示例：先是一段随机游走（彩色 token），后面跟着若干少量示例，这些示例定义了一条把某个位置上的状态映射到另一个位置上的状态的规则。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这里的规则把状态 $s_{i,j}$ 映射到 $s_{i+2,j}$（一条「两步规则」）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在这个例子里，city 会被映射到 wing。"
+   }
+  ]
+ },
+ "S1.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "一项近期研究明确考察了语言模型是否能学习上下文世界模型所需的那种结构化内部表示。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Park et al. (2025a) 向语言模型呈现一个具有潜在拓扑的状态空间上的随机游走，其中每个状态由一个任意词元表示（这些拓扑的示例见图 1 和图 2）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "他们表明，语言模型的词元表示逐渐反映出该状态空间的拓扑，使这些表示偏离其默认的、未语境化的语义。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，语言模型能够在上下文中学习编码完全新颖语义的表示，这一发现已被重复验证（Lubana et al., 2025），并被用作实际语言模型干预的启发（Yona et al., 2025）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在此，我们要问：当模型面对新任务时，这些上下文表示是可灵活部署的，还是在这些条件下是惰性的（Vafa et al., 2024; Li et al., 2025b）？"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "参见图 1 了解图示。"
+   }
+  ]
+ },
+ "S1.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们使用提示来研究这一问题；关键在于这些提示包含两个组成部分：一个定义上下文内语义（图2中的彩色词），另一个独立组成部分要求模型参照这些语义来完成任务。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们聚焦于两个简单的合成任务：（i）下一词预测任务（图2右），以及（ii）一项新颖任务，**自适应世界建模**（图2左下）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们发现，语言模型隐藏状态中存在的上下文内表征大多是惰性的。"
+   }
+  ]
+ },
+ "S1.p5.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，语言模型可能表征上下文中定义的结构，而未将其编码到隐藏状态的几何中。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们研究一种特别突出的替代方案，以最先进的闭源语言模型为典型代表。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些所谓的“推理模型”被训练为将其中间推理步骤外化为长思维链（CoTs；Wei et al. 2022；Nye et al. 2021；Jaech et al. 2024）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "关键的是，它们似乎以有些不同于其基础语言模型对应物的方式处理信息（Bogdan et al., 2025）；CoT 技术使它们能够对给定任务的各种可能方法进行动态推理（DeepSeek-AI et al., 2025；Yao et al., 2023），甚至表现得好像它们已经构建了任务背后场景的模型（Coda-Forno et al., 2024）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们研究这些外化推理链能够弥补原本惰性的隐藏表征、从而使上下文世界模型得以建立的可能性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们发现证据表明，前沿推理模型以某种方式编码新颖的上下文语义，这种方式有时有助于它们在解决下游任务时使用这些语义，但它们做得并不完美，留下了很大的改进空间。"
+   }
+  ]
+ },
+ "S1.p6.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "总之，我们的贡献如下："
+   }
+  ]
+ },
+ "S1.I1.i1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "minor",
+    "category": [
+     "addition"
+    ],
+    "issue": "“in-context semantics” 译为「语境中习得的语义」增加了「习得」这一学习过程含义，原文仅指在上下文中提供的语义。",
+    "suggestion": "我们提出了一项新任务，**自适应世界建模**，旨在探究语言模型能否灵活运用新颖的、上下文提供的语义来解决简单任务（第4节）。",
+    "zh_reviewed": "1. 我们提出了一项新任务，**自适应世界建模**，旨在探究语言模型能否灵活运用新颖的、语境中习得的语义来解决简单任务（第4节）。"
+   }
+  ]
+ },
+ "S1.I1.i2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们发现，开放权重模型难以利用上下文语义来解决下一 token 预测任务（第 3 节）或自适应世界建模任务（第 4 节），即使它们的潜在表征已经编码了这些语义。"
+   }
+  ]
+ },
+ "S1.I1.i3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "3. 我们发现前沿推理模型在自适应世界建模任务上取得了有限的成功，这表明它们使用较长的外化推理链可能部分地促成了对上下文语义的利用（第5节）。"
+   }
+  ]
+ },
+ "S2.SS0.SSS0.Px1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们使用 Park et al. (2025a) 提出的图追踪任务，研究语言模型的上下文表示学习能力。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这个任务是：在一串常见的、语义上互不相关的单 token 词组成的序列中，预测下一个词。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这个序列由在一个潜在状态空间上的随机游走生成，每个状态都用一个独一无二的词来表示（见图 2）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在我们的实验中，这些状态空间被组织成四种拓扑之一，拓扑由维度（2D 网格或 1D 直线）和状态总数（16 或 25）决定。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "具体来说，我们研究 4×4 网格、5×5 网格、16 个状态的直线和 25 个状态的直线，并对词与状态的对应关系做了许多次随机分配。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "和以往工作一样，对 2D 拓扑我们给出一段随机游走，对 1D 拓扑则给出一串随机挑选的相邻状态对。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们测量这些词的表示如何随上下文长度的变化而变化。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "使用下面介绍的指标，我们复现了 Park et al. (2025a) 的主要结果：在足够长的上下文之后，潜在表示会逐渐重现底层状态空间的几何结构。"
+   }
+  ]
+ },
+ "S2.SS0.SSS0.Px2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "给定一组语言模型的隐藏表示（对应状态空间中的每个 token），我们希望刻画这些隐藏状态在多大程度上反映了状态空间的拓扑。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "沿用以往工作的做法，我们对表示做如下预处理：在给定的第 $l$ 层，在随机游走中一个 50 个 token 的滑动窗口内（对 1D 拓扑则是 50 个相邻对），对状态空间中每个词所有出现位置的隐藏表示取平均。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这样就得到了该层上每个词的平均表示 $H^{l}(\\mathcal{T})$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们用两个指标来刻画上下文表示学习："
+   }
+  ]
+ },
+ "S2.SS0.SSS0.Px2.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**狄利克雷能量（Dirichlet Energy, DE）：**这个指标衡量的是：对应的词在底层状态空间中相邻的那些表示之间的距离。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "核心思想是，上下文表示学习应当把相邻的词推得彼此相似。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "DE 的定义为"
+   }
+  ]
+ },
+ "S2.SS0.SSS0.Px2.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "其中 $E_{G}$ 是给定状态空间拓扑 $G$ 时的 DE，$A_{i,j}$ 是一个指示变量，表示 token $i$ 和 $j$ 在状态空间中是否相邻，$h_{i}^{l}$ 指 token $i$ 在第 $l$ 层的某个隐藏状态。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们用状态空间的总能量 $\\sum_{i,j}||h_{i}^{l}-h_{j}^{l}||^{2}$ 对这个指标做归一化。"
+   }
+  ]
+ },
+ "S2.SS0.SSS0.Px2.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**距离相关（Distance Correlation, DC）：**这个指标衡量表示空间中的距离与底层状态空间中的距离之间的相关性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在状态空间中相距较远的状态，应当对应相距较远的表示。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "形式上，DC 的定义为"
+   }
+  ]
+ },
+ "S2.SS0.SSS0.Px2.p4.2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "其中"
+   }
+  ]
+ },
+ "S2.SS0.SSS0.Px2.p5.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "$G_{i}$ 指 token $i$ 在底层状态空间中的坐标。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "换句话说，DC 是特定 token 的表示之间的欧氏距离，与这些 token 所对应状态之间的曼哈顿距离的相关系数。"
+   }
+  ]
+ },
+ "S2.F3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图 3：在 5×5 网格拓扑上进行上下文表示学习的示例。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "狄利克雷能量下降、距离相关上升，表明上下文表示学习得更好。"
+   }
+  ]
+ },
+ "S2.SS0.SSS0.Px3.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们研究四个能力较强、经过指令微调的开放权重模型：`gemma-3-{4, 12, 27}b-it` (Team et al., 2025) 和 `OLMo-2-13b` (OLMo et al., 2024)。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "总体上，我们发现模型能够成功地在上下文中学到表示——随着上下文变长，表示越来越贴合底层状态空间的拓扑。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图 3 展示了在 `gemma-3-12b-it` 中任取的一个靠后的层上，基于 5×5 网格、50 种不同 token 分配得到的结果。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们注意到，对某些「模型—拓扑」组合，上下文表示学习的动态存在一些差异，其中包括一些组合先较早出现了上下文表示学习，随后又退化了（见附录 A）。"
+   }
+  ]
+ },
+ "S3.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了评估上下文表示是否可灵活部署，我们借鉴了以往的一项工作：它发现当语言模型被迫推迟预测时，下一词预测的表现会出现差距 (Hu and Frank, 2024)。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "那项工作研究的是语言模型在自然句子上的行为，而我们提出把它的结果推广到我们的合成图追踪设定中，在这个设定里，我们可以量化表示是否编码了完成下一词预测所需的语义。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "译文将“failures of encoding semantics”和“failures of deploying these semantics”译为“没有编码好语义”和“没有部署这些语义”，增添了一层“未完成”的否定意味；原文更中性，指在编码或部署语义方面出现的失败，不一定是“没有做”或“没做好”。",
+    "suggestion": "这使我们能够把编码语义的失败与部署这些语义的失败区分开。",
+    "zh_reviewed": "这使我们能够把「没有编码好语义」造成的失败，与「没有部署这些语义」造成的失败区分开。"
+   }
+  ]
+ },
+ "S3.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "具体来说，我们改变随机游走出现的位置：放在用户消息里（指令条件），或者放在预填充的模型回复里（预填充条件；见图 2 右）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在指令条件下，模型被要求在自己的回复中预测下一个词，这就要求模型推迟使用在上下文中学到的表示（因为中间隔着一些特殊 token）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "相比之下，预填充条件要求模型立即使用上下文表示来完成下一词预测。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "给定前面的序列和底层拓扑，如果回答属于合法的下一个 token 的集合，就算作「正确」。"
+   }
+  ]
+ },
+ "S3.F4": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图 4：所有开放权重模型在所有拓扑上的下一词预测结果。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "当随机游走出现在用户提示词中、而不是出现在预填充的模型回复中时，模型表现吃力。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这表明，在随机游走（或随机相邻对）中于上下文里学到的表示，在需要稍后再使用时，并不容易被部署。"
+   }
+  ]
+ },
+ "S3.SS0.SSS0.Px1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对第 2 节中用到的每个模型和每种状态空间拓扑，我们找出使最后一层和倒数第三层的平均距离相关达到最大的上下文长度（具体数值见附录 B）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们在所有模型和所有状态空间拓扑上，用 1000 种不同的词分配进行下一词预测分析。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的结果显示了两种条件之间的差距：当随机游走是预填充的时，模型能可靠地预测随机游走中一个合法的下一个词（复现了以往工作 (Park et al., 2025b; Lubana et al., 2025)），但当随机游走出现在用户提示词中时，模型表现吃力（见图 4）。"
+   }
+  ]
+ },
+ "S3.SS0.SSS0.Px2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对这种表现上的差距，一种可能的解释是：指令条件下的上下文表示学习得到的表示，本来就比预填充条件下的差。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，我们在图 5 中证明了情况并非如此。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们在所有模型、所有拓扑和所有上下文窗口上（每个窗口包含随机游走中的 50 个状态，或 50 个采样的相邻对，取决于底层拓扑的维度），计算两个上下文表示学习指标的比值。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们发现，上下文表示学习在两种条件下发生的程度大致相同。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "实际上，现有的那一点微小差别表明，指令条件下的表示保真度更高，从而排除了「指令条件导致表示比预填充条件更差」这种可能。"
+   }
+  ]
+ },
+ "S3.F5": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图 5：两种提示词格式条件之间，上下文表示学习指标的比值随上下文的变化。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "两种条件之间似乎没有实质性的差别（也就是说，指标的比值接近 1）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如果说有一点小差别，它似乎偏向指令提示词下的表示，而不是预填充提示词下的表示。"
+   }
+  ]
+ },
+ "S3.SS0.SSS0.Px2.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "有人可能还会担心，我们选择的上下文长度不足以做出准确的下一词预测。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "也许上下文表示一开始是惰性的，但在更多上下文之后就变得可灵活部署了。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "确实，Park et al. (2025a) 指出，准确的下一词预测有时需要比上下文表示学习更长的上下文。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们在附录 C 中考察了这种可能，发现在上下文加长的情况下，模型在指令条件下依然表现吃力。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "hedge"
+    ],
+    "issue": "原文 suggest 表示提示/暗示，语气较谨慎，译文“表明”略偏肯定，削弱了不确定性。",
+    "suggestion": "综合来看，这些结果提示，在上下文中学到的表示大多是惰性的。",
+    "zh_reviewed": "综合来看，这些结果表明，在上下文中学到的表示大多是惰性的。"
+   }
+  ]
+ },
+ "S4.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "minor",
+    "category": [
+     "hedge"
+    ],
+    "issue": "suggesting 译为「这表明」语气略强，原文为弱推断，可译为「暗示」",
+    "suggestion": "在第 3 节中，我们发现了上下文表示学习与下一词预测表现之间的一个细微分歧，这暗示上下文表示不是可灵活部署的。",
+    "zh_reviewed": "在第 3 节中，我们发现了上下文表示学习与下一词预测表现之间的一个细微分歧，这表明上下文表示不是可灵活部署的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这里我们定义一个任务——**自适应世界建模（Adaptive World Modeling, AWM）**——来进一步考察这一点。"
+   }
+  ]
+ },
+ "S4.SS0.SSS0.Px1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "AWM 提示词由两个部分组成。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "第一部分是图追踪任务（定义见第 2 节）。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "scope"
+    ],
+    "issue": "“that topology”特指前文提到的潜在状态空间拓扑，译文“某个拓扑”变成不定指，削弱了指代关系。",
+    "suggestion": "模型必须从在该拓扑上的随机游走中推断出潜在的状态空间拓扑。",
+    "zh_reviewed": "模型必须从在某个拓扑上的随机游走中推断出潜在的状态空间拓扑。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "第二部分是一个少量示例学习任务：拓扑中某个位置上的元素，按照一条简单的规则被映射到另一个位置上的元素（例如状态 $s_{i,j}\\rightarrow s_{i+2,j}$；见图 2）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "由于每个状态都用完全随意的词来表示，语言模型必须部署它在上下文中编码的结构，才能完成这个任务。"
+   }
+  ]
+ },
+ "S4.SS0.SSS0.Px1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们考察第 2 节中的同一组拓扑，并考察支配这个少量示例学习任务的几种不同规则。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对所有拓扑，我们都考察「向下 1 步」规则（其输入—输出转移在随机游走中出现过）和「向下 2 步」规则（其转移没有在随机游走中出现过；见图 2）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对 5×5 网格，我们还额外考察了一条「3 步规则」：位置 $(i,j)$ 上的状态被映射到位置 $(i+2,j+1)$ 上的状态。"
+   }
+  ]
+ },
+ "S4.SS0.SSS0.Px1.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在大多数设置中，我们在上下文里放 10 个示例，然后用一个留出的例子向模型查询。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "由于 4×4 网格拓扑只有 8 个定义良好的「向下 2 步」例子，这个提示词里我们只放 6 个示例。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们把提示词作为预填充的模型回复给出{fn3}，并使用第 3 节中用过的上下文长度。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "每种条件我们都在 1000 种 token 分配上评估。"
+   }
+  ]
+ },
+ "fn3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们还在 `gemma-3-27b-it` 上测试了另一个版本：把指令、随机游走和少量示例都放在用户消息里，得到的表现大致同样差。"
+   }
+  ]
+ },
+ "S4.F6": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图 6：自适应世界建模的结果。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在所有任务配置下，各个开放权重语言模型（每个点代表一个模型）都表现吃力，尽管它们在潜在表示中编码了底层的网格拓扑。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "注意：对「一步」规则，一种从出现过的相邻对中随机挑选的朴素策略，就能达到约 50%（一维）和 30%（二维）的准确率。"
+   }
+  ]
+ },
+ "S4.F7": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图 7：（上）当提示词中显式给出状态空间拓扑时，开放权重语言模型在少量示例学习上的结果。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "各个语言模型的表现参差不齐，但通常远高于 AWM 设定下的表现。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（下）在两个层上，随机游走中的 token 与少量示例中的 token 之间的相对狄利克雷能量（以及随机游走 token 与未语境化 token 之间的相对狄利克雷能量；浅色柱）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "上下文表示在少量示例中对底层拓扑的编码保真度更低。"
+   }
+  ]
+ },
+ "S4.SS0.SSS0.Px2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "从图 6 可以看到，我们测试的所有开放权重语言模型在 AWM 任务上都表现吃力。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "语言模型在一步规则上可能看起来表现得略好一些，但这类规则允许一种平凡的基线策略：从随机游走中观察到的转移里随机猜一个，而不需要真正推断出底层规则（详见附录 D）。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "agent"
+    ],
+    "issue": "原文 permit 表示某些组合允许或使模型可能出现非平凡表现，译文“取得了”把“允许”变为既成事实，并让“组合”成为表现的主体。",
+    "suggestion": "不过，我们确实看到，某些「拓扑—规则」组合允许模型在 AWM 任务上取得非平凡的表现。",
+    "zh_reviewed": "不过，我们确实看到，某些「拓扑—规则」组合在 AWM 任务上取得了非平凡的表现。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "特别是，在 4×4 网格拓扑上，模型在一步和两步规则上都达到了约 40% 的准确率。"
+   }
+  ]
+ },
+ "S4.SS0.SSS0.Px3.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "一个已经正确形成了与底层状态空间相对应的上下文表示的语言模型，可能会因为以下两个原因之一而难以完成 AWM 任务：(i) 即使拥有关于拓扑的完美信息，语言模型也无法从少量示例中正确归纳出规则；或者 (ii) 在 AWM 任务的语境下，上下文中学到的表示大多是惰性的，也就是说，面对少量示例时，语言模型无法可靠地使用其中编码的拓扑信息。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们对这两种可能都做了考察。"
+   }
+  ]
+ },
+ "S4.SS0.SSS0.Px3.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "首先，我们考察模型的少量示例学习能力。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对 4×4 或 5×5 网格拓扑，我们在提示词中显式描述底层状态空间，然后给出这条规则的少量示例，再用一个留出的状态向模型查询。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "具体来说，我们用 `Coordinates: 0 0 Item: city` 这种形式的语句来描述网格拓扑。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在图 7（上）中可以看到，给出显式描述时，语言模型的准确率远高于需要在上下文中推断拓扑时的准确率，其中一些模型在 4×4 网格上定义的一步和两步规则 AWM 任务上，准确率达到 $>$ 75%。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，语言模型在 AWM 上的困难，不能完全归因于它们从示例中学习规则的能力。"
+   }
+  ]
+ },
+ "S4.SS0.SSS0.Px3.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "接下来，我们考察在 AWM 任务的少量示例学习部分，上下文中学到的表示是否被灵活部署了。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "具体来说，我们考察出现在少量示例中的词，其隐藏表示是否也编码了状态空间拓扑。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如果当词出现在少量示例中时，表示并不反映状态空间拓扑，那就提供了证据，说明上下文表示没有被灵活部署来学习这条规则。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们测量随机游走中的表示的狄利克雷能量（DE），与同一批 token 出现在少量示例中时的 DE 之比。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如果这个比值大于 1，那么示例中的表示对底层拓扑的编码保真度就低于随机游走中的表示（详见附录 E）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "作为对照，我们还计算了未语境化 token 的 DE 与随机游走 token 的 DE 之比。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在图 7（下）中，我们发现少量示例中的表示，相比随机游走中对应的表示有所退化。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这表明，上下文中学到的表示没有被灵活部署来完成自适应世界建模任务。"
+   }
+  ]
+ },
+ "S4.SS0.SSS0.Px3.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "有人可能会担心，语言模型根本没有推断出少量示例和随机游走之间有任何关系。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们测试了这个任务的一个元学习变体：在提示词前面加上成功完成任务的例子，但发现模型的表现仍然很差（见附录 F）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "与第 3 节类似，我们在附录 G 中还考察了更长的上下文，发现这同样没有提升表现。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "综合来看，这些结果进一步支持了这一观点：在上下文中学到的表示大多是惰性的（即无法用于完成下游任务）。"
+   }
+  ]
+ },
+ "S5.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "最后，我们考察我们的分析是否能推广到前沿模型：`Gemini-Flash-2.5`、`Gemini-Pro-2.5`（Comanici et al., 2025）、`GPT-5-mini` 和 `GPT-5`（Team, 2025）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些模型是所谓的“推理模型”，它们会先生成较长的、言语化的推理链，然后再对用户查询给出答案（Nye et al., 2021）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这种计算形式代表了现代语言模型的最先进水平，并且在需要高级推理的任务上带来了实质性改进（Comanici et al., 2025; Team, 2025; DeepSeek-AI et al., 2025）。"
+   }
+  ]
+ },
+ "S5.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，支撑推理模型的表征和机制甚至比标准语言模型的内部运作更加不透明（Bogdan et al., 2025; Macar et al., 2025），一些人认为推理模型在使用扩展推理链时实现了根本性的新算法（Li et al., 2025c）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些先进的推理模型能否提供一种编码上下文语义并灵活地将其用于解决下游任务的方法？"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在本节中，我们通过在自适应世界建模（AWM）任务上测试前沿语言模型来研究这个问题。"
+   }
+  ]
+ },
+ "S5.SS0.SSS0.Px1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "与我们在附录 C 和 G 中对开放权重模型的分析类似，我们为每种拓扑提供由 1500 个 token 组成的随机游走或 1500 对相邻状态，并使用第 4 节所述的相同规则。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于 `Gemini` 模型，我们允许模型在回答前于其思维链中生成最多 5000 个 token。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们设置这一“思考预算”是为了防止因过长的思考生成而导致超时。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于 `GPT-5` 模型，我们使模型能够灵活地确定其思考预算。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们不认为这种差异是一个问题，因为我们的主要问题是是否有任何语言模型能够在自适应世界建模任务上表现良好。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此外，初步实验表明，施加 5000 个 token 的思考预算并未对 `Gemini` 模型的性能产生实质性影响。"
+   }
+  ]
+ },
+ "S5.SS0.SSS0.Px1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的结果呈现在图8中。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们看到，即便是这些前沿推理语言模型也没有完全解决自适应世界建模（AWM）任务，尽管许多模型的表现明显优于其开放权重对应模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "特别是，一些模型在一维拓扑上针对一步和两步规则取得了非平凡的准确率。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，当模型面对网格拓扑时，准确率完全崩塌。"
+   }
+  ]
+ },
+ "S5.F8": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图 8：前沿语言模型在自适应世界建模（AWM）上的结果。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "前沿语言模型比开放权重模型取得了更高的性能，尤其是在一维（线性）拓扑上。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，当它们面对二维（网格）拓扑时，性能急剧下降。"
+   }
+  ]
+ },
+ "S5.SS0.SSS0.Px2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "与第4节类似，我们研究了语言模型在 AWM 任务上出错的两个潜在来源：1) 无法从少量示例学习示例中归纳出规则（即使对底层状态空间拓扑有着完美的了解），以及 2) 无法生成能够被部署用于下游任务的底层状态空间拓扑表示。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们考察了 `Gemini-2.5-{Pro, Flash}`。"
+   }
+  ]
+ },
+ "S5.SS0.SSS0.Px2.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "首先，我们考察前沿推理语言模型在获得底层状态空间的显式表示时，是否能够解决少量示例学习任务。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "该分析完全按照第4节进行。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "从图9可以看出，两个模型在该设置下都达到了上限性能。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，错误并非由未能从示例中学习规则所导致。"
+   }
+  ]
+ },
+ "S5.SS0.SSS0.Px2.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "接下来，我们考察这些模型是否能够归纳出底层状态空间拓扑的灵活表征。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "由于我们无法访问这些前沿模型的隐藏表征，我们通过直接要求模型描述随机游走背后的状态转移矩阵的结构来考察这一问题。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们向模型提供在 4×4 和 5×5 网格上的 1000 条随机游走。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "要成功做到这一点，模型必须 (i) 首先已经推断出底层拓扑，并且 (ii) 能够调用这些在上下文中编码的语义，以生成对它们的自然语言描述。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了评估模型是否成功描述了状态空间，我们采用了一种宽松的自动评分策略。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "具体而言，我们将每个 LM 的回复放在一个新提示中提供给 `Gemini-2.5-Pro`，并要求模型在该回复包含对 4×4（或 5×5）网格的提及时回答“yes”，否则回答“no”。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "注意，原始 LM 的描述并不需要真正推断出正确的词-状态映射才能被视为正确。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "尽管如此，我们发现 `Pro` 和 `Flash` 模型都取得了良好但并非完美的表现（见图 9）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "从构造上看，这些 LM 实现对底层状态空间的完美理解的比例甚至更低。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，错误似乎主要源于这些 LM 对状态空间拓扑的灵活表征的编码和调用。"
+   }
+  ]
+ },
+ "S5.SS0.SSS0.Px2.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在附录 H 中，我们呈现了前沿模型在下一 token 预测任务上的结果。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们发现这些模型中的大多数表现相当不错。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在附录 I 中，我们通过在 `Gemini` 模型中消融推理链，考察了推理链对下一 token 预测和自适应世界建模这两项任务表现的作用。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们发现结果不一：在推理链被消融的情况下，`Flash` 在两项任务上的表现有时大幅提升，而 `Pro` 在两项任务上的表现则系统性下降。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "最后，在附录 J 中，我们发现关于底层状态空间拓扑的额外指导能提高模型表现，这进一步提供了证据，表明对底层拓扑的表征使推理模型能够在自适应世界建模（AWM）中取得成功。"
+   }
+  ]
+ },
+ "S5.SS0.SSS0.Px2.p5.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "综合来看，这些结果表明外化的推理链可能为模型编码和部署在上下文中定义的语义表征提供另一条途径。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，这些表征可能被部署的情境有些有限，为可适应人工智能系统的发展留下了很大的改进空间。"
+   }
+  ]
+ },
+ "S5.F9": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "minor",
+    "category": [
+     "term"
+    ],
+    "issue": "原文 few shot 中 shot 在术语表中规定译为「示例」，译文使用了「样本」（少样本学习），未采用项目统一译法。",
+    "suggestion": "图9：（左）当向任一 `Gemini` 模型提供明确描述底层状态空间拓扑的提示时，该语言模型在少量示例学习任务上达到天花板准确率。",
+    "zh_reviewed": "图9：（左）当向任一 `Gemini` 模型提供明确描述底层状态空间拓扑的提示时，该语言模型在少样本学习任务上达到天花板准确率。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（右）当提示 `Gemini` 模型描述生成随机游走的潜在状态空间的结构时，模型取得了尚可但并不完美的准确率（即使使用宽松的自动评分器进行评估也是如此）。"
+   }
+  ]
+ },
+ "S6.SS0.SSS0.Px1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "本研究处于两个活跃研究方向的交汇处：(i) 刻画语言模型所实现的内部世界模型，以及 (ii) 刻画上下文学习的能力与局限。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "一些工作通过对其内部表征进行线性探针（probing）（Li et al., 2023; Gurnee and Tegmark, 2024; Li et al., 2021）或通过其泛化行为（Vafa et al., 2024; Vafa et al., 2025）来评估世界模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "其中许多工作依赖于模型在整个上下文过程中跟踪状态的能力，这是本研究所考察的上下文表示学习的先导。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "最后，若干理论工作试图定义世界模型（Andreas, 2024; Li et al., 2025a）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "一个共同的主题是，世界模型通常不仅仅是一个查找表，而是支持其他操作。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在本文的语境中，这意味着在上下文中学习到的一组惰性表征并不构成一个上下文世界模型。"
+   }
+  ]
+ },
+ "S6.SS0.SSS0.Px1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "就上下文学习而言，许多研究聚焦于刻画ICL的算法性质（Akyürek et al., 2023; Von Oswald et al., 2023）、机制实现 Olsson et al. (2022); Todd et al. (2024); Hendel et al. (2023)，以及其涌现的条件（Chan et al., 2022; Park et al., 2025b; Wurgaft et al., 2025）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，上下文表示学习的研究仍处于起步阶段（Park et al., 2025a; Lubana et al., 2025; Yona et al., 2025）。"
+   }
+  ]
+ },
+ "S6.SS0.SSS0.Px2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在这项工作中，我们研究了语言模型（LMs）是否能够灵活地部署由上下文定义的语义的表征，以解决下游任务。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在多个任务和模型上，我们的结果表明，语言模型（LMs）无法可靠地做到这一点。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "关键的是，即使语言模型（LMs）将这些语义编码在其潜在表征中，这些表征也往往是惰性的，即无法用于下一 token 预测或自适应世界建模。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "尽管前沿模型似乎在一定程度上比其非推理对应模型更具适应性，但创建真正可适应的人工智能体需要支持灵活部署上下文中所学表征的训练方案和架构。"
+   }
+  ]
+ },
+ "S7.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这项工作存在若干局限性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "值得注意的是，我们揭示了编码在隐藏表征中的上下文语义可能不是可灵活部署的，但并未提供解决方案。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们推测，针对性的训练方案或使这些语义对更早模型层可用的机制性干预（类似于 Biran et al. (2024) 和 Lepori et al. (2025) 中发现的那些）能够部分解决这一问题。"
+   }
+  ]
+ },
+ "S7.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此外，很难理解推理模型产生的显式思维链与其隐藏 token 表示之间的关系。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "虽然我们提供了证据，表明采用思维链的模型似乎部分克服了上下文学习所得表征的局限，但我们尚不理解这一现象发生的机制。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "未来的工作可能专注于厘清这一关系。"
+   }
+  ]
+ },
+ "A1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在本节中，我们额外给出三个在不同拓扑和不同模型上的上下文表示学习示例。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "参见图 10、11 和 12，以查看一组特别多样的示例。"
+   }
+  ]
+ },
+ "A1.F10": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图10：`Gemma-3-27b-it` 在长度为25的线拓扑上的上下文表示学习。"
+   }
+  ]
+ },
+ "A1.F11": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图 11：`Gemma-3-4b-it` 在 5×5 网格拓扑上的上下文表示学习。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在这种情况下，上下文表示学习的行为不那么良好，不过距离相关指标仍随上下文增加。"
+   }
+  ]
+ },
+ "A1.F12": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图 12：`OLMo-2-13b` 在长度为 16 的线拓扑上的上下文表示学习。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在这种情况下，上下文表示学习迅速发生。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "英文原文 'much alter' 疑为 'much later' 的笔误；译文按 'later' 译成 '晚得多'，意思可能正确，但与字面不符。",
+    "suggestion": "这在上下文中崩塌得晚得多。",
+    "zh_reviewed": "这在上下文中崩塌得晚得多。"
+   }
+  ]
+ },
+ "A2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "表1报告了第3节所述的上下文表示学习分析中的最佳上下文长度。"
+   }
+  ]
+ },
+ "A2.T1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "表1：上下文表示学习的最优上下文长度"
+   }
+  ]
+ },
+ "A3.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在本节中，我们给出使用指令提示格式的下一个 token 预测任务的下一个 token 预测结果，区别在于我们为所有模型提供一致的 1500 长上下文长度。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "从附录 B 中我们可以看出，除 3 个模型-拓扑组合外，这一长度均大于先前分析的上下文长度。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "从图 13 中，我们看到这种延长的上下文长度并未对性能有所帮助。"
+   }
+  ]
+ },
+ "A3.F13": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图 13：恒定长上下文长度下的下一 token 预测结果。"
+   }
+  ]
+ },
+ "A4.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "本节描述了一种用于带一步规则的自适应世界建模任务的简单启发式解法，并给出该解法所达到的准确率。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "首先，请注意，由一步规则给出的输入/输出对（即那些将 $S_{i}$ 映射到 $S_{i+1}$ 或将 $S_{i,j}$ 映射到 $S_{i+1,j}$ 的配对）在随机游走中是出现过的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，一种简单的解法是猜测输入状态的出现过的相邻状态之一。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，并非每个状态都对应于一步规则的一个有效输入状态（例如，在零索引下，$S_{24}$ 在 25 状态线中不会映射到有效状态，因为 $S_{25}$ 不存在）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此外，并非每个状态都有相同数量的相邻状态。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在线的情况下，两端的两个状态各自只有一个相邻状态。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对每个可能的查询示例随机采样一个出现过的相邻状态，可得到表 2 中所给出的准确率。"
+   }
+  ]
+ },
+ "A4.T2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "表 2：朴素基线策略的准确率。"
+   }
+  ]
+ },
+ "A5.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在第4节中，我们给出了对自适应世界建模任务中随机游走中的 token 与少量示例中的 token 之间的相对狄利克雷能量的分析。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在本节中，我们提供该分析的具体细节。"
+   }
+  ]
+ },
+ "A5.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "首先，我们对每个模型和每种拓扑运行 50 个新的自适应世界建模提示。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们收集随机游走中最后 50 个 token 的激活（或线拓扑中的 50 个邻接）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如第 2 节所述，我们为每个 token 计算平均 token 表示。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们针对出现在提示中包含少量示例的部分中的 token 分别重复这一过程。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "值得注意的是，这两组 token 将成为占据状态空间的 token 的子集（对于提示的少量示例学习部分中的 token，这一点是有保证的，因为若干 token 按设计被留出）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为此，我们取两个集合中都出现的 token 的交集。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然后，我们按第 2 节所述分别对每个集合计算归一化狄利克雷能量，并报告这些值的比值。"
+   }
+  ]
+ },
+ "A5.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了给这些结果提供背景，我们提取出现在上述两个集合交集中的 token 的无上下文表示（对应于随机游走最后窗口中的 token，或少量示例中的 token）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在这种情况下，无上下文表示对应于这些 token 在随机游走中处于最开头位置的那些实例。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们计算并报告这些无上下文 token 相对于随机游走 token 的相对狄利克雷能量。"
+   }
+  ]
+ },
+ "A6.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在本节中，我们展示了第4节提到的该任务的元学习版本的结果。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "该变体由三次任务呈现组成，其中每次任务呈现由在5×5网格状态空间上的长度为500的随机游走，以及随后的3个少样本示例组成（全部使用同一规则生成）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在这三次任务呈现之后，会给出一个查询输入，模型必须推断出正确的输出。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "所有任务呈现均使用相同的拓扑创建，且为每个状态分配相同的token。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些结果是使用5×5网格拓扑生成的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "从图14可以看出，这种方法表现不佳。"
+   }
+  ]
+ },
+ "A6.F14": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图 14：元学习提示准确率。"
+   }
+  ]
+ },
+ "A7.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在本节中，我们呈现与附录C类似的分析，只不过针对使用 `Gemma-3-27b-it` 的自适应世界建模任务。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "从图15可以看出，这并未提升性能。"
+   }
+  ]
+ },
+ "A7.F15": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图15：在恒定长上下文长度下、使用 `gemma-3-27b-it` 的自适应世界建模结果。"
+   }
+  ]
+ },
+ "A8.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在本节中，我们展示使用第5节所述前沿模型进行的下一 token 预测任务的结果。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "从图16中我们发现，除 `Gemini-2.5-Flash` 外，模型在下一 token 预测上取得了良好表现。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "令人惊讶的是，这对于网格拓扑尤其如此。"
+   }
+  ]
+ },
+ "A8.F16": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图 16：前沿模型下一 token 预测性能。"
+   }
+  ]
+ },
+ "A9.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在本节中，我们消融 `Gemini` 模型使用思考 token 的能力，并分析其对下一 token 预测和自适应世界建模（adaptive world modeling）的影响。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于 `Gemini-2.5-Flash`，我们可以完全消融该模型生成思考 token 的能力。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，对于 `Gemini-2.5-Pro`，我们只能将思考预算设置为最少 128 个 token。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于 `Pro`，我们看到，将思考限制在 128 个 token 往往会在两项任务上损害性能（见图 17 和图 18）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，对于 `Flash`，我们看到的结果好坏参半。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在许多情况下（尤其是在线形拓扑上的下一 token 预测中），消融思考会大幅提高性能（见图 19 和图 20）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "必须开展更多工作来理解这些结果的含义。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "一个推测性假设是，完全消融思考会迫使模型依赖前向传播中的潜在表示，而不是（可能有缺陷的）外化思考轨迹。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些潜在表示很可能经历了上下文表示学习（in-context representation learning），并且（也许）模型已经学会在这个非常具体且有限的上下文中灵活地使用这些表示。"
+   }
+  ]
+ },
+ "A9.F17": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图 17：`Gemini-2.5-Pro` 在下一 token 预测上的思维消融。"
+   }
+  ]
+ },
+ "A9.F18": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图 18：`Gemini-2.5-Pro` 针对自适应世界建模的思维消融。"
+   }
+  ]
+ },
+ "A9.F19": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图 19：`Gemini-2.5-Flash` 的思维消融（下一 token 预测）。"
+   }
+  ]
+ },
+ "A9.F20": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图20：`Gemini-2.5-Flash` 在自适应世界建模上的思考消融。"
+   }
+  ]
+ },
+ "A10.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在本节中，我们分析在提供关于底层状态空间拓扑的强线索时前沿模型的表现。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "具体而言，这里我们在提示中包含网格配置（4×4 或 5×5）的信息，并且还提到少量示例将某一位置的状态映射到另一位置的状态。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "即使有了这些非常强的提示，模型仍然无法达到完美的自适应世界建模准确率（见图 21）。"
+   }
+  ]
+ },
+ "A10.F21": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图21：前沿模型在二维拓扑上有提示和无提示情况下的自适应世界建模性能。"
+   }
+  ]
+ }
+}

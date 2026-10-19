@@ -15,6 +15,7 @@
   bt_judge:        IUNO_JUDGE_*      → IUNO_REVIEW_* → IUNO_READER_*
   其中 * 为 BASE_URL / MODEL / API_KEY。
 """
+import json
 import os
 import re
 
@@ -31,6 +32,15 @@ ROLES = {
 def load_prompt(role):
     with open(os.path.join(ROOT, "prompts", ROLES[role]["prompt"]), encoding="utf-8") as f:
         return f.read().strip()
+
+
+def extra_body(role):
+    """角色的附加请求参数：环境变量 <前缀>_EXTRA 里的 JSON，原样并进请求体。
+    例如关掉 DeepSeek 的思考模式：IUNO_TRANSLATE_EXTRA='{"thinking": {"type": "disabled"}}'"""
+    for prefix in ROLES[role]["env"]:
+        if os.environ.get(f"{prefix}_EXTRA"):
+            return json.loads(os.environ[f"{prefix}_EXTRA"])
+    return {}
 
 
 def model_config(role):
@@ -84,6 +94,8 @@ def independence(translator_model, reviewer_model):
     different-model、unknown。"""
     if not translator_model or not reviewer_model:
         return "unknown"
+    if " + " in translator_model:  # 几个译者合译：按和审校最接近的那个算
+        return worst_independence([independence(t, reviewer_model) for t in translator_model.split(" + ")])
     t, r = translator_model.lower(), reviewer_model.lower()
     if t == r or t in r or r in t:
         return "same-model"

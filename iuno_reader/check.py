@@ -34,8 +34,23 @@ NUM_WORDS = {
 }
 
 
+NUM_ZH = {"0": "零", "1": "一", "2": "二两", "3": "三", "4": "四", "5": "五", "6": "六", "7": "七", "8": "八",
+          "9": "九", "10": "十", "11": "十一", "12": "十二"}  # base-10 → 十进制、2D → 二维 这类写法
+
+
 def _norm_math(s):
-    return re.sub(r"\s+", "", s)
+    """公式比较前统一写法：去空白，y^{\\prime} 和 y' 视为一样。"""
+    s = re.sub(r"\s+", "", s)
+    return re.sub(r"\^\{?\\prime\}?", "'", s)
+
+
+def _math_as_text(m, zh):
+    """只含一个简单记号的公式（$3$、$350$、$Q$）在译文里写成普通文字也算保留。"""
+    inner = m.strip("$")
+    if re.fullmatch(r"\d+(?:[.,]\d+)?", inner):  # 数字只要和前后的数字分开（70B 里的 70 算）
+        return re.search(rf"(?<![\d.]){re.escape(inner)}(?![\d])", zh) is not None
+    return bool(re.fullmatch(r"[A-Za-z]{1,3}", inner)) and re.search(
+        rf"(?<![A-Za-z]){re.escape(inner)}(?![A-Za-z])", zh) is not None
 
 
 def _strip_spans(s):
@@ -66,7 +81,7 @@ def check_sentence(en, zh, terms, hedges, conf=None, note=""):
     # 1. 公式、代码、脚注占位符必须原样保留
     en_math = Counter(_norm_math(m) for m in MATH.findall(en))
     zh_math = Counter(_norm_math(m) for m in MATH.findall(zh))
-    lost = en_math - zh_math
+    lost = [m for m in en_math - zh_math if not _math_as_text(m, zh)]
     if lost:
         add("red", "math", "公式没有原样保留：" + "、".join(list(lost)[:3]))
     for c in CODE.findall(en):
@@ -87,7 +102,7 @@ def check_sentence(en, zh, terms, hedges, conf=None, note=""):
     for n in NUM.findall(en_plain):
         if n in years:
             continue
-        if n not in zh_plain and n not in zh:
+        if n not in zh_plain and n not in zh and not any(ch in zh for ch in NUM_ZH.get(n, "") or "\0"):
             add("red", "number", f"数字 {n} 没有出现在译文里")
     # one 作代词时不是数量词：one another（彼此）、One might/may/could…（有人、人们）
     en_num = re.sub(r"\bone another\b|\b[Oo]ne (?:might|may|could|can|would|should|must)\b", " ", en_plain)

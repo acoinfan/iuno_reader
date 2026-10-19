@@ -1,0 +1,2554 @@
+{
+ "__meta__": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "models": {
+   "reviewer": "kimi-k3"
+  },
+  "translator": "deepseek-v4-pro（关思考）",
+  "independence": "different-model",
+  "usage": {
+   "calls": 69,
+   "prompt_tokens": 68539,
+   "completion_tokens": 72970,
+   "seconds": 1979.5,
+   "cached_tokens": 35328
+  }
+ },
+ "abs.p1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "规划时干预保真度是学习到的世界模型的一个独特、可测量的属性：模型自身的开环转移是否以匹配的环境干预方式移动任务变量。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在我们测试的设置中，它既不能通过奖励拟合揭示，也不能通过任务锚定训练保证。"
+   },
+   {
+    "verdict": "major",
+    "category": [
+     "term",
+     "hedge"
+    ],
+    "issue": "operator 在此指干预算子，两处均误译为「操作员」（指人），属术语明显译错；此外 substantially better 的「显著」被丢掉。",
+    "suggestion": "在已发布的 TD-MPC2 各检查点规模下，随着任务可观测量上的算子误差诊断增大，回合回报下降，而奖励预测误差保持很小且几乎平坦；并且，在无任务信号下训练的自监督世界模型，在共享任务上保留同一算子的效果显著优于任务锚定模型。",
+    "zh_reviewed": "在已发布的 TD-MPC2 检查点大小中，随着任务可观测量的操作员误差诊断增大，回合回报下降，而奖励预测误差保持较小且几乎平坦，并且在没有任务信号的情况下训练的自监督世界模型在共享任务上比任务锚定模型更好地保留了相同的操作员。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然后，捕获门控的匹配干预审计定位了失败之处。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在 Cheetah 上，三个 LeWorldModel 检查点捕获了当前任务查询并支持可解码的真实干预效果；然而，它们想象的五步效果比预测无效果更差，也比环境端点预言机更差。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "失败是任务方向旋转且增益过大，而不是特征坍缩。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这种严重模式是有条件的：五个 PreJEPA 种子在没有它的情况下保留了相对于预言机的缺陷，Finger Spin 实验将缺陷扩展到运动之外，且不同种子的严重程度各异，共享库效应几何既依赖于候选者又依赖于支持。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们还测试了实践方面的问题。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "「degrades held-out error ranking」译为「降低了留出误差排序」有歧义，易被读成「把排序名次降低」，原文意为「损害了留出数据上误差排序的质量」。",
+    "suggestion": "在 DreamerV3 中，携带当前查询的是后验分布而非其样本；集成不一致仅在训练支持附近能对误差排序；冻结的支持感知分数在两个受测迁移方向上都损害了留出误差排序的质量，而原生不一致在两个方向上仍具信息量。",
+    "zh_reviewed": "在 DreamerV3 中，后验分布而非其样本携带当前查询；集成不一致仅在训练支持附近对误差进行排序；并且在两个测试的迁移方向上，冻结的支持感知分数降低了留出误差排序，而原生不一致在两个方向上仍然提供信息。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "term"
+    ],
+    "issue": "「the model's native interface」的 native 指模型自身固有的接口，译为「本地接口」易被误解为与远程相对的「本地」，宜译「原生接口」。",
+    "suggestion": "我们得出结论：干预保真度必须在模型自身的原生接口上、以捕获优先的方式直接审计。",
+    "zh_reviewed": "我们得出结论，干预保真度必须直接在模型的本地接口上以捕获优先的方式进行审计。"
+   }
+  ]
+ },
+ "S1.p1.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "用于规划的世界模型必须完成两件不同的事情：表示当前对任务重要的变量，并预测候选动作如何改变它们（Sutton, 1991; Ha and Schmidhuber, 2018）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "标准训练信号不能单独证明任一要求。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "一步预测质量与控制性能的相关性较差（Lambert et al., 2020），并且模型可能通过下一步诊断，而其隐式转移结构是不连贯的（Vafa et al., 2024）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "即使模型对干预分配了错误的后果，任务变量也可能从真实编码状态中可读；相反，当相关量从一开始就无法从模型状态中恢复时，转移分数难以解释。"
+   }
+  ]
+ },
+ "S1.p2.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "本文通过五组结果来阐述一个主张。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "「distinct」此处意为该性质区别于其他性质（独立存在），译作「独特」略偏向「独一无二」，有轻微偏差。",
+    "suggestion": "规划时干预保真度，即模型自身的开环转换以与匹配的环境干预相同的方式移动任务变量的性质，是独立且可测量的。",
+    "zh_reviewed": "规划时干预保真度，即模型自身的开环转换以匹配的环境干预方式移动任务变量的性质，是独特且可测量的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "基于价值的训练信号既不能揭示也不能确保它；在奖励拟合、当前状态捕获和整体特征对齐都看起来良好时，它可能严重失效；因此必须直接审计，以捕获为先，在模型的原生接口上进行。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "term"
+    ],
+    "issue": "「intervention support」指干预的取值集合（支撑集），直译为「干预支持」表意不够清楚。",
+    "suggestion": "以下所有经验陈述都相对于声明的任务查询、物理时间范围、干预支持集和原生模型接口；没有一个是关于架构总体的主张。",
+    "zh_reviewed": "以下所有经验陈述都相对于声明的任务查询、物理时间范围、干预支持和原生模型接口；没有一个是关于架构总体的主张。"
+   }
+  ]
+ },
+ "S1.p3.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "论证分三步进行。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "首先，基于价值的信号既不能衡量干预保真度，也不能产生干预保真度。"
+   },
+   {
+    "verdict": "major",
+    "category": [
+     "term"
+    ],
+    "issue": "operator 指数学/动力学意义上的「算子」（与贝尔曼算子、转移算子相关），译为「操作员」（指人）属明显术语误译，会误导读者理解诊断对象。",
+    "suggestion": "在已发布的TD-MPC2检查点规模扫描中，随着任务可观测量上的算子误差诊断指标增大，回合回报下降，而奖励预测误差保持很小且几乎平稳，并且该算子诊断指标对检查点的排序与彼此一致的贝尔曼残差和价值切片指标不同（第3节）。",
+    "zh_reviewed": "在已发布的TD-MPC2检查点规模扫描中，随着任务可观测量的操作员误差诊断指标增大，回合回报下降，而奖励预测误差保持较小且几乎不变，并且操作员诊断指标对检查点的排序与相互一致的贝尔曼残差和价值切片指标不同（第3节）。"
+   },
+   {
+    "verdict": "major",
+    "category": [
+     "term",
+     "hedge",
+     "omission"
+    ],
+    "issue": "operator 同样误译为「操作员」，应为「算子」；且 substantially better 的程度副词「大幅/显著」被漏掉，只译成「更好地」。",
+    "suggestion": "针对任务信号进行训练也不能确保该性质：在同一共享任务上，不使用任何任务信号训练的自监督世界模型对同一算子的保持程度大幅优于任务锚定模型。",
+    "zh_reviewed": "针对任务信号进行训练也不能确保该性质：在共享任务上，没有任务信号训练的自监督世界模型比任务锚定模型更好地保持了相同的操作员。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "价值通道既没有检测到失败，在这个比较中也没有防止失败。"
+   }
+  ]
+ },
+ "S1.p4.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "其次，一项捕获门控的匹配干预审计定位了失败之处（第2、4和5节）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在Cheetah上，三个LeWorldModel检查点捕获了当前任务查询并支持可解码的真实干预效应，而它们自己想象的五步效应比完全不预测效应还要差，也比环境端点预言机差。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "失败并非整体特征崩溃：完整的预测特征变化仍然与真实变化高度一致，而其任务分量被旋转到接近正交并被放大。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这种严重模式是有条件的，而非普遍的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "五个独立训练的PreJEPA预测器保留了相对于预言机的缺陷，但没有重现严重的结合；Finger Spin将相对于预言机的差距扩展到运动之外，且不同种子间严重程度各异；在共享评估中，动作效应几何形状依赖于候选和支持，而非架构排名。"
+   }
+  ]
+ },
+ "S1.p5.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "第三，同一方案为审计和信任此类模型提供了实用指导（第6节）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在DreamerV3研究中，分类后验分布是唯一经过测试、能够在各检查点支持当前查询的表面；其样本、其众数以及确定性状态均失败。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "omission"
+    ],
+    "issue": "「降低了留出族上的误差排序」缺少「效果/质量」一类宾语，degrades error ranking 指使误差排序变差，直译「降低了误差排序」语义不完整，易被误读为降低了排序本身；「支持感知不一致性增强」也略显含混，宜明确是「对不一致性的支持感知增强」。",
+    "suggestion": "集成不一致性在训练支持附近能对误差进行排序，并在远离训练支持时恶化；一种冻结的、支持感知的不一致性增强方法在两种受测迁移方向上都损害了留出族上的误差排序效果，而架构原生不一致性在两种方向上仍具信息量。",
+    "zh_reviewed": "集成不一致性在训练支持附近对误差进行排序，并在远离训练支持时恶化，而冻结的支持感知不一致性增强在两种测试的迁移方向上均降低了留出族上的误差排序，而架构原生不一致性在两种方向上仍具信息量。"
+   }
+  ]
+ },
+ "S1.p6.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "「task-direction rotation with excess gain」是「伴随过度增益的任务方向旋转」（一个特征），译为「任务方向旋转和过度增益」变成了两个并列特征，关系略有变化；另外「usable practice」译为「可操作的实践」稍偏，原意更接近「可用的/可付诸实践的」。",
+    "suggestion": "本文的贡献，按论证使用它们的顺序，依次为：（i）基于已发布检查点的证据，表明奖励拟合可能对任务可观测量的算子保真度保持沉默，而任务锚定训练也不足以保证该保真度；（ii）一种捕获门控的匹配干预审计，将目标可用性、真实效应的可分辨性与模型自身转移的保真度分离开来；（iii）一项前瞻性的 Cheetah/LeWorldModel 分离实验，将当前查询的捕获与严重的传播失真区分开，后者被刻画为伴随过度增益的任务方向旋转；（iv）边界结果（PreJEPA 对严重联合现象的非复现、Finger 严重程度的异质性，以及支持依赖的共享库几何结构），界定了该现象的范围，同时并不抹去其相对于预言机的缺陷；以及（v）接口和不确定性结果，包括针对冻结支持感知评分的双向留出证伪器，将审计转化为可付诸实践的做法。",
+    "zh_reviewed": "本文的贡献，按论证使用的顺序，包括：（i）基于已发布检查点的证据，表明奖励拟合可能对任务可观测量的算子保真度保持沉默，且任务锚定训练不足以确保该保真度；（ii）一种捕获门控的匹配干预审计，将目标可用性、真实效应可分辨性和模型自身转移的保真度分离开来；（iii）一项前瞻性的 Cheetah/LeWorldModel 分离实验，将当前查询的捕获与严重的传播失真区分开，其特征为任务方向旋转和过度增益；（iv）边界结果（PreJEPA 对严重联合现象的非复现、Finger 严重程度的异质性，以及支持依赖的共享库几何结构），在不消除其相对于预言机的缺陷的情况下界定了该现象的范围；以及（v）接口和不确定性结果，包括针对冻结支持感知评分的双向留出证伪器，将审计转化为可操作的实践。"
+   }
+  ]
+ },
+ "S2.p1.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "令 $x$ 表示一个马尔可夫状态或一个声明的充分观测历史。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "固定一族任务查询 $\\mathcal{Q}=\\{q_{1},\\ldots,q_{m}\\}$、一个物理时域 $H$，以及一个在根和动作序列上的分布 $\\nu$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于一个动作 $a$，定义环境算子"
+   }
+  ]
+ },
+ "S2.p1.2": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "并令 $\\widehat{\\mathcal{K}}_{M}$ 表示候选模型 $M$ 在其规划器暴露状态 $S_{M}$ 上由自身开环转移所诱导的相应算子。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "本文中的每一条诊断性陈述都相对于 $(\\mathcal{Q},H,\\nu)$ 以及模型的原生接口而言。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "之所以评估开环潜在轨迹，是因为它们是规划器和想象轨迹学习者所消费的对象（Hafner et al., 2019; Hafner et al., 2020; Hansen et al., 2022）。"
+   }
+  ]
+ },
+ "S2.p2.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们使用两种分辨率递增的工具。"
+   }
+  ]
+ },
+ "S2.SS1.p1.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "较粗的仪器询问 $\\widehat{\\mathcal{K}}_{M}$ 在任务可观测变量上与 $\\mathcal{K}$ 相差多远，而不追问原因。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "带有分组交叉验证的岭探针从模型的潜在状态中解码每个查询；然后模型通过其自身的原生预测模式将潜在状态推进到规划时间范围，并将探针解码的结果与在相同动作下对真实环境结果评估的同一查询进行比较。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "结果是在声明的查询族上每个候选者的单一算子误差分数。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "探针质量与算子误差分开报告，因此一个难以解码的可观测变量不会被悄然归咎于转移。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "term"
+    ],
+    "issue": "task-relativity 意为“相对于任务（随任务而定）”，译作「任务相关性」更接近 task-relevance，含义略有偏移。",
+    "suggestion": "该诊断有意与基于价值的指标互补：它同样具有任务相对性，但在任务可观测变量上对转移进行评分，而不是在奖励、价值或回报上（Farahmand et al., 2017; Grimm et al., 2020）。",
+    "zh_reviewed": "该诊断有意与基于价值的指标互补：它共享它们的任务相关性，但在任务可观测变量上对转移进行评分，而不是在奖励、价值或回报上（Farahmand et al., 2017; Grimm et al., 2020）。"
+   }
+  ]
+ },
+ "S2.SS1.p2.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "粗粒度评分混淆了两种失败来源：信息可能不存在于潜在状态中，或者存在但被转移错误地移动了。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "第3节使用粗粒度评分，在那里这种混淆对所得到的结论无关紧要；本文其余部分使用更精细的工具，它将这两种来源分开。"
+   }
+  ]
+ },
+ "S2.SS2.p1.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "更精细的工具将保真度分解为三个可分别检验的前提条件，如图1所示。"
+   }
+  ]
+ },
+ "S2.F1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图1：**捕获门控的匹配干预审计。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "查询族、物理视界和干预支持在候选评估之前定义了环境侧目标。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "门1测试目标是否可从留出的真实规划状态中读出。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "resolves 此处意为「分辨/检测出」该效应，「解析了」易被理解为「分析」，且漏掉了 whether 所对应的「能否」意味。",
+    "suggestion": "门2测试冻结的端点读出能否分辨出匹配动作的真实效应。",
+    "zh_reviewed": "门2测试冻结的端点读出是否解析了匹配动作的真实效应。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "只有当两个前提都通过时，才解释门3：将模型的原生想象效应与真实效应、零效应或持续性以及环境端点预言机进行比较。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "任一前提失败都会产生未经认证的传播，而不是忠实传播的证据。**"
+   }
+  ]
+ },
+ "S2.SS2.SSS0.Px1.p1.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "一个预先指定的读出在真实编码状态上训练，并在留出的根上评估。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "「捕获报告」易被误读为动宾结构（捕获/报告），且「仅开发归一化」过于压缩，development-only 指仅用开发集（数据）做归一化，译文未体现「数据/集」这一层意思。",
+    "suggestion": "Capture 报告在仅使用开发数据做归一化时的逐坐标误差和聚合误差。",
+    "zh_reviewed": "捕获报告在仅开发归一化下的逐坐标和聚合误差。"
+   }
+  ]
+ },
+ "S2.SS2.SSS0.Px2.p1.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在解释模型传播之前，匹配的环境干预必须产生一个效果，该效果能够被冻结的端点读出在真实环境端点处解析。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如果此检查失败，则相应的传播比较不被解释。"
+   }
+  ]
+ },
+ "S2.SS2.SSS0.Px3.p1.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "从同一真实根状态出发，在环境中执行一个动作序列，并通过模型自身的开环转移执行该动作序列。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "冻结的读出将想象终点映射到目标坐标。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "将模型误差与持续性、零效应以及同一读出下真实环境终点的误差（环境终点预言机）进行比较。"
+   }
+  ]
+ },
+ "S2.SS2.SSS0.Px3.p2.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "门控顺序遵循有限时域查询误差的结构，该误差服从示意性分解"
+   }
+  ]
+ },
+ "S2.SS2.SSS0.Px3.p2.2": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "其中 $\\epsilon_{\\mathrm{cap},0}$ 是真实根处的捕获误差，$\\epsilon_{\\mathrm{op},t}$ 是闭包限制的转移误差，$\\tau$ 项是近似残差，而 $P_{s:h}=\\prod_{j=s}^{h-1}L_{j}$ 汇集了环境稳定性因子（附录 A）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "传播分数只有在捕获项较小时才可解释；该分解识别了已测量的误差来源，并非对已实现回报的保证。"
+   }
+  ]
+ },
+ "S2.SS2.SSS0.Px4.p1.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "每个环境族提供重复的根和动作对比。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "相同的动作序列，映射到每个模型的动作接口后，被应用于环境和每个兼容的候选模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "任务策略和环境随机支持保持为独立的组；根、动作、视界和模型输出是族内的重复测量。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "term"
+    ],
+    "issue": "「rollouts」译为「展开」不准确，「替代模型展开」易被误读为",
+    "zh_reviewed": "动作对比以生成式世界模型的可控性度量的精神来测试动作敏感性（Bruce et al., 2024; Arai et al., 2024），但针对执行的环境终点而非替代模型展开。"
+   }
+  ]
+ },
+ "S2.SS2.SSS0.Px5.p1.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "闭包开发、闭包验证、探针训练、校准和评估使用不相交的环境族身份；候选模型在环境侧目标构建期间不可用，评估数据不影响任何目标排名、读出容量、归一化、阈值、候选纳入或动作支持。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "「直接预测与真实特征对齐」易被误读为「直接地预测……与真实特征对齐」，direct 修饰的是 alignment（预测特征与真实特征的直接对齐）；「执行的环境端点」「动作空对照」表意也略含糊，「已执行环境的端点」「空动作对照」更清楚。",
+    "suggestion": "主要读出是带有分组嵌套交叉验证的标准化岭探针；对照包括标签和特征打乱、零时域恒等、持续性、已执行环境的端点、错误动作和空动作对照、探针容量敏感性，以及预测特征与真实特征的直接对齐。",
+    "zh_reviewed": "主要读出是带有分组嵌套交叉验证的标准化岭探针；对照包括标签和特征打乱、零时域恒等、持续性、执行的环境端点、错误动作和动作空对照、探针容量敏感性，以及直接预测与真实特征对齐。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "完整的环境族是不确定性单位；检查点、根、动作、坐标和想象样本从不被视为独立重复，每个候选模型单独报告。"
+   }
+  ]
+ },
+ "S2.SS2.SSS0.Px6.p1.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "该审计在应用于学习模型之前，先在合成系统上进行校准：十个预先指定的验收案例要求它区分捕获失败与传播失败、拒绝将持续性视为成功动力学、恢复已知的稳定秩、在正交基变化下保持不变，并在分割泄漏时停止；在固定配置下，所有十个案例均通过（附录B）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "学习模型的结果使用字面查询 $F_{Q}$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "更大的环境侧闭包目标 $\\mathcal{C}_{\\mathcal{Q},H,\\nu}=\\operatorname{span}\\{\\mathcal{K}_{a_{0}}\\cdots\\mathcal{K}_{a_{t-1}}q\\}$ 仅在通过秩、零空间和稳定性检查后使用；原始的 Cheetah 构造未通过那些检查，而合格的继任者仅在匹配的动作壳上成立（附录F）。"
+   }
+  ]
+ },
+ "S3.p1.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "本节使用第2.1节的粗略算子诊断来确立这一局限性，从而引出更精细的审计。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "两项结果都是对Cheetah运动的单环境观察；它们标记了一种失效模式，而非证明一条普遍规律。"
+   }
+  ]
+ },
+ "S3.SS1.p1.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "已发布的多任务 TD-MPC2 检查点（Hansen et al., 2024）提供了在一种配方下训练的五种模型规模。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在这一扫描中，cheetah-run 上的回合回报随着规划时域上任务可观测量的算子误差增大而下降，秩相关系数为 $-0.90$，并且在控制奖励预测准确度后该关联仍然存在。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "奖励预测误差本身很小，并且在相同的检查点中几乎持平（图 2）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "最大的检查点是最明显的实例：其奖励拟合在扫描中属于最佳之列，而其算子误差最差，且其规划回报崩溃。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "omission"
+    ],
+    "issue": "「the transition」指转移（动力学）模型，译为「转移」缺少「模型」二字，读起来像抽象动作而非模型主体，易造成指代不明。",
+    "suggestion": "在这一扫描中，价值通道自身的拟合统计量恰好在转移模型错误地移动任务可观测量的地方保持沉默。",
+    "zh_reviewed": "在这一扫描中，价值通道自身的拟合统计量恰好在转移错误地移动任务可观测量的地方保持沉默。"
+   }
+  ]
+ },
+ "S3.SS1.p2.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "算子诊断还测量了标准模型质量代理指标所没有测量的东西。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "按完整可观测族上的算子误差对相同检查点进行排序，与贝尔曼残差排序仅微弱一致，而算子分数的值受限变体几乎完全重现了贝尔曼残差排序（图2，右面板）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这种不一致本身具有信息量：在值相关方向上受限时，算子分数重现了值通道的排序，因此其额外信号来自值通道未约束的任务可观测方向。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，我们将算子分数视为基于值的指标的补充，与它们一起报告，而不是替代（Farahmand et al., 2017; Grimm et al., 2020; Lambert et al., 2020）。"
+   }
+  ]
+ },
+ "S3.SS1.p3.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "minor",
+    "category": [
+     "term"
+    ],
+    "issue": "「dependent」译为「依赖的」过于字面，此处指五个规模来自同一配方、彼此不独立（统计上相关），「依赖的发布规模」易让读者疑惑「依赖于什么」，建议明确为「相互依赖」或「非独立」。",
+    "suggestion": "这些是来自同一训练配方在同一任务上的五个相互依赖（非独立）的发布规模；该扫描只能支持一个相关性信号，而非选择规则或回报保证。",
+    "zh_reviewed": "这些是来自一种训练配方在一个任务上的五个依赖的发布规模；该扫描支持一个相关性标志，而非选择规则或回报保证。"
+   }
+  ]
+ },
+ "S3.F2": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图2：**奖励拟合在算子失效处保持沉默。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在cheetah-run上发布的五种规模的多任务TD-MPC2检查点（依赖规模；描述性扫描）。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "term"
+    ],
+    "issue": "「episode return」在强化学习语境中应译为「回合回报」，「情节回报」用词不当；「planning-time horizon」译为「规划时间范围」也不够准确，宜为「规划时域」。",
+    "suggestion": "（A）在规划时域上，回合回报与任务可观测量上的算子误差的关系；秩相关为$-0.90$（锚定自助法95%区间$[-0.90,-0.70]$；留一法范围$\\geq-0.80$）；在控制奖励预测准确度后，该关联仍然存在（偏秩相关$-0.89$）。",
+    "zh_reviewed": "（A）在规划时间范围内，情节回报与任务可观测量的算子误差的关系；秩相关为$-0.90$（锚定自助法95%区间$[-0.90,-0.70]$；留一法范围$\\geq-0.80$）；在控制奖励预测准确度后，该关联仍然存在（偏秩相关$-0.89$）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "317M检查点被标记：算子误差最差，回报崩溃。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（B）相同检查点的奖励预测误差，在$[0.03,0.09]$内持平，同一检查点被标记：奖励拟合接近最佳，算子最差。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（C）检查点排名：全可观测算子误差与贝尔曼残差指标（秩相关$+0.30$，95%区间$[+0.30,+0.60]$），以及值受限算子变体与相同贝尔曼残差（$+1.00$）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "单一环境和$n=5$个依赖规模；仅为相关性证据。**"
+   }
+  ]
+ },
+ "S3.SS2.p1.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "奖励拟合并不揭示操作符误差；一个仍存的可能性是，任务锚定训练尽管如此仍能防止它。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在这一比较中，它没有。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "三个独立种子的 LeWorldModel 运行（Maes et al., 2026），即从零开始在 cheetah-run 上训练的无任务信号的自监督视频预测世界模型，与在同一任务上训练的任务锚定 TD-MPC2 模型进行比较，使用在共享任务可观测变量上的匹配岭探针以及每个模型在规划时间范围内的原生预测模式。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "自监督模型对操作符的保持明显更好：它们的操作符误差约为任务锚定模型的 $0.46$，在所有三个种子上具有不相交的 95% 区间（图 3）。"
+   }
+  ]
+ },
+ "S3.SS2.p2.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "三项对照分析支持这一比较。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "单任务和多任务锚定检查点给出相同答案，排除了多任务劣势。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "将可观测族限制在两个模型都能很好探测的坐标上，使差距略大而非更小，排除了探测不对称性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在岭探测替换为单隐藏层 MLP 探测的情况下，种子级区间仍然不相交。"
+   },
+   {
+    "verdict": "major",
+    "category": [
+     "term"
+    ],
+    "issue": "operator 在算子学习语境下应译为「算子」，译成「操作者」变成了指人，意思发生实质偏差。",
+    "suggestion": "该比较仍仅涵盖两个模型家族，且只有一个锚定种子，模型具有不同的输入模态和原生预测模式；它限制了“任务锚定确保算子保真度”这一主张，且不支持更强的结论。",
+    "zh_reviewed": "该比较仍仅涵盖两个模型家族，且只有一个锚定种子，模型具有不同的输入模态和原生预测模式；它限制了“任务锚定确保操作者保真度”这一主张，且不支持更强的结论。"
+   }
+  ]
+ },
+ "S3.F3": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图3：**任务锚定并未赋予算子保真度。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在规划时间尺度上共享任务可观测量的算子误差；蓝色标记始终表示自监督 LeWorldModel 种子。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（A）在完整共享族上的岭探针：三个独立种子的 LeWorldModel 运行（$0.384\\pm 0.009$）对比任务锚定的 TD-MPC2（单任务 $0.840$；多任务 $0.833$）；误差比 $0.457\\pm 0.011$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（B）将族限制在两个模型都能很好探测的 $n=7$ 个可观测量上，对比单任务锚定检查点（多任务变体未在此协议下运行）：差距增大（比值 $0.395\\pm 0.012$）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（C）单隐藏层 MLP 探针消融，相同比较对象：种子级 95% 区间保持不相交（比值 $0.495\\pm 0.006$）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "两个模型族，每个变体一个锚定种子，输入模态和原生预测模式不同；这是对锚定主张的一个界限，而非架构排名。**"
+   }
+  ]
+ },
+ "S3.SS3.p1.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这两个结果共同表明，价值通道既不能检测操作符错误，在这一比较中也不能防止操作符错误。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "scope"
+    ],
+    "issue": "「cannot say what fails」意为无法说明是「什么/哪一部分」失败了，译文「失败的原因」把「什么失败」换成了「为何失败」，指向略有偏移。",
+    "suggestion": "但粗略分数无法说明究竟是什么失败了：操作符错误数字将潜在状态中缺失的信息与存在但被错误移动的信息混为一谈，并且它在没有匹配干预的情况下对支持集进行聚合。",
+    "zh_reviewed": "但粗略分数无法说明失败的原因：操作符错误数字将潜在状态中缺失的信息与存在但被错误移动的信息混为一谈，并且它在没有匹配干预的情况下对支持集进行聚合。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "本文的其余部分应用第2.2节的捕获门控审计，该审计将这两种解读区分开来。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这种区分具有实际意义：在本节中更好地保留粗略操作符的自监督家族，正是下一节中其匹配干预效果失败最严重的同一家族。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这两种工具测量同一模型的不同属性；这就是保留两者的原因，也是为什么任何一种原始分数在不同工具之间不可比。"
+   }
+  ]
+ },
+ "S4.p1.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "捕获门控审计定位了粗粒度诊断无法区分的失败：模型可以表示任务信息，却仍然错误预测动作如何改变它。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "本节和下一节的两个任务均来自 DeepMind Control Suite（Tassa et al., 2018）；表 1 总结了三个候选名单。"
+   }
+  ]
+ },
+ "S4.T1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "表1：捕获门控匹配干预结果。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "每一行是一个任务-架构名册。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "候选模型不进行汇总，原始分数在不同任务间不可比。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "原文的数学格式 $n=96$ 在译文中被改为纯文本 n=96，公式应原样保留。",
+    "suggestion": "区间使用4,096次全家族自助重采样，基于每个候选模型的 $n=96$ 个评估家族。",
+    "zh_reviewed": "区间使用4,096次全家族自助重采样，基于每个候选模型n=96个评估家族。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "原文的数学格式 $R^{2}$ 在译文中被改为 Unicode 字符 R²，公式应原样保留。",
+    "suggestion": "严重表示预测效应 $R^{2}$ 及其95%置信上限均低于零。",
+    "zh_reviewed": "严重表示预测效应R²及其95%置信上限均低于零。"
+   }
+  ]
+ },
+ "S4.SS1.p1.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "三个冻结的 LeWorldModel 检查点（Maes et al., 2026）在 Cheetah 任务策略支持上被评估。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "每个评估家族在五个环境步骤的物理时间范围内提供三个根和六个匹配的执行器对比；冻结目标是端点躯干速度，读出和阈值在 48 个校准家族上固定，然后每个检查点在 96 个评估家族上评分。"
+   }
+  ]
+ },
+ "S4.SS1.p2.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "所有三个检查点都通过了两个先决条件：当前查询可以从真实编码根中读出，并且冻结的读出在真实端点处解析了匹配脉冲的真实效应。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "它们自己想象的效应随后未能通过两项确认性比较。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "预测效应 $R^{2}$ 远低于零，比预测完全没有效应还要差，每个全家族 95% 区间都低于零，并且每个检查点的想象端点在相同读出下都可靠地比环境端点预言机差（表 1；图 4，顶行）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，当前查询捕获和真实效应可解析性与模型自身五步动作效应的严重失真共存，无论是前瞻性地还是在整个名单上。"
+   }
+  ]
+ },
+ "S4.SS2.p1.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "最简单的解释，即转移完全丢失了干预，并不成立。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "原文中的公式标记 $0.85$–$0.89$ 和 $1.7$–$2.6$ 在译文中丢失了 $ 符号，公式应原样保留。",
+    "suggestion": "在用确认包冻结的描述性对照中，完整的预测特征变化仍然与真实变化强烈一致（三个检查点的对比余弦为 $0.85$–$0.89$），而投影到任务读出上的相同变化几乎与真实任务效应正交，且幅度大 $1.7$–$2.6$ 倍。",
+    "zh_reviewed": "在用确认包冻结的描述性对照中，完整的预测特征变化仍然与真实变化强烈一致（三个检查点的对比余弦为0.85–0.89），而投影到任务读出上的相同变化几乎与真实任务效应正交，且幅度大1.7–2.6倍。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在所测量的表面内，失败在于任务方向错位且增益过大：模型大致以正确的方式移动其特征，但将这一移动中与任务相关的分量移向了错误的方向，且强度过大。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "「would have looked benign」的虚拟/反事实语气（本会显得无害，实际并未发生）在译文中丢失，译成了直陈的「看起来无害」。",
+    "suggestion": "这就是为什么通用的特征空间展开误差在这里本会显得无害，以及为什么轨迹合理性评分可能完全错过这一失败（第7节）。",
+    "zh_reviewed": "这就是为什么通用的特征空间展开误差在这里看起来无害，以及为什么轨迹合理性评分可能完全错过失败（第7节）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这种刻画是描述性的；它限制了候选机制，但没有确立其中任何一种。"
+   }
+  ]
+ },
+ "S4.SS2.p2.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "主要结果未确立的内容在第8节中予以限定：并非在任何非线性解码器下都缺乏任务信息，并非对其他时间范围或支撑集的主张，并非规划器失败或回报的主张，也并非超出所测试名单的泛化，后者是下一节的主题。"
+   }
+  ]
+ },
+ "S5.p1.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "严重的 Cheetah 模式可能是潜在世界模型的普遍特性、某一架构的特性，或某一任务清单的伪影。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "三个边界结果将其定位：oracle 相对缺陷在每个测试任务清单中重现，而严重联合现象则取决于模型家族、任务和种子。"
+   }
+  ]
+ },
+ "S5.SS1.p1.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在共享的冻结 DINOv2 主干（Oquab et al., 2024）上，五个独立初始化的动作条件预测器采用相同的四部分决策结构进行评估，候选选择在任何匹配干预结果被看到之前完成。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "每个预测器都通过了根捕获、真实效应分辨和 oracle 相对比较；没有一个满足在 LeWorldModel 中观察到的严重低于零的条件（表 1；图 4，底行）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，在能够检测到它的预先指定的测试下，严重联合现象在实质性不同的视觉预测器中并未复现。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "准确的传播也未被确立：每个预测减去 oracle 的误差区间严格为正，因此所有五个想象的终点仍然可靠地比它们试图预测的真实终点更差。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "hedge"
+    ],
+    "issue": "「attenuates it toward zero」译为「将其衰减至零」把「向零方向衰减」加强为「衰减到零」，丢失了对终点程度的限定。",
+    "suggestion": "在 LeWorldModel 旋转并放大任务效应之处，PreJEPA 则将其衰减趋近于零：一个共同的缺陷背后有两种不同的几何结构。",
+    "zh_reviewed": "在 LeWorldModel 旋转并放大任务效应的地方，PreJEPA 将其衰减至零：一个共同的缺陷背后有两种不同的几何结构。"
+   }
+  ]
+ },
+ "S5.F4": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图4：**干预差距与Cheetah上的非复现。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "行表示架构。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "左列是当前查询捕获$R^{2}$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "中列是匹配效应差距：空心方块是真实匹配效应$R^{2}$，实心圆是预测匹配效应$R^{2}$（族95%区间）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "箭头从环境效应指向模型的预测效应。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "该面板使用断裂的$R^{2}$轴，以便两端均可读；省略的区间不包含任何绘制值，且水平刻度在每个窗格内的架构之间共享。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "阴影区域为$R^{2}<0$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "标签标记冻结的低于零失真门：严重意味着预测$R^{2}$及其95%上端点均$<0$；不严重意味着该合取不成立。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "右列是预言机赤字（LeWorldModel的配对预测减预言机RMSE差异；PreJEPA的预测减预言机RMSE）；两者均$>0$意味着比环境端点预言机更差。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "候选标签在行间不可比。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "区间使用4,096次全族自助重采样（每个候选内$n=96$个评估族）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "读出和阈值在评估前于校准集上冻结。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "「worse than」译为「低于」：原文是「比零差、比预言机差」，译文直接说成数值上的「低于」，虽然对 $R^{2}$ 类指标含义等价，但措辞上把评价（更差）换成了比较（更低），略失原文语气。",
+    "suggestion": "LeWorldModel显示出捕获和真实效应分辨，预测效应比零差且比预言机差。",
+    "zh_reviewed": "LeWorldModel显示出捕获和真实效应分辨，预测效应低于零且低于预言机。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "PreJEPA保留捕获、真实效应分辨和预言机赤字，但不复现严重合取。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "两种架构不足以支持架构总体的声明；PreJEPA的非复现不是准确传播的证据。**"
+   }
+  ]
+ },
+ "S5.SS2.p1.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "minor",
+    "category": [
+     "term",
+     "scope"
+    ],
+    "issue": "「reproduces」未按术语表统一译为「复现」而用了「再现」；「超越运动的分离结构」修饰关系不清，易被读作分离结构本身「超越运动」，原文意为在运动（locomotion）任务之外复现了该分离结构。",
+    "suggestion": "将相同的捕获门控协议应用于 Finger Spin，以端点负铰链速度作为冻结查询，并进行三次独立随机种子的 LeWorldModel 运行，在运动（locomotion）任务之外复现了这种分离的结构。",
+    "zh_reviewed": "将相同的捕获门控协议应用于Finger Spin，以端点负铰链速度作为冻结查询，并使用三个独立种子的LeWorldModel运行，再现了超越运动的分离结构。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "term"
+    ],
+    "issue": "「resolution」在此指一项判定/解析检验（runs pass 的对象），译为「分辨率」易被误解为图像或数值分辨率。",
+    "suggestion": "所有三次运行都通过了根捕获和真实端点解析检验，并且每个配对的「预测减 oracle」区间都严格为正。",
+    "zh_reviewed": "所有三次运行都通过了根捕获和真实端点分辨率，并且每个配对的预测减oracle区间都严格为正。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "term"
+    ],
+    "issue": "「certificate」指一种判定凭证/判据，译为「证书」不够准确；「种子不变」表述生硬，宜点明是跨种子不恒定。",
+    "suggestion": "然而，严重性在不同种子间并不恒定：一次运行满足「严重的低于零」判据，而另外两次运行仍保持为正但逊于 oracle 的预测效应信号（表 1；图 5）。",
+    "zh_reviewed": "然而，严重性并非种子不变：一次运行满足严重的低于零证书，而另外两次运行保留了正但低于oracle的预测效应信号（表1；图5）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "oracle相对差距在任务间复现；极端形式即使在一种架构在一种任务上的不同种子间也未复现。"
+   }
+  ]
+ },
+ "S5.F5": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图5：**Finger Spin：oracle相对差距，严重程度不一。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在Finger Spin（终点负铰链速度）上三个独立种子的LeWorldModel运行。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "列如图4：捕获$R^{2}$；冻结严重/非严重门控下的匹配效应差距；配对预测减oracle RMSE差异（$>0$表示比环境终点oracle更差）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "区间使用4,096个全家族自助重采样（每个候选$n=96$个评估家族）；读出和阈值在评估前于校准集上冻结。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "原始分数与Cheetah不可比。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "oracle相对缺陷在每次运行中均复现；严重失真出现在三次中的一次。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "一种架构和一个额外任务；无普遍机制、架构排名或规划器声明。**"
+   }
+  ]
+ },
+ "S5.SS3.p1.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "上述确认性名册使用了有效但不同的环境家族。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "一项共享评估将冻结的 LeWorldModel 和 PreJEPA 候选模型，连同已发布的 TD-MPC2 模型（Hansen et al., 2024）的描述性面板，置于相同的根、五步动作和环境端点上，并分别分析任务策略和环境随机支持。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "没有出现一致的架构特征（图 6）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "LeWorldModel 任务策略单元在此库上未能通过真实效应解析，并且仍未获得传播认证；PreJEPA 任务策略效应持续衰减；TD-MPC2 表现出较大的检查点间和支持间差异，包括在其最大的已发布检查点中跨支持出现符号反转和极端放大模式，且没有单调的规模模式。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "每个预先指定的架构-支持摘要仍然没有定论。"
+   }
+  ]
+ },
+ "S5.SS3.p2.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "“roster”译作「名单」过于字面，此处指实际参评的一组候选模型（阵容），「名单」易被理解为名字列表而非模型集合本身。",
+    "suggestion": "综合这些边界结果，可以得出以下结论：在所有测试过的情形中，捕获与传播仍然是可分离的，并且相对于预言机的传播缺陷在每一组合格的候选模型中都出现过，但失败的严重程度和几何形态是候选模型、任务、种子和支持集的属性，而不是潜在世界模型作为一个类别的属性。",
+    "zh_reviewed": "综合这些边界结果，可以得出以下结论：在所有测试过的情形中，捕获与传播仍然是可分离的，并且相对于预言机的传播缺陷出现在每一个合格的名单中，但失败的严重程度和几何形态是候选模型、任务、种子和支持集的属性，而不是潜在世界模型作为一个类别的属性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "尖锐的 Cheetah 分类在其冻结的支持集上是有效的，并且不是该模型的支持集不变属性。"
+   }
+  ]
+ },
+ "S5.F6": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图6：**共享评估动作-效果几何。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "行是架构，列是在相同根、五步动作和环境终点上的干预支持。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在每一列内，水平轴是匹配效果余弦，并在各架构间共享；垂直轴列出候选，且在各行间不可比（三个LeWorldModel检查点、五个PreJEPA种子、五个依赖的TD-MPC2发布尺寸）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "区间使用在完整重置族（256个排列）上的4,096个全族自助重采样。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "阴影单元格在此库上未能通过真实效果可分辨性或捕获，且未对传播进行认证；它们不被计为传播成功或失败。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "term"
+    ],
+    "issue": "“oracle”译作「预言」不太符合机器学习语境下 oracle（理想参照/预言机）的技术含义，易引起误解，建议保留英文或译作「预言机」。",
+    "suggestion": "数字标签是冻结增益（att. 衰减，amp. 放大）；“rev.”标记负方向标签；“O?”标记未解决的 oracle 比较。",
+    "zh_reviewed": "数字标签是冻结增益（att. 衰减，amp. 放大）；“rev.”标记负方向标签；“O?”标记未解决的预言比较。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "标记填充编码持久性比较。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "十三个主核心单元格满足纳入标准；每个架构-支持摘要仍无定论。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "TD-MPC2行仅为描述性（依赖的发布尺寸）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此图不对架构进行排名，也不建立尺寸定律。**"
+   }
+  ]
+ },
+ "S6.p1.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如果干预保真度是有条件的，且无法从价值通道读出，那么实际问题就是如何审计它，以及何时信任模型自身的信号。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "三个结果回答了该问题的部分内容：读取哪个表面、分歧在多大程度上可信，以及哪个门首先约束。"
+   }
+  ]
+ },
+ "S6.SS1.p1.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "审计预设了一个承载查询的状态表面。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在DreamerV3研究（Hafner et al., 2023）中，在冻结捕获门条件下，针对当前查询在四个训练检查点上定位了六个原生表面。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "中心化后验logits是唯一在每个检查点都通过两个门的表面；采样的类别潜在变量、其众数、确定性循环状态及其拼接在所有检查点均未通过，且高达1,024个样本的有限采样预算无法达到精确logit结果（图9；附录E）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "审计所需的信息存在于后验分布中，而非展开机制所消耗的任何单个采样状态中。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这是一个表征边界结果：它许可了用于审计的分布级读出，但并未测试Dreamer的传播，后者仍未得到认证。"
+   }
+  ]
+ },
+ "S6.SS2.p1.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "集成不一致性是学习动力学中标准的认知信号（Lakshminarayanan et al., 2017; Chua et al., 2018）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在五种子PreJEPA家族中，它表现为一种尖锐的、相对于支持集的诊断指标：在任务策略支持集下，不一致性对未来的特征误差进行排序（$\\rho=0.678$），而在环境随机支持集下则无定论（$\\rho=0.027$）；一个独立改变根上下文和未来动作偏离程度的后续网格显示，追踪性能沿两个轴都在恶化（图7）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "预测分支相对于编码的真实分支也会收缩，并朝着离线训练支持集移动，同时远离相同支持集下的环境轨迹；预先指定的联合吸引子特征并未建立。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在该家族中，预先指定的不一致性百分位数与支持集分数的等权组合，相比单独使用不一致性，改善了全局误差排序。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些都不能校准认知不确定性；它们只是界定了该代理指标在何处具有信息量。"
+   }
+  ]
+ },
+ "S6.F7": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图7：**支持相关的特征与偏离阶梯。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（A–B）PreJEPA端点/支持分析（五个候选；完整环境族；4,096个全族自助样本）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "所有十个候选–支持单元都解析了真实分支的散布，收缩了预测散布，向训练支持移动，并远离同支持的基线流；预先指定的联合端点特征未得到确立。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "面板B是干预下种子分歧与未来特征误差之间的族级Spearman $\\rho$（任务策略 $\\rho=0.678$，$[0.635,0.719]$；环境随机 $\\rho=0.027$，$[-0.029,0.080]$）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（C–D）上下文–动作支持阶梯（$n=384$个评估族；$4\\times 4$网格；每单元96个族；主渲染通道）。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "term"
+    ],
+    "issue": "hatched 指带斜纹/阴影线标记的单元格，译作「阴影」容易被理解为颜色深浅或灰底，与图中标记方式不符。",
+    "suggestion": "单元格颜色为Spearman $\\rho$；斜纹单元格未解析；方框角为近策略支持。",
+    "zh_reviewed": "单元格颜色为Spearman $\\rho$；阴影单元格未解析；方框角为近策略支持。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "上下文和未来动作分量各自可检测，而它们的交互作用尚无定论。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "$C=0.5D_{\\mathrm{pct}}+0.5S$相比分歧$D$改善了全局排序（$\\Delta=0.0241$，95%区间$[0.0090,0.0397]$）；配对通道是技术敏感性分析，而非独立重复。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这仅是PreJEPA内部的证据，并不校准认知不确定性。**"
+   }
+  ]
+ },
+ "S6.SS3.p1.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "家族内的成功提示了一条一般规则：在所有地方都将支持度项添加到分歧上。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "一项双向留出测试证伪了那条冻结的规则。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "等权分数在 PreJEPA 上被冻结，并在不重新拟合的情况下转移，首先转移到三个独立训练的留出 TD-MPC2 运行上，然后反过来，在 TD-MPC2 加入开发后，转移到一个新环境库上的三个独立种子的留出 LeWorldModel 运行上。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "其成分是标准的离支持度惩罚：原生分歧（Yu et al., 2020; Kidambi et al., 2020）和源自马氏距离分布外分数的特征空间支持度距离（Lee et al., 2018）。"
+   }
+  ]
+ },
+ "S6.SS3.p2.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在两个方向上，相同的模式都成立：原生分歧对终点误差的排序具有信息量，冻结的组合分数比单独使用分歧略差但可靠地更差，而单独的支持距离则弱得多（图8；附录C）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在相反方向上，每个留出的运行中，组合分数减去原生分歧的区间都严格为负。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "两个方向共享一个任务和库设计，因此它们界定了这个冻结的加法规则，而不是每个支持校正；它们并未确立一个普遍的无支持定律。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "它们支持的实践是保守的：将架构原生的分歧视为默认的可迁移误差排序信号，并将任何支持增强视为特定于家族的工具，其迁移必须在重用前重新验证。"
+   }
+  ]
+ },
+ "S6.F8": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "「fails held-out transfer」意为在留出迁移上失败/未能实现迁移，「未能通过留出迁移」把迁移说成了可通过的测试，语义略有偏移。",
+    "suggestion": "图8：**冻结的支持增强在两个方向上都未能实现留出迁移。",
+    "zh_reviewed": "图8：**冻结的支持增强在两个方向上都未能通过留出迁移。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "分数 $C=0.5U_{\\mathrm{pct}}+0.5S$ 在 PreJEPA 上冻结，并在不重新拟合的情况下应用。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（A–B）留出的 TD-MPC2（三个独立训练的 4M 运行）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "完整角色 Spearman $\\rho$ 在每个分数与终点误差之间：原生分歧 $U$ $0.776$（$[0.762,0.789]$）；冻结组合 $C$ $0.756$（$[0.741,0.770]$）；仅支持距离 $0.521$（$[0.498,0.544]$）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "相对于 $U$ 的成对排名增益：$C-U=-0.020$（$[-0.028,-0.010]$）；阴影区域为 $\\Delta\\leq 0$。"
+   },
+   {
+    "verdict": "major",
+    "category": [
+     "term"
+    ],
+    "issue": "reciprocal 此处指相反（对向）的迁移方向，译为「互惠的」（mutually beneficial）属明显误译，读者会误解实验含义。",
+    "suggestion": "（C–D）反方向的留出 LeWorldModel（在全新环境库上三个独立随机种子的 epoch-100 运行）。",
+    "zh_reviewed": "（C–D）互惠的留出 LeWorldModel（在全新环境库上三个独立种子的 epoch-100 运行）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "该模式在较低的排名水平上重复：$U$ $0.417$（$[0.381,0.451]$）；$C$ $0.388$（$[0.355,0.420]$）；仅支持 $0.140$；增益 $-0.028$（$[-0.050,-0.007]$）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "空心圆是单个留出运行；每个都有严格为负的组合减原生区间（附录 C）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（E）TD-MPC2 方向上 $C-U$ 的上下文 $\\times$ 动作图。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "阴影线单元格的 95% 区间包含零，因此未解决；已解决单元格的符号仍然混合，且不会逆转完整角色标签。"
+   },
+   {
+    "verdict": "major",
+    "category": [
+     "term"
+    ],
+    "issue": "reciprocal level 指反方向实验的（较低）排名水平，「互惠水平」同样是把 reciprocal 误译为「互惠」。",
+    "suggestion": "A 和 C 中的 $\\rho$ 轴是共享的，以便看清反方向较低的水平；两个方向分别分析，从不合并。",
+    "zh_reviewed": "A 和 C 中的 $\\rho$ 轴是共享的，以便可见较低的互惠水平；两个方向分别分析，从不合并。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "区间使用 4,096 次全家族上下文分层自助抽样（每个方向 $n=384$ 个评估家族；4,608 个上下文-动作行作为重复测量）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "每个方向一个任务和库设计；不是校准，不是普遍的无支持定律，并且对奖励、回报和决策价值保持沉默。**"
+   }
+  ]
+ },
+ "S6.SS4.p1.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "第2.2节的门控顺序也是实际审计中失败的地方。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在对三个独立训练的TD-MPC2运行进行匹配外壳审计时，每个主单元都在第一个门控处终止：绝对根捕获在任务策略根上通过，但在两个测试的动作半径上真实端点效应解析失败，而在环境随机根上绝对捕获本身失败，因此两个方向上都没有可解释的传播单元（附录F）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在一个库上获得广泛状态重建资格的读出，既不能保证标量查询的支持转移，也不能保证端点减根差分后的足够分辨率。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "合格的环境侧闭合结果在目标层面显示出同样的局限性：闭合在匹配的动作外壳上成立，而不是在整个动作球上成立。"
+   }
+  ]
+ },
+ "S6.SS4.p2.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "由此产生的协议很简短。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "addition"
+    ],
+    "issue": "candidate 译为「候选模型」，原文只说 candidate，未明确所指为模型，多出了一层预设。",
+    "suggestion": "在评估任何候选项之前，先声明查询、物理视界和支持。",
+    "zh_reviewed": "在任何候选模型被评估之前，声明查询、物理视界和支持。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对读出进行两次资格验证，一次在真实根上，一次在真实观测端点上，每次针对每个支持。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "term"
+    ],
+    "issue": "oracle 译为「基准」，丢失了 oracle 作为权威真值来源的含义，「基准」更像是 baseline。",
+    "suggestion": "仅对同时通过这两项验证的单元解释想象的传播，并对照持续性、零效应和环境端点 oracle 进行解释。",
+    "zh_reviewed": "仅对通过这两项验证的单元解释想象的传播，并与持续性、零效应和环境端点基准进行比较。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "读取模型的原生接口，并且在状态是分布的情况下，读取分布而不是其样本。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "term"
+    ],
+    "issue": "families 译为「家族」，在数学/机器学习语境中规范译法为「族」，「家族」过于口语化。",
+    "suggestion": "仅在训练支持附近将不一致视为有信息量的，并且要求任何支持修正在使用前于留出族上通过资格验证。",
+    "zh_reviewed": "仅在训练支持附近将不一致视为有信息量的，并且要求任何支持修正在使用前在留出家族上通过资格验证。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "保真度始终是模型、查询、视界、支持和接口之间的关系，而不是一个单一的分数。"
+   }
+  ]
+ },
+ "S7.SS0.SSS0.Px1.p1.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "学习动作后果的模型并在其中进行规划是一个长期的研究计划（Sutton, 1991; Ha and Schmidhuber, 2018）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "现代潜在世界模型将编码器与开环潜在转移耦合，规划器或想象轨迹学习者直接使用该转移（Hafner et al., 2019; Hafner et al., 2020; Hafner et al., 2021; Hafner et al., 2023; Schrittwieser et al., 2020; Hansen et al., 2022; Hansen et al., 2024）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "审计评估的正是这个暴露给规划器的接口：真实编码根和模型自身的开环转移。"
+   }
+  ]
+ },
+ "S7.SS0.SSS0.Px2.p1.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "minor",
+    "category": [
+     "term"
+    ],
+    "issue": "“policy and value classes”指策略类和价值函数类（函数逼近意义上的函数类），译作“策略和价值类别”略含糊，易丢失“函数类”的含义。",
+    "suggestion": "价值感知和价值等价模型学习将模型精度限制在与规划相关的策略类和价值函数类上（Farahmand et al., 2017; Grimm et al., 2020; Grimm et al., 2021; Silver et al., 2017），并且已知单步似然与控制性能的相关性较差（Lambert et al., 2020）。",
+    "zh_reviewed": "价值感知和价值等价模型学习将模型精度限制在与规划相关的策略和价值类别上（Farahmand et al., 2017; Grimm et al., 2020; Grimm et al., 2021; Silver et al., 2017），并且已知单步似然与控制性能的相关性较差（Lambert et al., 2020）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的区分是操作性的：评估目标在候选模型之外构建，表征捕获在真实规划状态上进行测试，并且转移传播仅在捕获和持续性检查之后才被解释。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "term",
+     "other"
+    ],
+    "issue": "fidelity 的规定译法“保真度/质量”表示二者任选其一，译文却将“保真度/质量”连同斜杠原样写入句中，不是正常的译文表述，应择一使用。",
+    "suggestion": "贡献不在于函数相对算子误差的存在，而在于一个前瞻性的测量协议，该协议将目标可用性、真实效应分辨率和模型自身转移的保真度分开。",
+    "zh_reviewed": "贡献不在于函数相对算子误差的存在，而在于一个前瞻性的测量协议，该协议将目标可用性、真实效应分辨率和模型自身转移的保真度/质量分开。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "第3节添加了一个已发布检查点的失配实例：奖励拟合可能很小，并且在算子误差和规划回报差异很大的检查点上几乎平坦。"
+   }
+  ]
+ },
+ "S7.SS0.SSS0.Px3.p1.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "major",
+    "category": [
+     "term"
+    ],
+    "issue": "induces 在此句中意为规划器的行为「引发/导致」某种分布（状态访问分布），译为「归纳出」把因果关系误作归纳推理过程，意思明显不合适。",
+    "suggestion": "一步精确的学习模型可能在规划器诱导出的分布下复合误差（Ross and Bagnell, 2012; Janner et al., 2019），产生不稳定的多步样本展开（Talvitie, 2014; Talvitie, 2017），并在模型错误的区域被策略优化利用（Kurutach et al., 2018）。",
+    "zh_reviewed": "一步精确的学习模型可能在规划器归纳出的分布下复合误差（Ross and Bagnell, 2012; Janner et al., 2019），产生不稳定的多步样本展开（Talvitie, 2014; Talvitie, 2017），并在模型错误的区域被策略优化利用（Kurutach et al., 2018）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些论述在总体上涉及训练和控制性能；而本协议直接测量传播侧，按每次查询和每个匹配的干预进行，且仅在捕获和真实效果前提通过之后。"
+   }
+  ]
+ },
+ "S7.SS0.SSS0.Px4.p1.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "越来越多的研究从结构标准而非下一步损失或实际回报来评估世界模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Vafa et al. (2024) 表明，在离散自动机环境中，生成式序列模型可能通过下一步诊断，但其隐式转移结构是不连贯的；本审计是一个连续控制、干预匹配的类似物，具有显式的捕获门控和持续性以及预言机比较器。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Yu et al. (2026) 作为一种立场主张，世界模型评估应以干预推理和 rollout 有效性为中心；我们贡献了此类审计的一个已执行、前瞻性门控的实例及其边界条件。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Zhang (2026) 探究学习到的环境模拟器的潜在变量，并干预潜在方向；我们的干预则是在环境中匹配的，并在其执行终点进行评分。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "生成式交互模型的动作敏感性指标（Bruce et al., 2024; Arai et al., 2024）同样关注学习模型未充分利用动作输入的问题；匹配对比设计针对真实动作后果而非替代模型 rollout 来测试这一点。"
+   }
+  ]
+ },
+ "S7.SS0.SSS0.Px5.p1.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Koopman 和动态模式方法将动力学提升到有限观测族上的线性算子，并从数据中估计它们（Koopman, 1931; Schmid, 2010; Williams et al., 2015; Mezić, 2005; Korda and Mezić, 2018; Brunton et al., 2022）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们使用该语言来估计有限时域的环境侧闭包，而不是声称全局线性或谱恢复。"
+   }
+  ]
+ },
+ "S7.SS0.SSS0.Px6.p1.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "线性探针方法学为读出容量和选择性的显式控制提供了动机（Alain and Bengio, 2017; Hewitt and Liang, 2019; Belinkov, 2022）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "探针已在序列模型中恢复了线性可读的内部世界状态（Li et al., 2023; Nanda et al., 2023），而遗忘性探针表明可读性并不意味着行为上的使用（Elazar et al., 2021）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，捕获门与单独的传播测试配对，而不是被解读为解码信息被使用的证据。"
+   }
+  ]
+ },
+ "S7.SS0.SSS0.Px7.p1.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "集成不一致性是学习动力学中标准的认知信号（Lakshminarayanan et al., 2017; Chua et al., 2018），并在离线基于模型的强化学习中用于惩罚或截断支持集外的推演（Yu et al., 2020; Kidambi et al., 2020）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "其可靠性在分布偏移下会下降（Ovadia et al., 2019），并且已实现的不一致性惩罚对真实模型误差的追踪并不一致（Lu et al., 2022）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "特征空间支持距离源自马氏距离的分布外得分（Lee et al., 2018）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Berger et al. (2026) 报告称，在 RSSM 推演中，集成不一致性可能下降，而解码的物理差异却增大，并且先验推演可能高估奖励，相对于后验信息推演而言。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这一外部结果促使我们将潜在熟悉度与轨迹保真度区分开来。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "它不是针对我们候选对象的匹配干预证据，其吸引子解释也未用作我们 PreJEPA 结果的因果解释。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们关于支持相对性的发现是互补的：内部一致性或与熟悉潜在区域的接近并不一定意味着准确的物理动作效果，而在一个家族内有帮助的支持感知排序分数不一定能迁移到另一个家族。"
+   }
+  ]
+ },
+ "S7.SS0.SSS0.Px8.p1.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "联合嵌入预测架构推动了无需重建的潜在世界模型（LeCun, 2022; Assran et al., 2023; Balestriero and LeCun, 2025），而在冻结的自监督视觉特征上的潜在动力学支持零样本规划（Oquab et al., 2024; Zhou et al., 2025）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "LeWorldModel 和 PreJEPA 候选模型实例化了这一家族；审计将它们视为冻结的候选模型，而非表示或训练方案。"
+   }
+  ]
+ },
+ "S8.p1.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "学习模型的证据涵盖 Cheetah 运动和 Finger Spin，每个都有一个主要标量查询和五步物理视界。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "一项资格调查检查了跨越 13 个可能家族的 32 个系统；只有五次运行的 PreJEPA 家族通过了所有原始主要标准。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "已发布的 TD-MPC2 尺寸和一些 LeWorldModel 检查点仍然是依赖性的描述性面板。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，证据既不支持跨家族推断，也不支持群体级别的架构排名。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Walker 的延续已获授权但尚未终止，且不能与 Cheetah 或 Finger 合并。"
+   }
+  ]
+ },
+ "S8.p2.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "第3节的结果是相关性的，且仅来自单一环境。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "规模扫描的关联使用了来自同一训练配方的五个相关发布检查点；它是一个警示信号，而非选择规则。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "addition"
+    ],
+    "issue": "“one anchored seed”被译为“仅有一个锚定种子”，添加的“仅”字带出了原文没有的强调语气。",
+    "suggestion": "锚定比较跨越两个模型家族，其中有一个锚定种子，输入模态不同，原生预测模式也不同；这限制了任务锚定能确保算子保真度的论断，且不支持任何架构排名。",
+    "zh_reviewed": "锚定比较跨越两个模型家族，仅有一个锚定种子，输入模态不同，原生预测模式也不同；这限制了任务锚定能确保算子保真度的论断，且不支持任何架构排名。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "来自粗略算子诊断和捕获门控审计的原始分数不可比较。"
+   }
+  ]
+ },
+ "S8.p3.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "minor",
+    "category": [
+     "scope"
+    ],
+    "issue": "「在每个非线性解码器下都不存在或都可用」中两个「都」的辖域不清，易被读成「在每个解码器下都不存在」，与原文「无法确立信息在所有非线性解码器下是不存在还是可用」的语义有偏差。",
+    "suggestion": "捕获是相对于固定的读出族而言的，并不能据此断定信息在所有非线性解码器下是不存在还是可用。",
+    "zh_reviewed": "捕获是相对于固定的读出族而言的，并不证明在每个非线性解码器下都不存在或都可用。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "探针成功也不表明规划器使用了被解码的信息（Elazar et al., 2021）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "当规划不连续或动作裕度很小时，传播保真度未必意味着高回报；实验没有提供任何检查点选择结果、规划回报改进或回报保证。"
+   }
+  ]
+ },
+ "S8.p4.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "真实模型的结果使用字面任务查询。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "环境侧闭包是合成校准的，仅在匹配的动作壳上合格，且其候选模型决策值仍未测试：第一次模型侧壳审计在捕获门处终止（附录 F）。"
+   }
+  ]
+ },
+ "S8.p5.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "支持-参考分析仍然是相关性的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "端点收缩、向训练支持的运动以及分歧-错误关联并未识别出因果机制，第4.2节和第5节的几何特征（一个家族中具有过量增益的旋转，另一个家族中的衰减）限制了候选机制，但没有选择其中一个。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "外部证据表明，潜在推演可能漂移到熟悉区域，而物理误差增长（Berger et al., 2026），这激发了支持吸引的解释，但该证据不是在匹配干预下获得的，并且在此不作为解释使用。"
+   },
+   {
+    "verdict": "major",
+    "category": [
+     "term"
+    ],
+    "issue": "bank 误译为「银行」（金融机构），本文语境中指支持样本的库/存储体（如 support bank / memory bank），「银行设计」会让读者误解为无关概念。",
+    "suggestion": "留出的迁移结果只在一个任务和一种（支持）库设计上约束了一条冻结的加性支持规则；它们并未约束每一种支持修正，并且 Dreamer 研究确立的是表征边界而非传播结果，因此 Dreamer 的传播仍未得到验证。",
+    "zh_reviewed": "留出的迁移结果在一个任务和银行设计上限制了一个冻结的加性支持规则；它们并不限制每一个支持修正，并且Dreamer研究建立了表征边界而不是传播结果，因此Dreamer传播仍未得到认证。"
+   }
+  ]
+ },
+ "S9.p1.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "规划时干预保真度是学习到的世界模型的一个独特且可测量的属性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在本文测试的设置中，它既不能通过奖励拟合来揭示，也不能通过任务锚定训练来保证；在当前状态捕获、真实效果可分辨性和整体特征对齐都通过的情况下，它仍可能严重失败；其严重性和几何特性是候选模型、任务、种子和支持的属性，而不是潜在世界模型作为一个类别的属性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "揭示这一点的审计将保真度视为模型、任务查询、时间范围、干预支持和原生接口之间的关系：首先进行合格的捕获，在实际承载查询的表面上读取，并且仅在训练支持附近信任模型自身的不确定性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "有两个问题被有意留待解决：哪种机制在一个家族中产生具有过度增益的旋转，而在另一个家族中产生衰减；以及审计的排名是否对检查点选择和回报具有决策价值。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "term"
+    ],
+    "issue": "well-posed 是技术性表述（适定/良定义），指实验被严格地提出，译为「变得明确」偏弱，丢失了这层含义。",
+    "suggestion": "两者都需要实验，而本框架现在使这些实验成为适定（well-posed）的问题。",
+    "zh_reviewed": "两者都需要实验，而本框架现在使这些实验变得明确。"
+   }
+  ]
+ },
+ "A5.F9": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图9：**Dreamer当前查询表面定位。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在四个留出的检查点（列按查询损失尺度索引）上，六个原生表面的冻结捕获门结果。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "居中的后验logits在每个检查点都通过两个坐标门；后验概率仅在尺度16和64时通过；采样的类别状态、其众数、确定性循环状态以及拼接均未通过。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "通过/失败通过颜色和符号冗余编码。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这只是当前状态的可用性；传播未被测试。**"
+   }
+  ]
+ }
+}

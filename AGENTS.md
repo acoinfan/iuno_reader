@@ -6,7 +6,8 @@
 
 ```bash
 cd /home/a_coin_fan/work/iuno_reader
-.venv/bin/python -m iuno_reader run <arXiv 编号> [<编号> ...] [--sections abs,2,3,4] [--export <目录>]
+.venv/bin/python -m iuno_reader run <arXiv 编号> [<编号> ...] [--sections abs,2,3,4|body|all] [--export <目录>]
+# 默认 body：只翻正文（不含附录和参考文献）
 ```
 
 运行后看 `out/<编号>/manifest.json`：

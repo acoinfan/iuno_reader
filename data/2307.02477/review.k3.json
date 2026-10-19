@@ -1,0 +1,144 @@
+{
+ "__meta__": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "models": {
+   "reviewer": "kimi-k3"
+  },
+  "translator": "deepseek-v4-pro",
+  "independence": "different-model",
+  "usage": {
+   "calls": 4,
+   "prompt_tokens": 3984,
+   "completion_tokens": 2978,
+   "seconds": 65.0,
+   "cached_tokens": 2048
+  }
+ },
+ "abs.p1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "近期语言模型在广泛任务上令人印象深刻的表现表明，它们具有一定程度的抽象推理技能。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些技能是通用且可迁移的，还是专门针对预训练期间见过的特定任务？"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了区分这些效应，我们提出了一个基于“反事实”任务变体的评估框架，这些变体偏离了标准任务背后的默认假设。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在一组11项任务中，我们观察到反事实变体上有非平凡的表现，但仍然发现与默认条件相比，表现显著且一致地下降。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这表明，虽然当前语言模型可能在一定程度上具备抽象的任务解决技能，但它们通常也依赖狭窄的、不可迁移的任务解决程序。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些结果促使我们对语言模型的表现进行更细致的解读，以区分行为的这些方面。"
+   }
+  ]
+ },
+ "S1.p1.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "「蒸馏为通用交互式智能体」表述易被理解为知识变成了智能体，原文意思是把知识蒸馏（迁移）到智能体之中。",
+    "suggestion": "语言模型（LMs）引人注目的实证成功表明，大规模的下一个词预测可能是一种可行的方法，可以将大规模文本语料库中嵌入的知识蒸馏到通用交互式智能体中。",
+    "zh_reviewed": "语言模型（LMs）引人注目的实证成功表明，大规模的下一个词预测可能是一种可行的方法，可以将大规模文本语料库中嵌入的知识蒸馏为通用交互式智能体。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "LMs 在各种 NLP 基准上取得了令人瞩目的结果（OpenAI, 2023; Anil et al., 2023; Anthropic, 2023; i.a.），并展现出令人惊讶的能力，这些能力表明它们对世界有非平凡的理解（Bubeck et al., 2023）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "它们已被证明能够通过专业考试（Kung et al., 2023; Nori et al., 2023; Terwiesch, 2023; i.a.），在许多传统基准上超越最先进的方法（Sun et al., 2023; Sobania et al., 2023; Zhang et al., 2023a; Dhingra et al., 2023; i.a.），并在需要看似非平凡推理的任务上超越人类表现（Chowdhery et al., 2022; Hoffmann et al., 2022; Malinka et al., 2023; Guo et al., 2023; i.a.）。"
+   }
+  ]
+ },
+ "S1.p2.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "理想情况下，我们希望一个通用语言模型不仅能泛化到已知任务的未见实例，而且能泛化到新任务。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例如，人类能够将知识迁移到新实例，并且还能灵活地适应新任务（Singley and Anderson, 1989）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "当前语言模型的表现，在多大程度上源于它们运用任务通用推理技能的能力，而不是源于它们识别和回忆起在预训练中频繁见过的特定任务的能力？"
+   }
+  ]
+ },
+ "S1.p3.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "minor",
+    "category": [
+     "addition"
+    ],
+    "issue": "「主要」为原文没有的限定，has focused on 只是「关注」，添加「主要」多出了原文未明示的预设。",
+    "suggestion": "过去的工作关注实例层面的泛化，但这常常因数据污染问题而变得复杂（Dodge et al., 2021; Magar and Schwartz, 2022; i.a.）。",
+    "zh_reviewed": "过去的工作主要关注实例层面的泛化，但这常常因数据污染问题而变得复杂（Dodge et al., 2021; Magar and Schwartz, 2022; i.a.）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在本工作中，我们关注模型对新任务变体的泛化能力，这一点在语言模型上得到的系统研究较少（不过参见 Li et al. (2022), Mishra et al. (2022), and Wang et al. (2022b)）。"
+   }
+  ]
+ }
+}

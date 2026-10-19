@@ -1,0 +1,4593 @@
+{
+ "__meta__": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "models": {
+   "reviewer": "deepseek-v4-pro"
+  },
+  "translator": "deepseek-v4-pro",
+  "independence": "same-model",
+  "usage": {
+   "calls": 149,
+   "prompt_tokens": 130754,
+   "completion_tokens": 121650,
+   "seconds": 1159.3,
+   "cached_tokens": 91392
+  }
+ },
+ "abs.p1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "最近的工作表明，大型语言模型可能隐式地学习世界模型（world models）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们应如何评估这种可能性？"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们将此问题形式化，针对底层现实由确定性有限自动机支配的情形。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这包括简单逻辑推理、地理导航、游戏博弈和化学等多种多样的问题。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们受语言理论中经典的 Myhill-Nerode 定理启发，提出了用于世界模型恢复的新评估指标。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们在三个领域说明了这些指标的效用：游戏博弈、逻辑谜题和导航。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在所有领域中，我们考虑的生成模型在评估世界模型的现有诊断上表现良好，但我们的评估指标揭示它们的世界模型远不如它们看起来那样连贯。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这种不连贯造成了脆弱性：使用生成模型来解决相关但略有不同的任务可能导致失败。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "构建能够有意义地捕捉其所建模领域底层逻辑的生成模型将具有巨大价值；我们的结果提示了评估给定模型距离这一目标有多近的新方法。"
+   }
+  ]
+ },
+ "S1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "大型语言模型（LLMs）似乎具有远超其被训练来执行的下一个词元预测任务的能力 [17, 39, 35]。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "hedge",
+     "agent"
+    ],
+    "issue": "“suggests” 译成“表明”语气略有加强，丢失了原文的推测意味；“they are trained on” 是被动关系，译文“其所训练的”容易被理解为模型主动训练，施受关系不够清晰。",
+    "suggestion": "最近的研究提示了一个原因：它们正在隐式地恢复其被训练时所基于的底层领域的高保真表示 [1, 20]。",
+    "zh_reviewed": "最近的研究表明一个原因：它们正在隐式地恢复其所训练的底层领域的高保真表示 [1, 20]。"
+   }
+  ]
+ },
+ "S1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "一种从序列数据中恢复“世界模型”的算法将极具价值。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "举个例子，考虑如今人们可能如何构建导航工具：为每条街道和交叉口精细绘制地图，然后使用搜索算法来提供路线。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "语言模型的成功表明了一种替代方法：收集城市中行程的逐转弯序列（例如“`East North`…”），然后在它们上面训练序列模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如果序列模型成功恢复了世界模型，我们将无需绘制地图即可获得该城市的地图，并且仅通过预测下一个转弯即可获得路线算法。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这个例子并非牵强附会：这正是语言模型被用于蛋白质生成、遗传学和化学等科学领域的原因 [7, 21, 3, 14, 6]。"
+   }
+  ]
+ },
+ "S1.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这一切都依赖于这样一个前提假设：序列模型已经恢复了真实的世界模型；但我们如何检验它是否真的做到了呢？"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "回答这个问题首先需要定义我们所说的真实世界模型是什么意思。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Toshniwal et al. [36] 和 Li et al. [20] 提出了一种具体且有影响力的方法：研究在棋盘游戏记录（例如国际象棋和奥赛罗）上训练的序列模型是否恢复了底层的游戏规则。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "受这一方法的启发，我们考虑这样一种情形：底层世界可以概括为有限的状态集合以及支配状态之间转移的规则；这包括许多领域，如逻辑 [19]、位置跟踪 [28, 9]、游戏 [36, 20]，以及上文描述的若干科学应用。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，这些领域中的“世界”可以被建模为确定性有限自动机（DFA）。"
+   }
+  ]
+ },
+ "S1.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们展示了评估隐式世界模型的困难。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "quantity"
+    ],
+    "issue": "原文为复数 next tokens，译文为单数「下一个 token」，可能缩小了比较范围。",
+    "suggestion": "考虑一种现有方法：对于给定序列，将生成模型输出的后续 token 与该序列所隐含状态的有效后续 token 集合进行比较 [36, 20]。",
+    "zh_reviewed": "考虑一种现有方法：对于给定序列，将生成模型输出的下一个 token 与该序列所隐含状态的有效下一个 token 集合进行比较 [36, 20]。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "尽管直观，这种方法可能无法诊断出严重问题，我们具体说明这一点。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "经典的 Myhill-Nerode 定理 [26, 27] 提供了直觉：每一对不同的状态都可以被某个序列区分（该序列被一个状态接受，而不被另一个状态接受）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "除非那些最小区分序列的长度为 1，否则查看所输出的下一个单个 token 将无法可靠地评估生成模型是否具有对底层状态的准确模型。"
+   }
+  ]
+ },
+ "S1.p5.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Myhill-Nerode 的逻辑提示了两种度量，用于衡量生成模型是否有效捕捉底层状态和转移。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "第一个度量概括了序列压缩：在 DFA 下，导向相同状态的序列必须具有相同的后续；因此可以测试生成模型在从这两个序列开始时是否产生相似的输出序列。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "第二个度量概括了序列区分：在 DFA 下，导向不同状态的两个序列应具有不同的后续；因此可以测试生成模型在从这两个序列开始时是否与这些不同输出相匹配。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们正式定义这些度量，并提供与模型无关的过程，在给定对真实 DFA 的查询访问时计算它们。"
+   }
+  ]
+ },
+ "S1.p6.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了说明这些想法，我们首先从字面意义上看待那个风格化的地图示例。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们构建了一个纽约市出租车行程的逐转弯序列数据集。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然后，我们评估 transformer 在多大程度上成功恢复了曼哈顿的真实街道地图。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "按照通常的指标，这些 transformer 表现非常好：它们预测的下一个方向在几乎 100% 的情况下都是有效转弯，而且它们的状态表示甚至似乎编码了行程的当前位置。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的评估方法揭示，它们距离恢复纽约市的真实街道地图还非常遥远。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "作为可视化，我们使用图重建技术来恢复每个模型隐含的纽约市街道地图。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "得到的地图与曼哈顿的实际街道几乎没有相似之处，其中包含物理朝向不可能的街道以及位于其他街道上方的立交桥（见图3）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "由于这些 transformer 未能恢复纽约市的真实街道地图，它们在下游任务中是脆弱的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "尽管它们有时具有惊人的路线规划能力，但当引入绕行时，它们的表现就会崩溃。"
+   }
+  ]
+ },
+ "S1.p7.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些结果并非地图和导航所独有。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于 Othello 和逻辑谜题，我们使用我们的评估指标来表明，语言模型尽管远未恢复真实世界模型，却能在某些任务上表现得非常出色。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些结果表明，如果我们的目标是构建能够准确捕捉其所训练领域的世界模型的语言模型，那么使用有理论基础的评估指标非常重要。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们发布了纽约市出租车行程的基准数据集，以及实现我们评估指标的软件。{fn1}"
+   }
+  ]
+ },
+ "fn1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "`https://github.com/keyonvafa/world-model-evaluation`"
+   }
+  ]
+ },
+ "S1.p8.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**相关工作。** 我们的论文建立在研究生成模型是否在游戏情境中恢复世界模型（world model）的有影响力的工作之上。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Toshniwal et al. [36] 和 Li et al. [20] 开创了将游戏作为世界模型评估测试平台的研究，分别研究了国际象棋和奥赛罗的测试，这些测试随后由 Hazineh et al. [10] 和 Kuo et al. [18] 进一步研究。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的评估指标适用于这些游戏，因为它们是DFA。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "评估一个已训练模型是否已恢复出世界模型的一种常见方法是使用探针，这些探针评估神经网络的表示能否恢复某些真实世界状态 [11, 19, 1, 16, 20]。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "相比之下，我们的评估指标是模型无关的：它们仅基于序列。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "虽然我们的评估指标所得出的结果有时与现有工作中使用的结果一致，但它们也揭示了现有诊断未能捕捉到的世界模型中的不连贯性。"
+   }
+  ]
+ },
+ "S1.p9.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们研究在方向序列上训练的语言模型是否恢复了真实的底层地图。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这个问题与语言建模文献中研究的其他状态跟踪和导航问题相关 [31, 32]。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例如，Patel & Pavlick [28] 表明，较大的 LLM 将基本方位等空间概念锚定到网格世界中的位置，并泛化到各种网格布局。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "相关地，Schumann & Riezler [30] 证明，基于 transformer 的模型能够从底层图生成语言形式的导航指令。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此外，Guan et al. [9] 使用 LLM 根据自然语言描述执行规划任务。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的结果表明，LLM 可以在没有一个连贯的世界模型的情况下很好地完成其中一些任务（例如在地图上找到两点之间的最短路径）。"
+   }
+  ]
+ },
+ "S1.p10.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此外，我们的评估指标将序列模型接受的语言与底层 DFA 接受的语言进行比较。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "现有工作研究 Transformer 及其他序列模型在理论上是否能够识别不同复杂度类中的语言 [34, 4, 22, 23, 24]。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "与我们的工作最相关的是，Liu et al. [22] 表明低深度 Transformer 在理论上能够表示任意有限状态自动机，并表明经过明确训练以预测其标记状态的 Transformer 能够做到这一点。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "相比之下，本文并不旨在研究模型在理论上是否能够恢复底层自动机，也不旨在研究在给定状态标签时它们是否能够做到这一点。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "相反，我们提供了用于评估给定模型在多大程度上恢复底层 DFA 的度量指标。"
+   }
+  ]
+ },
+ "S2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在本节中，我们提出一个框架，用于在生成式序列模型和由确定性有限自动机表示的世界模型之间建立接口。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "两者都建立在词元、序列（又称字符串）和语言的共同基础架构之上。"
+   }
+  ]
+ },
+ "S2.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**词元与序列。** 我们考虑一个有限字母表 $\\Sigma$，其中词元 $a\\in\\Sigma$，以及序列 $s=(a_{1},a_{2},\\ldots)$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "令 $\\Sigma^{*}$ 表示该字母表上的序列集合。"
+   }
+  ]
+ },
+ "S2.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "生成模型。生成模型 $m(\\cdot)\\colon\\Sigma^{*}\\rightarrow\\Delta(\\Sigma)$ 是给定输入序列时对下一 token 的概率分布。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "也就是说，$m(s)\\in\\Delta(\\Sigma)$，并且 $m(a\\penalty\\ |\\penalty\\ s)$ 是给定输入序列 $s$ 时赋予词元 $a\\in\\Sigma$ 的概率。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "从序列 $s$ 出发，模型能以正概率生成的非空序列集合为："
+   }
+  ]
+ },
+ "S2.p3.2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为简单起见，我们在上式中仅针对概率非零的下一个 token 来写，但在实践中我们设置一个最小概率 $\\epsilon>0$，对应概率不可忽略的下一个 token。"
+   }
+  ]
+ },
+ "S2.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**确定性有限自动机（DFA）。** 我们使用确定性有限状态自动机 $W=(Q,\\Sigma,\\delta,q_{0},F)$ 的标准记号（完整定义见附录 C）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "作为一个简化假设，我们考虑存在一个特殊状态 $q_{\\text{reject}}$，它没有出边，且 $F=Q\\setminus\\{q_{\\text{reject}}\\}$（即 DFA 接受所有有效状态）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "扩展转移函数 $\\hat{\\delta}$ 接受一个状态和一个序列，并对序列中的每个 token 归纳地应用 $\\delta$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "一个 token 或一个序列是有效的，当且仅当分别从 $q_{0}$ 开始应用 $\\delta$ 或 $\\hat{\\delta}$ 的输出不是 $q_{\\text{reject}}$。"
+   }
+  ]
+ },
+ "S2.p5.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们定义 $L^{W}(q)$ 为从状态 $q$ 出发、被该 DFA 接受的有效且非空序列的集合。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们还将 $q(s)\\in F$ 定义为序列 $s$ 在从 $q_{0}$ 开始的 DFA 中所到达的状态，并将 $S(q)\\subseteq\\Sigma^{*}$ 定义为在 DFA 中从状态 $q_{0}$ 到达状态 $q$ 的所有序列的集合。"
+   }
+  ]
+ },
+ "S2.SS1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在整篇论文中，我们假设用于训练和测试生成模型的真实序列属于某个确定性有限状态自动机 $W$ 的语言。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这推广了以往的工作（例如，关于假设序列来自游戏中的合法走法的工作 [36, 20]），并使我们能够正式定义世界恢复。"
+   }
+  ]
+ },
+ "S2.Thmtheorem1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "一个生成模型 $m(\\cdot)$ **恢复 DFA** $W$，如果"
+   }
+  ]
+ },
+ "S2.Thmtheorem1.p1.2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "也就是说，恢复要求：模型 $m(\\cdot)$ 能以正概率生成某个序列，当且仅当该序列在 DFA $W$ 中有效。"
+   }
+  ]
+ },
+ "S2.SS1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "恢复是在语言层面定义的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，生成模型通常被逐 token 地构建和评估。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "事实证明，精确的下一个 token 预测足以恢复世界模型的语言。"
+   }
+  ]
+ },
+ "S2.Thmtheorem2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "生成模型 $m(\\cdot)$ 在 DFA $W$ 下满足**精确下一 token 预测**，如果"
+   }
+  ]
+ },
+ "S2.Thmtheorem3.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "生成模型 $m(\\cdot)$ 恢复 DFA $W$，当且仅当它在 DFA $W$ 下满足精确下一词元预测。"
+   }
+  ]
+ },
+ "S2.SS1.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "命题 2.3（证明见附录 A）提示了一种评估生成模型是否恢复了真实 DFA 的方法：评估下一 token 预测的有效性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "现有的世界模型诊断方法受这一直觉驱动；例如，Toshniwal et al. [36] 和 Li et al. [20] 评估世界模型恢复的一种方式是测量排名靠前的下一 token 预测中有效预测所占的百分比。"
+   }
+  ]
+ },
+ "S2.SS2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，下一 token 预测是一种有限的评估指标。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "虽然精确的下一 token 预测意味着完美恢复世界模型，但在下一 token 预测上非常接近正确并不意味着已经非常接近恢复世界模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这可以通过一个简单的例子来说明。"
+   }
+  ]
+ },
+ "S2.SS2.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**例：Cumulative Connect-4。** 考虑一个具有 $n$ 行和 7 列的竖直网格。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "两名玩家轮流将圆盘放入某一列，并且他们可以选择任何包含少于 $n$ 个圆盘的列。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "当一个圆盘被放入某列时，它会占据未被另一个圆盘占据的最底部位置，并且在整个游戏过程中一直保持在该位置。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "游戏持续到整个棋盘被填满，共 $7n$ 步，无论是否有玩家已经连成四子。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "游戏被表示为着法序列，其中每个序列有 $7n$ 个 token，每个 token 是 1 到 7 之间的整数，表示圆盘被放入的列。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这里，$\\Sigma=\\{1,\\dots,7\\}$ 表示各列，状态对应于每一列中的计数。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如果某一列尚未被填满，那么该列就是一个合法着法。"
+   }
+  ]
+ },
+ "S2.SS2.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "考虑一个生成模型，该模型对任意给定序列以均匀概率输出 $\\{1,\\dots,7\\}$，即对于所有 $a,a^{\\prime}\\in\\Sigma$ 和 $s,s^{\\prime}\\in\\Sigma^{*}$，有 $m(a\\penalty\\ |\\penalty\\ s)=m(a^{\\prime}\\penalty\\ |\\penalty\\ s^{\\prime})=1/7$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "该模型显然没有编码关于棋盘的任何信息。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，对于任何没有列被填满的棋盘，该模型都会提供一个合法的下一步（例如图1的右图），因此当 $n$ 很大时，它将是一个近乎完美的下一词元预测器。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例如，当 $n=1000$ 时，它在所有状态中超过 99% 的状态上预测出合法下一步。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "基于下一词元预测的指标将表明该算法接近恢复出世界模型。"
+   }
+  ]
+ },
+ "S2.SS3.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Cumulative Connect-4 指向了 next-token prediction 作为评估指标的一种一般脆弱性，这种脆弱性可以在 Myhill-Nerode 定理 [26, 27]——语言理论中的一个经典结果——的背景下理解。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Myhill-Nerode 定理指出，一个最小 DFA 从两个不同状态开始所接受的序列集合是不同的（完整陈述见附录 C）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "更形式化地说，对于状态 $q_{1}\\neq q_{2}$，我们有 $L^{W}(q_{1})\\neq L^{W}(q_{2})$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，尽管二者不同，这两个集合可能存在大量重叠。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Cumulative Connect-4 表现出这种行为；任何每列少于 $k$ 个圆盘的棋盘在接下来的 $n-k$ 步中都将具有相同的有效走法集合。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这一直觉引出了一对定义："
+   }
+  ]
+ },
+ "S2.Thmtheorem4.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "给定一个 DFA $W$，状态对 $q_{1},q_{2}\\in F$ 的 **Myhill-Nerode 内部** 是从这两个状态出发均被接受的序列集合："
+   }
+  ]
+ },
+ "S2.Thmtheorem4.p1.2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**Myhill-Nerode 边界** 是一个 DFA 在 $q_{1}$ 处接受但在 $q_{2}$ 处不接受的最小后缀集合："
+   }
+  ]
+ },
+ "S2.F1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图 1：左侧为 Myhill-Nerode 边界与内部的直观图示。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "右侧为累积 Connect-4 的两个状态示例。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "两个状态具有相同的有效下一步集合。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Myhill-Nerode 边界中最短的序列长度为 4，且该边界包含长度最多为 30 的序列。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "内部包含约 $8.8\\times 10^{27}$ 个长度为 29 的序列，这些序列不能区分两个棋盘。"
+   }
+  ]
+ },
+ "S2.F2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图2：我们两种评估指标的可视化描述。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "压缩错误是指模型未能认识到，导致相同状态的两个序列应当接受相同的后缀。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "区分错误是指模型未能为导致不同状态的两个序列找到正确的区分后缀。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的指标度量边界处的错误，这些错误在上方以图示方式描绘。"
+   }
+  ]
+ },
+ "S2.SS3.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图 1 展示了一个用于累积 Connect 4 的 Myhill-Nerode 内部和边界的示例。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "处于内部的序列被两个状态都接受；只有当我们到达边界时，这些状态才可区分。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，将具有较大内部的状态合并在一起的模型将在下一 token 预测测试中表现良好；这就是简单生成模型在累积 Connect-4 示例中成功的原因。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了恰当地区分状态，我们必须考虑足够长、从而能够被区分的序列。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在本文的其余部分，我们 (i) 使用 Myhill-Nerode 逻辑来开发新的评估指标，并且 (ii) 将这些指标应用于若干应用场景。"
+   }
+  ]
+ },
+ "S2.SS4.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们提出一些指标，通过将真实的 Myhill-Nerode 边界与模型所隐含的边界进行比较，来评估模型隐含的世界模型。"
+   }
+  ]
+ },
+ "S2.Thmtheorem5.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于两个序列 $s_{1},s_{2}$，**由模型 $m(\\cdot)$ 所隐含的 Myhill-Nerode 边界**是"
+   }
+  ]
+ },
+ "S2.SS4.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这是模型以 $s_1$ 为条件时接受、以 $s_2$ 为条件时不接受的极小后缀的集合。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "由于我们现在关注的是生成模型而非 DFA，该定义针对的是序列对，而不是状态对。"
+   }
+  ]
+ },
+ "S2.SS4.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的评估指标概括了一个生成模型能在多大程度上识别出可区分给定状态对的序列。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "给定一对状态 $q_{1}$ 和 $q_{2}$，该指标通过首先采样通向每个状态的序列来形成，即 $s_{1}\\in S(q_{1})$ 和 $s_{2}\\in S(q_{2})$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然后，我们计算状态之间真实的 Myhill-Nerode 边界，以及模型在这些序列之间的边界。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "接着，我们的指标以两种统计量作为基本构件，对所得的边界进行比较："
+   }
+  ]
+ },
+ "S2.Thmtheorem6.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "生成模型 $m(\\cdot)$ 相对于 DFA $W$ 的**边界召回率**定义为"
+   }
+  ]
+ },
+ "S2.Thmtheorem6.p1.2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**边界精确率**（boundary precision）定义为"
+   }
+  ]
+ },
+ "S2.SS4.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "注意，边界召回率和边界精确率不受两个状态之间的 Myhill-Nerode 内部是否很大的影响。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "回到累积 Connect-4，以相等概率输出 $\\{1,\\ldots,7\\}$ 的简单生成模型在这些指标上将会表现不佳；对于所有不同的状态对，其召回率都将为 0。"
+   }
+  ]
+ },
+ "S2.SS4.p5.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "基于召回率和精确率这两个基础构件，我们构建评估指标，以总结生成模型是否正确地压缩在DFA下到达相同状态的序列，并正确地区分在DFA下到达不同状态的序列。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这两个指标对应于不同的状态对采样方法。"
+   }
+  ]
+ },
+ "S2.SS4.p6.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**序列压缩指标。** 为评估序列压缩，我们采样相等状态对 $q_{1}=q_{2}$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "由于 DFA 提供了到达同一状态的多种方式，该测试评估生成模型是否识别两条序列对应于相同状态。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例如，在累积 Connect-4 中，可能存在多条到达相同棋盘局面的序列。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "召回率对相等状态无定义，因为不存在真实边界，因此我们的压缩指标仅报告精确率，并在均匀随机采样的状态上取平均（如果生成模型的边界正确地为空，则称其精确率为 1）。"
+   }
+  ]
+ },
+ "S2.SS4.p7.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**序列区分指标。** 为评估序列区分，我们采样不同的状态对，即 $q_{1}\\neq q_{2}$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这里必然存在一个真实边界，因此我们检验生成模型在多大程度上能恢复该边界。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们同时报告在均匀随机采样的状态对上平均后的精确率和召回率。"
+   }
+  ]
+ },
+ "S2.SS4.p8.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "两个指标都展示在图2中。"
+   },
+   {
+    "verdict": "major",
+    "category": [
+     "agent"
+    ],
+    "issue": "译文将“序列模型被正则化为给所有序列赋予非零概率”误为“序列模型被赋予非零概率”，施受关系颠倒，改变了原意。",
+    "suggestion": "但在实践中，序列模型经过正则化后会给所有序列赋予非零概率。",
+    "zh_reviewed": "尽管我们将生成模型定义为接受其赋予正概率的所有序列，但在实践中，序列模型经过正则化后会被赋予所有序列非零概率。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，我们的评估指标依赖于接受阈值参数 $\\epsilon>0$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在实践中，我们探究了对不同 $\\epsilon$ 值和其他接受机制的敏感性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们在第3节和附录E中更深入地呈现了消融和其他细节。"
+   }
+  ]
+ },
+ "S3.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了说明这些指标，我们创建了一个由纽约市出租车行程组成的数据集。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们将每次行程处理成逐转弯方向的序列，并训练 transformer 来预测下一个方向。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们表明，在这些序列上训练的 transformer 具有令人惊讶的路线规划能力：它们不仅能在两个交叉口之间找到有效路线，而且通常能找到最短路径。"
+   }
+  ]
+ },
+ "S3.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "随后，我们考察这些训练后模型的底层世界模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "尽管这些模型具有路径规划能力，我们的指标显示它们的底层世界模型是不连贯的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "利用图重建技术，我们表明每个模型所隐含的纽约市街道地图与实际地图几乎没有相似之处。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "最后，我们证明这些模型的路径规划能力在引入绕行时会失效，这是它们不连贯的世界模型所导致的结果。"
+   }
+  ]
+ },
+ "S3.SS1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的分析基于纽约市出租车与豪华轿车委员会（NYC Taxi & Limousine Commission）发布的出租车行程数据集，该数据集包含曼哈顿每次行程的上下车地点的纬度和经度。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "每次出租车行程遵循一个真实世界模型：与纽约市交叉路口和街道系统相对应的加权图。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图定义为 $G=(V,E,W)$，其中 $V$ 是交叉路口集合，$E$ 是街道集合，$W:E\\to\\mathbb{R}^{+}$ 是包含每条街道距离的权重函数。{fn2} 每条边根据其基本方向进行标注，表示为一个函数 $D:V\\times V\\rightarrow\\{\\square,\\texttt{N},\\texttt{S},\\texttt{E},\\texttt{W},\\texttt{NE},\\texttt{NW},\\texttt{SE},\\texttt{SW}\\}$，其中 $\\square$ 表示该边不存在。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "每个交叉路口在每个方向上最多有一条边。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "该图有4580个节点（即交叉路口）和9846条边（即街道）。"
+   }
+  ]
+ },
+ "fn2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "现实世界中的一个交叉口在这里可能被表示为多个交叉口。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例如，如果某个转弯仅从某个方向有效，它就被表示为两个不同的节点。"
+   }
+  ]
+ },
+ "S3.SS1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "一次遍历是一个节点序列，其中序列中每两个相邻节点之间都存在一条边。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了研究遍历的构造方式如何影响由此得到的生成模型，我们考虑三种不同的方法。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "最短路径方法通过找到两个节点之间的最短路径来构造遍历。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "由于这些遍历可能因交通状况而无法反映真实世界中的遍历，噪声最短路径方法通过对底层图中每条边的权重大小进行扰动来构造多条最短路径。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "最后，随机游走方法对随机遍历进行采样，而不是近似最短路径。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "详见附录 F。"
+   }
+  ]
+ },
+ "S3.SS1.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们将每条遍历转换为一个方向序列。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "每个序列以起点和目的地开头，随后是遍历中的基本方位（cardinal directions），最后以一个特殊的序列结束标记结束。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图5给出一组方向及其对应路径的示例。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "由于该语言对应一个具有 $|V|^{2}+1$ 个接受状态的 DFA $W$，这些接受状态对应所有当前路口/目的地路口对组合以及一个额外的结束状态，因此我们可以应用第2.4节中的评估指标。"
+   }
+  ]
+ },
+ "S3.SS1.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们将数据随机划分为训练集和测试集，确保没有任何起点-终点对同时出现在训练集和测试集中。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们纳入所有包含少于 100 个方向的序列。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的训练集包含：用于最短路径的 2.9M 条序列（120M 个 token）；用于含噪最短路径的 31M 条序列（1.7B 个 token）；以及用于随机游走的 91M 条序列（4.7B 个 token）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们针对每个数据集，使用 next-token 预测从头训练两类 transformer [38]：一个由 12 层、768 个隐藏维度和 12 个注意力头组成的 89.3M 参数模型；以及一个由 48 层、1600 个隐藏维度和 25 个注意力头组成的 1.5B 参数模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于每个模型，我们采用 GPT-2 的架构 [29]。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们在 8 块 A100 GPU 上训练模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于每个数据集，我们分析在留出集上性能最佳的模型：最短路径采用 89.3M 参数模型，含噪最短路径和随机游走采用 1.5B 参数模型。"
+   }
+  ]
+ },
+ "S3.SS2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了评估它们的能力，我们首先评估训练好的模型能否恢复未见过的（起点，终点）对之间的最短路径。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们向每个模型输入来自测试集的（起点，终点）对，并使用贪心解码生成一组方向。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "所有模型都一致地生成有效的遍历——比例在96%到99%之间。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "令人印象深刻的是，最短路径模型生成的序列中有97%是真正的最短路径，而在含噪最短路径上训练的模型生成的序列中，有94%在用于生成数据的某个含噪图中找到了最短路径。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图5给出了一个最短路径遍历的示例。"
+   }
+  ]
+ },
+ "S3.SS2.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了评估这些能力是否对应于连贯的隐式世界模型，我们首先考虑两种现有的诊断方法 [36, 20]。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**next-token 测试**评估：当模型以测试集中的每个子序列为条件时，其 top-1 预测的下一个 token 是否是一个合法的转向。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在我们的示例中，如果当前路口存在该方向的街道，则一次方向性移动是合法的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "预测 `end` token 仅在序列所隐含的遍历位于所列目的地时才是合法的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "与此同时，**当前状态探针**从 transformer 的表示中训练一个探针 [11]，以预测迄今为止方向所隐含的当前路口。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们在一个 transformer 的最后一层表示上训练一个线性探针。"
+   }
+  ]
+ },
+ "S3.SS2.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了实现序列压缩指标，我们随机采样状态（即 [交叉路口, 目的地] 对）以及两条到达每个状态的不同遍历（即前缀）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然后，我们评估模型是否对每个前缀都正确接受相同的后缀。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们对前缀对取平均，报告每个状态的得分；再对状态取平均，报告最终得分。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了实现序列区分指标，我们采样不同的状态对以及到达每个状态的遍历（即前缀），并将模型近似的 Myhill-Nerode 边界与真实边界进行比较。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们对前缀对取平均，报告每个状态对的得分；再对 1000 个随机采样的状态对取平均，报告最终得分。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "两种指标都依赖于阈值参数 $\\epsilon$：只有当模型为每个 token 分配的概率高于 $\\epsilon$ 时，前缀才会被采样或接受。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在这里，我们对所有模型和指标都取 $\\epsilon=0.01$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们在附录 E 中描述实现细节、提供参数消融，并考虑其他接受规则（例如 top-p 和 top-k）。"
+   }
+  ]
+ },
+ "S3.T1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "表1：世界模型的序列压缩与区分指标与现有指标的比较（括号内为标准误）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在现有指标上表现良好的模型可能在我们提出的指标上表现不佳。"
+   }
+  ]
+ },
+ "S3.SS2.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "表1总结了我们的结果。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "作为参照，我们将每个训练后的 Transformer 与遵循 Li et al. [20] 的随机初始化 Transformer 基线以及真实世界模型进行比较。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "三个经过训练的 Transformer 在现有诊断上表现异常出色；接近100%的下一 token 预测是有效的，且探针在超过90%的样本中恢复出了真实交叉路口。{fn3}"
+   }
+  ]
+ },
+ "fn3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "虽然下一 token 测试准确率经四舍五入为 100%，但没有模型表现完美。"
+   }
+  ]
+ },
+ "S3.SS2.p5.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，我们的评估指标揭示，这些既有诊断指标并不完整。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "所有经过训练的 transformer 在序列压缩上表现不佳，常常未能识别出通向同一状态的两个前缀应当允许相同的延续。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "即使是基于随机游走训练的 transformer——它在训练期间见过许多不同类型的遍历——也未能对一半状态的前缀进行压缩。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在序列区分指标上，基于最短路径或含噪最短路径训练的 transformer 表现不佳。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "相比之下，基于随机游走训练的 transformer 在序列区分指标上表现良好。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，这两个指标对于评估世界模型都很有价值；一个模型可能在其中一项指标上表现良好，而在另一项上表现不佳。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在这里，一个以很高比率区分不同状态的模型未能认识到，通向同一状态的两个前缀应当具有相同的有效延续。"
+   }
+  ]
+ },
+ "S3.F3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图3：根据三个模型生成的序列重建的曼哈顿地图：真实世界模型（左）、被噪声破坏的真实世界模型（中），以及在随机游走上训练的Transformer（右）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "边按照其指定的基本方位从节点出发。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在放大的图像中，属于真实图的边为黑色，重建算法添加的错误边为红色。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们在以下链接托管由Transformer生成的交互式重建地图：最短路径、带噪声最短路径和随机游走。"
+   }
+  ]
+ },
+ "S3.SS3.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的评估指标指向恢复世界模型方面的不足。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们现在表明，这些指标揭示了潜在的不连贯性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在地图设定中，真实世界模型的状态结构易于解释和可视化：它由地图本身定义。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们尝试“重构”每个生成模型采样出的序列所隐含的地图。"
+   }
+  ]
+ },
+ "S3.SS3.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "重建是一个开放式问题：生成模型会在起点和目的地之间生成方向，而这些方向并不一定对应于曼哈顿交叉口上的某个固定图。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为缩小范围，我们的目标是生成一张视觉上可解释的重建地图。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为此，我们将重建图固定为与真实世界模型具有相同的顶点集合，这些顶点对应于曼哈顿的交叉口，并确保重建算法每当在有效序列上运行时，返回的地图与真实模型一致。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此外，(a) 我们强制每个节点在任一方向上至多有一条出边，(b) 我们限制每个节点的最大度数，(c) 我们限制任意一条边所跨的欧氏距离。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "总体而言，我们的重建算法对生成模型作有利推定，试图重建属于真实地图的边，直到为了映射某个生成序列而被迫另作处理。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "该算法详见附录 B。"
+   }
+  ]
+ },
+ "S3.SS3.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图3展示了使用在随机游走上训练的 transformer 生成的序列重建出的三张地图。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "每张地图对应的序列是通过随机抽样 6400 个（起点，终点）对，然后对模型在每对上的遍历进行采样而生成的（附录 G 显示了当起点/终点对的分布遵循用于训练每个模型的采样分布时的类似结果）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "左侧是仅使用在真实世界模型下有效的序列重建的地图。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "右侧是使用 transformer 的序列重建的地图。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "transformer 的底层世界模型是不连贯的；它恢复出了一些街道，这些街道的朝向在物理上是不可能的（例如标记为 `NW` 但朝东），并且这些街道需要跨越其他街道上方的高架桥。"
+   }
+  ]
+ },
+ "S3.SS3.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了表明这张地图并非一个拥有正确世界模型但犯了少量转录错误的模型的产物，我们人为地对从真实模型中抽取的序列进行破坏。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "以与随机游走 transformer 出错概率相等的概率，我们在一个与世界模型一致的序列中随机重新标记一条边。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图3的中间面板展示了重构出的图。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "它比 transformer（其出错率相同）更接近真实世界模型得多。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "虽然这些结果是针对随机游走和一种图重构设置得到的，但附录G展示了其他模型和不同重构设置下的地图。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "所有设置都恢复出了不一致的底层地图。"
+   }
+  ]
+ },
+ "S3.SS4.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Transformer 拥有一个不一致的世界模型要紧吗？"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "毕竟，它在寻找最短路径这一实际任务上表现很好。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这里我们考察一个稍微相近的任务，并考虑一位司机在驾驶中遇到绕行；模型重新规划路线的能力如何？"
+   }
+  ]
+ },
+ "S3.SS4.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "具体来说，我们向每个 Transformer 输入测试集中的一个（起点，终点）对，并贪心地解码出一条遍历路径。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "但针对每个 token，我们以概率 $p$ 添加两种绕行之一：对于“随机绕行”，模型提出的 token 会被替换为一个随机选择的（真实的）有效 token；对于“对抗性绕行”，则会被替换为模型排名最低的有效 token。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在每次绕行之后，我们始终确保存在一条通往目的地的有效路径（长度短于 100）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "表 2 显示了所生成的合法遍历所占比例。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "尽管所有模型最初都表现良好，但绕行会侵蚀性能，这说明了有缺陷的世界模型可能带来问题。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "值得注意的是，在随机游走上训练的 Transformer 比在（含噪）最短路径上训练的模型对绕行更具鲁棒性，这与它在我们所提出的评估指标上的优势一致。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "模型在这些评估指标上的表现与绕行鲁棒性之间的相似性，说明了我们提出的指标在评估世界模型恢复方面的有效性。"
+   }
+  ]
+ },
+ "S3.T2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "表 2：引入绕行时有效遍历的比例（括号内为标准误）。"
+   }
+  ]
+ },
+ "S4.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们将我们的评估指标应用于另外两种设置：在奥赛罗棋游戏上训练的序列模型，以及被提示解决逻辑谜题的大语言模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在这两种情况下，我们的框架都发现了与我们在上一节针对地图发现的同类不一致性。"
+   }
+  ]
+ },
+ "S4.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**奥赛罗（Othello）。**Li et al. [20] 研究了在奥赛罗——一种玩家在 8×8 棋盘上放置棋子的棋盘游戏——中评估世界模型的问题。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "他们用对局记录训练 Transformer 模型，以预测每局游戏的下一步棋。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "他们表明，这些模型在第 2.4 节所考虑的下一 token 测试和当前状态探测上都表现良好。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "由于真正的奥赛罗游戏可以表示为一个 DFA，因此我们可以应用我们的世界模型评估指标。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "序列压缩指标评估的是：导致相同棋盘局面的开局是否具有相同的预测下一步棋，而序列区分指标评估的是模型能否区分两个不同的棋盘局面。"
+   }
+  ]
+ },
+ "S4.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们将我们的指标应用于 Li et al. [20] 所考虑的两种奥赛罗序列模型：一种在奥赛罗锦标赛的真实对局上训练，另一种在合成对局上训练。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "附录 D 中的表 3 报告了两种设置下的这些指标。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在真实对局上训练的模型在压缩指标和区分指标上均表现不佳，未能将大多数导致相同棋盘状态的对局开局对归并为一组。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "相比之下，在合成对局上训练的模型在两项指标上均表现良好。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这种辨别能力并未被现有指标捕捉到；现有指标显示两种模型表现相似。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们通过在附录 D 的表 4 中对奥赛罗进行一项“绕行”实验来验证这种辨别能力；虽然合成数据上训练的模型无论是否绕行都能产生近乎完美的对局，但在锦标赛数据上训练的模型会立即失败。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "与导航设置类似，我们再次发现，在随机/合成数据上训练的模型比在真实世界数据上训练的模型恢复了更多结构。"
+   }
+  ]
+ },
+ "S4.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**逻辑谜题。** 我们考虑一个涉及大语言模型（LLMs）的额外应用。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的指标要求真实语言（ground truth language）能够被表示为一个 DFA（确定性有限自动机），因此我们考虑一种与 Suzgun et al. [35] 中类似的“座位安排”逻辑谜题。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "有 $n$ 个座位和 $n$ 个人。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "词汇表由诸如“人物 ‘A’ 坐在 1 号座位”和“人物 ‘B’ 与人物 ‘C’ 相隔两个座位”这样的语句组成。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "一个状态是与迄今为止所有语句相一致的所有座位安排的集合；一个语句在给定状态下是有效的，如果它不与给定状态中的所有安排相矛盾。"
+   }
+  ]
+ },
+ "S4.p5.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们分析了 Llama 2 (70B) [37]、Llama-3 (8B 和 70B)、Mixtral (8x22B Instruct) [15]、Qwen 1.5 Chat (72B 和 110B) [2]、GPT-3.5 turbo 和 GPT-4。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们考虑 $n$=3 个个体。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们首先评估当座位安排完全由陈述指定时，LLM 是否能解决该逻辑谜题任务。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图 4 显示，大多数 LLM 在此任务上表现良好；GPT-4 在所有示例上都是准确的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们随后应用我们的度量，评估每个 LLM 是否正确压缩（是否导致相同状态的两组陈述会导致相同的评估）以及是否具有高的区分召回率（我们不计算区分精确率，因为近似每个 LLM 的 Myhill-Nerode 边界过于昂贵）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "进一步讨论见附录 E。"
+   }
+  ]
+ },
+ "S4.p6.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图4显示了在100个样本上平均后的结果。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "虽然大多数LLM在逻辑谜题被完全指定时能够解决它，但它们在压缩和区分指标上表现不佳：没有任何模型的压缩精确率高于40%。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在超过一半的情况下，当模型以两个具有相同可行状态集合的序列为条件时，它会断言每个序列允许的延续不同；示例见图8。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "没有任何模型的区分召回率高于0.60。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些结果引出一个有趣的观点：LLM可以在某些逻辑任务上表现良好（例如当座位安排被完全指定时），而不具备一个连贯的世界模型。"
+   }
+  ]
+ },
+ "S4.F4": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图4：左侧是用于评估大语言模型任务能力的一个示例。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "右侧是每个模型在任务上的平均表现以及它们在我们提出的指标上的结果。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "尽管没有连贯的世界模型，模型仍然非常擅长解决逻辑谜题。"
+   }
+  ]
+ },
+ "S5.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了构建能够有意义地捕捉其所建模问题逻辑的高保真度算法，我们需要衡量我们距离该目标有多近的方法。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "本文提出了基于理论依据的度量指标，用于评估生成模型内部隐含的世界模型（world model）。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "“feasible to implement”意为可实施、可实现，不必然强调“易于”，译文“易于实现”略有增强。",
+    "suggestion": "在地图、游戏和逻辑谜题上的应用表明，这些度量指标既具备可实现性，又具有启发性。",
+    "zh_reviewed": "在地图、游戏和逻辑谜题上的应用表明，这些度量指标既易于实现，又具有启发性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的结果表明，生成模型可以在世界模型不连贯的情况下完成令人印象深刻的任务（例如提供出租车行驶路线）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "但这种不连贯使它们在其他任务上变得脆弱（例如在有绕行路线时提供路线指引）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "当我们希望使用生成模型在科学领域中学习关于世界的某种潜在信息时，这种不连贯性也会造成问题。"
+   }
+  ]
+ },
+ "S5.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的主要局限在于对 DFA 的关注。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "虽然 DFA 适用于许多应用，如游戏、逻辑和状态跟踪，但对其进行扩展会非常有价值，例如扩展到底层世界模型比 DFA 更复杂或未知的情形。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们推测，与序列压缩和序列区分相关的核心思想可以推广到这些更丰富的设定，但将这一点留待未来工作。"
+   }
+  ]
+ },
+ "A1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们将首先证明正向方向：如果生成模型 $m(\\cdot)$ 恢复了世界模型 DFA $W$，那么 $m(\\cdot)$ 满足精确的下一 token 预测。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "根据假设，$L^{W}(q)=L^{m}(s)$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "考虑任意状态 $q\\in F$ 以及到达该状态的序列 $s\\in S(q)$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这意味着对于任意字符 $a\\in\\Sigma$ 的任意序列 $sa$，"
+   }
+  ]
+ },
+ "A1.p1.2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这就是下一 token 预测的定义。"
+   }
+  ]
+ },
+ "A1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "现在，我们证明反向：如果 $m(\\cdot)$ 实现精确的下一 token 预测，则它能恢复 $W$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "固定任意状态 $q$ 和序列 $s\\in S(q)$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "考虑任意序列 $a_{1}a_{2}..a_{k}\\in\\Sigma^{*}$，并令 $q^{\\prime}=\\hat{\\delta}(q,a_{1}a_{2}..a_{k})$ 为从 $q$ 出发沿该序列所到达的状态。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "注意，根据 $q_{\\text{reject}}$ 没有任何出边的定义，"
+   }
+  ]
+ },
+ "A1.p2.2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "根据假设，"
+   }
+  ]
+ },
+ "A1.p2.3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如果 $a_{1}a_{2}...a_{k}\\in L^{W}(q)$，那么 $q^{\\prime}\\neq q_{\\text{reject}}$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "那么必然有 $m(a_{j}|a_{1}a_{2}..a_{j-1})>0$ 对所有 $j<k$ 成立，这意味着 $a_{1}a_{2}...a_{k}\\in L^{m}(s)$。"
+   }
+  ]
+ },
+ "A1.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "反之，如果 $a_{1}a_{2}...a_{k}\\notin L^{W}(q)$，则 $q^{\\prime}=q_{\\text{reject}}$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "由此可得 $m(a_{k}|a_{1}a_{2}..a_{k-1})=0$，因此 $a_{1}a_{2}...a_{k}\\notin L^{m}(s)$。 ∎"
+   }
+  ]
+ },
+ "A2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在本节中，我们给出重建算法的更多细节，并展示由在最短路径、含噪最短路径和随机游走上训练的模型所生成序列的地图，每种设置分别对应若干参数配置。"
+   }
+  ]
+ },
+ "A2.F5": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图 5：数据和遍历的示例。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "omission"
+    ],
+    "issue": "译文未体现“contexts used for evaluation”也是“examples”的一部分，可能被理解为上下文本身而非示例。",
+    "suggestion": "左侧是训练期间看到的序列示例和用于评估的上下文示例。",
+    "zh_reviewed": "左侧是训练期间看到的序列示例和用于评估的上下文。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "右侧是由在最短路径数据上训练的 transformer 生成的一个遍历示例。"
+   }
+  ]
+ },
+ "A2.F6": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图6：性能指标作为用于近似 Myhill-Nerode 边界的最大后缀长度的函数。"
+   }
+  ]
+ },
+ "A2.F7": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图7：随着当前路口的双向街道增多，压缩精度变差。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "绘制的结果对应于最短路径模型。"
+   }
+  ]
+ },
+ "A2.SS1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们在算法1中的重建算法接收一组来自生成模型的序列，并试图重建这些序列所隐含的底层地图。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "重建的地图与真实世界模型（即曼哈顿的交叉路口）拥有相同的顶点集合，我们通过将每个交叉路口放置在其真实世界的纬度/经度来可视化它们。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，重建算法试图恢复每组序列所隐含的边和边方向。"
+   }
+  ]
+ },
+ "A2.SS1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于每条在真实地图下有效的序列，算法添加该序列所蕴含的真实边和边方向。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "从某种意义上说，该算法对生成模型作了有利推定。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，有时模型会出错，即生成的序列只有通过向真实地图添加一条额外边才有效。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在这种情况下，我们的重建算法在遍历的第一个无效步骤处添加一条新边。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "通常存在多条可添加的边会使遍历有效；算法添加能使后续有效步骤数量最大化的那条边。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "换句话说，该算法仅在 transformer 与世界模型之间出现差异时添加新边，并选择贪心地使与真实世界模型一致的后续步骤数量最大化的边。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，每条添加的边的方向标签就是遍历中相应无效步骤处的 token。"
+   }
+  ]
+ },
+ "A2.SS1.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的算法可能无法重构某些输入序列，因为无法使这些序列与我们迄今已重构的部分图保持一致。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "请注意，任何满足正文中约束的重构算法——即在每个交叉口的任一给定方向上只有一条出边、具有最大度数和最大边距离——都将无法重构所有序列集合。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例如，两个序列 $[v_{1},v_{2},\\texttt{E},\\texttt{end}]$ 和 $[v_{1},v_{3},\\texttt{E},\\texttt{end}]$ 无法在不违反第一条约束的情况下被重构。"
+   }
+  ]
+ },
+ "A2.SS2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们纳入了由在最短路径、含噪最短路径（模拟交通）和曼哈顿随机游走上训练的 Transformer 所生成的 6400 条序列构建的重建地图。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "每条序列通过随机采样一个（起点，终点）对，再针对该对采样模型的遍历路径而生成。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因为 Transformer 在训练期间从未见过长度超过 100 的序列，我们仅采样存在少于 100 步有效遍历的对。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们注意到，这种（起点，终点）对的分布不同于用于训练和评估每个模型的分布，并且有效遍历的百分比从 >95% 下降到 65-80%；然而，图 12 显示，当每张地图通过从训练/评估分布中采样（起点，终点）对构建时，会得到相似的地图。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们将受约束的最大度数在 4 到 8 之间变化（真实地图的最大度数为 4，并且有 8 个可能的罗盘方向），并将最大边距离在 $\\nicefrac{1}{2}$ 到 $1$ 英里之间变化。"
+   }
+  ]
+ },
+ "A2.SS2.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "每张地图都描绘了由图重建算法所推断出的曼哈顿地图。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "地图重建涉及在两个交叉口之间添加边。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们确保这些边在视觉上与算法重建出的标签相符。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例如，如果真实地图中交叉口 $v_{1}$ 位于交叉口 $v_{2}$ 的北边，但重建算法恢复出一条从 $v_{2}$ 到 $v_{1}$ 且标记为“南”的边，我们就画一条从 $v_{2}$ 出发、朝南并绕回 $v_{1}$ 的边。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在放大的图像中，属于真实地图的边为黑色，重建算法添加的错误边为红色。"
+   }
+  ]
+ },
+ "A2.SS2.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在每个图题中，我们列出了算法未能重建的序列数量。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "除了由 transformer 的所有序列重建的地图之外，我们还绘制了仅基于在真实世界模型下有效的序列构建的重建地图，以及对那些有效序列施加一些人为破坏后的重建结果。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于人为破坏，每条序列以固定概率被选中进行破坏：最短路径为 $25\\%$，带噪声的最短路径为 $35\\%$，随机游走为 $20\\%$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些百分比对应于 transformer 的序列中无效序列的比例，因此每幅图中 (b) 和 (c) 子图具有相同的有效序列与无效序列比例。"
+   }
+  ]
+ },
+ "A2.SS2.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们注意到，随机游走模型所对应的地图在视觉上比（例如）由最短路径数据构建的地图有更多的边。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这是因为，尽管重建算法的输入具有相同数量的序列，但不同生成模型的序列长度不同。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "最短路径序列中包含的方向总数为 $983true182$，含噪最短路径为 $1true140true487$，随机游走为 $1true584true549$。"
+   }
+  ]
+ },
+ "A3.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "回想一下，我们使用 DFA 的标准参数化 $W=(Q,\\Sigma,\\delta,q_{0},F)$（见[33]），其中"
+   }
+  ]
+ },
+ "A3.I1.i1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "$Q$ 是有限状态集，"
+   }
+  ]
+ },
+ "A3.I1.i2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "2. $\\Sigma$ 是一个有限的字符集，"
+   }
+  ]
+ },
+ "A3.I1.i3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "3. $\\delta:Q\\times\\Sigma\\to Q$ 是转移函数，将状态和字符映射到下一个状态，"
+   }
+  ]
+ },
+ "A3.I1.i4": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "4. $q_{0}\\in Q$ 是起始状态，"
+   }
+  ]
+ },
+ "A3.I1.i5": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "5. $F\\subseteq Q$ 是接受状态集。"
+   }
+  ]
+ },
+ "A3.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在本节其余部分，我们陈述 Myhill-Nerode 定理，该定理是我们世界模型检验的概念基础。"
+   }
+  ]
+ },
+ "A3.Thmtheorem1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "两个序列 $s_{1},s_{2}\\in\\Sigma^{*}$ 在语言 $L$ 下被称为**等价**，如果对所有后缀 $x\\in\\Sigma^{*}$，都有 $s_{1}x\\in L\\iff s_{2}x\\in L$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这一等价关系可用于将所有字符串划分为等价类。"
+   }
+  ]
+ },
+ "A3.Thmtheorem2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "一个语言 $L$ 是正则的，当且仅当它具有有限个等价类。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "那么，接受 $L$ 的最小确定有限自动机（DFA）的状态数等于这些等价类的数目。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在最小 DFA 中，对于每一对不同的状态 $q_{1}\\neq q_{2}$，都存在一个后缀 $x$，使得 $\\hat{\\delta}(q_{1},x)$ 或 $\\hat{\\delta}(q_{2},x)$ 中恰好有一个属于接受状态集合 $F$。"
+   }
+  ]
+ },
+ "A4.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图5展示了我们数据集中序列和遍历的一个示例。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "每个训练序列由一个起点节点、一个目的节点以及一组方向（其后跟一个结束节点）组成。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了进行评估，我们以训练期间未见过的（起点，终点）对为条件，并从模型生成一条遍历。"
+   }
+  ]
+ },
+ "A4.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图 6 显示了当我们考虑不同后缀长度来近似 Myhill-Nerode 边界时，我们的性能指标如何变化。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于压缩精度，考虑大小为 $k$ 的边界对应于为每个后缀采样长度为 $k$ 的后缀，并测量具有相同状态的前缀是否具有相同的长度为 $k$ 的后缀。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于区分精度，我们考虑大小为 $k$ 的边界，方法是仅采样长度为 $k$ 的后缀来近似模型的 Myhill-Nerode 边界。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于区分召回率，我们考虑大小为 $k$ 的边界，方法是仅基于长度为 $k$ 的后缀构造真实的 Myhill-Nerode 边界。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图 6 中的结果表明，考虑较大边界而非较小边界（例如单个下一 token）的重要性；例如，虽然基于随机游走训练的模型在考虑长度为 1 的边界时压缩精度得分为 100%，但当考虑完整 Myhill-Nerode 边界时，其性能为 50%。"
+   }
+  ]
+ },
+ "A4.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们还进行了一些分析，以探究为何这些模型在地图场景中的压缩测试上一致表现不佳。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们发现交叉路口处双向街道的数量与压缩精确率之间存在负相关；随着交叉路口处双向街道数量的增加，模型识别出通向同一交叉路口的两个序列确实处于相同状态的能力会变差。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图 7 绘制了最短路径模型的这一关系。"
+   }
+  ]
+ },
+ "A4.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "表3报告了我们针对训练来下奥赛罗（Othello）的模型所计算的指标。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们使用 Li et al. [20] 提供的 Transformer 模型检查点。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们对每项测试进行1000次采样。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的指标发现，虽然使用合成数据训练的模型恢复了真实世界模型，但使用锦标赛数据训练的模型则没有。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在表4中，我们进行了一项与第3节中针对出租车行程所做的绕行实验相类似的实验；在此实验中，模型预测的棋步被替换为另一个合法棋步。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "绕行结果支持了我们的指标所发现的模型之间的差异；虽然使用合成数据训练的模型无论是否存在绕行都能产生近乎完美的对局，但使用锦标赛数据训练的模型会立即失败。"
+   }
+  ]
+ },
+ "A4.T3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "表3：将第2.4节中的指标应用于奥赛罗序列模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "锦标赛模型和合成模型分别指在真实世界锦标赛对局和合成对局上训练的模型。"
+   }
+  ]
+ },
+ "A4.T4": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "表4：在奥赛罗中引入绕行时有效遍历的比例。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于“随机绕行”，模型提议的 token 被替换为一个随机选择的（真实）有效 token；对于“对抗性绕行”，则被替换为模型排名最低的有效 token。"
+   }
+  ]
+ },
+ "A5.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这里我们提供第 2.4 节描述并在第 3 节实现的测试的实现细节与消融实验。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们讨论该测试在三种设置——地图、奥赛罗（Othello）和逻辑谜题——中分别是如何实现的，然后展示不同设置下的消融实验。"
+   }
+  ]
+ },
+ "A5.SS1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**地图。** 在压缩测试中，我们从所有可能状态中随机采样一个状态，其中每个状态是一个（当前路口，目标路口）二元组。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然后我们采样两个通向同一状态的不同序列。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "由于模型只在长度为 100 或更短的序列上训练，我们只采样长度足够短、因而有可能在少于 100 步内到达目的地的序列。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在所有可能的序列中，我们首先均匀随机地采样一个长度 $l$，然后在反向图中进行两次长度为 $l$ 的随机游走。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这就得到了两个不同的长度为 $l$ 的前缀 $s_{1}$ 和 $s_{2}$，它们通向同一个状态。"
+   }
+  ]
+ },
+ "A5.SS1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "由于在压缩测试中真实世界的 Myhill-Nerode 边界为空，我们只需要计算模型的边界。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，计算模型的边界是难以处理的；它涉及在指数级数量的输出上评估 transformer。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，我们实际上并不需要计算完整的边界；只要存在一个序列被一个前缀接受而不被另一个前缀接受，精度就为 0。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，我们通过蒙特卡洛采样来近似精度。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们从以 $s_{1}$ 为条件的模型中采样 $M$ 条完整序列，确保每个 token 的概率都高于 $\\epsilon$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然后，我们检查当模型以 $s_{2}$ 为条件时，序列中的每个 token 是否都具有高于 $\\epsilon$ 的概率。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如果存在哪怕一个违规样本，就意味着模型未能压缩这两个前缀。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，采样得到的是性能的一个上界。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在实践中，我们使用 $M=30$ 个样本。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "下面，我们将展示结果对样本数量不是很敏感。"
+   }
+  ]
+ },
+ "A5.SS1.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于区分测试，我们均匀随机采样两个不同状态 $q_{1}$ 和 $q_{2}$，并如前所述采样到达每个状态的序列 $s_{1}$ 和 $s_{2}$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "与之前一样，计算完整的 Myhill-Nerode 边界是难以处理的，因此我们对其进行近似。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了近似真实世界模型的 Myhill-Nerode 边界，我们考虑所有长度为 $k$ 的延续，并找出在 $q_{1}$ 之后被接受、但在 $q_{2}$ 之后不被接受的最小后缀集合。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了查看真实边界中的哪些元素会被模型区分，我们分别在以 $s_{1}$ 和 $s_{2}$ 为条件时对每个元素评估模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们使用 $k=5$，并发现结果对于不同的 $k\\geq 5$ 是稳健的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们再次通过取 $M=30$ 个蒙特卡洛样本来近似 transformer 的 Myhill-Nerode 边界。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于每个在 $s_{1}$ 之后被接受、但在 $s_{2}$ 之后不被接受的序列，我们找到最小区分后缀，并将其纳入边界集。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然后，我们通过计算模型边界中的哪些元素在 $q_{1}$ 之后可接受、但在 $q_{2}$ 之后不可接受，来评估精确率。"
+   }
+  ]
+ },
+ "A5.SS1.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于两项测试，我们通过对通向每个状态的前缀的结果取平均来得到状态级得分，并通过所有采样状态的平均来报告总体得分。"
+   }
+  ]
+ },
+ "A5.SS1.p5.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**奥赛罗。** 在奥赛罗上进行的压缩测试涉及采样一个棋盘，然后采样两条通向该棋盘的序列。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们通过模拟 1000 局随机游戏，并从至少被两局不同游戏访问过的不同棋盘集合中随机采样一个棋盘，来近似这种采样。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这种采样为我们提供了两条不同的序列 $s_{1}$ 和 $s_{2}$，它们通向同一个棋盘 $q$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "与上述情况类似，我们不需要计算模型的完整 Myhill-Nerode 边界，因为每当有一条序列被 $s_{1}$ 接受而不被 $s_{2}$ 接受时，精度就是 0。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，我们再次使用 $M=30$ 个蒙特卡洛样本来近似精度，采用与地图实验相同的方法。"
+   }
+  ]
+ },
+ "A5.SS1.p6.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "major",
+    "category": [
+     "scope"
+    ],
+    "issue": "原文中“with the same length”修饰“sampled games”，译文将其改为修饰“状态”，改变了限定对象。",
+    "suggestion": "对于区分测试，我们从具有相同长度的已采样棋局集合中采样两个不同的状态 $q_{1}$ 和 $q_{2}$。",
+    "zh_reviewed": "对于区分测试，我们从采样的棋局集合中采样两个长度相同的不同状态 $q_{1}$ 和 $q_{2}$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们从观测到的棋局的经验分布中采样前缀 $s_{1}$ 和 $s_{2}$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们以与地图情形相同的方式近似 transformer 的 Myhill-Nerode 边界，即对完整棋局轨迹取 $M$ 个蒙特卡洛样本。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们对真实世界模型执行类似的采样技术，即在有效延续集合上随机采样 $M$ 条完整的棋局轨迹。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们对两种采样过程均使用 $M=30$，并使用阈值 $\\epsilon=0.01$。"
+   }
+  ]
+ },
+ "A5.F8": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图8：逻辑谜题测试中 GPT-4 的一个压缩错误示例。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "模型被提示以对应于相同底层状态的陈述以及一个示例延续。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "它评估认为该延续对一个状态有效，但对另一个状态无效。"
+   }
+  ]
+ },
+ "A5.SS1.p7.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**逻辑谜题。** 对大型语言模型执行我们的测试带来一个挑战：我们没有词元（token）级概率访问权限。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此外，由于我们允许大型语言模型进行思维链推理，通过对可能的思维链进行边缘化来采样长段延续在计算上是难以处理的。"
+   }
+  ]
+ },
+ "A5.SS1.p8.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，我们的测试设计基于提示。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "示例见图 8。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于压缩指标，我们从可能陈述集合中均匀随机地采样最多 2 条陈述，以到达状态 $q$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然后，我们通过反复从与 $q$ 一致且不会缩小状态空间的陈述集合中采样，来采样两条到达 $q$ 的前缀 $s_{1}$ 和 $s_{2}$，直到这些陈述所蕴含的状态恰好为 $q$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于每个状态，如果我们能找到一个后缀，使得模型在以一个序列提示时接受该后缀、而以另一个序列提示时不接受，则该状态的压缩指标失败。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们采样 5 条不同的可能延续陈述，一半时间从有效陈述集合中采样，一半时间均匀随机采样。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们注意到，由于压缩指标的性质，我们报告的这一指标高估了真实能力。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，在仅有 5 个样本的情况下，没有模型的表现超过 $0.35$，这一事实提示存在严重的压缩失败。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们采样 100 个状态。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "压缩错误示例见图 8。"
+   }
+  ]
+ },
+ "A5.SS1.p9.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "major",
+    "category": [
+     "scope",
+     "agent"
+    ],
+    "issue": "中文译文将「状态 $s_1$ 和 $s_2$」误作序列，并把导向关系反向，导致意思改变。原文中 $s_1$ 和 $s_2$ 是状态，序列导向它们。",
+    "suggestion": "对于区分度指标，我们再次采样状态 $q_{1}\\neq q_{2}$，并使用与之前相同的方法采样导向状态 $s_{1}$ 和 $s_{2}$ 的序列。",
+    "zh_reviewed": "对于区分度指标，我们再次采样状态 $q_{1}\\neq q_{2}$，并使用与之前相同的方法采样导向这些状态的序列 $s_{1}$ 和 $s_{2}$。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "hedge"
+    ],
+    "issue": "「tractably」强调可处理/可计算地，译文「容易地」略有夸大。",
+    "suggestion": "由于我们示例中的状态空间有限，我们可以可行地计算出真实的 Myhill-Nerode 边界。",
+    "zh_reviewed": "由于我们示例中的状态空间有限，我们可以容易地计算出真实的 Myhill-Nerode 边界。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了测试召回率，我们随后只需评估：当用 $s_{1}$ 或 $s_{2}$ 提示 LLM 时，真实边界中的语句是否被接受。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "hedge"
+    ],
+    "issue": "「tractable to compute」意为可处理/可计算，译文「易于计算」略有夸大。",
+    "suggestion": "尽管真实的 Myhill-Nerode 边界是可处理的，但用每个示例查询 LLM 仍然代价很高。",
+    "zh_reviewed": "尽管真实的 Myhill-Nerode 边界易于计算，但用每个示例查询 LLM 仍然代价很高。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "相反，我们使用来自真实边界的 $M$ 条语句进行蒙特卡洛采样来提示模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在实验中我们取 $M=5$。"
+   }
+  ]
+ },
+ "A5.SS1.p10.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们使用 OpenAI API 查询 GPT 模型，并使用 Together AI API 查询所有其他 LLM。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们提示 LLM 对每个查询执行思维链推理 [40]，并通过提示每个模型输出其响应、以关键字 “Answer:” 后跟其答案来自动评估答案。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "所有查询均使用贪心解码执行。"
+   }
+  ]
+ },
+ "A5.SS2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的测试涉及几个参数，例如 $\\epsilon$（每个模型的概率阈值）、用于近似真实 Myhill-Nerode 边界的最大后缀长度 $k$，以及用于近似该模型的 Myhill-Nerode 边界的蒙特卡洛样本数 $m$。"
+   }
+  ]
+ },
+ "A5.SS2.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们首先考虑 $\\epsilon$，它决定了精确率与召回率之间的权衡。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在正文中，我们考虑 $\\epsilon=0.01$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "表5报告了在 maps 指标上其他 $\\epsilon$ 取值的结果。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "从经验上看，随着 $\\epsilon$ 变化，我们看到了精确率与召回率之间的权衡。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，结论是稳定的：在 $\\epsilon$ 的所有取值下，每个模型都有一个不连贯的世界模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例如，尽管随机游走模型在 $\\epsilon=10^{-6}$ 时具有较高的压缩精确率和区分精确率，但它的区分召回率非常低，为 $0.11$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "同时，尽管在 $\\epsilon=0.10$ 时区分召回率被提升到 $1.00$，它的压缩精确率却降至 $0.16$。"
+   }
+  ]
+ },
+ "A5.T5": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "表5：在地图数据上训练的模型在不同 $\\epsilon$ 取值下的压缩和区分测试结果。"
+   }
+  ]
+ },
+ "A5.SS2.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "第2.4节引入的指标依赖于对模型接受或拒绝一个序列的含义的界定。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在正文中，我们考虑基于阈值参数的接受，这对应于 $\\epsilon$-采样解码机制 [12]。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在这里，我们考虑基于其他解码策略的两种替代接受形式：top-$k$ [8] 和 top-$p$ [13]。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于基于 top-$k$ 的接受，如果一个 token 属于模型对某个序列给出的 top-$k$ 排名 token 之列，则该 token 被接受，否则被拒绝。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于 top-$p$，如果一个 token 属于由累积概率大于 $p$ 的最高概率 token 组成的最小集合，则该 token 被接受。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "结果如表 6 和表 7 所示，并指向与第 3 节中基于阈值的指标相同的结论；没有一个模型恢复了世界模型，但在随机游走上训练的模型表现最好。"
+   }
+  ]
+ },
+ "A5.T6": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "表6：地图数据的压缩和区分指标，其中token接受基于top-$k$解码机制。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们考虑从$k=1$到$k=4$的值，因为只有8个有效的基本方向。"
+   }
+  ]
+ },
+ "A5.T7": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "表7：地图数据的压缩和区分指标，其中 token 接受基于 top-$p$ 解码机制。"
+   }
+  ]
+ },
+ "A5.SS2.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的测试还依赖于对模型 Myhill-Nerode 边界进行蒙特卡洛采样。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "样本数量只影响精度测试。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "每当存在一个后缀使得模型对一个前缀接受而对另一个前缀不接受时，该前缀对就不能通过压缩测试，因此性能应该会随着样本数量增加而变差。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "表8展示了最短路径模型的精度分数如何随样本数量变化。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们主要报告的指标使用 $M=30$ 个蒙特卡洛样本。"
+   }
+  ]
+ },
+ "A5.T8": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "表 8：精确率表现作为用于近似模型 Myhill-Nerode 边界的蒙特卡洛样本数量的函数。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "结果针对最短路径地图模型。"
+   }
+  ]
+ },
+ "A6.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这里我们更详细地描述乘车数据集（rides dataset）的构建过程。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的实证研究基于 2014 年纽约市出租车行程数据集，该数据集最初由纽约市出租车与豪华轿车委员会（NYC Taxi & Limousine Commission）发布。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们使用 Murray [25] 提供的、发生在 2014 年 1 月至 3 月之间的 1500 万次行程的一个子集。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们删除重复行程，并将数据集筛选为仅包含曼哈顿的行程，最终得到 3,358,737 个序列。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们使用 OSMnx 库 [5] 将纽约表示为一个加权图。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们将上车点和下车点匹配到最近的交叉口，匹配按纬度/经度度量。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "该图由 4,580 个节点、9,846 条边组成，每个节点的有效交叉口数量中位数为 2。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们将方位角（bearings）转换为 8 个基本方向（cardinal directions）之一。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们删除节点数为两个或更少的短途遍历。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们还删除 token 数超过 100 的序列。"
+   }
+  ]
+ },
+ "A6.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**最短路径。** 第一种方法通过寻找两个节点之间的最短路径来创建这两个节点之间的通行序列。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于数据集中的每一段出租车行程，我们将上车地点的纬度/经度映射到最近的交叉路口，并对下车地点做同样处理。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然后，我们执行 Dijkstra 算法，以距离为权重寻找最短路径。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在过滤掉重复的通行序列后，我们得到包含 2,932,675 条序列和 120,400,201 个 token 的训练集，以及包含 1,000 条序列和 41,641 个 token 的验证集。"
+   }
+  ]
+ },
+ "A6.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**噪声最短路径。** 最短路径遍历可能由于交通模式的差异而无法反映真实世界中的遍历。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此外，两个节点之间的最短路径遍历是确定性的，这可能限制模型习得世界模型的能力。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，我们构建最短路径遍历的含噪版本。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们通过修改权重函数来实现这一点，$\\tilde{W}(i,j)=W(i,j)+\\epsilon_{ij}$，其中 $\\epsilon_{ij}\\sim\\text{Gamma}(W(i,j),1)$；我们可以将其解释为向每条边人为添加与原始长度成比例的交通量。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们重新采样 50 个不同的权重函数。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在过滤掉重复遍历之后，我们得到包含 30,599,312 个序列和 1,677,587,216 个 token 的训练集，而验证集包含 1,000 个序列和 54,539 个 token。"
+   }
+  ]
+ },
+ "A6.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**随机游走。** 在最后一种设置中，我们采样随机遍历，而非近似最短路径。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们构造每条序列的方式是：均匀随机地采样一个节点，均匀随机地采样一个介于3到100之间的序列长度，并根据预先指定的序列长度，通过均匀随机地采样随机边来构造遍历。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们创建了一个包含90,646,864条序列和4,735,591,368个token的训练集，以及一个包含1,000条序列和52,360个token的验证集。"
+   }
+  ]
+ },
+ "A6.p5.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们使用 GPT-2 架构 [29] 在所有数据集上训练模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们对最短路径模型使用 GPT-2 small 架构，对含噪声最短路径模型和随机游走模型使用 GPT-2 extra-large 架构。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于最短路径模型，我们训练至过拟合，并使用验证集上表现最佳的检查点。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于两个较大的数据集，我们训练固定数量的轮数（epoch），并使用最后一个验证检查点；我们对含噪声最短路径数据集使用 5 个轮数（epoch），对随机游走数据集使用 1 个轮数（epoch）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们在 8 块 A100 GPU 上训练所有模型，每块 GPU 使用 6 条序列的批量大小。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "训练时间从最短路径模型的约 12 小时到随机游走模型的 48 小时不等。"
+   }
+  ]
+ },
+ "A7.F9": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图9：由在**最短路径**上训练的 transformer 重建的地图。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在放大后的图像中，属于真实图的边为黑色，由重建算法添加的虚假边为红色，并带有指示该边方向性的渐深渐变。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "交互式地图可在 `https://manhattan-reconstruction-shortest.netlify.app/` 查看。"
+   }
+  ]
+ },
+ "A7.F10": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图 10：由在**噪声最短路径**上训练的 Transformer 重建的地图。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "各条边沿着指定的基本方向从节点出发。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "交互式地图可在 `https://manhattan-reconstruction-noisy.netlify.app/` 访问。"
+   }
+  ]
+ },
+ "A7.F11": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图 11：由在**随机游走**上训练的 Transformer 重建的地图。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "交互式地图可在 `https://manhattan-reconstruction-random.netlify.app/` 获取。"
+   }
+  ]
+ },
+ "A7.F12": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图12：由在最短路径、含噪最短路径和随机游走上训练的 Transformer 重建出的地图，这些最短路径、含噪最短路径和随机游走是使用从训练所用同一分布中采样的（起点，终点）对构建的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "尽管轨迹在超过95%的情况下是有效的，但错误揭示了不连贯性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "重建使用50,000条序列，最大度为4，最大边长为 $\\nicefrac{{1}}{{2}}$ 英里。"
+   }
+  ]
+ },
+ "A7.F13": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图13：由在**最大度数为 $4$、最大边长为 $\\nicefrac{{1}}{{2}}$ 英里的最短路径**上训练的生成模型产生的序列重建的曼哈顿地图。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "重建过程在 $1513/6400$ 个序列上失败。"
+   }
+  ]
+ },
+ "A7.F14": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图14：由生成模型生成的序列重建的曼哈顿地图，该模型在**最大度为 $8$、最大边长为 $\\nicefrac{{1}}{{2}}$ 英里的最短路径**上训练。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "重建过程在 $1435/6400$ 个序列上失败。"
+   }
+  ]
+ },
+ "A7.F15": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图15：根据在**最大度为$4$且最大边长为$1$英里的最短路径**上训练的生成模型所产生的序列重建的曼哈顿地图。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "重建过程在$1334/6400$个序列上失败。"
+   }
+  ]
+ },
+ "A7.F16": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图 16：根据生成模型产生的序列重建的曼哈顿地图，该生成模型在 **最大度为 $8$ 且最大边长为 $1$ 英里的最短路径** 上训练。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "重建过程在 $1174/6400$ 个序列上失败。"
+   }
+  ]
+ },
+ "A7.F17": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图17：由在**最大度数为$4$且最大边长为$\\nicefrac{{1}}{{2}}$英里的噪声最短路径**上训练的生成模型所产生的序列重建的曼哈顿地图。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "重建过程在$2213/6400$个序列上失败。"
+   }
+  ]
+ },
+ "A7.F18": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图18：由在最大度数为$8$且最大边长为$\\nicefrac{{1}}{{2}}$英里的噪声最短路径上训练的生成模型所产生的序列重建的曼哈顿地图。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "重建过程在$1869/6400$个序列上失败。"
+   }
+  ]
+ },
+ "A7.F19": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图 19：根据生成模型产生的序列重建的曼哈顿地图，该模型在**最大度数为 $4$、最大边长为 $1$ 英里的噪声最短路径**上训练。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "重建过程在 $1935/6400$ 个序列上失败。"
+   }
+  ]
+ },
+ "A7.F20": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图20：由在**最大度数为 $8$、最大边长为 $1$ 英里的带噪声最短路径**上训练的生成模型生成的序列重建的曼哈顿地图。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "重建过程在 $1702/6400$ 个序列上失败。"
+   }
+  ]
+ },
+ "A7.F21": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图 21：**（图 3 的副本）由在最大度为 $4$、最大边长为 $\\nicefrac{{1}}{{2}}$ 英里的随机游走上训练的生成模型产生的序列重建出的曼哈顿地图。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "重建过程在 $1987/6400$ 个序列上失败。**"
+   }
+  ]
+ },
+ "A7.F22": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图 22：由生成模型生成的序列重建的曼哈顿地图，该模型在**最大度为 $8$、最大边长为 $\\nicefrac{{1}}{{2}}$ 英里的随机游走**上训练。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "重建过程在 $1491/6400$ 个序列上失败。"
+   }
+  ]
+ },
+ "A7.F23": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图 23：从在**最大度数为 $4$ 且最大边长为 $1$ 英里的随机游走**上训练的生成模型所产生的序列中重建的曼哈顿地图。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "重建过程在 $1905/6400$ 个序列上失败。"
+   }
+  ]
+ },
+ "A7.F24": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图 24：由生成模型生成的序列重建的曼哈顿地图，该模型在**最大度数为 $8$、最大边长为 $1$ 英里的随机游走**上训练。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "重建过程在 $1323/6400$ 个序列上失败。"
+   }
+  ]
+ }
+}

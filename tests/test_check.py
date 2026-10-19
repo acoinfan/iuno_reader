@@ -23,6 +23,12 @@ cases = [
     ("These results suggest that the representations are inert.", "这些结果证明这些表示是惰性的。", {"hedge_strengthened"}, set()),
     ("These results suggest that the representations are inert.", "这些结果表明这些表示是惰性的。", set(), {"hedge_strengthened", "hedge_missing"}),
     ("The representations are largely inert.", "这些表示是惰性的。", {"hedge_missing"}, set()),
+    # 只含一个数字或字母的公式写成普通文字算保留；prime 的两种写法等价；数字可以用中文写；复杂公式丢了仍然要标
+    ("Llama $3$ $70$B solves it.", "Llama 3 70B 解决了它。", set(), {"math"}),
+    ("We set $y^{\\prime}=x$ here.", "这里令 $y'=x$。", set(), {"math"}),
+    ("It works in base-10.", "它在十进制下有效。", set(), {"number"}),
+    ("We set $y^{\\prime}=x$ here.", "这里令 y=x。", {"math"}, set()),
+    ("We use 37 models.", "我们用了三十多个模型。", {"number"}, set()),
     # 被否定的禁用词不算语气加强；没被否定的仍然要标
     ("This suggests, but does not prove, that it fails.", "这表明——但并不证明——它失败了。", set(), {"hedge_mixed", "hedge_strengthened"}),
     ("This suggests that it fails.", "这表明并证明了它失败了。", {"hedge_mixed"}, set()),

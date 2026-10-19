@@ -1,0 +1,2667 @@
+{
+ "__meta__": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "models": {
+   "reviewer": "deepseek-v4-pro"
+  },
+  "translator": "deepseek-v4-pro",
+  "independence": "same-model",
+  "usage": {
+   "calls": 115,
+   "prompt_tokens": 93461,
+   "completion_tokens": 60295,
+   "seconds": 601.1,
+   "cached_tokens": 71040
+  }
+ },
+ "abs.p1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们研究 LLM 外推各种动力系统行为的能力，这些系统包括随机、混沌、连续和离散系统，其演化由具有物理意义的原理支配。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的结果表明，LLaMA-2（一个在文本上训练的语言模型）能够在没有微调或提示工程的情况下，对动力系统时间序列实现准确预测。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此外，所学到的物理规则的准确度随输入上下文窗口长度的增加而提高，揭示了一种上下文内的神经缩放定律。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在此过程中，我们提出了一种灵活且高效的算法，用于直接从 LLM 中提取多位数字的概率密度函数。{fn1}"
+   }
+  ]
+ },
+ "fn1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的代码已公开在 `https://github.com/AntonioLiu97/llmICL`。"
+   }
+  ]
+ },
+ "S1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "自 Transformer 架构（Vaswani et al. (2017)）提出以来，大型语言模型（LLMs）已展现出多种意想不到的涌现性质，例如程序执行（Nye et al. (2021)）和多步推理（Suzgun et al. (2022)）。"
+   }
+  ]
+ },
+ "S1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的工作通过提出一种新的视角和经验方法，探索了大语言模型对世界进行建模的能力。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "受近期观察结果的启发，即大语言模型能够在没有特定提示或微调的情况下进行上下文内时间序列外推（Gruver et al. (2023); Jin et al. (2023a)），我们旨在量化大语言模型对随机动力系统进行外推的能力。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们发现，随着观测时间步数的增加，大语言模型的统计预测一致地收敛到系统背后的真实转移规则；由此产生了一条经验缩放定律，如图1所示。"
+   }
+  ]
+ },
+ "S1.F1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图1：LLaMA-13b 在各种物理系统中对预测下一状态的损失函数随观测状态数量的演化。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们采用 Bhattacharyya 距离作为随机系统的损失函数（实线），采用与均值的平方偏差（SDM）作为确定性系统的损失函数（虚线）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "布朗运动和几何布朗运动显著偏离幂律标度，这可由它们缺乏平稳分布来解释（第 A.8 节）。"
+   }
+  ]
+ },
+ "S1.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的**主要贡献**如下："
+   }
+  ]
+ },
+ "S1.I1.i1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• 展示了 LLM 在零样本条件下、无需指令提示即可对动力系统演化建模的能力；"
+   }
+  ]
+ },
+ "S1.I1.i2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• 实现了一个计算高效的框架，称为 Hierarchy-PDF，用于提取由基于 Transformer 的 LLM 所学到的动力系统的统计信息；"
+   }
+  ]
+ },
+ "S1.I1.i3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• 发现了所学转移规则（与真实情况相比）的准确率与上下文窗口长度之间的缩放定律。"
+   }
+  ]
+ },
+ "S2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "上下文学习指 LLM 从提示中包含的示例中学习这一涌现能力 Brown et al. (2020)。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "上下文学习的一个例子是零样本时间序列预测 Gruver et al. (2023)。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这项工作旨在预测实证时间序列，并引入了一种分词（tokenization）程序，将浮点数序列转换为适合 LLM 的文本提示。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这引出了后续若干关于 LLM 在时间序列预测中应用的研究 Chen et al. (2023); Jin et al. (2023b); Jin et al. (2023a); Dooley et al. (2023); Schoenegger and Park (2023); Wang et al. (2023); Xu et al. (2023)。"
+   }
+  ]
+ },
+ "S2.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "与这些先前研究不同，我们的工作不侧重于预测真实世界时间序列，如天气数据或电力需求，在这些情形中生成序列的底层模型不可用或未定义。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "相反，我们旨在从LLM生成的概率向量中提取学到的转移规则，并将其与支配输入时间序列的真实规则（混沌、随机、离散、连续等）进行比较。"
+   }
+  ]
+ },
+ "S3.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们用于测试 LLM 从上下文数据中学习物理规则能力的方法包括三个步骤："
+   }
+  ]
+ },
+ "S3.I1.i1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "1. 从由马尔可夫转移规则 $P_{ij}$ 支配的给定动力系统中采样时间序列 $\\{x_{t}\\}_{t\\geq 0}$。"
+   }
+  ]
+ },
+ "S3.I1.i2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "2. 用这一时间序列提示 LLM，以提取其对后续数字学习到的概率密度 $\\tilde{P}_{ij}$。"
+   }
+  ]
+ },
+ "S3.I1.i3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "3. 使用巴氏距离（Bhattacharyya distance）测量基准真值 $P_{ij}$ 与学习到的 $\\tilde{P}_{ij}$ 之间的差异。{fn2}"
+   }
+  ]
+ },
+ "fn2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "其他损失函数可能合适，取决于动力系统是随机的还是确定性的，见第 A.1 节。"
+   }
+  ]
+ },
+ "S3.SS1.SSS0.Px1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的大部分测试数据可能被建模为离散时间马尔可夫链，其中 $t+1$ 时刻下一状态的概率密度函数（PDF）仅取决于 $t$ 时刻的前一状态 $x_t$："
+   }
+  ]
+ },
+ "S3.SS1.SSS0.Px1.p1.2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这模拟的要么是离散迭代系统，要么是经过时间离散化后的连续动力系统。"
+   }
+  ]
+ },
+ "S3.SS1.SSS0.Px2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "输入时间序列通常由（$\\sim 10^{3}$）个时间步组成，每个时间步表示为一个实数。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们首先重新缩放每个数，并用 $n$ 位数字表示它（通常 $n=3$）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "每个时间序列都被重新缩放到区间 $[1.50,8.50]$，使得整个序列中数字的位数从不改变。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "随后，我们遵循 Gruver et al. (2023) 中引入的方案，将时间序列序列化为字符串，并对其进行分词。"
+   }
+  ]
+ },
+ "S3.SS2.SSS0.Px1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "当马尔可夫过程是离散的且具有有限状态空间时，每个状态都可以用单个 token 表示。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们采用与十个数字字符串相对应的 token：$0,\\ldots,9$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们发现，即使是最先进的 LLaMA 模型（LLaMA-70b）也只能学习最多 9 个离散状态。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，我们不尝试通过扩展到非数字 token 来超过 9 个不同状态（详见第 A.3.3 节）。"
+   }
+  ]
+ },
+ "S3.F2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图 2：提取具有离散状态空间的系统的已学习转移规则。"
+   }
+  ]
+ },
+ "S3.SS2.SSS0.Px1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图2展示了我们利用LLM学习离散马尔可夫链的框架。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "首先，我们随机采样一个 $n\\times n$ 转移矩阵 $(P_{ij})$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然后，我们根据 $P_{ij}$ 生成一条马尔可夫链，对时间序列进行分词，并将其传入LLM，且不进行额外的“提示工程”。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "序列的长度被选择为使分词后的表示不超过该LLM上下文窗口的长度。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们通过对与 $n$ 个允许状态对应的输出logits执行softmax操作，并丢弃所有其他logits，来提取LLM对下一状态的预测。"
+   }
+  ]
+ },
+ "S3.SS2.SSS0.Px2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "许多随机过程，如布朗运动 Einstein (1905); Perrin (1909)，支撑在连续状态空间上。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于这些过程，我们将每个状态的值表示为一个多位数，并使用逗号符号“,”分隔每个状态。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如 Jin et al. (2023a) 中所观察到的，LLM 对多位数值的预测可以自然地解释为分层 softmax 分布 Mnih and Hinton (2008); Challu et al. (2023)。"
+   }
+  ]
+ },
+ "S3.SS2.SSS0.Px2.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "具体来说，设 $u$ 表示一个多位数字字符串，该字符串表示给定时间步上状态的值，那么 LLM 对第 $i$ 位数字 $u_{i}$ 的 softmax 预测提供了由十个宽度为 $0.1^{i}$ 的箱子组成的直方图。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "随后，对第 $(i+1)^{\\mathrm{th}}$ 位数字的预测在层次树中下降一级，通过将其中一个箱子细分为十个宽度为 $0.1^{i+1}$ 的更细箱子，依此类推，直到处理完最后一位数字（见图 3）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "该图右上角显示了一个被序列化为输入字符串的时间序列的示例。"
+   }
+  ]
+ },
+ "S3.F3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图3：从LLaMa-13b中提取的分层转移规则示例。"
+   },
+   {
+    "verdict": "major",
+    "category": [
+     "scope"
+    ],
+    "issue": "原文中 which 指代的是 resolutions，意为分辨率在众数附近更精细；译文说“这些分箱在众数附近被进一步细化”，将细化对象变成了分箱，改变了修饰对象。",
+    "suggestion": "PDF分箱根据分辨率进行颜色编码，在本例中分辨率在众数附近更加精细。",
+    "zh_reviewed": "PDF分箱根据分辨率进行颜色编码，在本例中，这些分箱在众数附近被进一步细化。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "$\\tilde{P}(x_{t+1}|x_{t})$ 的高度以对数尺度显示。"
+   }
+  ]
+ },
+ "S3.SS2.SSS0.Px3.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "单次通过 LLM 会生成由不同宽度的区间表示的离散化 PDF，但我们可以通过查询每个粗粒度区间来细化该 PDF。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例如，为了提供三位数的最大分辨率 PDF，我们需要查询该数字前两位的所有 $10^{2}$ 种组合。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "假设一个时间序列由 $S$ 个值（步）组成，每个值表示为 $n$ 位数字。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为整个序列的每个值获得最大分辨率 PDF 需要 LLM 的 $10^{n-1}S$ 次前向传播。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "“daunting” 意为“令人生畏的、艰巨的”，译文“繁琐的”偏向“繁琐、枯燥”，语气和含义略有偏差。",
+    "suggestion": "这一艰巨的过程可以大幅简化，因为大多数 $10^{n-1}S$ 个输入仅在最后几个 token 上不同，因此可以递归缓存与共享 token 相关联的 key 和 value 矩阵。",
+    "zh_reviewed": "这一繁琐的过程可以大幅简化，因为大多数 $10^{n-1}S$ 个输入仅在最后几个 token 上不同，因此可以递归缓存与共享 token 相关联的 key 和 value 矩阵。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "计算量可以进一步减少，方法是仅细化众数附近的高概率区间，而这些区间主导损失函数，如图 3 所示。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "算法 1 概述了 Hierarchy-PDF 算法，该算法用于递归细化时间序列中与多位数值相关联的 PDF（更多细节见附录 A）。"
+   }
+  ]
+ },
+ "S4.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "本节报告两个示例系统上的实证上下文学习结果：离散马尔可夫链和随机逻辑斯蒂映射。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们将对图 1 中报告的其他系统的讨论推迟到第 A.3 节和第 A.4 节。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "每个实验重复十次，轨迹由不同的随机种子初始化。"
+   }
+  ]
+ },
+ "S4.SS0.SSS0.Px1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "本节报告的所有数值实验均使用开源 LLaMA-13b 模型进行。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "虽然我们观察到更大的语言模型（如 LLaMA-70b）在某些动力系统上可能取得更低的上下文内损失（in-context loss）（第 A.3.3 节），但它们并未表现出会影响我们结论的定性差异。"
+   }
+  ]
+ },
+ "S4.SS1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "具有 $n$ 个状态的时间无关马尔可夫链的转移规则由一个随机矩阵 $(P_{ij})_{1\\leq i,j\\leq n}$ 构成，其定义为"
+   }
+  ]
+ },
+ "S4.SS1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "利用第3.2节中详细阐述的测试程序，我们生成10条马尔可夫链，每条链都来自一个互不相同且随机生成的、规模为 $n=4$ 的转移矩阵。"
+   }
+  ]
+ },
+ "S4.F4": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图4：马尔可夫链的上下文内损失曲线随输入时间序列长度迅速衰减。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "平均损失由10条单独的损失曲线求得。"
+   }
+  ]
+ },
+ "S4.SS1.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "LLM 预测与真实值之间的相应损失曲线显示在图 4 中。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "随着在上下文中观察到更多时间步，LLM 作出了非常准确的统计预测，尽管转移规则完全是随机合成的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些结论对于更大的转移矩阵（$n>4$）以及更复杂的大语言模型（如 LLaMA-70b）同样成立（见第 A.3.3 节）。"
+   }
+  ]
+ },
+ "S4.SS2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "逻辑斯蒂映射最初作为种群增长的离散时间模型被提出，是表现出混沌行为的最简单动力系统之一 Strogatz (2015)。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "它由以下迭代方程控制："
+   }
+  ]
+ },
+ "S4.SS2.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "其中 $r\\in[1,4)$ 是控制系统行为的参数。{fn3} 当在每一步引入具有方差的小高斯扰动时，逻辑斯蒂映射系统变为随机系统，从而得到修正后的迭代方程："
+   }
+  ]
+ },
+ "fn3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在我们的实验中，我们设定 $r=3.9$，这使系统明确处于混沌状态。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在这一取值下，logistic 映射表现出对初始条件的敏感依赖以及混沌特有的非周期行为。"
+   }
+  ]
+ },
+ "S4.SS2.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "其中 $\\epsilon\\stackrel{{\\scriptstyle\\text{i.i.d}}}{{\\sim}}\\mathcal{N}(0,\\sigma^{2})$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在这种情况下，下一状态 $x_{t+1}$ 在给定当前状态 $x_{t}$ 条件下的真实分布是均值为 $f(x_{t})$、方差为 $(\\sigma f^{\\prime}(x_{t}))^{2}$ 的高斯分布："
+   }
+  ]
+ },
+ "S4.SS2.p3.2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "$f$ 的一阶导数衡量局部动力学对外部扰动的敏感程度。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这直观地解释了为什么条件分布的标准差应与 $f^{\\prime}$ 成正比。{fn4} 我们在图 7 以及附录中的图 19 中可视化了 LLM 上下文内预测与真实转移规则相比的显著准确性。"
+   }
+  ]
+ },
+ "fn4": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "注意，方程 1 中的近似假设扰动与二阶导数相比很小。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "也就是说，$\\sigma^{2}\\ll 1/f^{\\prime\\prime}(x)$。"
+   }
+  ]
+ },
+ "S4.F7": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图7：LLM 学习到的含噪声逻辑斯蒂映射标准差作为状态值 $x_t$ 的函数，并与真实值对照。"
+   }
+  ]
+ },
+ "S4.SS2.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们再次观察到，在图 7 中，上下文内损失函数随着观测时间序列的长度呈类似幂律的衰减。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们注意到，为了实现低上下文内损失，LLM 必须学会不仅预测下一状态分布的均值，还要预测其方差。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这在图 7 中展示，并在第 A.9 节进一步讨论。"
+   }
+  ]
+ },
+ "S5.SS0.SSS0.Px1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们表明，在足够的上下文条件下，LLM 能够准确恢复确定性、混沌和随机时间序列背后的概率转移规则。"
+   }
+  ]
+ },
+ "S5.SS0.SSS0.Px2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "神经缩放定律 Kaplan et al. (2020) 是幂律，刻画了训练后的神经网络损失如何随模型参数（如模型规模、数据集规模和计算资源）变化。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "据我们所知，神经缩放定律迄今仅在训练过程中被观察到，该过程使用显式算法（如随机梯度下降和 Adam Kingma and Ba (2014)）更新神经网络权重。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在不同数值实验中观察到的损失曲线（见图1和图20）揭示了 LLMs 对动力系统零样本学习的一个额外的上下文缩放定律。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对这些缩放定律的进一步分析在第 A.6 节中给出。"
+   }
+  ]
+ },
+ "S5.F8": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图8：LLM 上下文学习相对于基线模型的损失曲线：离散马尔可夫链的 unigram 和 bi-gram 模型，以及含噪 logistic 映射的具有 1 步记忆的线性和非线性自回归模型（AR1）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "系数 $\\alpha$ 表示拟合得到的缩放指数。"
+   }
+  ]
+ },
+ "S5.SS0.SSS0.Px3.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "刻画 LLM 所实现的上下文学习算法是一个具有广泛研究兴趣的开放问题 Shen et al. (2023); Olsson et al. (2022)。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "近年来出现了一种新范式，将上下文学习的某些方面解释为 transformer “承载”经典算法（如梯度下降）Von Oswald et al. (2023)。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的研究通过提供新颖的现象学证据为这一领域作出贡献：我们证明预训练的 LLM 能够以上下文学习方式学习动力系统，并展现出与成熟学习算法相似的损失曲线，例如二元文法马尔可夫模型以及使用梯度下降训练的基于神经网络的自回归（AR1）模型（图 8）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们在附录 A.7 中详细阐述了这些基线模型的动机与设计。"
+   }
+  ]
+ },
+ "S5.SS0.SSS0.Px4.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "一个有说服力的未来方向是发展一种机制性理论，用以解释预训练 LLM 如何通过上下文学习并预测随机动态时间序列。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "进一步的研究可以聚焦于："
+   }
+  ]
+ },
+ "S5.I1.i1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• 研究 LLM 如何编码随机动力学时间序列中的时空特征（Gurnee and Tegmark, 2023），以及它们如何表示所学习的转移规则。"
+   }
+  ]
+ },
+ "S5.I1.i2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• 考察LLM如何执行学习随机动力系统所必需的子任务，例如从离散数据中收集马尔可夫转移统计量（Akyürek et al., 2024）并进行密度估计。"
+   }
+  ]
+ },
+ "S5.I1.i3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "评估自然语言训练在多大程度上增强了 transformer 在上下文中学习（in-context learn）动力系统的数学能力（Zhang et al., 2023），以及反之亦然。"
+   }
+  ]
+ },
+ "Sx1.SS0.SSS0.Px1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "尽管 LLMs 对下一时间步数值做出的准确预测极不可能归因于记忆，但彻底处理这一可能性仍然至关重要。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "鉴于即便只有一千个以三位数字编码的数值，潜在序列的数量也极其庞大（从而产生 $10^{3000}$ 个实例），这一数量远远超过 Touvron et al. (2023) 的训练语料库中约 $10^{12}$ 个 token。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "未来工作应确保严格的测试，以进一步排除数据泄漏。"
+   }
+  ]
+ },
+ "Sx1.SS0.SSS0.Px2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在准备本手稿时，更新的模型（例如 LLaMA-3）已经发布。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "由于时间和计算资源的限制，本研究未评估这些最新模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "未来的研究应纳入这些模型和其他新兴模型，以提供对所观察到现象更全面的理解。"
+   }
+  ]
+ },
+ "A1.SS1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "一旦提取出学习到的转移规则 $\\tilde{P}(X_{t+1}|X_t)$，我们就量化其与真实值 $P(X_{t+1}|X_t)$ 的偏差。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "根据系统的性质，以下两个损失函数之一可能更为合适（见第4节）。"
+   }
+  ]
+ },
+ "A1.SS1.SSS0.Px1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于随机时间序列，我们使用 Bhattacharyya 距离来刻画学习到的转移函数与真实转移函数之间的距离。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在域 $\\mathcal{X}$ 上，$P$ 与 $\\tilde{P}$ 之间的 Bhattacharyya 距离定义为 Bhattacharyya (1943); Bhattacharyya (1946); Kailath (1967)："
+   }
+  ]
+ },
+ "A1.SS1.SSS0.Px1.p1.2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "并且已被特征选择和信号提取方法广泛采用 Choi and Lee (2003); Kailath (1967)。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "由于 $\\tilde{P}(X_{t+1}|X_{t})$ 具有分层概率密度函数的形式，可以使用离散求积规则近似公式2中的积分："
+   }
+  ]
+ },
+ "A1.SS1.SSS0.Px1.p1.3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "其中 $\\Delta x$ 表示 $\\mathcal{X}$ 的划分中包含 $x$ 的子区间的长度。"
+   }
+  ]
+ },
+ "A1.SS1.SSS0.Px2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于确定性系统，真实转移函数变为δ函数。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，由 Equation 3 给出的离散化巴塔查里亚距离简化为（参见 Section A.2 中的 Equation 5）。"
+   }
+  ]
+ },
+ "A1.SS1.SSS0.Px2.p1.2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "“再加上一个常数 C”被译成独立于“成正比”之外，原文更可能表示与“NLL 加上常数 C”成正比。",
+    "suggestion": "这与 LLM 分配给真实数据的负对数似然（NLL）加上常数 $C$ 成正比。",
+    "zh_reviewed": "这与 LLM 分配给真实数据的负对数似然（NLL）成正比，再加上一个常数 $C${fn5}。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "NLL 仅涉及分层 PDF 中最细的箱，因此作为上下文损失不稳定。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "term"
+    ],
+    "issue": "“均值平方偏差”容易误解为“均方偏差”，原文强调的是与均值之差的平方。",
+    "suggestion": "作为替代方案，我们使用与均值的平方偏差（SDM）Kobayashi and Salam (2000) 作为确定性系统的上下文损失：",
+    "zh_reviewed": "作为替代方案，我们使用均值平方偏差（SDM）Kobayashi and Salam (2000) 作为确定性系统的上下文损失："
+   }
+  ]
+ },
+ "A1.SS1.SSS0.Px2.p1.3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "其中均值 $\\mu_{\\tilde{P}}=\\sum_{x}\\tilde{p}(x)x\\Delta x$ 从分层 PDF 中提取。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "请注意，与 Bhattacharyya 距离不同，后者仅在 $x_{\\mathrm{true}}$ 处参考模型预测 $\\tilde{p}$，SDM 考虑了整个支撑集 $x\\in\\mathcal{X}$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的数值实验表明，SDM 更稳定，并且能更好地捕捉确定性系统的上下文学习动态（见第 A.4 节）。"
+   }
+  ]
+ },
+ "fn5": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "该常数由系统的基数 B 和位数 n 决定，即 $C=-\\ln\\Delta x=n\\log B$。"
+   }
+  ]
+ },
+ "A1.SS2.SSS0.Px1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "两个 PDF $P$ 和 $\\tilde{P}$ 之间的 KL 散度定义为"
+   }
+  ]
+ },
+ "A1.SS2.SSS0.Px1.p1.2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "major",
+    "category": [
+     "causal"
+    ],
+    "issue": "原文中 as 表示原因，译文用“当...时”将其改为条件关系，因果/条件逻辑改变。",
+    "suggestion": "尽管这种损失函数常被用作各种机器学习系统的训练损失，但由于学习到的转移函数 $\\tilde{P}$ 往往接近于零，该损失函数可能会遭受数值不稳定，如图15和10所示，其中概率密度集中在支撑集的小区域内。",
+    "zh_reviewed": "尽管这种损失函数常被用作各种机器学习系统的训练损失，但当学习到的转移函数 $\\tilde{P}$ 往往接近于零时，该损失函数可能会遭受数值不稳定，如图15和10所示，其中概率密度集中在支撑集的小区域内。"
+   }
+  ]
+ },
+ "A1.SS2.SSS0.Px2.p1.2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于确定性系统，真实转移函数是一个δ函数。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，它与Hierarchy-PDF预测之间的Bhattacharyya距离仅涉及与真实值 $x_{\\mathrm{true}}$ 相关联的最精细的箱（bin）。"
+   }
+  ]
+ },
+ "A1.SS2.SSS0.Px2.p1.3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，Bhattacharyya 距离被化简为由 LLM 赋予数据的仿射变换后的负对数似然。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对 $\\tilde{p}(x_{\\mathrm{true}})$ 的这种局部敏感性解释了第 A.4 节中 Bhattacharyya 损失所见的大幅波动。"
+   }
+  ]
+ },
+ "A1.SS2.SSS0.Px3.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "虽然 Bhattacharyya 距离和 SDM 度量了提取的转移规则 $\\tilde{P}$ 与真实分布 $P$ 之间的一致性，但它们并未明确刻画分布的类型（例如高斯分布或均匀分布）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们使用峰度作为额外度量，以评估 LLM 是否恢复了 $P$ 的正确形状。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "分布 $P$ 的峰度定义见 Joanes and Gill (1998)。"
+   }
+  ]
+ },
+ "A1.SS2.SSS0.Px3.p1.2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "其中 $\\sigma^{2}$ 和 $\\mu_{4}$ 是二阶和四阶中心矩，它们可以用分层 PDF 近似为"
+   }
+  ]
+ },
+ "A1.SS2.SSS0.Px3.p1.3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "高斯分布的峰度等于 $3$，有界均匀分布的峰度等于 $9/5$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图9展示了LLM学习到的布朗运动转移规则的峰度，该峰度随着上下文长度的增加而收敛到 $3$。"
+   }
+  ]
+ },
+ "A1.F9": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图9：布朗运动转移规则的峰度随输入长度的变化。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "蓝色：LLM 预测 PDF 的峰度。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "红色：真实峰度，对所有高斯分布均为 $3$。"
+   }
+  ]
+ },
+ "A1.SS3.SSS1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "布朗运动是连续时间随机过程的一个例子 Einstein (1905)，并由随机微分方程（SDE）描述："
+   }
+  ]
+ },
+ "A1.SS3.SSS1.p1.2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "其中 $X_{t}$ 表示系统在时间 $t$ 的状态，$\\mu$ 是漂移系数，$\\sigma$ 是波动率系数，$dW_{t}$ 是维纳过程 Revuz and Yor (2013) 的增量，用于对运动的随机性建模。"
+   }
+  ]
+ },
+ "A1.F10": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图 10：布朗运动的下一状态预测。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "顶部：输入的随机时间序列以黑色显示，待预测的状态以红色高亮显示。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "底部：LLM 的预测，以及真实分布。"
+   }
+  ]
+ },
+ "A1.SS3.SSS1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了模拟布朗运动的轨迹，我们使用 Euler–Maruyama 方法 Platen (1999)，该方法将方程 8 离散化为 $X_{t+\\Delta t}=X_{t}+\\mu\\Delta t+\\sigma\\sqrt{\\Delta t}Z$，其中 $\\Delta t$ 是时间分辨率，$Z\\sim\\mathcal{N}(0,1)$ 是服从标准高斯分布的随机变量。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Euler–Maruyama 方法也可能写成条件分布："
+   }
+  ]
+ },
+ "A1.SS3.SSS1.p2.2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这正是图10中可视化的真实转移函数（ground truth transition function）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "事实上，真实下一状态被描述为高斯分布，并且我们在图10中观察到，LLM 的预测与真实的底层分布吻合良好。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此外，如图10所示，LLM 显示出 PDF 的正确高斯形状，并收敛到测量峰度 $3$（见 A.2 节）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然后，我们使用 $Z$ 的随机种子模拟十条不同的轨迹，并在图11中报告所得的 LLM 学习曲线，以 Bhattacharyya 距离度量。"
+   }
+  ]
+ },
+ "A1.F11": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图 11：LLM 预测的 PDF 与布朗运动真实转移函数之间的 Bhattacharyya 距离随输入长度的变化。"
+   }
+  ]
+ },
+ "A1.SS3.SSS2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "几何布朗运动（GBM）Oksendal (2013) 是一种随机过程，在数学金融中常被用来模拟股票价格和其他金融资产的轨迹 Hull (2021)。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "一个 GBM 由以下随机微分方程（SDE）支配："
+   }
+  ]
+ },
+ "A1.SS3.SSS2.p1.2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "其中 $X_{t}$ 模拟资产在时间 $t$ 的价格，且波动项 $\\sigma X_{t}dW_{t}$ 与当前资产价格 $X_{t}$ 成正比。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "GBM 的 Euler–Maruyama 离散化为 $X_{t+\\Delta t}=X_{t}+\\mu X_{t}\\Delta t+\\sigma X_{t}\\sqrt{\\Delta t}Z$，并由此得到真实转移函数："
+   }
+  ]
+ },
+ "A1.SS3.SSS2.p1.3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们使用随机种子模拟了十条不同的几何布朗运动（GBM）轨迹，并在图12中报告了相应的学习曲线。"
+   }
+  ]
+ },
+ "A1.F12": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图12：几何布朗运动的上下文内损失曲线。"
+   }
+  ]
+ },
+ "A1.SS3.SSS2.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们进行了额外的数值测试，以验证 LLM 正在学习 GBM 的方差与状态值 $X_{t}$ 之间的正确关系（见公式 10）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了研究这一点，我们在图 13 中针对所有预测状态展示了期望标准差，以及利用公式 7 从 Hierarchy-PDF 中提取的学习得到的标准差。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们发现 LLM 符合 GBM 的真实标准差，正如底层转移函数所规定的那样。"
+   }
+  ]
+ },
+ "A1.F13": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图13：几何布朗运动标准差随状态值 $x_{t}$ 的演变（见方程10），以及每个时间步从LLM中提取的预测标准差。"
+   }
+  ]
+ },
+ "A1.SS3.SSS3.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的实验表明，LLM 通常在离散状态数量 $n$ 较少的马尔可夫链上取得更低的上下文内损失，如图 14 所示。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于 LLaMA-13b 和 LLaMA-70b，当状态数量 $n\\geq 9$ 时，上下文内损失曲线不再显著下降。"
+   }
+  ]
+ },
+ "A1.F14": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图 14：LLaMA-13b（左）和 LLaMA-70b（右）关于转移矩阵中状态数的上下文内损失曲线。"
+   }
+  ]
+ },
+ "A1.SS4.SSS1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "逻辑斯蒂映射（logistic map）最初作为人口增长的离散时间模型被提出，是表现出混沌行为的最简单动力系统之一 Strogatz (2015)。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "它由以下迭代方程控制："
+   }
+  ]
+ },
+ "A1.SS4.SSS1.p1.2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这也可以使用条件分布来写，以反映系统的确定性性质，即 $X_{t+1}|\\{X_{t}=x_{t}\\}\\sim\\delta_{f(x_{t})}$，其中 $\\delta$ 表示狄拉克 delta 分布。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "该条件分布是图 15 中以红色显示的真实转移函数。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "参数 $r\\in[1,4)$ 控制系统的行为，并被设为 $r=3.9$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在该取值下，动力学自然被限制在区间 $(0,1)$ 内，且系统没有稳定不动点。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "由于系统的混沌性质，两条初始相近的轨迹会随时间呈指数发散。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这一性质使我们能够通过使用不同的初始条件 $x_{0}$（在 $(0,1)$ 中均匀采样）来采样多条不相关的轨迹。"
+   }
+  ]
+ },
+ "A1.F15": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图15：逻辑斯蒂映射的下一状态预测。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "上图：输入的混沌时间序列以黑色显示，待预测的状态以红色高亮显示。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "下图：LLM 对最后状态的统计预测。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "真实分布为 delta 分布，显示为一条垂直红线。"
+   }
+  ]
+ },
+ "A1.SS4.SSS1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图15展示了十条受测轨迹中的一条，以及 LLM 对最后状态的预测。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "下一状态预测的 PDF 使用第 3.2 节中描述的 Hierarchy-PDF 算法提取。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们发现 LLM 的预测接近真实值，只是存在微小偏差，表现为相邻值上很小但非零的概率密度。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "虽然图15底部的面板只报告了最后一个时间步的提取预测，但我们也对所有受测轨迹在每一个时间步提取了模型预测，并在图16中报告了相应的 Bhattacharyya 损失和 SDM 损失。"
+   }
+  ]
+ },
+ "A1.F16": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图16：Logistic映射的上下文内损失曲线。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于确定性系统，Bhattacharyya损失会出现较大波动，而SDM损失更为稳定。"
+   }
+  ]
+ },
+ "A1.SS4.SSS1.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "正如第3节所预示的，Bhattacharyya损失在确定性系统（如logistic映射）中会出现大幅波动，而SDM损失能更好地捕捉上下文学习动态。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "特别是，SDM损失随观测状态数量的增加而迅速下降，且无需对LLM进行任何微调或提示工程。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这表明LLM能够从上下文数据中提取logistic映射的底层转移规则。"
+   }
+  ]
+ },
+ "A1.SS4.SSS2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "洛伦兹系统 Lorenz (1963) 是一个三维（3D）动力系统，源自大气中对流滚卷的简化模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "它由一个由三个常微分方程构成的方程组组成："
+   }
+  ]
+ },
+ "A1.SS4.SSS2.p1.2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "其中 $\\sigma=10$、$\\rho=28$ 和 $\\beta=8/3$ 是支配该系统混沌行为的参数。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们采用一阶显式时间步进格式计算十条三维轨迹。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "所有轨迹在 $y$ 和 $z$ 上具有相同的初始条件，仅在 $x$ 坐标上不同，$x$ 坐标在 $(0,0.3)$ 内均匀采样。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "系统的混沌性质保证采样所得的轨迹彼此迅速发散。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们用模拟序列的 $x$ 分量提示 LLM，并提取其下一步预测值。"
+   }
+  ]
+ },
+ "A1.F17": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图17：预测Lorenz系统的$x$分量时，损失曲线随观测时间步数的变化。"
+   }
+  ]
+ },
+ "A1.SS4.SSS2.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "当 $x$、$y$ 和 $z$ 分量都被观测时，系统是确定性的且具有马尔可夫性；也就是说，时间 $t$ 的状态向量 $\\vec{s}_{t}=(x_{t},y_{t},z_{t})$ 完全决定下一状态 $\\vec{s}_{t+1}$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，如果只有 $x$ 分量被观测到，那么该系统就不再是马尔可夫的，但如果将状态向量扩展为包含更早状态的信息，它仍然是确定性的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，Takens 嵌入定理 Takens (2006) 保证，对序列 $x_{0:t}$ 至多七个状态的观测就足以预测 $x_{t+1}$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "寻找用于重构系统轨迹的最优状态数量是一个活跃的研究领域 Strogatz (2015)。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "尽管存在这一明显的困难，LLaMA-13b 随着观察到更多状态，能够对该序列作出越来越准确的预测，图 17 中绘制的递减损失曲线证明了这一点。"
+   }
+  ]
+ },
+ "A1.SS5.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "有人可能会天真地评论说，如果 $x_{t+1}$ 总是落在 $x_{t}$ 附近，那么 Lorenz 系统和 logistic 映射的上下文学习任务可能变得平凡（trivial），在这种情况下，LLM 只需要学习一个静态的噪声分布就能降低损失。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的实验并非如此。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在本节中，我们在图19和图19中展示了这些学习任务的非平凡性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在这两种情况下，很明显，LLM 已经成功学会主动预测下一状态的期望均值位置，并且在 logistic 映射示例中，还学会了下一状态分布的方差。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们注意到，Lorenz 系统是确定性模拟的，因此真实的下一状态分布被表示为 delta 函数。"
+   }
+  ]
+ },
+ "A1.F19": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图18：含噪逻辑斯蒂映射中的4个连续状态。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "真实值以红色显示，LLaMA预测以蓝色显示。"
+   }
+  ]
+ },
+ "A1.SS6.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "神经缩放定律 Kaplan et al. (2020) 描述了经过训练的神经网络（尤其是语言模型）的性能如何随着关键因素的变化而变化，例如模型规模（$N$）、数据集规模（$D$）以及用于训练的计算资源 (C)。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些定律通常表现为以下形式的幂律关系："
+   }
+  ]
+ },
+ "A1.SS6.p1.2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "其中 $L$ 表示模型的损失或性能指标。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "特征因子（$N_{\\text{c}}$、$D_{\\text{c}}$ 和 $C_{\\text{c}}$）以及幂系数（$\\alpha$）是从训练曲线中经验性地提取的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "拟合量取决于数据分布、模型架构以及训练所用优化器的类型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这种幂律关系在双对数图中表现为直线，其斜率对应于参数 $\\alpha$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们从学习动力系统得到的损失曲线（见图1）揭示了另一条适用于上下文学习的神经标度律："
+   }
+  ]
+ },
+ "A1.SS6.p1.3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "其中 $D_{\\text{in}}$ 表示在提示（上下文）中观察到的时间序列的长度。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在图 20 中，我们展示了对上下文内损失曲线拟合出的幂律。"
+   }
+  ]
+ },
+ "A1.F20": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图20：对LLaMA-13b的上下文内损失曲线进行幂律拟合，图例中显示拟合的幂系数 $\\alpha$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "左：以巴氏距离（Bhattacharyya distance）度量的随机序列损失。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "右：以SDM度量的确定性序列损失。"
+   }
+  ]
+ },
+ "A1.SS7.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在本节中，我们将 LLM 的预测与具有已知架构的基线模型进行比较，以理解上下文学习任务的难度，并更好地解读 Bhattacharyya 损失。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "具体而言，我们考虑以下基线模型：用于离散马尔可夫链的 unigram 和 bi-gram 模型，以及用于含噪 logistic 映射的带 1 步记忆（AR1）的线性和非线性自回归模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "用于马尔可夫链的 bi-gram 模型具有不公平的优势，因为它被设计用于对马尔可夫过程建模，其中某个 token 的概率分布仅依赖于前一个 token，即推断转移矩阵的值。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "另一方面，unigram 模型将所有 token 建模为从同一分布中独立同分布地抽取。"
+   }
+  ]
+ },
+ "A1.F21": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图 21：LLM 上下文内损失曲线与基线模型损失曲线的对比。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "系数 $\\alpha$ 表示拟合得到的缩放指数。"
+   }
+  ]
+ },
+ "A1.SS7.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "神经网络 AR1 模型以状态 $x_{t-1}$ 为输入，并输出对下一状态 $x_{t}$ 的预测，其形式为由均值和方差参数化的高斯分布：$f_{\\theta}:x_{t}\\rightarrow\\mathcal{N}(\\mu_{\\theta}(x_{t}),\\sigma_{\\theta}(x_{t}))$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，它也具有硬编码高斯性的不公平优势。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "另一方面，LLaMA 必须从数据中推断正确的分布族。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "尽管存在这一内在劣势，LLaMA 在大上下文极限下仍然优于神经网络 AR1 模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "非线性 AR1 模型中使用的神经网络具有三个全连接隐藏层，宽度分别为 64、32 和 16。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们发现，更简单的神经网络容易陷入局部极小值，导致性能不稳定。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图 21 中的损失曲线是通过在每个上下文长度下训练该神经网络的一个独立副本直至收敛，并使用训练后的神经网络预测下一状态分布而获得的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "训练损失定义为观测数据的负对数似然："
+   }
+  ]
+ },
+ "A1.SS7.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此外，神经网络集成使我们能够在每个上下文长度下可视化所学到的转移函数 $P(x_{t+1}|x_{t})$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在图22中，我们展示了随着上下文长度的增加，神经网络学习到的转移规则如何逐渐收敛到真实转移规则。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "由于在较大的上下文长度下，LLM 达到了与基于神经网络的 AR1 模型相似的损失，因此可以合理地预期 LLM 学到了与图22第5个子图所示精度相似的转移函数。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，很难可视化 LLM 所学到的、针对 $x_{t}\\in[0,1]$ 的完整转移规则 $P(x_{t+1}|x_{t})$，因为这样做需要在训练序列末尾附加一组 $x_{t}$ 的值，这会使训练序列变得不正确。"
+   }
+  ]
+ },
+ "A1.F22": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图22：含噪逻辑斯蒂映射的转移规则 $P(x_{t}|x_{t}-1)$，由基于神经网络的AR1模型学习得到，并与真实转移规则进行对比。"
+   }
+  ]
+ },
+ "A1.SS8.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "虽然大多数数据集都能被幂律很好地描述，但两条损失曲线——布朗运动和几何布朗运动——在约 $10^{2}$ 的上下文长度处就提前进入平台期，如图20所示。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们将这种提前平台化归因于以下事实：布朗运动和几何布朗运动在较大时间 $t$ 处会“游离出分布”，而本文研究的其他所有动力系统都收敛到稳定分布（即不变测度）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "一个由转移规则 $P(x_{t+1}|x_{t})$ 支配的马尔可夫系统（随机的或确定性的）如果满足如下条件，则称其具有不变测度 $\\pi$："
+   }
+  ]
+ },
+ "A1.SS8.p1.2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如果系统从 $\\pi(x)$ 初始化并按照 $P$ 演化，那么下一步状态的分布仍将服从 $\\pi(x)$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这一性质使 $\\pi$ 成为系统的一个不变分布或平稳分布。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "已有研究表明，处于混沌状态的 logistic 映射和 Lorenz 系统几乎必然收敛到各自的不变测度，无论初始化如何 Strogatz (2015)。"
+   }
+  ]
+ },
+ "A1.SS8.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于由转移矩阵 $p$ 支配的离散马尔可夫链，平稳分布被定义为离散概率质量函数，记为 $\\vec{\\pi}$，使得"
+   }
+  ]
+ },
+ "A1.SS8.p2.2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这与公式12描述的连续情形类似。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "根据定义，$p$ 的任意一个特征值为 $\\lambda=1$ 的非负右特征向量都是 $p$ 的平稳分布。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Sethna (2021) 证明了有效的转移矩阵至少有一个平稳分布。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "另一方面，布朗运动和几何布朗运动在无界域上（例如当 $\\mathcal{X}=\\mathbb{R}$ 时）都不具有不变分布{fn6}。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这一点可以从时间 $t$ 处的边缘分布 $P(x_{t})$ 看出。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于公式8中定义的布朗运动，$x_{t}$ 在时间 $t$ 处的边缘分布是一个正态分布："
+   }
+  ]
+ },
+ "A1.SS8.p2.3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "而对于公式9中定义的几何布朗运动，$x_t$ 的边缘分布是对数正态分布 Crow and Shimizu (1987)："
+   }
+  ]
+ },
+ "A1.SS8.p2.4": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "式14和式15都依赖于时间，且在 $t\\rightarrow\\infty$ 的极限下不会收敛到平稳分布。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于布朗运动和几何布朗运动，LLM 可能决定只考虑最近的一段时间步，并忽略较早的数据，这些数据在某种意义上“分布外”。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这可能解释了损失曲线早期趋于平台的现象。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "事实上，如果训练数据的调度在分布上发生偏移，经典的神经标度律可能被改进或打破，如 Sorscher et al. (2023) 所示。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "与 Sorscher et al. (2023)、Lu et al. (2022) 不同，这些工作通过改变数据调度，以获得随训练数据规模增大而下降得更快的更优学习曲线；而我们的实验考虑的是具有预先确定转移规律的时间序列。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，我们不能在不改变时间序列底层转移规则的情况下改动数据调度以使其平稳。"
+   }
+  ]
+ },
+ "fn6": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于随机系统，不变测度有时被称为平稳分布。"
+   }
+  ]
+ },
+ "A1.SS9.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "温度 $T$ 是一个控制 softmax 输出层方差的超参数。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "尽管大多数 LLM 在 $T=1$ 下训练，但在推理过程中通常会在区间 $T\\in[0.8,1.2]$ 内调节温度。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然后，可以在生成输出中选择更高的多样性（高 $T$）或更好的连贯性（低 $T$）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "温度超参数会影响从 LLM 中提取的 Hierarchy-PDF 的不确定性或方差。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图24和图24展示了不同温度如何改变 Hierarchy-PDF 的形状。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在两种情况下，更高的温度都会导致 PDF 的方差更大。"
+   }
+  ]
+ },
+ "A1.F24": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图23：几何布朗运动的下一状态预测。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "最上方：输入的随机时间序列（黑色），以及待预测的状态（红色）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "其余部分：从 LLaMA-13b 中提取的 Hierarchy-PDF 预测，在 $T=0.3$ 到 $3$ 的不同温度下评估，以及真实 PDF（红色）。"
+   }
+  ]
+ },
+ "A1.SS9.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们强调这些图中使用的不同细化方案：对于 GBM，PDF 在众数附近被细化到最后（第三）位数字，而在其他地方保持粗糙。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这是因为 GBM 的真实方差可能跨越两个数量级（见图 13），其中大多数数据点被困于较小 $X_{t}$ 处的低方差区域。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，我们需要高精度来分辨图 25 中的这些小方差。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "另一方面，带噪声的逻辑斯蒂映射时间序列没有这个问题，因此我们仅将其 PDF 统一细化到第二位数字。"
+   }
+  ]
+ },
+ "A1.F25": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图25：GBM中的大多数数据点都困在 $X_{t}$ 较小的低方差区域。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了分辨这些极小的方差，层级PDF（hierarchy-PDF）必须非常精细。"
+   }
+  ]
+ },
+ "A1.SS9.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "虽然我们论文中的损失曲线是在 $T=1$ 下计算的，但图 13 和图 7 中所示的预测 $\\sigma$ 是在 $T=0.7$ 下提取的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们对温度在 $T=0.3$ 到 $T=3$ 范围内进行了网格搜索（见图 27 和图 27），并观察到 $T=0.7$ 始终能带来更好的方差预测质量。"
+   }
+  ]
+ },
+ "A1.F27": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图 26：由 LLM 学习到的 GBM 标准差 $\\sigma$ 作为状态值 $X_{t}$ 的函数，以及真实值。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "LLM 预测在从 $T=0.3$ 到 $1$ 的温度范围内进行评估。"
+   }
+  ]
+ },
+ "A1.SS10.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "本节记录了 Hierarchy-PDF 算法的全部三个部分。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "addition",
+     "agent"
+    ],
+    "issue": "译文增加了“请读者”，原文的主语是“我们”，施事关系略有变化，但整体意思基本一致。",
+    "suggestion": "更多细节请参见 GitHub 仓库。",
+    "zh_reviewed": "我们请读者参阅 GitHub 仓库以获取更多细节。"
+   }
+  ]
+ }
+}

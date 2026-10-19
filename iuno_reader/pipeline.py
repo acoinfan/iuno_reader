@@ -185,9 +185,15 @@ def run(root, pid, sections=None, translate="auto", review="auto", export=None, 
         from .translate import OpenAICompatible
         eng = OpenAICompatible(role="translator")
         meta = tr.setdefault("__meta__", {})
-        meta["translator"] = eng.model
+        # 已有别人翻的段落时（例如先人工翻了几节，再用接口补译其余部分），两个译者都记下
+        old = meta.get("translator", "")
+        if old and eng.name not in old.split(" + "):
+            meta["translator"] = f"{old} + {eng.name}"
+        elif not old:
+            meta["translator"] = eng.name
         for t in missing:
             tr[t["id"]] = eng.translate(t)
+            tr[t["id"]]["translator"] = eng.name
             meta["usage"] = _add_usage(meta.get("usage"), eng.usage)
             eng.usage = dict.fromkeys(eng.usage, 0)
             _save(tr, P.d("translation.json"))
@@ -248,9 +254,11 @@ def run(root, pid, sections=None, translate="auto", review="auto", export=None, 
     # 核对与渲染
     reviews = [_load(f) for f in sorted(glob.glob(P.d("review.*.json"))) if not f.endswith(".raw.json")]
     review_info = [r.get("__meta__", {}) for r in reviews]
-    doc, stats = check_doc(doc, tr_clean, terms, hedges, reviews)
     chosen = {t["id"] for t in tasks}
-    secs = {s["section"] for s in doc["segments"] if s["id"] in chosen}
+    # 只核对、统计这次选中的段落（例如只翻正文时，以前翻过的附录不算进句数和标记数）
+    doc, stats = check_doc(doc, {k: v for k, v in tr_clean.items() if k in chosen}, terms, hedges, reviews)
+    # 公式按所在节一起显示；只看正文片段所在的节，免得被引用的附录图把整节附录的公式带进来
+    secs = {s["section"] for s in doc["segments"] if s["id"] in chosen and s["kind"] in ("para", "abstract", "item")}
     only = chosen | {s["id"] for s in doc["segments"] if s["kind"] == "equation" and s["section"] in secs}
     sections_zh = tr.get("__sections__", {})
     _save(doc, P.o("checked.json"))

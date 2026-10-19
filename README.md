@@ -13,6 +13,7 @@ cd /home/a_coin_fan/work/iuno_reader
 
 自动完成：下载 arXiv HTML → 拆成段落和句子 → 翻译 → 审校 → 规则核对 → 渲染 → 写出 `out/<id>/`。
 
+- **默认只翻正文**（摘要和所有非附录的节，外加正文引用到的图表和脚注），附录和参考文献不翻。要含附录的全文用 `--sections all`，只要某几节用 `--sections abs,2,3`。附录的识别：节名以 Appendix 开头；或者节编号和前面重复（罗马数字编号的论文，附录会从 I 重新编号）。
 - 配了接口（见下文「接口配置」），翻译和审校自动完成。
 - 没配接口时不会失败：流水线生成任务清单和写给 agent 的说明（`AGENT_TRANSLATE.md`、`AGENT_REVIEW.md`），状态停在 `awaiting_translation` 或 `awaiting_review`。agent 按说明完成后再运行一次 `run`，会从中断处接着做。
 - `--translate auto|api|agent`、`--review auto|blind|backtranslate|agent|none` 可以指定方式。
@@ -63,7 +64,7 @@ cd /home/a_coin_fan/work/iuno_reader
 .venv/bin/python -m iuno_reader render 2602.04212 --translated-only     # 核对并渲染
 ```
 
-- `--sections`：只处理某几节，例如 `abs,2,3,4`（`abs` 是摘要）或附录 `A,B`。
+- `--sections`：只处理某几节，例如 `abs,2,3,4`（`abs` 是摘要）或附录 `A,B`；`body` 表示全部正文，`all` 表示全文。`run` 默认是 `body`，分步命令默认全文。
 - `--translated-only`：渲染时只输出已经翻译的片段。
 
 ### 四个角色，互不交叉
@@ -157,5 +158,5 @@ export IUNO_BT_BASE_URL=...        IUNO_BT_MODEL=...        IUNO_BT_API_KEY=... 
 - 只支持有 arXiv HTML 版的论文；没有 HTML 版时，还不支持退回 TeX 源码。
 - 表格只翻译表题，表格内容请看原文。
 - 图片直接引用 arXiv 上的图片地址，离线时看不到。
-- 用罗马数字编号的论文（如 I、II、III），正文和附录的节编号可能重复，`--sections` 会同时选中两者。
+- 用罗马数字编号的论文（如 I、II、III），正文和附录的节编号可能重复，`--sections` 按编号选节时会同时选中两者；`body` 不受影响。
 - 核对规则是启发式的：可能误报（例如把代词 one 当成数量词，已排除常见情况），也可能漏报（例如否定的对象译错了）。

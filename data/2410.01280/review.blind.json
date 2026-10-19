@@ -1,0 +1,1879 @@
+{
+ "__meta__": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "models": {
+   "reviewer": "deepseek-v4-pro"
+  },
+  "translator": "deepseek-v4-pro（关思考）",
+  "independence": "same-model",
+  "usage": {
+   "calls": 43,
+   "prompt_tokens": 43491,
+   "completion_tokens": 56051,
+   "seconds": 524.2,
+   "cached_tokens": 25728
+  }
+ },
+ "abs.p1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "上下文学习，即基于输入提示中的少量示例进行适应的能力，是大语言模型（LLM）的一个普遍特征。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，随着LLM的上下文学习能力不断提高，从机制上理解这一现象变得越来越重要。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "特别是，LLM如何在上下文中学习解决特定类别的问题，例如强化学习（RL）问题，目前尚不清楚。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "通过三个不同的任务，我们首先表明Llama 3 70B可以在上下文中解决简单的RL问题。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然后，我们使用稀疏自编码器（SAE）分析Llama的残差流，并发现与时间差分（TD）误差密切匹配的表示。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "值得注意的是，尽管模型仅被训练来预测下一个标记，这些表示仍然出现。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们通过对这些表示进行精心设计的干预，验证了它们确实因果性地参与了TD误差和Q值的计算。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "综合来看，我们的工作建立了一种使用SAE研究和操纵上下文学习的方法论，为更机制化的理解铺平了道路。"
+   }
+  ]
+ },
+ "S1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在大规模文本语料库上预训练的大语言模型（LLMs）是熟练的上下文学习者。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "它们能够仅根据包含少量示例的文本提示来预测和学习新规则和新函数。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这一现象已在许多不同范式下得到证明，例如翻译（Brown et al., 2020; Wei et al., 2022）、函数学习和序列预测（Garg et al., 2022; Coda-Forno et al., 2023），甚至强化学习（Binz & Schulz, 2023; Shinn et al., 2024; Brooks et al., 2022; Schubert et al., 2024; Hayes et al., 2024）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，理解上下文学习在机制上是如何实现的变得越来越重要。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在本文中，我们研究了大语言模型中上下文强化学习（RL）背后的机制，具体来说，它们如何能够在仅给定标量奖励信号的情况下，通过试错学习生成最大化未来折扣奖励的动作。"
+   }
+  ]
+ },
+ "S1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在强化学习中，核心学习信号是时序差分（TD）误差（Sutton, 1988）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "TD误差是智能体对状态-动作对价值的信念与目标值之间的差异，目标值由即时奖励加上后继状态的折扣价值构成。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例如，当智能体收到意外奖励，或意外转移到高价值的后继状态时，相应的TD误差可用于更新对当前状态价值的信念。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这一学习规则构成了许多强化学习算法的基础，如$Q$-学习（Mnih et al., 2015; Watkins & Dayan, 1992）和Actor-Critic（Konda & Tsitsiklis, 1999; Sutton et al., 1999; Haarnoja et al., 2018）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "TD学习在神经科学中也发挥了重要作用，多项实验表明，在多个物种中，TD类计算与多巴胺之间存在联系（Montague et al., 1996; Schultz et al., 1997; Fiorillo et al., 2003; Flagel et al., 2011; Niv et al., 2015）。"
+   }
+  ]
+ },
+ "S1.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "TD学习是一种基础算法，已成功用于建模机器和动物的学习。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "LLM能否仅通过训练进行下一词预测，就在上下文中学会实现TD学习？"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们使用稀疏自编码器（SAE）来分析在强化学习设置中支持上下文学习的表征。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些模型已成功用于建立对神经网络及其表征的机制性理解（Bricken et al., 2023; Templeton, 2024; Gao et al., 2024; Lieberum et al., 2024）。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "原文中的数学格式 $3$ $70$B 被写成了普通文本 3 70B，应保留公式格式。",
+    "suggestion": "在多个实验中，我们建立了一套方法，用于系统性地研究和操纵Llama $3$ $70$B{fn1}（Dubey et al., 2024）中的上下文强化学习，并借助SAE（见图1）。",
+    "zh_reviewed": "在多个实验中，我们建立了一套方法，用于系统性地研究和操纵Llama 3 70B{fn1}（Dubey et al., 2024）中的上下文强化学习，并借助SAE（见图1）。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "原文中的数学格式 $Q$-values 被写成了普通文本 Q值，应保留公式格式。",
+    "suggestion": "利用我们的方法，我们在多个任务中发现了类似于TD误差和$Q$值的表征。",
+    "zh_reviewed": "利用我们的方法，我们在多个任务中发现了类似于TD误差和Q值的表征。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此外，我们发现操纵这些特征会以可预测的方式改变Llama的行为和表征。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们相信，我们的研究为上下文学习的机制性理解铺平了道路，为研究LLM如何在上下文中解决其他类型的学习问题树立了先例。"
+   }
+  ]
+ },
+ "fn1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "从这里开始，我们将该模型称为 Llama。"
+   }
+  ]
+ },
+ "S1.F1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图1：我们在三个不同的任务中研究上下文学习的机制：（A）两步任务，（B）网格世界任务，以及（C）图预测任务。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（D）两步任务的示例流程。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们如左侧所示提示Llama。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "当它选择动作时，我们记录动作之前标记的内部表示，这些标记以橙色突出显示。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们在这些表示上训练SAE（中间），并将SAE学习到的潜在变量与从强化学习智能体获得的TD误差信号和其他感兴趣的变量进行相关性分析（右侧）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在识别出这些潜在变量后，我们对它们进行损伤，并用损伤后的重构替换Llama的内部表示（中间）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然后我们测试损伤是否在行为中产生了预期效果（右侧）。"
+   }
+  ]
+ },
+ "S2.SS1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们在马尔可夫决策过程（MDP）的设置下研究上下文学习。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "一个MDP由一个状态空间 $\\mathcal{S}$、一个动作空间 $\\mathcal{A}$ 以及转移动态 $s_{t+1}\\sim T(s_{t+1}|s_{t},a_{t})$ 组成，后者定义了给定当前状态和动作时后继状态的概率分布，此外还有一个奖励函数 $r(s_{t},a_{t})$，它将状态-动作对映射到一个标量奖励项。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "智能体的目标是学习一个策略 $\\pi_{\\theta}(a_{t}|s_{t})$，该策略最大化未来折扣奖励，例如 $Q$ 值 $Q_{\\pi_{\\theta}}(s_{t},a_{t})=\\mathbb{E}_{\\pi_{\\theta}}\\left[\\sum_{t=1}^{T}\\gamma^{t}r(s_{t},a_{t})\\right]$，其中 $\\gamma$ 是折扣因子。"
+   }
+  ]
+ },
+ "S2.SS1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "学习固定策略 $\\pi_{\\theta}$ 的 $Q$ 值函数的一种经典算法是 TD 学习。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "从 $Q$ 值的初始估计出发，TD 学习通过自举生成一系列估计，这些估计收敛到真实值。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这是通过最小化 TD 误差来实现的，TD 误差是智能体先前估计的 $Q$ 值与即时奖励加上后继状态折扣 $Q$ 值之间的差异。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "假设策略总是选择使 $Q$ 值最大化的动作，时序差分误差和随后的 $Q$ 值更新可以写成如下形式："
+   }
+  ]
+ },
+ "S2.SS1.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们使用 $Q$-学习来建模 Llama 在 RL 任务中的行为和神经激活；有关 $Q$-学习模型实现的详细信息，请参见附录 A.1。"
+   }
+  ]
+ },
+ "S2.SS2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "寻找TD误差和$Q$-值痕迹的一个自然位置是Llama的Transformer块的残差流（Templeton, 2024; Bricken et al., 2023; Gurnee et al., 2023）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Transformer块的残差流携带来自输入和所有前面块的信息，使其成为初步探索的可行候选。"
+   }
+  ]
+ },
+ "S2.SS2.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "直接在残差流中搜索与 $Q$ 值或 TD 误差对应的特征，虽然可行，但往往不切实际。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在 Llama 中，每个 token 在残差流中被表示为一个 $8192$ 维向量。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "由于这种方法需要进行大量的统计比较，显示激活与 TD 误差之间联系的分析将面临统计功效降低的问题。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此外，已有研究表明，LLM 以纠缠和分布式的方式表示概念。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这种现象被称为多义性（Elhage et al., 2022），发生在单个语义概念由多个神经元表示时。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "利用机制可解释性领域的工具（Olah, 2023），我们试图从残差流中学习一组解纠缠、单义且可能更低维的特征。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们假设，与 TD 误差或动作值对应的特征可以在这种低维解纠缠的潜在空间中找到。"
+   }
+  ]
+ },
+ "S2.SS2.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "学习此类特征的一种流行模型是稀疏自编码器（SAE）架构。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "SAE通过梯度下降进行训练，以通过稀疏潜在特征的线性组合来重建像transformer这样的模型学习到的可能纠缠的特征。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "SAE已被证明能学习到更易于解释和单义的特征（Cunningham et al., 2023; Bricken et al., 2023）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们使用了具有单个密集编码器层（$f$）、随后是ReLU非线性（$\\sigma$）和单个密集解码器层（$g$）的SAE。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们训练SAE以重建残差流$h$中的向量，同时最小化编码特征的$L_{1}$范数："
+   }
+  ]
+ },
+ "S2.SS2.p5.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "其中 $\\tilde{h}=g(\\sigma(f(h)))$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们为 Llama 的 $80$ 个块中的每一个以及每个实验分别训练了 SAE。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "更多训练细节见附录 A.2。"
+   }
+  ]
+ },
+ "S3.F2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图2：Llama依赖类似TD的特征来在上下文中解决RL任务。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（A）Llama 70B经常通过试错在两步任务中学习到最优策略，而较小的8B对应模型没有超过机会水平。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "阴影区域表示均值的标准误差。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（B）Llama的行为最好用Q学习算法来描述。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（C和D）与奖励估计（短视值）和Q值估计以及时间差分误差都有显著相关性的SAE特征，在transformer块中逐渐出现。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（E和F）在Llama中停用单个TD特征就足以损害性能，并使行为与Q学习的一致性降低。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（G和H）负向钳制TD特征会降低后续表示与Q值和TD误差的相似性。"
+   }
+  ]
+ },
+ "S3.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们首先试图评估 Llama 纯粹在上下文中解决强化学习问题的能力。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们设计了一个受两步任务（Daw et al., 2011; Kool et al., 2016）启发的简单马尔可夫决策过程。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "反引号内容未保留，`Left`/`Right`/`Apple`/`Orange` 被译为中文且未加反引号。",
+    "suggestion": "在这个任务中，Llama 首先必须选择 `Left` 或 `Right`，以分别进入 `Apple` 状态或 `Orange` 状态。",
+    "zh_reviewed": "在这个任务中，Llama 首先必须选择向左或向右，以分别进入苹果状态或橙子状态。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这个第一次状态转移总是获得 0 奖励。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "反引号内容未保留，`Left`/`Right` 被译为中文且未加反引号。",
+    "suggestion": "从那里，Llama 再次必须选择 `Left` 或 `Right`，以进入终止状态并获得奖励。",
+    "zh_reviewed": "从那里，Llama 再次必须选择向左或向右，以进入终止状态并获得奖励。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "奖励和任务结构如图 1A 所示。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "奖励和转移动态是确定性的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们指示 Llama 最大化奖励，并鼓励它在实验开始时更多地探索（确切提示见附录 A.3）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "当进入一个新状态时，我们从 Llama 对可能动作标记的预测分布中以温度 1 采样一个动作。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Llama 完成了 100 个用唯一种子初始化的独立实验，每个实验包含 30 个回合。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们在前 7 个回合中从随机策略采样动作，以缓解探索问题。"
+   }
+  ]
+ },
+ "S3.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们首先观察到，Llama 在两步任务中获得的回报显著高于随机水平，并且经常学到最优策略（见图 2A）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "较小的 8B 参数版本 Llama 的表现大致处于随机水平，表明通过强化学习学习策略的能力随着规模扩大而出现。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，我们将后续分析集中在 70B 参数版本上。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "接下来，我们对 Llama 执行的动作序列拟合了行为模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们拟合了一个使用 TD 误差更新 Q 值的 Q 学习模型，一个只关心即时奖励的短视 Q 学习模型{fn2}（我们通过将 Q 学习模型的折扣参数 $\\gamma$ 设为 $0$ 来实现），以及一个重复模型，该模型根据过去在给定状态下选择某个动作的频率来计算选择概率。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们看到 Llama 的行为最符合 Q 学习模型，其负对数似然（NLL）得分为 $2729$，优于 NLL 为 $2864$ 的短视模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这表明它整合了关于未来折扣奖励的信息来选择动作（见图 2B）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "重复模型预测 Llama 只是重复提示中的动作模式，其拟合效果比随机还差，NLL 为 $5745$。"
+   }
+  ]
+ },
+ "fn2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在动物学习文献中，这被称为Rescorla-Wagner模型（Rescorla & Wagner, 1972）。"
+   }
+  ]
+ },
+ "S3.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "接下来，我们在Llama所有Transformer块的残差流输出上训练了SAE。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了为SAE创建多样化的训练集，我们收集了Llama在Two-Step Task的另外两个变体上的表示，其中奖励函数或转移函数在实验中途发生变化。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "由于转移动态或奖励函数的意外变化之后会出现大的正或负TD误差，我们预期这对于检测Llama激活中可能的TD误差是有用的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们在18000个残差流表示上，使用正则化强度$\\beta=1e-05$训练每个SAE，共30个epoch。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在所得的SAE中，我们发现特征在Transformer块上逐渐发展，这些特征同时跟踪奖励函数（体现在短视值中）以及$Q$值（见图2C）。"
+   }
+  ]
+ },
+ "S3.F3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图3：在两步任务的所有三种变体中，对三次独立运行的TD误差与来自第34块的最佳匹配SAE特征进行定性比较。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "当Llama遇到意外事件（例如转移到意外状态或收到意外奖励）时，SAE特征显示出与TD相似的跳跃。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "虚线表示转移动态或奖励函数发生变化的起始点。"
+   }
+  ]
+ },
+ "S3.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此外，我们观察到与TD误差显著相关的特征（见图2D）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在第34块中，我们发现与我们的Q学习模型的TD误差相关性最高（r=0.58）的SAE特征。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们在图3中展示了六个不同运行和Two-Step Task的三种变体下，归一化的SAE特征（与归一化的TD误差叠加）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "当奖励函数和转移动态发生变化时，该特征表现出与TD误差相同的定性变化。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们将这些类似于TD误差的潜在特征称为TD潜在变量。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了确定这个TD潜在变量是否与RL行为有因果关系，我们在TD潜在变量被停用或钳制的情况下测试了Llama在Two-Step Task上的表现。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在每次选择之前，我们将第34块中的残差流激活替换为训练好的SAE的重构，其中TD潜在变量被设置为0或被钳制。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们看到，仅仅停用TD潜在变量就导致任务表现显著变差（见图2E），产生的行为与Q学习智能体的差异更大（图2F）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "相比之下，停用第34块中与TD相关性最低的SAE特征并没有产生根据Q学习模型可能性更低的行为。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "最后，我们分析了在将TD潜在变量钳制为-10（类似于Templeton (2024)）后，SAE特征与Q值和TD误差之间的相关性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在这里，我们看到Q值和TD误差的相关强度都大幅下降（见图2G和H）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "总之，我们发现在Two-Step Task的三种不同变体中，有一个SAE特征表现出TD误差的特征。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对这个单一SAE特征进行干预就足以显著改变Llama在上下文中执行RL的能力，并影响后续的表征。"
+   }
+  ]
+ },
+ "S4.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在之前的任务中，我们表明 Llama 在一个简单强化学习任务中的行为和内部表征可以由一个 $Q$-学习模型预测。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "接下来，我们研究了当 Llama 被提示以由 $Q$-学习智能体生成的观察和动作序列时，是否也能在 Llama 中识别出 TD 误差和 $Q$-值。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这种设置使我们能够在更复杂的 MDP 中分析 Llama 的表征。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们训练了 $50$ 个独立的 $Q$-学习智能体，在 $5\\ \\times\\ 5$ 的网格中使用 $4$ 种不同的动作（`UP`、`DOWN`、`LEFT` 和 `RIGHT`）从固定的起始位置导航到固定的目标位置（图 1B）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "进入目标状态会获得 $+1$ 奖励并终止回合，而进入任何其他状态则获得 $-1$ 奖励。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "遵循 Kaplan 等人（2020）的方法，我们通过 Llama 预测 $Q$-学习智能体动作随时间变化的准确程度来量化其上下文强化学习能力。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "关于任务的更多细节，包括提示结构，在附录 A.4 中提供。"
+   }
+  ]
+ },
+ "S4.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "首先，我们观察到，随着 Llama 接收到更多观测，它在预测 $Q$-学习智能体的动作方面有所提升。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "虽然这表明了上下文学习，但我们还不能将这种能力归因于强化学习，因为 Llama 可能只是学习了动作序列，而没有关注奖励。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了控制这一点，我们向 Llama 提供了第二个提示，其中动作序列相同，但奖励被随机设置为 $+1$ 或 $-1$，与智能体是否到达目标无关。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如图 4A 所示，当给定正确的奖励时，Llama 在预测相同的动作序列方面表现更好，这表明它整合了奖励信息来预测动作。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "更多控制分析见附录 A.4。"
+   }
+  ]
+ },
+ "S4.F4": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图4：Llama能够预测$Q$学习智能体的动作，并跟踪与$Q$值和TD误差相似的变量。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（A）当获得关于奖励的正确信息时，Llama能更好地预测动作序列。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（B和C）$Q$值和奖励跟踪变量，以及伴随的误差信号，与SAE特征显著相关。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "显示的是经过$\\sigma=0.5$高斯平滑后的最大相关性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（D）损伤TD潜在变量会影响动作预测准确性，而损伤其他特征几乎不影响动作预测。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（E和F）损伤TD潜在变量也会影响后续的$Q$值和TD误差表示。"
+   }
+  ]
+ },
+ "S4.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然后，我们针对此任务在 Llama 的残差流表示上训练了 SAE，并检查学习到的潜在变量是否对应于生成观测结果的智能体的 $Q$ 值和 TD 误差。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "训练进行了 $15$ 个 epoch，正则化强度为 $\\beta=1e-05$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "与之前的任务一样，我们将 SAE 学习到的每个潜在表示与 $Q$ 值以及短视价值进行相关性分析。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "作为额外的对照，我们纳入了在对照分析中呈现的随机奖励序列上训练的 $Q$-learning 智能体的估计值。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在 Llama 的所有 transformer 块中，我们观察到与用于生成观测结果的 $Q$ 值之间的相关性最高（图 4B）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "类似地，大多数块对同一模型的 TD 误差显示出最高的相关性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们还发现与短视误差信号的高相关性，表明 Llama 也学习了奖励（图 4C）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些发现进一步支持了以下假设：即使在具有更大状态和动作空间的更复杂环境中，Llama 的内部表示也编码了类似强化学习的计算。"
+   }
+  ]
+ },
+ "S4.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "最后，我们通过去激活和钳制所识别的TD潜在变量来验证其因果作用。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们选择了4个不同块中的4个不同潜在变量，并将它们的活动设置为0。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "所有这些潜在变量都是从第40块开始选择的，并且与TD误差的相关系数r≥0.75。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在这个实验中，我们选择了更多的特征进行去激活，以对Llama的行为产生更强的影响。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "作为对照条件，我们损伤了来自相同块中相关性最低的潜在变量。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们发现，损伤TD潜在变量显著降低了Llama预测动作的能力，而对照损伤对Llama的动作预测影响很小（图4D）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "去激活或钳制TD潜在变量后，我们观察到Q值相关性（图4E）和TD误差相关性（图4F）均有所下降。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些结果为所识别的TD潜在变量在Llama的强化学习能力中的因果作用提供了证据。"
+   }
+  ]
+ },
+ "S5.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "到目前为止，我们已经在强化学习的背景下研究了TD学习。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，TD学习也可以在没有奖励的情况下用于学习统计结构。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例如，后继表示（SR; Dayan, 1993）根据智能体的策略，以未来折扣状态占用的形式编码MDP，并且可以使用TD学习来学习。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "SR表示为一个状态乘状态的矩阵 $\\mathbf{M}$，其中 $\\mathbf{M}(s,s^{\\prime})$ 是当智能体处于状态 $s$ 时，状态 $s^{\\prime}$ 的未来折扣期望占用，例如 $\\mathbf{M}(s,s^{\\prime})=\\mathbb{E}\\left[\\mathop{\\sum}\\limits_{t=0}^{\\infty}{\\gamma}^{t}{\\mathbb{I}}({s}_{t}={s}^{{\\prime}})|{s}_{0}=s\\right]$，其中 $\\mathbb{I}$ 是指示函数。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "方程1和方程2中定义的TD误差计算和更新可以推广为如下学习这种表示："
+   }
+  ]
+ },
+ "S5.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这里 $\\mathbf{1}_{s_{t}}$ 是状态索引 $s_{t}$ 处的独热向量。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "SR 不仅在强化学习研究中得到广泛应用（Kulkarni et al., 2016; Barreto et al., 2017; Machado et al., 2017），还被用作神经科学中海马体功能的模型（Garvert et al., 2023; Gershman, 2018; Stachenfeld et al., 2017; Gardner et al., 2018）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例如，已有研究表明，当人类接触到由潜在图生成的一系列刺激时，内侧颞叶中的表征类似于图的扩散特性（Schapiro et al., 2013; Schapiro et al., 2016; Garvert et al., 2017），而这一点被 SR 所捕捉。"
+   }
+  ]
+ },
+ "S5.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如果 Llama 使用类似 TD 的计算来表示 $Q$ 值，它是否同样依赖时间差分误差信号来学习类似 SR 的东西？"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了检验这一假设，我们向 Llama 提示由潜在社区图上的随机游走生成的观测序列（Schapiro et al., 2013）（图 1C）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "该图有三个社区，每个社区有五个完全连接的节点。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "每个社区还有两个瓶颈节点，连接到其他社区。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "模型被提示在每个时间点预测下一个观测。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "共有 $401$ 个观测，我们独立重复此过程 $20$ 次，使用随机采样的节点名称。"
+   }
+  ]
+ },
+ "S5.p5.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "“ceiling accuracy”指任务性能上限，译作“最高准确率”略有偏差，易被理解为模型自身的最高准确率而非任务上限。",
+    "suggestion": "首先，我们看到 Llama 学习了图的局部结构，并且在大约 100 次观察到的状态转移后能够以上限准确率预测下一个状态（图 5B）。",
+    "zh_reviewed": "首先，我们看到 Llama 学习了图的局部结构，并且在大约 100 次观察到的状态转移后能够以最高准确率预测下一个状态（图 5B）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Llama 是否也学习了图的全局连接结构？"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了检验这一点，我们在学习后对所有 80 个残差流对图中每个节点的表示进行了多维缩放（Torgerson, 1952）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们看到这些表示的 2D 投影逐渐变得越来越类似于图的 SR 的 2D 投影（图 5A），表明 Llama 表示了潜在图的全局几何结构。"
+   }
+  ]
+ },
+ "S5.p6.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了进一步探究 Llama 对全局图结构的理解，我们测试了它是否显式地表征瓶颈状态。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些是允许在社区之间进行转换的特殊状态，对于在分层结构环境中进行规划特别有用。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "尽管预测下一个 token 并不需要这样的表征，但我们发现从大约第 $20$ 个块开始，它们可以被线性解码（图 5C），解码准确率在模型大约一半处达到峰值。"
+   }
+  ]
+ },
+ "S5.p7.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些发现表明，Llama 在多个块上构建了图全局几何属性的表示。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，这可以在没有 TD 学习的情况下实现，例如通过一个通过计数经历过的转移来学习环境转移矩阵的模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了测试 Llama 是否通过 TD 学习获得结构知识，我们在其表示上训练了 SAE，并将它们与分别使用 TD 误差学习 SR 或仅学习图转移矩阵的智能体进行比较（训练细节见附录 A.5）。"
+   }
+  ]
+ },
+ "S5.F5": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图5：Llama通过TD学习习得图结构，其表示方式与后继表示（SR）相似。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（A）使用多维缩放将Llama的状态表示投影到二维空间，显示出跨Transformer块的潜在图结构的涌现。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（B）Llama在预测下一状态方面迅速达到高准确率。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "准确率是在100次运行中取平均得到的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（C）瓶颈状态可以从中部块开始线性解码。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（D和E）在Llama表示上训练的SAE的潜在表示与SR及相关的TD学习信号强相关，优于基于模型的替代方案。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "B-E中的阴影区域表示95%置信区间。"
+   }
+  ]
+ },
+ "S5.p8.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们识别出与每组表征相关性最大的潜在变量。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们发现，如图5D所示，在整个模型中，与SR的相关性（最大$r=0.62$）强于与转移矩阵的相关性（最大$r=0.49$）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些表征逐渐建立，并在模型后期达到峰值。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，我们发现，用于学习SR的TD误差（最大$r=0.60$）的相关性远强于与学习到的转移矩阵下下一状态的对数似然相对应的意外信号（最大$r=0.18$；图5E）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此外，我们在附录A.5中使用更传统的方法（如表征相似性分析（Kriegeskorte et al., 2008; Kornblith et al., 2019））重复了这些发现。"
+   }
+  ]
+ },
+ "S5.p9.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "最后，我们停用了与TD误差相关性最强的TD潜在变量，该变量位于第64块。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在此干预之后，Llama对下一状态的预测准确率从24.3%下降到18.9%（图6A）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这也降低了随后SAE潜在变量与SR之间的相关性（图6B），尽管在损伤后TD相关性迅速恢复（图6C）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在第65块中可以看到所学结构的破坏，其中图的社区结构被扭曲（图6D和6E）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "综合来看，我们的行为和表征分析表明，Llama的图知识以类似于SR的方式表示，并且我们识别出的TD潜在变量支持学习这些表征。"
+   }
+  ]
+ },
+ "S5.F6": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图6：损伤TD SAE潜在变量会损害行为和表征。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（A）在块$64$中损伤后，Llama预测下一状态的准确率下降。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（B）损伤后的SAE表征与SR的相关性降低，尽管损伤后TD误差恢复（C）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "虽然社区结构反映在块$65$的原始表征中（D），但这些表征因早期块的损伤而受到破坏（E）。"
+   }
+  ]
+ },
+ "S6.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "从机制角度理解上下文学习已受到广泛关注（Garg et al., 2022; Von Oswald et al., 2023; Dai et al., 2022; Ahn et al., 2024）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "先前的研究表明，Transformer 能够在没有明确引导的情况下发现已知和现有的算法。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Akyürek et al. (2024) 在线性回归问题上训练了 Transformer，并表明该模型可以在上下文中实现岭回归、梯度下降或普通最小二乘法。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Wang et al. (2024) 表明，明确训练用于解决强化学习问题的线性 Transformer 会发现 TD 学习方法。"
+   },
+   {
+    "verdict": "major",
+    "category": [
+     "scope"
+    ],
+    "issue": "原文“a domain-specific algorithm”是泛指，译文“该算法”变成了特指，可能误导读者认为指代前文提到的某个具体算法。",
+    "suggestion": "我们在此基础上进一步表明，即使模型从未被明确训练来解决某个领域特定问题，一个领域特定算法也能在 LLM 中涌现。",
+    "zh_reviewed": "我们在此基础上进一步表明，即使模型从未被明确训练来解决某个领域特定问题，该算法也能在 LLM 中涌现。"
+   }
+  ]
+ },
+ "S6.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "SAE 已成功用于将 LLM 激活分解为可解释的特征。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这已在玩具模型（Cunningham et al., 2023; Bricken et al., 2023）和最先进的语言模型（Gao et al., 2024）中得到证明。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "SAE 可以识别从具体对象到抽象概念的特征（Templeton, 2024）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "虽然使用 SAE 已经识别出特定概念，但我们的研究是，我们利用这种技术探索了上下文学习的特征。"
+   }
+  ]
+ },
+ "S6.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在强化学习与大语言模型这一更广泛的领域中，已有若干论文探讨了如何将这两种方法结合起来以改进大语言模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Le 等人（2022）在程序合成任务中，将大语言模型与深度强化学习以 Actor-Critic（Konda & Tsitsiklis, 1999）架构相结合，其中深度强化学习模型充当语言模型所生成代码的评判者。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Shinn 等人（2024）构建了一个框架，使大语言模型能够接收语言形式的强化学习反馈，从而在决策任务、编程和推理问题中表现得更好。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "最后，Brooks 等人（2022）开发了一种方法，用于改进大语言模型在强化学习任务中的上下文策略迭代。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "与这些使用强化学习来改进大语言模型行为的方法不同，我们专注于理解大语言模型能够进行强化学习的内在机制。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "鉴于强化学习在提升大语言模型能力方面已展现出的实用性，理解这些机制至关重要。"
+   }
+  ]
+ },
+ "S7.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "TD学习是人工智能研究中的一种基础算法（Sutton & Barto, 1987; Sutton & Barto, 2018; Mnih et al., 2015）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "它为将行动在时间上遥远的后果提炼为即时价值信号的问题提供了一种简单而高效的解决方案。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "TD学习具有通用性：它不仅可以用于学习未来的折扣奖励，还可以用于学习状态占用（Dayan, 1993）、不确定性（Guez et al., 2012）和预测误差（Burda et al., 2018; Saanum et al., 2024）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，神经科学研究在多个物种的纹状体神经群体中发现TD学习的痕迹或许并不令人惊讶。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在本文中，我们提供了证据，表明在一个在互联网规模文本语料库上预训练的大型Transformer网络的回路中实现了类似的预测和奖励基底。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这令人惊讶，因为该LLM并非使用RL目标进行训练，而只是执行下一个词元预测。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "一种假设是，TD学习可以通过允许LLM构建更通用的任务模型来促进下一个词元预测。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在图学习任务中，TD误差可用于构建SR，SR提供关于图结构的全局几何信息。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "表示跨越更长时域的特征对于构建丰富的世界表征可能很重要，而TD学习提供了这一点。"
+   }
+  ]
+ },
+ "S7.SS1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "minor",
+    "category": [
+     "addition"
+    ],
+    "issue": "译文将“extensions”译为“扩展方向”，补充了“方向”之意，原文仅指扩展本身。",
+    "suggestion": "我们的工作存在一些重要的局限性和扩展。",
+    "zh_reviewed": "我们的工作存在一些重要的局限性和扩展方向。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "首先，我们的SAE是任务特定的，不适合用于识别任意任务中的RL相关变量。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "未来的工作应尝试构建更通用的SAE，并用它们重复我们的分析。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "也许，这可以通过在来自大量多样RL任务语料库的表示上训练SAE来实现，或者通过在RL数据上微调预训练的SAE（例如，Lieberum等人（2024））来实现。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "同样，为了确立我们结果的普遍性，未来的工作可以旨在使用不同的LLM复现我们的发现。"
+   }
+  ]
+ },
+ "S7.SS1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "其次，虽然我们绘制了 Llama 各残差块中的 TD 误差和 $Q$ 值，但这些表征如何产生的回路级理解仍不清楚。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "归纳头（Olsson et al., 2022）能否产生这些表征？"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "计算误差信号和更新 $Q$ 表征还需要哪些其他核心回路？"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "注意力输出是否携带了残差流中无法立即获得的重要信息？"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些仍是完整理解 LLM 如何进行上下文强化学习的重要问题。"
+   }
+  ]
+ },
+ "S7.SS1.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "最后，虽然我们可以使用 $Q$-学习智能体预测 Llama 的行为，并在模型中发现类似 TD 的表征，但它们的对齐并不完美。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "未来的工作应确定还需要哪些额外组件才能完全解释模型的行为。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例如，向 $Q$-学习模型添加对重复的偏好，可以作为一种自然的扩展，以捕捉预训练 LLM 重复自身的倾向。"
+   }
+  ]
+ },
+ "S7.SS2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在这项工作中，我们展示了证据，表明LLM实现了TD学习，以在上下文中解决RL问题。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的工作不仅证明了SAE能够解开上下文学习过程中使用的特征，而且还证明了这些发现的特征可以以系统的方式操纵LLM的行为和表示。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的发现为使用SAE研究其他类型的上下文学习能力铺平了道路。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "最后，我们的工作建立了LLM和生物代理的学习机制之间的收敛线，这些生物代理已被证明在类似环境中实现TD计算。"
+   }
+  ]
+ }
+}

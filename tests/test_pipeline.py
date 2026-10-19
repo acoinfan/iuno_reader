@@ -77,6 +77,22 @@ try:
     m = run(tmp, PID, sections=["2"], export=exp)
     assert os.path.exists(os.path.join(exp, PID, "paper.zh.md")) and m["exported_to"].endswith(PID)
     print("导出 通过")
+
+    # 5. 只翻正文：Appendix 开头的节、罗马数字重新编号的节都算附录；正文引用的附录图仍会选上
+    from iuno_reader.translate import select_segments
+
+    def seg(i, sec, kind="para", en="x."):
+        return {"id": i, "kind": kind, "section": sec, "en": en, "sentences": [en]}
+    d1 = {"segments": [seg("a", "", "abstract"), seg("p1", "1 Intro", en="See Figure 9."), seg("p2", "2 Method"),
+                       seg("x1", "Appendix A Details"), seg("x2", "Appendix B More"),
+                       {**seg("F9", "Appendix B More", "caption", "Figure 9: A plot."), "figure": 9}]}
+    got = {s["id"] for s in select_segments(d1, ["body"])}
+    assert {"a", "p1", "p2", "F9"} <= got and not {"x1", "x2"} & got, got
+    d2 = {"segments": [seg("a", "", "abstract"), seg("p1", "I Introduction"), seg("p2", "II Methods"),
+                       seg("x1", "I Details on systems"), seg("x2", "II Additional analysis")]}
+    got = {s["id"] for s in select_segments(d2, ["body"])}
+    assert got == {"a", "p1", "p2"}, got
+    print("只翻正文（含罗马数字编号的附录） 通过")
     print("流水线测试全部通过")
 finally:
     shutil.rmtree(tmp)

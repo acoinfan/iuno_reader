@@ -1,0 +1,2481 @@
+{
+ "__meta__": {
+  "translator": "deepseek-v4-pro",
+  "usage": {
+   "calls": 118,
+   "prompt_tokens": 103672,
+   "completion_tokens": 163860,
+   "seconds": 2078.7
+  }
+ },
+ "abs.p1": {
+  "sentences": [
+   {
+    "zh": "最近的时间序列基础模型展现出预测物理系统的强大能力。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这些能力包括零样本预测，其中模型仅给定一条短轨迹作为上下文，在不了解底层物理知识的情况下预测系统未来状态。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在此，我们表明，基础模型常常通过一种简单的鹦鹉学舌式策略进行预测；当它们不进行鹦鹉学舌时，会表现出一些共同的失败模式，例如收敛到均值。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "因此，一个直接从上下文中复制的朴素上下文鹦鹉学舌模型，在预测各种动力系统（包括低维混沌、湍流、耦合振荡器和心电图）时，其得分高于领先的时间序列基础模型，而计算成本仅为后者的一小部分。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们将上下文鹦鹉学舌与归纳头作类比，这解释了近期一些工作所表明的现象：大语言模型往往可以被重新用于时间序列预测。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们的动力系统视角还将预测精度与上下文长度之间的缩放关系，与底层混沌吸引子的分形维数联系起来，从而为先前观察到的上下文神经缩放定律提供了洞见。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "通过揭示当前时间序列基础模型的性能差距和失败模式，上下文鹦鹉学舌可以指导未来基础模型的设计，并帮助识别超越鹦鹉学舌的上下文学习策略。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S1.p1.1": {
+  "sentences": [
+   {
+    "zh": "科学机器学习（SciML）中泛化的一个关键测试是零样本预测：基于短上下文轨迹预测新物理系统未来状态的能力。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "先前的 SciML 方法主要集中于开发专门化的预测模型，这些模型专门针对需要预测的系统进行训练（Brunton et al., 2016; Weinan, 2017; Chen et al., 2018; Pathak et al., 2018; Li et al., 2020; Chen & Tao, 2021; Gauthier et al., 2021; Lim & Zohren, 2021; Karniadakis et al., 2021; Levine & Stuart, 2022; Mikhaeil et al., 2022; Brunton et al., 2022; Das et al., 2023; Krishnapriyan et al., 2023; Yang et al., 2024; Yu & Wang, 2024; Azizzadenesheli et al., 2024; Brenner et al., 2024a; Brenner et al., 2024b; Ricci et al., 2024; He et al., 2025; Cheng et al., 2025; Grigoryeva et al., 2025; Berry & Das, 2025）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然而，这些模型的通用性受到可用的系统特定数据量的限制，这推动了时间序列基础模型的最新发展（Oreshkin et al., 2021; Garza & Mergenthaler-Canseco, 2023; Rasul et al., 2023; Jin et al., 2023; Zhou et al., 2023; Gruver et al., 2024; Dooley et al., 2024; Liu et al., 2024b; Woo et al., 2024; Ansari et al., 2024; Goswami et al., 2024; Das et al., 2024; Liang et al., 2024; Shi et al., 2025; Zhai et al., 2024; Liu et al., 2025b），这些模型在来自不同领域的大量观测和模拟时间序列上进行训练，并且随后可以对任何时间序列——包括由先前未见过的动力系统生成的时间序列——执行零样本预测。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "有趣的是，最近发现，当可用历史数据有限时，时间序列基础模型在预测混沌动力系统方面优于经典深度学习模型（Zhang & Gilpin, 2024）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S1.p2.1": {
+  "sentences": [
+   {
+    "zh": "时间序列基础模型使用什么机制来进行零样本预测，以及它们为何对预训练期间未见过的动力系统有效？",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "最近观察到，一个这样的基础模型 Chronos（Ansari et al., 2024）在预测混沌系统时经常采用一种极其简单的策略（Zhang & Gilpin, 2024）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "该策略，即上下文复述（context parroting），在上下文中扫描几乎重复出现的模式，并将最佳匹配模式之后的那部分上下文复制下来作为其预测（图 1）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这可以被视为一种“上下文最近邻（in-context nearest neighbor）”算法，它在上下文计算中容易实现（Garg et al., 2022）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "上下文复述作为零样本预测策略有多好？",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "通过将其与现有基础模型进行比较，我们能了解当前模型的优势和局限性是什么？",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S1.p3.1": {
+  "sentences": [
+   {
+    "zh": "在本文中，我们将上下文复述（context parroting）与一组多样化的竞争性基线在预测混沌系统这一具有挑战性的任务上进行比较。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们的基线包括四个最先进的时间序列基础模型：Chronos 和 Chronos Bolt（Ansari et al., 2024）、TimesFM（Das et al., 2024）、Time-MoE（Shi et al., 2025）和 Moirai（Woo et al., 2024），以及一个近期专为动力系统设计的基础模型：DynaMix（Hemmer & Durstewitz, 2025）。",
+    "conf": "mid",
+    "note": "原文称“四个”模型，但列举了 Chronos、Chronos Bolt、TimesFM、Time-MoE、Moirai 五个名称，存在不一致；译文按原文保留。"
+   },
+   {
+    "zh": "在附录中，我们还纳入了两种在小数据极限下特别有效的经典预测方法：AutoARIMA（Hyndman & Athanasopoulos, 2018）和单纯形投影（Sugihara & May, 1990）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "后者代表一种经典的非线性预测方法，在概念上类似于上下文复述（附录 F）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们发现，复述在零样本预测准确率和推理成本两方面均优于所有基线（包括领先的基础模型），尤其是在更长的上下文窗口下。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们的结果表明，当前的时间序列基础模型并未充分利用上下文数据中的信息，因此在 SciML 任务上仍有显著的改进空间。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S1.p4.1": {
+  "sentences": [
+   {
+    "zh": "我们的主要贡献如下：",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S1.I1.i1": {
+  "sentences": [
+   {
+    "zh": "1. 引入上下文复述（context parroting）作为动力系统零样本预测的一种简单但有效的基线，它可以指导设计更具信息量且无法通过简单重复解决的基准，并帮助识别超越复述的预测策略。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S1.I1.i2": {
+  "sentences": [
+   {
+    "zh": "2. 表明 context parroting 在预测混沌系统方面优于领先的时间序列基础模型，并揭示许多现有基础模型的常见失效模式，这可以指导未来更好的模型设计。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S1.I1.i3": {
+  "sentences": [
+   {
+    "zh": "3. 阐释预测精度与上下文长度之间的上下文神经标度律，将标度系数与底层混沌吸引子的分形维数联系起来。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S2.p1.1": {
+  "sentences": [
+   {
+    "zh": "**科学基础模型。** 基础模型（foundation models）最近已被引入许多科学机器学习任务（Miller et al., 2024），包括偏微分方程（Takamoto et al., 2022; Yang et al., 2023; Rahman et al., 2024; Subramanian et al., 2024; Herde et al., 2024; McCabe et al., 2024; Totounferoush et al., 2025）、神经科学（Cui et al., 2024; Caro et al., 2023; McKeen et al., 2024）和天气预报（Nguyen et al., 2023; Bodnar et al., 2024）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然而，这些基础模型大多仍是黑箱，而且尚未为预测多样的物理过程和动力过程提供可解释的策略。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在本文中，我们将上下文复述（context parroting）作为时间序列基础模型所使用的一种简单机制加以分析，并指出其作为零样本预测策略的优点与缺点。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这一策略以及此处获得的见解，有可能被应用于其他科学任务。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S2.p2.1": {
+  "sentences": [
+   {
+    "zh": "**上下文内神经缩放定律。**神经缩放定律（neural scaling laws）描述了神经网络性能与某些资源（如模型规模、数据规模或计算量）之间的关系（Kaplan et al., 2020; Sorscher et al., 2022; Bahri et al., 2024; Yao et al., 2024）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "此类缩放定律使实践者能够基于可用资源预测尚未训练模型的性能，并战略性地分配这些资源，以优化经计算调整的准确率（Hoffmann et al., 2022）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在将 LLM 应用于预测动力系统时，Liu et al. (2024a) 最近观察到一种上下文内神经缩放定律，其中测试损失随上下文长度按幂律下降。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这里，我们表明，当使用上下文复述（context parroting）预测动力系统时，这种上下文内神经缩放定律可以被复现，并且缩放系数可以与底层动力学过程的一个不变性质（混沌吸引子的分形维数）联系起来。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这一发现表明，神经缩放定律与生成数据的过程的不变性质存在内在联系，并且该理论有可能推广到其他模型和任务。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "例如，我们能从 LLM 的神经缩放定律中估计一种语言的“分形维数”吗（Du & Tanaka-Ishii, 2025）？",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S2.p3.1": {
+  "sentences": [
+   {
+    "zh": "**上下文学习与归纳头。** 归纳头是在简单 transformer 中通过训练自然涌现的计算回路，并且它们被假设支撑了基础模型大部分上下文学习能力（Elhage et al., 2021; Olsson et al., 2022; Von Oswald et al., 2023; Reddy, 2023）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在其最简单的形式中，归纳头复制上下文中重复出现的 token 以进行预测。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "例如，当被给定 token 流 $[A][B]\\dots[A]$ 时，归纳头将输出 $[B]$ 作为下一个 token。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "先前的工作在最小马尔可夫链文法上训练 transformer，并发现，在预训练期间，模型学会识别越来越高阶的 $k$-grams，不同的注意力头分别专门负责复制、查找和聚合（Edelman et al., 2024; Chen et al., 2024a）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这些工作表明，预训练使模型能够学习条件分布，从而允许它们表示在上下文中见到的序列分布（Lv et al., 2024; Chen et al., 2024b; Keskar et al., 2019; Zekri et al., 2024）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S2.p4.1": {
+  "sentences": [
+   {
+    "zh": "上下文鹦鹉学舌（context parroting）与归纳头（induction heads）之间存在明显的相似之处：二者本质上都是复制粘贴操作，而上下文鹦鹉学舌涉及的匹配不是一个 token，而是多个连续的 token。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "事实上，很容易想象上下文鹦鹉学舌是通过组合多个归纳头而自然涌现的。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这种相似性有可能解释，将在文本上训练的语言模型应用于时间序列任务而无需微调或提示工程时表现出的不合理的有效性（Garza & Mergenthaler-Canseco, 2023; Jin et al., 2023; Zhou et al., 2023; Gruver et al., 2024; Liu et al., 2024a）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在自然语言上训练形成的归纳头碰巧也适用于预测时间序列，并且可以很容易地被重新用于实现诸如上下文鹦鹉学舌之类的策略。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S3.p1.1": {
+  "sentences": [
+   {
+    "zh": "**上下文复述（context parroting）概述。** 在本节中，我们说明动机并介绍我们的基线：上下文复述。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "它受到近期观察结果的启发，即 Chronos 经常通过直接从上下文中复制来预测混沌系统（Zhang & Gilpin, 2024）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "图 1 显示了 Chronos 使用复述来预测一个部分观测的 Lorenz 系统的示例。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S3.p2.1": {
+  "sentences": [
+   {
+    "zh": "概括而言，上下文复述使用上下文最后 $D$ 个 token 来查询其余上下文。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "对于与查询最匹配的那个上下文序列，该序列在上下文中的后续 token 会被复制并用作预测。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "由于模体（motif）的长度 $D$ 可以视为 Takens 嵌入定理（Takens, 2006）视角下延迟嵌入中的延迟状态数，我们也把 $D$ 称为嵌入维度，并将交替使用嵌入维度和查询长度这两个术语。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "将 $D$ 解释为嵌入维度很方便，因为上下文复述可以看作 $D$ 维延迟嵌入空间中的最近邻算法。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在匹配过程中，我们排除最后 $D$ 个模体，以避免复述发生在过于接近预测起点的地方。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "从归纳头的角度来表述，查询查找充当复制头，最近邻匹配是选择器，精确重复是聚合操作（Chen et al., 2024a）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们在算法 1 中提供了上下文复述的伪代码。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S3.F1": {
+  "sentences": [
+   {
+    "zh": "图1：**基础模型通过上下文复述（context parroting）预测混沌动力学的一个示例**。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这里，基础模型（Chronos）被要求基于一条包含 512 个数据点的短上下文轨迹来预测 Lorenz 系统的 $x$ 变量。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "蓝色为预测，灰色为真实值。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "Chronos 仅仅通过在上下文中寻找与紧接预测之前的模式（黄色高亮）相似的模式，并复制匹配模式之后的演化（粉色方框高亮），就产生了准确的预测。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们将这一上下文复述策略提炼为算法 1，并将其与时间序列基础模型（包括 Chronos 本身）进行比较。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S3.p3.1": {
+  "sentences": [
+   {
+    "zh": "**与经典非线性预测方法的关系**。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们在附录 F.3 中表明，在各种极限情况下，上下文复述等价于两种来自非线性动力学的经典算法：单纯形投影技术和 S-map 算法（Sugihara & May, 1990; Sugihara, 1994）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这两种方法都以 Takens 嵌入定理为基础，该定理指出，从非线性动力系统导出的时间延迟低维观测量可以恢复底层高维吸引子的关键几何性质（Takens, 2006）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然而，与寻找最佳匹配片段的上下文复述不同，单纯形投影试图在上下文中识别多个匹配片段，并计算加权平均值作为其预测。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这可能会使单纯形投影对嵌入维度 $D$ 的选择更加敏感，从而在实践中将该方法限制在较小的嵌入维度上（Chang et al., 2017）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "除了单纯形投影和 S-map 之外，非线性动力学中还存在其他零样本预测策略。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "例如，Farmer-Sidorowich 方法（Farmer & Sidorowich, 1987）查看上下文中的多个最近邻，并建立局部线性模型来进行预测。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "一个有趣的未来方向是将这些来自非线性动力学的方法与上下文复述和时间序列基础模型进行比较，这可能会激发新的零样本预测策略。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S4.p1.1": {
+  "sentences": [
+   {
+    "zh": "**数据集。** `dysts` 数据集提供了一个包含 135 个低维混沌系统的标准化基准，每个系统由一组维数在 3 到 6 之间的常微分方程定义（Gilpin, 2021）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这些混沌系统来自不同的已发表论文，涵盖神经科学、气候科学、流体动力学和天体物理学等领域。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "每个系统都标注了其最大 Lyapunov 指数 $\\lambda$，这是底层动力学的一个不变量特征，量化了小扰动随时间增长的速率。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在混沌系统中，即使是微小误差也会在一个称为 Lyapunov 时间的特征时间尺度上迅速累积，该时间定义为 $\\tau\\equiv\\lambda^{-1}$。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "为了归一化不同混沌系统的预测难度（从而使 $135$ 个系统的结果能够有意义地比较和合并），我们以每个 Lyapunov 时间 $30$ 个点的固定采样率生成轨迹数据，并且也以 Lyapunov 时间衡量预测性能。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "为了表明我们的发现与广泛的 SciML 任务相关，稍后我们还将超越低维混沌系统和模拟数据，在来自 ECG 测量和电子电路的真实世界数据集上进行基准测试。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S4.p2.1": {
+  "sentences": [
+   {
+    "zh": "**模型。** 对于时间序列基础模型，我们选择 Chronosbase（200M 参数）、其变体 Chronos-Boltbase（205M 参数）、Time-MoElarge（200M 参数）、TimesFM-2.0（500M 参数）和 Moirai-2.0small（11M 参数）（Das et al., 2024; Ansari et al., 2024; Ansari et al., 2025; Shi et al., 2025; Liu et al., 2025a）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "所有这些模型都在海量真实世界时间序列数据（数千亿数据点）上进行了预训练，这些数据通常辅以合成数据以提高泛化能力。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们还考虑了 DynaMix，一个在混沌动力系统上预训练的基础模型（Hemmer & Durstewitz, 2025）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这些模型涵盖了广泛的设计选择：Time-MoE、TimesFM-2.0 和 Moirai-2.0 是仅解码器架构，Chronos 是编码器-解码器架构，而 DynaMix 是一种通过教师强制训练的几乎线性 RNN（Brenner et al., 2024a）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "Chronos 和 Time-MoE 使用逐点 token 化（pointwise tokenization），DynaMix 隐式地进行逐点 token 化，而 TimesFM-2.0 和 Moirai-2.0 使用分块（patching）。",
+    "conf": "mid",
+    "note": "tokenization/tokenizes 在时序模型语境下保留英文并加括号注释，是术语译法选择，可商榷。"
+   },
+   {
+    "zh": "Time-MoE、DynaMix 和 TimesFM-2.0 默认给出点预测，而 Chronos、Chronos-Bolt 和 Moirai-2.0 提供带有不确定性量化的概率预测。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "对于这些模型，我们在评估预测误差时使用中位数预测。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "所有基础模型的一个重要参数是最大上下文长度 $L_{\\max}$，它从 $512$ 个数据点（Chronos）、$1680$（Moirai-2.0）、$2048$（TimesFM-2.0）、$4096$（Time-MoE）到 DynaMix 因循环形式而可为任意值不等。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S4.p3.1": {
+  "sentences": [
+   {
+    "zh": "**流程。** 为评估不同模型对动力系统进行零样本预测的能力，我们为 `dysts` 中的 $135$ 个混沌系统各生成一条长度为 $10^{5}$ 的混沌轨迹，粒度为每个李雅普诺夫时间（Lyapunov time）$30$ 个数据点。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "每条轨迹都被标准化为零均值和单位标准差。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "对于给定的上下文长度 $L$，我们从混沌轨迹中随机选取一个长度为 $L$ 的片段，并将其作为上下文提供给模型。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "模型的任务是仅基于上下文预测接下来的 $300$ 个数据点（相当于 $10$ 个李雅普诺夫时间）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们要求模型在每个维度上独立进行单变量预测，然后对每个维度分别进行评估。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "为获得可靠的统计结果，我们将所有 $135$ 个混沌系统、所有维度以及每个系统 $20$ 个随机初始条件的结果进行汇总。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S4.p4.1": {
+  "sentences": [
+   {
+    "zh": "**指标。** 与先前研究（Hyndman & Koehler, 2006; Makridakis et al., 2022; Gilpin, 2021; Gilpin, 2023）一致，我们使用一组多样且互补的指标来评估预测性能。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S4.p5.1": {
+  "sentences": [
+   {
+    "zh": "对称平均绝对百分比误差（sMAPE）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S4.p5.2": {
+  "sentences": [
+   {
+    "zh": "其中序列 $\\mathbf{x}_{1},\\mathbf{x}_{2},\\dots,\\mathbf{x}_{T}$ 表示真实值，$\\hat{\\mathbf{x}}_{1},\\hat{\\mathbf{x}}_{2},\\dots,\\hat{\\mathbf{x}}_{T}$ 是模型做出的相应预测。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "为了提供一些有助于解释 sMAPE 值的背景，我们指出，预测白噪声的均值会得到约 $200$ 的 sMAPE。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S4.p6.1": {
+  "sentences": [
+   {
+    "zh": "除 sMAPE 之外，我们还展示了使用均方误差（MSE）和平均绝对误差（MAE）的基准结果，这两个指标在时间序列文献中常用。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S4.p7.1": {
+  "sentences": [
+   {
+    "zh": "对于混沌动力系统，由于误差积累的指数速率，点预测将不可避免地失败。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "因此，对于预测模型来说，保持混沌动力学的长期不变性质（如 Lyapunov 指数和吸引子维度）同样重要。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在这里，我们通过计算真实和预测吸引子分布之间的 KL 散度来比较它们的结构。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S4.p8.1": {
+  "sentences": [
+   {
+    "zh": "吸引子之间的 Kullback–Leibler 散度（$D_{\\mathrm{stsp}}$）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S4.p8.2": {
+  "sentences": [
+   {
+    "zh": "其中 $P$ 和 $Q$ 分别表示真实吸引子和预测吸引子。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在估计 $D_{\\mathrm{stsp}}$ 时，我们遵循 Hess et al. (2023) 和 Göring et al. (2024) 中的方法。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "具体来说，我们在真实轨迹和预测轨迹中的每个点处放置高斯核，并使用基于采样的近似方法（Hershey & Olsen, 2007）估计这些高斯混合之间的 KL 散度。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S4.p9.1": {
+  "sentences": [
+   {
+    "zh": "此外，我们通过计算功率谱来分析预测轨迹的频率成分。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这使用 Welch 方法进行估计。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们通过计算真实功率谱与预测功率谱之间的 Hellinger 距离来量化频谱重建的准确性。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S4.p10.1": {
+  "sentences": [
+   {
+    "zh": "在附录中，我们还通过比较关联维数和使用李雅普诺夫指数的发散率来衡量吸引子重构精度。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "关联维数通过计算每个吸引子点给定半径内落入的吸引子点数量的标度关系，从时间序列中估计分形吸引子维数（Grassberger & Procaccia, 1983）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S5.SS1.p1.1": {
+  "sentences": [
+   {
+    "zh": "这里，我们比较 context parroting 和基础模型在预测混沌动力学方面的能力。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "图2展示了每个模型的预测误差（以sMAPE衡量）以及它们在吸引子重构方面的精度（以KL散度衡量）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "显然，context parroting 在这两项指标上都优于此处测试的所有基础模型。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在附录图7中，我们表明，当以MSE和MAE为基准时，这一结论仍然成立。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "分形维数精度的结果见附录图8，其中 parroting、DynaMix 和 Chronos 显著优于其他基础模型。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S5.F2": {
+  "sentences": [
+   {
+    "zh": "图2：**Context parroting 在零样本预测中，在短期逐点准确性和长期吸引子重建方面均优于基础模型**。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "左图：各模型的预测误差作为预测时域的函数。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "所有模型的上下文长度均设为 $512$。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "右图：预测吸引子与真实吸引子之间的 KL 散度（越小越好）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "实线表示均值，虚线表示中位数。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "所有结果均来自 `dysts` 数据库中的 $135$ 个混沌系统，每个系统使用 $20$ 条从随机初始条件出发的轨迹。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S5.SS1.p2.1": {
+  "sentences": [
+   {
+    "zh": "与 Hemmer & Durstewitz (2025) 一致，我们观察到 DynaMix 保持了长期几何结构——在经典预测中被称为“气候”（Lu et al., 2018）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们将这种能力归因于其循环架构，循环架构通常能在较长的时间范围内更好地维持振荡（Elman, 1990; Durstewitz, 2017）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们还注意到，DynaMix 的高效循环混合专家设计使其能够以其他模型一小部分活跃参数实现有竞争力的性能。",
+    "conf": "mid",
+    "note": "原文 allows it achieve 缺少 to，按 allows it to achieve 理解翻译。"
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S5.SS1.p3.1": {
+  "sentences": [
+   {
+    "zh": "在基于 Transformer 的模型中，Chronos 在预测混沌系统方面表现最佳，这并不令人意外，因为在该数据集上它经常利用复述作为关键的预测策略（Zhang & Gilpin, 2024）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "Chronos 出现上下文复述的倾向，源于其作为在量化时间序列上运行的语言模型的独特架构。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "因此，Chronos 使用交叉熵损失进行训练，该损失促使保留 k-gram 频率，并鼓励生成与动力系统底层测度一致的多样化预测样本（Yu et al., 2025）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "相比之下，TimeMoE 和 TimesFM 使用均方误差损失进行训练。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这些模型在较长的预测时域上丧失多样性并回归到均值，从而抑制了振荡。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "基础模型的代表性预测见附录图 6，这些预测表明，在预测混沌系统时，回归到均值是许多基础模型常见的失败模式。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S5.SS1.p4.1": {
+  "sentences": [
+   {
+    "zh": "此外，与基于transformer的基础模型相比，上下文复述的推理成本可忽略不计，更不用说预训练它们所需的大量GPU时间了。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "例如，对于所有上下文长度，Chronos 与上下文复述之间存在六个数量级的计算差距。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "结合复述性能对嵌入维度 $D$ 的选择不敏感这一事实（附录图9），这些结果确立了上下文复述作为动力系统零样本预测的一个简单而有效的基线。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S5.F3": {
+  "sentences": [
+   {
+    "zh": "图 3：**尽管其预测是周期性的，上下文复读（Context parroting）仍能最好地重建混沌系统的功率谱。** 使用两个表现最佳的模型 DynaMix 和 Chronos 对四个不同混沌系统的预测，并与 Parroting 相对比。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们将上下文长度设为 $L=2000$。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在上下文结束之后生成 $10,000$ 个点的预测，图中显示最后 $2000$ 个时间点。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "功率谱使用 Welch 方法在最后 $5000$ 个时间点上进行估计。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S5.SS1.p5.1": {
+  "sentences": [
+   {
+    "zh": "鉴于按定义上下文复述输出的是周期性预测，人们可能会怀疑它无法真正捕捉对混沌至关重要的关键不变性质。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "例如，复述产生的循环模式的最大 Lyapunov 指数应为零。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然而，复述得到的轨迹可能具有正的有限时间 Lyapunov 指数，而这正是人们从有限长度时间序列中实际唯一能估计的量。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "由于复述原则上可以复制任意长的轨迹，因此对于足够长的上下文，所估计的 Lyapunov 指数将接近真实值。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在这个意义上，复述能够捕捉混沌的不变动力学性质，例如 Lyapunov 谱和功率谱，尽管按定义它只产生周期性轨迹。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S5.SS1.p6.1": {
+  "sentences": [
+   {
+    "zh": "在图3中，我们表明，parroting能够比Chronos和DynaMix更好地捕捉功率谱；根据图2，Chronos和DynaMix是取得最低吸引子KL散度的两个基础模型。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们在附录表4和表11中针对其他不变性质展示了同样的结果。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "此外，我们注意到，随着上下文长度变长，上下文鹦鹉学舌（context parroting）将能够模仿周期更长的、日益复杂的模式。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这一点在附录图12中被明确展示：其中随着上下文长度的增加，parroting对功率谱的捕捉越来越好。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S5.SS1.p7.1": {
+  "sentences": [
+   {
+    "zh": "图 4 进一步探究了上下文长度对预测精度的影响。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们发现，更长的上下文窗口会为上下文复述（context parroting）、DynaMix 和 Chronos 带来更好的性能。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然而，Chronos 最多只能有效利用 $L=512$ 的上下文长度，这一局限在后来的几代模型（Ansari et al., 2025）中得到了解决。",
+    "conf": "mid",
+    "note": "原文“later generations models”表述略不顺畅，可能应为“later generation models”，但含义明确。"
+   },
+   {
+    "zh": "在预训练前设定最大上下文长度这一要求，是基于 Transformer 的架构的一个局限。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "相比之下，像 DynaMix 这样的循环模型、状态空间模型以及上下文复述（Gu et al., 2021）并不存在这一局限，因而能够在推理时扩展到任意长度的上下文。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S5.F4": {
+  "sentences": [
+   {
+    "zh": "图4：**Parroting 能更好地利用较长的上下文数据，而 Chronos 在较短上下文下表现更好**。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "每条线表示不同上下文长度下的预测误差。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "一旦上下文长度超过其设计的 $512$ 个数据点的上限，Chronos 的性能就会饱和，而 context parroting 的准确率在更长的上下文窗口下持续提高。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这里我们将 parroting 算法的嵌入维度设为 $D=5$。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S5.SS1.p8.1": {
+  "sentences": [
+   {
+    "zh": "有趣的是，Chronos 在短上下文上优于上下文鹦鹉学舌，表明它采用了超越鹦鹉学舌的额外零样本学习策略。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们预期，在短上下文长度下，时间序列实际上变得非平稳，而这正是时间序列基础模型的优势所在。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "例如，Chronos 擅长延续上下文中的局部趋势，当上下文长度有限时，这可能是一种比鹦鹉学舌更有效的策略。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S5.SS1.p9.1": {
+  "sentences": [
+   {
+    "zh": "此外，即使像 Chronos 这样的 transformer 被限制为仅做复述，其注意力头所执行的 $\\sim\\mathcal{O}(L^{2})$ 运算原则上仍具有足够的计算复杂度，可以为每个单独的时间序列动态选择最优嵌入维度 $D$，这使注意力相对于嵌入维度 $D$ 固定的复述算法具有优势，后者的复杂度为最近邻搜索的 $\\sim\\mathcal{O}(D\\,L)$。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "明确识别使 Chronos 在短上下文情形中优于复述的机制将很有意义。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S5.SS2.p1.1": {
+  "sentences": [
+   {
+    "zh": "由于其简单性以及与基础模型的紧密联系，上下文复述可以作为一个可解析处理的模型，用来解释文献中一些有趣的实证发现。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "最近，Liu et al. (2024a) 报告了应用于动力系统的大语言模型的一种上下文神经标度律，其中单步预测误差随上下文长度呈代数式下降。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然而，尚不清楚这一标度律从何而来，也不清楚为什么在文本上训练的大语言模型无需微调就能有效处理时间序列。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在此，我们表明上下文复述自然会产生同样的上下文标度律，并为其起源提供几何上的见解。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "鉴于复述与大语言模型实现的归纳头之间的相似性（Olsson et al., 2022），我们接下来为复述建立的几何解释不仅适用于时间序列基础模型，而且可以想象也能被调整用于大语言模型，并部分解释 Liu et al. (2024a) 中的观察结果。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S5.F5": {
+  "sentences": [
+   {
+    "zh": "图5：**上下文复述（context parroting）解释了上下文神经缩放定律，并将缩放指数与吸引子维度联系起来。** 左：单步预测误差与上下文长度的关系。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "每条线代表一个不同的混沌系统，且缩放遵循幂律。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "原则上，对于任何具有定义良好的吸引子的确定性系统，无限上下文长度应使复述具有无限精度。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "中：延迟嵌入空间中最后一个上下文点与其最近邻之间的欧氏距离，作为上下文长度的函数。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "同样，缩放遵循幂律，具有相同的缩放指数 $\\alpha$。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "缩放指数对每个系统可能不同，并通过关系 $\\alpha=1/d_{\\mathrm{cor}}$ 与混沌吸引子的关联维数 $d_{\\mathrm{cor}}$ 相联系。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "右：估计的缩放指数 $\\alpha$ 与关联维数倒数 $1/d_{\\mathrm{cor}}$ 的关系，其中每个点代表一个混沌系统。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "对于所有面板，我们为复述算法设置嵌入维度 $D=10$。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S5.SS2.p2.1": {
+  "sentences": [
+   {
+    "zh": "图5左图展示了复读的一步预测误差（以sMAPE衡量）与上下文长度之间的幂律关系。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "更长的上下文长度通过让算法找到更好的匹配模体来改善预测，从而在更长时间内贴近真实值。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "图5中图显示了重合程度的改善，匹配模体之间的距离随上下文长度以代数方式下降。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "匹配模体距离 $\\ell$ 平均而言线性映射到一步预测误差 $e$：$\\langle e\\rangle=c\\langle\\ell\\rangle$，其中 $c$ 是依赖于混沌动力学最大李雅普诺夫指数的系统特定常数。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "因此，匹配模体距离的幂律关系意味着一 步预测误差的幂律关系。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "此外，这两个幂律具有相同的标度指数：$e\\propto L^{-\\alpha}$ 和 $\\ell\\propto L^{-\\alpha}$，如图5所证实。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S5.SS2.p3.1": {
+  "sentences": [
+   {
+    "zh": "我们能否针对任意给定的混沌系统，预测其标度系数 $\\alpha$（即随着更多上下文数据，预测改善有多快）？",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们将 $\\alpha$ 与底层动力学的几何不变量联系起来，具体而言是混沌吸引子的分形维数，该维数用关联维数来估计：",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S5.SS2.p3.2": {
+  "sentences": [
+   {
+    "zh": "其中 $C(\\epsilon)$ 是吸引子中彼此距离在给定半径 $\\epsilon$ 以内的点对数量。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "换句话说，如果我们在双对数坐标中绘制 $C(\\epsilon)$ 对 $\\epsilon$ 的曲线，$d_{\\mathrm{cor}}$ 就是所绘制直线的斜率。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们假设混沌系统是各态历经的，因此一条足够长的上下文轨迹代表吸引子的一个随机样本。",
+    "conf": "mid",
+    "note": "原文“so the a sufficiently-long context trajectory”存在“the a”叠用，疑为笔误，译文按“a sufficiently-long context trajectory”理解。"
+   },
+   {
+    "zh": "更长的上下文轨迹包含更多样本，并且对于足够大的样本量，我们可以从关联维数的定义证明，样本点与其最近邻之间的期望距离随上下文长度（即样本量）按 $L^{-1/d_{\\mathrm{cor}}}$ 减小。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "例如，对于二维吸引子，随机点与其最近邻之间的距离将以 $1/\\sqrt{L}$ 的速度减小。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "因此，分形维数衡量的是通过纳入更多样本可使吸引子上相邻点之间距离缩小的速度，而维数越高，将距离缩小到相同程度所需的点就越多。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "因此，从数学上我们预期 $\\alpha=1/d_{\\mathrm{cor}}$。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "非线性动力学领域针对 Farmer-Sidorowich 预测方法也推导出了类似的标度律（Farmer & Sidorowich, 1987）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "确实，在图 5 的右图中，我们观察到 $d_{\\mathrm{cor}}$ 与 $1/\\alpha$ 之间存在强相关（Spearman 相关系数约为 $0.85$），这支持了上文的上述理论论证。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S5.SS2.p4.1": {
+  "sentences": [
+   {
+    "zh": "我们在附录图10中表明，当对混沌系统进行聚合时，幂律标度在一系列嵌入维度 $D$ 上仍然成立。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "尽管我们在图5中关注确定性常微分方程，但我们指出，同样的幂律标度预计对离散映射和弱随机系统也成立。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "解释强随机系统（如随机马尔可夫链 (Liu et al., 2024a)）的幂律，是未来研究一个有前景的方向。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S5.SS3.p1.1": {
+  "sentences": [
+   {
+    "zh": "到目前为止，我们专注于来自 `dysts` 数据集的低维混沌系统，这使得我们能够在标准化基准下对不同预测模型进行系统比较。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在这里，我们表明 parroting 在更广泛的 SciML 任务上也优于基础模型，包括当前具有科学兴趣的真实世界数据集。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们的数据集为：(1) 雷诺数 $\\mathrm{Re}=900$ 的冯·卡门涡街，这是流体力学中一个标准问题，代表一种表现出间歇性的流动。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们生成了与排名靠前的 PCA 模态对应的时间序列，以捕捉全局结构；(2) 心电图记录（通过 PhysioNet 中的 QT Database）；(3) 从 Vera-Ávila et al. (2020)) 实验测得的 $28$ 个耦合电子电路；以及 (4) 通过受挫和非互易相互作用耦合的 $23$ 个 Kuramoto 振子，最近在 León & Pazó (2025) 中研究。",
+    "conf": "mid",
+    "note": "原文在 Vera-Ávila et al. (2020) 后多一个右括号，按原样保留。"
+   },
+   {
+    "zh": "这些都是高维系统，其中两个由模拟生成，两个在真实世界中测量。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "对于指标，我们使用 MAE 和 MSE 来衡量逐点预测精度，并使用 KL 散度来衡量吸引子重构的精度。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "结果总结如下。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "Parroting 是唯一一个在所有任务和所有指标上都排名前三的模型。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "其他指标，例如有效预测时间和分形维数精度，给出了类似的排名。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S5.T1": {
+  "sentences": [
+   {
+    "zh": "表 1：跨 SciML 任务的预测模型的性能比较（**MAE @ 50 步**，均值 $\\pm$ 标准差）",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "**粗体 = 最佳**，斜体 = 第二和第三名。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S5.T2": {
+  "sentences": [
+   {
+    "zh": "表2：各 SciML 任务中预测模型的性能比较（**MSE @ 50 steps**）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "**粗体 = 最佳**，斜体 = 第二和第三优。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S5.T3": {
+  "sentences": [
+   {
+    "zh": "表 3：各预测模型在 SciML 任务上的性能比较（**预测吸引子与真实吸引子之间的 KL 散度**）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "**粗体 = 最优**，斜体 = 第二和第三优。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S6.p1.1": {
+  "sentences": [
+   {
+    "zh": "我们发现，一种简单的预测策略——上下文复述（context parroting）——在动力学系统预测这一科学机器学习的关键任务上优于领先的基础模型。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "如果一个基础模型无法胜过上下文复述，那么可以说它未能学到系统的底层物理。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这一出人意料的发现暴露了当前基础模型作为通用时间序列预测器的局限性，并凸显了进一步扩大其规模或针对特定领域进行微调的必要性。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "它还表明，在科学机器学习任务中准确衡量基础模型的性能可能很困难，因为像复述这样的策略能够有效地钻短期和长期准确率指标的空子。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "未来科学机器学习的工作应当衡量与复述无关的能力——例如推断未观测参数或泛化到未见的分岔状态（Norton et al., 2025）——而不是仅仅在重建误差上竞争。",
+    "conf": "mid",
+    "note": "「bifurcation regimes」在此可能指分岔发生的参数区域或机制，译文选用「分岔状态」。"
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S6.p2.1": {
+  "sentences": [
+   {
+    "zh": "为一个具有挑战性的任务找到一个简单但有效的基线可以促使人们重新思考现状，从而推动更好的模型架构的发展（Arora et al., 2017）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "例如，上下文复述（context parroting）在时间序列领域形式化了一个可比较的明确基线，并有助于发现超越复述的策略。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "识别超越复述的上下文学习策略可以推动下一代基础模型的发展，并为关于大型语言模型是否（或在多大程度上）是随机鹦鹉的争论做出贡献（Bender et al., 2021; Mitchell & Krakauer, 2023; Arora & Goyal, 2023; McCoy et al., 2024）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S6.p3.1": {
+  "sentences": [
+   {
+    "zh": "一个有趣的未来方向是在保持该方法简单性和效率的同时，将上下文复述（context parroting）推广到处理非平稳时间序列。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "上下文复述假设存在一个平稳的底层测度；对于遍历确定性系统，这意味着时间点的条件概率在任意阶上都是平稳的（附录 F）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然而，较新的基础模型能够轻松处理基线漂移这类简单的非平稳性，这意味着修改后的复述策略在上下文内可能是可行的（Das et al., 2024）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "一旦得到推广，非平稳复述方法可以取代 Naive 和 Seasonal Naive，作为对一般时间序列（天气、交通、金融等）进行零样本预测时更具信息量的基线。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S6.p4.1": {
+  "sentences": [
+   {
+    "zh": "最后，我们想强调，我们并不是提议用上下文复读（context parroting）来替代时间序列基础模型。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "相反，复读的价值在于作为一个简单的基线，能够揭示当前基础模型中的不足，并指导新模型的设计。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "当基础模型相对于上下文复读表现不佳时，这表明它们尚未学会充分利用上下文数据。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "例如，我们在一系列领先的基础模型（TimesFM、TimeMoE、Chronos Bolt）中观察到的一个常见失效模式是，它们倾向于低估动态中的振荡，并且预测往往迅速收敛到均值（附录图 6）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "设计新的可解释的零样本预测策略也很有趣。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "例如，将上下文复读与来自非线性动力学文献的经典预测方法相结合（Farmer & Sidorowich, 1987; Sugihara & May, 1990）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S7.p1.1": {
+  "sentences": [
+   {
+    "zh": "YZ 感谢 Omidyar Fellowship 和 NSF DMS 2436231 的支持。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "WG 得到了 NSF DMS 2436233 和 NSF CMMI 2440490 的资助。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "本项目部分得益于 Chan Zuckerberg Initiative DAF（硅谷社区基金会旗下的一个捐赠人建议基金）授予的 DAF2023-329596 号资助。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "本论文的经费支持来自 Research Corporation for Science Advancement 的 CS-CSA-2026-075 号资助。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S8.p1.1": {
+  "sentences": [
+   {
+    "zh": "context parroting 算法的 Python 实现以及基准测试可在 `https://github.com/y-z-zhang/parroting` 获取。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A1.F6": {
+  "sentences": [
+   {
+    "zh": "图 6：**基础模型在一个混沌系统上的示例预测揭示了常见失效模式**。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这与图 1 中展示的任务相同（基于一条包含 $512$ 个数据点的短上下文轨迹预测 Lorenz 系统的 $x$ 变量）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "Chronos 在复诵策略下表现极好。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "其他模型表现相对较差，并且都表现出低估振荡的倾向（例如，快速向均值收敛）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这是我们在不同混沌系统和初始条件下持续观察到的普遍趋势。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A2.F7": {
+  "sentences": [
+   {
+    "zh": "图7：**上下文鹦鹉学舌（Context parroting）在零样本预测中优于基础模型**。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "与图2相同的设置，但预测误差用 MSE（左）和 MAE（右）度量。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在基础模型之外，我们还在比较中纳入了两种经典预测方法：单纯形投影（Sugihara & May, 1990）和 AutoARIMA（Hyndman & Athanasopoulos, 2018）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A2.F8": {
+  "sentences": [
+   {
+    "zh": "图 8：**复述基线与基础模型的分形维数准确度**。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "每个点表示模型对某个混沌吸引子的分形维数预测（随机初始条件下 $20$ 次预测的中位数）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "准确度通过 $135$ 个预测分形维数与真实分形维数之间的 Spearman 相关系数 $r$ 来衡量。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A3.p1.1": {
+  "sentences": [
+   {
+    "zh": "图9考察了嵌入维度 $D$ 的选择如何影响上下文复述的性能。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "总体而言，有效预测时间在较宽的嵌入维度 $D$ 范围内保持一致。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "对于短上下文窗口，较小的 $D$ 有轻微优势。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "对于长上下文窗口，较大的嵌入维度略好一些。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这一观察表明，未来有可能通过基于上下文长度等因素自适应地选择 $D$ 来实现改进。",
+    "conf": "mid",
+    "note": "原文中 'potential improvements ... that choose D adaptively' 的定语从句在字面上修饰 improvements，语义上应理解为通过自适应选择 D 所带来的潜在改进；中文译文做了必要的语序调整。"
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A3.F9": {
+  "sentences": [
+   {
+    "zh": "图 9：**嵌入维度 $D$ 对 context parroting 预测准确率的影响。** 每条曲线代表一个不同的上下文长度。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "结果在 `dysts` 数据库中的 $135$ 个混沌系统上取平均，每个系统使用 $100$ 条从随机初始条件出发的轨迹。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A3.F10": {
+  "sentences": [
+   {
+    "zh": "图10：**随上下文长度变化的缩放定律。** 左：单步预测误差与上下文长度的关系。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "对于所考虑的所有嵌入维度 $D$，这种缩放行为都遵循幂律。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在这里，由于是单步预测误差，较小的 $D$ 更准确。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "对于更长的预测视野，较大的 $D$ 可能更准确。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "右：最后一个上下文片段 $x_{L-D+1:L}$ 与其最接近的匹配之间的欧氏距离，作为上下文长度的函数。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "同样，对于所有 $D$，这种缩放行为都遵循幂律。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A4.p1.1": {
+  "sentences": [
+   {
+    "zh": "我们接下来测试上下文复述在长预测时域上的性能。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们固定上下文长度 $L=512$，然后生成长度为 $H=10000-512=9488$ 的预测（相当于超过 $316$ 个李雅普诺夫时间）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "表 4 展示了使用我们在较短预测时域实验中表现最佳的模型生成预测的结果。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "对于每个模型，我们通过计算以下三项来评估其全局精度：（1）长预测的分形维数与由真实值生成的估计之间的相关性；（2）长预测的最大李雅普诺夫指数与由真实值生成的估计之间的相关性；以及（3）长预测与真实值之间的吸引子 KL 散度（Grassberger & Procaccia, 1983; Rosenstein et al., 1993; Hess et al., 2023）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们发现，上下文复述在所有三项指标上都表现良好。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A4.T4": {
+  "sentences": [
+   {
+    "zh": "表4：不同模型在长预测时域下，预测吸引子与真实吸引子之间不变性质的KL散度和相关性。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "误差棒为所有吸引子上KL散度的标准差，相关性则给出基于p值的不确定范围。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "粗体 = 最佳，斜体 = 次佳。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A4.F11": {
+  "sentences": [
+   {
+    "zh": "图 11：**Lyapunov 指数直方图。** 我们从真值时间序列以及来自 parroting 和 DynaMix 的长 rollout 中估计 Lyapunov 指数，DynaMix 是当前一代基础模型中最能保持长期性质的模型。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这些 rollout 使用上下文长度 $2000$ 和预测范围 $10000$ 生成，并对应于 `dysts` 中所有不同混沌系统的估计。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A4.F12": {
+  "sentences": [
+   {
+    "zh": "图 12：**由复述（parroting）预测的不变性质随上下文长度而改善。**（A）随着上下文长度从 $100$ 增加到 $3000$，复述模型对单个混沌系统——Lorenz 吸引子——的预测。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在上下文结束之后生成 $10,000$ 个时间点的预测，并显示最后 $2000$ 个时间点。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "使用 Welch 方法在最后 $5000$ 个时间点上估计功率谱。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "（B）真实功率谱与预测功率谱之间的平均 Hellinger 距离作为上下文长度的函数，在 $129$ 个不同混沌系统（包括 Lorenz 吸引子）上取平均。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "误差条对应标准差。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "平均 Hellinger 距离在 Mikhaeil et al. (2022) 和 Brenner et al. (2022) 中被引入为混沌系统的长期度量指标。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A5.p1.1": {
+  "sentences": [
+   {
+    "zh": "我们向归一化后的混沌轨迹添加高斯噪声，并重复原始实验（0.1 的噪声水平相当于平均每个数据点受到 $10\\%$ 的扰动）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "结果在不同数量级的噪声下保持一致，且复述（parroting）在所有实验中始终为最佳或次佳。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A5.T5": {
+  "sentences": [
+   {
+    "zh": "表 5：**有效预测时间**在不同噪声水平下（越高越好）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "粗体 = 最佳，斜体 = 次佳。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "底纹高亮标出最佳（深色）和次佳（浅色）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A5.T6": {
+  "sentences": [
+   {
+    "zh": "表 6：不同噪声水平下的 **MAE @ 1 Lyapunov Time**（越低越好）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "粗体 = 最佳，斜体 = 次佳。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "底纹高亮显示最佳（深色）和次佳（浅色）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A5.T7": {
+  "sentences": [
+   {
+    "zh": "表7：不同噪声水平下的 **MSE @ 1 Lyapunov Time**（数值越低越好）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "粗体 = 最佳，斜体 = 次佳。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "底纹高亮显示最佳（深色）和次佳（浅色）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A5.T8": {
+  "sentences": [
+   {
+    "zh": "表8：**分形维数准确度**（Spearman 相关性）在不同噪声水平下（越高越好）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "加粗 = 最佳，斜体 = 次佳。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "底纹突出显示最佳（深色）和次佳（浅色）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A5.T9": {
+  "sentences": [
+   {
+    "zh": "表 9：预测的吸引子与真实吸引子在不同噪声水平下的 **KL 散度**（越低越好）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "粗体 = 最佳，斜体 = 次佳。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "底纹高亮最佳（深色）和次佳（浅色）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A5.p2.1": {
+  "sentences": [
+   {
+    "zh": "在正文中，我们设置了每李雅普诺夫时间（Lyapunov time）30 个点的中等粒度。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "下面，我们将其与每李雅普诺夫时间 10 个点和每李雅普诺夫时间 50 个点的粒度所得到的结果进行比较。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "粒度不会对结果或模型的相对排名产生强烈影响。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在所有实验中，Parroting 要么是最优的，要么是次优的。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这很合理，因为我们预计改变粒度会产生与时间重标定类似的效果（尽管数据点之间的间隔会更大或更小）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "例如，如果我们采用 2 倍更细的粒度，那么我们将需要把上下文长度加倍才能获得相同的回溯窗口。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A5.T10": {
+  "sentences": [
+   {
+    "zh": "表 10：不同粒度下的**有效预测时间**（越高越好）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "粗体 = 最佳，斜体 = 次佳。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A5.T11": {
+  "sentences": [
+   {
+    "zh": "表 11：不同粒度下的 **MAE @ 1 Lyapunov Time**（越低越好）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "粗体 = 最佳，斜体 = 次佳。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A5.T12": {
+  "sentences": [
+   {
+    "zh": "表 12：不同粒度下的 **MSE @ 1 Lyapunov Time**（越低越好）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "粗体 = 最佳，斜体 = 次佳。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A5.T13": {
+  "sentences": [
+   {
+    "zh": "表13：**分形维数准确度**（Spearman相关性）在不同粒度下的结果（越高越好）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "粗体 = 最佳，斜体 = 次佳。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A5.T14": {
+  "sentences": [
+   {
+    "zh": "表 14：不同粒度下预测吸引子与真实吸引子之间的 **KL 散度**（越低越好）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "粗体 = 最佳，斜体 = 次佳。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A6.SS1.p1.1": {
+  "sentences": [
+   {
+    "zh": "**数学表述。** 上下文复述（Context Parroting）对应的是在长度为 $L$ 的上下文中对长度为 $D$ 的序列进行的连续 $1$-最近邻搜索。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "因此，它对应于该时间序列的 Nadaraya–Watson 模型的一个极限，",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A6.SS1.p1.2": {
+  "sentences": [
+   {
+    "zh": "其中查询 $\\mathbf{q}$ 表示紧邻上下文窗口末尾之前的长度-$D$ 模式片段。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "$\\mathbf{y}$ 表示对后续值的长度-$H$ 预测。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "预测序列 $\\mathbf{y}$ 在给定查询的条件下具有概率 $\\hat{p}$。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "对称核 $K_{\\sigma}(\\mathbf{u},\\mathbf{v})=\\sigma^{-d}K\\bigl((\\mathbf{u}-\\mathbf{v})/h\\sigma\\bigr)$ 在维度 $d=D\\cdot\\dim(x_{t})$ 下具有带宽 $\\sigma$。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "假设在序列空间中以均方误差作为距离函数，我们使用高斯核。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A6.SS1.p1.3": {
+  "sentences": [
+   {
+    "zh": "我们将式1中作用于 $\\mathbf{y}$ 的第二个核设为 delta 函数，以便输出与上下文中的序列完全匹配的预测，而不是在最小二乘意义下的邻近序列。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们写出条件均值预测器",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A6.SS1.p1.4": {
+  "sentences": [
+   {
+    "zh": "Context parroting 对应于 $1$-最近邻极限 $\\sigma\\to 0$。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A6.SS1.p2.1": {
+  "sentences": [
+   {
+    "zh": "**上下文复述在长上下文长度下保持吸引子性质。** 在附录 F.4 中，我们推导出以下命题，",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A6.SS1.p2.2": {
+  "sentences": [
+   {
+    "zh": "其中 $L$ 是 Nadaraya–Watson 估计器 $p$ 的上下文长度，$F(\\mathbf{y})$ 是由遍历动力系统的预测序列 $\\mathbf{y}$ 得到的、对某个性质 $F$ 的估计；当在具有底层测度 $\\mu$ 的完整吸引子上计算时，该性质具有不变值 $\\mathbb{E}_{\\mu}\\!\\left[F(\\mathbf{x})\\right]$。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "查询 $\\mathbf{q}$ 是来自该动力系统的任意一个连续时间点序列。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "该命题表明，当上下文足够长时，对遍历系统进行上下文复述（context parroting）会保留底层动力学的不变值。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "因此，上下文复述构成了动力系统预测的一个有效基线，因为在长上下文的极限下，它会保留全局性质，如取值的条件分布、Lyapunov 指数或熵产生率。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A6.SS2.p1.1": {
+  "sentences": [
+   {
+    "zh": "对于完全离散的 token，对上下文拟合的 $D^{th}$ 阶马尔可夫链具有如下形式",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A6.SS2.p1.2": {
+  "sentences": [
+   {
+    "zh": "其中整体上下文长度为 $L$，马尔可夫链以 $D<L$ 个前文 token 为条件，对 $H<L$ 个未来 token 进行条件化。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "索引 $j$ 遍历上下文中所有长度为 $D+H$ 的连续序列，$j\\in\\{D-1,D,...,L-H-2,L-H-1\\}$。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "向量 $\\mathbf{q}\\in\\mathbb{R}^{D}$ 表示查询，向量 $\\mathbf{y}\\in\\mathbb{R}^{H}$ 表示对该查询的响应预测。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "式 (3) 只是统计长度为 $D+H$ 且以给定的 $D$ 个查询 token 开头的 token 序列的数量。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "由该模型导出的最大似然估计器总是采样似然最高的序列 $\\mathbf{y}$，",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A6.SS2.p1.3": {
+  "sentences": [
+   {
+    "zh": "然而，该估计量可能不稳定，因为会出现上下文中未见过的查询 $\\mathbf{q}$，这促使使用 token 平滑（token smoothing），其中式 3 被替换为该分布",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A6.SS2.p1.4": {
+  "sentences": [
+   {
+    "zh": "随着参数 $\\alpha$ 的值增大，预测会收敛到对可能预测 $\\mathbf{y}$ 的均匀采样。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "参数值 $\\alpha=0$ 退化为不做平滑，而 $\\alpha=0.5$ 对应 Jeffreys 先验，$\\alpha=1$ 对应拉普拉斯接续规则。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A6.SS3.p1.1": {
+  "sentences": [
+   {
+    "zh": "更一般的时间序列模型将 token 视为连续取值。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "一些时间序列基础模型（如 Chronos）使用分箱来离散化时间序列值，从而能够直接使用离散 token 架构（Ansari et al., 2024）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然而，许多时间序列模型假定 token 值实际上具有连续性，我们倾向于采用连续表述，以突出与动力系统理论的联系。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A6.SS3.p2.1": {
+  "sentences": [
+   {
+    "zh": "为了直接对连续值 token 进行建模，我们将 §F.2 中的离散计数替换为对所有过去子序列的核加权估计。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "设 $\\{\\mathbf{x}_{t}\\}$ 表示一个单变量或多变量时间序列。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "对于上下文长度 $L$ 和预测范围 $H$，条件密度的 Nadaraya–Watson 估计为",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A6.SS3.p2.2": {
+  "sentences": [
+   {
+    "zh": "其中 $K_{h}(\\mathbf{u},\\mathbf{v})=h^{-d}K\\bigl((\\mathbf{u}-\\mathbf{v})/h\\bigr)$ 是对称核，其带宽为 $h$，对于第一个核维数 $d=D\\cdot\\dim(\\mathbf{x}_{t})$，对于第二个核维数 $d=H\\cdot\\dim(\\mathbf{x}_{t})$。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "假设以均方误差作为序列空间中的距离函数，我们使用高斯核。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A6.SS3.p3.1": {
+  "sentences": [
+   {
+    "zh": "在实践中，我们去掉了式 5 中关于 $\\mathbf{y}$ 的第二个核，以便输出与上下文中的序列完全匹配的预测，而不是最小二乘意义下附近的序列。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "因此我们写出条件均值预测器",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A6.SS3.p3.2": {
+  "sentences": [
+   {
+    "zh": "其中我们分离出了一个与每个序列的权重相对应的项，",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A6.SS3.p4.1": {
+  "sentences": [
+   {
+    "zh": "**最近邻与全局平均极限。** 带宽 $h$ 起到平滑参数的作用（类似于式 4 中的 $\\alpha$）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "当 $h\\to 0$ 时，该方案近似于一个单一最近邻鹦鹉模型；而当 $h\\to\\infty$ 时，它收敛到对所有序列的全局平均。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A6.SS3.p5.1": {
+  "sentences": [
+   {
+    "zh": "**与注意力的联系。** 如果取",
+    "conf": "mid",
+    "note": "原句不完整，'If one takes' 缺少后续宾语，译文按字面保留。"
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A6.SS3.p5.2": {
+  "sentences": [
+   {
+    "zh": "则公式 6 还原出 softmax 注意力的一种简化形式，其中温度超参数 $\\tau$ 控制平滑度。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在这一视角下，连续复述方案是离散 $k$–gram 平滑的核回归类比（Tsai et al., 2019）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A6.SS3.p6.1": {
+  "sentences": [
+   {
+    "zh": "**k近邻极限。** 我们定义一个集合 $\\text{Top}k$，它对应于索引 $j\\in\\{D,D+1,...,L-H-1,L-H\\}$ 的可能取值的一个子集。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "$\\text{Top}k$ 的 $k$ 个元素对应于在所有 $j$ 的取值中使 $w(\\mathbf{q},\\mathbf{x}_{j-(D-1):j})$ 取得 $k$ 个最大值的那些索引 $j$。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们计算这 $k$ 个最近匹配的简单平均值。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A6.SS3.p6.2": {
+  "sentences": [
+   {
+    "zh": "从而得到一种 $k$ 近邻鹦鹉学舌方案。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "随着 $k$ 增大，该估计量在精确鹦鹉学舌（$k=1$）与全局平均（$k\\to L$）之间插值。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A6.SS3.SSS0.Px1.p1.1": {
+  "sentences": [
+   {
+    "zh": "单纯形投影法是非线性动力学中一种经典的预测方法，对应式 7 中 H=1（单步预测）、k=D+1 的特殊情形。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "条件 k=D+1 表示在 D 维空间中对一个点进行三角剖分所需的仿射独立邻点的最小数量（Sugihara & May, 1990）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A6.SS3.SSS0.Px1.p2.1": {
+  "sentences": [
+   {
+    "zh": "在单纯形投影中，查询 $\\mathbf{q}$ 被解释为时间序列可观测变量 $\\mathbf{x}$ 的时滞嵌入。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "Takens 定理认为，在温和条件下，从确定性遍历系统中提取的可观测变量的有限多个时滞嵌入将与全状态动力学微分同胚（可光滑映射）（Takens, 2006）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "由于单纯形投影仅使用邻居的身份而非绝对距离来为上下文点赋权，因此时滞嵌入足以计算出合适的权重。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A6.SS3.SSS0.Px2.p1.1": {
+  "sentences": [
+   {
+    "zh": "另一种常见的非线性预测技术保留式 Eq. 6 求和中的所有项，但改为进行如下形式的非线性加权。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A6.SS3.SSS0.Px2.p1.2": {
+  "sentences": [
+   {
+    "zh": "其中尺度参数 $\\bar{d}$ 由查询与上下文中各点之间距离的分布决定。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在实践中，该参数通常被设为上下文中所有长度为 $D$ 的序列之间的平均成对距离。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "超参数 $\\theta$ 的最优值随着底层动力学的非线性变得更强而增大 Sugihara (1994)。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们指出，在 S-map 的经典表述中，局部线性模型是基于上下文中看到的所有长度为 $D+H$ 的序列来拟合的，而这里我们使用 Nadaraya–Watson 估计量，以强调与现代核回归的联系。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A6.SS4.p1.1": {
+  "sentences": [
+   {
+    "zh": "对于连续时间中的遍历动力系统，存在一个自然测度 $\\mu(\\mathbf{x})$，使得对于某些可观测量 $F(\\mathbf{x})$，以下条件几乎必然成立，",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A6.SS4.p1.2": {
+  "sentences": [
+   {
+    "zh": "其中第二个等号来源于 Birkhoff 遍历定理（Walters, 1982）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A6.SS4.p2.1": {
+  "sentences": [
+   {
+    "zh": "我们对序列和单个 token 的期望值采用以下约定；期望 $\\mathbb{E}_{\\mu}\\!\\left[\\mathbf{x}_{t:t+T}\\right]$ 指在逐点测度 $\\mu$ 下序列 $\\mathbf{x}_{t:t+T}$ 的期望值。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们指出，对于确定性动力系统，一旦在吸引子上以测度 $\\mu(\\mathbf{x}_{t})$ 采样到给定点，后续点的条件概率就是关于第一个点的 delta 函数。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "因此，我们采用约定 $\\mu(\\mathbf{x}_{t})=\\mu(\\mathbf{x}_{t:t+T})$，并用该测度同时指代给定时间点的概率，或源自该时间点的任意长度序列的概率。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A6.SS4.p3.1": {
+  "sentences": [
+   {
+    "zh": "**命题.** 在适当的核条件下，",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A6.SS4.p3.2": {
+  "sentences": [
+   {
+    "zh": "其中 $L$ 是 Nadaraya–Watson 估计器 $p$ 的上下文长度，$F(\\mathbf{y})$ 是对具有测度 $\\mu$ 的遍历动力系统的一个不变量性质在序列 $\\mathbf{y}$ 上的估计，$\\mathbf{q}$ 是来自该动力系统的任意连续时间点序列。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "该命题指出，当上下文足够长时，遍历系统的 Nadaraya–Watson 估计器会保持底层动力学的不变量值。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A6.SS4.p4.1": {
+  "sentences": [
+   {
+    "zh": "**推导。** 我们从动力学平均的定义开始，",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A6.SS4.p4.2": {
+  "sentences": [
+   {
+    "zh": "将式 5 代入该表达式，",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A6.SS4.p4.3": {
+  "sentences": [
+   {
+    "zh": "我们将分子和分母同乘以 $1/L$ 并取极限 $L\\to\\infty$，以便将求和转换为期望，",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A6.SS4.p4.4": {
+  "sentences": [
+   {
+    "zh": "其中 $\\mathbf{x}_{\\leftarrow}$ 表示从底层动力系统中采样的长度为 $D+H$ 的随机回看窗口的前 $D$ 个点，而 $\\mathbf{x}_{\\rightarrow}$ 表示接下来的 $H$ 个时间点。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在实践中，这对应于一个长度为 $D+H$ 的时间序列，该序列通过从吸引子上按照测度 $\\mu$ 随机采样的点开始模拟动力学而生成。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A6.SS4.p5.1": {
+  "sentences": [
+   {
+    "zh": "如果我们取极限 $h\\to 0$（精确匹配），那么核 $K_{h}$ 变为 delta 函数，从而得到",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A6.SS4.p6.1": {
+  "sentences": [
+   {
+    "zh": "如果测度 $\\mu$ 是遍历的，那么给定任意查询 $\\mathbf{q}$ 时，不变量 $F$ 的条件期望就是其无条件期望，",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A6.SS5.p1.1": {
+  "sentences": [
+   {
+    "zh": "对于自相关性由……给出的随机时间序列 $\\mathbf{x}_{1:T}$",
+    "conf": "mid",
+    "note": "原文句子不完整，'given by' 后内容缺失，故用省略号表示后续未给出。"
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A6.SS5.p1.2": {
+  "sentences": [
+   {
+    "zh": "其中 $C$ 表示比例常数，预测的期望均方误差的标度关系为",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A6.SS5.p1.3": {
+  "sentences": [
+   {
+    "zh": "因此，在相关性（混合性）呈指数衰减的情况下，长度为 $L$ 的上下文窗口中关于未来状态的信息量以指数速度趋于饱和 Bradley (2005)。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "因此，由越来越大的上下文窗口导出的预测在不变测度 $\\mu$ 下以指数速度收敛到最优条件预测。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A6.SS5.p2.1": {
+  "sentences": [
+   {
+    "zh": "在标准光滑性条件下 Fan & Yao (2008); Takezawa (2005)，预测误差也表现出标准的偏差-方差权衡，其形式为",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A6.SS5.p2.2": {
+  "sentences": [
+   {
+    "zh": "因此，核的最优宽度按如下方式缩放：",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ }
+}

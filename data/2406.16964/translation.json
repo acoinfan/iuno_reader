@@ -1,0 +1,1986 @@
+{
+ "__meta__": {
+  "translator": "deepseek-v4-pro",
+  "usage": {
+   "calls": 95,
+   "prompt_tokens": 79367,
+   "completion_tokens": 125801,
+   "seconds": 1539.5
+  }
+ },
+ "abs.p1": {
+  "sentences": [
+   {
+    "zh": "大型语言模型（LLMs）正被应用于时间序列预测。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "但语言模型对时间序列实际上有用吗？",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在对三个近期且流行的基于LLM的时间序列预测方法进行的一系列消融研究中，我们发现移除LLM组件或将其替换为基本的注意力层并不会降低预测性能——在大多数情况下，结果甚至有所改善！",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们还发现，尽管预训练的LLM计算成本高昂，但它们并不比从头训练的模型表现更好，不能表示时间序列中的顺序依赖关系，也不能在少量示例设置中提供帮助。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "此外，我们探索了时间序列编码器，并发现分块和注意力结构的表现与基于LLM的预测器相似。{fn1}",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "fn1": {
+  "sentences": [
+   {
+    "zh": "复现我们工作所需的所有资源均可获取：`https://github.com/BennyTMT/LLMsForTimeSeries`",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S1.p1.1": {
+  "sentences": [
+   {
+    "zh": "时间序列分析是许多领域中的一个关键问题，包括疾病传播预测 [8]、零售销售分析 [3]、医疗保健 [25, 16] 和金融 [30]。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "时间序列分析领域的大量近期工作（这些工作在 GitHub 上构成的代码仓库总星标数超过 1200）集中于将预训练的大语言模型（LLM）应用于时间序列的分类、预测和异常检测 [14, 49, 21, 4, 5, 31, 13, 43, 15]。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这些论文假定，语言模型作为文本中序列依赖关系的先进模型，可能推广到时间序列数据中的序列依赖关系。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "鉴于语言模型如今在机器学习研究中无处不在，这一假设并不令人意外。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然而，语言建模与时间序列预测之间的直接联系在很大程度上仍未被明确界定。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "那么，语言建模在多大程度上真正有益于传统时间序列任务？",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S1.p2.1": {
+  "sentences": [
+   {
+    "zh": "我们的主张简单却深刻：**基于 LLM 的主流时间序列预测器与不含 LLM 的基础消融相比表现相同或更差，但所需的计算量却高出多个数量级**。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这一发现源自大量消融实验，揭示了当代时间序列预测文献中一个令人担忧的趋势。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们的目标并不是暗示语言模型永远不会对时间序列有用。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "事实上，近期研究指出了语言与时间序列交互的许多令人兴奋且充满前景的方式，例如时间序列推理 [24, 7, 44, 41, 36]、社会理解 [6] 和金融推理 [35, 19]。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "相反，我们旨在强调一些令人惊讶的发现：现有方法在既定的时间序列任务上几乎没有利用预训练语言模型固有的推理能力。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S1.p3.1": {
+  "sentences": [
+   {
+    "zh": "我们通过对三种近期流行的基于LLM的预测方法[49, 14, 21]进行三项消融来证实我们的主张，使用了来自参考文献方法的八个标准基准数据集以及来自MONASH[12]的另外五个数据集。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "首先，我们成功复现了原始论文中的结果。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然后，我们表明，将语言模型替换为简单的注意力层、基本的Transformer块、随机初始化的语言模型，甚至完全移除语言模型，都能产生相当或更好的性能。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在参考文献方法未研究过的另外五个数据集上，也观察到了相同的性能。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S1.p4.1": {
+  "sentences": [
+   {
+    "zh": "接下来，我们将这些方法与它们的消融版本在训练和推理速度上进行比较，结果表明这些更简单的方法在保持相当性能的同时，将训练和推理时间最多减少了三个数量级。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然后，为了探究 LLM 预测器性能的来源，我们进一步研究了时间序列编码器。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们发现，一个带有由分块（patching）和注意力组成的编码器的简单线性模型能够取得与 LLM 相似的预测性能。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "接下来，我们通过打乱输入时间序列来检验 LLM 的序列建模能力是否会迁移到时间序列上，并发现性能没有明显变化。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "最后，我们表明，在使用 10% 训练数据的少量示例设置下，LLM 甚至无助于预测。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们讨论了这些发现的意义，并提出使用大语言模型的时间序列方法最好留给需要文本推理的多模态应用 [4, 11, 37]。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S1.p5.1": {
+  "sentences": [
+   {
+    "zh": "我们在本文中做出的关键贡献如下：",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S1.I1.i1": {
+  "sentences": [
+   {
+    "zh": "• 我们针对将时间序列输入大语言模型进行预测的方法，提出了三种直接的消融方法。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "随后，我们在十三个标准数据集上对三种顶尖方法进行消融，发现大语言模型未能令人信服地改进时间序列预测。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然而，它们显著增加了训练和推理两方面的计算成本。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S1.I1.i2": {
+  "sentences": [
+   {
+    "zh": "我们通过在预测之前重新初始化其权重来研究 LLM 预训练的影响。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们发现这对预测性能没有影响。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "此外，在打乱输入时间序列时，我们没有发现任何证据表明 LLM 成功地将序列建模能力从文本迁移到时间序列，也没有任何迹象表明它们对少量示例场景有帮助。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S1.I1.i3": {
+  "sentences": [
+   {
+    "zh": "• 我们发现，一个非常简单的模型，以分块（patching）和注意力作为编码器，能够取得与 LLM 相似的性能。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这表明，尽管存在迅速采用 LLM 的热潮，LLM 所带来的益处与时间序列预测问题之间仍存在巨大差距。",
+    "conf": "mid",
+    "note": "原文“gap between the benefits LLMs pose and the time series forecasting problem”结构略有歧义，“pose”与“benefits”搭配不常见。"
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S2.p1.1": {
+  "sentences": [
+   {
+    "zh": "在此，我们总结与基于LLM的时间序列模型相关的关键工作。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这些工作可大致分为三个部分：(i) 使用LLM进行时间序列预测；(ii) LLM时间序列模型中的编码器；(iii) 更小且高效的时间序列神经模型。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S2.p2.1": {
+  "sentences": [
+   {
+    "zh": "**使用 LLM 进行时间序列预测。** 最近，随着大型语言模型（LLMs）[10, 28, 33] 的发展及其展示出的多模态能力，更多研究者已成功将 LLM 应用于时间序列预测任务 [13, 15, 5, 4]。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "Chang 等人 [5] 使用了对 GPT-2 中的 transformer 模块和位置编码进行微调的方法，以将预训练 LLM 与时间序列数据对齐，用于预测任务。",
+    "conf": "mid",
+    "note": "原文“used finetuning the transformer module...”结构略含混，可能缺少 of，按“对……进行微调”理解。"
+   },
+   {
+    "zh": "Zhou 等人 [49] 提出了一种类似的微调方法，名为 “OneFitAll”，用于基于 GPT-2 的时间序列预测。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "此外，Jin 等人 [14] 引入了一种重编程方法，将 LLM 的词嵌入与时间序列嵌入对齐，在 LLaMA [33] 上展示了良好的时间序列数据表示。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "类似地，CALF [21] 和 Test [31] 调整了词嵌入，使 LLM 能够有效地预测时间序列数据。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "除了时间序列预测模型外，Liu 等人 [22] 表明这些模型可以扩展到对健康时间序列进行分类，例如心率和每日步数。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这些模型还已被证明在少量示例设置下优于监督神经模型。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S2.p3.1": {
+  "sentences": [
+   {
+    "zh": "**LLM 时间序列模型中的编码器。** 为了使 LLM 能够从文本中学习，文本必须首先被离散化并编码为词元，词元是 $1\\times d$ 向量 [10, 28, 33]。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "类似地，基于 LLM 的时间序列方法学习离散的时间序列词元。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "一种方法是将时间序列分割为重叠补丁（patches），这有效地缩短了时间序列，同时保留其特征 [14, 49, 5, 4, 27, 26]。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "另一种方法涉及基于其趋势、季节成分和残差成分对一个方法进行分解 [4, 27]。",
+    "conf": "low",
+    "note": "原文“decomposing a method”疑为“decomposing a time series”的笔误，按字面翻译。"
+   },
+   {
+    "zh": "最后，Liu et al. [21] 使用 Transformer 馈入多变量时间序列，以使不同通道能够学习其他通道的动态。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这些嵌入过程之后是一个线性神经网络层，该层将时间序列编码投影到预训练 LLM 所使用的相同维度。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S2.p4.1": {
+  "sentences": [
+   {
+    "zh": "**小型高效神经预测器。** 除了大型语言模型（LLM）之外，已有大量研究关注更小但高效的框架，这些框架在时间序列预测上优于其庞大的同类模型 [18, 46, 32, 23, 2]。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "例如，Zeng 等人 [45] 提出了 DLinear，这是一种极其简单的模型，它结合了分解技术，并在当时取得了比最先进的基于 Transformer 的时间序列架构（如 Informer [47]、FEDformer [48] 和 Autoformer [39]）更好的预测性能。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "此外，Xu 等人 [42] 引入了一个仅有 10k 参数的轻量级模型，该模型捕捉时间序列中的幅度和相位信息，从而优于基于 Transformer 的模型。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S3.p1.1": {
+  "sentences": [
+   {
+    "zh": "我们使用三种最先进的时间序列预测方法，并针对 LLM 提出三种消融方法：（i）“**w/o LLM**”；（ii）“**LLM2Attn**”；（iii）以及“**LLM2Trsf**”。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "为了评估 LLM 在时间序列预测中的有效性，我们在八个标准数据集上测试这些方法。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S3.T1": {
+  "sentences": [
+   {
+    "zh": "表1：参考方法 [49, 21, 14] 中所用全部数据集的统计信息。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S3.T2": {
+  "sentences": [
+   {
+    "zh": "表2：三种使用大型语言模型进行时间序列预测的流行方法。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S3.SS1.p1.1": {
+  "sentences": [
+   {
+    "zh": "我们对三种近期使用大语言模型（LLM）进行时间序列预测的方法进行了实验。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "所有模型均发表于 2023 年 12 月至 2024 年 5 月之间，并且较受欢迎，其 GitHub 仓库合计获得了 1,245 颗星。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这些方法汇总于表2，并使用 GPT-2 [28] 或 LLaMA [33] 作为基础模型，并采用不同的对齐和微调策略。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S3.I1.i1": {
+  "sentences": [
+   {
+    "zh": "**OneFitsAll [49]**：OneFitsAll，有时称为GPT4TS，对输入时间序列应用实例归一化和分块，然后将其输入线性层，以获得语言模型的一个输入表示。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "语言模型的多头注意力和前馈层被冻结，而位置嵌入和层归一化在训练期间被优化。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "最后一个线性层用于将语言模型的最终隐藏状态转换为预测。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S3.I1.i2": {
+  "sentences": [
+   {
+    "zh": "• **Time-LLM [14]**：在 Time-LLM 中，输入时间序列通过分块（patching）进行分词，并利用多头注意力与词嵌入的低维表示对齐。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "该对齐的输出与描述性统计特征的嵌入相结合，被传入一个冻结的预训练语言模型。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然后，语言模型的输出表示被展平并通过一个线性层，以获得预测。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S3.I1.i3": {
+  "sentences": [
+   {
+    "zh": "• **CALF [21]**：CALF 通过将每个通道视为一个 token 来对输入时间序列进行嵌入。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "该架构的一半是一个“文本分支（textual branch）”，它使用交叉注意力（cross attention）将时间序列表示与语言模型词嵌入的低维表示对齐。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "该表示随后通过一个预训练且冻结的语言模型，以获得“文本预测（textual prediction）”。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "同时，一个“时间”（temporal）分支基于输入时间序列为预训练语言模型学习一个低秩适配器（low-rank adapter），以生成用于推理的“时间预测（temporal prediction）”。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "该模型包含额外的损失项，以强制这些表示之间具有相似性。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S3.SS1.p2.1": {
+  "sentences": [
+   {
+    "zh": "**复现性说明。** 在对每个模型进行实验时，我们试图复现其原始论文中的条件。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们使用了原始的超参数、运行时环境和代码，包括模型架构、训练循环和数据加载器。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "为确保公平比较，我们尽可能将原始论文中的误差指标与我们的结果一并列出。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S3.SS2.p1.1": {
+  "sentences": [
+   {
+    "zh": "为了分离基于LLM的预测器中LLM的影响，我们提出三种消融：移除LLM组件或将其替换为一个简单模块。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "具体而言，对于这三种方法中的每一种，我们进行以下三项修改：",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S3.SS2.p1.2": {
+  "sentences": [
+   {
+    "zh": "在上述消融中，我们保持预测器的剩余部分不变（可训练）。",
+    "conf": "mid",
+    "note": "“left parts”可能指剩余部分（与后文“remaining structure”对应），也可能按字面理解为左侧部分，此处按剩余部分翻译。"
+   },
+   {
+    "zh": "例如，如图1(a)所示，在移除LLM后，输入编码被直接传递到输出投影。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "或者，如图1(b)或(c)所示，在用注意力（attention）或Transformer替换LLM后，它们与原始方法的其余结构一起被训练。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S3.I2.i1": {
+  "sentences": [
+   {
+    "zh": "• **无 LLM**（图1（b））。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们完全移除语言模型，转而将输入 token 直接传递给参考方法的最后一层。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S3.I2.i2": {
+  "sentences": [
+   {
+    "zh": "• **LLM2Attn**（图1(c)）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们将语言模型替换为一个随机初始化的多头注意力层。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S3.I2.i3": {
+  "sentences": [
+   {
+    "zh": "• **LLM2Trsf**（图 1 (d)）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们将语言模型替换为一个随机初始化的 Transformer 块。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S3.F1": {
+  "sentences": [
+   {
+    "zh": "图1：所有LLM消融方法的概览。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "图(a)表示使用LLM作为基础模型的时间序列预测。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在一些工作中，LLM组件被冻结[14, 13]，而在另一些工作中，它们经过微调[49, 21, 4]。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "图(b)展示了移除LLM组件后的模型，仅保留其余结构。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "图(c)将LLM组件替换为单层自注意力机制。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "图(d)将LLM组件替换为一个简单的Transformer。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S3.SS3.p1.1": {
+  "sentences": [
+   {
+    "zh": "**基准数据集。** 我们在以下真实世界数据集上进行评估：（1）**ETT [20]**：包含与电力变压器相关的七个因素，分布于四个子集：ETTh1 和 ETTh2 为每小时记录，ETTm1 和 ETTm2 为每15分钟记录；（2）**Illness [39]**：包括来自美国疾病控制与预防中心的每周记录的流感样病例，描述的是流感样病例患者数占总患者数的比例；（3）**Weather [39]**：2010年至2013年间美国1,600个地点的当地气候数据，每个数据点由11个气候特征组成；（4）**Traffic [39]**：来自加州交通部门的每小时数据集，包含旧金山湾区高速公路上测得的道路占用率；（5）**Electricity [34]**：包含2012年至2014年间321个客户的每小时用电量。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "ETT 数据集的训练-验证-测试划分为 60%-20%-20%，而 Illness、Weather 和 Electricity 数据集的划分分别为 70%-10%-20%。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "所有数据集的统计信息见表1。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们强调，这些数据集（采用相同的划分和规模）已被广泛用于评估基于 LLM 及其他神经模型在时序数据上的时间序列预测能力 [47, 49, 4, 14, 5, 45, 39, 48]。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "（6）**Exchange Rate** [17]：收集于1990年至2016年间，包含八个国家货币的每日汇率（澳大利亚、英国、加拿大、瑞士、中国、日本、新西兰和新加坡）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "（7）**Covid Deaths** [12]：包含2020年1月至8月间266个国家和地区的新冠死亡每日统计数据。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "（8）**Taxi (30 min)** [1]：包含纽约市1,214个地点在2015年1月至2016年1月间的出租车出行记录。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "该数据每30分钟收集一次，平均有1,478个样本。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "（9）**NN5 (Daily)** [12]：包含英国111台ATM机的每日现金取款数据，每台ATM有791个数据点。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "（10）**FRED-MD** [12]：包含美联储自1959年1月1日以来发布的107个月度宏观经济指数。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "该数据集提取自FRED-MD数据库。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S3.SS3.p2.1": {
+  "sentences": [
+   {
+    "zh": "**评估指标与设置。** 我们报告预测值与时间序列真实值之间的平均绝对误差（MAE）和均方误差（MSE）结果。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "数学上，给定一个包含 $\\mathcal{D}$ 个元素的测试集，$\\mathrm{MAE}=\\frac{1}{|\\mathcal{D}|}\\sum_{t_{i}\\in\\mathcal{D}}[|c_{i}-\\widehat{c}_{i}|]$ 且 $\\mathrm{MSE}=\\frac{1}{|\\mathcal{D}|}\\sum_{t_{i}\\in\\mathcal{D}}(c_{i}-\\widehat{c}_{i})^{2}$，其中 $c_{i}$ 和 $\\widehat{c}_{i}$ 分别表示时间序列第 $i$ 个索引处的真实值和预测值。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S4.T3": {
+  "sentences": [
+   {
+    "zh": "表 3：所有模型——Time-LLM、CALF 和 OneFitsAll——的预测性能及我们消融实验的结果。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "所有结果均在不同预测长度上取平均，不过完整结果可在附录 E.1 中查看。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "以**红色**显示的结果表示性能最佳的模型。# Wins 指该方法表现最佳的次数，# Params 指模型参数的数量。“-” 表示该数据集未包含在原论文中。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S4.p1.1": {
+  "sentences": [
+   {
+    "zh": "在本节中，我们详细说明对所有基线 LLM 模型用于时间序列预测的全面评估。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "具体而言，我们提出以下研究问题。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "**(RQ1)** 预训练语言模型是否有助于预测性能？",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "**(RQ2)** 基于 LLM 的方法是否值得其计算成本？",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "**(RQ3)** 语言模型预训练是否有助于预测任务上的表现？",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "**(RQ4)** LLM 是否能表示时间序列中的顺序依赖关系？",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "**(RQ5)** LLM 是否有助于少量示例学习？",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "**(RQ6)** 性能来自哪里？",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S4.SS1.p1.1": {
+  "sentences": [
+   {
+    "zh": "我们的结果表明，预训练的 LLM 目前对时间序列预测任务尚无用处。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "总体而言，如表 3 所示，在 13 个数据集和两个指标上，消融方法在 $26/26$ 种情况下优于 Time-LLM 方法，在 $22/26$ 种情况下优于 CALF，在 $19/26$ 种情况下优于 OneFitsAll。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们按照 [49, 14, 21] 中的做法，对不同预测长度下的结果进行了平均。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在所有预测长度上（13 个数据集和 4 个预测长度），以 MAE 衡量，消融方法分别在 $35/40$、$31/40$ 和 $29/40$ 种情况下优于 Time-LLM、CALF 和 OneFitsAll。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "为确保公平比较，我们还将每种方法原论文中的结果与我们的复现结果一并报告。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "具体结果参见附录 E.1。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "为了更好地评估 LLM 和消融方法的有效性，我们为每个任务纳入了 95% 自助置信区间。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在 LLM 表现更好的任务中，例如 OneFitsAll 在 ETTh1 上的结果（见图 2），其 MAE 置信区间与消融方法“w/o LLM”的置信区间仍有大量重叠。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "其他数据集的结果和 MSE 指标见附录中的图 5 和图 6。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "总而言之，从上述评估结果来看，很难得出 LLM 在时间序列预测中有效的结论。",
+    "conf": "mid",
+    "note": "原句存在语法断裂（“our results on the evaluation above, it is hard to conclude...”），翻译时按语义整合为“从上述评估结果来看”。"
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S4.F2": {
+  "sentences": [
+   {
+    "zh": "图2：在上述示例中，只有OneFitsAll “w/ LLM”在ETTh1上比消融方法表现更好，但bootstrap置信区间存在大量重叠。",
+    "conf": "mid",
+    "note": "原文中的“bootstraped”疑为“bootstrapped”的拼写错误，翻译按“bootstrap置信区间”理解。"
+   },
+   {
+    "zh": "这些图展示了OneFitsAll、CALF和Time-LLM在使用LLM与消融方法（即 **w/o LLM**、**LLM2Attn** 和 **LLM2Trsf**）时在ETTh1、ETTm2和Electricity上的比较，垂直虚线表示原始工作的结果。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "MSE和其他数据集的其他图可在附录中的图5和图6中找到。",
+    "conf": "mid",
+    "note": "原文“Others Figures”疑为“Other figures”的拼写或语法错误，翻译按“其他图”理解。"
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S4.F3": {
+  "sentences": [
+   {
+    "zh": "图3：消融方法在推理时耗时更少，同时提供更好的预测性能。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "上图显示了Time-LLM、OneFitsAll和CALF在ETTm2、Traffic和Electricity数据集上的推理时间和预测准确率，并在预测长度上取平均。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "更多数据集和MSE指标的结果参见附录中的图7和图8。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S4.T4": {
+  "sentences": [
+   {
+    "zh": "表 4：在时间序列任务中，LLM（LLaMA 和 GPT-2）显著增加训练时间。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "该表展示了三种方法在 ETTh1 和 Weather 数据上预测长度为 96 时的模型参数量（以百万计）和总训练时间（以分钟计）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "与原始方法“**w/ LLM**”进行比较的是“**w/o LLM**”、“**LLM2Attn**”和“**LLM2Trsf**”。",
+    "conf": "mid",
+    "note": "原句“Compared with original method ... are ...”结构不完整，存在语法省略；按字面翻译为“与原始方法……进行比较的是……”。"
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S4.SS2.p1.1": {
+  "sentences": [
+   {
+    "zh": "在上一节中，我们表明 LLM 并未在时间序列预测任务上带来有意义的性能提升。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在这里，我们评估这些方法的计算强度，并同时考虑其标称性能。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们所参考方法中的语言模型使用数亿有时甚至数十亿的参数来进行时间序列预测。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "即使语言模型的参数被冻结，它们在训练和推理过程中仍会带来大量开销。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "例如，Time-LLM 拥有 6642 M 个参数，在 Weather 数据集上训练需要 3003 分钟，而消融方法只有 0.245 M 个参数，平均仅需 2.17 分钟。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在 ETTh1 和 Weather 数据集上训练其他方法的信息见表 4。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在推理时间方面，我们将其除以最大批量大小，以估计每个样本的推理时间。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "Time-LLM、OneFitsAll 和 CALF 平均分别比修改后的模型多耗时 **28.2**、**2.3** 和 **1.2** 倍。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "示例见图 3，其中绿色标记（消融方法）通常位于红色标记（LLM）下方，并且更靠近坐标轴左侧，这表明计算成本更低、预测性能更好。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "其他数据集和 MSE 指标参见附录中的图 7 和图 8。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "总之，LLM 在时间序列预测任务中的计算强度并未带来相应的性能提升。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S4.SS3.p1.1": {
+  "sentences": [
+   {
+    "zh": "我们在本节中的评估表明，**使用语言数据集进行预训练对于时间序列预测而言是不必要的。** 为了检验预训练期间学到的知识是否能实质性提升预测性能，我们对 CALF 的 [21] 语言模型在时间序列上的预训练和微调的不同组合进行了实验。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S4.I1.i1": {
+  "sentences": [
+   {
+    "zh": "• **预训练 + 微调（Pre+FT）**。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这是原始方法，其中预训练的语言模型在时间序列数据上进行微调。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "对于 CALF，基础语言模型被冻结，并学习低秩适配器（LoRA）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S4.I1.i2": {
+  "sentences": [
+   {
+    "zh": "• **随机初始化 + 微调（woPre+FT）**。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "预训练得到的文本知识是否有助于时间序列预测？",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在该方法中，我们随机初始化语言模型的权重（从而消除预训练的任何影响），并从头训练LLM。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S4.I1.i3": {
+  "sentences": [
+   {
+    "zh": "• **预训练 + 不微调（Pre+woFT）**。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在时间序列上的微调能在多大程度上提升预测性能？",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "对于这个基线，我们同样保持语言模型冻结，并且不学习 LoRA。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "因此，该模型的结果表明基础语言模型在没有额外时间序列处理指导下的性能。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S4.I1.i4": {
+  "sentences": [
+   {
+    "zh": "• **随机初始化 + 不微调（woPre+woFT）**。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "该基线实际上是从输入时间序列到预测结果的随机投影，并作为与其他方法进行比较的基线。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S4.T5": {
+  "sentences": [
+   {
+    "zh": "表 5：随机初始化 LLM 参数并从头开始训练（woPre）比使用预训练（Pre）模型取得了更好的结果。“woFT”和“FT”表示 LLM 参数是被冻结还是可训练。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S4.T6": {
+  "sentences": [
+   {
+    "zh": "表 6：在 ETTh1（预测长度为 96）和 Illness（预测长度为 24）上的输入打乱/掩码实验中，打乱输入对时间序列预测性能下降的影响在模型修改前后没有显著变化。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "其他预测长度的结果参见附录中的表 21。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S4.SS3.p2.1": {
+  "sentences": [
+   {
+    "zh": "总体来看，如表5所示，在8个数据集上使用MAE和MSE指标时，「Pretraining + Finetune」方法表现最佳3次，而「Random Initialization + Finetune」实现了8次最佳。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这表明语言知识对预测的帮助非常有限。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然而，「Pretrain + No Finetuning」和基线「Random Initialization + No Finetuning」分别有5次和0次表现最佳，这表明语言知识在微调过程中并没有产生有意义的贡献。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "详细结果参见附录中的表20。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S4.SS3.p3.1": {
+  "sentences": [
+   {
+    "zh": "总结而言，预训练带来的文本知识对时间序列预测提供的帮助非常有限。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S4.SS4.p1.1": {
+  "sentences": [
+   {
+    "zh": "大多数使用LLM的时间序列预测方法会微调位置编码，以帮助理解序列中时间步的位置 [4, 49, 21, 5, 31]。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们预期，具有良好位置表示的时间序列模型在输入被打乱时，其预测性能会显著下降 [45]。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们对时间序列应用了三种打乱方式：随机打乱整个序列（“sf-all”），仅打乱序列的前半部分（“sf-half”），以及交换序列的前半部分和后半部分（“ex-half”）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "如表6所示，**基于LLM的方法并不比其消融模型更容易受到输入打乱的影响。** 这意味着，LLM在表示时间序列中的顺序依赖关系方面并不具有独特能力。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S4.SS5.p1.1": {
+  "sentences": [
+   {
+    "zh": "在本节中，我们的评估表明，LLMs 在少量示例学习场景中仍然**没有显著用处**。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S4.SS5.p2.1": {
+  "sentences": [
+   {
+    "zh": "虽然我们的结果表明 LLM 对时间序列预测没有用处，但预训练权重中编码的知识仍有可能在数据稀缺的少量示例场景下帮助提升性能。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "为了评估情况是否如此，我们在每个数据集的 10% 数据上训练了模型及其消融版本。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "具体而言，我们评估了 Time-LLM 方法中的 LLaMA。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "表 7 所示的 LLaMA 结果，将 LLaMA 与完全移除 LLM（**w/o LLM**）进行了比较。",
+    "conf": "mid",
+    "note": "原句以 The results 为主语，结构略不自然，此译按常见学术表达处理。"
+   },
+   {
+    "zh": "没有差异，二者各在 8 个案例中表现更好。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们对 CALF（一种基于 GPT-2 的方法）进行了类似实验。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "表 8 中的结果表明，我们的消融版本在少量示例场景下能够比 LLM 表现更好。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S4.T7": {
+  "sentences": [
+   {
+    "zh": "表 7：在少量示例场景（10% 数据集）中，LLaMA（Time-LLM）的表现与消融方法相近。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "LLaMA 与 “**w/o LLM**” 各有 8 次优于对方。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "注意，Time-LLM 的结果来自原论文 [14]。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S4.T8": {
+  "sentences": [
+   {
+    "zh": "表8：在少量示例场景（10%数据集）中，消融方法的表现远好于GPT-2（CALF）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在没有LLMs的情况下，14个案例中有12个表现出更好的性能。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S4.SS6.p1.1": {
+  "sentences": [
+   {
+    "zh": "在本节中，我们评估LLM时间序列模型中常用的编码技术。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们发现，**将分块与单层注意力相结合是一个简单而有效的选择**。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S4.F4": {
+  "sentences": [
+   {
+    "zh": "图4：PAttn模型。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S4.SS6.p2.1": {
+  "sentences": [
+   {
+    "zh": "在第3.2节中，我们发现对基于LLM的方法进行简单消融并未降低性能。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "为了理解为何这些简单方法效果如此之好，我们选择了一些用于LLM时间序列任务编码的流行技术，例如分块（patching）[49, 14, 5, 31, 21]、分解（decomposition）[4, 27]。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "一个基本的Transformer块也可用于辅助编码[21]。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S4.SS6.p3.1": {
+  "sentences": [
+   {
+    "zh": "附录表18中展示的具体结果表明，一种结合了分块（patching）和注意力的结构，称为“PAttn”，在小型数据集（时间戳少于100万）上表现优于大多数其他编码方法，甚至可与LLM方法相媲美。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "其详细结构如图4所示，涉及对时间序列应用“instance norm”，然后进行分块和投影。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然后，单层注意力实现分块之间的特征学习。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "对于较大的数据集，如 Traffic（约1500万）和 Electricity（约800万），一种使用 CALF [21] 编码器、名为“LTrsf”的模型表现更好。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在这些方法中，最后将时间序列嵌入通过单个线性层进行投影以进行预测。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "其他编码器的细节见附录 D.3 小节。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S4.SS6.p4.1": {
+  "sentences": [
+   {
+    "zh": "总体而言，分块（patching）在编码中扮演着关键角色。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "此外，基本的注意力机制（Attention）和 Transformer 块也能有效地辅助编码。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S5.p1.1": {
+  "sentences": [
+   {
+    "zh": "在本文中，我们表明：尽管 LLM 近来在时间序列预测中很受欢迎，但它们似乎并未有意义地提升性能。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们对简单的消融进行了实验，结果表明，它们能够保持或提升基于 LLM 的对照方法的性能，同时所需的计算量明显更少。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "再次强调，我们的目标并不是要表明 LLM 在时间序列分析中没有一席之地。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这样做很可能会被证明是一种短视的论断。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "相反，我们建议社区应将更多关注投入到那些可能在时间序列与语言的交界处被 LLM 解锁的激动人心的任务上，例如时间序列推理 [24, 7, 44, 36] 或社会理解 [6]。",
+    "conf": "mid",
+    "note": "原文 tasks 后可能缺少关系代词 that，译文按补全后含义理解。"
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S6.p1.1": {
+  "sentences": [
+   {
+    "zh": "我们感谢弗吉尼亚大学研究计算团队维护了出色的高性能计算资源，使我们能够开展这项研究。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "本研究部分得到 NSF IIS-1901386、NSF CAREER IIS-2142794、NIH R01MH125179、比尔及梅琳达·盖茨基金会（INV-004841）以及海军研究办公室（#N00014-21-1-2154）的资助。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "p1.1": {
+  "sentences": [
+   {
+    "zh": "**语言模型真的对时间序列预测有用吗？",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "(附录)**",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A1.p1.1": {
+  "sentences": [
+   {
+    "zh": "这里，我们讨论本文的局限性。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A1.I1.i1": {
+  "sentences": [
+   {
+    "zh": "我们使用时间序列预测来评估大语言模型（LLMs）的能力。",
+    "conf": "mid",
+    "note": "原文 using time-series forecasting 可能修饰评估方式，也可能修饰 LLMs 的能力，存在一定歧义。"
+   },
+   {
+    "zh": "然而，为了更全面地了解大语言模型（LLMs）如何处理时间序列，这种能力还应跨其他下游任务进行评估，例如时间序列分类和问答。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A1.I1.i2": {
+  "sentences": [
+   {
+    "zh": "2. 我们的评估仅限于时间序列数据集，即时间间隔均匀的序列。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然而，也有很大一部分数据以非均匀序列的形式存在，例如支付记录、在线购买等。理解 LLM 在预测非均匀序列方面的能力对于验证我们关于 LLM 对时间序列数据有用性的主张也是必要的。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A2.p1.1": {
+  "sentences": [
+   {
+    "zh": "我们的研究将产生的主要影响之一，将体现在使用 LLM 对时间序列进行建模的模型的大量涌现上。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们的结果将帮助研究人员不要简单地跟随在所有应用中使用 LLM 的趋势，而是详细检查其可用性。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "具体而言，这些发现将帮助他们判断 LLM 组件是否必要，以及计算成本对于特定设置是否合理。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "除了研究界之外，我们关于更小、更简单的模型具有更好性能的发现将有助于开发可扩展的模型，这些模型易于理解和解释，并且可以在实际应用中低成本部署。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "虽然我们承认我们的大部分结果是实验性的，并且仅限于所选数据集，但我们认为这些结果也将帮助研究人员缩小在时间序列预测中寻找更好模型的搜索空间，而不会简单地忽视更简单的模型。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A3.p1.1": {
+  "sentences": [
+   {
+    "zh": "我们的所有贡献都将根据 MIT 许可证发布。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A4.SS1.p1.1": {
+  "sentences": [
+   {
+    "zh": "我们在同一设备上训练和评估每种参考方法和每种架构修改。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "对于使用 LlaMA-7B [33] 的 Time-LLM [14]，我们使用具有 80GB 显存的 NVIDIA A100 GPU。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "对于使用 GPT-2 [28] 的其他方法 [49, 21]，我们使用具有 48GB 显存的 NVIDIA RTX A6000 GPU。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "尽管对内存占用（memory footprint）的分析超出了本研究范围，但我们指出，在不使用 LLM 的情况下训练基线也可以在使用更小的 GPU 时完成。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A4.SS2.p1.1": {
+  "sentences": [
+   {
+    "zh": "在复现参考方法时，我们使用了原始仓库的超参数和模型结构。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在消融研究中，由于模型参数较少，我们在某些情况下调整了学习率或增大了批量大小。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "所有其他训练细节均与参考方法保持一致。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "具体的训练细节和超参数在仓库的代码和运行脚本中提供{fn2}。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "注意，简单方法的训练过程和超参数也可以通过此链接获取。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "fn2": {
+  "sentences": [
+   {
+    "zh": "https://github.com/BennyTMT/LLMsForTimeSeries",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A4.SS3.p1.1": {
+  "sentences": [
+   {
+    "zh": "为了探究LLM方法性能的来源，我们对编码器进行了进一步研究。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们使用各种编码器对时间序列数据进行编码，随后使用一个线性层将时间序列嵌入映射为预测值。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "结合分块（patching）和注意力的编码器结构如图4所示。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "PAttn 与 PatchTST [26] 的关键区别在于缺少了 PatchTST [26] 中的位置嵌入和前馈网络，或者更具体地说，将 Transformer 编码器替换为简单的单层注意力结构。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "它可能是一种简单而有效的方法，有助于评估新提出方法在成本与性能之间的权衡。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A4.SS3.p2.1": {
+  "sentences": [
+   {
+    "zh": "此外，我们提出了三种不同的神经模型：(i) “LTrsf”：它在更大的数据集上表现更好，并使用不含跨模态注意力的 CALF [21] 编码器。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这可能是 CALF 性能的一个潜在来源；(ii) “D-LTrsf”；以及 (iii) “D-PAttn”：两者都将时间序列分解为三个子序列，并分别使用上述两种方法对每个子序列进行预测，然后将结果进行线性组合以得到最终预测。",
+    "conf": "mid",
+    "note": "原句将列表项 (ii) 和 (iii) 与上一句的说明拼在同一句内，结构较为混乱；译文按原顺序直译。"
+   },
+   {
+    "zh": "在表18的结果中，我们注意到，即使是更简单的模型也显著优于基于 LLM 的时间序列模型。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "具体而言，所有基于 LLM 的模型合计能够作为最佳和第二最佳表现者出现33次。",
+    "conf": "low",
+    "note": "原文“all combined we able to appear”存在语法错误，疑为“all combined were able to appear”之误，此处按推断含义翻译。"
+   },
+   {
+    "zh": "然而，“PAttn” 的表现优于它们，它作为最佳和第二最佳表现者出现了34次。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "此外，“PAttn”、“LTrsf”与其他最先进方法之间的比较见表19。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A5.p1.1": {
+  "sentences": [
+   {
+    "zh": "这里我们展示了额外实验的结果，这些结果同样凸显了 LLM 在建模时间序列数据方面的能力。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A5.SS1.p1.1": {
+  "sentences": [
+   {
+    "zh": "由于大语言模型（LLMs）以及一般的深度学习模型本质上是概率性的，它们的预测在不同运行和不同随机初始化下可能有所不同。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "因此，我们报告我们的基线模型得出的所有 MAE 和 MSE 预测的置信区间（CI）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们报告 Time-LLM、CALF、OneFitsAll 分别在表 9、11 和 13 中的 MAE 预测置信区间，以及分别在表 10、12 和 14 中的 MSE 预测置信区间。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在所有结果中，我们注意到变化范围相当小，并且这些区间不会影响我们的观察结果。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "为了更清楚地展示细微差异，我们在图 5 和图 6 中呈现了可视化结果。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A5.SS1.p2.1": {
+  "sentences": [
+   {
+    "zh": "**其他数据集的置信区间。** 为了评估论文中消融实验的普适性，我们引入了五个未被参考方法[49, 14, 21]研究过的额外数据集。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "上述数据集被用于许多时间序列预测研究[29, 9, 38, 1, 45]。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "“汇率”数据集的预测长度为“96, 192, 336, 720”，与[45, 17]一致。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "其他四个数据集的预测长度分别为30、48、56和12，遵循 Chronos [1] 中的设置。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "如表15、16和17所示，使用我们所引用的三种方法[49, 14, 21]得到的五个新数据集上的预测性能仍然表明，语言模型对于预测任务而言并非必要。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A5.SS2.p1.1": {
+  "sentences": [
+   {
+    "zh": "这里我们提供所有未能加入主论文的方法和数据集的结果。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A5.SS2.p2.1": {
+  "sentences": [
+   {
+    "zh": "**推理时间。** 所有关于“推理时间”和预测性能的结果分别展示在图 7 和图 8 中。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A5.SS2.p3.1": {
+  "sentences": [
+   {
+    "zh": "**随机化参数与输入随机打乱。** 随机化参数的结果见表20。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "打乱输入的其余结果见表21、22、23和24。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A5.T9": {
+  "sentences": [
+   {
+    "zh": "表 9：Time-LLM 的 MAE 预测的置信区间。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "表现最佳的模型以红色文字突出显示。#Wins 表示该方法表现最佳的总次数。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A5.T10": {
+  "sentences": [
+   {
+    "zh": "表10：Time-LLM MSE预测的置信区间。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "表现最佳的模型以红色文字高亮显示。#Wins 指该方法表现最佳的总次数。",
+    "conf": "mid",
+    "note": "原文“in highlighted”疑似应为“is highlighted”，按此理解翻译。"
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A5.T11": {
+  "sentences": [
+   {
+    "zh": "表 11：CALF 的 MAE 预测的置信区间。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "表现最佳的模型以红色文字突出显示。#Wins 指的是该方法表现最佳的总次数。",
+    "conf": "mid",
+    "note": "原文存在语法错误 'in highlighted'，理解为 'is highlighted'。"
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A5.T12": {
+  "sentences": [
+   {
+    "zh": "表12：CALF MSE预测的置信区间。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "表现最好的模型以红色字体突出显示。#Wins 指该方法表现最佳的次数。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "注意，’-’ 表示该数据集未包含在原始论文中。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A5.T13": {
+  "sentences": [
+   {
+    "zh": "表 13：OneFitsAll 的 MAE 预测的置信区间。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "表现最好的模型以红色字体突出显示。#Wins 指该方法表现最佳的总次数。",
+    "conf": "mid",
+    "note": "原文为 'in highlighted'，疑为 'is highlighted' 的笔误，按此理解翻译。"
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A5.T14": {
+  "sentences": [
+   {
+    "zh": "表14：OneFitsAll的MSE预测的置信区间。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "表现最佳的模型以红色文字突出显示。#Wins 指该方法表现最佳的总次数。",
+    "conf": "mid",
+    "note": "原文“in highlighted”疑为“is highlighted”的笔误，按上下文理解为“以红色文字突出显示”。"
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A5.T15": {
+  "sentences": [
+   {
+    "zh": "表 15：Time-LLM 的 MAE 和 MSE 预测的置信区间。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "表现最好的模型以红色文字高亮显示。#Wins 表示该方法表现最佳的总次数。",
+    "conf": "mid",
+    "note": "原文有笔误：'in highlighted' 应为 'is highlighted'，按推测意思翻译。"
+   },
+   {
+    "zh": "上表中的消融结果来自参考方法 [49, 14, 21] 未曾研究过的数据集。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A5.T16": {
+  "sentences": [
+   {
+    "zh": "表 16：CALF 的 MAE 和 MSE 预测的置信区间。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "表现最好的模型以红色文字突出显示。#Wins 表示该方法表现最佳的总次数。",
+    "conf": "mid",
+    "note": "原文 'in highlighted' 似为笔误，按 'is highlighted' 理解。"
+   },
+   {
+    "zh": "上表中的消融结果来自参考方法 [49, 14, 21] 尚未研究过的数据集。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A5.T17": {
+  "sentences": [
+   {
+    "zh": "表17：OneFitsAll 的 MAE 和 MSE 预测的置信区间。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "表现最佳的模型以红色文字高亮显示。#Wins 指该方法表现最佳的总次数。",
+    "conf": "mid",
+    "note": "原文 'in highlighted' 疑为 'is highlighted' 的笔误，按上下文译为“以红色文字高亮显示”。"
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A5.F5": {
+  "sentences": [
+   {
+    "zh": "图5：消融研究表明，当不同方法移除 LLM（“**w/o LLM**”）或将其替换为单层注意力（“**LLM2Attn**”）或 Transformer（“**LLM2Trsf**”）时，与原始方法（如“GPT-2”或“LLaMA”）相比，在 MAE 指标下的时间序列预测任务性能并未下降，甚至有所提升。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "图中的垂直虚线表示原始论文中的结果。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "上述图表来自 ’ETTh2’、’ETTm1’、’Illness’、’Weather’ 和 ’Traffic’ 数据集。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A5.F6": {
+  "sentences": [
+   {
+    "zh": "图6：消融研究表明，当不同方法移除 LLM（“**w/o LLM**”）或将其替换为单层注意力（“**LLM2Attn**”）或 Transformer（“**LLM2Trsf**”）时，与原始方法（如“GPT-2”或“LLaMA”）相比，其在 MSE 指标下的时间序列预测任务性能并未下降，甚至有所提升。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "图中的垂直虚线表示原始论文中的结果。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A5.T18": {
+  "sentences": [
+   {
+    "zh": "表18：简单方法与参考文献 [21, 49, 14] 原始结果的比较。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "红色：最佳性能。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "蓝色：次佳。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A5.T19": {
+  "sentences": [
+   {
+    "zh": "表19：简单消融、基于LLM的方法和非LLM方法之间的比较。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "基于LLM的方法略优于非LLM方法。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "非LLM结果来自LLM-Time和iTransformer论文，这些结果是在相同的划分上计算的。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "正如预期，本文的主要发现没有改变：基于LLM的方法略好，但我们的消融表明这并非由于LLM。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "红色：最佳性能。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "蓝色：次佳。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A5.T20": {
+  "sentences": [
+   {
+    "zh": "表20：在语言数据集上的预训练对于时间序列预测任务并非必要。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "该表展示了使用预训练模型与不使用预训练的性能，以及在大语言模型（LLMs）用于时间序列预测时微调与不微调的组合情况。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A5.T21": {
+  "sentences": [
+   {
+    "zh": "表21：在ETTh1（预测长度为“96、192、336和720”）和Illness（预测长度为“24、36、48和60”）上，对Time-LLM、CALF和OneFitsAll方法进行输入打乱/掩码的结果；在模型修改前后，打乱输入对时间序列预测性能下降的影响没有显著变化。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A5.T22": {
+  "sentences": [
+   {
+    "zh": "表22：在ETTh2和Electricity上的输入打乱/掩码实验中，打乱输入对时间序列预测性能下降的影响在模型修改前后没有显著变化。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A5.T23": {
+  "sentences": [
+   {
+    "zh": "表23：对于在ETTm1和ETTm2上的输入打乱/掩码实验，输入打乱对时间序列预测性能下降的影响在模型修改前后没有显著变化。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A5.T24": {
+  "sentences": [
+   {
+    "zh": "表24：在Weather和Traffic上的输入打乱/掩码实验中，打乱输入对时间序列预测性能下降的影响在模型修改前后没有显著变化。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A5.F7": {
+  "sentences": [
+   {
+    "zh": "图7：消融方法在大多数情况下推理耗时更少，同时提供更好的预测性能。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "上图显示了 Time-LLM、OneFitsAll 和 CALF 在 ETTh1、ETTh2、ETTm1、Illness 以及 Weather、Traffic 数据集上的推理时间与预测准确率（按预测长度取平均）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "其他数据集的结果参见图3。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A5.F8": {
+  "sentences": [
+   {
+    "zh": "图8：消融方法在大多数情况下推理耗时更少，同时提供更好的预测性能。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "上图显示了 Time-LLM、OneFitsAll 和 CALF 在所有数据集上的推理时间和预测准确度（在预测长度上取平均，以 MSE 指标衡量）。",
+    "conf": "mid",
+    "note": "“in MSE metric”修饰“prediction accuracy”，原文表述略有歧义，译文用括号明确范围。"
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ }
+}

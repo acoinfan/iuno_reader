@@ -1,0 +1,2632 @@
+{
+ "__meta__": {
+  "translator": "deepseek-v4-pro + deepseek-v4-pro（关思考）",
+  "usage": {
+   "calls": 135,
+   "prompt_tokens": 109767,
+   "completion_tokens": 52324,
+   "seconds": 542.2,
+   "cached_tokens": 71168
+  }
+ },
+ "abs.p1": {
+  "sentences": [
+   {
+    "zh": "大语言模型（LLMs）新兴的零样本能力已促使其应用扩展到远超自然语言处理任务的领域。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在强化学习中，尽管LLMs已被广泛用于基于文本的环境，但它们与连续状态空间的结合仍未得到充分研究。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在本文中，我们研究如何利用预训练的LLMs在上下文中预测连续马尔可夫决策过程的动态。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们识别出处理多元数据和纳入控制信号是限制LLMs在此设置中部署潜力的关键挑战，并提出解耦上下文学习（Disentangled In-Context Learning, DICL）来解决这些问题。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们在两种强化学习设置中展示了概念验证应用：基于模型的策略评估和数据增强的异策略强化学习，并得到所提方法理论分析的支持。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们的实验进一步表明，我们的方法能产生校准良好的不确定性估计。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们在 https://github.com/abenechehab/dicl 发布代码。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S0.F1": {
+  "sentences": [
+   {
+    "zh": "图1：**DICL框架。** DICL 先将轨迹投影到解耦的特征空间中，再使用预训练的 LLM 和上下文学习进行零样本预测。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S1.p1.1": {
+  "sentences": [
+   {
+    "zh": "大型语言模型（LLMs）的兴起已显著影响了自然语言处理（NLP）领域。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "基于transformer架构（Vaswani et al., 2017）的LLMs（Brown et al., 2020; Hugo Touvron & the Llama 2 team., 2023; Dubey & the Llama 3 team., 2024）通过使机器能够以卓越的流畅性理解和生成类人文本，重新定义了机器翻译（Brown et al., 2020）、情感分析（Zhang et al., 2023b）和问答（Roberts et al., 2020; Pourkamali & Sharifi, 2024）等任务。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "LLMs最引人注目的方面之一是其涌现能力，尤其是上下文学习（in-context learning, ICL）（von Oswald et al., 2023）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "通过ICL，LLM可以仅通过在其输入上下文中被提供任务示例来学习执行新任务，而无需任何基于梯度的优化。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这种现象不仅在文本生成中被观察到，还在图像分类（Abdelhamed et al., 2024; Zheng et al., 2024）乃至解决逻辑谜题（Giadikiaroglou et al., 2024）等任务中被观察到，而这在标准统计学习理论的背景下是出乎意料的。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "据我们所知，预训练LLMs的ICL能力在强化学习中仅得到了很少的探索（Wang et al., 2023），尽管前者在理解确定性和混沌动力系统行为方面已展现出成功（Liu et al., 2024c）。",
+    "conf": "mid",
+    "note": "原文 the former 字面可指 ICL capabilities，但从语义看更可能指 pre-trained LLMs，存在指代歧义。"
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S1.p2.1": {
+  "sentences": [
+   {
+    "zh": "在本文中，我们展示了利用预训练大型语言模型（LLM）的上下文学习（ICL）如何提高强化学习（RL）的样本效率，并以策略评估和数据增强的异策略强化学习中的两个概念验证为例。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "遵循 Li et al. (2023) 提出并在 Liu et al. (2024c) 中通过实验研究的关于上下文学习的动力学系统视角，我们使用给定智能体的观测轨迹来预测其在常用强化学习环境中的未来状态和奖励。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "为了实现这一目标，我们解决了与考虑连续状态空间马尔可夫决策过程（MDP）相关的两个关键挑战：1）将动作信息纳入 LLM 的上下文；2）处理状态-动作维度之间的相互依赖关系，因为先前的方法已知会独立地处理多元数据的协变量。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们的框架 DICL（解耦上下文学习）在图1中进行了总结。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "DICL 的核心思想是应用一个特征空间变换，记作 $\\varphi$，该变换捕捉状态特征与动作特征之间的相互依赖关系，从而将每个维度解耦。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "随后，采用大型语言模型（LLM）通过上下文学习以零样本方式独立地预测每个分量。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "最后，利用逆变换 $\\varphi^{-1}$ 将预测结果变换回原始轨迹空间。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S1.p3.1": {
+  "sentences": [
+   {
+    "zh": "我们的方法带来了若干新颖的见解与贡献，我们将其总结如下：",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S1.I1.i1": {
+  "sentences": [
+   {
+    "zh": "1. 方法论。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们开发了一种新颖的方法，将状态维度相互依赖性和动作信息整合到上下文轨迹中。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这种方法被称为解耦上下文学习（DICL），带来了一种在具有连续状态空间的强化学习环境中应用上下文学习的新方法论。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们在涉及本体感觉控制的任务上验证了我们提出的方法。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S1.I1.i2": {
+  "sentences": [
+   {
+    "zh": "2. 理论方面。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们从理论上分析了由基于LLM的动力学模型进行多分支推演所产生的策略评估算法，进而得到一个新的回报界。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S1.I1.i3": {
+  "sentences": [
+   {
+    "zh": "3. 实验。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们展示了 LLM 的 MDP 建模能力如何使两种 RL 应用受益：策略评估和数据增强的离线强化学习。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "此外，我们表明，LLM 是一个经过校准的不确定性估计器，这是 MBRL 算法的一个理想性质。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S1.SS0.SSS0.Px1.p1.1": {
+  "sentences": [
+   {
+    "zh": "本文结构如下：第2节介绍我们工作中使用的文献中的主要概念（而更详细的相关工作则推迟到附录B）。",
+    "conf": "mid",
+    "note": "原文中的 'is differed' 疑为 'is deferred' 之误，此处按其意译为“推迟”。"
+   },
+   {
+    "zh": "然后，我们在第3.1节通过分析LLM的注意力矩阵开始我们的分析。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "DICL在第3.3节中介绍，而第4节包含所提方法在RL中的不同应用以及相应的理论分析。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "最后，第5节提供了简短的讨论以及由我们的方法引发的未来研究方向。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S2.p1.1": {
+  "sentences": [
+   {
+    "zh": "**强化学习（RL）。** RL 的标准框架是无限时域 **马尔可夫决策过程（MDP）** $\\mathcal{M}=\\langle\\mathcal{S},\\mathcal{A},P,r,\\mu_{0},\\gamma\\rangle$，其中 $\\mathcal{S}$ 表示状态空间，$\\mathcal{A}$ 表示动作空间，$P:\\mathcal{S}\\times\\mathcal{A}\\to\\mathcal{S}$ 表示（可能随机的）转移动态，$r:\\mathcal{S}\\times\\mathcal{A}\\rightarrow\\mathbb{R}$ 表示奖励函数，$\\mu_{0}$ 表示初始状态分布，$\\gamma\\in[0,1]$ 表示折扣因子。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "RL 的目标是，对每个状态 $s\\in\\mathcal{S}$，在动作空间 $\\mathcal{A}$ 上找到一个分布 $\\pi(s)$（称为策略），使折扣奖励的期望和 $\\eta(\\pi):=\\mathbb{E}_{s_{0}\\sim\\mu_{0},a_{t}\\sim\\pi,\\,s_{t>0}\\sim P^{t}}[\\sum_{t=0}^{\\infty}\\gamma^{t}r(s_{t},a_{t})]$ 最大化。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在策略 $\\pi$ 下，我们将 $s\\in\\mathcal{S}$ 处的状态价值函数定义为从状态 $s$ 开始、之后遵循策略 $\\pi$ 直到终止的折扣奖励期望和：$V^{\\pi}(s)=\\mathbb{E}_{a_{t}\\sim\\pi,s_{t>0}\\sim P^{t}}\\big[\\sum_{t=0}^{\\infty}\\gamma^{t}r(s_{t},a_{t})\\mid s_{0}=s\\big]$。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S2.p2.1": {
+  "sentences": [
+   {
+    "zh": "**基于模型的强化学习（Model-based RL，MBRL）。** MBRL 算法解决如下监督学习问题：根据在与真实系统交互时收集的数据，估计环境的动态 $\\hat{P}$（有时也估计奖励函数 $\\hat{r}$）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "模型的损失函数通常是对数似然 $\\mathcal{L}(\\mathcal{D};\\hat{P})=\\frac{1}{N}\\sum_{i=1}^{N}\\log\\hat{P}(s^{i}_{t+1}|s^{i}_{t},a^{i}_{t})$，对于确定性模型则为均方误差（Mean Squared Error, MSE）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "学习到的模型随后可用于在 MDP $\\widehat{\\mathcal{M}}=\\langle\\mathcal{S},\\mathcal{A},\\hat{P},r,\\mu_{0},\\gamma\\rangle$ 下进行策略搜索。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "该 MDP 与真实环境 $\\mathcal{M}$ 共享状态空间 $\\mathcal{S}$、动作空间 $\\mathcal{A}$ 和奖励函数 $r$，但从数据集 $\\mathcal{D}$ 中学习转移概率 $\\hat{P}$。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S2.p3.1": {
+  "sentences": [
+   {
+    "zh": "**大语言模型（Large Language Models，LLMs）。** 在自然语言处理领域，大语言模型（LLMs）已成为理解和生成类人文本的强大工具。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "LLM 通常被定义为一个神经网络模型，通常基于 transformer 架构（Vaswani et al., 2017），并在庞大的序列语料库 $U=\\{U_{1},U_{2},\\ldots,U_{i},\\ldots,U_{N}\\}$ 上训练，其中每个序列 $U_{i}=(u_{1},u_{2},\\ldots,u_{j},\\ldots,u_{n_{i}})$ 由来自词汇表 $\\mathcal{V}$ 的 token $u_{j}$ 组成。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "仅解码器型 LLM（Radford et al., 2019; Dubey & the Llama 3 team., 2024）通常编码一个自回归分布，其中每个 token 的概率仅以序列中先前的 token 为条件，表示为 $p_{\\theta}(U_{i})=\\prod_{j=1}^{n_{i}}p_{\\theta}(u_{j}|u_{0:j-1})$。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "参数 $\\theta$ 通过最大化整个数据集的概率 $p_{\\theta}(U)=\\prod_{i=1}^{N}p_{\\theta}(U_{i})$ 来学习。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "每个 LLM 都有一个相关联的分词器（tokenizer），它将输入字符串切分为一个 token 序列，每个 token 都属于 $\\mathcal{V}$。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "alg1": {
+  "sentences": [
+   {
+    "zh": "**算法1** $\\text{ICL}_{\\theta}$ (Liu et al., 2024b; Gruver et al., 2023b)",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S2.p4.1": {
+  "sentences": [
+   {
+    "zh": "**上下文学习（In-Context Learning，ICL）。** 为了在 ICL 中将轨迹用作输入，我们采用 Gruver et al. (2023b) 和 Jin et al. (2024) 提出的时间序列分词方法。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "该方法使用 LLM 词汇表中表示数字的子集 $\\mathcal{V}_{\\text{num}}$ 来对时间序列进行分词（算法 1）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "具体而言，给定一个单变量时间序列，我们将其重缩放到一个特定范围（Liu et al., 2024b; Zekri et al., 2024a; Requeima et al., 2024），用 $k$ 位数字对其进行编码，并将每个值拼接起来以构建 LLM 提示：",
+    "conf": "mid",
+    "note": "原文 univarite 恐为 univariate 的笔误，按“单变量”译。"
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S2.p5.1": {
+  "sentences": [
+   {
+    "zh": "$\\underbrace{[0.2513,5.2387,9.7889]}_{\\text{time series}}\\to\\underbrace{[1.5,5.16,8.5]}_{\\text{rescaled}}\\to\\underbrace{``150,516,850\"}_{\\text{prompt}}$",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S2.p6.1": {
+  "sentences": [
+   {
+    "zh": "在 LLM 前向传播之后，与 $\\mathcal{V}_{\\text{num}}$ 中 token 对应的 logits 可用于预测下一个值的分类分布，正如 Liu et al. (2024c) 所示，从而实现不确定性估计。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S3.F2": {
+  "sentences": [
+   {
+    "zh": "图2：**LLM能够感知时间模式。** 将$3$条具有不同模式的时间序列输入该LLM（Llama 3-8B）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "**(a)** 矩形脉冲。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "**(b)** 具有恒定子部分的矩形信号。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "**(c)** 专家策略下HalfCheetah的fthigh维度。",
+    "conf": "mid",
+    "note": "fthigh 疑似原文笔误或特定维度名，按原文保留，未作改动。"
+   },
+   {
+    "zh": "属于恒定槽位（或峰值）的token会关注所有先于它们出现的相似token，并更加关注它们的首次出现。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S3.SS1.p1.1": {
+  "sentences": [
+   {
+    "zh": "在考虑强化学习环境中收集的智能体多变量轨迹之前，我们首先想验证预训练的LLM模型是否对其中遇到的原始单变量信号敏感。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "为此，我们研究了Llama3 8B模型（Dubey & the Llama 3 team., 2024）在输入不同信号时的注意力机制，包括来自HalfCheetah系统（Brockman et al., 2016）的周期性fthigh维度。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "通过对Llama3中多头注意力的32层中每一层的32个头上的注意力矩阵进行平均，我们观察到了不同的模式，这些模式提供了对模型关注点和行为的洞察（图2显示了每个信号的选定注意力层）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "注意力矩阵呈现对角线模式，表明时间戳之间存在强自相关，并且由于仅解码器Transformer中的因果掩码注意力而呈现下三角结构。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS1.p2.1": {
+  "sentences": [
+   {
+    "zh": "对注意力矩阵的进一步检查揭示了一个更复杂的发现。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "重复模式内的标记（例如信号峰值、恒定部分）不仅关注同一周期内的过去标记，还关注来自同一模式先前出现的标记，展示了一种上下文学习形式。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "检测和利用此类信号中的重复模式的能力在强化学习中尤其有价值，因为状态转换和动作结果通常表现出周期性或反复出现的动态，特别是在连续控制任务中。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然而，将这一见解应用于强化学习面临两个关键挑战，涉及1）将动作整合到预测过程中，以及2）处理强化学习问题的多变量性质。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们现在通过基于上述分析中的见解来解决这些挑战。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS2.p1.1": {
+  "sentences": [
+   {
+    "zh": "给定一条长度为 $T$ 的初始轨迹 $\\mathcal{T}=(s_{0},a_{0},r_{1},s_{1},a_{1},r_{2},s_{2},\\ldots,r_{T-1},s_{T-1})$，其中 $s_{t}\\in\\mathcal{S}$，$a_{t}=\\pi(s_{t})\\in\\mathcal{A}${fn1}，策略 $\\pi$ 在整个轨迹中保持不变，且 $r_{t}\\in\\mathbb{R}$，我们希望预测未来的转移：给定 $(s_{T-1},a_{T-1})$，预测下一个状态和奖励 $(s_{T},r_{T})$，并以自回归方式预测后续转移。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "为简单起见，我们首先省略动作和奖励，转而关注多元序列 $\\tau^{\\pi}=(s_{0},s_{1},\\ldots,s_{T})$，其中我们假设状态各维度相互独立。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "稍后，我们将展示如何放宽省略动作和奖励以及状态独立性的假设，这对于强化学习中的应用至关重要。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "$\\tau^{\\pi}$ 的联合概率密度函数可以写为：",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "fn1": {
+  "sentences": [
+   {
+    "zh": "在实践中，状态和动作是实值向量，分别张成维度为 $d_{s}$ 和 $d_{a}$ 的空间：$\\mathcal{S}=\\mathbb{R}^{d_{s}}$，$\\mathcal{A}=\\mathbb{R}^{d_{a}}$",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.F3": {
+  "sentences": [
+   {
+    "zh": "图3：来自Halfcheetah环境中专家数据集的协方差矩阵表明状态-动作特征之间存在线性相关性。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS2.p3.1": {
+  "sentences": [
+   {
+    "zh": "利用第2节中定义的上下文学习器的仅解码器特性，我们可以将算法1应用于状态向量的每个维度，以推断在τ^π中访问的每个状态在其相对历史条件下的转移规则：对于所有j∈{1,…,d_s}，",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS2.p3.2": {
+  "sentences": [
+   {
+    "zh": "其中 $\\theta$ 是作为上下文学习器使用的 LLM 的固定参数，$T$ 是其上下文长度。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "假设 MDP 状态完全可观测，马尔可夫性质揭示了所学转移规则与相应马尔可夫规则之间的等价性：$\\hat{P}_{\\theta}(s_{t}|s_{t-1},\\ldots,s_{1},s_{0})=\\hat{P}_{\\theta}(s_{t}|s_{t-1})$。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS2.p4.1": {
+  "sentences": [
+   {
+    "zh": "这种方法，我们称之为 vICL（即 vanilla ICL），因此对状态的每个维度分别应用算法 1，假设它们相互独立。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "此外，动作信息被积分掉（如公式 1 所示），这在理论上将该方法的应用范围限制在仅通过动作期望依赖于策略的量（例如，价值函数 $V^{\\pi}(s)$）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们在下一节解决这些局限性。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS2.p5.1": {
+  "sentences": [
+   {
+    "zh": "关于DICL的零样本性质。我们对“零样本”一词的使用与LLM和时间序列文献（Gruver et al., 2023a）一致，表明我们不进行任何梯度更新或对预训练LLM权重进行微调。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "具体来说，我们采用Li et al. (2023)中研究的ICL的动力学系统表述，其中查询由轨迹“$s^{j}_{0},s^{j}_{1},\\ldots,s^{j}_{t-1}$”组成，标签是后续值$s^{j}_{t}$。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS3.p1.1": {
+  "sentences": [
+   {
+    "zh": "在本节中，我们通过引入解耦上下文学习（DICL）来解决第3.2节讨论的vICL的两个局限性，该方法放宽了状态特征独立的假设，并通过采用旨在将状态-动作向量映射到特征独立的潜在空间的策略，重新引入了动作。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然后，我们可以将vICL应用于潜在表示，因为vICL是在特征独立的假设下运行的。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "使用这种潜在空间的额外好处是，它可能降低维度，从而加快整体方法的速度。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS3.p2.1": {
+  "sentences": [
+   {
+    "zh": "虽然可以考虑像解耦自编码器这样的复杂方法{fn2}用于DICL，但在本工作中我们采用主成分分析（PCA）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "事实上，由于缺乏用于此类表示学习的预训练模型，需要在可能很大的数据集上从头开始训练。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这与我们利用LLM和上下文学习的预训练知识的目标相悖。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "相反，我们发现PCA能够生成新的线性不相关特征并降低维度，在简单性、可处理性和性能之间取得了良好的平衡（图3和图4）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "尽管如此，DICL对这一方面是不可知的，任何能够解耦特征的变换$\\varphi$都可以用来替代PCA。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在本文的其余部分，我们介绍DICL的两种变体：",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "fn2": {
+  "sentences": [
+   {
+    "zh": "关于PCA替代方法的更详细讨论见附录C。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.I1.i1": {
+  "sentences": [
+   {
+    "zh": "• DICL-$(s,a)$，它将 PCA 的旋转矩阵应用于状态和动作的特征空间，然后在主成分的投影空间中运行算法 1；",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.I1.i2": {
+  "sentences": [
+   {
+    "zh": "• DICL-$(s)$，它仅对状态轨迹应用相同的变换。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这在不需要整合动作的设置中很有用，例如当我们只想估计价值函数 $V^{\\pi}(s)$ 时。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.F4": {
+  "sentences": [
+   {
+    "zh": "图4：**基于PCA的DICL在更少的计算时间内实现了更小的多步误差。** 我们将DICL-$(s)$和DICL-$(s,a)$（使用等于特征数量一半的主成分数）与普通方法vICL和MLP基线进行了比较。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "（Llama 3-8B）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS4.p1.1": {
+  "sentences": [
+   {
+    "zh": "在本节中，我们旨在将我们的方法与 MuJoCo Gym 环境套件中的 HalfCheetah 系统进行对比（Brockman et al., 2016; Todorov et al., 2012）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们所有的实验均使用 Llama 3 系列模型进行（Dubey & the Llama 3 team., 2024）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "图 4(a) 显示了在预测范围 $h\\in\\{1,\\ldots,20\\}$ 步内每个状态维度的平均 MSE。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "图 4(b) 显示了 HalfCheetah 系统选定状态维度的预测轨迹（实验细节、指标和其余状态维度推迟到附录 F）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS4.p2.1": {
+  "sentences": [
+   {
+    "zh": "我们首先观察到，基于LLM的动力学预测器表现出一个预热阶段（图4(b)中约70步），这是LLM收集足够上下文所必需的。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "对于多步预测，图4(a)展示了在预测时域和轨迹上的平均MSE，表明DICL的两个版本在几乎所有状态维度上都优于朴素方法和在上下文数据上训练的MLP基线。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "实际上，我们假设这种改进尤其得益于PCA所实现的线性不相关空间中的投影。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "此外，我们还利用了降维特性，选择组件数量$c$等于原始特征数量$d_{s}+d_{a}$（或DICL-$(s)$中的$d_{s}$）的一半。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "如图4(c)所示，这导致该方法计算时间显著减少，且没有性能损失。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.T1": {
+  "sentences": [
+   {
+    "zh": "表1：不同LLM的比较。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "结果是来自7个D4RL（Fu et al., 2021）任务中每个任务5个回合的平均值。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "$\\downarrow$表示越低越好。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "最佳平均分数以**粗体**显示。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们显示平均分数$\\pm$95%高斯置信区间。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS4.p3.1": {
+  "sentences": [
+   {
+    "zh": "**LLM 对比。** 在表 1 中，我们比较了使用不同 LLM 时基线和 DICL 所获得的性能。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "与图 4(a) 类似，分数计算为给定预测范围 $h$ 内所有维度的平均值（有关 MSE 的详细信息，请参阅附录 F；有关 KS 统计量的详细信息，请参阅附录 G）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "请注意，与图 4 类似，在本实验中我们对 DICL-$(s,a)$ 和 DICL-$(s)$ 都使用了基于 PCA 的降维，将原始特征数量减少了一半。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "总体而言，我们可以看到，由于 PCA 的解耦效应，DICL（尤其是 DICL-$(s,a)$ 版本）与 vICL 和 MLP 基线相比，校准效果有所改善。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "此外，使用 3.1-70B 模型的 DICL-$(s)$ 实现了最低的均方误差（MSE），为 3.59。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "尽管如此，DICL-$(s,a)$ 在所有模型中都表现出最高的 MSE。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这可能是由于预测动作信息引入了额外误差，从而同时对动力学和数据生成策略进行建模。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这一方面与 MLP 基线不同，后者在测试时提供真实动作（充当预言机），也与仅基于状态运行的 DICL-$(s)$ 和 vICL 不同。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们在附录 H 中展示了这项消融研究的详细结果。请注意，我们仅使用了基于 LLaMA 系列模型的 LLM（Dubey & the Llama 3 team., 2024）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这是一个战略选择，因为 LLaMA 分词器通过为 0 到 999 之间的每个数字分配一个单独的标记，促进了我们的框架。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "对于其他 LLM，文献中已经提出了从其输出 logits 中提取转换规则的算法。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "例如，可以采用分层 Softmax 算法（Liu et al., 2024b）来实现这一目的。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.p1.1": {
+  "sentences": [
+   {
+    "zh": "正如前面几节所探讨的，LLM 可以通过上下文学习用作本体感觉控制的精确动力学学习器。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们现在陈述我们在将 DICL 集成到 MBRL 方面的主要贡献。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "首先，我们将基于模型的策略优化（MBPO）（Janner et al., 2019）的回报界推广到更一般的多分支情形，并用它来分析我们的方法。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "接下来，我们利用 LLM 来扩充离策略 RL 算法的重放缓冲区，从而得到一种样本效率更高的算法。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在第二个应用中，我们应用我们的方法来预测奖励信号，从而产生一种混合的基于模型的策略评估技术。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "最后，我们表明 LLM 提供了校准的不确定性估计，并以对我们结果的讨论作为结束。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS1.p1.1": {
+  "sentences": [
+   {
+    "zh": "在MBRL中使用动力学模型时，人们理想上寻求单调改进保证，确保模型下的最优策略在真实动力学下也是最优的，最多相差某个界限。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "此类保证通常取决于系统参数（例如折扣因子$\\gamma$）、预测范围$k$以及模型泛化误差$\\varepsilon_{\\text{m}}$。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "正如Janner等人（2019）和Frauenknecht等人（2024）所确立的，推导这些理论保证的框架是分支模型推演框架。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS1.p2.1": {
+  "sentences": [
+   {
+    "zh": "分支 rollout 回报 $\\eta^{\\text{branch}}[\\pi]$ 在 Janner et al. (2019) 中被定义为一种 rollout 的回报，该 rollout 从真实动态 $P$ 开始，并在某个时间点切换到在学习的动态 $\\hat{P}$ 下进行 $k$ 步 rollout。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.F5": {
+  "sentences": [
+   {
+    "zh": "图5：**多分支回报。** 遵循真实动力学 $P$ 的 rollout 以蓝色显示。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "遵循基于 LLM 的动力学 $\\hat{P}_{\\text{llm}}$ 的分支 rollout 以紫色显示。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "分支 rollout 可以重叠，以重叠分支上的期望作为回报。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS1.p3.1": {
+  "sentences": [
+   {
+    "zh": "对于基于大语言模型的动力学学习器，我们感兴趣的是研究一种更一般的分支方案，该方案稍后将用于分析我们数据增强的离策略算法的结果。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们首先定义多分支展开回报。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.Thmtheorem1.p1.1": {
+  "sentences": [
+   {
+    "zh": "策略 $\\pi$ 的多分支 rollout 回报 $\\eta^{\\text{llm}}_{p,k,T}[\\pi]$ 定义为在以下动态下 rollout 的期望回报：",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.Thmtheorem1.p1.2": {
+  "sentences": [
+   {
+    "zh": "这些不同的 rollout 实现，称为分支，可以重叠，这意味着如果在 $k$ 步窗口内从真实动态发生多次分支，多个基于 LLM 的动态可以并行运行（见图 5）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.I1.i1": {
+  "sentences": [
+   {
+    "zh": "对于 $t<T$，其中 $T$ 是最小上下文长度，rollout 遵循真实动态 $P$。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.I1.i2": {
+  "sentences": [
+   {
+    "zh": "2. 对于 $t\\geq T$，以概率 $p$，推演切换到基于 LLM 的动力学 $\\hat{P}_{\\text{llm}}$ 并持续 $k$ 步，否则推演继续使用真实动力学 $P$。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS1.p4.1": {
+  "sentences": [
+   {
+    "zh": "基于这一定义，我们现在陈述我们的主要理论结果，该结果包含真实回报与多分支展开回报之间的回报界。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.Thmtheorem2.p1.1": {
+  "sentences": [
+   {
+    "zh": "设 $T$ 为上下文轨迹的最小长度，$p\\in[0,1]$ 为给定状态是分支点的概率。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们假设奖励是有界的，并且在策略 $\\pi$ 下，基于 LLM 的模型与真实动态之间的期望总变差在每个时间步上都有界，即 $\\max_{t\\geq T}\\mathbb{E}_{s\\sim P^{t},a\\sim\\pi}[D_{\\text{TV}}(P(.|s,a)||\\hat{P}_{\\text{llm}}(.|s,a))]\\leq\\varepsilon_{\\text{llm}}(T)$。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "那么，在分支长度为 $k$ 的多分支 rollout 方案下，回报的界限如下：",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.Thmtheorem2.p1.2": {
+  "sentences": [
+   {
+    "zh": "其中 $r_{\\max}=\\max_{s\\in\\mathcal{S},a\\in\\mathcal{A}}r(s,a)$。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS1.p5.1": {
+  "sentences": [
+   {
+    "zh": "定理4.2推广了Janner等人（2019）提出的单分支回报，由于存在多个分支而加入了预测范围$k$的额外因子，并通过分支因子$p$直接考虑了LLM训练数据量的影响。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "此外，该界与最小上下文长度$T$成反比，既通过折扣因子$\\gamma^{T}$中的幂次，也通过误差项$\\varepsilon_{\\text{llm}}(T)$体现。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "实际上，项$\\varepsilon_{\\text{llm}}(T)$对应于上下文学习的泛化误差。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "文献中的几项工作研究了它，并表明它通常以$\\mathcal{O}(T^{-1/2})$的速率随上下文轨迹的长度$T$递减（Zekri等人，2024b；Zhang等人，2023c；Li等人，2023）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS2.p1.1": {
+  "sentences": [
+   {
+    "zh": "在本节中，我们展示如何将 DICL 用于离策略无模型强化学习算法（如 Soft Actor-Critic (SAC)（Haarnoja et al., 2018））中的数据增强。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "其思想是利用先前策略已经收集的轨迹，用 DICL 生成的转移来扩充离策略算法的回放缓冲区。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "目标是提高样本效率并加速学习曲线，特别是在学习的早期阶段，因为 LLM 可以从少量轨迹中生成准确的转移。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们将我们方法的这一应用命名为 DICL-SAC。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS2.p2.1": {
+  "sentences": [
+   {
+    "zh": "正如 Corrado & Hanna (2023) 所定义的，数据增强的离策略强化学习涉及对先前观察到的转移进行扰动以生成新的转移，而无需与环境进一步交互。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "生成的转移理想情况下应在 MDP 动力学下具有多样性和可行性，以提高样本效率，同时确保最优策略仍然可学习。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "alg2": {
+  "sentences": [
+   {
+    "zh": "**算法 2** DICL-SAC",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS2.p3.1": {
+  "sentences": [
+   {
+    "zh": "算法2（DICL-SAC）整合了多个组件，以展示一种新颖的概念验证，即利用DICL进行数据增强来提高SAC的样本效率。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "设 $\\mathcal{T}=(s_{0},a_{0},r_{0},\\ldots,s_{T_{\\max}},a_{T_{\\max}},r_{T_{\\max}})$ 为使用固定策略 $\\pi_{\\phi}$ 收集的一条真实轨迹，该轨迹从存储在回放缓冲区 $\\mathcal{R}$ 中的真实转移中采样。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们生成合成转移 $(s_{t},\\tilde{a}_{t},r_{t},\\hat{s}_{t+1})_{T\\leq t\\leq T_{\\max}}$；其中 $\\hat{s}_{t+1}$ 是由LLM模型仅应用于状态轨迹而生成的下一个状态，$\\tilde{a}_{t}$ 是从数据收集策略 $\\pi_{\\phi}(.|s_{t})$ 中采样的动作，$T$ 是最小上下文长度。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这些转移随后被存储在单独的回放缓冲区 $\\mathcal{R}_{\\text{llm}}$ 中。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在给定的更新频率下，DICL-SAC 使用从 $\\mathcal{R}$ 中采样的数据执行 $G$ 次梯度更新，并使用从 $\\mathcal{R}_{\\text{llm}}$ 中采样的数据执行 $\\alpha\\%\\cdot G$ 次梯度更新。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们方法的其他超参数包括基于LLM的方法（vICL、DICL-$(s)$ 或 DICL-$(s,a)$）、生成新LLM数据的频率以及最大上下文长度 $T_{\\max}$（完整超参数列表见附录D）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.F6": {
+  "sentences": [
+   {
+    "zh": "图6：数据增强的离策略强化学习。在训练早期阶段，DICL-SAC在三个Gym控制环境中提高了SAC的样本效率。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "由于DICL-SAC中大量使用LLM，我们使用Llama 3.2-1B模型进行了该实验。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS2.p4.1": {
+  "sentences": [
+   {
+    "zh": "图6比较了DICL-SAC与SAC在Gym库（Brockman et al., 2016）中三个控制环境上获得的回报曲线。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "正如我们的数据增强方法所预期的那样，我们观察到我们的算法在训练初期提高了SAC的样本效率。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这种改进在Pendulum和HalfCheetah环境中是适度但显著的，而在Hopper环境中回报曲线往往噪声更大。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "此外，随着LLM数据比例$\\alpha$的增加，算法的性能会下降（特别是在HalfCheetah中），正如定理4.2所预测的那样。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "实际上，较大比例的LLM数据与较高的分支概率$p$相关，因为在训练过程中会采样到更多的分支点。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "关于定理4.2中我们边界的其他参数，我们设置$T=1$，意味着所有LLM生成的转移都被添加到$\\mathcal{R}_{\\text{llm}}$中，并且设置$k=1$以最小化LLM推理时间。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS3.p1.1": {
+  "sentences": [
+   {
+    "zh": "在本节中，我们展示如何将 DICL 用于策略评估。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS3.p2.1": {
+  "sentences": [
+   {
+    "zh": "系统工程师经常面对多个需要在系统上测试的策略。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "一方面，离线策略评估（例如 Uehara et al. (2022)）涉及使用从不同策略收集的历史数据来估计目标策略的性能，而不会干扰系统。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然而，这种方法容易出现分布偏移和高方差等问题。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "另一方面，在线评估在真实条件下提供直接且无偏的比较。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "系统工程师通常更喜欢对一组预选策略进行在线评估，因为它提供实时反馈，并确保部署决策基于实时数据，密切反映系统在生产中的真实性能。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然而，在线评估可能耗时，并可能暂时影响系统性能。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "为了解决这个问题，我们提出一种混合方法，使用通过上下文学习获得的LLM动力学预测来减少在线评估所需的时间：策略评估的初始阶段作为标准在线测试进行，而其余部分则利用LLM的上下文学习能力所实现的动力学预测离线完成。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.F7": {
+  "sentences": [
+   {
+    "zh": "图7：**使用DICL进行策略评估。** 在$k=500$步上预测值的相对误差，上下文长度为$T=500$。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "本实验使用Llama 3-8B模型进行。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS3.p3.1": {
+  "sentences": [
+   {
+    "zh": "图7展示了在上下文长度T=500的情况下，通过预测k步的奖励轨迹所获得的价值相对误差。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "当k≤500时，我们使用实际奖励完成1000步回合的剩余步骤。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "对于DICL的两个版本，在应用PCA之前，将奖励向量拼接到特征空间中。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在Hopper环境中，很明显，仅预测奖励轨迹对于普通方法vICL来说是一项具有挑战性的任务。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "相反，DICL-(s)和DICL-(s,a)都有效地捕捉了奖励信号对状态和动作的部分依赖关系，为策略评估提供了一种更稳健的方法，并且与在从同一策略采样的转移数据集上训练的MLP基线相匹配。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然而，在HalfCheetah中，我们观察到普通方法在很大程度上优于基线和DICL。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们怀疑这是因为在HalfCheetah中，奖励信号与\\dot{rootx}维度强相关，而如图4(a)所示，我们的方法更难预测该维度。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS3.p4.1": {
+  "sentences": [
+   {
+    "zh": "注意，我们在此遵循的实验设置与基于模型的价值扩展（Feinberg et al., 2018; Buckman et al., 2018）的概念密切相关，其中我们使用动力学模型通过在Actor Critic算法中进行n步扩展来改进价值估计。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS4.p1.1": {
+  "sentences": [
+   {
+    "zh": "图4(b)中观察到的一个有趣特性是预测周围的置信区间。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "如算法1所述，给定上下文，可以提取下一个预测的完整概率分布，从而能够估计LLM预测中的不确定性。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "值得注意的是，这种不确定性在上下文有限时、峰值附近以及平均预测出现较大误差的区域尤为明显。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们在下一节通过评估LLM不确定性估计的校准来进一步探讨这一现象。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS4.p2.1": {
+  "sentences": [
+   {
+    "zh": "校准被认为是动力学模型在强化学习中应用时的一个重要性质（Malik et al., 2019）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在本节中，我们旨在研究从LLM的logits中得出的不确定性估计是否校准良好。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们通过评估每种基于LLM的方法所获得的概率分布的分位数校准（Kuleshov et al., 2018）来实现这一目标。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS4.SSS0.Px1.p1.1": {
+  "sentences": [
+   {
+    "zh": "对于变量 $y\\in\\mathcal{Y}=\\mathbb{R}$ 的回归问题，以及一个输出 $y_{i}$ 上累积分布函数（CDF）$F_{i}$ 的模型（其中 $i$ 索引数据点），分位数校准意味着 $y_{i}$（真实值）应在 $p\\%$ 的时间内落入 $p\\%$ 置信区间：",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.F8": {
+  "sentences": [
+   {
+    "zh": "图8：**分位数校准可靠性图。** LLM（Llama 3 8B）的不确定性估计校准良好。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "垂直线显示每个拟合的Kolmogorov-Smirnov统计量。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS4.SSS0.Px1.p3.1": {
+  "sentences": [
+   {
+    "zh": "其中 $F_{i}^{-1}:[0,1]\\to\\mathcal{Y}$ 表示分位数函数 $F_{i}^{-1}(p)=\\inf\\{y:p\\leq F_{i}(y)\\}$，对所有 $p\\in[0,1]$ 成立，$N$ 为样本数。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS4.SSS0.Px2.p1.1": {
+  "sentences": [
+   {
+    "zh": "图8展示了HalfCheetah系统中$bfoot$维度的可靠性图。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "总体结论是，无论使用哪种基于LLM的子程序来预测下一状态，从LLM的logits导出的不确定性估计在分位数校准方面都是校准良好的。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "理想情况下，预测器应与图8中的对角线对齐，而LLM方法几乎实现了这一点。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "此外，与朴素基线（细节推迟到附录G）相比，LLM预测器在基线已经校准时与之相当，在基线未校准时则优于基线。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "为了用点统计量量化预测器的校准，我们计算了Kolmogorov-Smirnov拟合优度检验（公式10），如图8图例所示。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.p1.1": {
+  "sentences": [
+   {
+    "zh": "通过引入DICL框架，我们的目标是弥合MBRL与LLM之间的差距。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们的研究提出了多个开放问题和未来的研究方向。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "值得注意的是，特征变换的选择对于在特定应用中提高性能至关重要。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们计划探索能够捕捉线性和非线性依赖关系的变换，例如自动编码器，如附录C中所讨论的。另一个可能的方向是将文本上下文信息集成到LLM提示中。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这种方法已被证明可以增强时间序列预测（Jin et al., 2024; Xue & Salim, 2023）和策略学习（Wang et al., 2023）的整体流程。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.p2.1": {
+  "sentences": [
+   {
+    "zh": "除此之外，我们的算法 DICL-SAC 通过应用 LLM 生成下一状态（公式 2）来进行数据增强。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "此操作需要总共 $d_{s}$ 次对 LLM 的调用（或在 $\\varphi$ 变换后为 $c$ 次）来生成 $T_{\\max}-T$ 个转移，因为时间步可以批量处理。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这种方法假设上下文中的策略是固定的，允许 LLM 仅使用状态隐式地学习 $P^{\\pi_{\\phi}}$。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "展望未来，一个未来的研究方向是探索如何通过用 LLM 替换动力学模型来将 DICL 应用于 MBRL。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "天真地应用 DICL-$(s,a)$ 将需要 $(T_{\\max}-T)\\cdot d_{s}$ 次对 LLM 的调用，因为当动作改变时，转移需要顺序预测。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这导致了一种计算上极其昂贵的方法，使其对许多应用不可行。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "因此，需要进一步研究以使这种方法在计算上高效。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.SSx1.p1.1": {
+  "sentences": [
+   {
+    "zh": "在本文中，我们探讨如何利用大型语言模型的新兴能力来惠及基于模型的强化学习。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们基于先前成功将上下文学习概念化用于单变量时间序列预测的工作，并提供了一种系统的方法论，将上下文学习应用于马尔可夫决策过程的动力学学习问题。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们的方法论基于将数据投影到线性不相关的表示空间中，被证明在捕捉典型本体感受控制环境的动力学方面是有效的，此外通过降维还提高了计算效率。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.SSx1.p2.1": {
+  "sentences": [
+   {
+    "zh": "为了将我们的发现转化为实际应用，我们处理了两个强化学习用例：数据增强的离策略强化学习，其中我们的算法 DICL-SAC 提高了 SAC 的样本效率，并在基于模型的多分支展开框架下受益于理论保证。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们的第二个应用是预测奖励轨迹，以执行混合在线和基于模型的策略评估。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "最后，我们表明基于大语言模型的动力学模型还提供了校准良好的不确定性估计。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx2.p1.1": {
+  "sentences": [
+   {
+    "zh": "为了确保可复现性，我们在 https://github.com/abenechehab/dicl 发布了代码。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "实现细节和超参数列于附录 D。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p2.1": {
+  "sentences": [
+   {
+    "zh": "**附录**",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A0.SSx1.SSS0.Px1.p1.1": {
+  "sentences": [
+   {
+    "zh": "在附录A中，我们证明了主要理论结果（定理4.2）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们在附录B中提供了扩展的相关工作。附录C给出了关于状态和动作维度相互依赖的额外材料。我们的方法的实现细节和超参数在附录D中给出。最后，我们提供了关于多步误差（附录F）、校准（附录G）、数据收集策略对预测误差的影响（附录E）以及关于LLM选择的消融研究的细节（附录H）的额外实验。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A1.SS1.p1.1": {
+  "sentences": [
+   {
+    "zh": "我们首先正式定义 LLM 多分支回报 $\\eta^{\\text{llm}}_{p,k,T}$。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "为此，我们首先用 $A_{t}$ 表示在时间步 $t$ 开始一个 $k$ 步 LLM 分支的随机事件，并用 $X_{t}$ 表示相应的指示随机变量 $X_{t}=\\mathbbm{1}[A_{t}]$。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们假设 $(X_{t})_{t\\geq T}$ 是独立的。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然后我们定义随机事件 $A_{t}^{k}$，即前 $k$ 个时间步中至少有一个发生了分支，这意味着给定时间步 $t$ 属于 $k$ 个可能分支中的至少一个 LLM 分支：$A_{t}^{k}=\\bigcup_{i=0}^{k-1}A_{t-i}$。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "LLM 多分支回报可以写成如下形式：",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A1.SS1.p3.1": {
+  "sentences": [
+   {
+    "zh": "其中 $P^{t}=P(.|P^{t-1})$，$P^{0}=\\mu_{0}$ 为初始状态分布，且 $\\hat{P}_{t,\\text{llm}}^{i}=\\hat{P}_{\\text{llm}}^{i}(.|P^{t-i})$。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A1.SS1.p4.1": {
+  "sentences": [
+   {
+    "zh": "在继续之前，我们首先需要建立以下引理。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A1.Thmtheorem1.p1.1": {
+  "sentences": [
+   {
+    "zh": "（多步误差界，Frauenknecht et al. (2024) 和 Janner et al. (2019) 中的引理 B.2。）",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "设 $P$ 和 $\\tilde{P}$ 为两个转移函数。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "定义时间步 $t$ 的多步误差，从任意初始状态分布 $\\mu_{0}$ 开始，为：",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A1.Thmtheorem1.p1.2": {
+  "sentences": [
+   {
+    "zh": "其中 $P^{0}=\\tilde{P}^{0}=\\mu_{0}$。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "设时间步 $t\\geq 1$ 的单步误差定义为：",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A1.Thmtheorem1.p1.3": {
+  "sentences": [
+   {
+    "zh": "且 $\\xi_{0}=\\varepsilon_{0}=0$。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A1.Thmtheorem1.p2.1": {
+  "sentences": [
+   {
+    "zh": "那么，多步误差满足以下界限：",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A1.SS1.p5.1": {
+  "sentences": [
+   {
+    "zh": "设 $t>0$。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们从全变差距离的定义开始：",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A1.SS1.p7.1": {
+  "sentences": [
+   {
+    "zh": "鉴于 $\\xi_{0}=\\varepsilon_{0}=0$，通过归纳可得：",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A1.SS1.p8.1": {
+  "sentences": [
+   {
+    "zh": "∎",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A1.SS1.p9.1": {
+  "sentences": [
+   {
+    "zh": "我们现在重述并证明定理4.2：",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A1.Thmtheorem2.p1.1": {
+  "sentences": [
+   {
+    "zh": "设 $T$ 为上下文轨迹的最小长度，$p\\in[0,1]$ 为给定状态是分支点的概率。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们假设奖励是有界的，并且在策略 $\\pi$ 下，基于 LLM 的模型与真实动态之间的期望总变差在每个时间步上都有界，即 $\\max_{t\\geq T}\\mathbb{E}_{s\\sim P^{t},a\\sim\\pi}[D_{\\text{TV}}(P(.|s,a)||\\hat{P}_{\\text{llm}}(.|s,a))]\\leq\\varepsilon_{\\text{llm}}(T)$。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "那么，在分支长度为 $k$ 的多分支展开方案下，回报的界限如下：",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A1.Thmtheorem2.p1.2": {
+  "sentences": [
+   {
+    "zh": "其中 $r_{\\max}=\\max_{s\\in\\mathcal{S},a\\in\\mathcal{A}}r(s,a)$。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A1.SS1.p10.1": {
+  "sentences": [
+   {
+    "zh": "**步骤 1：用与时间范围相关的误差来表示该界限。**",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A1.SS1.p12.1": {
+  "sentences": [
+   {
+    "zh": "然后，我们展开项 $\\mathbb{E}_{s_{t}\\sim P^{t},a_{t}\\sim\\pi}\\big[r(s_{t},a_{t})\\big]-\\mathbb{E}_{s_{t}\\sim\\hat{P}_{t,\\text{llm}}^{i},a_{t}\\sim\\pi}\\big[r(s_{t},a_{t})\\big]$ 中的积分，并将其表示为依赖于时间步的多步模型误差：",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A1.SS1.p14.1": {
+  "sentences": [
+   {
+    "zh": "**步骤2：简化界。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "通过应用引理A.1，我们可以利用单步误差的界来界定多步误差：**",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A1.SS1.p16.1": {
+  "sentences": [
+   {
+    "zh": "因此，该界限变为：",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A1.SS1.p17.1": {
+  "sentences": [
+   {
+    "zh": "∎",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A2.SS0.SSS0.Px1.p1.1": {
+  "sentences": [
+   {
+    "zh": "MBRL 已有效地用于迭代批量强化学习中，通过在模型学习和规划之间交替进行（Deisenroth & Rasmussen, 2011; Hafner et al., 2021; Gal et al., 2016; Levine & Koltun, 2013; Chua et al., 2018; Janner et al., 2019; Kégl et al., 2021），以及用于离线（纯批量）强化学习中，其中我们先进行一步模型学习，然后进行策略学习（Yu et al., 2020; Kidambi et al., 2020; Lee et al., 2021; Argenson & Dulac-Arnold, 2021; Zhan et al., 2021; Yu et al., 2021; Liu et al., 2021; Benechehab et al., 2023）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "规划要么在决策时通过模型预测控制（MPC）使用（Draeger et al., 1995; Chua et al., 2018; Hafner et al., 2019; Pinneri et al., 2020; Kégl et al., 2021），要么在后台使用，即在想象的模型 rollout 上学习无模型智能体（Dyna; Janner et al. (2019); Sutton (1991); Sutton et al. (1992); Ha & Schmidhuber (2018)），或者两者兼用。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "例如，基于模型的策略优化（MBPO）（Janner et al., 2019）训练一组前馈模型，并生成想象的 rollout 来训练软演员-评论家智能体。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A2.SS0.SSS0.Px2.p1.1": {
+  "sentences": [
+   {
+    "zh": "大型语言模型已被集成到强化学习（RL）中（Cao et al., 2024; Yang et al., 2023），在增强决策（Kannan et al., 2024; Pignatelli et al.,; Zhang et al., 2024; Feng et al., 2024）、奖励设计（Kwon et al., 2023; Wu et al., 2024; Carta et al., 2023; Liu et al., 2023）和信息处理（Poudel et al., 2023; Lin et al., 2024）方面发挥着关键作用。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "将大型语言模型用作世界模型与我们的工作尤其相关。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "更一般地，Transformer架构（Vaswani et al., 2017）已被用于离线强化学习（决策Transformer Chen et al. (2021)；轨迹Transformer Janner et al. (2021)）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "预训练的大型语言模型已被用于初始化决策Transformer，并针对离线强化学习任务对其进行微调（Shi et al., 2023; Reid et al., 2022; Yang & Xu, 2024）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "作为世界模型，基于Transformer的类Dreamer架构已被提出（Micheli et al., 2022; Zhang et al., 2023a; Chen et al., 2022），在Atari游戏等长记忆任务中展现出高效性。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在基于文本的环境中，大型语言模型已找到多种应用（Lin et al., 2024; Feng et al., 2024; Zhang et al., 2024; Ma et al., 2024），包括使用生成代码的大型语言模型以零样本方式生成策略（Liang et al., 2023; Liu et al., 2024a）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A2.SS0.SSS0.Px2.p2.1": {
+  "sentences": [
+   {
+    "zh": "与我们的工作最接近的是 Wang et al. (2023)，其中将包含控制环境多条信息的系统提示（例如状态和动作空间的描述、控制器的性质、历史观测和动作）输入给 LLM。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "与我们的方法不同，我们的方法专注于预测 RL 环境的动态，而 Wang et al. (2023) 旨在直接从 LLM 学习低级控制策略，并在提示中纳入额外信息。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "此外，Wang et al. (2023) 发现只有 GPT-4 在其框架内可用，而我们使用较小的开源 LLM（如 Llama 3.2 1B）提供了概念验证。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A2.SS0.SSS0.Px3.p1.1": {
+  "sentences": [
+   {
+    "zh": "针对回归任务的上下文学习已在多项工作中得到理论分析，基于Transformer架构提供了见解（Li et al., 2023; von Oswald et al., 2023; Akyürek et al., 2023; Garg et al., 2023; Xie et al., 2022）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "关于时间序列预测，LLMTime（Gruver et al., 2023a）成功利用上下文学习对一维时间序列数据进行零样本外推。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "类似地，Das et al. (2024) 引入了一个用于一维零样本时间序列预测的基础模型，而 Xue & Salim (2023) 以问答形式结合了数值数据和文本。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "上下文学习也可用于从LLM的logits中近似连续密度。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "例如，Liu et al. (2024c) 开发了一种分层softmax算法来推断一维马尔可夫动力系统的转移规则。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "基于这项工作，Zekri et al. (2024a) 提供了一个应用，预测随机梯度下降算法中的参数值轨迹。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "与我们的工作更相关的是，Requeima et al. (2024) 提出了LLMProcesses，一种旨在从LLM中提取多维分布的方法。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "上下文学习在数值数据上的其他实际应用包括表格数据的少量示例分类（Hegselmann et al., 2023）、回归（Vacareanu et al., 2024）和元上下文学习（Coda-Forno et al., 2023）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A3.SS1.SSS0.Px1.p1.1": {
+  "sentences": [
+   {
+    "zh": "PCA是一种降维技术，它将原始变量变换为一组新的变量，即主成分，这些主成分线性不相关。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "主成分可以排序，使得前几个主成分保留所有原始变量中存在的大部分变异。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "形式上，给定一个具有 $n$ 个观测和 $p$ 个变量的数据矩阵 $\\mathbf{X}$，PCA 对角化协方差矩阵 $\\mathbf{C}=\\frac{1}{n-1}\\mathbf{X}^{T}\\mathbf{X}$ 以找到特征向量，这些特征向量表示主成分的方向：$\\text{PCA: }\\mathbf{X}\\rightarrow\\mathbf{Z}=\\mathbf{X}\\mathbf{W},\\quad\\text{where }\\mathbf{W}\\text{ are the eigenvectors of }\\mathbf{C}$。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在我们的情况中，数据表示在给定数据收集策略 $\\pi_{D}$ 下的状态和动作数据集，而 $p$ 个变量表示状态（最终也包括动作）的维度。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A3.F9": {
+  "sentences": [
+   {
+    "zh": "图9：DICL-$(s,a)$方法中主成分数量的消融研究。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A3.SS1.SSS0.Px2.p1.1": {
+  "sentences": [
+   {
+    "zh": "图9展示了DICL-$(s,a)$方法中所用组件数量的消融研究。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "令人惊讶的是，我们观察到在HalfCheetah系统的23个组件中仅使用4个组件时，平均多步误差（详细定义见附录F）急剧下降。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "随后，对于中间数量的组件，误差略有增加，然后在恢复全部方差时再次下降。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这一发现加强了PCA作为DICL中我们选择的解缠算法的地位。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A3.SS2.p1.1": {
+  "sentences": [
+   {
+    "zh": "ICA是一种统计和计算技术，用于将多变量信号分离为加性、统计独立的成分。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "与PCA对数据进行去相关不同，ICA旨在找到一种线性变换，使各成分尽可能独立。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "给定数据矩阵$\\mathbf{X}$，ICA假设数据是由独立成分的线性混合生成的：$\\mathbf{X}=\\mathbf{A}\\mathbf{S}$，其中$\\mathbf{A}$是未知的混合矩阵，$\\mathbf{S}$是行独立的独立成分矩阵。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "ICA的目标是估计一个解混矩阵$\\mathbf{W}$，使得$\\mathbf{Y}=\\mathbf{W}\\mathbf{X}$是独立成分$\\mathbf{S}$的良好近似。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "ICA对独立性的影响是深远的：虽然PCA只保证成分不相关，但ICA通过优化统计独立性（通常以非高斯性（峰度或负熵）来衡量）更进一步。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A3.F10": {
+  "sentences": [
+   {
+    "zh": "图10：ICA估计的混合矩阵。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A3.SS2.p2.1": {
+  "sentences": [
+   {
+    "zh": "图10展示了在Hopper环境的D4RL-expert数据集上运行ICA时估计出的混合矩阵 $\\mathbf{A}$。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在ICA的假设下，特别是源信号的统计独立性、它们的线性混合以及原始（未知）混合矩阵的可逆性，如果估计的混合矩阵的每一行主要由单个值主导，即它接近于一个置换缩放后的单位矩阵，那么原始源就被成功恢复了。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "就我们的状态和动作数据而言，从图10来看，情况并不明确。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "与PCA类似，我们可以使用ICA对上下文中的多维信号进行变换，并将ICL过程应用于恢复出的独立源。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们计划在未来的后续工作中探索这种方法。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A3.SS3.p1.1": {
+  "sentences": [
+   {
+    "zh": "变分自编码器（VAEs）（Kingma & Welling, 2022）为学习表示提供了一个强大的框架。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "解耦表示是指潜在空间的每个维度都捕捉数据中一个独特且可解释的变化因素。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "通过将输入映射到概率潜在空间的编码器网络与重建数据的解码器网络相结合，VAE 采用重参数化技巧来实现通过采样过程的反向传播。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "解耦的关键在于 VAE 损失函数中的 KL 散度项，该项将潜在分布正则化，使其接近标准正态分布。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "诸如 $\\beta$-VAE（Higgins et al., 2017）等变体通过缩放 KL 散度项进一步强调这种正则化，从而鼓励模型学习更解耦的表示，但可能以重建质量为代价。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "除了简单的 VAE 之外，文献中已有先前的工作专门旨在学习潜在空间中的分解后验分布（Kim & Mnih, 2019）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "尽管这个方向看起来很有前景，但它引发了关于这些模型在我们论文所考虑的低数据情况下的可学习性的不同担忧。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A3.SS4.p1.1": {
+  "sentences": [
+   {
+    "zh": "前面的分析将状态维度视为表征空间中的特征，忽略了它们的时间性质以及我们预测下一状态的最终目标。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在实践中，我们感兴趣的是通过MDP的动力学函数捕捉对下一状态影响最显著的依赖关系。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "为了实现这一目标，我们使用敏感性分析（SA）来研究动力学函数输入的变化如何影响其输出。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A3.F11": {
+  "sentences": [
+   {
+    "zh": "图 11：敏感性矩阵。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A3.SS4.SSS0.Px1.p1.1": {
+  "sentences": [
+   {
+    "zh": "敏感性分析是一种系统方法，用于评估模型输出的不确定性如何归因于模型输入中不同的不确定性来源。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "一次一个变量（OAT）方法是一种用于理解单个输入变量对模型输出影响的技术。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在MDP的转移函数背景下，OAT方法涉及每次系统地改变一个当前状态或动作维度，同时保持其他所有维度不变，并观察输出维度中的相应变化：$\\frac{\\partial(\\mathbf{s}_{t+1})_{k}}{\\partial(\\mathbf{s}_{t})_{i}}\\text{ 和 }\\frac{\\partial(\\mathbf{s}_{t+1})_{k}}{\\partial(\\mathbf{a}_{t})_{j}}$，其中$(\\mathbf{s}_{t})_{i}$、$(\\mathbf{a}_{t})_{j}$和$(\\mathbf{s}_{t+1})_{k}$分别表示状态的第$i$维、动作的第$j$维和下一状态的第$k$维。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A3.SS4.SSS0.Px1.p2.1": {
+  "sentences": [
+   {
+    "zh": "在实践中，我们通过分别对每个输入维度施加扰动（幅度为 $10\\%$）来测量敏感性，并报告输出每个维度中发生的绝对变化。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "具体而言，对于确定性转移函数 $f$、输入状态维度 $i$ 和输出维度 $k$，我们测量 $|f(s+\\epsilon,a)_{k}-f(s,a)_{k}|$，其中 $\\epsilon_{i}=0.1\\times scale(i)$，其他位置为 $0$。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "图 11 中的敏感性矩阵表明，大多数下一状态维度主要受其各自先前值的影响（状态维度方块中的对角形状）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "除此之外，动作仅直接影响某些状态维度，特别是速度，这从这些系统背后的物理模拟性质来看是预期的。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这一发现表明，vICL 方法在所考虑的强化学习环境中可能在实际中给出良好结果，并使我们希望 DICL-$(s)$ 方法足以捕获状态维度依赖性，特别是对于单步预测。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A3.Thmtheorem1.p1.1": {
+  "sentences": [
+   {
+    "zh": "该敏感性分析针对的是单步转移函数。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在实践中，当观察模拟的更大时间尺度时，这些结论可能会改变。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A4.SS1.p1.1": {
+  "sentences": [
+   {
+    "zh": "Soft Actor-Critic（SAC）（Haarnoja et al., 2018）是一种离策略算法，它结合了最大熵框架，通过除了期望回报之外还寻求最大化策略的熵来鼓励探索。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "SAC使用深度神经网络来近似策略（演员）和价值函数（评论家），采用两个Q值函数来减轻离策略算法在策略改进步骤中典型的正偏差。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这种方法有助于为复杂环境学习更稳定和有效的策略，使SAC特别适合具有高维、连续动作空间的任务。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A4.SS1.p2.1": {
+  "sentences": [
+   {
+    "zh": "我们使用 CleanRL（Huang et al., 2022）中提供的 SAC 实现。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在所有环境中，我们保留库中提供的默认超参数，除了更新频率。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们在表 2 中列出了每个所考虑环境使用的完整超参数列表。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A4.T2": {
+  "sentences": [
+   {
+    "zh": "表2：SAC超参数。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A4.SS2.p1.1": {
+  "sentences": [
+   {
+    "zh": "对于我们的算法，我们将一个LLM推理接口（通常是来自Huggingface的Transformers库（Wolf et al., 2020））与CleanRL（Huang et al., 2022）集成。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "表3显示了所考虑环境中所有DICL-SAC超参数的选择。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A4.T3": {
+  "sentences": [
+   {
+    "zh": "表3：DICL-SAC超参数。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A4.SS2.SSS0.Px1.p1.1": {
+  "sentences": [
+   {
+    "zh": "为了确保 DICL-SAC 对 LLM 生成的数据执行同等重要的梯度更新，我们使用了一种梯度更新平衡机制。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "实际上，由于损失函数的默认归约方法是求平均，批量 $\\mathcal{B}$ 中批量大小最小的那个在梯度下降时会被赋予更高的权重：$\\frac{1}{|\\mathcal{B}|}$。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "为了解决这个问题，我们将与 LLM 生成的批量 $\\mathcal{B}_{\\text{llm}}$ 对应的损失乘以一个校正系数 $\\frac{|\\mathcal{B}_{\\text{llm}}|}{|\\mathcal{B}|}$，以确保所有样本的权重相等。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A4.SS2.SSS0.Px1.p2.1": {
+  "sentences": [
+   {
+    "zh": "我们现在展示 HalfCheetah 和 Hopper 环境上的完整训练曲线（图 12）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "回报曲线展示了平滑后的平均训练曲线 ± 95% 高斯置信区间，其中 HalfCheetah 和 Hopper 使用 5 个种子，Pendulum 使用 10 个种子。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A4.F12": {
+  "sentences": [
+   {
+    "zh": "图12：**数据增强的离策略强化学习。** 完整训练曲线。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A4.SS2.SSS0.Px1.p3.1": {
+  "sentences": [
+   {
+    "zh": "**更新频率。** SAC 的默认更新频率为 $1$ 步，意味着与环境交互的策略在每次交互后都会更新。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在我们的基于 LLM 的框架中，这引入了额外的复杂性，因为这暗示上下文轨迹的状态访问分布将从一个时间戳移动到另一个时间戳。",
+    "conf": "mid",
+    "note": "原文中 'at this implies' 可能是 'as this implies' 的笔误，按 'as this implies' 理解翻译。"
+   },
+   {
+    "zh": "因此，我们假设更新频率等于给定环境一个 episode 的最大步数。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A4.SS2.SSS0.Px1.p4.1": {
+  "sentences": [
+   {
+    "zh": "需要指出的是，将所有算法的更新频率设置为相当于一个完整回合的步数具有双重影响：它可以稳定数据收集策略，这是有益的，但也可能导致对早期低质量策略收集的数据过度训练，这是有害的。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这种权衡在强化学习文献中已有研究（Matsushima et al., 2021; Thomas et al., 2024）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "值得注意的是，Thomas et al. (2024) 认为更新频率更多是一种系统约束，而非设计选择或超参数。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "例如，控制一个物理系统（如直升机）本身就强加了最小更新频率。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "因此，我们认为这是一个公平的比较，因为这一约束被统一应用于所有算法。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A4.SS2.SSS0.Px1.p5.1": {
+  "sentences": [
+   {
+    "zh": "为了完整性和比较起见，我们还使用其默认的一步更新频率评估了 SAC 基线。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "图 13 展示了我们的算法 DICL-SAC、更新频率为 1000 的基线 SAC 以及更新频率为 1 的默认 SAC 之间的比较。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们看到，在 Halfcheetah 上，默认 SAC（$uf=1$）的表现与更新频率为 1000 的 SAC 相似。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在 Pendulum 和 Hopper 上，它的表现略好一些，而 DICL 在更新频率为 1000 的约束下仍保持竞争力。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A4.F13": {
+  "sentences": [
+   {
+    "zh": "图13：**数据增强的离策略强化学习。** 与默认更新频率设置下的SAC进行比较。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们使用Llama 3.2-1B模型进行了这项实验。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A5.F14": {
+  "sentences": [
+   {
+    "zh": "图14：在vICL动力学学习器下，状态覆盖率和策略熵与MSE和KS指标的相关性图。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A5.p1.1": {
+  "sentences": [
+   {
+    "zh": "在本实验中，我们研究策略如何影响基于LLM的动力学模型的准确性和校准。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "为此，我们在HalfCheetah环境中训练了三种无模型算法（PPO (Schulman et al., 2017)、SAC (Haarnoja et al., 2018)和TD3 (Fujimoto et al., 2019)），并在训练过程中选择不同的检查点以捕获多样化的策略。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然后，我们分析策略特征（特别是状态覆盖（定义为策略遇到的任意两个状态之间的最大距离）和熵）与均方误差和Kolmogorov-Smirnov (KS)统计量之间的相关性。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们的发现表明，状态覆盖与MSE和KS均相关，这可能是因为探索广泛状态范围的策略生成的轨迹更难学习。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "关于熵，我们可以看到它也与MSE相关，但有趣的是，它似乎不影响校准。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A6.SS0.SSS0.Px1.p1.1": {
+  "sentences": [
+   {
+    "zh": "在图4(a)中，我们计算了预测时域 $h=1,\\ldots,20$ 上的平均均方误差，以及从D4RL专家数据集中均匀采样的 $5$ 条轨迹。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "为了可视化目的，我们首先对所有维度进行重新缩放（使用由MinMaxScaler和StandardScaler组成的流水线），以使相应的均方误差处于同一尺度。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "表1中的均方误差指标也以类似方式计算，不同之处在于它是7个不同任务（HalfCheetah：random、medium、expert；Hopper：medium、expert；Walker2d：medium、expert）的平均值。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A6.SS0.SSS0.Px2.p1.1": {
+  "sentences": [
+   {
+    "zh": "对于 $MLP$ 基线，我们实例化一个 MLP：$4$ 层，每层 $128$ 个神经元，使用 $ReLU$ 激活函数。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然后，我们将上下文轨迹格式化为一个 $\\{(s_{t},a_{t},s_{t+1})\\}$ 数据集，在该数据集上使用早停法和 Adam 优化器（Kingma & Ba, 2015）训练 MLP $150$ 个 epoch。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A6.SS0.SSS0.Px2.p2.1": {
+  "sentences": [
+   {
+    "zh": "我们现在扩展图4，在图15中展示HalfCheetah系统所有维度的多步生成轨迹。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A6.F15": {
+  "sentences": [
+   {
+    "zh": "图15：Halfcheetah",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A7.SS0.SSS0.Px1.p1.1": {
+  "sentences": [
+   {
+    "zh": "在校准图8和图16中，我们将基于LLM的动力学模型与一个（朴素的）基线进行比较，该基线使用上下文矩（均值和方差）来估计高斯分布。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A7.SS0.SSS0.Px1.p2.1": {
+  "sentences": [
+   {
+    "zh": "**Kolmogorov-Smirnov 统计量（KS）**：该指标使用真实值（在模型分布下）的分位数来计算。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "假设性地，如果预测真实值的误差是一个随机变量，且服从具有预测标准差的高斯分布，那么这些分位数是均匀的，我们将这一性质称为校准。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "为了评估这一点，我们计算 Kolmogorov-Smirnov（KS）统计量。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "形式上，从模型累积分布函数（CDF）$F_{\\theta}(s_{t+1}|s_{t},a_{t})$ 出发，我们定义真实值分位数的经验 CDF 为 $\\mathcal{F}_{\\theta,j}(x)=\\frac{\\big|\\big\\{(s_{t},a_{t},s_{t+1})\\in\\mathcal{D}|F^{j}_{\\theta}(s_{t+1}|s_{t},a_{t})\\leq x\\big\\}\\big|}{N}$，其中 $x\\in[0,1]$。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们用 $U(x)$ 表示区间 $[0,1]$ 上均匀分布的 CDF，并将 KS 统计量定义为整个数据集 $\\mathcal{D}$ 上两个 CDF 之间的最大绝对差：",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A7.SS0.SSS0.Px1.p4.1": {
+  "sentences": [
+   {
+    "zh": "KS 分数介于零和一之间，值越低表示校准越好。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A7.F16": {
+  "sentences": [
+   {
+    "zh": "图16：Halfcheetah",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A8.p1.1": {
+  "sentences": [
+   {
+    "zh": "在这项消融研究中，我们考察了LLM规模对D4RL任务上预测性能和校准的影响。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "所分析的LLM均来自LLaMA 3模型家族（Dubey & the Llama 3 team., 2024），规模范围从1B到70B参数，包括3B和8B的中间规模。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "每个模型被输入从D4RL数据集中随机采样的5条长度为$T=300$的轨迹：expert、medium和random。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "后一个任务仅在HalfCheetah上评估，因为Hopper和Walker2d环境中随机策略的回合还没有足够的上下文来应用DICL。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "对于medium和expert数据集，我们在所有环境HalfCheetah（图17）、Hopper（图19(a)）和Walker2d（图19(b)）上评估它们。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "用于评估模型的指标是：",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A8.I1.i1": {
+  "sentences": [
+   {
+    "zh": "• 均方误差（MSE）：在按照附录F类似方式对数据进行重新缩放后应用，以衡量预测误差。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A8.I1.i2": {
+  "sentences": [
+   {
+    "zh": "• Kolmogorov-Smirnov (KS) 统计量：用于评估校准度，表明预测概率与观测结果之间的匹配程度。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "该指标在附录 G 中有正式描述。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A8.p3.1": {
+  "sentences": [
+   {
+    "zh": "所有结果均在预测范围 $h\\in\\{1,\\ldots,20\\}$ 上取平均。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在 HalfCheetah 环境中，我们观察到 DICL-$(s)$ 在所有任务和几乎所有 LLM 上，就预测误差而言，始终优于其他变体。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "DICL-$(s,a)$ 在随机和中等数据集上被 vICL 超越，而在专家数据集上其性能有所提升。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这可能是因为策略已收敛到稳定的专家策略，使得 DICL-$(s,a)$ 也更容易预测动作。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "关于校准，三种方法通常表现相似，DICL-$(s,a)$ 略有优势，尤其是在较小的 LLM 上。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在 Hopper 环境中，DICL 相对于 vICL 的 MSE 改进在最小的 LLM 上不太明显，但在 LLaMA 3.1 70B 模型上变得更加显著。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然而，DICL-$(s,a)$ 在 KS 统计量（校准）方面始终且显著地优于 vICL 和 DICL-$(s)$。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在 Walker2d 环境中，vICL 在专家任务中被证明是一个强大的基线，而 DICL-$(s)$ 在中等数据集上显示出相对于它的改进。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "对于 Walker2d 中的校准，DICL-$(s,a)$ 在所有任务和 LLM 规模上继续优于其他变体。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A8.F17": {
+  "sentences": [
+   {
+    "zh": "图 17：HalfCheetah。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A8.fig1": {
+  "sentences": [
+   {
+    "zh": "((a)) Hopper。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ }
+}

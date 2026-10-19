@@ -73,5 +73,8 @@ assert roles.independence("deepseek-v4-flash", "deepseek/deepseek-r2") == "same-
 assert roles.independence("gpt-5", "o3-mini") == "same-vendor"
 assert roles.independence("deepseek-v4-flash", "gemini-3-pro") == "different-model"
 assert roles.worst_independence(["different-model", "same-vendor"]) == "same-vendor"
+# 合译：按和审校最接近的那个译者算
+assert roles.independence("claude-opus-5.5（人工） + deepseek-v4-pro", "deepseek-v4-pro") == "same-model"
+assert roles.independence("claude-opus-5.5（人工） + deepseek-v4-pro", "kimi-k3") == "different-model"
 print("独立性判断 通过")
 print("角色隔离测试全部通过")

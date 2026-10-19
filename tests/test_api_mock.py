@@ -82,7 +82,8 @@ def fake_post(self, body):
         raise T.ApiError('HTTP 400：{"error":"response_format is not supported"}', 400, retryable=False)
     content = "<think>先想想……{\"x\": 1}</think>好的，结果如下：\n```json\n" + \
         json.dumps({"sentences": [{"zh": "甲", "conf": "high"}, {"zh": "乙", "conf": "high"}]}) + "\n```"
-    return {"choices": [{"message": {"content": content}}], "usage": {"prompt_tokens": 10, "completion_tokens": 5}}
+    return {"choices": [{"message": {"content": content}}],
+            "usage": {"prompt_tokens": 10, "completion_tokens": 5, "prompt_cache_hit_tokens": 4}}
 
 
 T.OpenAICompatible._post = fake_post
@@ -90,6 +91,7 @@ eng = T.OpenAICompatible()
 out = eng.translate(task)
 assert [s["zh"] for s in out["sentences"]] == ["甲", "乙"], out
 assert not eng.json_mode and "response_format" not in bodies[-1] and eng.usage["prompt_tokens"] == 10
+assert eng.usage["cached_tokens"] == 4, eng.usage  # DeepSeek 的缓存命中字段
 print("接口层：JSON 模式退回、去掉思考段 通过")
 
 bodies.clear()
@@ -109,6 +111,15 @@ out = eng.translate(task)
 assert [s["zh"] for s in out["sentences"]] == ["甲", "乙"], out
 assert eng.temperature is None and "temperature" not in bodies[-1] and not eng.json_mode, bodies
 print("接口层：不接受 temperature 时去掉再发 通过")
+
+os.environ["IUNO_READER_EXTRA"] = '{"thinking": {"type": "disabled"}}'
+T.OpenAICompatible._post = fake_post
+bodies.clear()
+T.OpenAICompatible().translate(task)
+assert bodies[-1]["thinking"] == {"type": "disabled"}, bodies[-1]
+assert T.OpenAICompatible().name == "mock-model（关思考）"
+del os.environ["IUNO_READER_EXTRA"]
+print("接口层：附加请求参数 通过")
 
 hits, slept = [], []
 T.time.sleep = slept.append  # 不真的等
@@ -138,4 +149,28 @@ T.OpenAICompatible._post = deny
 out = T.OpenAICompatible().translate(task, retries=2)
 assert len(calls) == 1 and "401" in out["sentences"][0]["note"], (calls, out)
 print("接口层：401 不重试 通过")
+
+# 6. review 命令多线程：每段都审到、用量汇总正确、只在主线程写文件
+import shutil  # noqa: E402
+from iuno_reader import cli  # noqa: E402
+
+PID = "_mock_review"
+dd = os.path.join(cli.ROOT, "data", PID)
+os.makedirs(dd, exist_ok=True)
+try:
+    segs = [{"id": f"p{i}", "kind": "para", "section": "1 Intro", "en": "A b.", "sentences": ["A b."]} for i in range(8)]
+    json.dump({"segments": segs}, open(os.path.join(dd, "doc.json"), "w"))
+    json.dump({f"p{i}": {"sentences": [{"zh": "甲乙。"}]} for i in range(8)}, open(os.path.join(dd, "translation.json"), "w"))
+
+    def ok_post(self, body):
+        return {"choices": [{"message": {"content": json.dumps({"reviews": [{"verdict": "ok"}]})}}],
+                "usage": {"prompt_tokens": 3, "completion_tokens": 2}}
+    T.OpenAICompatible._post = ok_post
+    cli.main(["review", PID, "--mode", "blind", "--workers", "3", "--sections", "all"])
+    out = json.load(open(os.path.join(dd, "review.blind.json")))
+    assert len([k for k in out if not k.startswith("__")]) == 8, out.keys()
+    assert out["__meta__"]["usage"]["calls"] == 8 and out["__meta__"]["usage"]["completion_tokens"] == 16, out["__meta__"]
+finally:
+    shutil.rmtree(dd)
+print("review 多线程 通过")
 print("接口流程（模拟）测试全部通过")

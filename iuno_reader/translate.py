@@ -17,7 +17,7 @@ import urllib.error
 import urllib.request
 
 from .glossary import terms_in
-from .roles import load_prompt, model_config, payload_translator
+from .roles import extra_body, load_prompt, model_config, payload_translator
 
 
 def build_task(seg, prev_en, doc_title, terms, hedges):
@@ -34,17 +34,36 @@ def build_task(seg, prev_en, doc_title, terms, hedges):
     }
 
 
+def appendix_sections(doc):
+    """附录的节名集合：以 Appendix 开头的节；或者节编号和前面重复的节及其之后的所有节
+    （罗马数字编号的论文，附录会从 I 重新编号，节名里没有 Appendix）。"""
+    seen, out, in_app = set(), set(), False
+    for s in doc["segments"]:
+        sec = s.get("section", "")
+        if not sec or sec in seen or sec in out:
+            continue
+        key = sec.split()[0]
+        if sec.startswith("Appendix ") or (key in {x.split()[0] for x in seen} and re.fullmatch(r"[IVXLC\d]+", key)):
+            in_app = True
+        (out if in_app else seen).add(sec)
+    return out
+
+
 def select_segments(doc, sections=None):
-    """sections 例：["abs", "2", "3", "4", "A"]；None 表示全部。
+    """sections 例：["abs", "2", "3", "4", "A"]；["body"] 表示只要正文（摘要和所有非附录的节）；None 表示全部。
     选中的正文引用到的图、表、脚注也会一起选上，即使它们在 HTML 里属于别的节（图常浮动到前面）。"""
-    if not sections:
+    if not sections or sections == ["all"]:
         return [s for s in doc["segments"] if s["kind"] != "equation"]
     from .extract import referenced_floats
     chosen = set()
+    app = appendix_sections(doc) if "body" in sections else set()
     for s in doc["segments"]:
         if s["kind"] == "equation":
             continue
         sec = s.get("section", "")
+        if "body" in sections and sec not in app:
+            chosen.add(s["id"])
+            continue
         key = "abs" if s["kind"] == "abstract" else (sec.split()[0] if sec else "")
         if sec.startswith("Appendix "):
             key = sec.split()[1]
@@ -100,10 +119,20 @@ class OpenAICompatible:
         self.api_key = api_key or cfg[2]
         self.temperature = temperature
         self.timeout = timeout
+        self.extra = extra_body(role)
         self.json_mode = True
         self.usage = {"calls": 0, "prompt_tokens": 0, "completion_tokens": 0, "seconds": 0.0}
         if not (self.base_url and self.model and self.api_key):
             raise SystemExit(f"角色 {role} 缺少接口配置，请设置环境变量（见 roles.py 的说明）")
+
+    @property
+    def name(self):
+        """写进译者记录的名字：模型名，带附加参数时注明（例如关掉思考模式）。"""
+        if not self.extra:
+            return self.model
+        if self.extra == {"thinking": {"type": "disabled"}}:
+            return f"{self.model}（关思考）"
+        return f"{self.model}（{json.dumps(self.extra, ensure_ascii=False, separators=(',', ':'))}）"
 
     def _post(self, body):
         req = urllib.request.Request(self.base_url + "/chat/completions", data=json.dumps(body).encode(), headers={
@@ -118,7 +147,7 @@ class OpenAICompatible:
             raise ApiError(f"连接失败：{e}")
 
     def _chat(self, messages):
-        body = {"model": self.model, "messages": messages}
+        body = {"model": self.model, "messages": messages, **self.extra}
         if self.temperature is not None:
             body["temperature"] = self.temperature
         if self.json_mode:
@@ -146,8 +175,18 @@ class OpenAICompatible:
                     self.temperature = None
         self.usage["calls"] += 1
         self.usage["seconds"] += time.time() - t0
-        for k in ("prompt_tokens", "completion_tokens"):
-            self.usage[k] += (data.get("usage") or {}).get(k) or 0
+        u = data.get("usage") or {}
+        # 缓存命中的输入 token：DeepSeek 叫 prompt_cache_hit_tokens，OpenAI 和 Kimi 放在 prompt_tokens_details 里
+        cached = (u.get("prompt_cache_hit_tokens") or (u.get("prompt_tokens_details") or {}).get("cached_tokens")
+                  or u.get("cached_tokens") or 0)
+        got = {"prompt_tokens": u.get("prompt_tokens") or 0, "completion_tokens": u.get("completion_tokens") or 0,
+               "cached_tokens": cached}
+        # 北京时间工作日 9–12、14–18 点是 DeepSeek 的高峰时段（价格翻倍），单独记一笔，方便算钱
+        bj = time.gmtime(time.time() + 8 * 3600)
+        if bj.tm_wday < 5 and (9 <= bj.tm_hour < 12 or 14 <= bj.tm_hour < 18):
+            got.update({f"peak_{k}": v for k, v in list(got.items())})
+        for k, v in got.items():
+            self.usage[k] = self.usage.get(k, 0) + v
         if "choices" not in data:
             raise ApiError(f"返回里没有 choices：{json.dumps(data, ensure_ascii=False)[:300]}")
         return data["choices"][0]["message"].get("content") or ""

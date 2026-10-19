@@ -1,0 +1,2552 @@
+{
+ "__meta__": {
+  "translator": "deepseek-v4-pro + deepseek-v4-pro（关思考）",
+  "usage": {
+   "calls": 130,
+   "prompt_tokens": 108576,
+   "completion_tokens": 108614,
+   "seconds": 1076.0,
+   "cached_tokens": 68992
+  }
+ },
+ "abs.p1": {
+  "sentences": [
+   {
+    "zh": "推进大语言模型（LLMs）的规划与推理能力，是解锁其在复杂且具影响力的领域中可靠表现潜力的关键前提之一。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在本文中，我们旨在在多种棋盘游戏（国际象棋、菲舍尔随机棋/Chess960、四子棋和Hex）上展示这一点，并表明基于搜索的规划能够显著提升LLM的棋力。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们介绍、比较并对比了两种主要方法：在外部搜索中，模型指导蒙特卡洛树搜索（MCTS）的模拟和评估，而无需调用外部游戏引擎；在内部搜索中，模型经过训练，能够在上下文中生成线性化的搜索树以及由此产生的最终选择。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "两者都建立在经过相关领域知识预训练的语言模型之上，能够可靠地捕捉相应环境中的转移函数和价值函数，且幻觉极少。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们将我们的LLM搜索实现与针对特定游戏的最先进引擎进行了对比评估，展示了相较于基础模型在棋力上的显著提升，并在更接近人类搜索预算的情况下达到了国际象棋特级大师水平的表现。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们提出的将搜索与领域知识相结合的方法并不局限于棋盘游戏，这暗示了未来更广泛的应用前景。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S1.p1.1": {
+  "sentences": [
+   {
+    "zh": "尽管大型语言模型（LLMs）在文本生成、语言理解和翻译上表现流畅，但它们容易出现幻觉和推理错误，尤其是在复杂语境下（Chang et al., 2024; Hadi et al., 2023）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "因此，对LLMs中规划与推理能力的发展给予了特别关注（Minaee et al., 2024）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "根据Kahneman的双系统认知理论（Kahneman, 2011），先前的工作主要改进了语言模型中的联想式系统1推理，而规划与推理现在则侧重于改进更深思熟虑的系统2思维（Plaat et al., 2024）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S1.p2.1": {
+  "sentences": [
+   {
+    "zh": "规划与推理方法通常归入两个不同类别之一：在**内部规划**中，LLM 在上下文中制定计划，例如思维链提示（Chain-of-Thought prompting）（Wei et al., 2022），通过自回归地考虑朝向目标的可能步骤及其后果。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "相比之下，**外部规划**利用 LLM 在神经符号系统中生成步骤，例如在思维树（Tree of Thought）（Yao et al., 2024）中，其中外层循环对可能的步骤序列执行显式搜索。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "本文阐述了如何训练语言模型进行内部和外部规划，以改进序贯决策中的推理，并以棋盘游戏作为实验领域。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S1.p3.1": {
+  "sentences": [
+   {
+    "zh": "棋盘游戏历来在自动决策的发展中发挥了重要作用，托雷斯的自动机「El Ajedrecista」在数字计算出现之前就能下三枚棋子的国际象棋残局（tor, November 1915）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "游戏在环境动态和对手策略两方面都提供了多样的推理挑战，因此在推动 LLM 推理能力边界方面获得了大量关注（Hu et al., 2024b; Costarelli et al., 2024; Duan et al., 2024）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "顺带一提，LLM 在可靠地游玩常见棋盘游戏（如国际象棋，甚至井字棋）方面一直存在困难（Topsakal and Harper, 2024）。",
+    "conf": "mid",
+    "note": "incidentally 在此处作为话语标记，译为「顺带一提」，但也可理解为「与此同时」，存在一定歧义。"
+   },
+   {
+    "zh": "考虑到其他领域已经取得了很大进展，这可能显得有些令人惊讶。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然而，由于游戏敏锐地暴露了 LLM 无法利用世界模型对可能的未来进行一致推理，因此它们成为规划和推理的绝佳试验台。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在游戏博弈方面取得进展，可以为今后如何最好地将这种能力注入 LLM 提供启示。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们为实现这一理想目标提出了若干贡献。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S2.F1": {
+  "sentences": [
+   {
+    "zh": "图 1：用于训练多动作价值模型的一个完整示例。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "Robert J. Fischer（2690）– Mijo Udovčić（2460），布莱德 1961，1/2–1/2。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S2.p1.1": {
+  "sentences": [
+   {
+    "zh": "多动作价值（MAV）模型是一种仅在文本游戏数据上预训练的 Transformer 模型，它同时充当：（$i$）世界模型，（$ii$）价值函数，以及（$iii$）策略函数，用于多种完美信息棋盘游戏。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "充当世界模型还要求具备以下能力：（$i$）状态跟踪（在先前状态中执行一步着法之后确定游戏的新状态），（$ii$）合法着法预测，（$iii$）终止状态检测。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "为实现这一点，MAV 在遵循图 1 所示灵活格式的示例上进行训练。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S2.SS0.SSS0.Px1.p1.1": {
+  "sentences": [
+   {
+    "zh": "MAV 的输入以一个头部开始，该头部包含一系列命令，用于指定正在进行的游戏、所提供的输入以及预期输出。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S2.SS0.SSS0.Px2.p1.1": {
+  "sentences": [
+   {
+    "zh": "每个游戏使用不同的文本格式来表示其状态，与 `%state` 和 `%prev_state` 命令搭配使用。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "它们都被设计为便于模型导航和操作：棋盘上的每个格子都是一个单独的 token，并且格子在 token 空间中保持恒定的相对位置。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "对于国际象棋，我们还支持使用标准 FEN 表示（通过 `%fen` 命令）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S2.SS0.SSS0.Px3.p1.1": {
+  "sentences": [
+   {
+    "zh": "模型的起始状态可以通过两种方式给出：要么直接用 `%state` 命令给出，要么如图 1 所示用 `%prev_state %prev_action %state` 命令，这些命令指示模型接受一个先前状态（`%prev_state`）和在该状态中走出的一步着法（`%prev_action`），并据此推断和输出起始状态（`%state`）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "后一种功能使模型充当转移函数。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S2.SS0.SSS0.Px4.p1.1": {
+  "sentences": [
+   {
+    "zh": "`%top_k` 命令指示模型考虑起始状态，并输出最佳的 $k$ 个合法着法及其动作值，按偏好从最高动作值到最低动作值排序。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "$k$ 可配置，以允许改变 MAV 所执行的推理时计算量。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "如果合法着法少于 $k$ 个，模型就输出全部着法（将 $k$ 设为 `\"all\"` 也能实现这一点）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在起始状态为终局状态的情况下，`%top_k` 命令改为输出游戏结果（例如，当先手方获胜时输出 `[%top_1 invalid: \"1-0\"]`）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S2.SS0.SSS0.Px4.p2.1": {
+  "sentences": [
+   {
+    "zh": "某一着法的动作价值对应于在采取该着法时，当前状态下的玩家被预测的获胜概率。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "对于国际象棋，状态-动作价值的表示方式与 Ruoss et al. (2024a) 类似：使用公式将 Stockfish 的厘兵评估值映射为获胜概率。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S2.SS0.SSS0.Px4.p2.2": {
+  "sentences": [
+   {
+    "zh": "取自 `https://lichess.org/page/accuracy`。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "随后，胜率被映射到离散且互不重叠的桶中，从而使价值预测问题变成一个分类任务，而非回归任务。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这在其他研究（Farebrother et al., 2024）中已被证明是有益的。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们使用 64 个桶，每个桶由一个不同的特殊 token 表示（例如，第 28 个桶用 `<ctrl28>` 表示）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "图 2 展示了由 MAV 预测的两个胜率分布。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "四子棋和 Hex 分别使用游戏引擎 Fhourstones（Tromp,）和 neurobenzene（Gao and Pawlewicz,）来获取状态-动作价值，这些价值同样被映射到相同的 64 个桶 token。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S2.SS0.SSS0.Px4.p3.1": {
+  "sentences": [
+   {
+    "zh": "在生成训练数据时，我们随机变化 $k$，确保包含 $k$ 大于合法走法数量的示例。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们随机化走法的顺序，目的是：($i$) 鼓励模型独立地对待各个走法，($ii$) 帮助防止幻觉。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "如果采用固定顺序，例如从 $a1a2$ 到 $h8h7$ 的字典序，那么 ($i$) 如果模型跳过了合法走法 $a1a4$ 而输出了 $a1a5$，它就无法回头修正错误；并且 ($ii$) 模型在考虑像 $h8h7$ 这样顺序靠后的走法时，可能会严重依赖对先前走法的评估。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "通过在训练数据中使用随机化的走法顺序，模型被引导向一种近似置换对称性（Bronstein et al., 2021）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S2.F2": {
+  "sentences": [
+   {
+    "zh": "图2：对于一个安全的位置性走法，例如 `Re1`，MAV 赋予很小的不确定性，并给出 40-45% 的胜率，因为白方少一个兵。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "相比之下，象的牺牲 `Bxh7+`（根据 Stockfish 的最佳走法）是一种风险更高的进攻走法，因此在低胜率、均等胜率和高胜率附近有大量概率质量。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S2.SS0.SSS0.Px5.p1.1": {
+  "sentences": [
+   {
+    "zh": "在推理过程中，对于每个着法，模型会生成一个关于 64 个 token 的分布，这些 token 对应动作价值桶。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们试验了两种方法将该分布转换为该着法的最终评分：最大值评分（max scoring）对应于贪婪解码，使用模型分布的众数；而均值评分（mean scoring）使用桶上的期望。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S2.SS0.SSS0.Px5.p2.1": {
+  "sentences": [
+   {
+    "zh": "均值评分（Ruoss et al. (2024a) 中也使用了该方法）利用了模型的更多信息，并且更能区分众数相同的动作。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在一个几乎均势的局面中，许多着法最可能出现的结果可能是和棋，但仍有一些着法可能比其他着法具有更高的获胜机会。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在这种情况下，均值评分将能够选出最佳着法，而最大值评分法则不能。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "图 2 进一步说明了这一点。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S2.SS0.SSS0.Px6.p1.1": {
+  "sentences": [
+   {
+    "zh": "在模型具有很大优势的局面中，它可能有许多胜率约为100%的可用走法，而这些走法并不会直接导致以将死结束对局。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这可能导致模型在此类局面中漫无目的地走棋。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这一问题在 Ruoss et al. (2024a) 中曾出现，他们通过使用 Stockfish 来打破平局，即当所有前5个走法的胜率都高于99%时。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "为了消除推理时对游戏引擎的依赖，我们引入了 `%best_action` 命令，该命令指示模型在该局面中输出游戏引擎所选择的走法。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "通过这种方式，我们教会模型上述的打破平局的程序。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S2.SS0.SSS0.Px7.p1.1": {
+  "sentences": [
+   {
+    "zh": "总之，MAV 相较于现有最先进的基于 Transformer 的国际象棋引擎（Ruoss et al., 2024a; Monroe and Leela Chess Zero Team, 2024; Czech et al., 2024; Farebrother et al., 2024）做出了四项关键改进，第一，它在一个模型中同时进行世界建模、策略和动作价值计算。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "第二，它被训练为在动作价值建模结束时输出最佳动作，使模型能够在它拥有决定性优势的对局中可靠地完成对局。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这两项改进使 MAV 能够在不依赖外部游戏引擎提供合法着法或结束对局的情况下，下完整盘对局。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "第三，上述所有步骤都可以在一次模型调用中完成，而无需逐一评估每个动作——这一重要特性指导了 MAV 格式的设计，以降低推理的成本和基础设施复杂性。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "第四，模型在推理时执行的计算量可以动态变化，使我们能够在执行内部和外部搜索时以更高的延迟为代价获得更高的质量，并且性能随着我们扩展规划而提高。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S2.SS0.SSS0.Px8.p1.1": {
+  "sentences": [
+   {
+    "zh": "我们整理了一个数据集，其中包含四种游戏（国际象棋（Chess）、Chess960、四子棋（Connect Four）和海克斯棋（Hex））中多样化且相关的局面。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这些数据集的统计信息和来源见附录B中的表4。每个局面用于生成一个训练样本，随机改变 ($i$) `%top_k` 中的 $k$ 个动作值，($ii$) 初始或最终状态跟踪命令是否出现，以及 ($iii$) 国际象棋中 `%state` 或 `%FEN` 表示的使用与顺序。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "关于这些数据集的更多细节见附录B。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S2.SS0.SSS0.Px9.p1.1": {
+  "sentences": [
+   {
+    "zh": "我们使用 Gemini 架构（Gemini Team et al., 2024）训练了两个随机初始化的仅解码器 Transformer 模型，分别称为 MAV 和 MAV--small{fn1}，其参数分别为 27 亿和 10 亿{fn2}。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "它们分别在该数据集上训练了 1.9 个和 1.2 个 epoch。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "除表 1 中 MAV–small 的最高得分结果外，所有其他实验和结果均使用 27 亿参数的 MAV。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "为了高效利用我们模型的参数，每个训练样本的输入部分在损失计算期间被屏蔽掉。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这意味着我们的模型不会将容量浪费在学习生成游戏局面上。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "fn1": {
+  "sentences": [
+   {
+    "zh": "截至 2025 年 5 月 21 日，可以在 `https://goo.gle/ChessChamp` 上与 MAV–small 对弈国际象棋。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "fn2": {
+  "sentences": [
+   {
+    "zh": "请注意，在实践中 MAV 和 MAV-small 并不使用许多自然语言特有的参数。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S3.p1.1": {
+  "sentences": [
+   {
+    "zh": "外部搜索使用 MAV 生成规划步骤，并应用搜索算法来引导和优化规划步骤序列。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在本文中，我们在之前讨论的 MAV 之上评估规划，并使用 MCTS 作为搜索过程。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S3.p2.1": {
+  "sentences": [
+   {
+    "zh": "外部搜索基于 AlphaZero 风格的 MCTS（Silver et al., 2017）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "有两个关键要素：一个 **prior** 函数，它在每个状态返回动作上的概率分布；以及一个 **value** 函数，它返回一个数值，指示状态或状态-动作对的价值；两者都从 MAV 输出中提取。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "外部搜索是 MCTS 的一种改编；在其最基本的形式中，如同在 AlphaZero 中，MCTS 依赖于显式的世界模型，查询游戏引擎（例如 OpenSpiel 中的国际象棋实现（Lanctot et al., 2019））以提供合法动作、状态转移和终局状态。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "受 MuZero（Schrittwieser et al., 2020）的启发，在下面的一小节中，我们描述了如何消除对游戏引擎的这种依赖，转而仅使用 MAV 来跟踪状态、转移，并在规划期间提供合法动作和游戏结果。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S3.p3.1": {
+  "sentences": [
+   {
+    "zh": "由已学习的世界模型引导的外部搜索算法总结在算法1中，其子程序见附录A。搜索从初始游戏状态 $s_{0}$ 开始。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "首先，从 MAV 获得合法动作 $\\boldsymbol{a}_{0}^{L}$ 以及从当前玩家 $i$ 视角出发的相应状态-动作值 $\\boldsymbol{Q}^{(i)}(s_{0},\\boldsymbol{a}_{0}^{L})$。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "先验函数是一个 $\\varepsilon$-greedy 策略，完全由状态-动作值推导而来，这些状态-动作值由对前 $k$ 个值的贪婪 softmax 组成，并与对所有动作的均匀分布混合以鼓励探索。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "具体来说，令 $\\boldsymbol{a}^{g,k}\\subseteq\\boldsymbol{a}^{L}$ 为合法动作 $\\boldsymbol{a}^{L}$ 的子集，这些动作的值位于前 $k$ 个排名值之中；如果 $|\\boldsymbol{a}^{L}|\\leq k$，则该子集等于 $\\boldsymbol{a}^{L}$。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "定义状态 $s$ 下动作 $a$ 在贪婪策略下的概率为",
+    "conf": "mid",
+    "note": "原句不完整，缺少公式或后续内容，按原文结构翻译。"
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S3.p3.2": {
+  "sentences": [
+   {
+    "zh": "其中 $\\tau$ 是温度参数。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在实践中，我们根据已走步数动态调整温度（Veličković et al., 2024），并在计算 softmax 之前将状态-动作值转换为胜率。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S3.p4.1": {
+  "sentences": [
+   {
+    "zh": "均匀策略的概率为 $\\pi^{u}(s,a;\\boldsymbol{a}^{L})=\\frac{1}{|\\boldsymbol{a}^{L}|}$。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在状态 $s$ 中采取动作 $a$ 的先验概率为",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S3.p4.2": {
+  "sentences": [
+   {
+    "zh": "根节点 $\\mathcal{N}_{0}$ 随后用当前行动玩家、与该节点对应状态的字符串描述以及合法动作进行初始化（分别为：$\\mathcal{N}_{0}(i)$、$\\mathcal{N}_{0}(s)$、$\\mathcal{N}_{0}(\\boldsymbol{a}^{L})$）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然后扩展该节点，使得每个动作添加一个子节点，并为通向该子节点的动作附加一个先验概率。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然后运行模拟：每次模拟从根节点开始，根据 PUCT 选择动作和子节点，直到一个叶节点被扩展并评估，并且价值通过该模拟访问过的节点进行反向传播。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在 $M$ 次这样的模拟之后，选择一个最终着法 $a^{*}$。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S3.F3": {
+  "sentences": [
+   {
+    "zh": "图3：采用学习世界模型的状态跟踪MCTS。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S3.SS1.p1.1": {
+  "sentences": [
+   {
+    "zh": "经典 MCTS 依赖游戏引擎的若干组件来模拟对局。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "MAV 通过将状态跟踪、合法动作预测、动作价值预测和终局检测结合在单一模型中，取代了这些组件。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这使我们能够消除对游戏引擎的依赖，从而带来若干好处。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "首先，我们用棋盘游戏展示，MCTS 在没有显式世界模型的情况下也能取得惊人的表现；许多有趣的现实世界问题正是这种情况。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "其次，这是朝着用 LLM 进行内部搜索更近的一步。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S3.SS1.p2.1": {
+  "sentences": [
+   {
+    "zh": "我们对 MCTS 进行调整（见算法 1），使其使用学习得到的 MAV 来预测从父节点 $\\mathcal{N}_{t-1}(s)$ 的字符串描述和动作 $a_{t-1}$ 到子节点 $\\mathcal{N}_{t}$ 的状态转移，如图 3 所示。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们利用获得的信息存储该子节点的（预测的）字符串描述 $s_{t}$，随后用合法动作 $\\boldsymbol{a}_{t}^{L}$ 及其关联的状态-动作值 $\\boldsymbol{Q}^{(i)}(s_{t},\\boldsymbol{a}_{t}^{L})$ 扩展该子节点，这些值用于根据公式 1 计算先验，并将子节点的值计算为所有状态-动作值中的最大值，即 $\\max_{a_{t}\\in\\boldsymbol{a}_{t}^{L}}Q^{(i)}(s_{t},a_{t})$。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S3.SS1.p3.1": {
+  "sentences": [
+   {
+    "zh": "MAV 可能会产生幻觉，并返回格式不当的响应。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "为解决这一问题，针对每个游戏，解析器函数负责将输出转换为下一状态、合法动作及其值。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "如果解析失败——这仅在响应违反预定义格式时才会发生——则将一个特殊值 $-\\infty$ 赋给该节点，以避免未来被考虑。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "该过程通过显式避开发生幻觉的状态，使状态跟踪 MCTS 对幻觉具有鲁棒性。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S3.SS2.p1.1": {
+  "sentences": [
+   {
+    "zh": "由于大语言模型（LLM）推理成本高昂，我们使用异步蒙特卡洛树搜索（Async MCTS），该搜索同时排队多个叶节点评估（即在一“批”模拟中）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "为避免冗余的并发计算，我们采用并行 MCTS 中常用的一种优化：虚拟计数，它会在模拟期间将访问计数临时增加某个常数 $n_{c}$，并在反向传播阶段被移除。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "关于这种 MCTS 形式的更多细节，请参见附录 A。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S3.SS2.p2.1": {
+  "sentences": [
+   {
+    "zh": "在低模拟次数下，使用伴随固定虚拟计数 $n_{c}$ 的虚拟损失未能在探索与利用之间取得令人满意的平衡。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "为解决这一问题，我们引入动态虚拟计数（dynamic virtual counts），动态地为更靠近叶节点的虚拟计数值赋予更大权重。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "假设模拟 $m$ 遇到叶节点 $\\mathcal{N}_{l}$。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们为在模拟 $m$ 和叶节点 $\\mathcal{N}_{l}$ 中被访问的状态-动作对 $(s_{t},a_{t})$ 定义一个虚拟计数。",
+    "conf": "mid",
+    "note": "原文“visited in simulation m and leaf N_l”结构略为含糊，译文保持原结构，未增删信息。"
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S3.SS2.p2.2": {
+  "sentences": [
+   {
+    "zh": "其中 $d_{\\mathcal{N}_{t}}$ 表示子节点 $\\mathcal{N}_{t}$ 相对于在模拟 $m$ 期间到达的叶节点 $\\mathcal{N}_{l}$ 的深度，$\\lfloor\\cdot\\rfloor$ 是向下取整函数。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "如附录 A 中图 6 所示，结果表明，从叶节点处的最大虚拟计数 $n_{\\text{max}}$ 开始，以指数方式降低虚拟计数是有益的，该计数随后在每个父节点处减半，直至根节点，同时保持最小虚拟计数 $n_{\\text{min}}$。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S4.F4": {
+  "sentences": [
+   {
+    "zh": "图4：内部搜索输入提示与响应（广度=3，深度=1）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "该响应是实际的模型响应，但为简洁起见，我们只展示部分 `%top_all` 动作-价值对。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "相应的极小极大搜索树在右侧可视化。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "MAV 将最高价值赋予 \\BlackQueenOnWhite `d6`，而内部搜索识别出唯一的获胜着法 \\BlackQueenOnWhite `xg6`。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S4.p1.1": {
+  "sentences": [
+   {
+    "zh": "与外部搜索相比，在内部搜索中模型不需要外部控制器。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "相反，搜索过程被蒸馏到模型中，使其能够（$i$）评估搜索节点（状态），（$ii$）在更新当前状态的同时扩展节点，以及（$iii$）将结果从叶节点反向传播回根节点——所有这些都在一次模型调用内完成。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这种蒸馏是通过将搜索树线性化为文本格式并在这些线性化后的树上训练模型来实现的。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S4.SS0.SSS0.Px1.p1.1": {
+  "sentences": [
+   {
+    "zh": "内部搜索的提示与 MAV 的提示相似，但包含一个带有搜索参数（树深度和广度，见图4）的前导部分。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "目标数据的格式受极小极大树深度优先遍历的启发，作为一种迭代且线性化的极小极大树遍历序列。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "因此，遵循这种格式对应于一种算法执行任务，类似于 CLRS-Text（Markeeva et al., 2024）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S4.SS0.SSS0.Px1.p2.1": {
+  "sentences": [
+   {
+    "zh": "训练数据基于目标搜索树，这些树使用深度 3 构造（注意，深度零即 MAV），通过对状态进行标注（例如，国际象棋状态用 Stockfish 标注），并将前 5 个着法扩展成树。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这产生了高质量的目标搜索树，类似于游戏引擎内部生成的搜索树。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "为了丰富训练数据并使训练后的模型能够控制搜索预算，提示由多样的搜索参数组成，深度范围 1–3、广度范围 2–5，而续写部分生成相应的树，这些树被下采样以匹配参数，同时适应上下文大小。",
+    "conf": "mid",
+    "note": "continuations 在此处指代可能略有歧义，或指训练样本中的续写输出。"
+   },
+   {
+    "zh": "这使得必须排除最大的参数组合（即省略深度 3、广度 5 的示例）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S4.SS0.SSS0.Px1.p3.1": {
+  "sentences": [
+   {
+    "zh": "图4展示了由训练得到的内部搜索MAV（MAV–IS）预测的一个内部搜索轨迹示例，以及相应的搜索树。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S4.SS0.SSS0.Px2.p1.1": {
+  "sentences": [
+   {
+    "zh": "我们利用预训练的 MAV，并使用 60% MAV 数据与 40% 搜索数据的混合数据对其进行微调。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "微调进行了 20,000 步，批量大小为 512。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "因此，与在内部搜索轨迹上的微调相比，模型在 MAV 预训练期间见过的词元数量多一个数量级。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S5.SS1.p1.1": {
+  "sentences": [
+   {
+    "zh": "对LLM的总体评估以及对推理的专门评估是一个广泛的领域（Chang et al., 2024），其中游戏已被确立为评估基准（Costarelli et al., 2024; Duan et al., 2024）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们在一个游戏联赛中评估MAV语言模型，该联赛进行正面对抗对局，并从MAV和基线智能体池中均匀随机抽取组合。",
+    "conf": "low",
+    "note": "原文“which head-to-head match-ups”似乎缺少谓语动词，可能原句有遗漏或笔误，翻译按可理解的意思处理。"
+   },
+   {
+    "zh": "我们报告内部Elo评级（仅群体成员之间的相对Elo），并在可能的情况下报告外部Elo评级。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S5.SS1.p2.1": {
+  "sentences": [
+   {
+    "zh": "对于国际象棋评估，我们依赖在不同棋力水平下运行的最先进 Stockfish 引擎来估计广泛使用的外部 Elo 等级分。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这是通过使用线性拟合将内部 Elo 与外部报告的等级分进行校准来完成的。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "此外，我们纳入了 Ext-BoN 模型（Ruoss et al., 2024a），该模型使用 Transformer 在国际象棋上表现出特级大师水平（详见附录 B）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们使用一组 Top Chess Engine Championship (TCEC) 开局局面（tce,）（见附录 G 表 5）。",
+    "conf": "mid",
+    "note": "原句中“(tce,)”含义不清，按原样保留。"
+   },
+   {
+    "zh": "在每场两个智能体之间的对局中，使用一个特定开局，并且智能体交换先后手，以确保每个智能体对每个开局都既执黑又执白。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "每个 Stockfish 实例都以 2 秒搜索时间运行。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们在附录 B 和附录 C 中进一步阐述我们的评估设置以及最接近的相关工作。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S5.SS1.p3.1": {
+  "sentences": [
+   {
+    "zh": "不同方法的棋力总体比较如表1所示。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "接下来，我们对不同方法的表现进行了更深入的分析。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S5.T1": {
+  "sentences": [
+   {
+    "zh": "表1：不同智能体在国际象棋、Chess960、四子棋和Hex中的表现比较。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在MAV–MCTS智能体中，$M$ 指模拟次数。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "外部Elo是根据智能体之间取得的内部Elo估算的。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "**重要：** Stockfish智能体的外部Elo锚定于CCLR快棋Elo。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "因此，MAV–MCTS智能体的Elo估计并不准确，因为这些智能体将无法在快棋时限下对弈。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S5.T2": {
+  "sentences": [
+   {
+    "zh": "表 2：国际象棋局面中 MAV 的错误率分析。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们考虑来自 Lichess 谜题的局面，以及来自随机生成的棋盘数据集的局面，这些棋盘在正常对弈过程中从未出现，并且与训练数据相比高度分布外（out-of-distribution）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S5.SS2.p1.1": {
+  "sentences": [
+   {
+    "zh": "在国际象棋棋力方面，MAV 在使用均值评分时达到 2923 的外部 Elo，在使用最大值评分时达到 2875。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "因此，它超过了多个强基线，包括 Stockfish–L10，并且与 Ruoss et al. (2024a) 的 Ext-BoN 模型表现相当。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "对于 Chess960，MAV 优于 Ruoss et al. (2024a)，这或许是因为它显式地在 Chess960 数据上进行了训练。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S5.SS2.p2.1": {
+  "sentences": [
+   {
+    "zh": "在表 2 中，我们分析了合法走法率、预测的 `%top_all` 走法的精确率和召回率，以及预测下一个 FEN 状态的准确率。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "结果表明，MAV 能够可靠地执行所有这些操作。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S5.SS2.SSS0.Px1.p1.1": {
+  "sentences": [
+   {
+    "zh": "在开局和残局阶段，人类棋手通常依赖记忆中的开局着法和残局理论，而中局更需要计算和直觉。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在附录 D 中，我们报告了 MAV 对局中的相同模式，以及一个具体局面，其中模型在未见过的局面上展现出创造性着法。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "总体而言，MAV 在评估中弈出的局面中有 10% 出现在其训练数据中，而在第 20 步至第 50 步之间，几乎没有局面在训练期间被 MAV 见过。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这些结果表明，为了避免在中局输棋，MAV 必须具备泛化能力。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S5.F5": {
+  "sentences": [
+   {
+    "zh": "图5：国际象棋 Elo 等级分随着测试时计算量的增加而提高。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "**左：** 外部搜索结果，改变模拟次数 / MAV 模型调用次数。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "**右：** 内部搜索结果，改变在单次模型调用中执行的极小极大搜索的宽度（$b$）和深度（$d$）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "$x$ 轴显示提示+响应中的 token 数量。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S5.SS3.p1.1": {
+  "sentences": [
+   {
+    "zh": "对于我们的外部MCTS智能体，我们通过手动和两两对比相结合的方式调整超参数，并在附录A中报告详细信息。我们还包含一个基本的MCTS基线，它指的是使用均匀先验和随机 rollout 进行100次模拟的MCTS。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S5.SS3.p2.1": {
+  "sentences": [
+   {
+    "zh": "我们首先分析在 MAV–MCTS 中使用价值函数的评分方法的性能。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们通过在各种模型之间进行大型锦标赛来做到这一点，细节（包括结果）见附录 A 中的图 7。使用均值评分的 MAV–MCTS 在所有情况下表现明显更好。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "因此，在其余的外部搜索实验中，我们仅报告均值评分方法的结果。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S5.SS3.p3.1": {
+  "sentences": [
+   {
+    "zh": "我们随后进行了一场规模更大的锦标赛，纳入了 Ext-BoN，结果见表 1。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "每场锦标赛中进行的对局总数分别为：国际象棋 14689 局，Chess960 4480 局，四子棋 2189 局，Hex 6334 局。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在国际象棋中，仅进行 100 次模拟的 MAV–MCTS 其内部 Elo 比无搜索的 MAV 高 68 分，并且总体而言，Elo 表现随模拟次数呈对数提升，如图 5（右）所示。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S5.SS3.p4.1": {
+  "sentences": [
+   {
+    "zh": "在 Chess960 的情况下，每局游戏从随机位置开始（在预设的 960 个初始位置中），我们获得了与国际象棋可比的结果。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在 Connect Four 的情况下，我们注意到 MAV–MCTS 在改进 MAV 方面特别有帮助，所有智能体的 Elo 至少提高了 244。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "与国际象棋类似，改进随着模拟次数的增加而持续上升，但在这里我们注意到 MAV 相对于基础 MCTS 的性能增益相对较小，而 MAV–MCTS 相对于 MAV 的改进更大。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S5.SS3.p5.1": {
+  "sentences": [
+   {
+    "zh": "由于我们的最终模型未经过充分的 Hex 状态追踪能力训练，因此在 Hex 结果中仅使用游戏引擎来确定合法动作、状态转移和终局状态。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "与 Connect Four 相比，我们注意到在 Hex 中基础 MCTS 与 MAV 之间存在较大改进，并且从搜索中获得的改进与 Chess 类似。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们推测这可能是由于这些游戏的相对复杂性，但需要更多研究来阐明这些差异的原因。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "今后应该有可能像在 Chess 中那样支持 Hex 的无引擎逻辑。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在所有游戏中，随着模拟次数的增加，外部 MCTS 的表现始终更好。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S5.SS4.p1.1": {
+  "sentences": [
+   {
+    "zh": "对于我们的内部搜索实验，我们改变极小极大搜索的深度和广度参数，最高到广度 4 和深度 2。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们通过计算训练数据中每个配置的提示+响应的平均长度，将这些不同配置映射为 token 计数。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "图5（右）展示了 MAV--IS 作为 token 计数函数的性能。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们可以看到，通过外部 Elo{fn3} 衡量的棋力随搜索预算的增加而提升。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "fn3": {
+  "sentences": [
+   {
+    "zh": "对于内部搜索实验，一旦任一方达到决定性的、1200+厘兵优势，我们就停止对局。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这样做是因为内部搜索训练数据不包含最快获胜，这有时会导致模型在胜势局面中漫无目的地移动棋子。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S5.SS4.p2.1": {
+  "sentences": [
+   {
+    "zh": "我们还分析了，在考虑每个节点上可用合法走法数量的情况下，MAV–IS 搜索是否尽可能生成所要求形状的树。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在从现有对局中抽取的 5980 个局面样本上，MAV–IS 在 99.6% 的情况下构造出了形状准确的树。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S5.SS4.p3.1": {
+  "sentences": [
+   {
+    "zh": "关于内部搜索如何提高棋力的示例，见图4。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在此示例中，响应的初始 MAV 部分预测 \\BlackQueenOnWhite \\wmoved6 为最佳着法。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然而，随着内部搜索继续，模型在将前3条线路进一步探索一步之后，能够找到更好的着法 \\BlackQueenOnWhite \\wmovexg6。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这表明模型具备自我纠正能力，这是能够推理的 LLM 的一项重要能力（Kumar et al., 2024）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S6.p1.1": {
+  "sentences": [
+   {
+    "zh": "尽管在完美信息棋盘游戏领域取得了令人鼓舞的结果，这些结果显示出用大语言模型（LLMs）进行外部和内部规划的潜力，但我们的初步研究做出了若干假设，未来工作可能需要解决这些假设——即，获取或生成大量游戏对局数据的能力，以及能够获得可靠的求解器或游戏引擎来标注这些数据，从而为模型创建合适的训练课程。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S6.p2.1": {
+  "sentences": [
+   {
+    "zh": "我们 MAV 模型的另一个重要局限是，它们仅在游戏数据上训练，因此不具备使用自然语言进行口头交流的能力。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然而，在可能也纳入自然语言数据的潜在更大模型中实现同样的能力，应该不存在根本性障碍，因为我们使用的架构和分词器与经典基于文本的 LLM 完全相同。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S6.p3.1": {
+  "sentences": [
+   {
+    "zh": "如何为通用对话任务设计良好的价值函数，以及如何在训练中纳入这些价值函数或其他高度专业化的知识，使模型能够在推理时于各种各样的对话语境中灵活地利用它们，这仍然是一个悬而未决的问题。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "S7.p1.1": {
+  "sentences": [
+   {
+    "zh": "本文证明了 LLM 在多个完全信息博弈中学习强价值函数并充当世界模型的能力。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这使得它们能够用于 MCTS，在其中即使搜索预算相当有限，我们仍观察到约 +300 Elo 分的显著性能提升。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "更进一步，我们发现基于搜索轨迹进行训练使模型能够学习一种有效的搜索过程，该搜索过程可通过单次模型调用执行。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这为快速增长的文献增添了新内容，这些文献突出了利用 LLM 进行规划与推理的前景。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A1.F6": {
+  "sentences": [
+   {
+    "zh": "图6：异步MCTS与动态虚拟计数构建模块。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A1.F7": {
+  "sentences": [
+   {
+    "zh": "图7：在全部MCTS智能体、不同水平的Stockfish以及基础MCTS之间的锦标赛中，MCTS评分方法的表现。",
+    "conf": "mid",
+    "note": "原文“among a tournaments”存在语法问题，按上下文理解为“在……之间的锦标赛中”。"
+   },
+   {
+    "zh": "y轴显示每个智能体的内部Elo，其中基础MCTS的内部Elo被设为0。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A1.SS2.p1.1": {
+  "sentences": [
+   {
+    "zh": "由于现代大型 transformer 模型单次推理所需的时间可能比经过优化的深度卷积网络（例如 MuZero (Schrittwieser et al., 2020) 中使用的网络）长几个数量级，因此将 MCTS 搜索的耗时保持在合理水平可能是一项挑战。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "单次模型调用的推理时间在一次搜索所需时间中占主导地位，因此我们力求保持总调用次数较低。",
+    "conf": "mid",
+    "note": "原文“time take”似为“time taken”的笔误。"
+   },
+   {
+    "zh": "由于新节点的先验和值都通过 MAV 获得，因此 MCTS 的每次模拟至多有一次模型调用。",
+    "conf": "mid",
+    "note": "原文“obtained for the MAV”含义略有歧义，这里按“通过 MAV 获得”理解。"
+   },
+   {
+    "zh": "在低模拟次数的情况下，重用搜索树是一种简单的优化，在我们的实验中可减少 5-10% 的服务器调用次数。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A1.SS2.p2.1": {
+  "sentences": [
+   {
+    "zh": "尽管推理调用次数较低，进行许多MAV调用仍然可能代价高昂。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "因此，我们运行一个异步版本的MCTS，它在概念上与算法1非常相似，但主循环有所改变。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "概述如图6所示。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A1.SS2.p3.1": {
+  "sentences": [
+   {
+    "zh": "并行 MCTS 实现通常依赖虚拟损失（Mirsoleimani et al., 2017; Chaslot et al., 2008），以避免多个线程因确定性的动作选择而选择相同的向下模拟路径。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们的 Async MCTS 引入了三个新参数：",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro"
+ },
+ "A1.SS2.p3.2": {
+  "sentences": [
+   {
+    "zh": "在异步MCTS中，模拟改为按批次执行。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "首先，串行执行 $b$ 次向下遍历，以排队 $b$ 个评估。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这 $b$ 个评估并行执行，MAV输出异步返回。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A1.I1.ix1.p1.1": {
+  "sentences": [
+   {
+    "zh": "在任何给定时间异步执行的模拟次数，每次模拟都会导致一次评估（MAV 调用）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A1.I1.ix2.p1.1": {
+  "sentences": [
+   {
+    "zh": "等待评估的时间量。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "超时到期后，任何尚未返回的评估都将被丢弃。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A1.I1.ix3.p1.1": {
+  "sentences": [
+   {
+    "zh": "在模拟过程中临时添加到访问次数 $N(s,a)$ 上的“虚拟”值，用于阻止一批模拟中的所有模拟选择相同的路径。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A1.SS2.p4.1": {
+  "sentences": [
+   {
+    "zh": "然后，评估结果在返回时被逐一处理。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "对于每个成功（即未超时）的排队评估，其值随后被（串行地）反向传播到树上。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在评估排队之前访问的状态-动作对被分配临时虚拟计数：它们的访问计数被临时设置为 $N(s,a)=N(s,a)+n_{c}$。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然后在向上传递时减去访问计数和虚拟计数，即 $N(s,a)=N(s,a)-n_{c}$。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A1.SS2.p5.1": {
+  "sentences": [
+   {
+    "zh": "注意，由于模拟和评估处理（反向传播）都是串行完成的，因此不需要复杂的并发处理原语，如互斥锁或信号量。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在实践中，该实现基于 Python 的 `concurrent.futures` 模块，并复用了大部分串行 MCTS 子程序，仅更改了主循环。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A1.SS2.p6.1": {
+  "sentences": [
+   {
+    "zh": "每次搜索的平均耗时如表1所示。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A1.T3": {
+  "sentences": [
+   {
+    "zh": "表3：异步MCTS每次搜索的平均耗时。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A1.SS3.p1.1": {
+  "sentences": [
+   {
+    "zh": "对于我们的外部MCTS智能体，我们结合手动调整和直接对战比较来调优超参数。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们发现，对于先验（公式1），设置 $\\tau=0.1$、$k=5$ 和 $\\varepsilon=0.05$ 效果最佳。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A1.SS3.p2.1": {
+  "sentences": [
+   {
+    "zh": "对于异步 MCTS，我们使用批量大小 $b=16$。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们发现，在性能方面，较低的批量大小总是更受青睐。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们使用超时 $t_{0}=60$ 秒，并且（仅作为基线）使用静态虚拟损失参数 $n_{c}=10$。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在正面对比中，我们发现调优的动态虚拟计数通常会优于静态虚拟计数。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们使用鲁棒子节点策略进行最终着法选择 Chaslot et al. (2009)（选择访问次数最多的动作），并使用总奖励作为平局决胜。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A1.SS3.p3.1": {
+  "sentences": [
+   {
+    "zh": "我们在所有情况下使用动态虚拟计数最小值 $n_{\\text{min}}=2$，最大值 $n_{\\text{max}}$ 随模拟次数变化：$(M,n_{\\text{max}})\\in$ {$(100,8)$, $(250,8)$, $(500,8)$, $(1000,16)$, $(2000,32)\\}$。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A1.SS4.p1.1": {
+  "sentences": [
+   {
+    "zh": "在本节中，我们描述外部 MCTS 的术语和伪代码。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A1.I2.i1": {
+  "sentences": [
+   {
+    "zh": "• $i\\in\\{0,1\\}$：表示当前行动玩家；例如，在国际象棋中，0 表示白方，1 表示黑方",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A1.I2.i2": {
+  "sentences": [
+   {
+    "zh": "• $M$：MCTS 模拟的次数",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A1.I2.i3": {
+  "sentences": [
+   {
+    "zh": "• $s_{t}$：第 $t$ 步状态的字符串描述；例如国际象棋中的 FEN",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A1.I2.i4": {
+  "sentences": [
+   {
+    "zh": "• $a_{t}$：第 $t$ 步的动作",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A1.I2.i5": {
+  "sentences": [
+   {
+    "zh": "• $T(s_{t-1},a_{t-1})=s_{t}$：一个（确定性）转移函数",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A1.I2.i6": {
+  "sentences": [
+   {
+    "zh": "• $\\boldsymbol{a}_{t}^{L}=(a_{t}^{1},\\ldots,a_{t}^{L(s_{t})})$：步骤 $t$ 的合法动作列表；注意 $\\boldsymbol{a}_{t}^{L}$ 依赖于状态，但为简化记号我们省略了这种依赖。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A1.I2.i7": {
+  "sentences": [
+   {
+    "zh": "• $\\mathcal{N}_{0}$：根节点；存储内部对象，包括当前行动玩家 $\\mathcal{N}_{0}(i)\\in\\{0,1\\}$、初始状态的字符串描述 $\\mathcal{N}_{0}(s)=s_{0}$、合法动作列表 $\\mathcal{N}_{0}(\\boldsymbol{a}^{L})=\\boldsymbol{a}^{L}_{0}$",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A1.I2.i7.I1.i1": {
+  "sentences": [
+   {
+    "zh": "– 一个活跃玩家 $\\mathcal{N}_{0}(i)\\in\\{0,1\\}$",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A1.I2.i7.I1.i2": {
+  "sentences": [
+   {
+    "zh": "– 初始状态的字符串描述 $\\mathcal{N}_{0}(s)=s_{0}$",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A1.I2.i7.I1.i3": {
+  "sentences": [
+   {
+    "zh": "– 合法动作列表 $\\mathcal{N}_{0}(\\boldsymbol{a}^{L})=\\boldsymbol{a}^{L}_{0}$",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A1.I2.i8": {
+  "sentences": [
+   {
+    "zh": "• $Q^{(i)}(s_{t},a_{t})$：从玩家 $i$ 的视角来看，在状态 $s_{t}$ 下采取动作 $a_{t}$ 的状态-动作价值",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A1.I2.i9": {
+  "sentences": [
+   {
+    "zh": "• $\\boldsymbol{Q}^{(i)}(s_{t},\\boldsymbol{a}_{t}^{L})=(Q^{(i)}(s_{t},a_{t}^{1}),\\ldots,Q^{(i)}(s_{t},a_{t}^{L(s_{t})}))$：从玩家 $i$ 的角度来看，在状态 $s_{t}$ 下，针对所有合法走法 $\\boldsymbol{a}_{t}^{L}$ 的状态-动作价值。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A1.I2.i10": {
+  "sentences": [
+   {
+    "zh": "• $P(s_{t},a_{t})=\\mathbb{P}(a_{t}|s_{t})$：在状态 $s_{t}$ 下采取动作 $a_{t}$ 的先验概率",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A1.I2.i11": {
+  "sentences": [
+   {
+    "zh": "• $\\boldsymbol{P}(s_{t},\\boldsymbol{a}_{t}^{L})=(P(s_{t},a_{t}^{1}),\\ldots,P(s_{t},a_{t}^{L(s_{t})}))$：先验分布，即状态 $s_{t}$ 中所有合法走法 $\\boldsymbol{a}_{t}^{L}$ 上的分布",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A1.I2.i12": {
+  "sentences": [
+   {
+    "zh": "• $\\mathcal{N}_{t}$：步骤 $t>0$ 处的节点；存储内部对象：一个活跃玩家 $\\mathcal{N}_{t}(i)=1-\\mathcal{N}_{t-1}(i)$，一个状态的字符串描述 $\\mathcal{N}_{t}(s)\\in\\{s_{t}=T(s_{t-1},a_{t-1}),\\text{{None}}\\}$，状态 $s_{t}$ 中合法动作的列表 $\\mathcal{N}_{t}(\\boldsymbol{a}^{L})\\in\\{\\boldsymbol{a}_{t}^{L},\\text{{None}}\\}$，从子节点视角 $i=\\mathcal{N}_{t}(i)$ 看的累积值 $\\mathcal{N}_{t}(V^{(i)}(s))\\geq 0$，给定父状态 $s_{t-1}$ 和动作 $a_{t-1}$ 的访问次数 $\\mathcal{N}_{t}(N(s,a))=N(s_{t-1},a_{t-1})\\geq 0$，给定父状态 $s_{t-1}$ 和动作 $a_{t-1}$ 的先验概率 $\\mathcal{N}_{t}(P(s,a))=P(s_{t-1},a_{t-1})\\geq 0$",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A1.I2.i12.I1.i1": {
+  "sentences": [
+   {
+    "zh": "– 一个活跃玩家 $\\mathcal{N}_{t}(i)=1-\\mathcal{N}_{t-1}(i)$",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A1.I2.i12.I1.i2": {
+  "sentences": [
+   {
+    "zh": "– 状态 $\\mathcal{N}_{t}(s)\\in\\{s_{t}=T(s_{t-1},a_{t-1}),\\text{{None}}\\}$ 的字符串描述",
+    "conf": "low",
+    "note": "原文句子结构不完整，缺少谓语，且符号定义与上下文不一致，难以确定准确含义。"
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A1.I2.i12.I1.i3": {
+  "sentences": [
+   {
+    "zh": "– 状态 $s_{t}$ 中的合法动作列表 $\\mathcal{N}_{t}(\\boldsymbol{a}^{L})\\in\\{\\boldsymbol{a}_{t}^{L},\\text{{None}}\\}$",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A1.I2.i12.I1.i4": {
+  "sentences": [
+   {
+    "zh": "– 从子节点视角 $i=\\mathcal{N}_{t}(i)$ 的累积价值 $\\mathcal{N}_{t}(V^{(i)}(s))\\geq 0$",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A1.I2.i12.I1.i5": {
+  "sentences": [
+   {
+    "zh": "– 给定父状态 $s_{t-1}$ 和动作 $a_{t-1}$，访问计数 $\\mathcal{N}_{t}(N(s,a))=N(s_{t-1},a_{t-1})\\geq 0$",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A1.I2.i12.I1.i6": {
+  "sentences": [
+   {
+    "zh": "– 给定父状态 $s_{t-1}$ 和动作 $a_{t-1}$，先验概率 $\\mathcal{N}_{t}(P(s,a))=P(s_{t-1},a_{t-1})\\geq 0$",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A1.I2.i13": {
+  "sentences": [
+   {
+    "zh": "• MAV：一种支持多动作值接口的模型 $(\\boldsymbol{a}^{L}_{0},\\boldsymbol{Q}^{(i)}(s_{0},\\boldsymbol{a}^{L}_{0}))=\\textsc{MAV}(s_{0})$：一个状态评估器；返回根节点 $\\mathcal{N}_{0}$ 中状态 $s_{0}$ 的合法动作列表 $\\boldsymbol{a}^{L}_{0}$ 和相关的状态-动作值 $\\boldsymbol{Q}^{(i)}(s_{0},\\boldsymbol{a}^{L}_{0})$；注意，状态评估器仅对根节点是必需的 $(s_{t},\\boldsymbol{a}_{t}^{L},\\boldsymbol{Q}^{(i)}(s_{t},\\boldsymbol{a}_{t}^{L}))=\\textsc{MAV}(s_{t-1},a_{t-1})$：一个状态-动作评估器；对于给定的状态-动作父元组 $(s_{t-1},a_{t-1})$，返回子状态 $s_{t}=T(s_{t-1},a_{t-1})$、子节点的合法动作列表 $\\boldsymbol{a}_{t}^{L}$ 以及从子节点视角 $i=\\mathcal{N}_{t}(i)$ 出发的相关状态-动作值 $\\boldsymbol{Q}^{(i)}(s_{t},\\boldsymbol{a}_{t}^{L})$",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A1.I2.i13.I1.i1": {
+  "sentences": [
+   {
+    "zh": "– $(\\boldsymbol{a}^{L}_{0},\\boldsymbol{Q}^{(i)}(s_{0},\\boldsymbol{a}^{L}_{0}))=\\textsc{MAV}(s_{0})$：一个状态评估器；返回根节点 $\\mathcal{N}_{0}$ 中状态 $s_{0}$ 的合法走法列表 $\\boldsymbol{a}^{L}_{0}$ 以及相关的状态-动作值 $\\boldsymbol{Q}^{(i)}(s_{0},\\boldsymbol{a}^{L}_{0})$；注意，状态评估器仅对根节点是必需的",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A1.I2.i13.I1.i2": {
+  "sentences": [
+   {
+    "zh": "– $(s_{t},\\boldsymbol{a}_{t}^{L},\\boldsymbol{Q}^{(i)}(s_{t},\\boldsymbol{a}_{t}^{L}))=\\textsc{MAV}(s_{t-1},a_{t-1})$：一个状态-动作评估器；对于给定的状态-动作父元组 $(s_{t-1},a_{t-1})$，返回子状态 $s_{t}=T(s_{t-1},a_{t-1})$、子节点的合法动作列表 $\\boldsymbol{a}_{t}^{L}$ 以及从子节点视角 $i=\\mathcal{N}_{t}(i)$ 出发的相关状态-动作值 $\\boldsymbol{Q}^{(i)}(s_{t},\\boldsymbol{a}_{t}^{L})$",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A2.p1.1": {
+  "sentences": [
+   {
+    "zh": "在本节中，我们描述每个游戏的数据生成细节，而表4报告了训练数据统计。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A2.T4": {
+  "sentences": [
+   {
+    "zh": "表4：多动作价值（MAV）模型训练数据统计。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A2.SS0.SSS0.Px1.p1.1": {
+  "sentences": [
+   {
+    "zh": "对于国际象棋和Chess960，我们使用开源引擎Stockfish 16（源代码可在Github上获取）进行标注，并在内部Elo计算中作为对手。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们使用clang++从源代码编译所有Stockfish构建，所有构建均使用以下编译标志 `-O3 -DIS_64BIT -DUSE_PTHREADS -mprefer-vector-width=128`。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们在各种硬件上使用两种不同配置运行Stockfish，对于较旧的硬件，我们添加了 `-DUSE_POPCNT -DUSE_SSSE3 -DUSE_SSE41 -march=westmere -msse4.2`，对于较新的硬件，我们添加了 `-DUSE_AVX2 -DUSE_PEXT -march=haswell`。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这些构建通常使我们在单线程运行 `stockfish -- bench 4096 1 130000 default nodes` 时每秒获得约350k-700k个节点。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A2.SS0.SSS0.Px2.p1.1": {
+  "sentences": [
+   {
+    "zh": "（Ruoss 等人，2024a）表明，一个小的（2.7 亿参数）Transformer 可以在 Lichess 上以 2895 的 Elo 等级分与人类对弈快棋（即特级大师水平）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "他们创建了一个包含 1000 万盘国际象棋对局的大规模数据集，其中包含由最先进的国际象棋引擎 Stockfish 16 提供的合法走法和价值标注（150 亿个数据点）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然后，他们通过监督学习训练 Transformer 来预测动作价值，即不进行显式搜索，并表明他们的模型实现了高度非平凡的泛化（例如，解决具有挑战性的国际象棋谜题）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "因此，他们表明，可以通过监督学习将 Stockfish 基于搜索的算法的非常好的近似蒸馏到大规模 Transformer 中，但完美的蒸馏仍然遥不可及。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A2.SS0.SSS0.Px3.p1.1": {
+  "sentences": [
+   {
+    "zh": "国际象棋局面来自两个来源：Lichess 和 TCEC。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "TCEC 数据包括第 1-25 赛季中所有 34,291 局标准国际象棋对局，从中提取了 4,204,025 个唯一局面。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "Lichess 标准等级分国际象棋对局取自 2014 年 10 月、2017 年 3 月和 2020 年 1 月，共计 58,705,532 局。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "2013 年 8 月至 2024 年 6 月期间在 Lichess 上进行的全部 19,758,457 局 Chess960 对局均被纳入。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "所有局面均使用 Stockfish 16 进行 1 秒的标注，但来自 TCEC 和 Lichess 2014 年 10 月对局的局面除外，这些局面使用了 15 秒的分析时间。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A2.SS0.SSS0.Px4.p1.1": {
+  "sentences": [
+   {
+    "zh": "通过 neurobenzene（Gao 和 Pawlewicz，）自对弈生成了 12,279,645 局 Hex 对局，搜索时间设置为 10 秒。",
+    "conf": "mid",
+    "note": "原文引用 'Gao and Pawlewicz,' 缺少年份，可能为不完整引用，保留原样。"
+   },
+   {
+    "zh": "在 10% 的局面中，改为选择随机着法，以鼓励探索原本狭窄的状态空间分布。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A2.SS0.SSS0.Px5.p1.1": {
+  "sentences": [
+   {
+    "zh": "2,458,293 盘四子棋游戏是使用 ε-贪婪策略生成的，其中 ε=0.4。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "贪婪动作在所有能产生最佳可达极小极大值的走法中均匀选择，该值使用 Fhourstones 求解器（Tromp,）计算。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A3.p1.1": {
+  "sentences": [
+   {
+    "zh": "我们在游戏中开展规划与推理实验，类似于 GameBench（Costarelli 等人，2024）和 GTBench（Duan 等人，2024）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "游戏提供了一个在可控且安全的环境中开发和测试方法的机会，其真实情况可通过现有游戏模型轻松验证。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们使用 OpenSpiel（Lanctot 等人，2019）作为游戏引擎来驱动我们的评估。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A3.p2.1": {
+  "sentences": [
+   {
+    "zh": "语言智能体的决策不可分割地融合了提示策略、语言模型和响应解释。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "语言模型本质上与第二种模态——游戏——进行交互，其中提示将状态观察编码为语言输入，响应解释将语言输出映射回动作。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "语言模型在语言空间中执行响应计算。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "任何给定的三元组都可以在特定状态上进行评估，或者通过与另一个三元组或直接在游戏表示上操作的基准机器人（例如，随机、搜索或基于强化学习的智能体）对战来评估。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A3.p3.1": {
+  "sentences": [
+   {
+    "zh": "我们通过固定的状态数据集离线评估智能体，并通过与参考对手的成对比赛在线评估。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们为每个数据集跨智能体计算的动作选择分位数和动作价值遗憾等指标可直接比较，并展现出不同的技能维度（任务），例如在开局、中局或残局局面中表现出色。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "相比之下，在线比赛直接以胜/平/负衡量相对棋力，并且可能针对每对对手遍历不同的状态分布。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "虽然最终目标是在广泛的对手中提高棋力，但对数据集的离线评估有助于刻画每种策略。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A3.p4.1": {
+  "sentences": [
+   {
+    "zh": "多对手的锦标赛会产生方形的智能体对智能体矩阵，指示每对之间的胜局数和和局数（负局数可从胜局数的转置推断）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "Elo（Elo, 1967）为每位竞争者找到最佳的一维评分，使得他们之间的相互胜率最好地由他们指数化评分的比率来解释。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这意味着一个排名，即对每位竞争者的序数偏好。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们报告比赛的平均胜率（将和局视为半胜），以及锦标赛的Elo评分。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A4.p1.1": {
+  "sentences": [
+   {
+    "zh": "在开局和残局阶段，人类棋手通常依赖记忆的理论，而中局则需要更多的计算和直觉。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在图8中，我们观察到MAV在评估中所下的棋局有10%的局面出现在其训练数据中，而在第20步到第50步之间，MAV在训练期间几乎未见过任何局面。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这些结果表明，为了避免在中局输棋，MAV需要具备泛化能力。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A4.p2.1": {
+  "sentences": [
+   {
+    "zh": "最后，我们展示一个 MAV 泛化能力作用于训练数据中未出现局面的例子。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在图 9 所示的局面中，MAV 找到了一个创造性的着法 g5，根据 Stockfish 这是最佳着法。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "该着法允许 f3 上的白马吃掉这个兵，但为黑方带来了长期优势。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A4.F8": {
+  "sentences": [
+   {
+    "zh": "图8：评估期间遇到的国际象棋局面中，也出现在MAV训练数据中的百分比。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在第20步到第50步之间，几乎所有遇到的局面都是未见过的，这要求模型进行泛化。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A4.F9": {
+  "sentences": [
+   {
+    "zh": "图9：MAV走出创造性弃兵着法g5（根据Stockfish为最佳着法）以获得长期优势的示例局面。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A4.SS0.SSS0.Px1.p1.1": {
+  "sentences": [
+   {
+    "zh": "我们通过随机采样棋盘上棋子的数量和类型，同时确保符合若干规则（例如：双方王不能同时处于被将军状态，或者该局面不是将杀局面），以程序化方式生成分布外（OOD）局面。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "分布外局面的示例见图10。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "请注意，有些局面无法通过从初始国际象棋局面出发的合法着法序列到达，这表明MAV能够泛化到其训练所用人类对局之外的局面，如表2所报告的接近100%的准确率所示。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A4.F10": {
+  "sentences": [
+   {
+    "zh": "图10：来自分布外集合的一个样本，用于测试MAV的合法走法率和状态跟踪准确率。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "图旁边的方格表示当前行棋方。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A5.p1.1": {
+  "sentences": [
+   {
+    "zh": "使用语言模型进行规划和推理既是一个开放的挑战，也是一个活跃的研究领域。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "鉴于规划作为一种能力在复杂、动态和开放式领域中支持决策的广泛相关性（Rasal 和 Hauer，2024），迄今为止已经探索了相应广泛的规划方法，以满足这些未满足的需求，这也许并不令人意外。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "本节的其余部分首先概述一般的推理基准，然后特别介绍游戏基准。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "接下来，我们概述相邻的上下文推理工作，这些工作与内部搜索共享由语言模型自身扩展计划的特点，以及作为搜索的推理，它勾勒出围绕类似外部搜索方法的更广泛范围。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "最后，我们给出国际象棋等具体工作的指引，国际象棋在我们的评估中占据突出地位。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A5.SS0.SSS0.Px1.p1.1": {
+  "sentences": [
+   {
+    "zh": "推理任务可分为常识推理（Zhao et al., 2024; Cui et al., 2024）、结构化推理（Wang et al., 2024b）、数学推理（Shao et al., 2024b; Wu et al., 2024c; Chen et al., 2024a; Gu et al., 2024; Wang et al., 2024d; Zhang et al., 2024c; Tang et al., 2024b）、算法推理（Markeeva et al., 2024）、符号推理（Fang et al., 2024）、因果推理（Jin et al., 2024）、时间推理（Xiong et al., 2024）、元推理（Zeng et al., 2024）和策略推理（Zhang et al., 2024d）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "多模态推理可能涵盖这些类别的任意子集，并增加了整合跨模态任务的复杂性（Chia et al., 2024; Kil et al., 2024; Xie et al., 2024a; Haresh et al., 2024; Shao et al., 2024a; Shi et al., 2024）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "还有多语言基准（Bang et al., 2023; Wang et al., 2024c），旨在评估模型跨语言的推理能力。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "大型语言模型可以直接处理这些推理任务，或借助外部工具（Paranjape et al., 2023; Lu et al., 2024）或规划器和求解器（Dagan et al., 2023; Borazjanizadeh and Piantadosi, 2024），其性能可以在典型场景或谜题中进行评估（Giadikiaroglou et al., 2024; Li et al., 2024b），这些场景或谜题往往更复杂且更偏离分布。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这些评估可以是通用的，也可以是更特定领域的（Nori et al., 2024; Guo et al., 2024）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "也有研究致力于从决策和规划的角度评估语言模型作为世界模型的效用（Yang et al., 2024a）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A5.SS0.SSS0.Px2.p1.1": {
+  "sentences": [
+   {
+    "zh": "战略推理（Gandhi et al., 2023）自然出现在游戏对弈中，由于动态环境以及预测对手行动的不确定性，它尤其具有挑战性。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "它以目标为导向，具有交互性和适应性，并且需要一定程度的预测能力。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在游戏之外，这种类型的推理可能在经济（Horton, 2023; Li et al., 2023）和社会（Gandhi et al., 2024a; Ziems et al., 2024）应用中具有价值。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "本文的重点主要放在游戏中的战略规划上，这些游戏已被提议作为开发和评估语言模型中战略推理（Tsai et al., 2023a; Duan et al., 2024; Costarelli et al., 2024）的重要基准集，这与它们先前在人工智能发展中的历史作用（McCarthy, 1990; Schaul et al., 2011; Ensmenger, 2012）以及特别是在顺序决策中的作用不无相似。",
+    "conf": "mid",
+    "note": "原文中 'a an important' 存在笔误，应为 'an important'，翻译时按正确意思处理。"
+   },
+   {
+    "zh": "与本文同时开发的三个特定游戏基准是 GameBench（Costarelli et al., 2024）、GTBench（Duan et al., 2024）和 LMAct（Ruoss et al., 2024b）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这三者都采用了相同的语言模型游戏代理化方法：一个代理包括一个提示策略（从游戏状态生成提示）、一个生成响应的 LLM，以及将文本响应解释为游戏动作的机制。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "由此产生的代理可以通过在特定游戏（如井字棋）中进行对局来评估，对手可以是基准强化学习代理或其他语言模型代理。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这使得从两两胜率或基于锦标赛结果的 Elo 评级得出的排名中得出关于战略推理能力的结论成为可能。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们的具体评估在本文的实验部分中进行了描述。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A5.SS0.SSS0.Px3.p1.1": {
+  "sentences": [
+   {
+    "zh": "已有研究表明，大型语言模型在自然语言空间中编码了一定程度的内在推理能力，尤其是在被提示这样做时（Plaat et al., 2024），这种能力可以通过思维链（CoT）技术（Kojima et al., 2022; Wei et al., 2022; Shi et al., 2022; Zhang et al., 2023; Wang et al., 2024e）、从最少到最多提示（Zhou et al., 2022）、计划与解决提示（Wang et al., 2023）、自问结构化提示（Press et al., 2022）、多步问题分解与计划执行（Nguyen and Shareghi, 2024）、少量示例提示（Brown et al., 2020; Gao et al., 2020; Gramopadhye et al., 2024）以及多样本提示（Agarwal et al., 2024）等方法加以激发。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然而，CoT方法并不总是可靠的，可能表达不一致的推理步骤或与实际决策过程不符的推理轨迹（Ye and Durrett, 2022; Turpin et al., 2024），可能对拼写错误不够稳健（Gan et al., 2024），并且可能不是更复杂领域中规划的最佳方法，尽管最近有研究表明它们原则上可以处理例如动态规划任务（Feng et al., 2024a）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "如果没有一个能够跟踪状态转换的世界模型，就很难评估早期决策的长期后果（Hao et al., 2023）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这些新兴能力在很大程度上受到数据本身的影响，因为中间推理步骤仅在数据具有局部结构时才有帮助，这种结构由具有强相互影响的局部变量簇组成（Prystawski et al., 2024）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "CoT推理过程可以通过面向任务的反馈进行优化（Lee et al., 2024）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "信息丰富的思维模板可以从多个不同任务中蒸馏出来并重复使用，并汇编在一个思维缓冲区中（Yang et al., 2024b）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "CoT生成的多样性很重要，生成更多样化的推理链可以带来更好的性能（Zhang et al., 2022）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "推理轨迹可以与动作交错进行，如ReAct（Yao et al., 2022）中所示。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "自一致性技术为进一步提高模型性能提供了另一条途径（Wang et al., 2022）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "为了发挥作用，CoT提示可能需要针对其问题类别进行专门设计（Stechly et al., 2024）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "合成数据生成可用于提高示例的质量和覆盖范围（Shao et al., 2023）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "CoT也已在多模态情境下得到考虑（Lu et al., 2022; Mitra et al., 2024），并且最近有研究表明，思维白板在鼓励跨模态推理方面是有帮助的（Menon et al., 2024）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "语言模型能够仅通过额外令牌带来的额外计算来提高其在某些类型问题上的性能，即使这些令牌是过滤令牌而非结构化或可解释的CoT（Pfau et al., 2024）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "也可以考虑生成内部思维，作为预测未来令牌的令牌级推理依据，Quiet-STAR方法（Zelikman et al., 2024）展示了这一点。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "该方法属于一类利用自我改进或自我博弈来提升语言模型规划和推理能力的方法，这类方法已被广泛采用（Zelikman et al., 2022; Singh et al., 2024; Hosseini et al., 2024; Aksitov et al., 2023; Chen et al., 2024c; Tian et al., 2024; Saab et al., 2024）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "自我改进方法通常依赖于LLM内在的自我纠正能力，然而在没有明确外部反馈的情况下，自我纠正推理仍然困难（Huang et al., 2024）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "鉴于CoT推理最终是贪心的，并且在有许多值得探索的选项时可能会出现问题（Saparov and He, 2022），这成为探索替代性、更结构化搜索方法的动机。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "动态提示条件策略选择可能有助于为每个特定问题确定最佳战略方法（Parekh et al., 2024）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "多智能体方法可用于进一步发展这一点，将战略推理与更具体的逐步规划解耦（Wang et al., 2024a）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "规划也可以在关联的知识图谱上进行（Chen et al., 2024b），并且在更一般的情况下，图学习可能有助于整体规划能力（Wu et al., 2024b）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "最后，有些问题可能更自然地适合逆向规划，这可能需要定制的方法（Ren et al., 2024）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A5.SS0.SSS0.Px4.p1.1": {
+  "sentences": [
+   {
+    "zh": "在特别涉及序列决策问题的任务上测试大语言模型需要智能体化，已有多种方法被提出，用于将大语言模型用作游戏智能体或嵌入游戏智能体中（Tsai et al., 2023b; Hu et al., 2024b; Wu et al., 2024a; Hu et al., 2024c）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "基于MCTS的规划和自我博弈也在此背景下得到了探索（Rebstock et al., 2024; Putta et al., 2024; Light et al., 2024）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "与其依赖单个推理链，也可以构建思维树（Long, 2023; Yao et al., 2024）、思维图（Besta et al., 2024）或思维图式（Zhang et al., 2024e）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "最近也有研究关注将MCTS与大语言模型结合用于复杂推理任务（Zhang et al., 2024a）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "思维万物（XoT）方法（Ding et al., 2023）利用MCTS将外部领域知识融入思维中，遍历树（Tree-of-Traversals）方法（Markowitz et al., 2024）也是如此，使语言模型能够有效地对知识图谱中编码的事实进行推理。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "树搜索在完成现实网络任务（Koh et al., 2024）、代码生成（Li et al., 2024a）、数学推理（Jiang et al., 2024）以及表格数据处理（Ji et al., 2024）方面也被证明是有价值的。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "虽然大多数方法依赖于被提示的大语言模型本身充当价值函数，因此搜索的效用受限于该价值函数近似的质量（Chen et al., 2024d），并且搜索深度较低，但也可以使用带有学习价值函数的树搜索来指导大语言模型解码，正如TS-LLM中所展示的那样（Feng et al., 2024b）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "语言智能体树搜索（LATS）（Zhou et al., 2024）将MCTS与自我反思和记忆相结合，在编程任务上取得了强大的性能。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "MCTS也被用于通过迭代偏好优化来提高大语言模型的推理能力（Xie et al., 2024b）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "当应用于语言生成领域时，MCTS可以被视为对直接偏好优化（DPO）策略的基于似然的搜索（Rafailov et al., 2024）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "MCTS还可以用于为零样本上下文学习策略性地规划问题解决轨迹（Tang et al., 2024a）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "基于MCTS的自奖励树搜索已被用于改进特定领域的检索增强生成（Hu et al., 2024a）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在其他搜索策略方面，最近提出了Searchformer（Lehnert et al., 2024），这是一种Transformer模型，经过训练以模仿$A^{*}$算法的动态，在推箱子谜题和迷宫导航中表现出良好的性能。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "算法蒸馏最近被提出作为一种将强化学习算法蒸馏到神经网络中的方法，促进了大语言模型的上下文强化学习（Laskin et al., 2022）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A5.SS0.SSS0.Px5.p1.1": {
+  "sentences": [
+   {
+    "zh": "由于我们的论文探讨了将语言模型规划应用于国际象棋，而这一直是一个独立的研究主题，因此在这里我们也简要回顾当前的最新技术水平，以及与国际象棋特别相关的方法和评估。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "Chess-GPT（Feng et al., 2023）是一个定制模型，整合了下棋能力和语言能力，被证明在棋盘状态跟踪和下棋实力方面相比多个LLM基线有显著提升。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "最近，有研究表明，可以训练Transformer模型达到国际象棋特级大师水平（Ruoss et al., 2024a），无需搜索，只需向前看一步。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "最近也出现了涉及扩散模型的进展（Anonymous, 2024）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "通过训练专门的国际象棋Transformer模型，已经表明这些模型可能表现出超越性（Zhang et al., 2024b），至少在较低的下棋实力水平上——由此产生的模型可能超越训练集中的任何人类棋手，因为模型学习到的策略有效地平均掉了人类棋手所犯的一些错误。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这与表明弱到强监督是可能的发现一致（Burns et al., 2023）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "也有可能开发技能兼容的模型（Hamade et al., 2024），因为技能兼容性最终与下棋实力不同。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "人们也有兴趣开发能够充当国际象棋教练的模型（Menon, 2023）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "有证据表明，下棋的Transformer可以学习并内化与未来最优走法相关的前瞻能力（Jenner et al., 2024）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "混合卷积Transformer网络已被确定为一个有前景的方向，带来了性能提升（Czech et al., 2024）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "对最著名语言模型的国际象棋下棋实力的深入分析（Acher, 2023）曾确定gpt-3.5-turbo-instruct是当时最强的模型，能够完成更长的对局并在非平凡的Stockfish难度级别上获胜，但仍然有不可忽略比例的对局因非法走法而未能完成。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A7.p1.1": {
+  "sentences": [
+   {
+    "zh": "在每两个智能体之间的对局中，会使用一个特定的开局，并且智能体会交换座位，以确保每个智能体分别以黑方和白方下过每个开局。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这些开局列于表5中。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A7.T5": {
+  "sentences": [
+   {
+    "zh": "表5：国际象棋使用的开局库表。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "开局收集自多个TCEC（顶级国际象棋引擎锦标赛）赛季。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "评分使用Stockfish 16计算，每个局面搜索15亿个节点。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "评分均从白方视角给出（因此负值表示黑方更好），并通过以下公式计算：$\\tfrac{\\text{centipawns}}{100}$",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ }
+}

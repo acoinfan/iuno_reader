@@ -11,7 +11,9 @@ import argparse
 import json
 import os
 import sys
+import threading
 import urllib.request
+from concurrent.futures import ThreadPoolExecutor
 
 from . import extract as ex
 from .check import check_doc
@@ -85,14 +87,16 @@ def cmd_translate(a):
     tasks = make_tasks(doc, load_terms(), load_hedges(), _sections(a))
     eng = OpenAICompatible(role="translator")
     meta = tr.setdefault("__meta__", {})
-    if meta.get("translator") and meta["translator"] != eng.model:
-        meta["translator"] = f"{meta['translator']}+{eng.model}"  # 混合了不同译者，审校时据此判断独立性
-    else:
-        meta["translator"] = eng.model
+    old = meta.get("translator", "")
+    if old and eng.name not in old.split(" + "):
+        meta["translator"] = f"{old} + {eng.name}"  # 混合了不同译者，审校时据此判断独立性
+    elif not old:
+        meta["translator"] = eng.name
     for i, t in enumerate(tasks, 1):
         if t["id"] in tr and not a.force:
             continue
         tr[t["id"]] = eng.translate(t)
+        tr[t["id"]]["translator"] = eng.name
         save_json(tr, path)  # 每段存一次，中途失败不丢已完成的
         print(f"[{i}/{len(tasks)}] {t['id']}")
 
@@ -110,7 +114,8 @@ def cmd_render(a):
     only = None
     if _sections(a):
         only = {s["id"] for s in select_segments(doc, _sections(a))}
-        only |= {s["id"] for s in doc["segments"] if s["kind"] == "equation" and s.get("section", "").split(" ")[0] in _sections(a)}
+        secs = {s["section"] for s in doc["segments"] if s["id"] in only and s["kind"] in ("para", "abstract", "item")}
+        only |= {s["id"] for s in doc["segments"] if s["kind"] == "equation" and s.get("section") in secs}
     if a.translated_only:
         done = {s["id"] for s in doc["segments"] if s.get("translated")}
         secs = {s["section"] for s in doc["segments"] if s["id"] in done}
@@ -165,28 +170,42 @@ def cmd_review(a):
     tr = load_json(p("data", a.id, "translation.json"), {})
     tr.pop("__sections__", None)
     translator = (tr.pop("__meta__", None) or {}).get("translator", "")
-    path = p("data", a.id, f"review.{a.mode}.json")
+    path = p("data", a.id, f"review.{a.name or a.mode}.json")
     done = load_json(path, {})
     rv = ApiReviewer(a.mode)
     # 只要有一个审校角色和翻译用了同一个模型（或同一家的模型），就算独立性不足
     ind = worst_independence([independence(translator, m) for m in rv.models().values()])
     done["__meta__"] = {"reviewer": rv.name(), "mode": a.mode, "models": rv.models(),
-                        "translator": translator, "independence": ind}
+                        "translator": translator, "independence": ind,
+                        "usage": (done.get("__meta__") or {}).get("usage", {})}
     print("审校模型", rv.models(), "翻译者", translator or "未知", "独立性：", INDEPENDENCE_ZH[ind])
     tasks = make_review_tasks(doc, tr)
-    for i, t in enumerate(tasks, 1):
-        if t["id"] in done and not a.force:
-            continue
+    if _sections(a) != ["all"]:  # 默认只审正文：附录哪怕翻过也不审，审校（尤其贵的模型）按段收费
+        keep = {s["id"] for s in select_segments(doc, _sections(a))}
+        tasks = [t for t in tasks if t["id"] in keep]
+    todo = [t for t in tasks if a.force or t["id"] not in done]
+    local = threading.local()
+
+    def one(t):
+        # 每个线程用自己的审校客户端，用量各记各的，交回主线程汇总
+        if not hasattr(local, "rv"):
+            local.rv = ApiReviewer(a.mode)
         try:
-            done[t["id"]] = rv.review(t)
+            return t, local.rv.review(t), None, local.rv.take_usage()
         except RuntimeError as e:
-            print(f"[{i}/{len(tasks)}] {t['id']} 审校失败：{e}")
-            continue
-        usage = done["__meta__"].setdefault("usage", {})
-        for k, v in rv.take_usage().items():
-            usage[k] = round(usage.get(k, 0) + v, 1)
-        save_json(done, path)
-        print(f"[{i}/{len(tasks)}] {t['id']}")
+            return t, None, e, local.rv.take_usage()
+
+    with ThreadPoolExecutor(max_workers=max(1, a.workers)) as pool:
+        for n, (t, res, err, used) in enumerate(pool.map(one, todo), 1):
+            usage = done["__meta__"].setdefault("usage", {})
+            for k, v in used.items():
+                usage[k] = round(usage.get(k, 0) + v, 1)
+            if err:
+                print(f"[{n}/{len(todo)}] {t['id']} 审校失败：{err}")
+                continue
+            done[t["id"]] = res
+            save_json(done, path)  # 只在主线程写文件，每审完一段存一次
+            print(f"[{n}/{len(todo)}] {t['id']}")
 
 
 def cmd_run(a):
@@ -230,13 +249,14 @@ def main(argv=None):
                      ("translate", cmd_translate), ("render", cmd_render)]:
         s = sub.add_parser(name)
         s.add_argument("id")
-        s.add_argument("--sections", help="只处理这些节，逗号分隔，例如 abs,2,3,4 或 A,B")
+        s.add_argument("--sections", help="只处理这些节，逗号分隔，例如 abs,2,3,4 或 A,B；body 表示全部正文（不含附录）")
         s.add_argument("--force", action="store_true")
         s.add_argument("--translated-only", action="store_true", help="render 时只输出已翻译的片段")
         s.set_defaults(fn=fn)
     s = sub.add_parser("run", help="流水线：下载→拆分→翻译→审校→核对渲染→输出 out/<id>/")
     s.add_argument("ids", nargs="+", help="一个或多个 arXiv 编号")
-    s.add_argument("--sections", help="只处理这些节，逗号分隔，例如 abs,2,3,4")
+    s.add_argument("--sections", default="body",
+                   help="只处理这些节，逗号分隔，例如 abs,2,3,4；默认 body（全部正文，不含附录）；all 表示含附录的全文")
     s.add_argument("--translate", choices=["auto", "api", "agent"], default="auto",
                    help="auto：有接口就自动翻译，否则生成 agent 任务说明")
     s.add_argument("--review", choices=["auto", "blind", "backtranslate", "agent", "none"], default="auto")
@@ -256,6 +276,9 @@ def main(argv=None):
     s = sub.add_parser("review", help="用 OpenAI 兼容接口审校")
     s.add_argument("id")
     s.add_argument("--mode", choices=["blind", "backtranslate"], default="backtranslate")
+    s.add_argument("--name", help="结果存成 review.<name>.json（默认用 mode）；几个模型分别审同一份译文时用来区分")
+    s.add_argument("--sections", default="body", help="只审这些节；默认 body（正文），all 表示全部已翻译的段落")
+    s.add_argument("--workers", type=int, default=1, help="同时审几段（按接口允许的并发数设，例如 Kimi 15 并发、3 篇同时跑就设 5）")
     s.add_argument("--force", action="store_true")
     s.set_defaults(fn=cmd_review)
     s = sub.add_parser("probe", help="给每个配好接口的角色发一个小样例，检查接口能不能用、审校能不能抓错")

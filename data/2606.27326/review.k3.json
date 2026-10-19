@@ -1,0 +1,1710 @@
+{
+ "__meta__": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "models": {
+   "reviewer": "kimi-k3"
+  },
+  "translator": "deepseek-v4-pro（关思考）",
+  "independence": "different-model",
+  "usage": {
+   "calls": 60,
+   "prompt_tokens": 55107,
+   "completion_tokens": 32963,
+   "seconds": 907.4,
+   "cached_tokens": 31232
+  }
+ },
+ "S1.p1.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "现代生成式世界模型在各种环境中渲染出极其逼真、动作可控的未来（Alonso et al., 2024; Valevski et al., 2024; Hafner et al., 2025; Parker-Holder et al., 2025）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，它们生成的推演经常产生幻觉：它们在视觉上保持流畅且表面看似合理，同时偏离真实动态（Janner et al., 2019）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "该术语借自语言建模文献（Ji et al., 2023; Huang et al., 2025），在语言建模中通常指生成事实错误的文本；类似的失败也已在图像（Li et al., 2023）和视频生成（Huang et al., 2024）中得到研究。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在世界模型中，这种失败可以说后果更为严重：幻觉轨迹被直接输入下游规划器和策略（Schrittwieser et al., 2020; Hafner et al., 2023; Hansen et al., 2024），因此推演过程中的无声幻觉转化为控制过程中无声的错误决策。"
+   }
+  ]
+ },
+ "S1.p2.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "尽管这些模型的保真度不断提高，但自回归推演会在何处以及为何产生幻觉，人们仍知之甚少。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "一种自然的解读是，幻觉是一个架构问题，需要通过更大的骨干网络和更多的训练计算来解决（Hoffmann et al., 2022）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，我们认为**世界模型中的幻觉主要是一个数据覆盖问题：**它集中在状态-动作空间的低覆盖区域（Levine et al., 2020; Gadre et al., 2023），因此既可以通过运行时可用信号进行预测（Lakshminarayanan et al., 2017; Gal and Ghahramani, 2016; Chua et al., 2018），也可以通过调整模型训练所用的数据而非架构变更来预防。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的实验揭示，一个根本原因——覆盖缺口——解释了模型流程每个阶段的失败：分词器、动作条件化和多步推演，并且它表现为图1所示的三种不同失败模式。"
+   }
+  ]
+ },
+ "S1.F1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图1：**幻觉。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们将幻觉归类为三种不同的失效模式：感知、动作边缘化和场景发散，并开发了检测和缓解方法。**"
+   }
+  ]
+ },
+ "S1.p3.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在这项工作中，我们着手描述不同类型的幻觉，使用模型内部的信号预测它们何时会发生，并利用这些信息来弥补潜在的覆盖缺口。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们探索了两种具体的弥补缺口的方式：（i）在大规模预训练期间使用覆盖感知的采样技术，以及（ii）通过使用我们推导出的幻觉预测器进行有针对性的在线数据收集。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "理解幻觉何时以及为何发生需要三种资源，而目前没有任何单一基准能够同时提供这些资源：对训练语料库的完全控制、跨越许多任务和领域的行为多样化数据，以及通过在线交互探测覆盖缺口的实时环境。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了解决这一缺口，我们开发了 **MMBench2**，这是一个用于视觉世界建模的大规模多任务数据集，它扩展了 MMBench（Hansen et al., 2026），包含 $65.6$k 条混合质量轨迹，相当于 $224{\\times}224$ 视频在 $15$ fps 下的 $427$ 小时，并带有真实动作和奖励标签以及跨越 $10$ 个领域的 $210$ 个任务的实时模拟器。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在 $210$ 个任务中，$200$ 个构成预训练语料库，$10$ 个被保留为完全未见过的迁移任务，使我们能够探测训练分布内外的覆盖情况。"
+   }
+  ]
+ },
+ "S1.p4.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "原文中 $350$ 的数学格式（$...$）在译文中被去掉，写成了普通文本 350M，应原样保留占位格式。",
+    "suggestion": "利用MMBench2，我们训练了一个 $350$M 参数的Dreamer 4（Hafner et al., 2025）世界模型，并剖析其幻觉行为。",
+    "zh_reviewed": "利用MMBench2，我们训练了一个350M参数的Dreamer 4（Hafner et al., 2025）世界模型，并剖析其幻觉行为。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们识别出三种不同的幻觉模式，每种模式锚定于流程的不同阶段：编码器-解码器对中的感知幻觉、动力学模型中的动作边缘化，以及多步展开过程中的场景发散。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们开发了三种幻觉预测器：分词器往返残差、流不稳定性和种子间去噪方差，并用它们在运行时检测幻觉，以及作为在线数据收集（Sekar et al., 2020）在已见和未见任务中的好奇心奖励。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "原文中 $50$ 的数学格式（$...$）在译文中被去掉，写成了普通文本 50，应原样保留占位格式。",
+    "suggestion": "经验上，我们的幻觉驱动数据收集仅用 $50$ 条真实轨迹就能适应完全未见的环境，接近人类数据收集的效果。",
+    "zh_reviewed": "经验上，我们的幻觉驱动数据收集仅用50条真实轨迹就能适应完全未见的环境，接近人类数据收集的效果。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "总之，这些结果表明，现代世界模型中的幻觉在很大程度上是一个覆盖问题，并且检测它的相同信号也可以用来缓解它。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**我们将贡献总结如下：**"
+   }
+  ]
+ },
+ "S1.p4.2": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "major",
+    "category": [
+     "omission"
+    ],
+    "issue": "漏译了第二句「See `https://nicklashansen.com/mmbench2` for videos and resources.」，丢失了视频与资源的获取地址。",
+    "suggestion": "为了支持生成式世界建模的进一步研究，我们发布了完整的数据集、训练和评估代码、模型检查点，以及一个用于与世界模型进行开放式交互的浏览器界面。视频和相关资源请见 `https://nicklashansen.com/mmbench2`。",
+    "zh_reviewed": "为了支持生成式世界建模的进一步研究，我们发布了完整的数据集、训练和评估代码、模型检查点，以及一个用于与世界模型进行开放式交互的浏览器界面。"
+   }
+  ]
+ },
+ "S1.I1.i1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• **MMBench2：** 一个大型的 427 小时数据集，用于视觉世界建模，包含真实动作和奖励、实时环境以及行为多样的数据，包括人类游玩数据。"
+   }
+  ]
+ },
+ "S1.I1.i2": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• 生成式世界模型中幻觉的逐阶段表征，与分词器、动作边缘化和推演失败相关联。"
+   }
+  ]
+ },
+ "S1.I1.i3": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• 三个幻觉预测器，无需标签或额外训练即可检测幻觉。"
+   }
+  ]
+ },
+ "S1.I1.i4": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• 一种**覆盖感知的训练方案**，可在不增加额外成本的情况下，减少所有三种预测器中的幻觉，并提高推演的保真度。"
+   }
+  ]
+ },
+ "S1.I1.i5": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• 一个用于**定向数据收集**的框架，仅用少至 $50$ 条轨迹即可将预训练的 $350$M 世界模型适配到未见过的环境。"
+   }
+  ]
+ },
+ "S1.F2": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图 2：**MMBench2 任务。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "意思正确，但原文中 $36$ 和 $210$ 的数学模式标记在译文中被去掉，按要求应原样保留。",
+    "suggestion": "MMBench2 中 $210$ 个任务中的 $36$ 个样本，展示了语料库的视觉和形态多样性。",
+    "zh_reviewed": "MMBench2 中 210 个任务中的 36 个样本，展示了语料库的视觉和形态多样性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "所有观测均为 $224{\\times}224$ RGB 帧。**"
+   }
+  ]
+ },
+ "S2.p1.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了充分理解大型生成式世界模型中的幻觉，有必要控制训练过程并访问其训练数据，但（据我们所知）目前尚不存在规模令人满意的此类资源。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了填补这一空白，我们提出了 **MMBench2**：一个用于视觉世界建模的大规模多任务数据集。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "term"
+    ],
+    "issue": "「live environments」指可实际运行、可交互的环境（与离线数据相对），译为「实时环境」易引起误解，似乎强调运行速度而非可交互性。",
+    "suggestion": "我们的数据集包含 $\\mathbf{65{,}600}$ 条轨迹（$427$ 小时的 $224{\\times}224$ 视频，$15$ fps，总计 $23$M 帧），涵盖 $\\mathbf{210}$ 个不同的连续控制任务，行为多样（包括人类游玩数据），并配有真实动作和奖励标签，以及 MMBench2 中每个任务对应的可交互（可实际运行）环境和语言指令。",
+    "zh_reviewed": "我们的数据集包含 $\\mathbf{65{,}600}$ 条轨迹（$427$ 小时的 $224{\\times}224$ 视频，$15$ fps，总计 $23$M 帧），涵盖 $\\mathbf{210}$ 个不同的连续控制任务，具有多样化的行为（包括人类游玩数据），并配有真实动作和奖励标签，以及 MMBench2 中每个任务都包含的实时环境和语言指令。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "term"
+    ],
+    "issue": "同上，「live environments」意为可实际运行的交互式环境，「实时环境」不够准确。",
+    "suggestion": "顾名思义，MMBench2 直接构建在 MMBench 之上，后者提供了在统一接口下集成的 200 个可交互（可实际运行）环境。",
+    "zh_reviewed": "顾名思义，MMBench2 直接构建在 MMBench 之上，后者提供了在统一接口下集成的 200 个实时环境。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图 2 展示了我们任务的广度。"
+   }
+  ]
+ },
+ "S2.p2.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**任务概览。** MMBench2 涵盖 $\\mathbf{10}$ 个任务域：DMControl (Tassa et al., 2018)、DMControl Extended (Hansen et al., 2026)、Meta-World (Yu et al., 2019)、ManiSkill3 (Tao et al., 2025)、MuJoCo (Todorov et al., 2012)、MiniArcade (Hansen et al., 2026)、Box2D (Brockman et al., 2016)、RoboDesk (Kannan et al., 2021)、OGBench (Park et al., 2025) 和 Continuous Atari (Farebrother and Castro, 2024)。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "它们共同覆盖了运动、灵巧和桌面操作、目标条件导航以及街机风格环境，具有 $1$ 到 $16$ 维的连续动作空间；我们将每个动作向量零填充到最大维度（$d_{a}{=}16$），并提供逐维有效性掩码，以便模型可以忽略每个任务中的非活动维度。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在 $\\mathbf{210}$ 个任务中，$200$ 个构成预训练集，$10$ 个（本工作提出）被保留作为未见过的迁移任务。"
+   }
+  ]
+ },
+ "S2.p3.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "200个任务的预训练语料库每个任务包含260个回合。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "addition",
+     "other"
+    ],
+    "issue": "原文中的公式格式 $25$ 和 $1{,}000$ 未原样保留，且「步」为原文没有的补充（原文只说长度数值）。",
+    "suggestion": "然而，回合长度因任务而异，从某些ManiSkill3操作任务的 $25$ 到Atari游戏的 $1{,}000$ 不等。",
+    "zh_reviewed": "然而，回合长度因任务而异，从某些ManiSkill3操作任务的25步到Atari游戏的1,000步不等。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，如图3所示，语料库在不同任务之间高度不均匀。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此外，任务内部的视觉多样性在整个语料库中也差异很大，例如，倒立摆（MuJoCo）变化很小，而像地下城探险者（本文提出）、双足行走者（Box2D）和Krull（Atari）这样的任务在帧与帧之间以及回合之间变化很大。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "请参阅附录C了解任务概述，参阅附录D了解数据收集过程的详细描述。"
+   }
+  ]
+ },
+ "S2.F3": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图3：**数据集构成。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "原文数字用数学格式 $210$ 标注，译文去掉了 $...$ 定界符；按规定应原样保留。",
+    "suggestion": "我们训练语料库（2000万帧）中 $210$ 个任务的逐任务帧数，按降序排列并按领域着色。",
+    "zh_reviewed": "我们训练语料库（2000万帧）中210个任务的逐任务帧数，按降序排列并按领域着色。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "原文 $20$、$26\\%$、$0.7\\%$ 的数学格式定界符在译文中被去掉，应原样保留；意思无偏差。",
+    "suggestion": "分布呈重尾：前 $20$ 个任务占所有帧的 $26\\%$（以Atari为主），而后 $20$ 个任务仅贡献 $0.7\\%$（短时程操作任务）。",
+    "zh_reviewed": "分布呈重尾：前20个任务占所有帧的26%（以Atari为主），而后20个任务仅贡献0.7%（短时程操作任务）。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "原文 $65$k 的数学格式定界符被去掉，应原样保留；意思无偏差。",
+    "suggestion": "虚线标记逐任务中位数（$65$k）。**",
+    "zh_reviewed": "虚线标记逐任务中位数（65k）。**"
+   }
+  ]
+ },
+ "S3.p1.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们试图回答以下问题：世界模型为何会产生幻觉，以及我们能否预测它们何时可能产生幻觉？"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了回答这个问题，我们选择开发并训练一个350M参数的视觉世界模型，该模型在很大程度上遵循Dreamer 4（Hafner et al., 2025）中引入的整体架构和训练方案。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，我们的世界模型是一个以动作为条件的生成模型，遵循日益常见的两阶段训练方案：（1）首先，通过视觉观察的掩码自编码训练视频分词器；（2）随后，通过流匹配在由冻结的分词器产生的空间潜在token上训练一个实现为块因果Transformer（Vaswani et al., 2017）的动力学模型，并额外以动作token为条件。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们首先在MMBench2训练语料库上预训练我们的世界模型，然后通过进行一系列有针对性的微调实验来解决我们的具体研究问题。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "本节旨在概述我们的架构和训练方案。"
+   }
+  ]
+ },
+ "S3.p2.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**分词器。** 我们的视频分词器实例化为对称的编码器-解码器Transformer架构。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "编码器接收以步长$14$“分块”的$224{\\times}224$ RGB帧（每帧$256$个补丁令牌），前置$64$个可学习的潜在查询，并将潜在流投影到由$\\tanh$激活函数约束的$64$维瓶颈，产生每帧代码$z\\in[-1,1]^{64\\times 64}$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "解码器随后仅以潜在代码为条件重建图像。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "训练使用掩码重建目标（He et al., 2022），其中每帧从$\\mathcal{U}(0,0.9)$中抽取的一部分输入补丁被替换为学习到的掩码令牌，损失（像素MSE + LPIPS（Zhang et al., 2018））仅在掩码位置上计算。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们通过运行均方根对损失进行归一化，以降低对超参数的敏感性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "编码器和解码器各有50M可学习参数。"
+   }
+  ]
+ },
+ "S3.p3.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**动力学模型。** 我们的动力学模型是一个 250M 参数的块因果 Transformer，作用于打包的 tokenizer 潜变量上，并在上述冻结的 tokenizer 之上进行训练。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "每个时间步，输入序列由一个动作 token（一个作用于 16 维填充动作的 2 层 MLP）、一个捷径条件 token（编码噪声水平 $\\sigma$ 和步长 $d$）、32 个打包的空间潜变量 token、4 个寄存器 token，以及可选的智能体 token（用作奖励和行为克隆头的读出）组成。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "term"
+    ],
+    "issue": "「bootstrap」译为「引导」不够准确，易被理解为「引导/制导」，此处的自举（bootstrapping）指用模型自身预测构造训练目标；且「将两个较粗步长的预测蒸馏为……」在中文里像是独立分句，修饰关系不如原文清晰（原文该从句修饰 self-consistency bootstrap）。",
+    "suggestion": "该模型使用 Frans et al. (2025) 的捷径流匹配目标进行训练，该目标将经验性的一步回归项与一种自一致性自举交织在一起，后者将两个较粗步长的预测蒸馏为一个较细步长的目标。",
+    "zh_reviewed": "该模型使用 Frans et al. (2025) 的捷径流匹配目标进行训练，该目标将经验性的一步回归项与自一致性引导交织在一起，将两个较粗步长的预测蒸馏为一个较细步长的目标。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在推理时，这使得下一帧采样只需少至 4 个欧拉子步即可完成。"
+   }
+  ]
+ },
+ "S3.p4.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**训练方案。** Dreamer 4 的训练方案是为只有一小部分训练数据带有动作和奖励标签的场景而开发的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，MMBench2 为数据集中的每条轨迹都提供了真实动作和奖励，我们选择利用这一点。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们首先在整个训练语料上预训练分词器，然后继续预训练动力学模型，并以动作为条件。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在这个初始预训练阶段之后，我们尝试了后续章节中介绍的额外中期训练和微调方案。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "scope"
+    ],
+    "issue": "原文是初始化两个头：奖励预测头和行为克隆策略头，译文「奖励预测和行为克隆（BC）策略头」连读易被理解为一个同时做奖励预测的策略头，范围有歧义。",
+    "suggestion": "作为我们实验的一部分，我们在预训练之后初始化了额外的奖励预测头和行为克隆（BC）策略头。",
+    "zh_reviewed": "作为我们实验的一部分，我们在预训练之后初始化了额外的奖励预测和行为克隆（BC）策略头。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "奖励预测器通过 $L{=}8$ 多步离散回归（使用 $\\operatorname{symlog}$ 双热编码）进行训练，梯度通过动力学模型反向传播。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "BC 策略是一个确定性高斯策略，通过 MSE 损失训练来预测真实动作——这与 Dreamer 4 只考虑离散动作的做法不同。"
+   }
+  ]
+ },
+ "S4.p1.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "生成式世界模型通过串联三个不同的操作来想象未来：（1）编码器将每个观测映射为潜在编码，（2）以动作为条件的动力学头预测下一个潜在编码，（3）解码器将重建渲染回像素空间。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些阶段中的每一个都是在状态-动作空间的一个有限切片上训练得到的函数，因此当被要求外推到其未见过的范围之外时，每个阶段都可能独立地失败。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们使用“幻觉”一词来指代任何此类失败：输出流畅且视觉上合理，却与现实脱节。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "关键的是，由于这三个阶段顺序组合，早期引入的幻觉（例如损坏的编码）会被后续阶段传播和放大，因此指出哪个阶段产生了给定的失败是诊断和修复它的先决条件。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "本节探讨如何表征、检测并最终缓解幻觉。"
+   }
+  ]
+ },
+ "S4.SS1.p1.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们识别出生成式世界模型可能产生幻觉的三种不同方式，每种方式都与想象流程的不同阶段相关。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们在图1中展示了每种幻觉类型，并将其定义如下："
+   }
+  ]
+ },
+ "S4.SS1.p1.2": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "“disjoint”强调三者探测的是互不重叠、各自独立的部分，译为“不同部分”弱化了“互不重叠”的含义。",
+    "suggestion": "这三种失效模式探测模型互不重叠的三个部分：分词器、动力学模型的动作条件化，以及动力学误差的多步累积。",
+    "zh_reviewed": "这三种失效模式探测模型的不同部分：分词器、动力学模型的动作条件化，以及动力学误差的多步累积。"
+   }
+  ]
+ },
+ "S4.I1.i1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（i）**感知幻觉。** 分词器对观测的重建在尚未执行任何动态推演之前，就已经与观测本身存在差异。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "具体而言，编码器-解码器对将分布外场景结构投影到其学习到的潜在“词汇表”中最接近的分布内样本上。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例如，一个未见过的迷宫布局可能被重建为智能体和目标位于正确位置，但墙壁却是训练期间见过的完全不同的布局。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然后，动态头针对这个被破坏的场景进行推演，就好像它是真实情况一样。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "causal"
+    ],
+    "issue": "“is a property of ... alone”表示“仅仅是冻结编码器-解码器对的固有属性”，译为“仅由……引起”把属性归属改成了因果表述，语气略有偏差。",
+    "suggestion": "这种失败模式仅仅是冻结的编码器-解码器对本身的属性，即使在推演步数 $H{=}0$ 时也依然存在。",
+    "zh_reviewed": "这种失败模式仅由冻结的编码器-解码器对引起，即使在时间范围 $H{=}0$ 时也持续存在。"
+   }
+  ]
+ },
+ "S4.I1.i2": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "(ii) **动作边缘化（被忽略的）幻觉。** 在给定上下文的情况下，预测的下一个潜在状态在很大程度上对输入动作不敏感。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "推演在视觉上看似合理，但坍缩到动作边缘化的未来，因此模型的行为更像视频生成器，而不是可控的世界模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在操作上，我们通过在评估时干预动作流来暴露这种模式，例如在批次内随机打乱动作并测量由此产生的流均方误差变化；以这种方式产生幻觉的模型，其流均方误差在干预下几乎不发生变化。"
+   }
+  ]
+ },
+ "S4.I1.i3": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（iii）**场景发散幻觉。** 众所周知，自回归推演会随着预测时域的增加而累积复合误差。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，场景发散幻觉是一种非常具体的失效模式，其中预测了物理上不合理的事件（例如在 Pong 中得分时球瞬移回场内）。"
+   },
+   {
+    "verdict": "major",
+    "category": [
+     "term"
+    ],
+    "issue": "states 在本文语境中指模型的「状态」，误译为「州」。",
+    "suggestion": "这种类型的幻觉在数据覆盖较差的状态中最为常见。",
+    "zh_reviewed": "这种类型的幻觉在数据覆盖较差的州最为常见。"
+   }
+  ]
+ },
+ "S4.SS2.p1.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "接下来，我们开发了三种不同的预测器，旨在跟踪模型幻觉。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "经验上，我们发现这三个指标虽然在机制上不同，但都是幻觉事件的强预测因子。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "hedge"
+    ],
+    "issue": "「is in itself evidence that」译为「证明了」，语气被加强，evidence 是「证据」而非「证明」。",
+    "suggestion": "我们认为这种趋同是一种特性而非冗余，因为三个机制上不同的预测器在幻觉事件上达成一致，本身就是底层信号真实存在的证据。",
+    "zh_reviewed": "我们认为这种趋同是一种特性而非冗余，因为三个机制上不同的预测器在幻觉事件上达成一致，本身就证明了底层信号是真实的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "它们都不需要任何标签或额外训练，这使得它们特别适合用于运行时检测。"
+   }
+  ]
+ },
+ "S4.SS2.p2.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**提出的预测器1：分词器往返残差。** $u_{r}=\\|\\hat{z}-\\mathrm{Encode}(\\mathrm{Decode}(\\hat{z}))\\|$，即对动力学预测的下一个潜在变量 $\\hat{z}$ 进行单次解码-编码往返后的潜在空间残差，通过测量定义感知幻觉的症状来针对感知幻觉：一个预测的潜在变量，其解码帧偏离分词器的流形，例如损坏的场景布局或虚构的物体，无法在重新编码后保留，并产生较大的 $u_{r}$。"
+   }
+  ]
+ },
+ "S4.SS2.p3.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**提出的预测器2：流不稳定性。** $u_{f}$，即动力学头在给定 $(\\text{context},\\text{action})$ 对处的流不稳定性，衡量去噪器的干净目标预测 $\\hat{x}_{1}$ 在连续欧拉积分子步之间的移动量，并在子步的后半段取平均。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "一个尖锐、良态的动力学头会快速收敛到稳定的 $\\hat{x}_{1}$（低 $u_{f}$）；而一个条件作用提供很少信号的头会在子步间持续振荡（高 $u_{f}$）。"
+   }
+  ]
+ },
+ "S4.SS2.p4.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**提出的预测器3：种子间方差。** $u_{s}$，即在固定过去和动作的情况下，跨 $N$ 条独立去噪轨迹的下一个潜在预测的种子间方差，通过测量跨噪声种子的认知不确定性来针对场景发散型幻觉：种子不一致的区域正是多步推演将发散的区域。"
+   }
+  ]
+ },
+ "S4.F4": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图4：**数据覆盖与幻觉。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "从左到右：样本帧、关键智能体/物体位置的状态密度，以及世界模型的标记器往返残差 $u_{r}$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们分别用深蓝色和深紫色表示高状态密度和高 ${\\color[rgb]{0.457,0.25,0.6133}\\mathbf{u_{r}}}$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "幻觉集中在低覆盖区域，尤其是在已访问状态分布的边缘附近。**"
+   }
+  ]
+ },
+ "S4.SS2.p5.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**控制场景运动。** 在实践中，我们发现直接使用上述三个信号会受到场景活动的干扰：高运动转换会同时放大分词器残差、流不稳定性和不同种子间的去噪离散度。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "term"
+    ],
+    "issue": "running estimate 译为「运行估计」过于字面，此处指随数据流持续更新的滚动/递推估计；且「作为运行估计」略偏离原文「以滚动估计的方式计算」的表述。",
+    "suggestion": "为了消除这一干扰，我们改为报告动态归一化变体 $u^{\\text{norm}}\\doteq u/m$，其中 $m$ 是潜在表示的每步 RMS 变化，在整个数据集上按任务取平均计算，或在用于在线数据收集时以滚动估计的方式计算。",
+    "zh_reviewed": "为了消除这一干扰，我们改为报告动态归一化变体 $u^{\\text{norm}}\\doteq u/m$，其中 $m$ 是潜在表示的每步 RMS 变化，在数据集上按任务计算平均值，或在在线数据收集时作为运行估计。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "按场景运动进行归一化意味着每个预测器跟踪的是模型不确定性相对于场景中发生多少变化的程度。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在后续所有分析中，我们将 $u_{r}^{\\text{norm}},u_{f}^{\\text{norm}},u_{s}^{\\text{norm}}$ 作为主要的幻觉预测器。"
+   }
+  ]
+ },
+ "S4.SS3.p1.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "上述分类和预测器提示了一种以数据为中心的幻觉视角：三种失败模式中的每一种，从机制上讲，都是模型对状态-动作空间的某些区域见得不够多的结果。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "感知幻觉是分词器重建分布中的覆盖缺口，动作边缘化幻觉是动作条件转移中的覆盖缺口，而场景发散幻觉是模型被要求想象的那条轨迹上的覆盖缺口。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "scope"
+    ],
+    "issue": "「four of our tasks」指（众多任务中的）其中四个任务，译为「我们的四个任务」可能被理解为总共只有四个任务，范围略有偏移。",
+    "suggestion": "图4展示了在我们其中四个任务上数据覆盖与幻觉之间的关系。",
+    "zh_reviewed": "图4展示了在我们的四个任务上数据覆盖与幻觉之间的关系。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "两种干预措施自然随之而来："
+   }
+  ]
+ },
+ "S4.SS3.p2.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**覆盖感知训练。** 我们提出对现有数据集进行重采样，以提升状态-动作空间中代表性不足区域的权重，然后检验在训练时填补这些空白是否能同时减少所有三种失败模式。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "由于上述视角将覆盖范围确定为每种幻觉类型的根本杠杆，因此预期单一的重加权方案能同时使所有三个信号朝正确方向移动，而不需要针对每种类型分别进行干预。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在实践中，我们通过调整采样使其在任务间而非帧间均匀，来重新平衡训练数据。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们还尝试了损失重加权，但发现采样干预更优。"
+   }
+  ]
+ },
+ "S4.SS3.p3.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**有针对性的数据收集。** 当现有数据集对某个区域的覆盖不足，仅靠重新加权无法改善时，幻觉预测器本身可以作为有针对性的、好奇心驱动的数据收集目标。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "具体来说，在与真实环境交互的过程中，候选轨迹在世界模型中展开，根据预测的幻觉进行评分，然后执行排名最高的轨迹，从而产生数据，这些数据在构造上覆盖了之前导致模型产生幻觉的转移。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在实践中，我们以闭环方式收集数据，预测时域为 $H=32$，每 $K=16$ 步重新规划一次。"
+   }
+  ]
+ },
+ "S5.p1.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们在MMBench2的训练语料库上训练了一个350M参数的动作条件世界模型。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "原文的「$3$M」是公式占位符，译文改成了纯文本「300万」，按规范应原样保留为 $3$M。",
+    "suggestion": "我们的训练数据包含约2000万帧，分辨率为$224\\times 224$，涵盖200个不同的连续控制任务，并保留剩余的$3$M帧用于测试。",
+    "zh_reviewed": "我们的训练数据包含约2000万帧，分辨率为$224\\times 224$，涵盖200个不同的连续控制任务，并保留剩余的300万帧用于测试。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "scope"
+    ],
+    "issue": "「strictly consider」意为「仅/只考虑」（排他性地限定为RGB观测），译成「严格考虑」容易被理解为「严谨地考虑」，限定含义有所偏离。",
+    "suggestion": "尽管MMBench2中低维状态信息很容易获得，但我们在这项工作中选择仅考虑RGB观测。",
+    "zh_reviewed": "尽管MMBench2中低维状态信息很容易获得，但我们选择在这项工作中严格考虑RGB观测。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们在下面描述我们的实验设置。"
+   }
+  ]
+ },
+ "S5.p2.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**评估。** 我们在四个连续的训练阶段评估我们的世界模型及其变体：（1）无奖励标签的动作条件预训练，（2）覆盖感知的“中期训练”，该阶段通过我们提出的重加权采样扩展前一阶段，（3）带奖励标签的动作条件世界建模，以及（4）通过定向数据收集在已见和未见任务上进行微调。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的关键评估指标包括："
+   }
+  ]
+ },
+ "S5.I1.i1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "(i) **重建 PSNR** $\\uparrow$ 评估编码器/解码器质量，不考虑动力学。"
+   }
+  ]
+ },
+ "S5.I1.i2": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "(ii) **Rollout PSNR gain (dB)** $\\uparrow$ 评估生成的 rollout 相对于一个基线的质量，该基线在整个 rollout 时间范围内重复最后一帧。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "尽管朴素，但根据任务的不同，这个基线可能出奇地强。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "当 $\\Delta$PSNR $\\leq 0$ 时，我们认为场景发散。"
+   }
+  ]
+ },
+ "S5.I1.i3": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "(iii) **动作打乱比率** $\\uparrow$ 通过测量一步教师强制流 MSE 相对于批量打乱动作的比值，来评估动力学模型中的动作敏感性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "当该比率 $\\leq 1.1$ 时，我们认为动作被忽略（边缘化）。"
+   }
+  ]
+ },
+ "S5.I1.i4": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "(iv) **下游任务性能（归一化得分）** $\\uparrow$ 通过使用交叉熵方法（CEM）的闭环 MPC 评估世界模型对下游任务的有用性，其中规划时域 $H=32$，每 $16$ 步重新规划。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们报告归一化得分 $s\\in[0,1]$ 而不是原始奖励，因为不同任务的奖励尺度差异很大（相差几个数量级）。"
+   }
+  ]
+ },
+ "S5.p3.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "实现细节。编码器和解码器各有 50M 可学习参数，动力学模型（包括预测头）有 250M 参数。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们使用 8 块 NVIDIA H100 GPU 进行训练。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "分词器预训练 300k 步（14 GPU 天），动力学模型预训练 180k 步（24 GPU 天）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的最终检查点（微调后）分别训练 380k 和 210k 步，总共 58 GPU 天，使用上下文长度 T=24。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "奖励头和 BC 策略以每个任务语言指令的 CLIP-ViT/B 嵌入为条件。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "更多实现细节见附录 F。"
+   }
+  ]
+ },
+ "S5.p4.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们试图回答以下问题："
+   }
+  ]
+ },
+ "S5.I2.i1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（Q1）**幻觉检测。** 我们提出的指标能否准确预测模型幻觉？"
+   }
+  ]
+ },
+ "S5.I2.i2": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（Q2）**预训练。** 覆盖感知训练能否有意义地减少幻觉？"
+   }
+  ]
+ },
+ "S5.I2.i3": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "(Q3) **定向数据收集。** 能否通过收集额外数据来缓解模型幻觉？"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在固定预算下，哪种类型的数据对世界模型的改进最大？"
+   }
+  ]
+ },
+ "S5.I2.i4": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（Q4）**泛化。** 预训练的世界模型如何适应未见过的任务？"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的世界模型是零样本泛化，还是需要微调？"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "它在什么情况下无法迁移？"
+   }
+  ]
+ },
+ "S5.F5": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图5：**我们的三个幻觉预测器追踪相同的实际 rollout 误差。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "原文的 $9$k 中数字 9 是公式格式，译文去掉了 $...$ 标记，按要求应原样保留。",
+    "suggestion": "每个点对应来自200个训练任务中任意一个的 $9$k 个留出的24帧序列之一，使用我们预训练的基础模型计算；紫色曲线显示8个区间中每个区间的中位数。**",
+    "zh_reviewed": "每个点对应来自200个训练任务中任意一个的9k个留出的24帧序列之一，使用我们预训练的基础模型计算；紫色曲线显示8个区间中每个区间的中位数。**"
+   }
+  ]
+ },
+ "S5.SS1.p1.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**检测幻觉事件。** 为了确定我们提出的幻觉指标是否能预测幻觉，并进而预测模型性能，我们计算了开环 rollout 的 $\\Delta$PSNR 与每个预测指标之间的 Spearman 相关性；结果如图 5 所示。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们发现所有三个预测指标都存在强负相关（$\\rho\\approx 0.80$），这表明它们都追踪相同的潜在误差。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们还测量了它们针对两个二元幻觉标签（动作被忽略（动作打乱比率 $\\leq 1.1$）和场景发散（rollout $\\Delta$PSNR 与帧重复基线相比 $\\leq 0$））的每任务聚合 AUROC；结果见附录 E。我们发现我们的预测指标始终优于其未归一化的对应指标（即 $u_{f}^{\\text{norm}}$ 是比 $u_{f}$ 更好的预测指标）以及依赖潜在场景运动 $m$ 或每任务帧数的基线。"
+   }
+  ]
+ },
+ "S5.T1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "minor",
+    "category": [
+     "scope"
+    ],
+    "issue": "「by stage」在表题中意为「按阶段分列/展示」，译文「按阶段进行的覆盖感知训练」容易读成训练本身按阶段进行，修饰关系略有偏移。",
+    "suggestion": "表1：**按阶段分列的覆盖感知训练结果。",
+    "zh_reviewed": "表1：**按阶段进行的覆盖感知训练。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在200个任务的留出轨迹上，覆盖感知训练相对于基础模型的平均变化。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Tok ft使用覆盖感知训练对分词器进行$30$k步微调，然后使用默认采样对动力学模型进行$30$k步微调，Dyn ft则相反，Both使用覆盖感知训练对两者各进行$30$k步微调。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "最佳结果以粗体显示。**"
+   }
+  ]
+ },
+ "S5.SS1.p2.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**覆盖感知训练。** 我们通过将基础模型的预训练额外延长 30k 步（分词器和动力学模型各 30k 步）来评估所提出的覆盖感知训练的有效性，同时改变采样方法：跨帧均匀采样（默认）和跨任务均匀采样（我们的方法）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "结果如表 1 所示。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们发现分词器和动力学模型都从覆盖感知训练中受益，并且对两者都采用覆盖感知训练可获得最佳整体性能。"
+   }
+  ]
+ },
+ "S5.F6": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图6：**按收集方法划分的数据覆盖情况。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们展示了三种在线数据收集策略（专家、好奇心和人类）在未见任务集中的两个任务上的状态密度。**"
+   }
+  ]
+ },
+ "S5.T2": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "表2：**针对10个未见任务的微调进行定向数据收集。** 我们在10个已见任务和10个未见任务上微调世界模型，改变数据来源和微调策略。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "每个数据源每个任务包含50条轨迹。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "离线指标使用等量的专家轨迹和人类游玩数据组成的测试集计算。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "任务性能通过使用CEM的闭环MPC测量；我们报告每个任务3个回合中归一化到$[0,1]$的平均性能。"
+   }
+  ]
+ },
+ "S5.SS1.p3.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**通过定向数据收集缓解幻觉。** 由于我们观察到数据覆盖与幻觉之间存在强关联，一个自然随之而来的问题是：能否通过定向数据收集填补覆盖缺口来缓解幻觉？"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了回答这个问题，我们构建了一个任务集，其中包含预训练期间见过的10个任务和10个完全未见过的任务，然后为每个任务收集50个回合，仅改变所使用的行为策略。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "具体来说，我们评估了以下方法：无操作（全零）动作、随机动作、专家策略、人类游玩（通过键盘）以及基于好奇心的探索（Sekar et al., 2020），使用我们提出的幻觉预测器 $u_{r}^{\\mathrm{norm}}$ 作为目标。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "不同收集策略的状态密度如图6所示。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们分别对分词器和动力学模型进行了 $50$k 步和 $30$k 步的微调，并通过闭环 MPC（使用 CEM 进行规划）报告离线性能指标和下游任务性能。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "10个未见任务的结果如表2所示，更多结果见附录E。预训练在一定程度上实现了零样本迁移（$0.276$，是随机策略基线 $0.118$ 的 $2.3{\\times}$），并且仅使用基于 $u_{r}^{\\mathrm{norm}}$ 的好奇心为每个任务收集 $50$ 条轨迹，就将性能提升到 $0.325$，达到专家/人类预言机（$0.362$）的约 $90\\%$，尽管没有使用任何特权行为。"
+   }
+  ]
+ },
+ "S5.SS2.p1.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "经验上，我们发现幻觉可以在很大程度上通过有针对性的数据收集来缓解，但并非所有数据源都同样具有信息量。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们认为这有两个具体原因：（i）世界建模需要广泛的状态-动作覆盖，例如随机策略并不能保证这一点，以及（ii）下游任务是目标导向的，其状态-动作分布比一般空间窄得多，因此例如我们的闭环MPC评估主要衡量模型在该较窄子空间周围的准确性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "也就是说，可以说这是设计使然：有些行为我们比其他行为更感兴趣建模，但这提出了一个更广泛的问题，即我们今后如何最好地评估世界模型。"
+   }
+  ]
+ },
+ "S5.SS2.p2.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**现成的分词器能改善感知吗？** 在未见任务上减轻感知幻觉的一种具体方法是利用在比本工作所用数据集大几个数量级的数据集上训练的现成分词器。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了研究这种方法的可行性，我们将我们训练的分词器（在未见任务集上微调前后）与四个现成分词器进行比较；结果见表3。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "原文中的公式占位符 $200$ 在译文中被改写为普通文本“200任务”，未按原样保留。",
+    "suggestion": "我们发现，在来自 $200$ 任务训练语料库的任务上评估时，现成的分词器（如最强的 Wan 2.1 VAE）表现不如我们的域内分词器，但在未见任务集上表现显著更好，除非我们对模型进行微调，在这种情况下我们的域内分词器再次胜出。",
+    "zh_reviewed": "我们发现，在从200任务训练语料库中选取的任务上评估时，现成分词器（如最强的Wan 2.1 VAE）表现不如我们的域内分词器，但在未见任务集上表现显著更好，除非我们对模型进行微调，此时我们的域内分词器再次获胜。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些结果表明，现成分词器确实对世界建模有前景，但在可能的情况下，域内微调仍然有切实的好处。"
+   }
+  ]
+ },
+ "S5.SS2.p3.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "「position MMBench2 vs. existing datasets」意为将 MMBench2 与现有数据集进行对比、明确其相对位置，译文「与……进行了定位」未体现出对比、比较的意味，表述也不够通顺。",
+    "suggestion": "**相关工作。** 我们在附录 A 中详细讨论了相关工作，并在附录 B 中将 MMBench2 与现有的世界建模数据集进行了对比定位。",
+    "zh_reviewed": "**相关工作。** 我们在附录 A 中详细讨论了相关工作，并在附录 B 中将 MMBench2 与现有的世界建模数据集进行了定位。"
+   }
+  ]
+ },
+ "S5.SS2.p4.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**总之，**我们认为生成式世界模型中的幻觉首先是一个数据覆盖问题，并识别出三种失败模式：感知、动作边缘化和场景发散。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的预测器以约 $\\rho\\approx 0.80$ 的相关性追踪它们与 rollout $\\Delta$PSNR 的关系，并产生两种互补的方案：覆盖感知采样同时减少所有三种失败模式，以及使用预测器作为好奇心奖励使我们的预训练模型适应完全未见过的任务。"
+   }
+  ]
+ },
+ "S5.T3": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "表3：**与现成分词器的比较。** 我们的分词器以及四个现成分词器的重建PSNR和LPIPS，在我们微调实验中使用的10个“已见”和“未见”任务集上进行评估。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的分词器在训练集任务上大幅优于最佳现成分词器Wan 2.1 VAE，但在没有额外微调的情况下对新任务的泛化能力较差。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "最佳结果以粗体显示；箭头表示越高（$\\uparrow$）还是越低（$\\downarrow$）越好。"
+   }
+  ]
+ },
+ "S5.SS2.p5.1": {
+  "reviewer": "kimi-k3",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "原文 $350$M 和 $210$ 的公式格式（$...$）在译文中被去掉了美元符号，应原样保留。",
+    "suggestion": "**局限性。** 我们的研究在 $350$M 参数规模下，跨越 $210$ 个模拟控制任务进行。",
+    "zh_reviewed": "**局限性。** 我们的研究在 350M 参数规模下，跨越 210 个模拟控制任务进行。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的发现是否能迁移到十亿参数模型，或迁移到带有传感器噪声和部分可观测性的真实机器人数据，仍然是一个开放的实证问题。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们也承认训练大型世界模型所需的巨大计算成本，以及对更多样化数据集的需求。"
+   }
+  ]
+ }
+}

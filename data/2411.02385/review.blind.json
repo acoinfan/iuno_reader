@@ -1,0 +1,2880 @@
+{
+ "__meta__": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "models": {
+   "reviewer": "deepseek-v4-pro"
+  },
+  "translator": "deepseek-v4-pro（关思考）",
+  "independence": "same-model",
+  "usage": {
+   "calls": 70,
+   "prompt_tokens": 66155,
+   "completion_tokens": 62073,
+   "seconds": 579.8,
+   "cached_tokens": 42240
+  }
+ },
+ "abs.p1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "人们相信，扩展视频生成模型有望构建遵循基本物理定律的世界模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，这些模型能否仅从视觉中发现物理定律是值得质疑的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "学习真实定律的世界模型应该给出对细微差别稳健的预测，并在未见过的场景上正确外推。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在这项工作中，我们在三个关键场景中进行评估：分布内、分布外和组合泛化。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们开发了一个用于物体运动和碰撞的二维模拟测试平台，以生成由一个或多个经典力学定律确定性控制的视频。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们专注于训练基于扩散的视频生成模型的扩展行为，以根据初始帧预测物体运动。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的扩展实验显示在分布内完美泛化，组合泛化有可测量的扩展行为，但在分布外场景中失败。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "进一步的实验揭示了关于这些模型泛化机制的两个关键见解：（1）模型未能抽象出一般物理规则，而是表现出“基于案例”的泛化行为，即模仿最接近的训练示例；（2）当泛化到新案例时，观察到模型在参考训练数据时优先考虑不同因素：颜色 $>$ 大小 $>$ 速度 $>$ 形状。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的研究表明，仅靠扩展不足以让视频生成模型发现基本物理定律。"
+   }
+  ]
+ },
+ "p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "∗ 同等贡献（按字母顺序）"
+   }
+  ]
+ },
+ "p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "`https://phyworld.github.io`"
+   }
+  ]
+ },
+ "S1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "基础模型（Bommasani et al., 2021）通过将模型和数据扩展到前所未有的规模（Brown, 2020; Kaplan et al., 2020），已经展现出卓越的能力。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例如，视频生成（Brooks et al., 2024; Yang et al., 2024）不仅能生成高保真度和超现实的视频，还引发了人们对世界模型构建的新一轮兴趣（Yang et al., 2023）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "由于能够生成逼真的数据和精确的模拟，这一主题正受到机器人学（Yang et al., 2023; Yue et al., 2024）和自动驾驶（Hu et al., 2023）领域的高度关注。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些模型需要理解基本的物理定律，以生成超出训练语料库的数据，并保证精确的模拟。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，视频生成能否仅仅通过观察视频就发现这些规则，仍然是一个悬而未决的问题。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们旨在通过特别关注数据和模型的规模化，提供一项系统性的研究来回答这个问题。"
+   }
+  ]
+ },
+ "S1.F1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图1：泛化模式的分类。$\\ocircle$ 表示训练数据。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "$\\times$ 表示测试数据。"
+   }
+  ]
+ },
+ "S1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "判断视频模型是学到了规律还是仅仅记住了数据，是很有挑战性的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "由于模型的内部知识不可获取，我们只能通过检查其在未见场景上的预测（即其泛化能力）来推断模型的理解。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在本文中，我们基于训练数据和测试数据之间的关系，提出了一种分类法（图1）以进行全面评估。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "分布内（ID）泛化假设训练数据和测试数据是独立同分布（i.i.d.）的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "另一方面，分布外（OOD）泛化指的是模型在与训练数据分布不同的测试数据上的表现，特别是当潜在参数超出训练期间所见范围时。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "人类水平的物理推理可以轻松外推到OOD，并在没有遇到过完全相同场景的情况下预测物理过程。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此外，我们还考察了一种特殊的OOD能力，称为组合泛化，它评估模型是否能以新颖的方式组合两个不同的概念，这一特质通常被认为是基础模型迈向通用人工智能（AGI）所必需的（Du & Kaelbling, 2024）。"
+   }
+  ]
+ },
+ "S1.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此外，真实世界的视频通常包含复杂的非刚性物体和运动，这给定量评估甚至人工验证带来了重大挑战。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此类视频丰富的纹理和外观可能成为混杂因素，分散模型对底层物理的注意力。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了缓解这些问题，我们特别关注经典力学，并开发了一个二维模拟器，其中物体由简单的几何形状表示。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "每个视频描绘了这些二维物体的运动或碰撞，在给定初始帧的情况下，完全由一个或两个基本物理定律支配。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "该模拟器使我们能够生成大规模数据集，以支持视频生成模型的扩展。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此外，我们开发了一种工具，可以从像素中推断生成视频中每个物体的内部状态（例如位置和大小）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这使我们能够为物理定律发现建立定量评估指标。"
+   }
+  ]
+ },
+ "S1.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们首先研究缩放视频生成模型如何影响分布内（ID）和分布外（OOD）泛化。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们选择三个基本物理定律进行模拟：球的匀速直线运动、两球之间的完全弹性碰撞以及球的抛物线运动。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们将数据集从3万扩展到300万个示例，并将视频扩散模型的参数从2200万增加到3.1亿。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "一致地，我们观察到模型在所有任务上都实现了近乎完美的分布内泛化。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，分布外泛化误差并未随着数据和模型规模的增加而改善，这揭示了缩放视频生成模型在处理分布外数据方面的局限性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于组合泛化，我们设计了一个环境，其中包含多个经历自由落体和碰撞的物体，以研究它们之间的相互作用。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "每次从八个物体中选择四个来创建视频。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "总共有70种组合（$C_{8}^{4}$）可能。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们使用其中60种进行训练，10种进行测试。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们通过将训练数据数量从60万变化到600万来训练模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们通过将生成的测试样本标记为“异常”（如果视频在物理上看起来不合理）来进行人工评估。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "结果表明，缩放数据将异常案例的百分比从$67\\%$大幅降低到$10\\%$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这表明缩放对于提高组合泛化至关重要。"
+   }
+  ]
+ },
+ "S1.p5.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的实证分析揭示了视频生成模型中泛化机制的两个有趣特性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "首先，这些模型很容易被训练集中的“欺骗性”示例所偏置，导致它们在特定条件下以“基于案例”的方式进行泛化。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这一现象在大型语言模型中也观察到（Hu et al., 2024），描述了模型在解决新任务时倾向于参考相似的训练案例。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例如，考虑一个在高速球体匀速直线运动数据上训练的视频模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如果通过水平翻转视频进行数据增强，从而引入反向运动，模型可能会生成一个低速球体在初始帧之后反转方向的场景，尽管这种行为在物理上是不正确的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "其次，我们探讨了在泛化过程中不同数据属性如何竞争。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例如，如果匀速运动的训练数据包含红色球体和蓝色方块，模型可能会在条件帧之后立即将红色方块转变为球体。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这种行为表明模型优先考虑颜色而非形状。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的成对分析揭示了以下优先级层次：颜色 > 大小 > 速度 > 形状。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "hedge"
+    ],
+    "issue": "原文 'could explain' 含有不确定性，译文 '可以解释' 语气更确定，削弱了可能性语气。",
+    "suggestion": "这一排序或许可以解释为什么当前的视频生成模型经常难以保持对象一致性。",
+    "zh_reviewed": "这一排序可以解释为什么当前的视频生成模型经常难以保持对象一致性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们希望这些发现能为未来视频生成和世界模型的研究提供有价值的见解。"
+   }
+  ]
+ },
+ "S2.SS1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在本节中，我们旨在建立框架并定义视频生成背景下物理规律发现的概念。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在经典物理学中，规律通过数学方程来表述，这些方程从初始条件预测未来状态和动力学。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在基于视频的观测领域，每一帧代表一个时刻，物理规律的预测对应于以过去状态为条件生成未来帧。"
+   }
+  ]
+ },
+ "S2.SS1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "考虑一个物理过程，它涉及若干潜在变量 $\\boldsymbol{z}=(z_{1},z_{2},\\ldots,z_{k})\\in\\mathcal{Z}\\subseteq\\mathbb{R}^{k}$，每个变量代表某个物理参数，如速度或位置。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "根据经典力学，这些潜在变量将按照微分方程 $\\dot{\\boldsymbol{z}}=F(\\boldsymbol{z})$ 演化。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在离散版本中，如果两个连续帧之间的时间间隔为 $\\delta$，那么我们有 $\\boldsymbol{z}_{t+1}\\approx\\boldsymbol{z}_{t}+\\delta F(\\boldsymbol{z}_{t})$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "将渲染函数记为 $R(\\cdot):\\mathcal{Z}\\mapsto\\mathbb{R}^{3\\times H\\times W}$，它将世界状态渲染为形状为 $H\\times W$ 且具有 RGB 通道的图像。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "考虑一个视频 $V=\\{I_{1},I_{2},\\ldots,I_{L}\\}$，它由 $L$ 帧组成，并遵循经典力学动力学。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "物理一致性要求存在一系列潜在变量，它们满足以下条件：1) $\\boldsymbol{z}_{t+1}=\\boldsymbol{z}_{t}+\\delta F(\\boldsymbol{z}_{t}),t=1,\\ldots,L-1.$ 2) $I_{t}=R(\\boldsymbol{z}_{t}),\\quad t=1,\\ldots,L.$ 我们训练一个由 $\\theta$ 参数化的视频生成模型 $p$，其中 $p_{\\theta}(I_{1},I_{2},\\ldots,I_{L})$ 表征了它对视频帧的理解。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们可以基于初始帧的条件，通过从 $p_{\\theta}(I_{c+1}^{\\prime},\\ldots I_{L}^{\\prime}\\mid I_{1},\\ldots,I_{c})$ 中采样来预测后续帧。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "变量 $c$ 通常根据任务取值为 1 或 3。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，物理一致性损失可以简单地定义为 $-\\log p_{\\theta}(I_{c+1},\\ldots,I_{L}\\mid I_{1},\\ldots,I_{c})$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "它衡量预测值符合现实世界发展的可能性有多大。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "模型必须理解底层的物理过程才能准确预测后续帧，这使我们能够定量评估视频生成模型是否正确发现并模拟了物理定律。"
+   }
+  ]
+ },
+ "S2.SS2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在本文中，我们只关注视频生成模型，将其他建模方法的讨论留待未来工作。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "遵循 Sora（Brooks et al., 2024），我们采用变分自编码器（VAE）和 DiT 架构进行视频生成。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "VAE 在空间和时间上将视频压缩为潜在表示，而 DiT 对去噪过程进行建模。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这种方法展现出强大的可扩展性，并在生成高质量视频方面取得了有前景的结果。"
+   }
+  ]
+ },
+ "S2.SS2.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**VAE模型。** 我们采用(2+1)D-VAE将视频投影到潜在空间。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "从SD1.5-VAE结构开始，我们使用3D块将其扩展为时空自编码器（Yu et al., 2023b）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "(2+1)D-VAE的所有参数都在高质量图像和视频数据上进行了预训练，以保持强大的外观建模能力，同时实现运动建模。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "更多细节见第B.2节。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在本文中，我们固定预训练的VAE编码器，并将其用作视频压缩器。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "第B.3节的结果证实了VAE能够准确编码和解码物理事件视频。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这使我们能够专注于训练扩散模型来学习物理定律。"
+   }
+  ]
+ },
+ "S2.SS2.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**扩散模型。** 给定 VAE 模型的压缩潜在表示，我们将其展平为时空块序列，作为 transformer 的 token。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "值得注意的是，自注意力应用于视频 token 的整个时空序列，不区分空间和时间维度。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于位置嵌入，采用了 RoPE（Su et al., 2024）的 3D 变体。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如第 2.1 节所述，我们的视频模型以最初的 $c$ 帧为条件。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "将 $c$ 帧视频零填充到与完整物理视频相同的长度。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们还引入了一个二进制掩码“video”，将最初 $c$ 帧的值设为 $1$，表示这些帧是条件输入。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "噪声、条件和掩码视频沿通道维度拼接，形成模型的最终输入。"
+   }
+  ]
+ },
+ "S2.SS3.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "假设我们有一个如上所述学习得到的视频生成模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们如何判断底层物理定律是否已被发现？"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "一个完善的定律描述自然世界的行为，例如物体如何运动和相互作用。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，一个包含真实物理定律的视频模型应该能够经受实验验证，在任何情况下产生合理的预测，这证明了模型的泛化能力。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了全面评估这一点，我们在本文范围内考虑以下泛化分类（见图1）：1）**分布内**（ID）泛化描述训练数据和测试数据来自相同分布的情况。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在我们的情况中，训练数据和测试数据都遵循相同的定律，并且位于相同的域中。2）一个已经学会物理定律的人可以轻松外推到从未观察过的场景。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这种能力被称为**分布外**（OOD）泛化。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "尽管这听起来具有挑战性，但这种评估是必要的，因为它表明模型是否能够从数据中学习原则性规则。3）此外，在ID和OOD之间存在一种情况，具有更多的实用价值。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们称之为**组合**泛化，代表每个“概念”或对象在训练期间都已被观察到，但并非它们的所有组合。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "它测试模型以新颖方式结合过去经验中相关信息的能力。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "类似的概念已在LLM中探索过（Riveland & Pouget, 2024），表明模型可以通过重新组合先前学习的组件，在没有任务特定经验的情况下，在语言指令任务中表现出色。"
+   }
+  ]
+ },
+ "S3.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在本节中，我们研究ID/OOD泛化与模型或数据规模之间的相关性，重点关注视频生成模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们使用由基本运动学方程支配的确定性任务，因为它们允许对ID/OOD进行清晰定义，并便于进行定量误差评估。"
+   }
+  ]
+ },
+ "S3.SS1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "具体来说，我们考虑三种物理场景。1) **匀速直线运动：** 一个彩色球以恒定速度水平移动。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这用于说明惯性定律。2) **完全弹性碰撞：** 两个大小和速度不同的球水平相向运动并发生碰撞。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "其背后的物理定律是能量和动量守恒。3) **抛物线运动：** 一个具有初始水平速度的球因重力而下落。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这代表了牛顿第二运动定律。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "每种运动都由其初始帧决定。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "可视化见图2。"
+   }
+  ]
+ },
+ "S3.F2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图2：下采样视频可视化。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "箭头指示时间的推进。"
+   }
+  ]
+ },
+ "S3.SS1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**训练数据生成。** 我们使用 Box2D 模拟各种场景的运动状态并将其渲染为视频，每个场景具有 2-4 个自由度（DoF），例如球的初始速度和质量。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为每个自由度定义了一个分布内范围。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们通过在这些范围内均匀采样高维网格，生成了 30K、300K 和 3M 视频的训练数据集。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "所有球具有相同的密度，因此它们的质量由其大小推断。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为保持一致性，抛物线运动中的重力加速度是恒定的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "球的初始位置在可见范围内随机初始化。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "更多细节在第 C.1 节中提供。"
+   }
+  ]
+ },
+ "S3.SS1.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**测试数据生成。** 我们使用分布内（ID）和分布外（OOD）数据评估训练好的模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于分布内评估，我们从训练时使用的同一网格中采样，确保没有任何特定数据点出现在训练集中。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "分布外评估视频使用超出训练范围的初始半径和速度值生成。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "存在多种类型的分布外设置，例如仅速度或半径超出分布，或两者均超出分布。"
+   }
+  ]
+ },
+ "S3.SS1.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "模型。对于每个场景，我们从头训练不同规模的模型，如表1所示。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这确保了结果不受不可控的预训练数据的影响。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "前三个帧作为条件提供，这足以推断球的速度并预测后续帧。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "扩散模型使用32块Nvidia A100 GPU训练100K步，批量大小为256，这足以收敛，因为训练300K步的模型达到了相似的性能。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们保持预训练的VAE固定。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "每个视频由32帧组成，分辨率为128x128。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们还尝试了256x256分辨率，这产生了相似的泛化误差，但显著减慢了训练过程。"
+   }
+  ]
+ },
+ "S3.T1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "表1：DiT模型规模的详细信息。"
+   }
+  ]
+ },
+ "S3.SS1.p5.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**评估指标。** 我们观察到，学习到的模型能够生成形状一致的球。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了获得生成视频中第 $i$ 个球的中心位置 $x^{i}_{t}$，我们使用一种基于彩色像素均值的启发式算法，通过颜色区分球。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了确保 $x^{i}_{t}$ 的正确性，我们排除球部分超出视野的帧，得到有效帧 $T$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于碰撞场景，只考虑碰撞后的帧。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然后，我们通过对位置进行微分，计算每个球在每个时刻的速度 $v^{i}_{t}$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "视频的误差定义为：$e=\\frac{1}{N|T|}\\sum^{N}_{i=1}\\sum_{t\\in T}\\left|v^{i}_{t}-\\hat{v}^{i}_{t}\\right|,$ 其中 $v^{i}_{t}$ 是时间 $t$ 的计算速度，$\\hat{v}^{i}_{t}$ 是模拟器中的真实速度，$N$ 是球的数量，$|T|$ 是有效帧的数量。"
+   }
+  ]
+ },
+ "S3.SS1.p6.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "基线。我们计算真实速度与真实视频解析值之间的误差，称为 Groundtruth（GT）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这代表了系统误差——由将视频解析为速度引起——并定义了一个模型能达到的最小误差。"
+   }
+  ]
+ },
+ "S3.F3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "minor",
+    "category": [
+     "term"
+    ],
+    "issue": "“ground truth state”是机器学习术语，指真实/真值状态，译成“地面真实状态”不准确且可能被误解为物理地面。",
+    "suggestion": "图3：给定前3帧时，模拟器中的真值状态与扩散模型生成的视频解析值之间的小球速度误差。",
+    "zh_reviewed": "图3：给定前3帧时，模拟器中地面真实状态与扩散模型生成的视频解析值之间的小球速度误差。"
+   }
+  ]
+ },
+ "S3.SS2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于图3中的分布内（ID）泛化，增加模型规模（DiT-S到DiT-L）或数据量（30K到3M）在三个任务中一致地降低了速度误差，有力地证明了规模对于分布内泛化的重要性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "以匀速运动任务为例：DiT-S模型在30K数据下的速度误差为$0.022$，而DiT-L在3M数据下达到$0.012$的误差，非常接近使用真实视频获得的$0.010$的误差。"
+   }
+  ]
+ },
+ "S3.SS2.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，对于分布外（OOD）预测，结果差异显著。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "首先，在所有设置中，OOD 速度误差比 ID 误差高一个数量级。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例如，DiT-L 模型在 3M 数据的匀速运动中 OOD 误差为 $0.427$，而 ID 误差仅为 $0.012$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "其次，扩大训练数据和模型规模对减少这种预测误差几乎没有影响，甚至产生负面影响。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "速度误差随数据量或模型规模的变化高度随机，例如，DiT-B 在匀速运动上的误差在数据量为 30K、300K 和 3M 时分别为 $0.433$、$0.328$ 和 $0.358$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们还在匀速运动 3M 数据集上训练了 DiT-XL，但未观察到 OOD 泛化有所改善。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，我们没有在其他场景中进行 DiT-XL 训练。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些发现表明，扩展规模无法在 OOD 场景中表现合理。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "ID 和 OOD 设置之间的显著差异促使我们在第 5.2 节研究视频生成的泛化机制。"
+   }
+  ]
+ },
+ "S4.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在第3节中，视频生成模型未能在分布外场景中进行推理。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这是可以理解的——从数据中推导出精确的物理定律对人类和模型来说都很困难。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例如，科学家们花了几个世纪才制定出牛顿的三大运动定律。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，即使是孩子也能通过结合过去经验中的元素，直观地预测日常情境中的结果。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这种结合已知信息来预测新场景的能力被称为组合泛化。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "现在，我们评估基于扩散的视频模型的组合能力。"
+   }
+  ]
+ },
+ "S4.SS1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们选择 PHYRE 模拟器（Bakhtin et al., 2019）作为测试平台——一个包含多个物体下落并相互碰撞、形成复杂物理交互的二维环境。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "它包含各种类型的物体，包括球、罐子、杆和墙，这些物体可以是固定的，也可以是动态的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这使得碰撞、抛物线轨迹、旋转和摩擦等复杂交互能够在一个视频中同时发生。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "尽管存在这种复杂性，底层的物理定律是确定性的，允许模型学习这些定律并预测未见过的场景。"
+   }
+  ]
+ },
+ "S4.F4": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图4：下采样视频。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "黑色物体是固定的，其他物体是动态的。"
+   }
+  ]
+ },
+ "S4.SS1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**训练数据。** 考虑了八种物体类型，包括两个动态灰色球、一组固定黑色球、一个固定黑色杆、一个动态杆、一组动态立杆、一个动态罐子和一个动态立棍。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "每个任务包含一个红球和从八种类型中随机选择的四个物体，从而产生 $C^{4}_{8}=70$ 个独特模板。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "示例见图4。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "每个物体具有独特的视觉外观和颜色，使模型能够通过从训练数据中学习关联来推断物体类型和物理属性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "由于所有物体初始静止且初速度为零，我们提供第一帧，以便模型能够推断其属性并利用这些信息预测未来事件。"
+   }
+  ]
+ },
+ "S4.SS1.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "每个模板以四个对象的随机尺寸和位置进行初始化，生成100K个视频以覆盖一系列可能的场景。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了探索模型的组合能力和规模效应，我们将训练数据构建为三个级别：一个包含6个模板（0.6M视频）的最小集合，该集合涵盖了八种对象类型中所有两两对象之间的交互类型，以及包含30和60个模板（3M/6M视频）的更大集合，其中60个模板的集合几乎覆盖了整个模板空间。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "最小训练集对模型的组合泛化能力提出了最高的要求。"
+   }
+  ]
+ },
+ "S4.SS1.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**测试数据。** 对于每个训练模板，我们保留一小部分视频来创建模板内评估集。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此外，保留10个未使用的模板用于模板外评估集，以评估模型泛化到训练期间未见的新组合的能力。"
+   }
+  ]
+ },
+ "S4.SS1.p5.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**模型。** 第一帧被用作视频生成的条件，因为初始物体是静止的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们发现较小的模型（如 DiT-S）难以处理复杂视频，因此我们主要使用 DiT-B 和 DiT-XL。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "所有模型均在 64 块 Nvidia A100 GPU 上以 256 的批量大小训练了 1000K 梯度步，以确保收敛。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了更好地捕捉物理事件的复杂性，我们将分辨率提高到 256x256，帧数为 32。"
+   }
+  ]
+ },
+ "S4.SS1.p6.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在ID/OOD设置中，场景简单（例如，纯色背景上的1–2个彩色球），因此可以通过像素平均和帧差分可靠地估计位置和速度。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "相比之下，组合设置包含许多形状不规则且颜色相似的物体，使得像素分配模糊不清，位置估计不可靠。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们还测试了霍夫圆检测和预训练物体检测器等方法，但它们导致了显著误差。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "鉴于这些挑战，我们排除了速度作为指标。"
+   }
+  ]
+ },
+ "S4.SS1.p7.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "相反，我们依赖客观视频保真度指标与人工评估的结合。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们使用多个指标来评估生成视频相对于真实视频的保真度。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Frechet Video Distance (FVD) (Unterthiner et al., 2018) 使用在 Kinetics-400 (Carreira & Zisserman, 2017) 上预训练的 Inflated-3D ConvNets (I3D) 的特征，计算生成视频与真实视频之间的特征距离。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "SSIM 和 PSNR (Wang et al., 2004) 是像素级指标：SSIM 评估亮度、对比度和结构相似性，而 PSNR 测量峰值信号与均方误差之间的比率，两者均在帧上取平均。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "LPIPS (Zhang et al., 2018) 衡量图像块之间的感知相似性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "由于像素级指标可能无法完全捕捉物理合理性，我们还加入了人工评估，报告由人类评估的违反物理定律的生成视频的异常比例。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这种组合方法为复杂环境下的物理正确性提供了全面的评估。"
+   }
+  ]
+ },
+ "S4.T2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "表2：组合泛化结果。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "花括号占位符内的英文被改为中文，未按规则原样保留。",
+    "suggestion": "结果以{in-template result} / {out-of-template result}的格式呈现。",
+    "zh_reviewed": "结果以{模板内结果}/{模板外结果}的格式呈现。"
+   }
+  ]
+ },
+ "S4.SS2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "由于复杂性增加，该任务需要更高的分辨率、更多的训练迭代次数和更大的模型规模才能表现良好。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，我们无法像第3节那样对所有数据和模型规模组合进行全面扫描。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，我们从最大的模型DiT-XL开始，研究组合泛化的数据扩展行为。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如表2所示，当模板数量从6增加到60时，所有指标在模板外测试集上都有所改善。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "值得注意的是，人类评估的异常率从67%显著降低到10%。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "相反，使用6个模板训练的模型在模板内测试集上取得了最佳的SSIM、PSNR和LPIPS分数。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这可以解释为，6模板集中的每个训练样本被暴露的频率是60模板集中的十倍，使其能够更好地拟合与模板6相关的模板内任务。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此外，我们使用DiT-B模型在全部60个模板上进行了额外实验，以验证模型扩展的重要性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "正如预期，异常率增加到24%。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些结果表明，模型容量和组合空间的覆盖范围对于组合泛化都至关重要。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这一见解意味着，视频生成的扩展定律应侧重于增加组合多样性，而不仅仅是扩大数据量。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "一些生成的视频可以在图21、图22、图23和图24中找到。"
+   }
+  ]
+ },
+ "S5.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在本节中，我们旨在通过系统性的实验设计来探究视频生成模型的泛化机制。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "基于这些发现，我们试图识别组合泛化中的某些模式，这些模式可能有助于驾驭或提示模型。"
+   }
+  ]
+ },
+ "S5.SS1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "模型的泛化能力源于其插值和外推能力（Xu et al., 2020; Balestriero et al., 2021）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在本节中，我们设计实验来探索视频生成模型这些能力的极限。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们设计了故意遗漏某些潜在值（即速度）的数据集。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "训练后，我们在已见和未见场景上测试模型的预测。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们主要关注匀速运动和碰撞过程。"
+   }
+  ]
+ },
+ "S5.SS1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**匀速运动。** 我们创建了一系列训练集，其中某个速度范围被缺失。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "每个集合包含20万个视频以确保公平。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如图5（1）-（2）所示，当训练集中存在较大缺口时，模型倾向于生成速度偏高或偏低的视频，以在初始帧显示中等速度时模仿训练数据。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们发现，视频生成模型的分布外准确率与缺口大小密切相关，如图5（3）所示，当缺口缩小时，模型能对大部分分布外数据进行正确插值。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此外，如图5（4）和（5）所示，当缺失范围的一个子集被重新引入（不增加数据量）时，模型表现出更强的插值能力。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "总的来说，在第3节中，评估是严格的分布外外推。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在这种设置下，仅仅增加数据量或模型规模并不能显著提高性能，因为难以真正掌握物理定律和进行真正的外推。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "相比之下，图5揭示了从外推到插值的转变。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "随着相邻训练区域之间的间隙缩小，模型在测试集上的性能提高，反映了模型更强的插值能力。"
+   }
+  ]
+ },
+ "S5.SS1.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**碰撞。** 它涉及多个变量，并且更具挑战性，因为模型必须学习一个二维非线性函数。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "具体来说，我们从两个球的初始速度训练集中排除一个或多个方形区域，然后评估碰撞后的速度预测误差。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于每个速度点，我们对半径参数网格进行采样以生成多个视频案例，并计算平均误差。"
+   },
+   {
+    "verdict": "major",
+    "category": [
+     "term",
+     "causal"
+    ],
+    "issue": "此处的 induce 表示“导致、引起”，而非“归纳出”；译为“归纳出”改变了因果关系。",
+    "suggestion": "如图6（1）-（2）所示，视频生成模型的外推误差在OOD点之间造成了一个有趣的差异：对于位于训练集凸包内的OOD速度组合，即黄色区域中的内部红色方块，模型泛化良好。",
+    "zh_reviewed": "如图6（1）-（2）所示，视频生成模型的外推误差在OOD点之间归纳出一个有趣的差异：对于位于训练集凸包内的OOD速度组合，即黄色区域中的内部红色方块，模型泛化良好。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，当潜在值位于训练集凸包的外部空间时，模型会出现较大误差。"
+   }
+  ]
+ },
+ "S5.F5": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图5：匀速运动视频生成。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "模型在缺少中间速度范围的数据集上进行训练。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例如，在第一幅图中，训练速度覆盖 $[1.0,1.25]$ 和 $[3.75,4.0]$，排除了中间范围。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "当使用缺失范围 $[1.25,3.75]$ 中的速度条件进行评估时，生成的速度倾向于偏离初始条件，从而打破惯性定律。"
+   }
+  ]
+ },
+ "S5.F6": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图6：碰撞视频生成。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "模型在黄色区域上训练，并在黄色（ID）和红色（OOD）区域的数据点上进行评估。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "当OOD范围被训练区域包围时，OOD泛化误差保持相对较小，且与ID误差相当。"
+   }
+  ]
+ },
+ "S5.SS2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "先前工作（Hu et al., 2024）表明，大语言模型依赖记忆，在推理过程中复现训练案例，而不是学习加法算术等任务背后的规则。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在本节中，我们研究视频生成模型是否表现出类似行为，即记忆数据而非理解物理定律，这限制了它们对未见数据的泛化能力。"
+   }
+  ]
+ },
+ "S5.F7": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图7：匀速运动的示例，说明了记忆现象。"
+   }
+  ]
+ },
+ "S5.SS2.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们在速度 $v\\in[2.5,4.0]$ 的匀速运动视频上训练模型，使用前三帧作为输入条件。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "使用了两个训练集：Set-1 仅包含从左向右移动的球，而 Set-2 通过在训练时进行水平翻转，包含两个方向的运动。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在评估中，我们关注低速球（$v\\in[1.0,2.5]$），这些球未出现在训练数据中。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如图 7 所示，Set-1 模型生成的视频仅具有正速度，偏向高速范围。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "相比之下，Set-2 模型偶尔会生成具有负速度的视频，如绿色圆圈所突出显示。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例如，一个从左向右移动的低速球可能在其条件帧之后突然反转方向。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这可能发生，因为模型将反转的训练视频识别为低速球的最接近匹配。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "两个模型之间的这种区别表明，视频生成模型受到训练数据中“欺骗性”示例的影响。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "模型似乎不是抽象出普遍规则，而是依赖记忆和基于案例的模仿来进行 OOD 泛化。"
+   }
+  ]
+ },
+ "S5.SS3.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们旨在研究视频模型进行案例匹配的方式——为给定的测试输入识别相近的训练样本。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们使用匀速直线运动进行这项研究。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "具体来说，我们以成对的方式比较四个属性，即颜色、形状、大小和速度。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "通过比较，我们试图确定模型在案例匹配中依赖特定属性的偏好。"
+   }
+  ]
+ },
+ "S5.SS3.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "每个属性都有两个不相交的值集。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于每对属性，有四种类型的组合。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们使用两种组合进行训练，其余两种用于测试。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例如，我们在图8（1）中比较颜色和形状。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "使用具有相同大小和速度范围的红色球和蓝色方块的视频进行训练。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在测试时，蓝色球在条件帧之后立即变成方块，而红色方块变成球。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们在1,400个测试用例上没有观察到例外，表明模型在案例匹配中优先考虑颜色而非形状。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在大小与形状以及速度与形状的比较中也观察到类似的趋势，如图8（2）-（3）所示，表明形状是最不被优先考虑的属性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这表明基于扩散的视频模型本质上更倾向于其他属性而非形状，这可能解释了为什么当前的开集视频生成模型通常在形状保持方面存在困难。"
+   }
+  ]
+ },
+ "S5.F8": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图8：匀速运动。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（1）颜色对比形状，（2）大小对比形状，（3）速度对比形状。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "箭头 $\\Rightarrow$ 表示生成的视频偏离其指定条件，转而模仿相似的训练案例。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例如，在第一幅图中，模型在蓝色球和红色方块的视频上进行训练。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "当以蓝色球为条件时，如底部所示，它转变为蓝色方块，即按颜色模仿训练案例。"
+   }
+  ]
+ },
+ "S5.F9": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图9：匀速运动。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（1）颜色对比尺寸，（2）颜色对比速度，（3）尺寸对比速度。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "将真实视频与预测视频进行比较时，速度的变化是明显的。"
+   }
+  ]
+ },
+ "S5.SS3.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "其他三对属性的结果如图9所示。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于连续属性速度和大小，我们选择了位于极端边界的两个不同值来创建二元比较：速度为1.0和4.0，大小为0.7和1.4。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于颜色与大小的比较，训练集包括：（1）红色小球和（2）蓝色大球。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在评估过程中，在202个评估案例中，大小始终被改变而颜色保持不变，清楚地表明颜色 $>$ 大小。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "类似的观察结果在图9（2）和（3）中也很明显，从而得出颜色 $>$ 速度和大小 $>$ 速度的结论。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "基于以上分析，我们建立了优先级顺序：颜色 $>$ 大小 $>$ 速度 $>$ 形状。"
+   }
+  ]
+ },
+ "S5.SS4.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在第4节中，我们表明扩大数据覆盖范围可以提升组合泛化能力。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "但什么样的数据才能真正实现概念上可组合的视频生成？"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在本节中，我们通过实验设计识别出三种基本的组合模式。"
+   }
+  ]
+ },
+ "S5.SS4.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**属性组合**。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如图14（1）-（2）所示，某些属性对——例如速度与大小，或颜色与大小——表现出一定程度的组合泛化能力。"
+   }
+  ]
+ },
+ "S5.SS4.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**空间组合**。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如附录中图11（左侧）所示，训练数据包含两种不同类型的物理事件。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "一种类型涉及一个蓝色方块以恒定速度水平移动，而一个红球保持静止。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "相比之下，另一种类型描绘了一个红球向墙壁移动然后弹开，而蓝色方块保持静止。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在测试时，当红球和蓝色方块同时移动时，模型能够正确生成两个球的运动。"
+   }
+  ]
+ },
+ "S5.SS4.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**时间组合。** 如图11右侧所示，当训练数据包含不同的物理事件——一半是两个球碰撞但不反弹，另一半是红球从墙上反弹——模型学会了在时间上组合这些事件。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，当球在墙附近碰撞时，模型准确预测了碰撞，并且蓝球将以不变的速度从墙上反弹。"
+   }
+  ]
+ },
+ "S5.SS4.p5.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，视频生成模型能够识别训练集中的基本物理事件，并将它们跨属性、时间和空间进行组合，以生成包含复杂物理事件链的视频。"
+   }
+  ]
+ },
+ "S5.SS5.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "视频生成模型要充当世界模型，其视觉表示必须为完整的物理建模提供足够的信息。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在我们的实验中，我们发现视觉歧义会导致细粒度物理建模出现显著不准确。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例如，在图10中，当尺寸差异处于像素级别时，仅凭视觉很难判断球是否能穿过间隙，从而产生视觉上合理但错误的结果。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "类似地，球相对于块的水平位置存在视觉歧义，也可能导致不同的结果。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些发现表明，仅依赖视觉表示可能不足以进行准确的物理建模。"
+   }
+  ]
+ },
+ "S5.F10": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图10：第一行：真实情况；第二行：生成的视频。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "视觉表示中的歧义导致细粒度物理建模的不准确性。"
+   }
+  ]
+ },
+ "S6.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**视频生成。** 开放集视频生成主要基于扩散模型（Rombach et al., 2022; Ho et al., 2022b; Ho et al., 2022a; He et al., 2024）或自回归模型（Yu et al., 2023a; Yu et al., 2023b; Kondratyuk et al., 2023）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些模型通常需要预训练的图像或视频VAE（Kingma, 2013; Van Den Oord et al., 2017）进行数据压缩，以提高计算效率。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "一些方法利用预训练的文本到图像（T2I）模型进行零样本（Khachatryan et al., 2023; Zhang et al., 2023b）或少量示例（Wu et al., 2023）视频生成。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此外，图像到视频（I2V）生成（Zeng et al., 2024; Girdhar et al., 2023; Zhang et al., 2023a）表明，当以图像为条件时，视频质量会大幅提高。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "扩散Transformer（DiT）（Peebles & Xie, 2023）在T2I生成方面表现出比U-Net（Ronneberger et al., 2015）更好的扩展行为。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Sora（Brooks et al., 2024）利用DiT架构直接对潜在视频和图像码的时空补丁进行操作。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的模型遵循Sora的架构，在概念上与I2V生成一致，依赖图像而非文本提示作为条件。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此前有一些工作评估大型视频模型的物理理解能力（Bansal et al., 2024; Sun et al., 2024; Liao et al., 2024），以及更广泛地评估大型视频模型的基准（Huang et al., 2024; Liu et al., 2024）。"
+   }
+  ]
+ },
+ "S6.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**世界模型。** 世界模型（Ha & Schmidhuber, 2018）旨在学习能够准确预测在采取某些动作后环境如何演变的模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此前，它们通常在抽象空间中运行，并用于强化学习（Sutton, 2018）以实现规划（Silver et al., 2016; Schrittwieser et al., 2020）或通过虚拟交互促进策略学习（Hafner et al., 2019; Hafner et al., 2020; Yue et al., 2023）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "随着生成模型的进步，世界模型现在可以通过采用条件视频生成的通用框架直接处理视觉观测。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例如，在自动驾驶中（Hu et al., 2023; Jia et al., 2023; Gao et al., 2024; Zheng et al., 2024），条件是驾驶员的操作，而在机器人世界模型中（Yang et al., 2023; Black et al., 2023; 1xw, 2024），条件通常是控制信号。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Genie（Bruce et al., 2024）则通过无监督方式从视频游戏中恢复条件。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在我们的物理定律发现设定中，不需要每步的动作/条件，因为一旦指定初始状态，物理事件就由底层定律决定。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "更多相关工作见附录A。"
+   }
+  ]
+ },
+ "S7.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**结论。** 视频生成被认为是通往可扩展世界模型的一条有前景的途径。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，其从视觉观察中学习物理定律的能力尚未得到验证。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们通过考察其在三种典型场景下的泛化性能，开展了该领域的首次系统性研究：分布内、分布外（OOD）和组合泛化。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "研究结果表明，仅靠扩展无法解决OOD问题，尽管它确实能提升其他场景下的性能。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的深入分析表明，视频模型的泛化更多基于参考相似的训练样本，而非学习通用规则。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们观察到在这种“基于案例”的行为中，颜色 $>$ 大小 $>$ 速度 $>$ 形状的优先级顺序。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "总之，我们的研究表明，单纯的扩展不足以发现物理定律。"
+   }
+  ]
+ },
+ "S7.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**讨论。** 我们研究的见解对现实世界场景具有实际意义。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "现实世界的视频数据本质上是海量、连续且高维的，与纯语言数据相比，要全面覆盖要困难得多。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例如，在现实世界的机器人技术中，物体速度、关节配置、相机视角、背景噪声和任务目标等因素在连续且组合上巨大的空间中变化。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的结果提示了一条应对这些挑战的前进道路——增加训练数据的组合多样性会显著提升物理视频建模的性能。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此外，我们的发现暗示，模型扩展在训练分布足够多样化的支持下最为有效。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这对未来设计能够在复杂、现实世界环境中稳健泛化的数据集和模型具有直接意义。"
+   }
+  ]
+ },
+ "Sx1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "本文介绍的工作旨在推动机器学习领域的发展。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的工作可能产生许多社会影响，但我们认为无需在此特别强调其中任何一项。"
+   }
+  ]
+ },
+ "Ax1.F11": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图11：空间和时间组合泛化。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "训练集的两个子集包含不相交的物理事件。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，训练后的模型可以在空间和时间维度上组合这两种类型的事件。"
+   }
+  ]
+ },
+ "A5.F14": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图14：匀速运动。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（1）速度与大小：箭头 $\\rightarrow$ 表示生成视频相对于其初始条件偏移的方向。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（2）颜色与大小：模型使用小红球和大蓝球进行训练，并在颜色-大小条件对调的情况下进行评估。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "所有生成的视频都保留了初始颜色，但大小相对于原始值有轻微偏移。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（3）颜色与速度：模型使用低速红球和高速蓝球进行训练，并在颜色-速度条件对调的情况下进行评估。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "所有生成的视频都保留了初始颜色，但速度相对于原始值有较大偏移。"
+   }
+  ]
+ },
+ "A7.F21": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图21：由在6M数据（60个模板）上训练的DiT-XL生成的外观合理且遵循物理定律的模板外评估案例的可视化。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "放大查看细节。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "值得注意的是，模型生成的前四个案例与真实情况几乎完全相同。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在某些情况下，例如最右侧的示例，生成的视频在物理上似乎合理，但由于视觉模糊性与真实情况不同，如第5.5节所讨论。"
+   }
+  ]
+ },
+ "A7.F22": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "minor",
+    "category": [
+     "omission"
+    ],
+    "issue": "原文中 appear abnormal 被省略，仅译出违反物理定律。",
+    "suggestion": "图22：由在6M数据（60个模板）上训练的DiT-XL生成的、外观异常且违反物理定律的模板外评估案例的可视化。",
+    "zh_reviewed": "图22：由在6M数据（60个模板）上训练的DiT-XL生成的、违反物理定律的模板外评估案例的可视化。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "异常情况用红色虚线圆圈标出。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**案例1**：一个灰色球突然消失。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**案例2**：刚性杆在与球接触的几个中间帧中断裂，接触后恢复。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**案例3**：刚性罐在与杆相互作用的几个中间帧中未能保持其形状。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**案例4**：刚性杆在与站立贴纸接触的几个中间帧中断裂。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们观察到的大多数异常案例涉及物体消失或形状不一致，这可以通过第5.3节讨论的案例匹配偏好来解释。"
+   }
+  ]
+ },
+ "A7.F23": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图23：**更多违反物理定律的模板外评估案例（1）可视化，这些案例看起来异常**。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**案例5**：灰色球穿过一个刚体杆。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**案例6**：一个十字棍先落到地面，然后违反重力回到站立位置。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**案例7**：一个灰色小球在第3帧消失，并在第5帧出现在不同位置，类似于一种“瞬移”。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**案例8**：一个刚体杆的一端保持悬在半空中，违反了预期的重力行为。"
+   }
+  ]
+ },
+ "A7.F24": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "minor",
+    "category": [
+     "omission"
+    ],
+    "issue": "漏译了“appear abnormal”，原文强调这些案例看起来异常且违反物理定律。",
+    "suggestion": "图24：更多看起来异常且违反物理定律的模板外评估案例（2）的可视化。",
+    "zh_reviewed": "图24：更多违反物理定律的模板外评估案例（2）的可视化。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "案例9：两个球，一大一小，碰撞后以一种物理上不合理的方式交换了位置。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "案例10：一个小罐子悬浮在半空中，违反了重力定律。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "案例11：一根刚性杆似乎分裂成了两个独立的部分。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "案例12：一根短的刚性杆在较早的帧中可见，但在第4帧中突然消失。"
+   }
+  ]
+ }
+}
