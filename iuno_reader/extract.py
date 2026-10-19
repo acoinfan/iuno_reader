@@ -1,8 +1,8 @@
-"""把 arXiv HTML（LaTeXML 生成）拆成可逐段、逐句翻译的片段。
+"""把 arXiv HTML（LaTeXML 生成，或 ar5iv 转出的同格式网页）拆成可逐段、逐句翻译的片段。
 
 输出 doc.json：
 {
-  "arxiv_id": ..., "title": ..., "source": "arxiv-html", "base_url": ...,
+  "arxiv_id": ..., "title": ..., "source": "arxiv-html|ar5iv", "base_url": ...,
   "segments": [
     {"id": "S2.p3", "kind": "para|abstract|caption|footnote|item|equation|table",
      "section": "2 Preliminaries ...", "subsection": "Metrics",
@@ -203,7 +203,19 @@ def _flush_footnotes(segs, ctx, section, subsection, start_index):
         _seg(segs, f"fn{n}", "footnote", section, subsection, txt, ctx=ctx, footnote=n)
 
 
-def extract(html, arxiv_id, base_url="https://arxiv.org/html/"):
+AR5IV = "https://ar5iv.labs.arxiv.org/"
+_AR5IV_CANON = re.compile(r"<link[^>]*rel=\"canonical\"[^>]*ar5iv\.labs\.arxiv\.org", re.I)
+
+
+def html_source(html):
+    """网页来自哪里：arXiv 自己的 HTML 版，或者 ar5iv（arXiv 没有 HTML 版的论文，ar5iv 用 TeX 源码转出同样格式的网页）。
+    按页头的 canonical 链接判断；不能只搜「ar5iv」字样，有的论文在参考文献里提到它。"""
+    return ("ar5iv", AR5IV) if _AR5IV_CANON.search(html[:30000]) else ("arxiv-html", "https://arxiv.org/html/")
+
+
+def extract(html, arxiv_id, base_url=None):
+    source, default_base = html_source(html)
+    base_url = base_url or default_base
     soup = BeautifulSoup(html, "lxml")
     bib = _bib_entries(soup)  # 参考文献在删掉之前先存下来，用来给正文里的引用找对应论文
     for bad in soup.select("nav, .ltx_page_footer, .ltx_bibliography, .ltx_TOC, header, footer"):
@@ -286,7 +298,7 @@ def extract(html, arxiv_id, base_url="https://arxiv.org/html/"):
             lead = (_clean(tag.get_text()) + " ") if tag else ""
             _seg(segs, el.get("id") or "item", "item", section, subsection, lead + body, ctx=ctx)
             _flush_footnotes(segs, ctx, section, subsection, fn_done)
-    return {"arxiv_id": arxiv_id, "title": title, "source": "arxiv-html",
+    return {"arxiv_id": arxiv_id, "title": title, "source": source,
             "base_url": base_url, "segments": segs, "bib": bib}
 
 

@@ -49,19 +49,43 @@ def appendix_sections(doc):
     return out
 
 
+_SKIM_HEAD = re.compile(r"\bintroduction\b", re.I)
+_SKIM_TAIL = re.compile(r"\b(discussions?|conclusions?|concluding|limitations?|summary|outlook|future (work|directions?)"
+                        r"|final (remarks|thoughts)|closing|takeaways?)\b", re.I)
+_SKIM_NOT = re.compile(r"result|experiment|evaluat", re.I)  # 「Results and Discussion」是实验节，不算
+
+
+def skim_sections(doc):
+    """略读要翻的节：引言，以及讨论、结论、局限、展望这类收尾的节（不含附录、不含实验结果节）。
+    没有收尾节的论文（最后一节就是实验）只翻摘要和引言。
+    引言和收尾的节都认不出来（例如网页没拆出节结构）时返回 None，调用方按全部正文处理。"""
+    app = appendix_sections(doc)
+    body = [x for x in dict.fromkeys(s.get("section", "") for s in doc["segments"])
+            if x and x != "Abstract" and x not in app]
+    head = {x for x in body if _SKIM_HEAD.search(x)}
+    tail = {x for x in body if _SKIM_TAIL.search(x) and not _SKIM_NOT.search(x)}
+    if not head and not tail:
+        return None
+    return head | tail
+
+
 def select_segments(doc, sections=None):
-    """sections 例：["abs", "2", "3", "4", "A"]；["body"] 表示只要正文（摘要和所有非附录的节）；None 表示全部。
+    """sections 例：["abs", "2", "3", "4", "A"]；["body"] 表示只要正文（摘要和所有非附录的节）；
+    ["skim"] 表示略读（摘要、引言、讨论和结论，见 skim_sections）；None 表示全部。
     选中的正文引用到的图、表、脚注也会一起选上，即使它们在 HTML 里属于别的节（图常浮动到前面）。"""
     if not sections or sections == ["all"]:
         return [s for s in doc["segments"] if s["kind"] != "equation"]
     from .extract import referenced_floats
     chosen = set()
+    skim = skim_sections(doc) if "skim" in sections else set()
+    if skim is None:
+        sections = [x for x in sections if x != "skim"] + ["body"]
     app = appendix_sections(doc) if "body" in sections else set()
     for s in doc["segments"]:
         if s["kind"] == "equation":
             continue
         sec = s.get("section", "")
-        if "body" in sections and sec not in app:
+        if ("body" in sections and sec not in app) or ("skim" in sections and (s["kind"] == "abstract" or sec in skim)):
             chosen.add(s["id"])
             continue
         key = "abs" if s["kind"] == "abstract" else (sec.split()[0] if sec else "")

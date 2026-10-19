@@ -2,7 +2,7 @@
 
 arXiv 论文的**逐句双语对照**阅读工具：每段英文下面紧跟中文，逐句核对译文有没有丢掉否定、数字、限定词、公式和引用，并用颜色标出值得怀疑的句子。
 
-不翻译 PDF。PDF 翻译要先拆版面再重新排版，这一步可能会悄悄丢掉整段文字（例如 BabelDOC 的 issue #620、#613）。这里直接用 arXiv 的 HTML 版（由作者上传的 LaTeX 生成），段落和公式都是原样的，译文和原文可以逐句对齐、逐句检查。
+不翻译 PDF。PDF 翻译要先拆版面再重新排版，这一步可能会悄悄丢掉整段文字（例如 BabelDOC 的 issue #620、#613）。这里直接用 arXiv 的 HTML 版（由作者上传的 LaTeX 生成；arXiv 没有时用 ar5iv 的同格式网页），段落和公式都是原样的，译文和原文可以逐句对齐、逐句检查。
 
 ## 流水线：一条命令
 
@@ -13,11 +13,29 @@ cd /home/a_coin_fan/work/iuno_reader
 
 自动完成：下载 arXiv HTML → 拆成段落和句子 → 翻译 → 审校 → 规则核对 → 渲染 → 写出 `out/<id>/`。
 
-- **默认只翻正文**（摘要和所有非附录的节，外加正文引用到的图表和脚注），附录和参考文献不翻。要含附录的全文用 `--sections all`，只要某几节用 `--sections abs,2,3`。附录的识别：节名以 Appendix 开头；或者节编号和前面重复（罗马数字编号的论文，附录会从 I 重新编号）。
+- **默认只翻正文**（摘要和所有非附录的节，外加正文引用到的图表和脚注），附录和参考文献不翻。要含附录的全文用 `--sections all`，只要某几节用 `--sections abs,2,3`。**略读**用 `--sections skim`：只翻摘要、引言，以及讨论、结论、局限、展望这类收尾的节（按节名认，「Results and Discussion」这种实验节不算），平均约为正文的三成；没有收尾节的论文只翻摘要和引言，认不出节结构的按正文全翻。附录的识别：节名以 Appendix 开头；或者节编号和前面重复（罗马数字编号的论文，附录会从 I 重新编号）。
 - 配了接口（见下文「接口配置」），翻译和审校自动完成。
 - 没配接口时不会失败：流水线生成任务清单和写给 agent 的说明（`AGENT_TRANSLATE.md`、`AGENT_REVIEW.md`），状态停在 `awaiting_translation` 或 `awaiting_review`。agent 按说明完成后再运行一次 `run`，会从中断处接着做。
 - `--translate auto|api|agent`、`--review auto|blind|backtranslate|agent|none` 可以指定方式。
 - 给其他 agent 的使用说明见 [AGENTS.md](AGENTS.md)。
+
+### 手里不是 arXiv 编号时
+
+`run` 和前端的输入框也认 DOI、论文页面链接和标题，会先换成 arXiv 编号再翻；只想查不想翻用 `find`：
+
+```bash
+.venv/bin/python -m iuno_reader find 10.18653/v1/2026.acl-long.366 https://aclanthology.org/2025.winlp-main.30.pdf "Emergent World Representations"
+```
+
+| 给的是 | 怎么找 arXiv 版本 |
+|---|---|
+| arXiv 编号、arxiv.org / ar5iv 链接、arXiv 的 DOI（`10.48550/arXiv.…`） | 直接取编号 |
+| 其他 DOI | [OpenAlex](https://openalex.org) 查标题；记录里带 arXiv 版本就用它，否则拿标题去 arXiv 搜 |
+| 论文页面链接（ACL Anthology、NeurIPS、期刊等；PDF 链接会换成对应页面） | 读网页里的 `citation_title`、`citation_doi`、`citation_arxiv_id` 标签，再按上面查 |
+| PMC 编号或 Europe PMC 链接 | Europe PMC 接口查标题和 DOI |
+| 标题 | 去 arXiv 搜，标题几乎完全一致才算 |
+
+找不到 arXiv 版本时会说明查到的是哪篇、为什么翻不了，并给出全文地址（例如只在 NeurIPS 发表的 Li 2024）。OpenReview 拦截程序请求，它的链接认不出来，请直接给标题。查询结果缓存在 `cache/resolve.json`。
 
 ## 网页前端
 
@@ -27,7 +45,7 @@ cd /home/a_coin_fan/work/iuno_reader
 ```
 
 - **任务**：把论文 PDF 拖进来（从文件名认 arXiv 编号），或粘贴编号、链接；选一个方案，点「添加」。每篇一张卡片：翻译、审校的进度条，已经花了多少钱，标红标橙句数，可以暂停、继续、重试，完成后「打开」看双语网页。
-- **方案**：内置「尤诺推荐」（pro 关思考翻译 + pro 盲审）、「尤诺推荐 · 精读」（再加 Kimi K3 审）、「最省钱」（flash 翻译，只在空闲时段跑）。也可以复制一份改成自己的：每个角色选接口、模型、思考（默认 / 关 / 低 / 高）、并发数；翻译范围（只翻正文 / 全文）；是否只在 DeepSeek 空闲时段跑。下面的「设置」可以改同时跑几篇，以及完成后把网页和 Markdown 复制到哪个目录（例如知识库的 `translations/`）。
+- **方案**：内置「尤诺推荐」（pro 关思考翻译 + pro 盲审）、「尤诺推荐 · 精读」（再加 Kimi K3 审）、「尤诺推荐 · 略读」（只翻摘要、引言、讨论和结论）、「最省钱」（flash 翻译，只在空闲时段跑）。也可以复制一份改成自己的：每个角色选接口、模型、思考（默认 / 关 / 低 / 高）、并发数；翻译范围（只翻正文 / 全文）；是否只在 DeepSeek 空闲时段跑。下面的「设置」可以改同时跑几篇，以及完成后把网页和 Markdown 复制到哪个目录（例如知识库的 `translations/`）。
 - **接口**：自动读 cc-switch 里的接口；也可以手动添加（选服务商自动填地址）。每个接口可以「测试翻译」「测试审校」，就是跑一次 `probe`。
 - **用量**：每篇的花费表（翻译、每份审校分开），按正文句数算每百句多少钱，附价格表。
 
@@ -212,7 +230,7 @@ export IUNO_BT_BASE_URL=...        IUNO_BT_MODEL=...        IUNO_BT_API_KEY=... 
 
 ## 已知限制
 
-- 只支持有 arXiv HTML 版的论文；没有 HTML 版时，还不支持退回 TeX 源码。
+- 只支持 arXiv 论文。arXiv 自己没有 HTML 版时（2023 年 12 月以前的论文，或转换失败），自动改用 [ar5iv](https://ar5iv.labs.arxiv.org/) 由 TeX 源码转出的同格式网页；ar5iv 也转换失败的（例如 2305.15486）暂时翻不了。
 - 表格只翻译表题，表格内容请看原文。
 - 图片直接引用 arXiv 上的图片地址，离线时看不到。
 - 用罗马数字编号的论文（如 I、II、III），正文和附录的节编号可能重复，`--sections` 按编号选节时会同时选中两者；`body` 不受影响。

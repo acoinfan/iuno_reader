@@ -115,6 +115,28 @@ try:
     got = {s["id"] for s in select_segments(d2, ["body"])}
     assert got == {"a", "p1", "p2"}, got
     print("只翻正文（含罗马数字编号的附录） 通过")
+
+    # 6. 略读：摘要、引言、讨论和结论；实验结果节和附录里的「Discussion」不算；认不出节结构时按正文全翻
+    d3 = {"segments": [seg("a", "Abstract", "abstract"), seg("p1", "1 Introduction", en="See Figure 1."),
+                       seg("p2", "2 Method"), seg("p3", "3 Results and Discussion"), seg("p4", "4 Discussion"),
+                       seg("p5", "5 Conclusion and Future Work"), seg("p6", "Impact Statement"),
+                       seg("x1", "Appendix A Further Discussion"),
+                       {**seg("F1", "2 Method", "caption", "Figure 1: Overview."), "figure": 1}]}
+    got = {s["id"] for s in select_segments(d3, ["skim"])}
+    assert got == {"a", "p1", "p4", "p5", "F1"}, got
+    d4 = {"segments": [seg("a", "Abstract", "abstract"), seg("p1", "1 Introduction"), seg("p2", "5 Experiments")]}
+    assert {s["id"] for s in select_segments(d4, ["skim"])} == {"a", "p1"}
+    d5 = {"segments": [seg("a", "Abstract", "abstract"), seg("p1", ""), seg("p2", "")]}
+    assert {s["id"] for s in select_segments(d5, ["skim"])} == {"a", "p1", "p2"}
+    print("略读挑节 通过")
+
+    # 7. 网页来源：按页头 canonical 认 ar5iv，图片地址跟着换；参考文献里提到 ar5iv 的 arXiv 网页不算
+    from iuno_reader.extract import html_source
+    a5 = '<html><head><link rel="canonical" target="_blank" href="https://ar5iv.labs.arxiv.org/html/2609.17376"></head>'
+    assert html_source(a5) == ("ar5iv", "https://ar5iv.labs.arxiv.org/")
+    ax = '<html><head><title>x</title></head><body>see https://ar5iv.labs.arxiv.org/html/1706.03762</body>'
+    assert html_source(ax)[0] == "arxiv-html"
+    print("网页来源判断 通过")
     print("流水线测试全部通过")
 finally:
     shutil.rmtree(tmp)

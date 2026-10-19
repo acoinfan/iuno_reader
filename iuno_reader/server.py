@@ -33,6 +33,25 @@ WEB = os.path.join(os.path.dirname(os.path.abspath(__file__)), "web")
 ARXIV = re.compile(r"\d{4}\.\d{4,5}")
 
 
+def _to_arxiv(texts):
+    """输入框或拖进来的文字 → arXiv 编号。DOI、论文页面链接、标题先查（见 resolve.py），换不到的连同原因返回。"""
+    from .resolve import ARXIV_ID, Finder, find_inputs
+    ids, bad, finder = [], [], None
+    for it in [x for t in texts for x in find_inputs(t)]:
+        if ARXIV_ID.fullmatch(it):
+            ids.append(ARXIV_ID.fullmatch(it).group(1))
+            continue
+        finder = finder or Finder(ROOT)
+        r = finder.find(it)
+        (ids.append(r["arxiv"]) if r.get("arxiv") else bad.append(r))
+    return list(dict.fromkeys(ids)), bad
+
+
+def _why(r):
+    name = f"《{r['title'][:50]}》" if r.get("title") else r["input"][:60]
+    return f"{name}没有 arXiv 版本，暂时翻不了（{r.get('error', '')}）"
+
+
 def _json(path, default=None):
     try:
         with open(path, encoding="utf-8") as f:
@@ -391,11 +410,12 @@ class Handler(BaseHTTPRequestHandler):
                 return self._send(200, {"models": list_models(p) if p else []})
             if method == "POST" and path == "/api/jobs":
                 b = self._body()
-                ids = list(dict.fromkeys(ARXIV.findall(" ".join(b.get("ids", [])))))
+                ids, bad = _to_arxiv(b.get("ids", []))
                 if not ids:
-                    return self._send(400, {"error": "没认出 arXiv 编号（形如 2602.04212）"})
+                    msg = "；".join(_why(r) for r in bad) or "没认出论文（可以填 arXiv 编号、DOI、论文页面链接或标题）"
+                    return self._send(400, {"error": msg, "unresolved": bad})
                 Q.add(ids, b.get("preset", ""))
-                return self._send(200, {"added": ids})
+                return self._send(200, {"added": ids, "unresolved": [_why(r) for r in bad]})
             m = re.fullmatch(r"/api/jobs/(\d+)/(pause|resume|retry|delete)", path)
             if method == "POST" and m:
                 Q.action(int(m.group(1)), m.group(2))

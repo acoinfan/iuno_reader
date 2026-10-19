@@ -65,18 +65,33 @@ def _write(text, path):
         f.write(text)
 
 
-def fetch(P, force=False):
+def download_html(pid):
+    """先下 arXiv 自己的 HTML 版；没有（2023 年 12 月以前的论文，或 arXiv 转换失败）就下 ar5iv 用 TeX 源码转出的网页。
+    返回 (网页字节, 地址)。ar5iv 转换失败时返回的「No content available」空页面里也有 ltx_document、ltx_para，
+    所以按有没有节或摘要判断。"""
+    import urllib.error
     import urllib.request
+    tried = []
+    for url in (f"https://arxiv.org/html/{pid}", f"{ex.AR5IV}html/{pid}"):
+        try:
+            with urllib.request.urlopen(urllib.request.Request(url, headers={"User-Agent": "iuno_reader"}), timeout=90) as r:
+                data = r.read()
+        except urllib.error.HTTPError as e:
+            tried.append(f"{url}（HTTP {e.code}）")
+            continue
+        if b'class="ltx_section' in data or b'class="ltx_abstract' in data:
+            return data, url
+        tried.append(f"{url}（页面里没有论文正文）")
+    raise RuntimeError("arXiv 和 ar5iv 都没有这篇的网页版：" + "；".join(tried))
+
+
+def fetch(P, force=False):
     if os.path.exists(P.cache) and not force:
         return {"status": "cached"}
-    url = f"https://arxiv.org/html/{P.pid}"
-    with urllib.request.urlopen(urllib.request.Request(url, headers={"User-Agent": "iuno_reader"}), timeout=60) as r:
-        data = r.read()
-    if b"ltx_document" not in data:
-        raise RuntimeError("下载到的页面不是 LaTeXML 生成的论文 HTML，可能这篇没有 HTML 版（暂不支持 TeX 兜底）")
+    data, url = download_html(P.pid)
     with open(P.cache, "wb") as f:
         f.write(data)
-    return {"status": "downloaded", "bytes": len(data)}
+    return {"status": "downloaded", "bytes": len(data), "url": url}
 
 
 def _has_api(role):
@@ -366,7 +381,8 @@ def run(root, pid, sections=None, translate="auto", review="auto", export=None, 
 
     manifest = {
         "arxiv_id": pid, "title": doc["title"], "abs_url": f"https://arxiv.org/abs/{pid}",
-        "html_url": f"https://arxiv.org/html/{pid}", "tool": f"iuno_reader {VERSION}",
+        "html_url": f"{ex.AR5IV if doc.get('source') == 'ar5iv' else 'https://arxiv.org/'}html/{pid}",
+        "source": doc.get("source", "arxiv-html"), "tool": f"iuno_reader {VERSION}",
         "generated_at": datetime.datetime.now().isoformat(timespec="seconds"),
         "sections_selected": sections or "all", "stage": stage, "stages": st,
         "review_summary": [f"{m.get('reviewer')}（{m.get('mode')}，{INDEPENDENCE_ZH.get(m.get('independence'), '?')}）"

@@ -63,7 +63,7 @@ label.f+input,label.f+select{width:100%}
 <!-- 任务 -->
 <div class="pane on" id="jobs">
  <div class="drop" id="drop"><b>把论文 PDF 拖到这里</b><br>从文件名里认 arXiv 编号（例如 2602.04212_xxx.pdf）；也可以拖链接或文字进来</div>
- <div class="row"><input type="text" class="grow" id="ids" placeholder="或粘贴 arXiv 编号 / 链接，多个用空格分开">
+ <div class="row"><input type="text" class="grow" id="ids" placeholder="或粘贴 arXiv 编号、DOI、论文页面链接（多个用空格分开），或者一个标题">
   <select id="jobPreset"></select><button class="pri" id="add">添加</button></div>
  <div class="small" id="presetNote" style="margin-top:6px"></div>
  <div id="list"></div>
@@ -76,7 +76,7 @@ label.f+input,label.f+select{width:100%}
   <div class="ch"><b id="edTitle">新方案</b><span class="small">内置方案不能改，可以「复制」一份再改</span></div>
   <div class="grid" style="margin-top:10px">
    <div><label class="f">方案名</label><input type="text" id="edName"></div>
-   <div><label class="f">翻译范围</label><select id="edScope"><option value="body">只翻正文（推荐）</option><option value="all">含附录的全文</option></select></div>
+   <div><label class="f">翻译范围</label><select id="edScope"><option value="body">只翻正文（推荐）</option><option value="skim">略读（摘要、引言、讨论和结论）</option><option value="all">含附录的全文</option></select></div>
    <div><label class="f">时段</label><select id="edOff"><option value="0">随时跑</option><option value="1">只在空闲时段跑（DeepSeek 半价）</option></select></div>
   </div>
   <div id="edRoles"></div>
@@ -123,7 +123,7 @@ const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&
 const TH={default:'默认',off:'关',low:'低',high:'高'};
 const STATUS={queued:['排队中','gray'],waiting:['等空闲时段','warn'],running:['进行中',''],paused:['已暂停','gray'],done:['完成',''],error:['出错','err']};
 let S={presets:[],providers:[],jobs:[],settings:{},vendors:[],thinking:[]};
-function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('on');clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove('on'),2600);}
+function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('on');clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove('on'),Math.max(2600,t.length*120));}
 async function api(method,url,body){const r=await fetch(url,{method,headers:{'Content-Type':'application/json'},body:body?JSON.stringify(body):undefined});
  const d=await r.json().catch(()=>({}));if(!r.ok)throw new Error(d.error||r.status);return d;}
 $$('.tab').forEach(t=>t.onclick=()=>{$$('.tab').forEach(x=>x.classList.toggle('on',x===t));$$('.pane').forEach(p=>p.classList.toggle('on',p.id===t.dataset.p));if(t.dataset.p==='cost')loadCost();});
@@ -156,9 +156,10 @@ function fillPresetSelect(){const sel=$('#jobPreset'),cur=sel.value;
  sel.innerHTML=S.presets.map(p=>`<option>${esc(p.name)}</option>`).join('');if(cur&&S.presets.some(p=>p.name===cur))sel.value=cur;
  const p=S.presets.find(x=>x.name===sel.value);$('#presetNote').textContent=p?(p.note||summary(p)):'';}
 $('#jobPreset').onchange=fillPresetSelect;
-async function addIds(text){const ids=(text.match(/\d{4}\.\d{4,5}/g)||[]);
- if(!ids.length){toast('没认出 arXiv 编号（形如 2602.04212），请在输入框里填编号');return;}
- try{const d=await api('POST','/api/jobs',{ids,preset:$('#jobPreset').value});toast('已添加 '+d.added.join('、'));refresh();}catch(e){toast(e.message);}}
+async function addIds(text){if(!text.trim()){toast('请填 arXiv 编号、DOI、论文页面链接或标题');return;}
+ toast('正在查找论文…');
+ try{const d=await api('POST','/api/jobs',{ids:[text],preset:$('#jobPreset').value});
+  toast('已添加 '+d.added.join('、')+(d.unresolved&&d.unresolved.length?'；'+d.unresolved.join('；'):''));refresh();}catch(e){toast(e.message);}}
 $('#add').onclick=()=>{addIds($('#ids').value);$('#ids').value='';};
 $('#ids').onkeydown=e=>{if(e.key==='Enter')$('#add').click();};
 const dz=$('#drop');
@@ -166,7 +167,8 @@ const dz=$('#drop');
 ['dragleave','drop'].forEach(e=>dz.addEventListener(e,ev=>{ev.preventDefault();dz.classList.remove('over');}));
 dz.addEventListener('drop',ev=>{const names=[...ev.dataTransfer.files].map(f=>f.name);
  const txt=ev.dataTransfer.getData('text')||'';const bad=names.filter(n=>!/\d{4}\.\d{4,5}/.test(n));
- if(bad.length)toast('这些文件名里没有 arXiv 编号：'+bad.join('、'));addIds(names.join(' ')+' '+txt);});
+ if(bad.length)toast('这些文件名里没有 arXiv 编号，请改填 DOI、链接或标题：'+bad.join('、'));
+ const ok=names.filter(n=>/\d{4}\.\d{4,5}/.test(n));if(ok.length||txt.trim())addIds(ok.join(' ')+' '+txt);});
 
 /* ---------- 方案 ---------- */
 const provName=id=>(S.providers.find(p=>p.id===id)||{}).name||id+'（找不到）';
@@ -178,7 +180,7 @@ function drawPresets(){
   <div class="right"><button class="sm" data-copy="${i}">复制</button>${p.builtin?'':`<button class="sm" data-edit="${i}">编辑</button><button class="sm danger" data-del="${i}">删除</button>`}</div></div>
   <table style="margin-top:8px"><tr><td style="width:64px" class="small">翻译</td><td>${esc(roleText(p.translator))}</td></tr>
   <tr><td class="small">审校一</td><td>${esc(roleText(p.reviewer))}</td></tr><tr><td class="small">审校二</td><td>${esc(roleText(p.reviewer2))}</td></tr>
-  <tr><td class="small">范围</td><td>${p.scope==='all'?'含附录的全文':'只翻正文'}${p.offpeak_only?' · 只在空闲时段跑':''}</td></tr></table></div>`).join('');
+  <tr><td class="small">范围</td><td>${p.scope==='all'?'含附录的全文':p.scope==='skim'?'略读（摘要、引言、讨论和结论）':'只翻正文'}${p.offpeak_only?' · 只在空闲时段跑':''}</td></tr></table></div>`).join('');
  $$('[data-copy]').forEach(b=>b.onclick=()=>{const p=JSON.parse(JSON.stringify(S.presets[b.dataset.copy]));p.name+=' 副本';p.builtin=false;edit(p);});
  $$('[data-edit]').forEach(b=>b.onclick=()=>edit(JSON.parse(JSON.stringify(S.presets[b.dataset.edit]))));
  $$('[data-del]').forEach(b=>b.onclick=async()=>{const p=S.presets[b.dataset.del];if(!confirm('删除方案「'+p.name+'」？'))return;

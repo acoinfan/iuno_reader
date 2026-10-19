@@ -11,7 +11,6 @@ import argparse
 import json
 import os
 import sys
-import urllib.request
 
 from . import extract as ex
 from .check import check_doc
@@ -46,16 +45,13 @@ def cmd_fetch(a):
     if os.path.exists(out) and not a.force:
         print("已有缓存", out)
         return
-    url = f"https://arxiv.org/html/{a.id}"
+    from .pipeline import download_html
     try:
-        with urllib.request.urlopen(urllib.request.Request(url, headers={"User-Agent": "iuno_reader"}), timeout=60) as r:
-            data = r.read()
+        data, url = download_html(a.id)
     except Exception as e:
-        sys.exit(f"下载失败：{url}（{e}）。这篇可能没有 HTML 版，暂不支持 TeX 源码兜底。")
-    if b"ltx_document" not in data:
-        sys.exit("下载到的页面不是 LaTeXML 生成的论文 HTML，可能这篇没有 HTML 版。")
+        sys.exit(f"下载失败：{e}")
     open(out, "wb").write(data)
-    print("已下载", out, len(data), "字节")
+    print("已下载", url, "→", out, len(data), "字节")
 
 
 def cmd_extract(a):
@@ -196,11 +192,51 @@ def cmd_review(a):
         print(f"[{n}/{len(todo)}] {t['id']}")
 
 
+def _describe(r):
+    if r.get("arxiv"):
+        extra = f"《{r['title'][:70]}》" if r.get("title") else ""
+        return f"{r['input']} → arXiv {r['arxiv']}{extra}（{r.get('via', '')}）"
+    head = f"{r['input']}：没找到 arXiv 版本"
+    if r.get("title"):
+        head += f"，查到的是《{r['title'][:70]}》"
+    reason = r.get("error") or ""
+    oa = f"；全文：{r['oa_url']}" if r.get("oa_url") else ""
+    return f"{head}（{r.get('via') or '无'}；{reason}）{oa}，流水线暂时翻不了"
+
+
+def to_arxiv(items):
+    """arXiv 编号原样返回；DOI、链接、标题先换成 arXiv 编号（见 resolve.py）。返回 (编号列表, 换不到的)。"""
+    from .resolve import ARXIV_ID, Finder
+    ids, bad, finder = [], [], None
+    for it in items:
+        if ARXIV_ID.fullmatch(it.strip()):
+            ids.append(ARXIV_ID.fullmatch(it.strip()).group(1))
+            continue
+        finder = finder or Finder(ROOT)
+        r = finder.find(it)
+        print(_describe(r))
+        (ids.append(r["arxiv"]) if r.get("arxiv") else bad.append(r))
+    return list(dict.fromkeys(ids)), bad
+
+
+def cmd_find(a):
+    from .resolve import Finder, find_inputs
+    finder = Finder(ROOT)
+    items = [x for t in a.items for x in find_inputs(t)]
+    rc = 0
+    for it in items:
+        r = finder.find(it)
+        print(_describe(r))
+        rc |= not r.get("arxiv")
+    sys.exit(rc)
+
+
 def cmd_run(a):
     from .pipeline import run
     secs = _sections(a)
-    rc = 0
-    for pid in a.ids:
+    ids, bad = to_arxiv(a.ids)
+    rc = 1 if bad else 0
+    for pid in ids:
         try:
             m = run(ROOT, pid, secs, a.translate, a.review, a.export, a.force, a.workers, a.review_workers)
         except Exception as e:
@@ -252,14 +288,14 @@ def main(argv=None):
                      ("translate", cmd_translate), ("render", cmd_render)]:
         s = sub.add_parser(name)
         s.add_argument("id")
-        s.add_argument("--sections", help="只处理这些节，逗号分隔，例如 abs,2,3,4 或 A,B；body 表示全部正文（不含附录）")
+        s.add_argument("--sections", help="只处理这些节，逗号分隔，例如 abs,2,3,4 或 A,B；body 表示全部正文（不含附录）；skim 表示略读（摘要、引言、讨论和结论）")
         s.add_argument("--force", action="store_true")
         s.add_argument("--translated-only", action="store_true", help="render 时只输出已翻译的片段")
         s.set_defaults(fn=fn)
     s = sub.add_parser("run", help="流水线：下载→拆分→翻译→审校→核对渲染→输出 out/<id>/")
-    s.add_argument("ids", nargs="+", help="一个或多个 arXiv 编号")
+    s.add_argument("ids", nargs="+", help="一个或多个 arXiv 编号；也可以是 DOI、论文页面链接或标题（加引号），会先换成 arXiv 编号")
     s.add_argument("--sections", default="body",
-                   help="只处理这些节，逗号分隔，例如 abs,2,3,4；默认 body（全部正文，不含附录）；all 表示含附录的全文")
+                   help="只处理这些节，逗号分隔，例如 abs,2,3,4；默认 body（全部正文，不含附录）；skim 表示略读（摘要、引言、讨论和结论）；all 表示含附录的全文")
     s.add_argument("--translate", choices=["auto", "api", "agent"], default="auto",
                    help="auto：有接口就自动翻译，否则生成 agent 任务说明")
     s.add_argument("--review", choices=["auto", "blind", "backtranslate", "agent", "none"], default="auto")
@@ -282,7 +318,7 @@ def main(argv=None):
     s.add_argument("id")
     s.add_argument("--mode", choices=["blind", "backtranslate"], default="backtranslate")
     s.add_argument("--name", help="结果存成 review.<name>.json（默认用 mode）；几个模型分别审同一份译文时用来区分")
-    s.add_argument("--sections", default="body", help="只审这些节；默认 body（正文），all 表示全部已翻译的段落")
+    s.add_argument("--sections", default="body", help="只审这些节；默认 body（正文），skim 表示略读的几节，all 表示全部已翻译的段落")
     s.add_argument("--workers", type=int, default=1, help="同时审几段（按接口允许的并发数设，例如 Kimi 15 并发、3 篇同时跑就设 5）")
     s.add_argument("--force", action="store_true")
     s.set_defaults(fn=cmd_review)
@@ -294,6 +330,9 @@ def main(argv=None):
     s.add_argument("--port", type=int, default=8780)
     s.add_argument("--host", default="127.0.0.1", help="默认只监听本机")
     s.set_defaults(fn=cmd_serve)
+    s = sub.add_parser("find", help="只查不翻：把 DOI、论文页面链接或标题换成 arXiv 编号")
+    s.add_argument("items", nargs="+", help="arXiv 编号或链接、DOI、doi.org 链接、ACL/OpenReview/NeurIPS 等论文页面链接、标题（标题要加引号）")
+    s.set_defaults(fn=cmd_find)
     s = sub.add_parser("citations", help="引用统计：一次调研里各篇论文都在引用哪些论文、库内论文之间谁引用了谁")
     s.add_argument("--project", help="知识库 pdfs/ 下的项目名，例如 cvpr4；不写就统计整个知识库")
     s.add_argument("--library", help="知识库目录（默认用设置里的「知识库目录」）")
