@@ -13,7 +13,29 @@ for k in list(os.environ):
     if k.startswith("IUNO_"):
         del os.environ[k]  # 确保不会连接任何接口
 
+from iuno_reader import images, pipeline  # noqa: E402
 from iuno_reader.pipeline import run  # noqa: E402
+
+pipeline.fix_images = lambda doc, path: []  # 离线测试：不下载图片检查
+
+# 0. 图片检查（不联网）：完整 / 截断的 PNG、截断的 SVG；v3 坏了退回 v2
+import struct, zlib  # noqa: E402,E401
+
+
+def _png(w=4, h=4):
+    raw = b"".join(b"\x00" + b"\xff" * (3 * w) for _ in range(h))
+    chunk = lambda t, d: struct.pack(">I", len(d)) + t + d + struct.pack(">I", zlib.crc32(t + d))  # noqa: E731
+    return (b"\x89PNG\r\n\x1a\n" + chunk(b"IHDR", struct.pack(">IIBBBBB", w, h, 8, 2, 0, 0, 0))
+            + chunk(b"IDAT", zlib.compress(raw)) + chunk(b"IEND", b""))
+
+
+good = _png(64, 64)
+assert images.intact(good, "a.png") and not images.intact(good[:60], "a.png")
+assert images.intact(b"<svg>x</svg>\n", "a.svg") and not images.intact(b"<svg><g>", "a.svg")
+fake = {"https://arxiv.org/html/1234.5678v3/f.png": good[:60], "https://arxiv.org/html/1234.5678v2/f.png": good}
+images._get = lambda u, timeout=30: fake[u]
+assert images.resolve("https://arxiv.org/html/1234.5678v3/f.png") == ("https://arxiv.org/html/1234.5678v2/f.png", True)
+print("图片检查：截断识别、退回旧版本 通过")
 
 PID = "2602.04212"
 tmp = tempfile.mkdtemp(prefix="iuno_reader_test_")

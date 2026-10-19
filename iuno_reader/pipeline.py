@@ -22,6 +22,7 @@ from collections import Counter
 from . import extract as ex
 from .check import LEVELS, check_doc
 from .glossary import load_hedges, load_terms
+from .images import fix_images
 from .parallel import pmap
 from .render import ICON, render_html, render_markdown
 from .roles import INDEPENDENCE_ZH, independence, load_prompt, model_config, worst_independence
@@ -206,6 +207,8 @@ def run(root, pid, sections=None, translate="auto", review="auto", export=None, 
     st["fetch"] = fetch(P, force_fetch)
 
     doc = ex.extract(open(P.cache, encoding="utf-8").read(), pid)
+    for old, new in fix_images(doc, P.cache[:-5] + ".images.json"):
+        print(f"图片坏了，改用：{new}（原地址 {old}）")
     _save(doc, P.d("doc.json"))
     st["extract"] = {"status": "ok", "segments": len(doc["segments"]),
                      "sentences": sum(len(s["sentences"]) for s in doc["segments"])}

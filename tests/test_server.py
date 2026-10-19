@@ -79,6 +79,15 @@ try:
     assert row["sentences"] == 3 and abs(row["total"] - 4.5) < 1e-6, row
     print("进度与花费：按正文数段、按价格表算钱 通过")
 
+    # 批注：存进 data/<编号>/notes.json，复盘笔记写到 out/<编号>/notes.md
+    note = {"id": "n1", "s": "p0-1", "side": "en", "quote": "A", "tags": ["重点"], "note": "要记住", "time": "2026-10-19 16:00"}
+    assert call("POST", f"/api/notes/{PID}", {"notes": [note], "markdown": "# 批注\n- #重点 「A」"})[0] == 200
+    assert call("GET", f"/api/notes/{PID}")[1]["notes"] == [note]
+    md_path = os.path.join(server.OUT, PID, "notes.md")
+    assert open(md_path, encoding="utf-8").read().startswith("# 批注")
+    shutil.rmtree(os.path.join(server.OUT, PID), ignore_errors=True)
+    print("批注：保存、读取、写复盘笔记 通过")
+
     call("POST", f"/api/jobs/{j['n']}/delete")
     assert server.Q.find(j["n"]) is None
     assert call("GET", "/out/../../etc/passwd")[0] == 404

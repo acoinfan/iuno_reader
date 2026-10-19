@@ -325,6 +325,26 @@ class Handler(BaseHTTPRequestHandler):
                         rows.append({"pid": pid, "title": title, "sentences": n, "total": c, "parts": parts,
                                      "upper": upper})
                 return self._send(200, {"rows": rows, "prices": pv.prices()})
+            m = re.fullmatch(r"/api/notes/(\d{4}\.\d{4,5})", path)
+            if m:  # 双语网页里的标签批注
+                pid = m.group(1)
+                f = os.path.join(ROOT, "data", pid, "notes.json")
+                if method == "GET":
+                    return self._send(200, _json(f, {"notes": []}) or {"notes": []})
+                if method == "POST":
+                    b = self._body()
+                    os.makedirs(os.path.dirname(f), exist_ok=True)
+                    with open(f, "w", encoding="utf-8") as fh:
+                        json.dump({"notes": b.get("notes", [])}, fh, ensure_ascii=False, indent=1)
+                    md = str(b.get("markdown", ""))
+                    targets = [os.path.join(OUT, pid, "notes.md")]
+                    if settings().get("export_dir", "").strip():
+                        targets.append(os.path.join(settings()["export_dir"].strip(), f"{pid}-批注.md"))
+                    for t in targets:
+                        os.makedirs(os.path.dirname(t), exist_ok=True)
+                        with open(t, "w", encoding="utf-8") as fh:
+                            fh.write(md)
+                    return self._send(200, {"ok": True})
             if method == "GET" and path == "/api/models":
                 p = pv.provider(q.get("provider", [""])[0])
                 return self._send(200, {"models": list_models(p) if p else []})

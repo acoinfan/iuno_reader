@@ -234,6 +234,51 @@ figure{margin:30px -26px 34px;padding:24px 26px 18px;background:#f4f1e9;border-r
 figure .imgs{display:flex;flex-wrap:wrap;justify-content:center;align-items:flex-end;gap:12px;margin:0 auto 18px;max-width:88%}
 figure img{display:block;max-height:460px;max-width:100%;flex:1 1 0;min-width:0;object-fit:contain;background:#fff;border-radius:4px}
 figure .imgs img:only-child{max-width:82%;flex:0 1 auto}
+/* 侧栏目录：宽屏（主栏两边放得下）常驻左侧，窄屏收成右下角「目录」按钮，点开从左边滑出 */
+html{scroll-behavior:smooth}
+h2.pair,h3.pair,figure,header{scroll-margin-top:18px}
+.toc{position:fixed;left:0;top:0;bottom:0;width:260px;overflow-y:auto;z-index:40;background:#fdfcf8;
+     border-right:1px solid var(--rule);padding:18px 12px 40px;font-family:var(--zh);font-size:13.5px;
+     transform:translateX(-102%);transition:transform .2s;box-shadow:2px 0 14px rgba(0,0,0,.04)}
+.toc.on{transform:none}
+.toc a{display:block;color:var(--ink);text-decoration:none;padding:5px 8px;border-radius:6px;line-height:1.45}
+.toc a:hover{background:#f1eee5}
+.toc a.l1{font-weight:700;margin-bottom:6px}
+.toc a.l3{padding-left:22px;font-size:12.5px;color:#444}
+.toc a .e{display:block;font-family:var(--en);font-size:11.5px;color:var(--sub);margin-top:1px}
+.toc a.cur{background:var(--hl);color:#2f7a4c}
+.toc-h{font-size:12px;color:var(--sub);margin:14px 8px 6px;display:flex;justify-content:space-between}
+.toc-x{cursor:pointer;font-size:16px;line-height:1}
+.toc-figs{display:flex;flex-wrap:wrap;gap:4px;padding:0 6px}
+.toc-figs a{padding:2px 8px;background:#f1eee5;font-size:12.5px}
+.toc-btn,.top-btn{position:fixed;right:20px;z-index:39;font:13px var(--zh);border:1px solid var(--rule);background:#fff;
+     color:#2f7a4c;border-radius:20px;padding:6px 14px;cursor:pointer;text-decoration:none;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.toc-btn{bottom:62px}.top-btn{bottom:20px}
+@media (min-width:1860px){.toc{transform:none;box-shadow:none}.toc-btn,.toc-x{display:none}}
+/* 标签批注：选中文字 → 「✎ 批注」；有批注的句子加下划线和小标记；侧栏可按标签筛选、跳转、导出 */
+.ann-add{position:absolute;z-index:45;font:13px var(--zh);background:#2f7a4c;color:#fff;border:none;border-radius:6px;
+     padding:4px 10px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.ann-pop{position:absolute;z-index:46;width:340px;max-width:92vw;background:#fff;border:1px solid var(--rule);border-radius:10px;
+     padding:12px;font:13px var(--zh);box-shadow:0 6px 24px rgba(0,0,0,.12)}
+.ann-pop .q{color:var(--sub);font-size:12.5px;max-height:4.5em;overflow:auto;margin-bottom:8px;border-left:3px solid var(--rule);padding-left:8px}
+.ann-pop textarea{width:100%;height:76px;font:13px var(--zh);border:1px solid var(--rule);border-radius:6px;padding:6px;margin-top:8px;box-sizing:border-box}
+.ann-pop input{font:12.5px var(--zh);border:1px solid var(--rule);border-radius:6px;padding:3px 6px;width:96px}
+.ann-pop .row{display:flex;gap:6px;justify-content:flex-end;margin-top:8px}
+.ann-pop button{font:13px var(--zh);border:1px solid var(--rule);background:#fff;border-radius:6px;padding:4px 10px;cursor:pointer}
+.ann-pop button.pri{background:#2f7a4c;color:#fff;border-color:#2f7a4c}
+.ann-pop button.del{color:#c0392b;margin-right:auto}
+.tag{display:inline-block;padding:1px 8px;margin:2px 3px 2px 0;border-radius:10px;font-size:12px;cursor:pointer;border:1px solid transparent;
+     background:#f1eee5;color:#555;user-select:none}
+.tag.on{color:#fff}
+.s.ann{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px;text-decoration-color:var(--tc,#2f7a4c)}
+.ann-mark{cursor:pointer;font-size:.78em;margin-left:2px;vertical-align:.15em;color:var(--tc,#2f7a4c);user-select:none}
+.s.flash{animation:flash 1.6s}
+@keyframes flash{0%,60%{background:#fff3b0}100%{background:transparent}}
+.ann-list a{font-size:12.5px}
+.ann-list a .n{display:block;color:var(--sub);font-size:11.5px}
+.ann-tools{display:flex;flex-wrap:wrap;gap:4px;padding:0 6px 6px}
+.ann-tools button{font:12px var(--zh);border:1px solid var(--rule);background:#fff;border-radius:6px;padding:2px 8px;cursor:pointer}
+.ann-empty{color:var(--sub);font-size:12.5px;padding:0 8px}
 /* 看大图：点图片全屏显示（铺满窗口），再点一下切到原始尺寸可滚动看细节，Esc 或点空白处关闭 */
 figure img{cursor:zoom-in}
 .lb{position:fixed;inset:0;z-index:50;background:#f4f1e9;display:none;overflow:auto;cursor:zoom-out}
@@ -254,7 +299,7 @@ sup{font-size:.7em}
 @media (max-width:860px){main{padding:28px 18px}.pair{grid-template-columns:1fr;row-gap:6px}}
 """
 
-JS = """<script>
+JS = r"""<script>
 document.querySelectorAll('.s').forEach(el=>{
   const peers=()=>document.querySelectorAll(`.s[data-s="${el.dataset.s}"]`);
   el.addEventListener('mouseenter',()=>peers().forEach(x=>x.classList.add('hl')));
@@ -270,6 +315,7 @@ function paint(){
   focus.forEach((k,i)=>document.querySelectorAll(`[data-l="${CSS.escape(k)}"]`).forEach(x=>x.classList.add('f'+(i+1))));
   document.body.classList.toggle('focusing',focus.length>0);}
 document.addEventListener('click',e=>{
+  if(String(getSelection())) return;  // 正在选文字（准备批注）时不算点词
   const w=e.target.closest('.w,.g');if(!w) return;
   const p=w.closest('.p');const k=(p&&p.dataset.l)||w.dataset.l;if(!k) return;
   const i=focus.indexOf(k);
@@ -291,6 +337,24 @@ function pick(sel,all,key,dflt){const B=document.querySelectorAll(sel);
   let v=dflt;try{v=localStorage.getItem(key)||dflt}catch(e){}set(v);}
 pick('.weights span',['w1','w2','w3'],'iuno-reader-weight','w2');
 pick('.bolds span',['bio','kw'],'iuno-reader-bold','bio');
+// arXiv 上个别图片文件是坏的（例如 2602.04212v3 的图 1 只传了一截）：加载失败就换同一篇更早版本里的同名图片
+function olderVersion(im){const m=im.src.match(/(\d{4}\.\d{4,5})v(\d+)\//);
+  if(m&&+m[2]>1) im.src=im.src.replace(m[0],m[1]+'v'+(+m[2]-1)+'/');}
+document.querySelectorAll('figure img').forEach(im=>{im.addEventListener('error',()=>olderVersion(im));
+  if(im.complete&&im.naturalWidth===0) olderVersion(im);});  // 脚本运行前就已经失败的
+// 侧栏目录：按钮开合；窄屏点了目录项自动收起；滚动时高亮当前所在的节
+const TOC=document.getElementById('toc'),wide=()=>matchMedia('(min-width:1860px)').matches;
+if(TOC){
+  document.getElementById('tocBtn').addEventListener('click',()=>TOC.classList.toggle('on'));
+  TOC.querySelector('.toc-x').addEventListener('click',()=>TOC.classList.remove('on'));
+  TOC.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{if(!wide())TOC.classList.remove('on');}));
+  const heads=[...document.querySelectorAll('h2.pair[id],h3.pair[id]')];let last=null;
+  const spy=()=>{let cur=null;for(const h of heads){if(h.getBoundingClientRect().top<140)cur=h;else break;}
+    const id=cur?cur.id:null;if(id===last)return;last=id;
+    TOC.querySelectorAll('a.cur').forEach(a=>a.classList.remove('cur'));
+    const a=id&&TOC.querySelector(`a[data-a="${id}"]`);
+    if(a){a.classList.add('cur');const r=a.getBoundingClientRect();if(r.top<60||r.bottom>innerHeight-20)a.scrollIntoView({block:'center'});}};
+  let tick=false;addEventListener('scroll',()=>{if(!tick){tick=true;requestAnimationFrame(()=>{spy();tick=false;});}});spy();}
 // 看大图
 const LB=document.createElement('div');LB.className='lb';
 LB.innerHTML="<img alt=''><span class='tip'>点图片：原始尺寸 / 适应窗口　·　Esc 或点空白处关闭</span>";
@@ -306,6 +370,113 @@ if(t) t.addEventListener('click',()=>{document.body.classList.toggle('plain');
   t.textContent=document.body.classList.contains('plain')?'显示标记':'隐藏标记';});
 </script>"""
 
+
+ANN_JS = r"""<script>
+// ---------- 标签批注 ----------
+// 存在浏览器里（localStorage，按论文编号分开）；通过 iuno_reader 前端服务打开时，同时存到服务器的 data/<编号>/notes.json。
+// 删除的批注留一个 deleted 标记，免得和服务器上的旧版本合并时又冒出来。
+(function(){
+const PID=document.body.dataset.pid||location.pathname, KEY='iuno-reader-notes:'+PID;
+const TAGS=[['重点','#d9534f'],['不懂','#e8a33d'],['疑问','#8a7bd1'],['生词','#3b82c4'],['方法','#2f7a4c'],['结论','#6b6b6b']];
+const color=t=>(TAGS.find(x=>x[0]===t)||[0,'#2f7a4c'])[1];
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const SERVER=/^https?:/.test(location.protocol)&&location.pathname.startsWith('/out/');
+const now=()=>{const d=new Date(),p=n=>String(n).padStart(2,'0');return `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())} ${p(d.getHours())}:${p(d.getMinutes())}`;};
+let notes=[];try{notes=JSON.parse(localStorage.getItem(KEY)||'[]')}catch(e){}
+const live=()=>notes.filter(n=>!n.deleted);
+// 句子 → 所在的节和小节，导出时按节整理
+const order=[],secOf={};let h2='',h3='';
+document.querySelectorAll('h2.pair,h3.pair,.en .s[data-s]').forEach(el=>{
+  const name=el.querySelector?.('.zh')?.innerText.trim()||el.querySelector?.('.en')?.innerText.trim()||'';
+  if(el.tagName==='H2'){h2=name;h3='';}else if(el.tagName==='H3'){h3=name;}else{order.push(el.dataset.s);secOf[el.dataset.s]=[h2,h3];}});
+const textOf=(sid,side)=>(document.querySelector(`.${side} .s[data-s="${sid}"]`)?.innerText||'').replace(/●/g,'').trim();
+function persist(sync=true){
+  try{localStorage.setItem(KEY,JSON.stringify(notes))}catch(e){}
+  if(sync&&SERVER)fetch('/api/notes/'+PID,{method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({notes,markdown:toMarkdown()})}).catch(()=>{});}
+function merge(list){const m=new Map(notes.map(n=>[n.id,n]));
+  list.forEach(n=>{const o=m.get(n.id);if(!o||(n.time||'')>(o.time||''))m.set(n.id,n);});
+  notes=[...m.values()];persist(false);paint();}
+// 选中文字 → 「✎ 批注」按钮
+const add=document.createElement('button');add.className='ann-add';add.textContent='✎ 批注';add.style.display='none';
+document.body.appendChild(add);let pending=null;
+document.addEventListener('mouseup',e=>{if(e.target.closest('.ann-pop,.ann-add'))return;setTimeout(()=>{
+  const sel=getSelection(),txt=String(sel).trim();
+  const node=sel.rangeCount&&sel.anchorNode,el=node&&(node.nodeType===1?node:node.parentElement).closest('.s[data-s]');
+  if(!txt||!el){add.style.display='none';return;}
+  const r=sel.getRangeAt(0).getBoundingClientRect();
+  pending={s:el.dataset.s,side:el.closest('.zh')?'zh':'en',quote:txt.slice(0,500)};
+  add.style.left=(r.right+scrollX+6)+'px';add.style.top=(r.top+scrollY-34)+'px';add.style.display='block';},0);});
+add.addEventListener('click',()=>{add.style.display='none';
+  if(pending)open({id:'n'+Date.now().toString(36),tags:[],note:'',...pending},parseInt(add.style.left),parseInt(add.style.top)+34);});
+// 编辑框
+let pop=null;
+function close(){if(pop){pop.remove();pop=null;}}
+function open(n,x,y){close();const isNew=!notes.some(m=>m.id===n.id);const sel=new Set(n.tags);
+  const all=[...TAGS.map(t=>t[0]),...new Set(live().flatMap(m=>m.tags).filter(t=>!TAGS.some(x=>x[0]===t)))];
+  pop=document.createElement('div');pop.className='ann-pop';
+  pop.innerHTML=`<div class="q">${esc(n.quote)}</div><div class="tags"></div>
+   <input placeholder="新标签，回车添加"><textarea placeholder="写点什么：为什么重要、哪里不懂、和哪篇有关……">${esc(n.note)}</textarea>
+   <div class="row">${isNew?'':'<button class="del">删除</button>'}<button class="cancel">取消</button><button class="pri">保存</button></div>`;
+  const box=pop.querySelector('.tags');
+  const drawTags=()=>{box.innerHTML=all.map(t=>`<span class="tag ${sel.has(t)?'on':''}" style="${sel.has(t)?'background:'+color(t):''}">${esc(t)}</span>`).join('');
+    box.querySelectorAll('.tag').forEach(s=>s.onclick=()=>{const t=s.textContent;sel.has(t)?sel.delete(t):sel.add(t);drawTags();});};
+  drawTags();
+  pop.querySelector('input').onkeydown=e=>{const v=e.target.value.trim().replace(/\s+/g,'_');if(e.key==='Enter'&&v){if(!all.includes(v))all.push(v);sel.add(v);e.target.value='';drawTags();}};
+  pop.querySelector('.cancel').onclick=close;
+  pop.querySelector('.pri').onclick=()=>{Object.assign(n,{tags:[...sel],note:pop.querySelector('textarea').value.trim(),time:now(),deleted:false});
+    if(isNew)notes.push(n);persist();paint();close();getSelection().removeAllRanges();};
+  const del=pop.querySelector('.del');if(del)del.onclick=()=>{if(!confirm('删除这条批注？'))return;Object.assign(n,{deleted:true,time:now()});persist();paint();close();};
+  document.body.appendChild(pop);
+  pop.style.left=Math.max(8,Math.min(x,scrollX+innerWidth-pop.offsetWidth-12))+'px';pop.style.top=y+'px';
+  pop.querySelector('textarea').focus();}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')close();});
+// 显示：句子下划线 + 句末小标记；侧栏列表
+function jump(sid){const el=document.querySelector(`.s[data-s="${sid}"]`);if(!el)return;
+  el.scrollIntoView({block:'center'});document.querySelectorAll(`.s[data-s="${sid}"]`).forEach(x=>{x.classList.remove('flash');void x.offsetWidth;x.classList.add('flash');});}
+let filter='';
+function paint(){
+  document.querySelectorAll('.ann-mark').forEach(m=>m.remove());
+  document.querySelectorAll('.s.ann').forEach(s=>{s.classList.remove('ann');s.style.removeProperty('--tc');});
+  live().forEach(n=>document.querySelectorAll(`.s[data-s="${n.s}"]`).forEach(s=>{
+    const c=color(n.tags[0]);s.classList.add('ann');s.style.setProperty('--tc',c);
+    const m=document.createElement('span');m.className='ann-mark';m.textContent='✎';m.style.setProperty('--tc',c);
+    m.title=(n.tags.length?'['+n.tags.join('][')+'] ':'')+(n.note||n.quote);
+    m.onclick=e=>{e.stopPropagation();const r=m.getBoundingClientRect();open(n,r.left+scrollX,r.bottom+scrollY+6);};
+    s.after(m);}));
+  const toc=document.getElementById('toc');if(!toc)return;
+  let sec=document.getElementById('annSec');
+  if(!sec){sec=document.createElement('div');sec.id='annSec';toc.appendChild(sec);}
+  const list=live().sort((a,b)=>order.indexOf(a.s)-order.indexOf(b.s));
+  const tags=[...new Set(list.flatMap(n=>n.tags))];
+  const shown=filter?list.filter(n=>n.tags.includes(filter)):list;
+  sec.innerHTML=`<div class="toc-h">批注（${list.length}）</div>
+   <div class="ann-tools">${['',...tags].map(t=>`<span class="tag ${filter===t?'on':''}" data-t="${esc(t)}" style="${filter===t?'background:'+(t?color(t):'#2f7a4c'):''}">${t?esc(t):'全部'}</span>`).join('')}</div>
+   <div class="ann-tools"><button data-x="md">导出复盘笔记</button><button data-x="json">备份</button><button data-x="in">导入</button></div>
+   <div class="ann-list">${shown.map(n=>`<a href="javascript:void 0" data-s="${n.s}">${n.tags.map(t=>`<span style="color:${color(t)}">#${esc(t)}</span>`).join(' ')} ${esc(n.quote.slice(0,40))}${n.note?`<span class="n">${esc(n.note.slice(0,60))}</span>`:''}</a>`).join('')}</div>
+   ${list.length?'':'<div class="ann-empty">在正文里选中文字，就会出现「✎ 批注」按钮。</div>'}`;
+  sec.querySelectorAll('.ann-tools .tag').forEach(t=>t.onclick=()=>{filter=t.dataset.t;paint();});
+  sec.querySelectorAll('.ann-list a').forEach(a=>a.onclick=()=>jump(a.dataset.s));
+  sec.querySelector('[data-x=md]').onclick=()=>download(`${PID}-批注.md`,toMarkdown(),'text/markdown');
+  sec.querySelector('[data-x=json]').onclick=()=>download(`${PID}-批注备份.json`,JSON.stringify(notes,null,1),'application/json');
+  sec.querySelector('[data-x=in]').onclick=()=>{const f=document.createElement('input');f.type='file';f.accept='.json';
+    f.onchange=async()=>{try{merge(JSON.parse(await f.files[0].text()));persist();}catch(e){alert('导入失败：'+e.message);}};f.click();};}
+function download(name,text,type){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([text],{type}));a.download=name;a.click();}
+function toMarkdown(){
+  const title=document.querySelector('header .title .zh')?.innerText.trim()||document.title;
+  const en=document.querySelector('header .title .en')?.innerText.trim()||'';
+  let md=`# ${title} · 批注\n\n> ${en}（arXiv ${PID}）· 导出于 ${now()}\n> 中文对照：[[translations/${PID}-zh.md]]\n\n`;let last='';
+  live().sort((a,b)=>order.indexOf(a.s)-order.indexOf(b.s)).forEach(n=>{
+    const [s2,s3]=secOf[n.s]||['',''],head=[s2,s3].filter(Boolean).join(' › ');
+    if(head!==last){md+=`## ${head||'（无节名）'}\n\n`;last=head;}
+    md+=`- ${n.tags.map(t=>'#'+t).join(' ')} 「${n.quote.replace(/\s+/g,' ')}」\n`;
+    if(n.note)md+=`  - 批注：${n.note.replace(/\n/g,'\n    ')}\n`;
+    md+=`  - 原句：${textOf(n.s,'en')}\n  - 译文：${textOf(n.s,'zh')}\n  - ${n.time}\n\n`;});
+  return md;}
+paint();
+if(SERVER)fetch('/api/notes/'+PID).then(r=>r.ok?r.json():null).then(d=>{if(d&&d.notes)merge(d.notes);}).catch(()=>{});
+})();
+</script>"""
 
 _NOT_KW = {"et", "al"}  # 引用里的 et al. 不算实词
 
@@ -472,7 +643,7 @@ def render_html(doc, stats, sections_zh=None, only=None, review_info=None):
            f"<title>{html.escape(title_zh or doc['title'])}</title><style>{CSS}</style>",
            "<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>",
            "<script src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js' async></script>",
-           "</head><body><main><header>",
+           f"</head><body data-pid='{html.escape(doc['arxiv_id'])}'><main><header id='top'>",
            f"<div class='pair title'><div class='en'>{html.escape(doc['title'])}</div><div class='zh'>{html.escape(title_zh)}</div></div>",
            f"<div class='meta'><a href='https://arxiv.org/abs/{doc['arxiv_id']}'>arXiv {doc['arxiv_id']}</a>　·　"
            f"共 {total} 句，有标记 {total - s.get('ok', 0)} 句　·　<span class='toggle' id='toggle'>隐藏标记</span>"
@@ -489,14 +660,19 @@ def render_html(doc, stats, sections_zh=None, only=None, review_info=None):
     ordered = reading_order(doc["segments"], only)
     canon = _canon_table(ordered)
     cur_sec = cur_sub = None
+    toc, figs = [], []  # 侧栏目录：(级别, 锚点, 中文, 英文)；图表：(锚点, 标签)
     for seg in ordered:
         if seg["section"] != cur_sec:
             cur_sec, cur_sub = seg["section"], None
-            out.append(f"<h2 class='pair'><div class='en'>{html.escape(cur_sec)}</div>"
+            anchor = f"s{len(toc)}"
+            toc.append((2, anchor, sections_zh.get(cur_sec, ""), cur_sec))
+            out.append(f"<h2 class='pair' id='{anchor}'><div class='en'>{html.escape(cur_sec)}</div>"
                        f"<div class='zh'>{html.escape(sections_zh.get(cur_sec, ''))}</div></h2>")
         if seg.get("subsection") and seg["subsection"] != cur_sub:
             cur_sub = seg["subsection"]
-            out.append(f"<h3 class='pair'><div class='en'>{html.escape(cur_sub)}</div>"
+            anchor = f"s{len(toc)}"
+            toc.append((3, anchor, sections_zh.get(cur_sub, ""), cur_sub))
+            out.append(f"<h3 class='pair' id='{anchor}'><div class='en'>{html.escape(cur_sub)}</div>"
                        f"<div class='zh'>{html.escape(sections_zh.get(cur_sub, ''))}</div></h3>")
         kind = seg["kind"]
         if kind == "equation":
@@ -507,7 +683,11 @@ def render_html(doc, stats, sections_zh=None, only=None, review_info=None):
         if kind in ("caption", "table"):
             urls = seg.get("images") or ([seg["image"]] if seg.get("image") else [])
             img = ("<div class='imgs'>" + "".join(f"<img src='{u}' alt=''>" for u in urls) + "</div>") if urls else ""
-            out.append(f"<figure class='para'>{img}<div class='pair'><div class='en'>{en}</div>"
+            anchor = "f-" + re.sub(r"[^A-Za-z0-9_-]", "-", seg["id"])
+            m = _LABEL_EN.match(seg["en"])
+            if m:
+                figs.append((anchor, ("表 " if m.group(1).lower().startswith("tab") else "图 ") + m.group(2)))
+            out.append(f"<figure class='para' id='{anchor}'>{img}<div class='pair'><div class='en'>{en}</div>"
                        f"<div class='zh'>{zh}</div>{note_html}</div></figure>")
         elif kind == "footnote":
             n = seg.get("footnote")
@@ -516,5 +696,19 @@ def render_html(doc, stats, sections_zh=None, only=None, review_info=None):
         else:
             out.append(f"<div class='para pair'><div class='en'><p>{en}</p></div>"
                        f"<div class='zh'><p>{zh}</p></div>{note_html}</div>")
-    out.append(JS + "</main></body></html>")
+    out.append(_toc_html(title_zh or doc["title"], toc, figs))
+    out.append(JS + ANN_JS + "</main></body></html>")
     return "\n".join(out)
+
+
+def _toc_html(title, toc, figs):
+    """侧栏目录：各节、小节（中文在前，英文小字），以及图表快捷跳转。宽屏常驻，窄屏收成右下角按钮。"""
+    items = [f"<a href='#top' class='l1'>{html.escape(title)}</a>"]
+    for level, anchor, zh, en in toc:
+        sub = f"<span class='e'>{html.escape(en)}</span>" if zh else ""
+        items.append(f"<a href='#{anchor}' class='l{level}' data-a='{anchor}'>{html.escape(zh or en)}{sub}</a>")
+    fig_links = "".join(f"<a href='#{a}'>{html.escape(lab)}</a>" for a, lab in figs)
+    figs_html = f"<div class='toc-h'>图表</div><div class='toc-figs'>{fig_links}</div>" if figs else ""
+    return (f"<nav class='toc' id='toc'><div class='toc-h'>目录<span class='toc-x' title='收起'>×</span></div>"
+            f"{''.join(items)}{figs_html}</nav>"
+            "<button class='toc-btn' id='tocBtn'>目录</button><a class='top-btn' href='#top' title='回到顶部'>↑</a>")
