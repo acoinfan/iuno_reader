@@ -19,6 +19,20 @@ cd /home/a_coin_fan/work/iuno_reader
 - `--translate auto|api|agent`、`--review auto|blind|backtranslate|agent|none` 可以指定方式。
 - 给其他 agent 的使用说明见 [AGENTS.md](AGENTS.md)。
 
+## 网页前端
+
+```bash
+cd /home/a_coin_fan/work/iuno_reader
+.venv/bin/python -m iuno_reader serve          # 浏览器打开 http://localhost:8780
+```
+
+- **任务**：把论文 PDF 拖进来（从文件名认 arXiv 编号），或粘贴编号、链接；选一个方案，点「添加」。每篇一张卡片：翻译、审校的进度条，已经花了多少钱，标红标橙句数，可以暂停、继续、重试，完成后「打开」看双语网页。
+- **方案**：内置「尤诺推荐」（pro 关思考翻译 + pro 盲审）、「尤诺推荐 · 精读」（再加 Kimi K3 审）、「最省钱」（flash 翻译，只在空闲时段跑）。也可以复制一份改成自己的：每个角色选接口、模型、思考（默认 / 关 / 低 / 高）、并发数；翻译范围（只翻正文 / 全文）；是否只在 DeepSeek 空闲时段跑。下面的「设置」可以改同时跑几篇，以及完成后把网页和 Markdown 复制到哪个目录（例如知识库的 `translations/`）。
+- **接口**：自动读 cc-switch 里的接口；也可以手动添加（选服务商自动填地址）。每个接口可以「测试翻译」「测试审校」，就是跑一次 `probe`。
+- **用量**：每篇的花费表（翻译、每份审校分开），按正文句数算每百句多少钱，附价格表。
+
+只监听本机。接口密钥和自己的方案存在 `~/.config/iuno_reader/`（权限 600），网页上只显示密钥末尾四位。任务队列在 `out/jobs.json`，每个任务的日志在 `out/jobs/<编号>.log`；关掉服务再打开，没做完的任务会接着排队，已经翻好、审好的段落不会重复花钱。价格表在 `iuno_reader/providers.py`，可以用 `~/.config/iuno_reader/prices.json` 覆盖。
+
 ## 输出 out/<id>/
 
 | 文件 | 内容 |
@@ -149,6 +163,7 @@ export IUNO_BT_BASE_URL=...        IUNO_BT_MODEL=...        IUNO_BT_API_KEY=... 
 .venv/bin/python tests/test_review.py                    # 审校合并（含过期检测、盲审清单不泄露备注）
 .venv/bin/python tests/test_api_mock.py                  # 用假回复测试接口流程（不联网），含 JSON 模式退回、401 不重试
 .venv/bin/python tests/test_nlp.py                       # 词性、核心词与首字母加粗长度
+.venv/bin/python tests/test_server.py                    # 网页前端的服务端（接口、方案、任务队列、进度与花费）
 .venv/bin/python tests/smoke_extract.py 2602.04212 ...   # 抽取冒烟测试（先 fetch + extract）
 .venv/bin/python tests/coverage_vs_pdf.py 2602.04212 <PDF 纯文本>   # 用 PDF 文本独立检查有没有漏段落
 ```

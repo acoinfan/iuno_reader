@@ -3,6 +3,7 @@
 import json
 import os
 import sys
+import tempfile
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 os.environ.update(IUNO_READER_BASE_URL="http://mock", IUNO_READER_MODEL="mock-model", IUNO_READER_API_KEY="x")
@@ -173,4 +174,37 @@ try:
 finally:
     shutil.rmtree(dd)
 print("review 多线程 通过")
+
+# 7. 补译标题：论文标题存进 __title__，节标题按英文原名存；已有译名的不再翻
+from iuno_reader import pipeline  # noqa: E402
+
+sent = []
+
+
+def head_post(self, body):
+    items = json.loads(body["messages"][1]["content"])["sentences"]
+    sent.append(items)
+    return {"choices": [{"message": {"content": json.dumps({"sentences": [{"zh": "译·" + x, "conf": "high"} for x in items]})}}],
+            "usage": {"prompt_tokens": 5, "completion_tokens": 5}}
+
+
+T.OpenAICompatible._post = head_post
+tmpd = tempfile.mkdtemp()
+
+
+class _P:
+    def d(self, name):
+        return os.path.join(tmpd, name)
+
+
+doc = {"title": "A Paper", "segments": [
+    {"id": "a", "section": "1 Intro", "subsection": ""}, {"id": "b", "section": "2 Method", "subsection": "2.1 Setup"},
+    {"id": "c", "section": "Appendix A More", "subsection": ""}]}
+tr = {"__sections__": {"1 Intro": "1 引言"}}
+pipeline._translate_headings(_P(), doc, tr, [{"id": "a"}, {"id": "b"}], {})
+assert sent == [["A Paper", "2 Method", "2.1 Setup"]], sent  # 已有的「1 Intro」和没选中的附录不翻
+assert tr["__sections__"]["__title__"] == "译·A Paper" and tr["__sections__"]["2.1 Setup"] == "译·2.1 Setup"
+assert tr["__sections__"]["1 Intro"] == "1 引言" and tr["__meta__"]["usage"]["calls"] == 1
+shutil.rmtree(tmpd)
+print("补译标题 通过")
 print("接口流程（模拟）测试全部通过")

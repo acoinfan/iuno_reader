@@ -2,10 +2,14 @@
  "__meta__": {
   "translator": "deepseek-v4-pro",
   "usage": {
-   "calls": 95,
-   "prompt_tokens": 79367,
-   "completion_tokens": 125801,
-   "seconds": 1539.5
+   "calls": 96,
+   "prompt_tokens": 80162,
+   "completion_tokens": 126391,
+   "seconds": 1544.7,
+   "cached_tokens": 512,
+   "peak_prompt_tokens": 795,
+   "peak_completion_tokens": 590,
+   "peak_cached_tokens": 512
   }
  },
  "abs.p1": {
@@ -1982,5 +1986,26 @@
    }
   ],
   "translator": "deepseek-v4-pro"
+ },
+ "__sections__": {
+  "__title__": "语言模型真的对时间序列预测有用吗？",
+  "Abstract": "摘要",
+  "1 Introduction": "1 引言",
+  "2 Related Work": "2 相关工作",
+  "3 Experimental Setup": "3 实验设置",
+  "3.1 Reference Methods for Language Models and Time Series": "3.1 语言模型与时间序列的参考方法",
+  "3.2 Proposed Ablations": "3.2 提出的消融",
+  "3.3 Datasets and Evaluation Metrics": "3.3 数据集与评估指标",
+  "4 Results": "4 结果",
+  "4.1 Do pretrained language models contribute to forecasting performance? (RQ1)": "4.1 预训练语言模型是否有助于预测性能？（RQ1）",
+  "4.2 Are LLM-based methods worth the computational cost? (RQ2)": "4.2 基于LLM的方法是否值得计算成本？（RQ2）",
+  "4.3 Does language model pretraining help performance on forecasting tasks? (RQ3)": "4.3 语言模型预训练是否有助于预测任务的表现？（RQ3）",
+  "4.4 Do LLMs represent sequential dependencies in time series? (RQ4)": "4.4 LLM是否表示时间序列中的顺序依赖？（RQ4）",
+  "4.5 Do LLMs help with few-shot learning in forecasting? (RQ5)": "4.5 LLM是否有助于预测中的少量示例学习？（RQ5）",
+  "4.6 Where does the performance come from? (RQ6)": "4.6 性能从何而来？（RQ6）",
+  "5 Conclusion": "5 结论",
+  "6 Acknowledgements": "6 致谢",
+  "Appendix E Additional Experiments": "附录E 附加实验",
+  "E.2 Complete Results": "E.2 完整结果"
  }
 }

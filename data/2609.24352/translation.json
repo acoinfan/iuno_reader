@@ -2,11 +2,14 @@
  "__meta__": {
   "translator": "deepseek-v4-pro",
   "usage": {
-   "calls": 122,
-   "prompt_tokens": 114108,
-   "completion_tokens": 241608,
-   "seconds": 2262.4,
-   "cached_tokens": 67200
+   "calls": 123,
+   "prompt_tokens": 114910,
+   "completion_tokens": 242182,
+   "seconds": 2267.3,
+   "cached_tokens": 67712,
+   "peak_prompt_tokens": 802,
+   "peak_completion_tokens": 574,
+   "peak_cached_tokens": 512
   }
  },
  "abs.p1": {
@@ -2933,5 +2936,27 @@
    }
   ],
   "translator": "deepseek-v4-pro"
+ },
+ "__sections__": {
+  "__title__": "少量示例促使大语言模型使用上下文中的世界表示",
+  "Abstract": "摘要",
+  "1 Introduction": "1 引言",
+  "2 Preliminaries": "2 预备知识",
+  "2.1 World Representation in LLMs": "2.1 大语言模型中的世界表示",
+  "2.2 Experimental Design": "2.2 实验设计",
+  "3 Few-Shot Demonstrations Improve Downstream Predictions": "3 少量示例提升下游预测",
+  "4 Few-Shot Demonstrations Shift World Representations": "4 少量示例改变世界表示",
+  "4.1 LLMs Construct World Representations": "4.1 大语言模型构建世界表示",
+  "4.2 Few-Shot Demonstrations Relocate World Representations": "4.2 少量示例重新定位世界表示",
+  "5 Predictive Use of World Representations": "5 世界表示的预测性使用",
+  "5.1 Intervention Experiments": "5.1 干预实验",
+  "5.2 Experiments on Practical Tasks": "5.2 实际任务实验",
+  "6 Discussion": "6 讨论",
+  "AI use statement": "AI 使用声明",
+  "Appendix C Experimental details": "附录 C 实验细节",
+  "Graph Tracking.": "图追踪。",
+  "Appendix D Detailed Results": "附录 D 详细结果",
+  "D.2 Probing and Representation Analysis": "D.2 探针与表示分析",
+  "D.3 Shot Vector": "D.3 示例向量"
  }
 }

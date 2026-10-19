@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>iuno_reader</title>
+<style>
+:root{--ink:#1f2328;--sub:#6b7280;--line:#e3e5e8;--acc:#3b915d;--accbg:#e8f3ec;--bg:#f6f7f9;--warn:#b7791f;--warnbg:#fdf4e3;--err:#c0392b;--errbg:#fbeaea}
+*{box-sizing:border-box}
+body{margin:0;font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;color:var(--ink);background:var(--bg);font-size:14px}
+.app{max-width:960px;margin:0 auto;padding:20px 16px 60px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.brand{font-weight:700;font-size:19px}.brand span{color:var(--acc)}
+.pill{font-size:12px;padding:3px 10px;border-radius:99px;background:var(--accbg);color:var(--acc)}
+.pill.warn{background:var(--warnbg);color:var(--warn)}.pill.err{background:var(--errbg);color:var(--err)}.pill.gray{background:#eef0f2;color:var(--sub)}
+.tabs{display:flex;gap:4px;margin:14px 0;border-bottom:1px solid var(--line)}
+.tab{padding:8px 16px;cursor:pointer;color:var(--sub);border-bottom:2px solid transparent;margin-bottom:-1px;user-select:none}
+.tab.on{color:var(--ink);border-color:var(--acc);font-weight:600}
+.pane{display:none}.pane.on{display:block}
+.box{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-top:12px}
+.drop{border:1.5px dashed #c9cdd3;border-radius:12px;padding:22px;text-align:center;color:var(--sub);background:#fff;transition:.15s}
+.drop.over{border-color:var(--acc);background:var(--accbg);color:var(--acc)}
+.drop b{color:var(--ink)}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:10px}
+input,select,textarea{font:inherit;padding:6px 9px;border:1px solid var(--line);border-radius:7px;background:#fff;color:var(--ink)}
+input[type=text],input[type=password]{min-width:0}
+.grow{flex:1;min-width:180px}
+button{font:inherit;padding:6px 12px;border-radius:7px;border:1px solid var(--line);background:#fff;cursor:pointer;color:var(--ink)}
+button:hover{border-color:#c9cdd3}
+button.pri{background:var(--acc);border-color:var(--acc);color:#fff}
+button.sm{padding:2px 9px;font-size:12.5px}
+button.danger{color:var(--err)}
+a{color:var(--acc)}
+.ch{display:flex;justify-content:space-between;gap:8px;align-items:baseline;flex-wrap:wrap}
+.ti{font-weight:600}.id{color:var(--sub);font-size:12px;margin-left:6px}
+.meta{font-size:12px;color:var(--sub);margin-top:3px}
+.right{display:flex;gap:6px;align-items:center;flex-wrap:wrap;font-size:12.5px;color:var(--sub)}
+.right b{color:var(--ink)}
+.st{display:grid;grid-template-columns:64px 1fr 76px;gap:5px 10px;align-items:center;margin-top:10px;font-size:12.5px}
+.st .nm{color:var(--sub)}.st .num{text-align:right;color:var(--sub);font-variant-numeric:tabular-nums}
+.bar{height:7px;background:#eef0f2;border-radius:99px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--acc);border-radius:99px;transition:width .5s}
+.bar.r2 i{background:#8a7bd1}
+.small{font-size:12px;color:var(--sub)}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin:0 3px 0 4px;vertical-align:0}
+.errtxt{font-size:12px;color:var(--err);margin-top:6px;word-break:break-all}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{text-align:left;padding:7px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--sub);font-weight:500}
+.r{text-align:right;font-variant-numeric:tabular-nums}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px 12px}
+label.f{display:block;font-size:12px;color:var(--sub);margin-bottom:3px}
+label.f+input,label.f+select{width:100%}
+.role{border-top:1px solid var(--line);padding-top:10px;margin-top:10px}
+.role h5{margin:0 0 6px;font-size:13px}
+.empty{color:var(--sub);text-align:center;padding:24px}
+.ok{color:var(--acc)}.bad{color:var(--err)}
+.res{font-size:12.5px;margin-top:8px;background:var(--bg);border-radius:8px;padding:8px 10px;display:none;white-space:pre-wrap}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#1f2328;color:#fff;padding:8px 14px;border-radius:8px;font-size:13px;opacity:0;transition:.2s;pointer-events:none}
+.toast.on{opacity:.92}
+@media (max-width:600px){.st{grid-template-columns:52px 1fr 64px}.hide-s{display:none}}
+</style></head><body><div class="app">
+<div class="top"><div class="brand">iuno<span>_</span>reader</div><span class="pill" id="peak"></span></div>
+<div class="tabs"><div class="tab on" data-p="jobs">任务</div><div class="tab" data-p="presets">方案</div><div class="tab" data-p="api">接口</div><div class="tab" data-p="cost">用量</div></div>
+
+<!-- 任务 -->
+<div class="pane on" id="jobs">
+ <div class="drop" id="drop"><b>把论文 PDF 拖到这里</b><br>从文件名里认 arXiv 编号（例如 2602.04212_xxx.pdf）；也可以拖链接或文字进来</div>
+ <div class="row"><input type="text" class="grow" id="ids" placeholder="或粘贴 arXiv 编号 / 链接，多个用空格分开">
+  <select id="jobPreset"></select><button class="pri" id="add">添加</button></div>
+ <div class="small" id="presetNote" style="margin-top:6px"></div>
+ <div id="list"></div>
+</div>
+
+<!-- 方案 -->
+<div class="pane" id="presets">
+ <div id="presetList"></div>
+ <div class="box" id="editor" style="display:none">
+  <div class="ch"><b id="edTitle">新方案</b><span class="small">内置方案不能改，可以「复制」一份再改</span></div>
+  <div class="grid" style="margin-top:10px">
+   <div><label class="f">方案名</label><input type="text" id="edName"></div>
+   <div><label class="f">翻译范围</label><select id="edScope"><option value="body">只翻正文（推荐）</option><option value="all">含附录的全文</option></select></div>
+   <div><label class="f">时段</label><select id="edOff"><option value="0">随时跑</option><option value="1">只在空闲时段跑（DeepSeek 半价）</option></select></div>
+  </div>
+  <div id="edRoles"></div>
+  <div class="row"><button class="pri" id="edSave">保存方案</button><button id="edCancel">取消</button></div>
+ </div>
+ <div class="row"><button id="newPreset">+ 新建方案</button></div>
+ <div class="box"><b>设置</b>
+  <div class="grid" style="margin-top:10px">
+   <div><label class="f">同时跑几篇</label><input type="number" min="1" max="10" id="setJobs"></div>
+   <div style="grid-column:span 2"><label class="f">完成后复制到（例如知识库的 translations 目录，留空不复制）</label><input type="text" id="setExport" style="width:100%"></div>
+  </div>
+  <div class="row"><button id="setSave">保存设置</button></div>
+ </div>
+</div>
+
+<!-- 接口 -->
+<div class="pane" id="api">
+ <div id="provList"></div>
+ <div class="row"><button id="addProv">+ 添加接口</button></div>
+ <div class="box" id="provForm" style="display:none">
+  <div class="grid">
+   <div><label class="f">服务商</label><select id="pvVendor"></select></div>
+   <div><label class="f">名称</label><input type="text" id="pvName"></div>
+   <div style="grid-column:span 2"><label class="f">地址（OpenAI 兼容）</label><input type="text" id="pvBase" style="width:100%"></div>
+   <div style="grid-column:span 2"><label class="f">密钥（只存在本机，页面上之后只显示末尾四位）</label><input type="password" id="pvKey" style="width:100%"></div>
+   <div><label class="f">常用模型（可不填）</label><input type="text" id="pvModel"></div>
+  </div>
+  <div class="row"><button class="pri" id="pvSave">保存</button><button id="pvCancel">取消</button></div>
+ </div>
+ <div class="small" style="margin-top:12px">「测试」会发一个三句话的样例：翻译测试看能不能连上、译文对不对；审校测试里埋了两处错，看它能不能抓出来。花费几分钱。</div>
+</div>
+
+<!-- 用量 -->
+<div class="pane" id="cost">
+ <div class="box"><table id="costTable"></table></div>
+ <div class="small" style="margin-top:8px" id="costNote"></div>
+</div>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const TH={default:'默认',off:'关',low:'低',high:'高'};
+const STATUS={queued:['排队中','gray'],waiting:['等空闲时段','warn'],running:['进行中',''],paused:['已暂停','gray'],done:['完成',''],error:['出错','err']};
+let S={presets:[],providers:[],jobs:[],settings:{},vendors:[],thinking:[]};
+function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('on');clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove('on'),2600);}
+async function api(method,url,body){const r=await fetch(url,{method,headers:{'Content-Type':'application/json'},body:body?JSON.stringify(body):undefined});
+ const d=await r.json().catch(()=>({}));if(!r.ok)throw new Error(d.error||r.status);return d;}
+$$('.tab').forEach(t=>t.onclick=()=>{$$('.tab').forEach(x=>x.classList.toggle('on',x===t));$$('.pane').forEach(p=>p.classList.toggle('on',p.id===t.dataset.p));if(t.dataset.p==='cost')loadCost();});
+
+/* ---------- 任务 ---------- */
+function bar(b,total,cls){const p=total?Math.min(100,100*b.done/total):0;
+ return `<div class="nm">${esc(b.name)}</div><div class="bar ${cls}"><i style="width:${p}%"></i></div><div class="num">${total==null?'—':b.done+'/'+total+' 段'}</div>`;}
+function drawJobs(){
+ const L=$('#list');
+ if(!S.jobs.length){L.innerHTML='<div class="box empty">还没有任务。拖几篇论文进来试试。</div>';return;}
+ L.innerHTML=S.jobs.slice().reverse().map(j=>{const p=j.progress||{},[st,cls]=STATUS[j.status]||[j.status,'gray'];
+  const fl=p.flags?` · <span class="dot" style="background:#d9534f"></span>${p.flags.red} <span class="dot" style="background:#e8a33d"></span>${p.flags.orange}`:'';
+  const costTip=Object.entries(p.cost_parts||{}).map(([k,v])=>k+' ¥'+v).join('；');
+  const btn=[];
+  if(j.status==='running'||j.status==='queued'||j.status==='waiting')btn.push(`<button class="sm" data-a="pause" data-n="${j.n}">暂停</button>`);
+  if(j.status==='paused')btn.push(`<button class="sm" data-a="resume" data-n="${j.n}">继续</button>`);
+  if(j.status==='error')btn.push(`<button class="sm" data-a="retry" data-n="${j.n}">重试</button>`);
+  if(p.html)btn.push(`<a href="/out/${j.pid}/paper.zh.html" target="_blank"><button class="sm">打开</button></a>`);
+  btn.push(`<button class="sm danger" data-a="delete" data-n="${j.n}">删除</button>`);
+  return `<div class="box"><div class="ch"><div><span class="ti">${esc(p.title||'（下载中，标题稍后显示）')}</span><span class="id">${esc(j.pid)}</span>
+   <div class="meta"><span class="pill ${cls}">${st}</span> ${esc(j.step||'')} · 方案：${esc(j.preset.name)}${fl}</div></div>
+   <div class="right"><span title="${esc(costTip)}">已花 <b>¥${(p.cost||0).toFixed(2)}</b>${p.cost_upper?'（上限）':''}</span>${btn.join('')}</div></div>
+   <div class="st">${(p.bars||[]).map((b,i)=>bar(b,p.total,i===2?'r2':'')).join('')}</div>
+   ${j.error?`<div class="errtxt">${esc(j.error)}</div>`:''}</div>`;}).join('');
+ $$('#list button[data-a]').forEach(b=>b.onclick=async()=>{const a=b.dataset.a;
+  if(a==='delete'&&!confirm('删除这个任务？已经翻好的译文会保留在数据目录里。'))return;
+  try{await api('POST',`/api/jobs/${b.dataset.n}/${a}`);refresh();}catch(e){toast(e.message);}});
+}
+function fillPresetSelect(){const sel=$('#jobPreset'),cur=sel.value;
+ sel.innerHTML=S.presets.map(p=>`<option>${esc(p.name)}</option>`).join('');if(cur&&S.presets.some(p=>p.name===cur))sel.value=cur;
+ const p=S.presets.find(x=>x.name===sel.value);$('#presetNote').textContent=p?(p.note||summary(p)):'';}
+$('#jobPreset').onchange=fillPresetSelect;
+async function addIds(text){const ids=(text.match(/\d{4}\.\d{4,5}/g)||[]);
+ if(!ids.length){toast('没认出 arXiv 编号（形如 2602.04212），请在输入框里填编号');return;}
+ try{const d=await api('POST','/api/jobs',{ids,preset:$('#jobPreset').value});toast('已添加 '+d.added.join('、'));refresh();}catch(e){toast(e.message);}}
+$('#add').onclick=()=>{addIds($('#ids').value);$('#ids').value='';};
+$('#ids').onkeydown=e=>{if(e.key==='Enter')$('#add').click();};
+const dz=$('#drop');
+['dragenter','dragover'].forEach(e=>dz.addEventListener(e,ev=>{ev.preventDefault();dz.classList.add('over');}));
+['dragleave','drop'].forEach(e=>dz.addEventListener(e,ev=>{ev.preventDefault();dz.classList.remove('over');}));
+dz.addEventListener('drop',ev=>{const names=[...ev.dataTransfer.files].map(f=>f.name);
+ const txt=ev.dataTransfer.getData('text')||'';const bad=names.filter(n=>!/\d{4}\.\d{4,5}/.test(n));
+ if(bad.length)toast('这些文件名里没有 arXiv 编号：'+bad.join('、'));addIds(names.join(' ')+' '+txt);});
+
+/* ---------- 方案 ---------- */
+const provName=id=>(S.providers.find(p=>p.id===id)||{}).name||id+'（找不到）';
+function roleText(r){return r?`${provName(r.provider)} · ${r.model} · 思考${TH[r.thinking||'default']} · 并发 ${r.workers}`:'不用';}
+function summary(p){return `翻译：${roleText(p.translator)}；审校：${roleText(p.reviewer)}${p.reviewer2?'；再审：'+roleText(p.reviewer2):''}`;}
+function drawPresets(){
+ $('#presetList').innerHTML=S.presets.map((p,i)=>`<div class="box"><div class="ch"><div><span class="ti">${esc(p.name)}</span>
+  ${p.builtin?'<span class="pill" style="margin-left:6px">内置</span>':''}<div class="meta">${esc(p.note||'')}</div></div>
+  <div class="right"><button class="sm" data-copy="${i}">复制</button>${p.builtin?'':`<button class="sm" data-edit="${i}">编辑</button><button class="sm danger" data-del="${i}">删除</button>`}</div></div>
+  <table style="margin-top:8px"><tr><td style="width:64px" class="small">翻译</td><td>${esc(roleText(p.translator))}</td></tr>
+  <tr><td class="small">审校一</td><td>${esc(roleText(p.reviewer))}</td></tr><tr><td class="small">审校二</td><td>${esc(roleText(p.reviewer2))}</td></tr>
+  <tr><td class="small">范围</td><td>${p.scope==='all'?'含附录的全文':'只翻正文'}${p.offpeak_only?' · 只在空闲时段跑':''}</td></tr></table></div>`).join('');
+ $$('[data-copy]').forEach(b=>b.onclick=()=>{const p=JSON.parse(JSON.stringify(S.presets[b.dataset.copy]));p.name+=' 副本';p.builtin=false;edit(p);});
+ $$('[data-edit]').forEach(b=>b.onclick=()=>edit(JSON.parse(JSON.stringify(S.presets[b.dataset.edit]))));
+ $$('[data-del]').forEach(b=>b.onclick=async()=>{const p=S.presets[b.dataset.del];if(!confirm('删除方案「'+p.name+'」？'))return;
+  await api('DELETE','/api/presets/'+encodeURIComponent(p.name));refresh();});
+}
+const ROLES=[['translator','翻译',false],['reviewer','审校一（盲审）',true],['reviewer2','审校二（换一家再审，可选）',true]];
+function edit(p){$('#editor').style.display='block';$('#edTitle').textContent=p.name?'编辑方案':'新方案';
+ $('#edName').value=p.name||'';$('#edScope').value=p.scope||'body';$('#edOff').value=p.offpeak_only?'1':'0';
+ $('#edRoles').innerHTML=ROLES.map(([k,label,opt])=>{const r=p[k]||{};return `<div class="role"><h5>${label}</h5><div class="grid">
+  <div><label class="f">接口</label><select data-r="${k}" data-f="provider">${opt?'<option value="">不用</option>':''}${S.providers.map(x=>`<option value="${esc(x.id)}" ${x.id===r.provider?'selected':''}>${esc(x.name)}</option>`).join('')}</select></div>
+  <div><label class="f">模型 <a href="#" data-models="${k}" class="small">列出可用模型</a></label><input type="text" list="dl-${k}" data-r="${k}" data-f="model" value="${esc(r.model||'')}"><datalist id="dl-${k}"></datalist></div>
+  <div><label class="f">思考</label><select data-r="${k}" data-f="thinking">${S.thinking.map(t=>`<option value="${t}" ${t===(r.thinking||'default')?'selected':''}>${TH[t]}</option>`).join('')}</select></div>
+  <div><label class="f">并发（同时处理几段）</label><input type="number" min="1" max="50" data-r="${k}" data-f="workers" value="${r.workers||4}"></div></div></div>`;}).join('');
+ $$('[data-models]').forEach(a=>a.onclick=async ev=>{ev.preventDefault();const k=a.dataset.models;const pid=$(`select[data-r="${k}"][data-f="provider"]`).value;
+  if(!pid){toast('先选接口');return;}try{const d=await api('GET','/api/models?provider='+encodeURIComponent(pid));
+  $('#dl-'+k).innerHTML=d.models.map(m=>`<option value="${esc(m)}">`).join('');toast('可用模型：'+d.models.join('、'));}catch(e){toast(e.message);}});
+ $('#editor').scrollIntoView({behavior:'smooth'});}
+$('#newPreset').onclick=()=>edit({scope:'body',translator:{provider:'',model:'',thinking:'off',workers:6},reviewer:{provider:'',model:'',thinking:'default',workers:6}});
+$('#edCancel').onclick=()=>$('#editor').style.display='none';
+$('#edSave').onclick=async()=>{const p={name:$('#edName').value.trim(),scope:$('#edScope').value,offpeak_only:$('#edOff').value==='1',note:''};
+ if(!p.name){toast('给方案起个名字');return;}
+ for(const [k,label] of ROLES){const g=f=>$(`[data-r="${k}"][data-f="${f}"]`).value.trim();
+  if(!g('provider')){p[k]=null;continue;}if(!g('model')){toast(label+'：填一下模型');return;}
+  p[k]={provider:g('provider'),model:g('model'),thinking:g('thinking'),workers:Math.max(1,parseInt(g('workers'))||1)};}
+ if(!p.translator){toast('翻译一定要选接口');return;}
+ p.note=summary(p);
+ try{await api('POST','/api/presets',p);$('#editor').style.display='none';toast('已保存方案「'+p.name+'」');refresh();}catch(e){toast(e.message);}};
+$('#setSave').onclick=async()=>{try{await api('POST','/api/settings',{max_jobs:$('#setJobs').value,export_dir:$('#setExport').value});toast('设置已保存');refresh();}catch(e){toast(e.message);}};
+
+/* ---------- 接口 ---------- */
+function drawProviders(){
+ $('#provList').innerHTML=S.providers.map((p,i)=>`<div class="box"><div class="ch"><div><span class="ti">${esc(p.name)}</span>
+  <span class="pill gray" style="margin-left:6px">${esc(p.source)}</span><div class="meta">${esc(p.base)} · 密钥 ••••${esc(p.key_tail)}</div></div>
+  <div class="right">${p.source==='自己添加'?`<button class="sm danger" data-pdel="${esc(p.id)}">删除</button>`:''}</div></div>
+  <div class="row"><input type="text" class="grow" placeholder="模型名，例如 deepseek-v4-pro" data-tm="${i}" value="${esc(p.model||'')}">
+   <select data-tt="${i}">${S.thinking.map(t=>`<option value="${t}">思考${TH[t]}</option>`).join('')}</select>
+   <button class="sm" data-test="${i}" data-role="translator">测试翻译</button><button class="sm" data-test="${i}" data-role="reviewer">测试审校</button></div>
+  <div class="res" id="res-${i}"></div></div>`).join('')||'<div class="box empty">还没有接口。cc-switch 里的接口会自动出现；也可以手动添加。</div>';
+ $$('[data-pdel]').forEach(b=>b.onclick=async()=>{if(!confirm('删除这个接口？'))return;await api('DELETE','/api/providers/'+encodeURIComponent(b.dataset.pdel));refresh();});
+ $$('[data-test]').forEach(b=>b.onclick=async()=>{const i=b.dataset.test,p=S.providers[i],model=$(`[data-tm="${i}"]`).value.trim();
+  if(!model){toast('先填模型名');return;}const box=$('#res-'+i);box.style.display='block';box.textContent='测试中，推理模型可能要几十秒……';
+  try{const r=await api('POST','/api/test',{provider:p.id,model,thinking:$(`[data-tt="${i}"]`).value,role:b.dataset.role});
+   let t=r.ok?'✓ 可用':'✗ 失败：'+r.error;
+   t+=`\nJSON 模式：${r.json_mode?'支持':'不支持（已自动退回）'} · ${r.seconds} 秒 · 输入 ${r.usage.prompt_tokens} / 输出 ${r.usage.completion_tokens} token · 约 ¥${r.cost}`;
+   if(r.sentences)t+='\n'+r.sentences.map((s,k)=>`${k+1}. [${s.conf}] ${s.zh}${s.flags.length?'　⚠ '+s.flags.join(' '):''}`).join('\n');
+   if(r.verdicts)t+=`\n判定：${r.verdicts.join('、')}（应为 ok、错、错；抓对 ${r.caught}）`;
+   box.innerHTML=`<span class="${r.ok?'ok':'bad'}">${esc(t)}</span>`;}catch(e){box.textContent='✗ '+e.message;}});
+}
+$('#addProv').onclick=()=>{$('#provForm').style.display='block';$('#pvVendor').innerHTML=S.vendors.map((v,i)=>`<option value="${i}">${esc(v.name)}</option>`).join('')+'<option value="-1">自定义</option>';$('#pvVendor').onchange();};
+$('#pvVendor').onchange=()=>{const v=S.vendors[$('#pvVendor').value];$('#pvBase').value=v?v.base:'';$('#pvName').value=v?v.name.replace(/（.*/,''):'';};
+$('#pvCancel').onclick=()=>$('#provForm').style.display='none';
+$('#pvSave').onclick=async()=>{try{await api('POST','/api/providers',{name:$('#pvName').value.trim(),base:$('#pvBase').value.trim(),key:$('#pvKey').value.trim(),model:$('#pvModel').value.trim()});
+ $('#pvKey').value='';$('#provForm').style.display='none';toast('已保存');refresh();}catch(e){toast(e.message);}};
+
+/* ---------- 用量 ---------- */
+async function loadCost(){try{const d=await api('GET','/api/cost');const cols=[...new Set(d.rows.flatMap(r=>Object.keys(r.parts)))];
+ let tot=0,sent=0;const sums={};
+ const body=d.rows.map(r=>{tot+=r.total;sent+=r.sentences;cols.forEach(c=>sums[c]=(sums[c]||0)+(r.parts[c]||0));
+  return `<tr><td>${esc(r.title||r.pid)}<div class="small">${r.pid}</div></td><td class="r hide-s">${r.sentences}</td>${cols.map(c=>`<td class="r hide-s">${r.parts[c]!=null?'¥'+r.parts[c].toFixed(2):'—'}</td>`).join('')}
+  <td class="r"><b>¥${r.total.toFixed(2)}</b>${r.upper?'<div class="small">上限</div>':''}</td><td class="r">¥${(r.sentences?100*r.total/r.sentences:0).toFixed(2)}</td></tr>`;}).join('');
+ $('#costTable').innerHTML=`<tr><th>论文</th><th class="r hide-s">正文句数</th>${cols.map(c=>`<th class="r hide-s">${esc(c)}</th>`).join('')}<th class="r">合计</th><th class="r">每百句</th></tr>${body}
+  <tr><td><b>合计</b></td><td class="r hide-s">${sent}</td>${cols.map(c=>`<td class="r hide-s">¥${(sums[c]||0).toFixed(2)}</td>`).join('')}<td class="r"><b>¥${tot.toFixed(2)}</b></td><td class="r">¥${(sent?100*tot/sent:0).toFixed(2)}</td></tr>`;
+ $('#costNote').innerHTML='价格（元 / 百万 token：缓存命中 / 未命中 / 输出）：'+Object.entries(d.prices).map(([m,p])=>`${esc(m)} ${p[0]} / ${p[1]} / ${p[2]}${p[3]?'（高峰翻倍）':''}`).join('；')
+  +'。花费包括以前翻过的附录，所以有几篇「每百句」偏高；「上限」表示旧记录没有时段信息，按高峰价算。';
+}catch(e){toast(e.message);}}
+
+/* ---------- 刷新 ---------- */
+async function refresh(){try{const d=await api('GET','/api/state');const first=!S.loaded;S=Object.assign(d,{loaded:true});
+ $('#peak').textContent=d.peak?'DeepSeek 高峰时段 · 价格翻倍':'空闲时段 · DeepSeek 半价';$('#peak').className='pill'+(d.peak?' warn':'');
+ drawJobs();fillPresetSelect();
+ if(first||!$('#presets').classList.contains('on')||$('#editor').style.display==='none')drawPresets();
+ if(first||!$('#api').classList.contains('on'))drawProviders();
+ if(first){$('#setJobs').value=d.settings.max_jobs;$('#setExport').value=d.settings.export_dir||'';}
+}catch(e){$('#peak').textContent='连不上服务';$('#peak').className='pill err';}}
+refresh();setInterval(refresh,1500);
+</script></body></html>

@@ -2,10 +2,14 @@
  "__meta__": {
   "translator": "deepseek-v4-pro",
   "usage": {
-   "calls": 118,
-   "prompt_tokens": 103672,
-   "completion_tokens": 163860,
-   "seconds": 2078.7
+   "calls": 119,
+   "prompt_tokens": 104442,
+   "completion_tokens": 164372,
+   "seconds": 2083.3,
+   "cached_tokens": 512,
+   "peak_prompt_tokens": 770,
+   "peak_completion_tokens": 512,
+   "peak_cached_tokens": 512
   }
  },
  "abs.p1": {
@@ -2477,5 +2481,24 @@
    }
   ],
   "translator": "deepseek-v4-pro"
+ },
+ "__sections__": {
+  "__title__": "上下文复述：科学机器学习中基础模型的一个简单但难以超越的基线",
+  "Abstract": "摘要",
+  "1 Introduction": "1 引言",
+  "2 Related work": "2 相关工作",
+  "3 Context parroting as a zero-shot forecasting strategy": "3 上下文复述作为一种零样本预测策略",
+  "4 Methods": "4 方法",
+  "5 Results": "5 结果",
+  "5.1 Context parroting outperforms foundation models in forecasting chaos": "5.1 上下文复述在混沌预测中优于基础模型",
+  "5.2 Theoretical explanation of in-context neural scaling laws": "5.2 上下文神经标度律的理论解释",
+  "5.3 SciML tasks beyond low-dimensional chaotic systems": "5.3 超越低维混沌系统的科学机器学习任务",
+  "6 Conclusion and future directions": "6 结论与未来方向",
+  "7 Acknowledgments": "7 致谢",
+  "8 Reproducibility Statement": "8 可复现性声明",
+  "Appendix A Sample predictions from foundation models": "附录A 基础模型的样本预测",
+  "Appendix B Benchmarking with other metrics": "附录B 使用其他指标的基准测试",
+  "Appendix C Effects of embedding dimension $D$": "附录C 嵌入维度 $D$ 的影响",
+  "Appendix D Invariant properties on long forecast horizons": "附录D 长预测时域上的不变性质"
  }
 }

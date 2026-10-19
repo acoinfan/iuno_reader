@@ -2,11 +2,14 @@
  "__meta__": {
   "translator": "deepseek-v4-pro + deepseek-v4-pro（关思考）",
   "usage": {
-   "calls": 130,
-   "prompt_tokens": 108576,
-   "completion_tokens": 108614,
-   "seconds": 1076.0,
-   "cached_tokens": 68992
+   "calls": 132,
+   "prompt_tokens": 109955,
+   "completion_tokens": 109460,
+   "seconds": 1083.8,
+   "cached_tokens": 70016,
+   "peak_prompt_tokens": 1379,
+   "peak_completion_tokens": 846,
+   "peak_cached_tokens": 1024
   }
  },
  "abs.p1": {
@@ -2548,5 +2551,38 @@
    }
   ],
   "translator": "deepseek-v4-pro（关思考）"
+ },
+ "__sections__": {
+  "__title__": "通过语言模型的外部与内部规划掌握棋盘游戏",
+  "Abstract": "摘要",
+  "1 Introduction": "1 引言",
+  "2 Multi-Action-Value Model": "2 多动作价值模型",
+  "Command specification.": "命令规范。",
+  "State representation.": "状态表示。",
+  "Starting state.": "起始状态。",
+  "Value function.": "价值函数。",
+  "Value Definition: Scoring Methods.": "价值定义：计分方法。",
+  "Best action prediction.": "最佳动作预测。",
+  "Novelty.": "新颖性。",
+  "Datasets.": "数据集。",
+  "Models.": "模型。",
+  "3 External Search": "3 外部搜索",
+  "3.1 External Search with State-Tracking MAV": "3.1 带状态跟踪 MAV 的外部搜索",
+  "3.2 Async MCTS and Dynamic Virtual Counts": "3.2 异步 MCTS 与动态虚拟计数",
+  "4 Internal Search": "4 内部搜索",
+  "Data.": "数据。",
+  "Training details.": "训练细节。",
+  "5 Experiments": "5 实验",
+  "5.1 Evaluation": "5.1 评估",
+  "5.2 Multi-Action-Value Results": "5.2 多动作价值结果",
+  "Generalization.": "泛化性。",
+  "5.3 External Search Results": "5.3 外部搜索结果",
+  "5.4 Internal Search Results": "5.4 内部搜索结果",
+  "6 Discussions and Limitations": "6 讨论与局限性",
+  "7 Conclusions": "7 结论",
+  "Appendix A External MCTS": "附录 A 外部 MCTS",
+  "A.1 Additional Plots and Results": "A.1 附加图表与结果",
+  "Appendix B External Engines and Game Data": "附录 B 外部引擎与游戏数据",
+  "Appendix G Opening Book": "附录 G 开局库"
  }
 }

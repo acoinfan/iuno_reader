@@ -22,6 +22,7 @@ from collections import Counter
 from . import extract as ex
 from .check import LEVELS, check_doc
 from .glossary import load_hedges, load_terms
+from .parallel import pmap
 from .render import ICON, render_html, render_markdown
 from .roles import INDEPENDENCE_ZH, independence, load_prompt, model_config, worst_independence
 from .translate import make_tasks
@@ -78,6 +79,36 @@ def fetch(P, force=False):
 
 def _has_api(role):
     return all(model_config(role))
+
+
+def _translate_headings(P, doc, tr, tasks, terms):
+    """补译论文标题和这次用到的各级节标题，存进 translation.json 的 __sections__（标题存在 __title__）。
+    已经有译名的不再翻。复用翻译角色的提示词和条数校验，每 30 条一次请求。"""
+    from .glossary import terms_in
+    from .translate import OpenAICompatible
+    secz = tr.setdefault("__sections__", {})
+    chosen = {t["id"] for t in tasks}
+    heads = []
+    for s in doc["segments"]:
+        if s["id"] in chosen:
+            for h in (s.get("section"), s.get("subsection")):
+                if h and h not in secz and h not in heads:
+                    heads.append(h)
+    items = ([doc["title"]] if doc.get("title") and "__title__" not in secz else []) + heads
+    if not items:
+        return
+    eng = OpenAICompatible(role="translator")
+    meta = tr.setdefault("__meta__", {})
+    for i in range(0, len(items), 30):
+        batch = items[i:i + 30]
+        task = {"id": "__headings__", "paper": doc.get("title", ""), "subsection": "", "previous_paragraph": "",
+                "section": "（这一组是论文标题和各节标题，每条单独译成简洁的中文标题；节编号如 3、3.1、A、IV 原样保留在开头）",
+                "terms": {t: "/".join(terms[t]["zh"]) for t in terms_in(" ".join(batch), terms)}, "sentences": batch}
+        for h, s in zip(batch, eng.translate(task)["sentences"]):
+            if s.get("zh"):
+                secz["__title__" if h == doc.get("title") and "__title__" not in secz else h] = s["zh"]
+        meta["usage"] = _add_usage(meta.get("usage"), eng.take_usage())
+        _save(tr, P.d("translation.json"))
 
 
 def _add_usage(total, new):
@@ -166,7 +197,10 @@ def flags_md(doc, pid):
     return "\n".join(out)
 
 
-def run(root, pid, sections=None, translate="auto", review="auto", export=None, force_fetch=False):
+def run(root, pid, sections=None, translate="auto", review="auto", export=None, force_fetch=False, workers=1,
+        review_workers=None):
+    """workers：翻译时同时处理几段；review_workers：审校时同时审几段（默认同 workers）。按接口允许的并发数设。"""
+    review_workers = review_workers or workers
     P = Paths(root, pid)
     st = {}
     st["fetch"] = fetch(P, force_fetch)
@@ -191,11 +225,11 @@ def run(root, pid, sections=None, translate="auto", review="auto", export=None, 
             meta["translator"] = f"{old} + {eng.name}"
         elif not old:
             meta["translator"] = eng.name
-        for t in missing:
-            tr[t["id"]] = eng.translate(t)
+        for t, res, _, used in pmap(lambda e, t: e.translate(t), missing, workers,
+                                    lambda: OpenAICompatible(role="translator")):
+            tr[t["id"]] = res
             tr[t["id"]]["translator"] = eng.name
-            meta["usage"] = _add_usage(meta.get("usage"), eng.usage)
-            eng.usage = dict.fromkeys(eng.usage, 0)
+            meta["usage"] = _add_usage(meta.get("usage"), used)
             _save(tr, P.d("translation.json"))
         missing = []
     if missing:
@@ -210,6 +244,9 @@ def run(root, pid, sections=None, translate="auto", review="auto", export=None, 
         st["translate"] = {"status": "done", "translator": (tr.get("__meta__") or {}).get("translator", "未知"),
                            "segments": len(tasks), "sentences": n_sent,
                            "usage": (tr.get("__meta__") or {}).get("usage")}
+
+    if translate in ("auto", "api") and _has_api("translator"):
+        _translate_headings(P, doc, tr, tasks, terms)
 
     # 审校：只在翻译完成后进行
     tr_clean = {k: v for k, v in tr.items() if not k.startswith("__")}
@@ -231,14 +268,14 @@ def run(root, pid, sections=None, translate="auto", review="auto", export=None, 
             done["__meta__"] = {"reviewer": rv.name(), "mode": mode, "models": rv.models(),
                                 "translator": translator, "independence": ind}
             done["__meta__"]["usage"] = (_load(path, {}).get("__meta__") or {}).get("usage")
-            for t in rtasks:
-                if t["id"] not in done:
-                    try:
-                        done[t["id"]] = rv.review(t)
-                    except RuntimeError as e:
-                        print(f"审校失败 {t['id']}：{e}")
-                    done["__meta__"]["usage"] = _add_usage(done["__meta__"]["usage"], rv.take_usage())
-                    _save(done, path)
+            todo = [t for t in rtasks if t["id"] not in done]
+            for t, res, err, used in pmap(lambda r, t: r.review(t), todo, review_workers, lambda: ApiReviewer(mode)):
+                if err:
+                    print(f"审校失败 {t['id']}：{err}")
+                else:
+                    done[t["id"]] = res
+                done["__meta__"]["usage"] = _add_usage(done["__meta__"]["usage"], used)
+                _save(done, path)
             existing = sorted(set(existing) | {path})
         elif not existing or review == "agent":
             _write(_agent_review_md(P, len(rtasks), sum(len(t["pairs"]) for t in rtasks), doc["title"]),

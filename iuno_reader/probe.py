@@ -46,8 +46,8 @@ def _summary(eng, t0, ok, detail):
             "usage": eng.usage, **detail}
 
 
-def probe_translator():
-    eng, t0 = _engine("translator"), time.time()
+def probe_translator(eng=None):
+    eng, t0 = eng or _engine("translator"), time.time()
     try:
         out = eng.translate(SAMPLE, retries=2)["sentences"]
     except Exception as e:
@@ -75,8 +75,8 @@ def _score(reviews):
             "caught": f"{sum(g == e for g, e in zip(got, EXPECT))}/3"}
 
 
-def probe_reviewer():
-    eng, t0 = _engine("reviewer"), time.time()
+def probe_reviewer(eng=None):
+    eng, t0 = eng or _engine("reviewer"), time.time()
     try:
         out = eng.ask_json(load_prompt("reviewer"), payload_reviewer(_review_task()), "reviews", 3)
     except Exception as e:

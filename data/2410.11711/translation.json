@@ -2,11 +2,14 @@
  "__meta__": {
   "translator": "deepseek-v4-pro + deepseek-v4-pro（关思考）",
   "usage": {
-   "calls": 135,
-   "prompt_tokens": 109767,
-   "completion_tokens": 52324,
-   "seconds": 542.2,
-   "cached_tokens": 71168
+   "calls": 136,
+   "prompt_tokens": 110527,
+   "completion_tokens": 52928,
+   "seconds": 547.3,
+   "cached_tokens": 71680,
+   "peak_prompt_tokens": 760,
+   "peak_completion_tokens": 604,
+   "peak_cached_tokens": 512
   }
  },
  "abs.p1": {
@@ -2628,5 +2631,28 @@
    }
   ],
   "translator": "deepseek-v4-pro（关思考）"
+ },
+ "__sections__": {
+  "__title__": "使用大型语言模型的零样本基于模型的强化学习",
+  "Abstract": "摘要",
+  "1 Introduction": "1 引言",
+  "Organization of the paper.": "论文结构。",
+  "2 Background knowledge": "2 背景知识",
+  "3 Zero-shot dynamics learning using Large Language Models": "3 使用大型语言模型的零样本动力学学习",
+  "3.1 Motivation": "3.1 动机",
+  "3.2 Problem setup": "3.2 问题设定",
+  "3.3 State and action dimension interdependence": "3.3 状态与动作维度的相互依赖",
+  "3.4 An illustrative example": "3.4 一个说明性示例",
+  "4 Use-cases in Reinforcement Learning": "4 强化学习中的用例",
+  "4.1 Theoretical analysis: Return bound under multi-branch rollouts": "4.1 理论分析：多分支展开下的回报界",
+  "4.2 Data-augmented off-policy Reinforcement Learning": "4.2 数据增强的离策略强化学习",
+  "4.3 Policy Evaluation": "4.3 策略评估",
+  "4.4 Calibration of the LLM uncertainty estimates": "4.4 大型语言模型不确定性估计的校准",
+  "Quantile calibration.": "分位数校准。",
+  "LLMs are well-calibrated forecasters.": "大型语言模型是校准良好的预测器。",
+  "5 Discussion": "5 讨论",
+  "Conclusion": "结论",
+  "Reproducibility Statement": "可复现性声明",
+  "Outline.": "大纲。"
  }
 }

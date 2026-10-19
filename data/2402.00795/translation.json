@@ -2,11 +2,14 @@
  "__meta__": {
   "translator": "deepseek-v4-pro",
   "usage": {
-   "calls": 115,
-   "prompt_tokens": 93496,
-   "completion_tokens": 113654,
-   "seconds": 1128.2,
-   "cached_tokens": 62208
+   "calls": 116,
+   "prompt_tokens": 94180,
+   "completion_tokens": 113999,
+   "seconds": 1132.1,
+   "cached_tokens": 62720,
+   "peak_prompt_tokens": 684,
+   "peak_completion_tokens": 345,
+   "peak_cached_tokens": 512
   }
  },
  "abs.p1": {
@@ -1973,5 +1976,19 @@
    }
   ],
   "translator": "deepseek-v4-pro"
+ },
+ "__sections__": {
+  "__title__": "LLM 学习动力系统的支配原理，揭示上下文神经标度律",
+  "Abstract": "摘要",
+  "1 Introduction": "1 引言",
+  "2 Background and related work": "2 背景与相关工作",
+  "3 Methodology": "3 方法",
+  "3.1 Prompt generation": "3.1 提示生成",
+  "3.2 Extraction of transition rules": "3.2 转移规则的提取",
+  "4 Experiments and Results": "4 实验与结果",
+  "4.1 Markov chains with discrete states": "4.1 具有离散状态的马尔可夫链",
+  "4.2 Noisy logistic map": "4.2 含噪声的逻辑斯蒂映射",
+  "5 Discussion and conclusion": "5 讨论与结论",
+  "Limitations": "局限性"
  }
 }

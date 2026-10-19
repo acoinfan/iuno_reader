@@ -2,14 +2,14 @@
  "__meta__": {
   "translator": "deepseek-v4-pro",
   "usage": {
-   "calls": 163,
-   "prompt_tokens": 143571,
-   "completion_tokens": 276111,
-   "seconds": 3016.7,
-   "cached_tokens": 93312,
-   "peak_prompt_tokens": 68570,
-   "peak_completion_tokens": 135445,
-   "peak_cached_tokens": 40576
+   "calls": 164,
+   "prompt_tokens": 144424,
+   "completion_tokens": 276963,
+   "seconds": 3023.4,
+   "cached_tokens": 93824,
+   "peak_prompt_tokens": 69423,
+   "peak_completion_tokens": 136297,
+   "peak_cached_tokens": 41088
   }
  },
  "abs.p1": {
@@ -3411,5 +3411,37 @@
    }
   ],
   "translator": "deepseek-v4-pro"
+ },
+ "__sections__": {
+  "__title__": "推理还是背诵？通过反事实任务探索语言模型的能力与局限",
+  "Abstract": "摘要",
+  "1 Introduction": "1 引言",
+  "2 Counterfactual Tasks": "2 反事实任务",
+  "2.1 Counterfactual Comprehension Check": "2.1 反事实理解检查",
+  "3 Tasks": "3 任务",
+  "3.1 Arithmetic": "3.1 算术",
+  "3.2 Programming": "3.2 编程",
+  "3.3 Basic Syntactic Reasoning": "3.3 基本句法推理",
+  "3.4 Natural Language Reasoning with First-Order Logic": "3.4 一阶逻辑自然语言推理",
+  "3.5 Spatial Reasoning": "3.5 空间推理",
+  "3.6 Drawing": "3.6 绘画",
+  "3.7 Music": "3.7 音乐",
+  "3.8 Chess": "3.8 国际象棋",
+  "3.9 SET Game": "3.9 SET 游戏",
+  "4 Results": "4 结果",
+  "5 Analysis": "5 分析",
+  "5.1 “Commonness” of Counterfactual Conditions": "5.1 反事实条件的“常见性”",
+  "5.2 Proximity between Default and Counterfactual Conditions": "5.2 默认条件与反事实条件之间的接近度",
+  "5.3 Relationship between Default vs. Counterfactual Performance": "5.3 默认与反事实表现之间的关系",
+  "5.4 0-Shot Chain-of-Thought Prompting": "5.4 0 样本思维链提示",
+  "5.5 Few-shot Demonstrations": "5.5 少量示例",
+  "5.6 Qualitative Analysis of Drawing Results": "5.6 绘画结果的定性分析",
+  "6 Discussion": "6 讨论",
+  "7 Limitations": "7 局限性",
+  "7.1 Underestimation": "7.1 低估",
+  "7.2 Overestimation": "7.2 高估",
+  "8 Related Work": "8 相关工作",
+  "9 Conclusion": "9 结论",
+  "Appendix C Raw Results": "附录 C 原始结果"
  }
 }

@@ -2,14 +2,14 @@
  "__meta__": {
   "translator": "deepseek-v4-pro",
   "usage": {
-   "calls": 149,
-   "prompt_tokens": 128610,
-   "completion_tokens": 236647,
-   "seconds": 2760.9,
-   "cached_tokens": 83456,
-   "peak_prompt_tokens": 94745,
-   "peak_completion_tokens": 179548,
-   "peak_cached_tokens": 59136
+   "calls": 150,
+   "prompt_tokens": 129397,
+   "completion_tokens": 237222,
+   "seconds": 2766.0,
+   "cached_tokens": 83968,
+   "peak_prompt_tokens": 95532,
+   "peak_completion_tokens": 180123,
+   "peak_cached_tokens": 59648
   }
  },
  "abs.p1": {
@@ -3371,5 +3371,26 @@
    }
   ],
   "translator": "deepseek-v4-pro"
+ },
+ "__sections__": {
+  "__title__": "评估生成模型中隐含的世界模型",
+  "Abstract": "摘要",
+  "1 Introduction": "1 引言",
+  "2 Framework": "2 框架",
+  "2.1 Recovering world models": "2.1 恢复世界模型",
+  "2.2 Next-token prediction is a fragile metric for recovering structure": "2.2 下一个词元预测是恢复结构的脆弱指标",
+  "2.3 The Myhill-Nerode interior and boundary": "2.3 Myhill-Nerode 内部与边界",
+  "2.4 Compression and distinction metrics for evaluating world models": "2.4 用于评估世界模型的压缩与区分指标",
+  "3 Illustration: Do Transformers Recover the Street Map of New York City?": "3 示例：Transformer 能否恢复纽约市街道地图？",
+  "3.1 Data and models": "3.1 数据与模型",
+  "3.2 Evaluating world models": "3.2 评估世界模型",
+  "3.3 Reconstructing implicit maps": "3.3 重建隐式地图",
+  "3.4 Implication of failing to recover the world model: detour fragility": "3.4 未能恢复世界模型的含义：绕路脆弱性",
+  "4 Other Applications: Othello and Logic Puzzles": "4 其他应用：奥赛罗与逻辑谜题",
+  "5 Conclusion": "5 结论",
+  "Appendix B Reconstructed Maps": "附录 B 重建的地图",
+  "Appendix D Additional results": "附录 D 附加结果",
+  "Appendix E Evaluation metric details and ablations": "附录 E 评估指标细节与消融",
+  "E.1 Implementation details": "E.1 实现细节"
  }
 }

@@ -2,10 +2,14 @@
  "__meta__": {
   "translator": "claude-opus-5.5（尤诺，按 tasks 清单人工逐句翻译） + deepseek-v4-pro",
   "usage": {
-   "calls": 55,
-   "prompt_tokens": 48042,
-   "completion_tokens": 74616,
-   "seconds": 908.3
+   "calls": 56,
+   "prompt_tokens": 48663,
+   "completion_tokens": 74798,
+   "seconds": 910.3,
+   "cached_tokens": 512,
+   "peak_prompt_tokens": 621,
+   "peak_completion_tokens": 182,
+   "peak_cached_tokens": 512
   }
  },
  "__sections__": {
@@ -19,7 +23,14 @@
   "Results": "结果",
   "Analysis": "分析",
   "4 Experiment 2: In-Context Representation Learning Does Not Imply Adaptive World Modeling": "4 实验 2：上下文表示学习并不意味着自适应世界建模",
-  "Task": "任务"
+  "Task": "任务",
+  "Abstract": "摘要",
+  "5 Experiment 3: Investigating Reasoning Models": "5 实验3：考察推理模型",
+  "Analyses": "分析",
+  "6 Discussion": "6 讨论",
+  "Related Work": "相关工作",
+  "Conclusion": "结论",
+  "7 Limitations": "7 局限性"
  },
  "fn2": {
   "sentences": [

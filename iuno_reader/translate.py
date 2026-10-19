@@ -125,6 +125,11 @@ class OpenAICompatible:
         if not (self.base_url and self.model and self.api_key):
             raise SystemExit(f"角色 {role} 缺少接口配置，请设置环境变量（见 roles.py 的说明）")
 
+    def take_usage(self):
+        """取出自上次以来的用量，并清零。"""
+        used, self.usage = self.usage, dict.fromkeys(self.usage, 0)
+        return used
+
     @property
     def name(self):
         """写进译者记录的名字：模型名，带附加参数时注明（例如关掉思考模式）。"""
@@ -165,14 +170,17 @@ class OpenAICompatible:
                     continue
                 # 接口不接受某个可选参数（JSON 模式；或像 kimi-k2.6 只允许 temperature=1）：
                 # 去掉它、用服务端默认值再发，之后这个实例都不再带它
-                bad = [k for k in ("response_format", "temperature") if k in body and k in str(e)]
+                # 附加参数（思考开关、思考强度）也一样：这家不认就去掉
+                bad = [k for k in ("response_format", "temperature", *self.extra) if k in body and k in str(e)]
                 if e.status != 400 or not bad:
                     raise
                 body.pop(bad[0])
                 if bad[0] == "response_format":
                     self.json_mode = False
-                else:
+                elif bad[0] == "temperature":
                     self.temperature = None
+                else:
+                    self.extra = {k: v for k, v in self.extra.items() if k != bad[0]}
         self.usage["calls"] += 1
         self.usage["seconds"] += time.time() - t0
         u = data.get("usage") or {}

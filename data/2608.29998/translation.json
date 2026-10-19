@@ -2,11 +2,14 @@
  "__meta__": {
   "translator": "deepseek-v4-pro（关思考）",
   "usage": {
-   "calls": 91,
-   "prompt_tokens": 73203,
-   "completion_tokens": 20077,
-   "seconds": 234.5,
-   "cached_tokens": 46592
+   "calls": 93,
+   "prompt_tokens": 74828,
+   "completion_tokens": 21294,
+   "seconds": 246.3,
+   "cached_tokens": 47616,
+   "peak_prompt_tokens": 1625,
+   "peak_completion_tokens": 1217,
+   "peak_cached_tokens": 1024
   }
  },
  "abs.p1": {
@@ -2273,5 +2276,47 @@
    }
   ],
   "translator": "deepseek-v4-pro（关思考）"
+ },
+ "__sections__": {
+  "__title__": "潜在世界模型中的干预差距",
+  "Abstract": "摘要",
+  "1 Introduction": "1 引言",
+  "2 Two Audits of Planning-Time Fidelity": "2 规划时保真度的两项审计",
+  "2.1 Operator error on task observables": "2.1 任务可观测量的操作者误差",
+  "2.2 The capture-gated matched-intervention audit": "2.2 捕获门控的匹配干预审计",
+  "Capture.": "捕获。",
+  "Real-effect resolvability.": "真实效应可分辨性。",
+  "Propagation.": "传播。",
+  "Matched interventions and supports.": "匹配干预与支持。",
+  "Isolation, readouts, and inference.": "隔离、读出与推断。",
+  "Calibration and closure boundary.": "校准与闭合边界。",
+  "3 The Value Channel Neither Reveals Nor Ensures Operator Fidelity": "3 价值通道既不揭示也不确保操作者保真度",
+  "3.1 Return falls with operator error where reward fit is silent": "3.1 在奖励拟合沉默处，回报随操作者误差下降",
+  "3.2 Task-anchored training did not confer operator fidelity": "3.2 任务锚定训练未赋予操作者保真度",
+  "3.3 Limits of the coarse diagnostic": "3.3 粗粒度诊断的局限",
+  "4 Capture Without Propagation": "4 无传播的捕获",
+  "4.1 The primary dissociation": "4.1 主要分离",
+  "4.2 Rotation with excess gain, not collapse": "4.2 具有过度增益的旋转，而非坍缩",
+  "5 The Deficit Replicates; Severe Distortion Does Not": "5 缺陷可复现；严重失真不可复现",
+  "5.1 A prospective non-replication in PreJEPA": "5.1 PreJEPA 中的前瞻性非复现",
+  "5.2 A second task: heterogeneous severity on Finger Spin": "5.2 第二项任务：Finger Spin 上的异质严重性",
+  "5.3 Shared-bank geometry is candidate- and support-dependent": "5.3 共享库几何依赖于候选和支持",
+  "6 Auditing in Practice: Surfaces, Uncertainty, and Support": "6 实践中的审计：表面、不确定性与支持",
+  "6.1 The query is carried by the posterior distribution, not its sample": "6.1 查询由后验分布承载，而非其样本",
+  "6.2 Disagreement ranks error only near support": "6.2 分歧仅在支持附近对误差排序",
+  "6.3 A frozen support correction fails held-out transfer in both directions": "6.3 冻结支持校正双向均未通过留出迁移",
+  "6.4 Capture is the first gate to fail in practice": "6.4 实践中捕获是第一个失效的门",
+  "7 Related Work": "7 相关工作",
+  "World models for planning.": "用于规划的世界模型。",
+  "Value equivalence and objective mismatch.": "价值等价与目标不匹配。",
+  "Rollout error and model exploitation.": "展开误差与模型利用。",
+  "Evaluating world models beyond return.": "超越回报评估世界模型。",
+  "Operator-theoretic language.": "算子理论语言。",
+  "Probing internal representations.": "探针内部表征。",
+  "Uncertainty and support.": "不确定性与支持。",
+  "Self-supervised world models.": "自监督世界模型。",
+  "8 Scope and Limitations": "8 范围与局限",
+  "9 Conclusion": "9 结论",
+  "Appendix E Dreamer Interface Boundaries": "附录 E Dreamer 接口边界"
  }
 }

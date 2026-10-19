@@ -2,19 +2,33 @@
  "__meta__": {
   "translator": "claude-opus-5.5（尤诺扮演 agent，按 AGENT_TRANSLATE.md 翻译） + deepseek-v4-pro",
   "usage": {
-   "calls": 113,
-   "prompt_tokens": 94974,
-   "completion_tokens": 127343,
-   "seconds": 1532.4,
-   "cached_tokens": 58624,
-   "peak_prompt_tokens": 61314,
-   "peak_completion_tokens": 87263,
-   "peak_cached_tokens": 37504
+   "calls": 114,
+   "prompt_tokens": 95725,
+   "completion_tokens": 127776,
+   "seconds": 1536.4,
+   "cached_tokens": 59136,
+   "peak_prompt_tokens": 62065,
+   "peak_completion_tokens": 87696,
+   "peak_cached_tokens": 38016
   }
  },
  "__sections__": {
   "__title__": "揭示上下文学习中自发出现的物理表示",
-  "Abstract": "摘要"
+  "Abstract": "摘要",
+  "I Introduction": "I 引言",
+  "II Preliminaries": "II 预备知识",
+  "II.1 Learning physics of a system with neural networks": "II.1 用神经网络学习系统的物理规律",
+  "II.2 LLM’s ability to learn in-context": "II.2 大语言模型的上下文学习能力",
+  "II.3 Interpretable features to world models in LLMs": "II.3 从可解释特征到大语言模型中的世界模型",
+  "III Methods": "III 方法",
+  "III.1 Testing LLMs solve physics tasks in-context": "III.1 测试大语言模型在上下文中解决物理任务",
+  "III.2 Investigation of residual stream in LLMs": "III.2 大语言模型中残差流的研究",
+  "IV Results": "IV 结果",
+  "IV.1 Effects of history length during ICL": "IV.1 上下文学习期间历史长度的影响",
+  "IV.2 Correlations of latents with physical quantities": "IV.2 潜在变量与物理量的相关性",
+  "IV.3 Varying system complexity and model scale": "IV.3 改变系统复杂度和模型规模",
+  "IV.4 Gradient-based attribution analysis": "IV.4 基于梯度的归因分析",
+  "V Discussion": "V 讨论"
  },
  "abs.p1": {
   "sentences": [

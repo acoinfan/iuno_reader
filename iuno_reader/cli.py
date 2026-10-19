@@ -11,14 +11,13 @@ import argparse
 import json
 import os
 import sys
-import threading
 import urllib.request
-from concurrent.futures import ThreadPoolExecutor
 
 from . import extract as ex
 from .check import check_doc
 from .glossary import import_kb_glossary, load_hedges, load_terms, write_terms
 from .render import render_html, render_markdown
+from .parallel import pmap
 from .translate import OpenAICompatible, make_tasks, select_segments
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -184,28 +183,17 @@ def cmd_review(a):
         keep = {s["id"] for s in select_segments(doc, _sections(a))}
         tasks = [t for t in tasks if t["id"] in keep]
     todo = [t for t in tasks if a.force or t["id"] not in done]
-    local = threading.local()
-
-    def one(t):
-        # 每个线程用自己的审校客户端，用量各记各的，交回主线程汇总
-        if not hasattr(local, "rv"):
-            local.rv = ApiReviewer(a.mode)
-        try:
-            return t, local.rv.review(t), None, local.rv.take_usage()
-        except RuntimeError as e:
-            return t, None, e, local.rv.take_usage()
-
-    with ThreadPoolExecutor(max_workers=max(1, a.workers)) as pool:
-        for n, (t, res, err, used) in enumerate(pool.map(one, todo), 1):
-            usage = done["__meta__"].setdefault("usage", {})
-            for k, v in used.items():
-                usage[k] = round(usage.get(k, 0) + v, 1)
-            if err:
-                print(f"[{n}/{len(todo)}] {t['id']} 审校失败：{err}")
-                continue
-            done[t["id"]] = res
-            save_json(done, path)  # 只在主线程写文件，每审完一段存一次
-            print(f"[{n}/{len(todo)}] {t['id']}")
+    for n, (t, res, err, used) in enumerate(pmap(lambda r, t: r.review(t), todo, a.workers,
+                                                 lambda: ApiReviewer(a.mode)), 1):
+        usage = done["__meta__"].setdefault("usage", {})
+        for k, v in used.items():
+            usage[k] = round(usage.get(k, 0) + v, 1)
+        if err:
+            print(f"[{n}/{len(todo)}] {t['id']} 审校失败：{err}")
+            continue
+        done[t["id"]] = res
+        save_json(done, path)  # 只在主线程写文件，每审完一段存一次
+        print(f"[{n}/{len(todo)}] {t['id']}")
 
 
 def cmd_run(a):
@@ -214,7 +202,7 @@ def cmd_run(a):
     rc = 0
     for pid in a.ids:
         try:
-            m = run(ROOT, pid, secs, a.translate, a.review, a.export, a.force)
+            m = run(ROOT, pid, secs, a.translate, a.review, a.export, a.force, a.workers, a.review_workers)
         except Exception as e:
             print(f"== {pid} 失败：{type(e).__name__}: {e}")
             rc = 1
@@ -235,6 +223,11 @@ def cmd_import(a):
     terms.update(new)
     write_terms(terms, p("glossary", "terms.tsv"))
     print("术语表条目", len(terms))
+
+
+def cmd_serve(a):
+    from .server import serve
+    serve(a.port, a.host)
 
 
 def cmd_probe(a):
@@ -262,6 +255,8 @@ def main(argv=None):
     s.add_argument("--review", choices=["auto", "blind", "backtranslate", "agent", "none"], default="auto")
     s.add_argument("--export", help="把结果文件夹复制到这个目录下的 <id>/")
     s.add_argument("--force", action="store_true", help="重新下载 HTML")
+    s.add_argument("--workers", type=int, default=1, help="翻译时同时处理几段（按接口允许的并发数设）")
+    s.add_argument("--review-workers", type=int, help="审校时同时审几段（默认同 --workers）")
     s.set_defaults(fn=cmd_run)
     s = sub.add_parser("review-tasks", help="导出盲审清单（只含原文和译文）")
     s.add_argument("id")
@@ -285,6 +280,10 @@ def main(argv=None):
     s.add_argument("--roles", default="translator,reviewer,backtranslate",
                    help="逗号分隔：translator、reviewer（盲审）、backtranslate（回译 + 比对）")
     s.set_defaults(fn=cmd_probe)
+    s = sub.add_parser("serve", help="网页前端：拖论文进来、选方案、看进度和花费")
+    s.add_argument("--port", type=int, default=8780)
+    s.add_argument("--host", default="127.0.0.1", help="默认只监听本机")
+    s.set_defaults(fn=cmd_serve)
     s = sub.add_parser("import-kb-glossary")
     s.add_argument("path")
     s.set_defaults(fn=cmd_import)

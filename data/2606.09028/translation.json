@@ -1,0 +1,1551 @@
+{
+ "__meta__": {
+  "translator": "deepseek-v4-pro（关思考）",
+  "usage": {
+   "calls": 74,
+   "prompt_tokens": 54991,
+   "completion_tokens": 12661,
+   "seconds": 190.6,
+   "cached_tokens": 37888,
+   "peak_prompt_tokens": 54991,
+   "peak_completion_tokens": 12661,
+   "peak_cached_tokens": 37888
+  }
+ },
+ "S1.p3.1": {
+  "sentences": [
+   {
+    "zh": "动作可识别性刻画了转移域内的动作结构。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "潜在世界模型自然归纳出两个这样的域：来自环境演化的真实编码转移，以及由学习到的动态生成的模型预测转移。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "两个域都可能包含可解码的动作信息，但通过不同的关系编码动作。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "特别是，预测转移可以表现出很强的域内动作一致性，因为动作被明确提供给预测器；相关的规划时方法测试逆动态模型是否能恢复这个条件动作（Seo et al., 2026）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这引出了一个问题：这种动作-转移关系是否也在真实编码转移中得到保留。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S1.p5.1": {
+  "sentences": [
+   {
+    "zh": "我们在 TwoRoom、PushT 和 OGBench-Cube（Park et al., 2025）上验证了这一观点。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "真实转移的动作可识别性与规划的相关性远高于标准预测损失，而完整的 ATM 揭示了那些预测转移高度自解码但在跨域动作结构上表现出明显差异的模型。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "受控干预进一步表明，改善两个域中的可解码性会产生不同的转移结构和规划结果，支持了这一区分。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "除了诊断之外，相同的量还为模型筛选提供了一个轻量级信号。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "总之，这些结果表明，潜在规划失败不仅反映了动作信息弱，还反映了动作信息在真实转移和预测转移之间的表示和传递方式。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S1.p4.1": {
+  "sentences": [
+   {
+    "zh": "这促使我们进行跨域的动作结构测试。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "如果真实转移和预测转移保持兼容的动作条件关系，那么在一个域中学习到的逆规则在另一个域中应该仍然具有信息量；跨域退化表明动作关系在域之间发生了变化。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "因此，我们引入了**跨域逆迁移**，并将其实例化为**动作一致性迁移矩阵（ATM）**，这是一个 $2\\times 2$ 矩阵，通过在每个域中训练逆探针并在两个域上评估它们而形成。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "其对角线元素刻画了域内动作可识别性，而非对角线元素衡量了动作-转移关系的跨域迁移。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这四个项共同将弱动作结构与一种性质不同的失败模式区分开来：一种域特定的动作关系，它在模型推演中内部一致，但不能迁移到真实转移。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S1.p2.1": {
+  "sentences": [
+   {
+    "zh": "因此，面向规划的表示应当保留动作效果，使得不同的候选动作在潜在转移空间中保持可区分（Pathak et al., 2017; Brandfonbrener et al., 2023; Cui et al., 2024; Han and Yilmaz, 2026; Zhang et al., 2026）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们将这一性质称为动作可辨识性：引发潜在转移的动作应当在有意义的程度上保持可恢复。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "近期同时进行的工作同样强调了转移层面的动作敏感性，将动作恢复或转移分离作为表示学习的原则（Boylan and Hokamp, 2026; Gan et al., 2026）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "如果不同的动作引发弱可区分或强纠缠的潜在变化，那么即使单个潜在状态具有信息量，该表示也可能为动作选择提供不可靠的接口。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们表明，动作可辨识性通过贝叶斯逆风险获得了原则性的解释，将转移质量与给定潜在转移时动作的条件不确定性联系起来。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S1.p1.1": {
+  "sentences": [
+   {
+    "zh": "潜在世界模型通过在表征空间中向前滚动学习到的动力学来评估候选动作序列，从而支持目标条件规划（Ha 和 Schmidhuber，2018；Hafner 等人，2019；Hansen 等人，2022）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "最近的方法，如 DINO-WM（Zhou 等人，2025）、PLDM（Sobal 等人，2025）和 LeWM（Maes 等人，2026），进一步表明这种规划不需要显式的未来观测重建。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然而，准确的潜在预测并不一定转化为可靠的规划：预测质量良好的模型在下游性能上仍可能存在显著差异（Grimm 等人，2020；Wang 等人，2026a）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "现有的评估大多侧重于预测准确性或终点成功率，这使得学习到的表征中哪些属性真正使其对动作选择有用仍不清楚。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们认为，缺失的一块在于动作引起的潜在转移的结构。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "尽管潜在规划通常被表述为目标匹配，但候选动作通过由学习到的动力学引起的转移来影响目标。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "abs.p1": {
+  "sentences": [
+   {
+    "zh": "潜在世界模型可以实现准确的潜在预测，但在下游规划性能上仍可能存在显著差异。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们认为，这种差异的一个关键来源在于动作诱导的潜在转移的结构。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们通过贝叶斯逆风险来形式化动作可识别性，刻画在观察到动作诱导的转移后，关于动作的不确定性还剩余多少。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "模型预测的转移可能变得高度自解码，同时编码了特定领域的动作关系，而这种关系无法迁移到真实环境的转移中。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们通过跨域逆迁移来刻画这种不匹配，具体化为动作一致性迁移矩阵（ATM），这是一个在真实和预测转移域上的 $2\\times 2$ 逆风险矩阵。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在 TwoRoom、PushT 和 OGBench-Cube 中，真实转移的动作可识别性对下游规划的追踪效果远好于标准预测损失，而完整的 ATM 揭示了高度自解码但跨域不一致的预测转移。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "对这两个域的受控干预进一步产生了不同的转移结构和规划结果，支持了这一分解。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "相同的诊断还支持轻量级模型筛选，对于成功率相差超过 5% 的候选模型，达到了 98.81% 的成对排序准确率。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S1.p6.1": {
+  "sentences": [
+   {
+    "zh": "我们的贡献如下：",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S1.I1.i1": {
+  "sentences": [
+   {
+    "zh": "1. 我们将**动作诱导的转移结构**确定为潜在规划中的一个关键因素，并通过贝叶斯逆风险对动作可识别性进行了形式化。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S1.I1.i2": {
+  "sentences": [
+   {
+    "zh": "2. 我们表明，预测的转移可能具有高度的自解码性，却编码了领域特定的动作结构，并引入 **ATM** 来刻画域内可识别性和跨域动作迁移。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S1.I1.i3": {
+  "sentences": [
+   {
+    "zh": "3. 我们通过在三个规划任务中进行受控干预来验证这一分解，并展示其在模型诊断和筛选中的效用。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.p1.1": {
+  "sentences": [
+   {
+    "zh": "图1总结了我们对潜在规划失败的转移结构观点。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们首先通过贝叶斯逆风险来形式化动作可识别性。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然后，我们区分真实编码转移与模型预测转移，并询问它们的条件动作关系是否跨域转移。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这产生了跨域逆风险公式和动作一致性转移矩阵（ATM）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "最后，我们引入受控干预来独立操纵这些属性。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S2.F1": {
+  "sentences": [
+   {
+    "zh": "图1：ATM概览。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "一个冻结的潜在世界模型归纳出真实和预测的转移域，其中逆探针被训练并在跨域上进行评估，以形成$2\\times 2$动作一致性转移矩阵。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "由此产生的层次结构使用$D_{T,T}$表示动作可识别性，$|G_{T\\rightarrow P}|$表示转移不匹配，$L_{\\mathrm{ATM\\text{-}sym}}$表示矩阵级不对称性。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "雪花和火焰分别表示冻结和可训练模块。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S2.SS0.SSS0.Px1.p1.1": {
+  "sentences": [
+   {
+    "zh": "早期工作如 Ha 和 Schmidhuber 的世界模型（Ha and Schmidhuber, 2018）和 PlaNet（Hafner et al., 2019）表明，紧凑的潜在动态可以从高维观测中支持控制，而 Dreamer（Hafner et al., 2020; Hafner et al., 2023）和 TD-MPC 风格的方法（Hansen et al., 2022; Hansen et al., 2024）进一步将潜在推演与策略优化、价值学习或模型预测控制相结合。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "更近期的无奖励或目标条件方法，包括 DINO-WM（Zhou et al., 2025）、PLDM（Sobal et al., 2025）和 LeWM（Maes et al., 2026），直接在学习的表示空间中使用如 CEM（Rubinstein, 1999）等优化器进行规划。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "近期分析表明，潜在规划依赖于超越预测准确性的属性。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "特别是，决策度量对齐询问 MPC 使用的潜在度量是否保留候选计划的决策相关排序（Wang et al., 2026a）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "ATM 考察了面向规划的表示的一个互补方面：动作诱导的潜在转移的结构，包括动作效应是否可识别，以及它们的动作-转移关系是否在真实和预测域之间转移。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S2.SS0.SSS0.Px2.p1.1": {
+  "sentences": [
+   {
+    "zh": "潜在世界模型通常通过下游成功率、回报或基于推演的规划性能来评估（Hafner et al., 2020; Hansen et al., 2022; Zhou et al., 2025; Maes et al., 2026）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这种终点评估直接衡量任务性能，但与规划器耦合、依赖于模拟器，并且通常成本高昂。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "近期工作还研究了事后修复或验证器，包括基于可达性的规划成本（Li et al., 2026）、动作可达性或动作一致性约束（Liu et al., 2026; Wang et al., 2026b），以及用于测试时选择的未来动作兼容性（Ruan et al., 2026）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "最近的一种规划时方法还在预测推演中使用逆动力学一致性作为动作选择信号（Seo et al., 2026）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "ATM 直接检验在一个域中学习到的动作-转移关系在另一个域中是否仍然有效。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这产生了一个 $2\\times 2$ 的跨域逆风险矩阵，而无需改变规划器或其目标。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS1.p1.1": {
+  "sentences": [
+   {
+    "zh": "我们考虑以目标为条件的规划，使用以动作为条件的潜在世界模型。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "编码器 $E_{\\theta}$ 将观测 $o_{t}$ 映射到 $z_{t}=E_{\\theta}(o_{t})$，动力学预测器产生 $\\hat{z}_{t+1}=F_{\\theta}(z_{t},a_{t})$。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "对于多步规划，诸如 CEM（Rubinstein, 1999）之类的优化器将预测器向前展开，以找到一个动作序列，其预测的终端状态最匹配潜在目标 $z_{g}=E_{\\theta}(o_{g})$：",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S2.SS0.SSS0.Px3.p1.1": {
+  "sentences": [
+   {
+    "zh": "逆动力学长期以来被用于学习与控制相关的表征、探索信号和动作条件特征。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "好奇心驱动的探索利用逆动力学来抑制不可控的视觉变化（Pathak et al., 2017），而逆动力学预训练已被研究用于模仿和视觉运动表征学习（Brandfonbrener et al., 2023）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "对比逆动力学已被纳入JEPA风格的世界模型训练中，利用潜在转移上的动作判别作为防坍缩信号（Boylan and Hokamp, 2026）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "最近的动作敏感世界模型鼓励动作恢复、动作条件转移分离或动作感知动力学（Zhang et al., 2026; Gan et al., 2026; Han and Yilmaz, 2026; Tian et al., 2026）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这些方法主要研究如何学习其转移对动作保持敏感的表征。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "ATM将动作可识别性视为已训练世界模型的一种属性，通过贝叶斯逆风险将其形式化，并考察动作-转移关系在真实和预测转移域之间是否得以保留。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "AITS和AITS-P作为受控干预，用于检验这种分解。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS1.p5.1": {
+  "sentences": [
+   {
+    "zh": "当多个动作归纳出等价的转移后果时，就可能产生不可约的逆向歧义。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在这种情况下，跨域保持动作-转移关系是相关的标准。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS1.p2.1": {
+  "sentences": [
+   {
+    "zh": "尽管规划目标是通过预测的未来状态来表达的，但候选动作通过所学动态归纳出的潜在转移来影响它。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "关键问题是不同动作是否在潜在转移空间中归纳出可区分的结构。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们将其形式化为动作可识别性：从动作归纳出的潜在转移中，关于该动作的信息有多少仍然可以恢复？",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS1.p6.1": {
+  "sentences": [
+   {
+    "zh": "然而，动作可识别性是一种域内性质：它刻画的是在某个转移域内可恢复的动作信息，而不是同一动作-转移关系是否跨域共享。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS1.p4.1": {
+  "sentences": [
+   {
+    "zh": "较低的逆风险意味着潜在转移对诱发动作留下的不确定性更少，而较高的风险则表明动作可识别结构较弱。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "$R^{*}$ 是转移-动作联合分布的一个性质，与任何特定的逆模型无关。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这赋予了动作可识别性一个直接的统计解释。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在实践中，我们使用第3.3节中的轻量级探针来估计这个量。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS1.p3.1": {
+  "sentences": [
+   {
+    "zh": "考虑一个环境转移 $(o_{t},a_{t},o_{t+1})$ 及其潜在特征 $\\xi_{t}=[z_{t},z_{t+1},z_{t+1}-z_{t}]$，其中 $z_{t+1}=E_{\\theta}(o_{t+1})$。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "令 $\\Xi$ 和 $A$ 表示相应的随机变量。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们通过最小平方逆预测风险来刻画动作可识别性。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在平方损失下，贝叶斯最优解码器为 $h^{*}(\\xi)=\\mathbb{E}[A\\mid\\Xi=\\xi]$，得到",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS2.p1.1": {
+  "sentences": [
+   {
+    "zh": "一个潜在世界模型从同一个元组 $(o_{t},a_{t},o_{t+1})$ 归纳出两个转移域。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "第一个是真实编码转移域，通过对观测到的下一状态进行编码获得。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "第二个是预测转移域，通过在相同的当前潜在状态和动作下应用学习到的动力学获得。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们将它们表示为",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS2.p2.2": {
+  "sentences": [
+   {
+    "zh": "根据式（2），域内贝叶斯风险刻画了每个域内的动作可识别性。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然而，两个域中的低逆风险并不意味着共享的动作-转移关系。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS2.p1.2": {
+  "sentences": [
+   {
+    "zh": "其中 $z_{t+1}=E_{\\theta}(o_{t+1})$ 且 $\\hat{z}_{t+1}=F_{\\theta}(z_{t},a_{t})$。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这两个特征共享相同的当前潜在状态和动作，区别仅在于下一个潜在状态是来自环境演化还是学习到的预测器。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS2.p3.1": {
+  "sentences": [
+   {
+    "zh": "这一区别对于模型预测的转移尤为重要。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "由于动作是显式的预测器输入，预测的转移可能以模型特定的形式编码动作信息，这种形式在模型的推演空间中具有很高的可解码性。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "因此，预测域的低逆风险仅表明动作可以从模型生成的转移中恢复；它并不意味着在真实编码转移中存在相同的动作-转移关系。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS2.p2.1": {
+  "sentences": [
+   {
+    "zh": "这两个域不必通过相同的关系来编码动作。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "令 $\\mathcal{D}_{T}$ 和 $\\mathcal{D}_{P}$ 表示它们的联合转移-动作分布。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "它们归纳出不同的条件动作关系，$p_{T}(a\\mid\\xi^{T})$ 和 $p_{P}(a\\mid\\xi^{P})$。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在平方损失下，它们的贝叶斯最优逆规则是",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS2.p4.1": {
+  "sentences": [
+   {
+    "zh": "这将域内动作可解码性与跨域动作迁移区分开来。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "如果两个域保持兼容的动作条件结构，那么在一个域中学习到的逆关系在另一个域中应仍具有信息性。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "相反，跨域退化表明动作-转移关系在真实动态和预测动态之间发生了变化。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们在下一节中用动作一致性迁移矩阵来操作化这一迁移原则。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS3.p2.1": {
+  "sentences": [
+   {
+    "zh": "对于 $i,j\\in\\{T,P\\}$，我们定义",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS3.p1.1": {
+  "sentences": [
+   {
+    "zh": "我们用一组共享的轻量探针族来具体实现第3.2节中的域特定贝叶斯逆规则。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "对于每个世界模型，编码器和预测器保持冻结；我们分别在 $\\mathcal{D}_{T}$ 和 $\\mathcal{D}_{P}$ 上训练探针 $h_{T}$ 和 $h_{P}$。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "两个探针使用相同的两层MLP，带有LayerNorm和GELU；token级或patch级潜在变量在特征构建前进行平均池化。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS3.p5.1": {
+  "sentences": [
+   {
+    "zh": "我们用相对差距来总结方向性跨域迁移",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS3.p3.1": {
+  "sentences": [
+   {
+    "zh": "矩阵 $\\mathbf{A}_{\\mathrm{ATM}}$ 的行表示训练域，列表示评估域。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "对角线元素衡量域内动作可解码性，而非对角线元素衡量所学动作-转移关系的迁移。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS4.p1.1": {
+  "sentences": [
+   {
+    "zh": "方向性差距刻画了方向性迁移不匹配，而完整的ATM还可能在真实域与预测域之间表现出不对称性。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们用一种紧凑的矩阵级统计量来概括这种行为，同时保留单个条目和方向性差距作为主要诊断指标。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS3.p6.1": {
+  "sentences": [
+   {
+    "zh": "因此，ATM 是一个经验性的跨域逆风险矩阵，其对角线元素量化域内动作可辨识性，非对角线元素量化跨域迁移。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "完整矩阵能够区分弱动作信息与领域特定的动作编码——这一区分是任何单一逆损失都无法揭示的。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS3.p4.1": {
+  "sentences": [
+   {
+    "zh": "具体而言，$D_{T,T}$ 近似真实域的动作可识别性，而 $D_{T,P}$ 检验这种逆关系是否迁移到预测的转移上。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "相反，$D_{P,P}$ 衡量预测域的自解码能力，而 $D_{P,T}$ 检验这种关系是否迁移到真实转移上。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "因此，$D_{P,P}\\ll D_{P,T}$ 揭示了预测域特有的动作编码：动作在模型的 rollout 空间中容易恢复，但相同的解码关系在真实转移上失效。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS3.p5.2": {
+  "sentences": [
+   {
+    "zh": "这里 $\\epsilon$ 是一个小的稳定性常数。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "$G_{T\\rightarrow P}$ 衡量真实域逆关系迁移到预测转移时的相对变化，$G_{P\\rightarrow T}$ 则衡量反向迁移。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "由于跨域评估偶尔会改善逆预测，我们使用幅度来衡量不匹配程度，并使用带符号的值来分析迁移方向。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS4.p2.1": {
+  "sentences": [
+   {
+    "zh": "我们首先将两个域内逆风险之间的差异测量为",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS4.p3.1": {
+  "sentences": [
+   {
+    "zh": "这里，$I_{\\mathrm{diag}}$ 衡量域内可解码性差异，而第二项衡量方向性迁移不对称性。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "对数压缩限制了极端相对差距，最终的单调映射将 $L_{\\mathrm{ATM\\text{-}sym}}$ 限制在 $[0,1)$ 范围内。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "接近零的值表明域内可解码性相似且迁移相对对称；较大的值表明更强的矩阵级不对称性。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS5.p2.1": {
+  "sentences": [
+   {
+    "zh": "令 $h_{\\psi}^{T}$ 和 $h_{\\psi}^{P}$ 分别表示针对真实转移特征和预测转移特征的训练时逆推头。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们定义",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS5.p1.1": {
+  "sentences": [
+   {
+    "zh": "上述诊断指标刻画了训练后的转移结构。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "为了检验所识别的性质是否对有针对性的领域特定变化作出不同响应，我们引入了两种训练时干预。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这些干预选择性地提高真实或预测转移中的动作可解码性，同时保持规划器不变。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS4.p4.1": {
+  "sentences": [
+   {
+    "zh": "$L_{\\mathrm{ATM\\text{-}sym}}$ 是一个三级诊断指标，而非独立诊断指标。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "当主要 ATM 量相当时，较低的不对称性更可取，但不应掩盖动作可辨识性或方向性迁移方面的巨大差异。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "因此，我们将其用作打破平局的汇总指标，以 $D_{T,T}$ 和 $|G_{T\\rightarrow P}|$ 作为主要诊断指标。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS5.p4.1": {
+  "sentences": [
+   {
+    "zh": "两种干预都没有直接优化跨域迁移。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "因此，对它们的比较检验了在不同域中提高域内动作可解码性是否会产生相同的跨域结构。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "特别是，更强的预测域可解码性在构造上并不要求学习到的逆关系在真实转移上保持有效。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS5.p3.1": {
+  "sentences": [
+   {
+    "zh": "我们将真实转移干预（$\\alpha_{T}>0,\\alpha_{P}=0$）称为动作可辨识转移监督（AITS），将预测转移干预（$\\alpha_{T}=0,\\alpha_{P}>0$）称为 AITS-P。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们还通过同时启用这两项来考虑它们的组合。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "AITS 鼓励动作可辨识的真实转移，而 AITS-P 鼓励预测转移空间中的动作可解码性。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS5.p5.1": {
+  "sentences": [
+   {
+    "zh": "训练时的逆预测头在训练后被丢弃。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "对于ATM评估，我们冻结编码器和预测器，并从头开始训练新的探针$h_{T}$和$h_{P}$。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这确保了ATM反映的是学习到的世界模型，而不是辅助干预头。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS2.p1.1": {
+  "sentences": [
+   {
+    "zh": "我们首先检验动作可识别性是否捕捉到预测损失之外的、与规划相关的变异，以及跨域迁移是否增加了区分度。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们聚焦于 OGBench-Cube，其不太饱和的成功率使其更适合研究转移诊断与规划性能之间的连续关系。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS1.SSS0.Px2.p1.1": {
+  "sentences": [
+   {
+    "zh": "我们的对照实验使用 LeWM 风格（Maes et al., 2026）的潜在世界模型。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "从一个共享的 LeWM 基线出发，我们比较 AITS、AITS-P 及其组合，选择性地干预真实域、预测域或两者中的动作可解码性。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们还纳入 DINO-WM（Zhou et al., 2025）检查点作为外部家族，以检验类似的真实-预测转移结构是否在这些干预之外出现。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "每个任务中的所有变体都使用相同的 CEM 规划协议。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.p1.1": {
+  "sentences": [
+   {
+    "zh": "我们围绕上述诊断层次组织实验。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "首先，我们检验真实转移的动作可识别性是否捕捉到超越预测损失的规划相关变异，以及跨域量是否提供进一步细化。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "其次，我们检查完整的ATM，以发现仅靠域内可解码性无法察觉的失败模式。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "第三，受控干预检验真实域和预测域中的定向变化是否产生不同的跨域结构和规划结果。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "最后，我们评估相同的诊断方法用于轻量级模型筛选。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS1.SSS0.Px1.p1.1": {
+  "sentences": [
+   {
+    "zh": "我们评估三个目标条件规划任务：TwoRoom、PushT 和 OGBench-Cube（Park et al., 2025）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "TwoRoom 是二维导航，PushT 是连续控制二维操作，OGBench-Cube 是更复杂的三维操作。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "它们共同涵盖了越来越具挑战性的转移结构，从导航到接触丰富的操作和视觉复杂的三维控制。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS2.p2.1": {
+  "sentences": [
+   {
+    "zh": "表1比较了潜在预测损失、真实转移的动作可辨识性，以及一种额外惩罚真实到预测转移不匹配的简单组合。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "所有量均按较高值表示更好质量的方向排列。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.T1": {
+  "sentences": [
+   {
+    "zh": "表1：与OGBench-Cube下游规划成功率的相关性。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "数值越高越好。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "此处，$\\lambda$ 在同一任务的候选池内拟合。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS2.p4.1": {
+  "sentences": [
+   {
+    "zh": "这支持了第3节中的层级结构：$D_{T,T}$ 捕获了主要的与规划相关的变异，而当域内动作可识别性不足时，$|G_{T\\rightarrow P}|$ 增加了区分度。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "接下来分析高阶矩阵结构。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS2.p3.1": {
+  "sentences": [
+   {
+    "zh": "最大的提升来自用真实转移的动作可辨识性替换预测损失：斯皮尔曼相关系数从0.4983增加到0.8130，皮尔逊相关系数从0.3927增加到0.7015。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这支持将 $D_{T,T}$ 作为主要的规划相关诊断指标。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "添加真实到预测的转移项进一步将秩相关提高到0.8239，同时线性相关几乎保持不变，表明跨域结构提供了超出域内可辨识性的次级区分能力。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS3.p1.1": {
+  "sentences": [
+   {
+    "zh": "在确立了真实转移动作可辨识性作为主要诊断指标之后，我们接下来考察跨域结构在域内可解码性之外还能揭示什么。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "图2展示了跨模型变体、模型家族以及全部三个任务的完整ATM矩阵。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.F2": {
+  "sentences": [
+   {
+    "zh": "图2：跨任务和模型变体的完整ATM矩阵。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "行表示训练域，列表示评估域。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "低的对角线损失表明域内动作可解码性强，而对角线与跨域之间的差距揭示了迁移不匹配。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "预测转移监督可以产生低的 $D_{P,P}$，但 $D_{P,T}$ 要大得多，这暴露了一种可自解码但特定于域的动作编码。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS3.p2.1": {
+  "sentences": [
+   {
+    "zh": "一个反复出现的模式是，较强的域内可解码性并不意味着同一动作-转移关系能够跨域迁移。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "若干预测转移监督模型实现了较低的 $D_{P,P}$，但 $D_{P,T}$ 显著更大：动作在预测 rollout 内高度可解码，然而逆关系在真实转移上失效。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这正是第 3.3 节所刻画的预测域特定动作结构。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS3.p5.1": {
+  "sentences": [
+   {
+    "zh": "综合来看，这些观察支持 ATM 的核心区分：动作信息在一个转移域内可能高度可解码，但底层的动作-转移关系并未在真实动态和预测动态之间迁移。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "接下来，我们通过受控干预直接检验这一区分。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS3.p3.1": {
+  "sentences": [
+   {
+    "zh": "因此，完整的ATM揭示了仅凭任一单独对角线无法看到的区别。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "具有相似域内逆风险的模型在跨域迁移上可能差异显著，而高度可解码的预测转移仍可能依赖于域特定的动作编码。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "因此，跨域量提供了超越真实转移动作可识别性的次级区分。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS3.p4.1": {
+  "sentences": [
+   {
+    "zh": "这一模式出现在不同任务和模型配置中。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "DINO-WM（Zhou et al., 2025）的检查点进一步表明，真实-预测转移不匹配出现在一个独立训练的世界模型家族中，超出了我们受控的转移监督目标。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS4.p1.1": {
+  "sentences": [
+   {
+    "zh": "我们接下来使用第3.5节中的受控干预来检验，在不同域中提高动作可解码性是否会产生相同的学习结构。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "AITS和AITS-P都没有直接优化跨域迁移：AITS针对真实转移的可解码性，而AITS-P针对预测转移的可解码性。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.T2": {
+  "sentences": [
+   {
+    "zh": "表2：三个任务上的受控干预分析。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "$D_{T,T}$ 和 $D_{P,P}$ 衡量域内动作可解码性，$|G_{T\\to P}|$ 衡量真实到预测的迁移不匹配，$L_{\\mathrm{ATM\\text{-}sym}}$ 总结高阶矩阵不对称性。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "所有 ATM 诊断值均乘以 $100$ 以便阅读。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "当主要诊断指标相当时，较低的 $L_{\\mathrm{ATM\\text{-}sym}}$ 作为第三级标准更可取。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "Success 表示下游规划成功率（%）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS4.p2.1": {
+  "sentences": [
+   {
+    "zh": "表2显示了不同干预措施下不同的ATM特征。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "AITS在所有三个任务上都提高了真实转移的动作可识别性和规划性能，将TwoRoom上的成功率从87%提高到92%，PushT上从96%提高到100%，OGBench-Cube上从74%提高到84%。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在OGBench-Cube上，$D_{T,T}$从36.65下降到15.87。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS5.p1.1": {
+  "sentences": [
+   {
+    "zh": "最后，我们探讨上述转移层面的量是否也能支持实用的模型选择。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "遵循第4.2节，我们使用一个简单的任务特定评分，将真实转移的动作可识别性与真实到预测的转移不匹配相结合：",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS4.p3.1": {
+  "sentences": [
+   {
+    "zh": "AITS-P 产生了一种不同的结构。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "它可以大幅降低 $D_{P,P}$，使预测的转换具有高度的自可解码性，而无需相应的可迁移的动作关系。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "图 2 显示了 $D_{P,P}$ 与 $D_{P,T}$ 之间的巨大差异，揭示了一个预测域特定的动作编码。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "因此，仅凭预测域的可解码性并不能确保与真实转换的兼容性。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS4.p4.1": {
+  "sentences": [
+   {
+    "zh": "规划结果进一步阐明了这一层级关系。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "尽管矩阵不对称性很大，AITS-P 在较简单的 TwoRoom 和 PushT 任务上仍然有效，但在 OGBench-Cube 上成功率仅从 74% 提高到 78%，而 AITS 下为 84%。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "同时应用两种干预措施同样并不总是优于单独使用 AITS。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这些结果支持 ATM 的区分：域内动作可解码性是有用的，但它产生于何处——以及相应的关系是否可迁移——可能对规划很重要，尤其是在要求更高的转移结构下。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS5.p2.1": {
+  "sentences": [
+   {
+    "zh": "表3报告了在OGBench-Cube上的成对排序，其候选模型涵盖了广泛的规划性能范围。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "当$S_{\\mathrm{ATM}}$与基于模拟器的成功排序一致时，该对即为正确。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS5.p1.2": {
+  "sentences": [
+   {
+    "zh": "其中 $\\lambda$ 在同一任务内拟合。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们仅将该分数用于相对排序，而非作为绝对规划成功率的校准预测器。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.T3": {
+  "sentences": [
+   {
+    "zh": "表3：在OGBench-Cube上使用$S_{\\mathrm{ATM}}=-D_{T,T}-\\lambda|G_{T\\to P}|$的成对模型排序准确率。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "边际排除了基于模拟器的成功率仅有微小差异的配对。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS5.p3.1": {
+  "sentences": [
+   {
+    "zh": "该分数正确地对所有配对中的82.84%进行了排序，并且随着性能差距的增大，其可靠性也随之提高。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "对于差距超过5%的配对，准确率达到98.81%；所有差距超过10%的配对均被正确排序。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "因此，相同的诊断方法为选择具有实质性差异的候选模型提供了一个轻量级的信号。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS5.p4.1": {
+  "sentences": [
+   {
+    "zh": "我们进一步比较了跨家族的 LeWM 风格和 DINO-WM 候选模型。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "将在 LeWM 风格模型上拟合的系数迁移到 LeWM–DINO-WM 对上，准确率为 $68.54\\%$。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在混合池上重新拟合单一系数后，跨家族准确率提高到 $89.90\\%$，所有池化对上的准确率为 $83.10\\%$。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这表明底层的 ATM 量在不同模型家族之间仍然具有信息性，而它们的相对尺度可能需要轻量级校准。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS5.p5.1": {
+  "sentences": [
+   {
+    "zh": "模型筛选是ATM的一个实际应用结果，而非其定义性目的：一旦缓存了潜在转移，在我们的设置中，每个检查点ATM仅需3–5秒，而基于模拟器的CEM评估则需要数分钟到数小时。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "核心贡献仍然是将域内动作可识别性与跨域迁移分离开来。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S6.p1.1": {
+  "sentences": [
+   {
+    "zh": "ATM 也为面向规划的潜在表征的理想性质提供了一个视角。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们的结果表明了一个层级：强真实转移动作可识别性是首要的，而当可识别性相当时，跨域转移和矩阵平衡提供了进一步的细化。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "世界模型家族在这一层级上表现出不同的权衡，这表明有效的潜在表征应首先在真实转移中保留清晰的动作诱导结构，然后在预测转移中保持兼容的动作关系。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.p1.1": {
+  "sentences": [
+   {
+    "zh": "我们研究为什么具有相似预测质量的潜在世界模型会表现出不同的规划性能。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们将动作诱导的转移结构确定为一个关键因素：真实转移的动作可识别性提供了主要信号，而跨域转移揭示了失败模式。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们通过贝叶斯逆风险形式化这些性质，并用动作一致性转移矩阵（ATM）联合诊断它们。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在三个任务中，动作可识别性对规划性能的追踪效果明显优于预测损失，而完整的ATM暴露了高度可自解码但特定于域的预测转移；受控干预产生了不同的转移结构和规划结果。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这些结果确定了潜在规划失败的两个来源：动作信息弱以及预测转移的动作结构未能转移到真实动态。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S6.SSx1.p1.1": {
+  "sentences": [
+   {
+    "zh": "我们使用生成式人工智能工具来提供研究方法论和实验呈现方面的反馈，协助解释实验结果，支持代码实现和调试，并协助手稿起草和编辑。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们还使用生成式人工智能进行文献检索和总结，识别相关工作，并完善图表和论文结构。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "所有人工智能辅助的建议均由作者独立审查；引用的文献已对照原始来源进行核实，人工智能辅助的代码已根据预期的实验行为进行审查和测试，报告的数字结果已与我们的实验输出进行核对，所有方法论决策和最终结论均由作者做出。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们对本工作的最终内容负责，包括在生成式人工智能辅助下产生的文本、声明、代码和制品。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S6.SSx2.p1.1": {
+  "sentences": [
+   {
+    "zh": "我们在附录中提供了详细的实验和实现信息。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "附录A详细说明了所评估的任务和世界模型、ATM转换构建和探针协议，以及受控干预设置。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "贝叶斯逆风险公式背后的理论推导在附录B中给出。额外的筛选和跨家族评估细节在附录C中给出，计算成本测量在附录D中给出。代码将在录用后发布。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "__sections__": {
+  "__title__": "ATM：为何潜在世界模型可能无法规划",
+  "Abstract": "摘要",
+  "1 Introduction": "1 引言",
+  "2 Related Work": "2 相关工作",
+  "Latent world models for control and planning.": "用于控制与规划的潜在世界模型。",
+  "Evaluation and diagnostics for world models.": "世界模型的评估与诊断。",
+  "Inverse dynamics and action-centric world modeling.": "逆向动力学与以行动为中心的世界建模。",
+  "3 A TRANSITION-STRUCTURE VIEW OF LATENT PLANNING FAILURE": "3 潜在规划失败的转移结构视角",
+  "3.1 Latent Planning and Action-Identifiable Transitions": "3.1 潜在规划与行动可识别的转移",
+  "3.2 Real and Predicted Transition Domains": "3.2 真实与预测的转移域",
+  "3.3 Cross-Domain Inverse Transfer and ATM": "3.3 跨域逆向转移与ATM",
+  "3.4 Matrix-Level Asymmetry": "3.4 矩阵层面的不对称性",
+  "3.5 Controlled Interventions on Transition Structure": "3.5 对转移结构的受控干预",
+  "4 Experiments": "4 实验",
+  "Tasks.": "任务。",
+  "Models.": "模型。",
+  "4.2 A Hierarchy of Planning-Relevant Transition Diagnostics": "4.2 规划相关转移诊断的层级",
+  "4.3 Cross-Domain Transfer Reveals Hidden Failure Modes": "4.3 跨域转移揭示隐藏的失败模式",
+  "4.4 Controlled Interventions Separate Decodability from Transfer": "4.4 受控干预区分可解码性与可转移性",
+  "4.5 Practical Model Screening with ATM": "4.5 使用ATM进行实用的模型筛选",
+  "5 Conclusion": "5 结论",
+  "6 Discussion": "6 讨论",
+  "AI use statement": "AI使用声明",
+  "Reproducibility statement": "可复现性声明"
+ }
+}

@@ -2,11 +2,14 @@
  "__meta__": {
   "translator": "deepseek-v4-pro（关思考）",
   "usage": {
-   "calls": 65,
-   "prompt_tokens": 55506,
-   "completion_tokens": 15510,
-   "seconds": 163.4,
-   "cached_tokens": 33920
+   "calls": 66,
+   "prompt_tokens": 56202,
+   "completion_tokens": 15891,
+   "seconds": 167.4,
+   "cached_tokens": 34432,
+   "peak_prompt_tokens": 696,
+   "peak_completion_tokens": 381,
+   "peak_cached_tokens": 512
   }
  },
  "abs.p1": {
@@ -1833,5 +1836,20 @@
    }
   ],
   "translator": "deepseek-v4-pro（关思考）"
+ },
+ "__sections__": {
+  "__title__": "稀疏自编码器揭示大语言模型中的时序差分学习",
+  "Abstract": "摘要",
+  "1 Introduction": "1 引言",
+  "2 Methods": "2 方法",
+  "2.1 Reinforcement Learning": "2.1 强化学习",
+  "2.2 Sparse Autoencoders": "2.2 稀疏自编码器",
+  "3 Llama uses TD features to learn policies in-context": "3 Llama 使用 TD 特征在上下文中学习策略",
+  "4 $Q$-values and TD support optimal action prediction": "4 $Q$ 值和 TD 支持最优动作预测",
+  "5 Learning graph structures without rewards": "5 在没有奖励的情况下学习图结构",
+  "6 Related work": "6 相关工作",
+  "7 Discussion": "7 讨论",
+  "7.1 Limitations & Future Work": "7.1 局限性与未来工作",
+  "7.2 Conclusion": "7.2 结论"
  }
 }

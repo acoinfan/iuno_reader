@@ -2,11 +2,14 @@
  "__meta__": {
   "translator": "deepseek-v4-pro（关思考）",
   "usage": {
-   "calls": 98,
-   "prompt_tokens": 78153,
-   "completion_tokens": 17730,
-   "seconds": 215.3,
-   "cached_tokens": 51200
+   "calls": 99,
+   "prompt_tokens": 78849,
+   "completion_tokens": 18053,
+   "seconds": 218.8,
+   "cached_tokens": 51712,
+   "peak_prompt_tokens": 696,
+   "peak_completion_tokens": 323,
+   "peak_cached_tokens": 512
   }
  },
  "S1.p1.1": {
@@ -1978,5 +1981,18 @@
    }
   ],
   "translator": "deepseek-v4-pro（关思考）"
+ },
+ "__sections__": {
+  "__title__": "世界模型中的幻觉是可预测且可预防的",
+  "1 Introduction": "1 引言",
+  "2 MMBench2: A Dataset for Visual World Modeling": "2 MMBench2：一个用于视觉世界建模的数据集",
+  "3 Training a Large Visual World Model": "3 训练大型视觉世界模型",
+  "4 Hallucination in World Models": "4 世界模型中的幻觉",
+  "4.1 Characterizing Hallucination": "4.1 描述幻觉",
+  "4.2 Detecting Hallucination": "4.2 检测幻觉",
+  "4.3 Mitigating Hallucination": "4.3 缓解幻觉",
+  "5 Experiments": "5 实验",
+  "5.1 Main results": "5.1 主要结果",
+  "5.2 Discussion": "5.2 讨论"
  }
 }

@@ -2,11 +2,14 @@
  "__meta__": {
   "translator": "deepseek-v4-pro（关思考）",
   "usage": {
-   "calls": 111,
-   "prompt_tokens": 94948,
-   "completion_tokens": 25668,
-   "seconds": 267.6,
-   "cached_tokens": 58112
+   "calls": 112,
+   "prompt_tokens": 95780,
+   "completion_tokens": 26437,
+   "seconds": 273.2,
+   "cached_tokens": 58624,
+   "peak_prompt_tokens": 832,
+   "peak_completion_tokens": 769,
+   "peak_cached_tokens": 512
   }
  },
  "abs.p1": {
@@ -3183,5 +3186,33 @@
    }
   ],
   "translator": "deepseek-v4-pro（关思考）"
+ },
+ "__sections__": {
+  "__title__": "视频生成离世界模型有多远：物理定律视角",
+  "Abstract": "摘要",
+  "1 Introduction": "1 引言",
+  "2 Video Generation for Phyiscal Law Discovery": "2 用于物理定律发现的视频生成",
+  "2.1 Problem Definition": "2.1 问题定义",
+  "2.2 Video Generation Model": "2.2 视频生成模型",
+  "2.3 On the Verification of Learned Laws": "2.3 关于所学定律的验证",
+  "3 In-Distribution and Out-of-Distribution Generalization": "3 分布内与分布外泛化",
+  "3.1 Fundamental Physical Scenarios": "3.1 基本物理场景",
+  "3.2 Perfect ID and Failed OOD Generalization": "3.2 完美的分布内泛化与失败的分布外泛化",
+  "4 Combinatorial Generalization": "4 组合泛化",
+  "4.1 Combinatorial Physical Scenarios": "4.1 组合物理场景",
+  "4.2 Scaling Law Observed for Combinatorial Generalization": "4.2 组合泛化中观察到的缩放定律",
+  "5 Deeper Analysis": "5 深入分析",
+  "5.1 Understanding Generalization from Interpolation and Extrapolation": "5.1 从插值和外推理解泛化",
+  "5.2 Memorization or Generalization": "5.2 记忆还是泛化",
+  "5.3 How Does Diffusion Model Retrieve Data?": "5.3 扩散模型如何检索数据？",
+  "5.4 Complex Combinatorial Generalization": "5.4 复杂组合泛化",
+  "5.5 Is Video Sufficient for Complete Physics Modeling?": "5.5 视频是否足以进行完整的物理建模？",
+  "6 Related Works": "6 相关工作",
+  "7 Conclusion and Discussion": "7 结论与讨论",
+  "Impact Statement": "影响声明",
+  "Appendix Contents": "附录目录",
+  "Appendix E More Experiments and Discussions": "附录 E 更多实验与讨论",
+  "E.2 Continuous Experiment for Pairwise Comparison": "E.2 成对比较的连续实验",
+  "Appendix G Visualization": "附录 G 可视化"
  }
 }

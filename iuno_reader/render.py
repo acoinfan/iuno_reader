@@ -234,6 +234,14 @@ figure{margin:30px -26px 34px;padding:24px 26px 18px;background:#f4f1e9;border-r
 figure .imgs{display:flex;flex-wrap:wrap;justify-content:center;align-items:flex-end;gap:12px;margin:0 auto 18px;max-width:88%}
 figure img{display:block;max-height:460px;max-width:100%;flex:1 1 0;min-width:0;object-fit:contain;background:#fff;border-radius:4px}
 figure .imgs img:only-child{max-width:82%;flex:0 1 auto}
+/* 看大图：点图片全屏显示（铺满窗口），再点一下切到原始尺寸可滚动看细节，Esc 或点空白处关闭 */
+figure img{cursor:zoom-in}
+.lb{position:fixed;inset:0;z-index:50;background:#f4f1e9;display:none;overflow:auto;cursor:zoom-out}
+.lb.on{display:flex}
+.lb img{margin:auto;max-width:96vw;max-height:94vh;object-fit:contain;background:#fff;box-shadow:0 2px 18px rgba(0,0,0,.12);cursor:zoom-in}
+.lb.on.full{display:block}
+.lb.full img{display:block;margin:24px auto;max-width:none;max-height:none;cursor:zoom-out}
+.lb .tip{position:fixed;top:10px;right:16px;font:13px var(--zh);color:var(--sub);background:#fff;padding:3px 10px;border-radius:6px;border:1px solid var(--rule)}
 figure .en{font-size:16.5px;line-height:1.68}
 figure .zh{font-size:15.5px;line-height:1.9;text-align:left}
 .figlabel{color:#2f7a4c;font-weight:bold;margin-right:.35em;-webkit-text-stroke:0}
@@ -283,6 +291,16 @@ function pick(sel,all,key,dflt){const B=document.querySelectorAll(sel);
   let v=dflt;try{v=localStorage.getItem(key)||dflt}catch(e){}set(v);}
 pick('.weights span',['w1','w2','w3'],'iuno-reader-weight','w2');
 pick('.bolds span',['bio','kw'],'iuno-reader-bold','bio');
+// 看大图
+const LB=document.createElement('div');LB.className='lb';
+LB.innerHTML="<img alt=''><span class='tip'>点图片：原始尺寸 / 适应窗口　·　Esc 或点空白处关闭</span>";
+document.body.appendChild(LB);const LBI=LB.querySelector('img');
+document.querySelectorAll('figure img').forEach(im=>im.addEventListener('click',()=>{
+  LBI.src=im.src;LB.classList.remove('full');LB.classList.add('on');document.body.style.overflow='hidden';}));
+LBI.addEventListener('click',e=>{e.stopPropagation();LB.classList.toggle('full');});
+const lbClose=()=>{LB.classList.remove('on','full');document.body.style.overflow='';};
+LB.addEventListener('click',lbClose);
+document.addEventListener('keydown',e=>{if(e.key==='Escape')lbClose();});
 const t=document.getElementById('toggle');
 if(t) t.addEventListener('click',()=>{document.body.classList.toggle('plain');
   t.textContent=document.body.classList.contains('plain')?'显示标记':'隐藏标记';});
