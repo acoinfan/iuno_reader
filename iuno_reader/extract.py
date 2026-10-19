@@ -58,6 +58,39 @@ def referenced_floats(segments, main_ids):
 class Ctx:
     def __init__(self):
         self.footnotes = []  # (n, Tag)
+        self.cites = []  # 当前片段里的引用，_seg 取走后清空
+
+    def take_cites(self):
+        cites, self.cites = self.cites, []
+        return cites
+
+
+_ARXIV_ID = re.compile(r"(?:arxiv\.org/(?:abs|pdf|html)/|arXiv[:\s]*(?:preprint\s+arXiv:)?\s*)(\d{4}\.\d{4,5})", re.I)
+
+
+def _bib_entries(soup):
+    """参考文献 → {条目 id: {tag, authors, title, year, text, links, arxiv}}。
+    LaTeXML 有两种排法：带 ltx_bib_author / ltx_bib_title 的（biblatex 一类），
+    和只有几个 ltx_bibblock 的（bibtex 一类：第一块作者、第二块标题）。"""
+    out = {}
+    for li in soup.select("li.ltx_bibitem"):
+        bid = li.get("id")
+        if not bid:
+            continue
+        tag = li.find(class_="ltx_tag_bibitem")
+        blocks = [b for b in li.find_all(class_="ltx_bibblock") if "ltx_bib_cited" not in b.get("class", [])]
+        au, ti = li.find(class_="ltx_bib_author"), li.find(class_="ltx_bib_title")
+        authors = _clean(au.get_text()) if au else (_clean(blocks[0].get_text()) if blocks else "")
+        title = _clean(ti.get_text()) if ti else (_clean(blocks[1].get_text()) if len(blocks) > 1 else "")
+        text = _clean(" ".join(b.get_text(" ") for b in blocks))
+        links = [a["href"] for a in li.find_all("a", href=True) if a["href"].startswith("http")]
+        m = _ARXIV_ID.search(" ".join(links) + " " + text)
+        tag_txt = _clean(tag.get_text()) if tag else ""
+        year = re.search(r"\b(19|20)\d{2}[a-z]?\b", tag_txt + " " + text)
+        out[bid] = {"tag": tag_txt, "authors": authors, "title": title.rstrip("."),
+                    "year": year.group(0)[:4] if year else "", "text": text, "links": links,
+                    "arxiv": m.group(1) if m else ""}
+    return out
 
 
 def _text_of(node, ctx, in_note=False):
@@ -83,6 +116,15 @@ def _text_of(node, ctx, in_note=False):
     if node.name in ("script", "style", "annotation", "annotation-xml"):
         return ""
     inner = "".join(_text_of(c, ctx, in_note) for c in node.children)
+    if node.name == "cite":
+        # 记下引用：整段文字（如「Lepori et al. (2026)」）和其中每个指向参考文献的锚点
+        refs = [{"t": _clean(a.get_text()), "b": a["href"][1:]} for a in node.find_all("a", href=True)
+                if a["href"].startswith("#bib")]
+        if refs:
+            t = _clean(inner)
+            if t[:1] in "([" and t[-1:] in ")]":  # 括号式引用去掉外层括号；「Park et al. (2025)」这种保持原样
+                t = t[1:-1].strip()
+            ctx.cites.append({"text": t, "refs": refs})
     if "ltx_font_typewriter" in cls and inner.strip():
         return f"`{inner.strip()}`"
     if "ltx_font_bold" in cls and inner.strip() and node.name != "h2":
@@ -136,12 +178,15 @@ def split_sentences(text):
     return [unhide(p) for p in merged if p]
 
 
-def _seg(segs, sid, kind, section, subsection, en, **extra):
+def _seg(segs, sid, kind, section, subsection, en, ctx=None, **extra):
     en = _clean(en)
+    cites = ctx.take_cites() if ctx else []
     if not en and kind not in ("equation",):
         return
     d = {"id": sid, "kind": kind, "section": section, "subsection": subsection, "en": en,
          "sentences": split_sentences(en) if kind != "equation" else []}
+    if cites:
+        d["cites"] = cites
     d.update(extra)
     segs.append(d)
 
@@ -155,11 +200,12 @@ def _flush_footnotes(segs, ctx, section, subsection, start_index):
             continue
         txt = _text_of(content, ctx, in_note=True)
         txt = re.sub(r"^\s*(footnote:\s*)?", "", txt)
-        _seg(segs, f"fn{n}", "footnote", section, subsection, txt, footnote=n)
+        _seg(segs, f"fn{n}", "footnote", section, subsection, txt, ctx=ctx, footnote=n)
 
 
 def extract(html, arxiv_id, base_url="https://arxiv.org/html/"):
     soup = BeautifulSoup(html, "lxml")
+    bib = _bib_entries(soup)  # 参考文献在删掉之前先存下来，用来给正文里的引用找对应论文
     for bad in soup.select("nav, .ltx_page_footer, .ltx_bibliography, .ltx_TOC, header, footer"):
         bad.decompose()
     ctx = Ctx()
@@ -167,11 +213,12 @@ def extract(html, arxiv_id, base_url="https://arxiv.org/html/"):
     segs = []
     title_el = soup.find(class_="ltx_title_document")
     title = _clean(_text_of(title_el, ctx)) if title_el else arxiv_id
+    ctx.take_cites()
 
     ab = soup.find(class_="ltx_abstract")
     if ab:
         for i, p in enumerate(ab.find_all("p", class_="ltx_p")):
-            _seg(segs, f"abs.p{i + 1}", "abstract", "Abstract", "", _text_of(p, ctx))
+            _seg(segs, f"abs.p{i + 1}", "abstract", "Abstract", "", _text_of(p, ctx), ctx=ctx)
         _flush_footnotes(segs, ctx, "Abstract", "", fn_done)
 
     article = soup.find("article") or soup
@@ -183,6 +230,7 @@ def extract(html, arxiv_id, base_url="https://arxiv.org/html/"):
             continue
         if el.name in ("h2",) and "ltx_title" in cls:
             section, subsection = _clean(_text_of(el, ctx)), ""
+            ctx.take_cites()
             if section.lower().startswith("acknowledg"):
                 section = "__skip__"
             continue
@@ -190,6 +238,7 @@ def extract(html, arxiv_id, base_url="https://arxiv.org/html/"):
             continue
         if el.name in ("h3", "h4") and "ltx_title" in cls:
             subsection = _clean(_text_of(el, ctx))
+            ctx.take_cites()
             continue
         if el.name == "figure" and ("ltx_figure" in cls or "ltx_table" in cls):
             if el.get("id") in seen_fig or el.find_parent("figure"):
@@ -209,7 +258,8 @@ def extract(html, arxiv_id, base_url="https://arxiv.org/html/"):
             kind = "table" if "ltx_table" in cls else "caption"
             if cap:
                 _seg(segs, el.get("id") or f"fig{len(seen_fig)}", kind, section, subsection,
-                     _text_of(cap, ctx), image=images[0] if images else None, images=images)
+                     _text_of(cap, ctx), ctx=ctx, image=images[0] if images else None, images=images)
+            ctx.take_cites()  # 没有图注时，子图里零星的引用不归到下一段
             _flush_footnotes(segs, ctx, section, subsection, fn_done)
             continue
         if el.name == "div" and "ltx_para" in cls:
@@ -220,7 +270,8 @@ def extract(html, arxiv_id, base_url="https://arxiv.org/html/"):
                     continue
                 ccls = child.get("class", [])
                 if child.name == "p" and "ltx_p" in ccls:
-                    _seg(segs, child.get("id") or el.get("id"), "para", section, subsection, _text_of(child, ctx))
+                    _seg(segs, child.get("id") or el.get("id"), "para", section, subsection, _text_of(child, ctx),
+                         ctx=ctx)
                 elif child.name == "table" and "ltx_equation" in ccls:
                     m = child.find("math")
                     alt = (m.get("alttext") or "") if m else ""
@@ -233,10 +284,10 @@ def extract(html, arxiv_id, base_url="https://arxiv.org/html/"):
             tag = el.find(class_="ltx_tag_item")
             body = "".join(_text_of(p, ctx) + " " for p in el.find_all("p", class_="ltx_p"))
             lead = (_clean(tag.get_text()) + " ") if tag else ""
-            _seg(segs, el.get("id") or "item", "item", section, subsection, lead + body)
+            _seg(segs, el.get("id") or "item", "item", section, subsection, lead + body, ctx=ctx)
             _flush_footnotes(segs, ctx, section, subsection, fn_done)
     return {"arxiv_id": arxiv_id, "title": title, "source": "arxiv-html",
-            "base_url": base_url, "segments": segs}
+            "base_url": base_url, "segments": segs, "bib": bib}
 
 
 if __name__ == "__main__":

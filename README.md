@@ -60,7 +60,17 @@ cd /home/a_coin_fan/work/iuno_reader
 - **看大图**：点图片全屏显示，再点一下看原始尺寸，Esc 关闭。
 - **标签批注**：选中一段文字会出现「✎ 批注」，可以打标签（重点、不懂、疑问、生词、方法、结论，也能自己加）、写批注。有批注的句子中英两边都会加下划线和 ✎，点 ✎ 可以修改。侧栏「批注」区能按标签筛选、点击跳转，「导出复盘笔记」按节整理成 Markdown（标签写成 Obsidian 的 `#标签`）。批注存在浏览器里（按论文分开），「备份」「导入」可以换浏览器或电脑；通过 `serve` 打开时还会存到 `data/<编号>/notes.json`，并把复盘笔记写到 `out/<编号>/notes.md`（设置了「完成后复制到」时同时复制成 `<编号>-批注.md`）。
 
+- **引用**：正文里的引用（「Lepori et al. (2026)」「[17, 39]」）中英两边都加了下划线，悬停看是哪篇，点开有标题、作者、arXiv 和出版页链接，还能跳到本文下一处引用它的地方。**在你知识库里的论文**用绿色实线加「库」字标出，卡片里写着它在库里的位置（如「cvpr4 · 精读-反面 #1」），并链到它的中文译文、PDF 和论文卡片（Obsidian）。侧栏底部列出「引用了你库里的 N 篇」，点一下跳到第一次引用的地方。Markdown 版在文末列出库内论文的双链，全部参考文献放在一个折叠框里。
+
 开关状态保存在浏览器里。点词高亮和加粗需要 spaCy 与 `en_core_web_sm`（没有时自动关闭这两项）。
+
+### 引用怎么对应到论文
+
+每条参考文献按顺序找：① 条目里自带的 arXiv 编号；② 标题和知识库里的论文对上（会议版没有 arXiv 编号时靠这一步，例如 ACL 版的 Lepori 2026 对上库里的 2602.04212）；③ 拿标题去 arXiv 搜，标题几乎完全一致才算。只查正文引用到的条目。arXiv 的查询结果缓存在 `cache/arxiv_lookup.json`，几篇同时跑时共用一把锁、请求间隔 3 秒；对应结果存在 `data/<编号>/refs.json`。
+
+- 知识库目录：前端「设置」里的「知识库目录」，或环境变量 `IUNO_LIBRARY`（research-KB 的根目录）。会读 `pdfs/**/*.pdf`（文件名里的 arXiv 编号；`按优先级/<档>/<序号>_` 给出阅读顺序位置）、`pdfs/**/INDEX.md` 里的标题、`translations/<编号>-zh.html` 和 `papers/*.md` 卡片。没设时只做 arXiv 对应。
+- 不想联网查 arXiv：`IUNO_ARXIV_LOOKUP=0`。
+- 网页里链到译文、PDF 的是相对 `translations/` 目录的路径，网页放在知识库的 `translations/` 里打开才能点通；卡片用 `obsidian://` 链接打开，库名取知识库目录的名字。
 
 ## 颜色
 
@@ -170,6 +180,7 @@ export IUNO_BT_BASE_URL=...        IUNO_BT_MODEL=...        IUNO_BT_API_KEY=... 
 .venv/bin/python tests/test_api_mock.py                  # 用假回复测试接口流程（不联网），含 JSON 模式退回、401 不重试
 .venv/bin/python tests/test_nlp.py                       # 词性、核心词与首字母加粗长度
 .venv/bin/python tests/test_server.py                    # 网页前端的服务端（接口、方案、任务队列、进度与花费）
+.venv/bin/python tests/test_cites.py                     # 引用与参考文献：抽取、逐句定位（含中文）、对应知识库（不联网）
 .venv/bin/python tests/smoke_extract.py 2602.04212 ...   # 抽取冒烟测试（先 fetch + extract）
 .venv/bin/python tests/coverage_vs_pdf.py 2602.04212 <PDF 纯文本>   # 用 PDF 文本独立检查有没有漏段落
 ```
@@ -181,3 +192,4 @@ export IUNO_BT_BASE_URL=...        IUNO_BT_MODEL=...        IUNO_BT_API_KEY=... 
 - 图片直接引用 arXiv 上的图片地址，离线时看不到。
 - 用罗马数字编号的论文（如 I、II、III），正文和附录的节编号可能重复，`--sections` 按编号选节时会同时选中两者；`body` 不受影响。
 - 核对规则是启发式的：可能误报（例如把代词 one 当成数量词，已排除常见情况），也可能漏报（例如否定的对象译错了）。
+- 中文栏的引用靠「作者姓 + 年份」或方括号里的数字去找，译者把作者名译成中文或改了写法时找不到（英文栏不受影响）。知识库里没有 arXiv 编号、清单里也没写标题的 PDF（例如只有 NeurIPS 版的论文）对不上。

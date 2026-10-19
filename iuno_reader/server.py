@@ -247,7 +247,7 @@ class Queue:
 
 
 def settings():
-    return {"max_jobs": 2, "export_dir": ""} | (pv._load("settings.json", {}) or {})
+    return {"max_jobs": 2, "export_dir": "", "library_dir": ""} | (pv._load("settings.json", {}) or {})
 
 
 # ---------- 测试接口 ----------
@@ -381,7 +381,8 @@ class Handler(BaseHTTPRequestHandler):
             if method == "POST" and path == "/api/settings":
                 b = self._body()
                 pv._save("settings.json", {"max_jobs": max(1, int(b.get("max_jobs", 2))),
-                                           "export_dir": str(b.get("export_dir", ""))})
+                                           "export_dir": str(b.get("export_dir", "")),
+                                           "library_dir": str(b.get("library_dir", ""))})
                 return self._send(200, {"ok": True})
             return self._send(404, {"error": "没有这个地址"})
         except (ValueError, KeyError, OSError) as e:

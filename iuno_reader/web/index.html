@@ -87,6 +87,7 @@ label.f+input,label.f+select{width:100%}
   <div class="grid" style="margin-top:10px">
    <div><label class="f">同时跑几篇</label><input type="number" min="1" max="10" id="setJobs"></div>
    <div style="grid-column:span 2"><label class="f">完成后复制到（例如知识库的 translations 目录，留空不复制）</label><input type="text" id="setExport" style="width:100%"></div>
+   <div style="grid-column:span 3"><label class="f">知识库目录（research-KB 的根目录；填了以后，译文里引用到你库里论文的地方会标出来，并链到译文、卡片和 PDF）</label><input type="text" id="setLibrary" style="width:100%"></div>
   </div>
   <div class="row"><button id="setSave">保存设置</button></div>
  </div>
@@ -205,7 +206,7 @@ $('#edSave').onclick=async()=>{const p={name:$('#edName').value.trim(),scope:$('
  if(!p.translator){toast('翻译一定要选接口');return;}
  p.note=summary(p);
  try{await api('POST','/api/presets',p);$('#editor').style.display='none';toast('已保存方案「'+p.name+'」');refresh();}catch(e){toast(e.message);}};
-$('#setSave').onclick=async()=>{try{await api('POST','/api/settings',{max_jobs:$('#setJobs').value,export_dir:$('#setExport').value});toast('设置已保存');refresh();}catch(e){toast(e.message);}};
+$('#setSave').onclick=async()=>{try{await api('POST','/api/settings',{max_jobs:$('#setJobs').value,export_dir:$('#setExport').value,library_dir:$('#setLibrary').value});toast('设置已保存');refresh();}catch(e){toast(e.message);}};
 
 /* ---------- 接口 ---------- */
 function drawProviders(){
@@ -250,7 +251,7 @@ async function refresh(){try{const d=await api('GET','/api/state');const first=!
  drawJobs();fillPresetSelect();
  if(first||!$('#presets').classList.contains('on')||$('#editor').style.display==='none')drawPresets();
  if(first||!$('#api').classList.contains('on'))drawProviders();
- if(first){$('#setJobs').value=d.settings.max_jobs;$('#setExport').value=d.settings.export_dir||'';}
+ if(first){$('#setJobs').value=d.settings.max_jobs;$('#setExport').value=d.settings.export_dir||'';$('#setLibrary').value=d.settings.library_dir||'';}
 }catch(e){$('#peak').textContent='连不上服务';$('#peak').className='pill err';}}
 refresh();setInterval(refresh,1500);
 </script></body></html>

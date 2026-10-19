@@ -198,6 +198,24 @@ def flags_md(doc, pid):
     return "\n".join(out)
 
 
+def _cite_info(P, doc, only):
+    """正文里引用到的参考文献 → 对应的 arXiv 编号和知识库里的论文（见 library.py）。
+    出错只打印提醒，不影响渲染；结果另存 data/<编号>/refs.json。"""
+    from .library import Resolver, library_root, load_library
+    bib = doc.get("bib") or {}
+    used = {r["b"] for s in doc["segments"] if s["id"] in only for c in s.get("cites") or [] for r in c["refs"]}
+    try:
+        root = library_root()
+        lib = load_library(root) if root else None
+        res = Resolver(lib, cache_path=os.path.join(os.path.dirname(P.cache), "arxiv_lookup.json"))
+        refs = res.resolve({b: v for b, v in bib.items() if b in used}, P.pid)
+    except Exception as e:  # noqa: BLE001  对应参考文献只是锦上添花，任何问题都不能挡住译文
+        print(f"参考文献对应失败，网页里的引用不带链接：{type(e).__name__}: {e}")
+        lib, refs = None, {}
+    _save(refs, P.d("refs.json"))
+    return {"refs": refs, "lib": lib["papers"] if lib else {}, "vault": lib["vault"] if lib else ""}
+
+
 def run(root, pid, sections=None, translate="auto", review="auto", export=None, force_fetch=False, workers=1,
         review_workers=None):
     """workers：翻译时同时处理几段；review_workers：审校时同时审几段（默认同 workers）。按接口允许的并发数设。"""
@@ -302,8 +320,11 @@ def run(root, pid, sections=None, translate="auto", review="auto", export=None, 
     only = chosen | {s["id"] for s in doc["segments"] if s["kind"] == "equation" and s["section"] in secs}
     sections_zh = tr.get("__sections__", {})
     _save(doc, P.o("checked.json"))
-    _write(render_markdown(doc, stats, sections_zh, only, review_info), P.o("paper.zh.md"))
-    _write(render_html(doc, stats, sections_zh, only, review_info), P.o("paper.zh.html"))
+    cite_info = _cite_info(P, doc, only)
+    st["refs"] = {"cited": len(cite_info["refs"]), "arxiv": sum(1 for v in cite_info["refs"].values() if v["arxiv"]),
+                  "in_library": sum(1 for v in cite_info["refs"].values() if v["lib"])}
+    _write(render_markdown(doc, stats, sections_zh, only, review_info, cite_info), P.o("paper.zh.md"))
+    _write(render_html(doc, stats, sections_zh, only, review_info, cite_info), P.o("paper.zh.html"))
     _write(paper_en_md(doc), P.o("paper.en.md"))
     _write(flags_md({"segments": [s for s in doc["segments"] if s["id"] in only]}, pid), P.o("flags.md"))
     counts = {lv: stats.get(lv, 0) for lv in LEVELS}
