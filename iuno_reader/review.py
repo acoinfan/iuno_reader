@@ -4,7 +4,7 @@
 {
   "__meta__": {"reviewer": "审校者名字", "mode": "blind|backtranslate",
                "models": {"reviewer": "...", "backtranslator": "...", "bt_judge": "..."},
-               "translator": "翻译者", "independence": "different-model|same-model|unknown"},
+               "translator": "翻译者", "independence": "different-model|same-vendor|same-model|unknown"},
   "<片段 id>": {"reviewer": "...", "mode": "...",
                 "reviews": [{"verdict": "ok|minor|major", "category": [...], "issue": "中文说明",
                              "suggestion": "建议译文", "backtranslation": "（回译模式）",
@@ -15,6 +15,7 @@
 - 盲审：reviewer 只看到原文和译文。
 - 回译比对：backtranslator 只看到中文；bt_judge 只看到原文 A 和回译 B。两者是两个独立的引擎。
 """
+from .glossary import load_terms, terms_in
 from .roles import (INDEPENDENCE_ZH, independence, load_prompt, payload_backtranslator,  # noqa: F401
                     payload_bt_judge, payload_reviewer)
 from .translate import OpenAICompatible
@@ -26,8 +27,11 @@ CATEGORIES = {
 }
 
 
-def make_review_tasks(doc, translation):
-    """导出审校清单：只含原文、译文和节标题，不含翻译者的置信度和备注。"""
+def make_review_tasks(doc, translation, terms=None):
+    """导出审校清单：只含原文、译文、节标题和本段命中的术语表译法，不含翻译者的置信度和备注。
+    术语表译法是项目定下的（例如 few-shot → 少量示例），审校据此不把它们当成错译。"""
+    if terms is None:
+        terms = load_terms()
     tasks = []
     for seg in doc["segments"]:
         tr = translation.get(seg["id"])
@@ -36,6 +40,7 @@ def make_review_tasks(doc, translation):
         zh = [s.get("zh", "") for s in tr.get("sentences", [])]
         tasks.append({"id": seg["id"], "kind": seg["kind"], "section": seg.get("section", ""),
                       "subsection": seg.get("subsection", ""),
+                      "terms": {t: "/".join(terms[t]["zh"]) for t in terms_in(seg["en"], terms)},
                       "pairs": [{"en": en, "zh": zh[i] if i < len(zh) else ""} for i, en in enumerate(seg["sentences"])]})
     return tasks
 
@@ -68,6 +73,16 @@ class ApiReviewer:
         if self.mode == "blind":
             return {"reviewer": self.reviewer.model}
         return {"backtranslator": self.backtranslator.model, "bt_judge": self.judge.model}
+
+    def take_usage(self):
+        """取出各引擎自上次以来的用量之和，并清零。"""
+        engines = [self.reviewer] if self.mode == "blind" else [self.backtranslator, self.judge]
+        total = {}
+        for e in engines:
+            for k, v in e.usage.items():
+                total[k] = total.get(k, 0) + v
+            e.usage = dict.fromkeys(e.usage, 0)
+        return total
 
     def name(self):
         return "+".join(dict.fromkeys(self.models().values()))

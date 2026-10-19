@@ -189,8 +189,9 @@ body.w3{--zhw:600;--zhb:900;--enstroke:.6px}
 /* 英文：左对齐让词距均匀（两端对齐会把空隙撑得忽宽忽窄，眼睛要不停找词的边界），再稍微加宽词距 */
 body .en{text-align:left;word-spacing:.06em;hyphens:manual}
 body.wide .en{word-spacing:.26em}
-/* 突出实词：名词、专有名词、动词保持深色并加粗一点，其余词变浅灰 */
+/* 加粗三选一：首字母（核心词的前几个字母加粗，study → **st**udy）/ 整词（核心词深色稍粗，其余变浅灰）/ 关 */
 .w{cursor:pointer;border-radius:2px}
+body.bio .en .w.k .h{font-weight:bold}
 body.kw .en .w{color:#8d8d8d}
 body.kw .en .w.k{color:var(--ink);-webkit-text-stroke:calc(var(--enstroke) + .4px) currentColor}
 /* 点词高亮：最多三个词，三种底色 */
@@ -199,8 +200,8 @@ body.kw .en .w.k{color:var(--ink);-webkit-text-stroke:calc(var(--enstroke) + .4p
 .nb{cursor:pointer;font-size:.8em;margin-left:2px;vertical-align:.1em;user-select:none}
 .clear{display:none}
 body.focusing .clear{display:inline}
-.weights span{cursor:pointer;padding:0 6px;border-radius:3px}
-.weights span.on{background:#e4f1e8;color:#2f7a4c}
+.weights span,.bolds span{cursor:pointer;padding:0 6px;border-radius:3px}
+.weights span.on,.bolds span.on{background:#e4f1e8;color:#2f7a4c}
 main{max-width:1320px;margin:0 auto;padding:48px 56px 120px}
 .pair{display:grid;grid-template-columns:1fr 1fr;column-gap:56px}
 .en{font-family:var(--en);font-size:17.5px;line-height:1.72;hyphens:auto;text-align:justify}
@@ -273,14 +274,15 @@ function sw(id,cls,on_txt,off_txt,key){const el=document.getElementById(id);if(!
     try{localStorage.setItem(key,on?'1':'0')}catch(e){}};
   el.addEventListener('click',()=>set(!document.body.classList.contains(cls)));
   let v='0';try{v=localStorage.getItem(key)||'0'}catch(e){}set(v==='1');}
-sw('kwt','kw','突出实词：开','突出实词：关','iuno-reader-kw');
 sw('wst','wide','加宽词距：开','加宽词距：关','iuno-reader-wide');
-const W=document.querySelectorAll('.weights span');
-function setW(w){document.body.classList.remove('w1','w2','w3');document.body.classList.add(w);
-  W.forEach(x=>x.classList.toggle('on',x.dataset.w===w));try{localStorage.setItem('iuno-reader-weight',w)}catch(e){}}
-W.forEach(x=>x.addEventListener('click',()=>setW(x.dataset.w)));
-let saved='w2';try{saved=localStorage.getItem('iuno-reader-weight')||'w2'}catch(e){}
-setW(saved);
+// 多选一的开关：字体粗细 w1/w2/w3，加粗方式 none/bio/kw
+function pick(sel,all,key,dflt){const B=document.querySelectorAll(sel);
+  const set=v=>{all.forEach(c=>document.body.classList.remove(c));if(v!=='none') document.body.classList.add(v);
+    B.forEach(x=>x.classList.toggle('on',x.dataset.w===v));try{localStorage.setItem(key,v)}catch(e){}};
+  B.forEach(x=>x.addEventListener('click',()=>set(x.dataset.w)));
+  let v=dflt;try{v=localStorage.getItem(key)||dflt}catch(e){}set(v);}
+pick('.weights span',['w1','w2','w3'],'iuno-reader-weight','w2');
+pick('.bolds span',['bio','kw'],'iuno-reader-bold','bio');
 const t=document.getElementById('toggle');
 if(t) t.addEventListener('click',()=>{document.body.classList.toggle('plain');
   t.textContent=document.body.classList.contains('plain')?'显示标记':'隐藏标记';});
@@ -291,7 +293,8 @@ _NOT_KW = {"et", "al"}  # 引用里的 et al. 不算实词
 
 
 def _en_html(sentence, terms, ann=None):
-    """英文句子 → HTML：每个字母词包一层 <span class='w' data-l=原形>，实词加 k；
+    """英文句子 → HTML：每个字母词包一层 <span class='w' data-l=原形>，核心词加 k，
+    并把前几个字母包成 <span class='h'>（首字母加粗用）；
     术语表里的词组再包一层 <span class='p' data-l=词组>。公式、代码、占位符原样保留。
     spaCy 不可用时退回普通转义。"""
     from . import nlp
@@ -299,7 +302,7 @@ def _en_html(sentence, terms, ann=None):
         return _h(sentence)
     ann = ann if ann is not None else nlp.analyze(sentence)
     # 找术语表里的多词术语在本句的位置（按词原形连续匹配，中间只允许空格或连字符）
-    starts, ends = {}, {}
+    starts, ends, in_term = {}, {}, set()
     for t in sorted(terms, key=len, reverse=True):
         parts = re.split(r"[\s\-]+", t.strip().lower())
         if len(parts) < 2:
@@ -314,6 +317,7 @@ def _en_html(sentence, terms, ann=None):
                             for j in range(len(parts) - 1))
             if ok:
                 starts[i], ends[i + len(parts) - 1] = key, True
+                in_term.update(range(i, i + len(parts)))  # 多词术语的每个词都算核心词（in context learning 的 in）
     out, last, bold = [], 0, False
 
     def raw(txt):
@@ -333,8 +337,12 @@ def _en_html(sentence, terms, ann=None):
         out.append(raw(sentence[last:a]))
         if i in starts:
             out.append(f"<span class='p' data-l='{_attr(starts[i])}'>")
-        k = " k" if kw and key not in _NOT_KW else ""
-        out.append(f"<span class='w{k}' data-l='{_attr(key)}'>{html.escape(sentence[a:b])}</span>")
+        word = sentence[a:b]
+        kw = (kw or i in in_term) and key not in _NOT_KW
+        n = nlp.bold_len(word) if kw else 0
+        body = (f"<span class='h'>{html.escape(word[:n])}</span>{html.escape(word[n:])}" if n
+                else html.escape(word))
+        out.append(f"<span class='w{' k' if kw else ''}' data-l='{_attr(key)}'>{body}</span>")
         if i in ends:
             out.append("</span>")
         last = b
@@ -451,7 +459,8 @@ def render_html(doc, stats, sections_zh=None, only=None, review_info=None):
            f"<div class='meta'><a href='https://arxiv.org/abs/{doc['arxiv_id']}'>arXiv {doc['arxiv_id']}</a>　·　"
            f"共 {total} 句，有标记 {total - s.get('ok', 0)} 句　·　<span class='toggle' id='toggle'>隐藏标记</span>"
            "　·　<span class='weights'>字体粗细 <span data-w='w1'>细</span><span data-w='w2'>中</span><span data-w='w3'>粗</span></span>"
-           "　·　<span class='toggle' id='kwt' title='名词、专有名词、动词保持深色并稍加粗，其余词变浅灰'>突出实词：关</span>"
+           "　·　<span class='bolds' title='只作用于核心词（名词、动词、形容词、副词、数词、否定词和连字符复合词），the、of 这类虚词不变'>加粗 "
+           "<span data-w='none'>关</span><span data-w='bio'>首字母</span><span data-w='kw'>整词</span></span>"
            "　·　<span class='toggle' id='wst'>加宽词距：关</span>"
            "　·　<span class='toggle clear' id='clear'>清除高亮</span><br>"
            f"<span class='chips'>{chips}</span><br>{html.escape(_review_line(stats, review_info))}"

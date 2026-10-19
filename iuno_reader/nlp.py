@@ -1,12 +1,15 @@
 """英文词性标注与词形还原（spaCy en_core_web_sm），给网页阅读版式用：
-- 名词、专有名词、动词算「实词」，可以突出显示；
+- 核心词（名词、专有名词、动词、形容词、副词、数词，以及否定词）加粗前几个字母；
+  the、of、to、which 这类虚词不加粗；
+- 连字符复合词（in-context、one-token）的每一部分都算核心词，in、one 也不例外；
 - 每个词带上原形（lemma），点一个词时，全文同一原形的词一起高亮。
 spaCy 没装时，available() 返回 False，渲染会自动跳过这些功能。
 """
 import functools
 import re
 
-KW_POS = {"NOUN", "PROPN", "VERB"}
+KW_POS = {"NOUN", "PROPN", "VERB", "ADJ", "ADV", "NUM"}
+NEG = {"not", "no", "never", "nor", "cannot", "n't"}  # 否定词改变句意，虽是虚词也加粗
 MATH = re.compile(r"\$\$.*?\$\$|\$[^$]*\$")
 CODE = re.compile(r"`[^`]+`")
 PLACE = re.compile(r"\{fn\d+\}")
@@ -50,22 +53,46 @@ def blank(s):
     return CODE.sub(sp, MATH.sub(sp, PLACE.sub(sp, s))).replace("**", "  ")
 
 
+def _hyphenated(plain, a, b):
+    """这个词是不是连字符复合词的一部分（in-context 里的 in，one-token 里的 one）。"""
+    before = a >= 2 and plain[a - 1] == "-" and plain[a - 2].isalnum()
+    after = b + 1 < len(plain) and plain[b] == "-" and plain[b + 1].isalnum()
+    return before or after
+
+
 def analyze(sentence):
-    """返回句子里每个字母词的 (start, end, key, is_kw)，位置相对于原句，已跳过公式和代码。"""
+    """返回句子里每个字母词的 (start, end, key, is_kw)，位置相对于原句，已跳过公式和代码。
+    is_kw 表示核心词（见模块说明），网页上加粗它的前几个字母。"""
     plain = blank(sentence)
     doc = _model()(plain)
     by_start = {t.idx: t for t in doc}
     out = []
     for m in WORD.finditer(plain):
+        w = m.group(0)
         t = by_start.get(m.start())
-        if t is not None and t.text[:len(m.group(0))].lower() == m.group(0).lower():
-            lemma = t.lemma_ if t.lemma_ and t.lemma_ != "-PRON-" else m.group(0)
-            if len(t.text) > len(m.group(0)):  # 例如 e.g. 这类 token，只取字母部分
-                lemma = m.group(0)
-            out.append((m.start(), m.end(), norm_key(m.group(0), lemma), t.pos_ in KW_POS))
-        else:
-            out.append((m.start(), m.end(), norm_key(m.group(0)), False))
+        if t is not None and t.text[:len(w)].lower() == w.lower():
+            lemma = t.lemma_ if t.lemma_ and t.lemma_ != "-PRON-" else w
+            if len(t.text) > len(w):  # 例如 e.g. 这类 token，只取字母部分
+                lemma = w
+            kw = t.pos_ in KW_POS or w.lower() in NEG
+        else:  # 一个 token 里的后半个词，例如 can't 的 t
+            lemma, kw = None, w.lower() in NEG
+        kw = kw or _hyphenated(plain, m.start(), m.end())
+        out.append((m.start(), m.end(), norm_key(w, lemma), kw))
     return out
+
+
+def bold_len(word):
+    """首字母加粗要加粗几个字母：study → st，representation → repre，in → i。
+    一个字母的词不加粗（整词都粗了就没有引导作用）。"""
+    n = len(word)
+    if n <= 1:
+        return 0
+    if n <= 3:
+        return 1
+    if n == 4:
+        return 2
+    return int(n * 0.4)
 
 
 @functools.lru_cache(maxsize=4096)

@@ -160,7 +160,7 @@ def cmd_import_review(a):
 
 def cmd_review(a):
     from .review import ApiReviewer, make_review_tasks
-    from .roles import INDEPENDENCE_ZH, independence
+    from .roles import INDEPENDENCE_ZH, independence, worst_independence
     doc = load_json(p("data", a.id, "doc.json"))
     tr = load_json(p("data", a.id, "translation.json"), {})
     tr.pop("__sections__", None)
@@ -168,9 +168,8 @@ def cmd_review(a):
     path = p("data", a.id, f"review.{a.mode}.json")
     done = load_json(path, {})
     rv = ApiReviewer(a.mode)
-    # 只要有一个审校角色和翻译用了同一个模型，就算独立性不足
-    inds = [independence(translator, m) for m in rv.models().values()]
-    ind = "same-model" if "same-model" in inds else ("unknown" if "unknown" in inds else "different-model")
+    # 只要有一个审校角色和翻译用了同一个模型（或同一家的模型），就算独立性不足
+    ind = worst_independence([independence(translator, m) for m in rv.models().values()])
     done["__meta__"] = {"reviewer": rv.name(), "mode": a.mode, "models": rv.models(),
                         "translator": translator, "independence": ind}
     print("审校模型", rv.models(), "翻译者", translator or "未知", "独立性：", INDEPENDENCE_ZH[ind])
@@ -183,6 +182,9 @@ def cmd_review(a):
         except RuntimeError as e:
             print(f"[{i}/{len(tasks)}] {t['id']} 审校失败：{e}")
             continue
+        usage = done["__meta__"].setdefault("usage", {})
+        for k, v in rv.take_usage().items():
+            usage[k] = round(usage.get(k, 0) + v, 1)
         save_json(done, path)
         print(f"[{i}/{len(tasks)}] {t['id']}")
 
@@ -214,6 +216,11 @@ def cmd_import(a):
     terms.update(new)
     write_terms(terms, p("glossary", "terms.tsv"))
     print("术语表条目", len(terms))
+
+
+def cmd_probe(a):
+    from .probe import run
+    run(a.roles.split(","))
 
 
 def main(argv=None):
@@ -251,6 +258,10 @@ def main(argv=None):
     s.add_argument("--mode", choices=["blind", "backtranslate"], default="backtranslate")
     s.add_argument("--force", action="store_true")
     s.set_defaults(fn=cmd_review)
+    s = sub.add_parser("probe", help="给每个配好接口的角色发一个小样例，检查接口能不能用、审校能不能抓错")
+    s.add_argument("--roles", default="translator,reviewer,backtranslate",
+                   help="逗号分隔：translator、reviewer（盲审）、backtranslate（回译 + 比对）")
+    s.set_defaults(fn=cmd_probe)
     s = sub.add_parser("import-kb-glossary")
     s.add_argument("path")
     s.set_defaults(fn=cmd_import)

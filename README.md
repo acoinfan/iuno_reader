@@ -35,11 +35,11 @@ cd /home/a_coin_fan/work/iuno_reader
 |---|---|
 | 隐藏标记 | 关掉所有风险底色，纯阅读 |
 | 字体粗细 细/中/粗 | 英文 Computer Modern 用细描边加粗，中文思源宋体切换字重；默认「中」 |
-| 突出实词 | 用 spaCy 标注词性，名词、专有名词、动词保持深色并稍加粗，其余词变浅灰 |
+| 加粗 关/首字母/整词 | 只作用于核心词：名词、专有名词、动词、形容词、副词、数词、否定词（not、no、cannot…），以及连字符复合词和术语表多词术语的每一部分（in-context 的 in、one-token 的 one）；the、of、to、which 这类虚词不变。「首字母」加粗核心词的前几个字母（study → **st**udy，representation → **repre**sentation，1 个字母的词不加粗），默认这一档；「整词」让核心词深色稍粗、其余词变浅灰 |
 | 加宽词距 | 英文栏词距再加宽（英文默认已改为左对齐，词距均匀） |
 | 点词高亮 | 点任意英文单词，全文同一个词（按原形，整篇统一）一起铺底色；若在术语表里，中文栏对应译名也一起亮；最多三个，再点取消 |
 
-开关状态保存在浏览器里。点词高亮和突出实词需要 spaCy 与 `en_core_web_sm`（没有时自动关闭这两项）。
+开关状态保存在浏览器里。点词高亮和加粗需要 spaCy 与 `en_core_web_sm`（没有时自动关闭这两项）。
 
 ## 颜色
 
@@ -100,7 +100,19 @@ export IUNO_BT_BASE_URL=...        IUNO_BT_MODEL=...        IUNO_BT_API_KEY=... 
    export IUNO_READER_API_KEY=...        # 不要写进仓库
    ```
 
-   每翻完一段就保存一次，中途失败不会丢掉已经完成的部分；已翻译的段落默认跳过，加 `--force` 重翻。翻译规则（逐句、限定词按强弱译、公式和占位符原样保留、自评置信度）写在 `iuno_reader/translate.py` 的 `RULES` 里。**这部分代码还没有在真实接口上跑过。**
+   每翻完一段就保存一次，中途失败不会丢掉已经完成的部分；已翻译的段落默认跳过，加 `--force` 重翻。翻译规则（逐句、限定词按强弱译、公式和占位符原样保留、自评置信度）写在 `prompts/translator.md` 里。
+
+   接口不支持 JSON 模式（`response_format`）时会自动退回普通模式；推理模型输出里的 `<think>` 段会被去掉；密钥错、模型名错这类错误不重试，直接报出状态码和返回内容。
+
+### 换接口前先探测
+
+```bash
+.venv/bin/python -m iuno_reader probe [--roles translator,reviewer,backtranslate]
+```
+
+给每个配好接口的角色发一个三句话的固定样例（含否定、限定词、数字、公式、脚注占位符），报告能不能连上、JSON 模式支不支持、耗时和 token；翻译结果用规则核对一遍；审校角色拿到的是故意译错两句的样例（「suggests, but does not prove」译成「证明」、41.2% 写成 42.1%），看它能不能抓出来。报告另存到 `out/probe/`。
+
+已实测（2026-10-19，`api.deepseek.com/v1`）：`deepseek-v4-flash` 翻译 3 秒、JSON 模式可用；`deepseek-v4-pro` 盲审 5 秒抓对 3/3，回译 + 比对 36 秒抓对 2/3（把第 1 句的回译措辞差异误报成 minor）。整篇论文还没有用接口跑过。
 
 ### 独立审校（规则查不出来的那一层）
 
@@ -134,7 +146,8 @@ export IUNO_BT_BASE_URL=...        IUNO_BT_MODEL=...        IUNO_BT_API_KEY=... 
 ```bash
 .venv/bin/python tests/test_check.py                     # 核对规则的单元测试
 .venv/bin/python tests/test_review.py                    # 审校合并（含过期检测、盲审清单不泄露备注）
-.venv/bin/python tests/test_api_mock.py                  # 用假回复测试接口流程（不联网）
+.venv/bin/python tests/test_api_mock.py                  # 用假回复测试接口流程（不联网），含 JSON 模式退回、401 不重试
+.venv/bin/python tests/test_nlp.py                       # 词性、核心词与首字母加粗长度
 .venv/bin/python tests/smoke_extract.py 2602.04212 ...   # 抽取冒烟测试（先 fetch + extract）
 .venv/bin/python tests/coverage_vs_pdf.py 2602.04212 <PDF 纯文本>   # 用 PDF 文本独立检查有没有漏段落
 ```

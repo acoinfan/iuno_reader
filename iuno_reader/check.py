@@ -42,6 +42,16 @@ def _strip_spans(s):
     return CODE.sub(" ", MATH.sub(" ", s))
 
 
+def _unnegated(word, zh):
+    """译文里有没有一处 word，它前面三个字以内没有不、未、没、非、无。"""
+    i = zh.find(word)
+    while i >= 0:
+        if not re.search(r"[不未没非无]", zh[max(0, i - 3):i]):
+            return True
+        i = zh.find(word, i + 1)
+    return False
+
+
 def check_sentence(en, zh, terms, hedges, conf=None, note=""):
     flags = []
 
@@ -90,13 +100,13 @@ def check_sentence(en, zh, terms, hedges, conf=None, note=""):
     if en_neg and not NEG_ZH.search(zh_plain):
         add("red", "negation", "原文有否定或否定性的词（" + "、".join(sorted(set(x.lower() for x in en_neg))) + "），译文里没找到否定表达")
 
-    # 4. 限定词：丢失或被加强
+    # 4. 限定词：丢失或被加强（被否定的禁用词不算，例如 suggests, but does not prove →「表明，但并不证明」）
     for h in hedges:
         m = h["en"].search(en_plain)
         if not m:
             continue
         ok = any(o in zh for o in h["zh_ok"])
-        forbid = [f for f in h["zh_forbid"] if f in zh]
+        forbid = [f for f in h["zh_forbid"] if _unnegated(f, zh)]
         if forbid and not ok:
             add("red", "hedge_strengthened", f"限定词 '{m.group(0)}' 可能被译重了（译文出现「{'、'.join(forbid)}」）")
         elif not ok:

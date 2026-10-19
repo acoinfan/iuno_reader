@@ -15,7 +15,9 @@ NOTE = "译者秘密备注XYZ"
 doc = {"segments": [{"id": "p1", "kind": "para", "section": "3 Experiment", "subsection": "Analysis",
                      "en": " ".join(EN), "sentences": EN}]}
 tr = {"p1": {"sentences": [{"zh": ZH[0], "conf": "low", "note": NOTE}, {"zh": ZH[1], "conf": "high", "note": ""}]}}
-task = make_review_tasks(doc, tr)[0]
+TERMS = {"inert": {"zh": ["惰性的"], "note": ""}, "few-shot": {"zh": ["少量示例"], "note": ""}}
+task = make_review_tasks(doc, tr, TERMS)[0]
+assert task["terms"] == {"inert": "惰性的"}, task["terms"]  # 只带本段命中的术语
 tt = {"paper": "P", "section": "3 Experiment", "subsection": "Analysis", "previous_paragraph": "prev",
       "terms": {"inert": "惰性的"}, "sentences": EN, "zh_secret": ZH[0], "note": NOTE}
 
@@ -27,15 +29,15 @@ def s(x):
 # 翻译：看得到英文，看不到任何中文译文或备注
 p = s(roles.payload_translator(tt))
 assert EN[0] in p and ZH[0] not in p and NOTE not in p, p
-# 盲审：看得到原文和译文，看不到置信度和备注
+# 盲审：看得到原文、译文和术语表译法，看不到置信度和备注
 p = s(roles.payload_reviewer(task))
-assert EN[0] in p and ZH[0] in p and NOTE not in p and "conf" not in p, p
+assert EN[0] in p and ZH[0] in p and NOTE not in p and "conf" not in p and "惰性的" in s(roles.payload_reviewer(task)["terms"]), p
 # 回译：只看得到中文，看不到任何英文原文
 p = s(roles.payload_backtranslator(task))
 assert ZH[0] in p and not any(e in p for e in EN) and not re.search(r"[A-Za-z]{4,}", p.replace("sentences", "")), p
 # 回译比对：只看得到英文 A 和 B，看不到中文和备注
 p = s(roles.payload_bt_judge(task, ["Models cannot reliably use them.", "Results show they are inert."]))
-assert EN[0] in p and not re.search(r"[一-鿿]", p) and NOTE not in p, p
+assert EN[0] in p and not re.search(r"[一-鿿]", p) and NOTE not in p and '"inert"' in p, p  # 术语只给英文
 print("白名单：四个角色的输入隔离 通过")
 
 # 提示词：四份各自独立、互不相同，并各自写明了能看到和看不到什么
@@ -66,5 +68,10 @@ assert roles.independence("deepseek-chat", "gpt-4o") == "different-model"
 assert roles.independence("deepseek-chat", "deepseek-chat") == "same-model"
 assert roles.independence("claude-opus-5.5", "claude-opus-5.5（子代理）") == "same-model"
 assert roles.independence("", "gpt-4o") == "unknown"
+assert roles.independence("deepseek-v4-flash", "deepseek-v4-pro") == "same-vendor"
+assert roles.independence("deepseek-v4-flash", "deepseek/deepseek-r2") == "same-vendor"
+assert roles.independence("gpt-5", "o3-mini") == "same-vendor"
+assert roles.independence("deepseek-v4-flash", "gemini-3-pro") == "different-model"
+assert roles.worst_independence(["different-model", "same-vendor"]) == "same-vendor"
 print("独立性判断 通过")
 print("角色隔离测试全部通过")

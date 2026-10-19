@@ -11,6 +11,7 @@ from iuno_reader import translate as T  # noqa: E402
 from iuno_reader.review import ApiReviewer  # noqa: E402
 
 replies = []
+ORIG_CHAT = T.OpenAICompatible._chat
 
 
 def fake_chat(self, messages):
@@ -67,5 +68,74 @@ replies[:] = [json.dumps({"reviews": [{"verdict": "minor", "category": ["hedge"]
                                       {"verdict": "ok", "category": [], "issue": "", "suggestion": ""}]})]
 r = rv.review(rtask)
 assert r["mode"] == "blind" and r["reviews"][0]["verdict"] == "minor"
+assert rv.take_usage()["calls"] == 0 and rv.reviewer.usage["calls"] == 0  # 假回复不经过真实请求，用量为 0
 print("盲审：通过")
+
+# 5. 接口层：不支持 JSON 模式时自动退回；401 不重试；推理模型的 <think> 段和前后废话能去掉
+T.OpenAICompatible._chat = ORIG_CHAT
+bodies = []
+
+
+def fake_post(self, body):
+    bodies.append(dict(body))
+    if "response_format" in body:
+        raise T.ApiError('HTTP 400：{"error":"response_format is not supported"}', 400, retryable=False)
+    content = "<think>先想想……{\"x\": 1}</think>好的，结果如下：\n```json\n" + \
+        json.dumps({"sentences": [{"zh": "甲", "conf": "high"}, {"zh": "乙", "conf": "high"}]}) + "\n```"
+    return {"choices": [{"message": {"content": content}}], "usage": {"prompt_tokens": 10, "completion_tokens": 5}}
+
+
+T.OpenAICompatible._post = fake_post
+eng = T.OpenAICompatible()
+out = eng.translate(task)
+assert [s["zh"] for s in out["sentences"]] == ["甲", "乙"], out
+assert not eng.json_mode and "response_format" not in bodies[-1] and eng.usage["prompt_tokens"] == 10
+print("接口层：JSON 模式退回、去掉思考段 通过")
+
+bodies.clear()
+
+
+def temp_one(self, body):
+    bodies.append(dict(body))
+    if "temperature" in body:
+        raise T.ApiError('HTTP 400：{"error":{"message":"invalid temperature: only 1 is allowed for this model"}}', 400,
+                         retryable=False)
+    return fake_post(self, body)
+
+
+T.OpenAICompatible._post = temp_one
+eng = T.OpenAICompatible()
+out = eng.translate(task)
+assert [s["zh"] for s in out["sentences"]] == ["甲", "乙"], out
+assert eng.temperature is None and "temperature" not in bodies[-1] and not eng.json_mode, bodies
+print("接口层：不接受 temperature 时去掉再发 通过")
+
+hits, slept = [], []
+T.time.sleep = slept.append  # 不真的等
+
+
+def limited(self, body):
+    hits.append(1)
+    if len(hits) <= 2:
+        raise T.ApiError("HTTP 429：request reached organization max RPM: 3, please try again after 1 seconds", 429)
+    return fake_post(self, body)
+
+
+T.OpenAICompatible._post = limited
+out = T.OpenAICompatible().translate(task)
+assert [s["zh"] for s in out["sentences"]] == ["甲", "乙"] and len(hits) == 4 and slept[:2] == [20, 40], (hits, slept)
+print("接口层：限流时等待后重发 通过")
+
+calls = []
+
+
+def deny(self, body):
+    calls.append(1)
+    raise T.ApiError("HTTP 401：invalid api key", 401, retryable=False)
+
+
+T.OpenAICompatible._post = deny
+out = T.OpenAICompatible().translate(task, retries=2)
+assert len(calls) == 1 and "401" in out["sentences"][0]["note"], (calls, out)
+print("接口层：401 不重试 通过")
 print("接口流程（模拟）测试全部通过")

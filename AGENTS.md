@@ -56,8 +56,10 @@ cd /home/a_coin_fan/work/iuno_reader
 | 角色 | 提示词 | 能看到 | 看不到 |
 |---|---|---|---|
 | 翻译 | `prompts/translator.md` | 英文句子、节标题、上一段原文、命中的术语 | 任何审校、回译 |
-| 盲审 | `prompts/reviewer_blind.md` | 节标题、逐句的英文原文与中文译文 | 译者身份、置信度和备注、其他审校 |
+| 盲审 | `prompts/reviewer_blind.md` | 节标题、命中的术语及规定译法、逐句的英文原文与中文译文 | 译者身份、置信度和备注、其他审校 |
 | 回译 | `prompts/backtranslator.md` | 只有中文译文 | 英文原文、标题、备注、审校 |
-| 回译比对 | `prompts/bt_judge.md` | 只有英文原文和回译 | 中文译文、备注、审校 |
+| 回译比对 | `prompts/bt_judge.md` | 英文原文、回译、命中术语的英文 | 中文译文（含术语的中文译法）、备注、审校 |
+
+审校会拿到本段命中的术语表译法：用了规定译法就不算错（例如 few-shot → 少量示例），免得审校反复建议换成别的说法。
 
 接口模式下，这些限制由 `iuno_reader/roles.py` 的白名单在代码里强制执行（`tests/test_roles.py` 有测试）；agent 模式下靠任务说明约束，请自觉遵守。

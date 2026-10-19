@@ -23,6 +23,9 @@ cases = [
     ("These results suggest that the representations are inert.", "这些结果证明这些表示是惰性的。", {"hedge_strengthened"}, set()),
     ("These results suggest that the representations are inert.", "这些结果表明这些表示是惰性的。", set(), {"hedge_strengthened", "hedge_missing"}),
     ("The representations are largely inert.", "这些表示是惰性的。", {"hedge_missing"}, set()),
+    # 被否定的禁用词不算语气加强；没被否定的仍然要标
+    ("This suggests, but does not prove, that it fails.", "这表明——但并不证明——它失败了。", set(), {"hedge_mixed", "hedge_strengthened"}),
+    ("This suggests that it fails.", "这表明并证明了它失败了。", {"hedge_mixed"}, set()),
     ("The rule maps $s_{i,j}$ to $s_{i+2,j}$.", "该规则把 $s_{i,j}$ 映射到另一个状态。", {"math"}, set()),
     ("We use prefilled responses{fn3} here.", "这里我们使用预填充的回复。", {"placeholder"}, set()),
     ("as shown by Park et al. (2025a).", "如 Park 等人所示。", {"citation"}, set()),

@@ -23,7 +23,7 @@ from . import extract as ex
 from .check import LEVELS, check_doc
 from .glossary import load_hedges, load_terms
 from .render import ICON, render_html, render_markdown
-from .roles import INDEPENDENCE_ZH, independence, load_prompt, model_config
+from .roles import INDEPENDENCE_ZH, independence, load_prompt, model_config, worst_independence
 from .translate import make_tasks
 
 VERSION = "0.2"
@@ -78,6 +78,14 @@ def fetch(P, force=False):
 
 def _has_api(role):
     return all(model_config(role))
+
+
+def _add_usage(total, new):
+    """累加接口用量（调用次数、输入输出 token、秒数），存进 __meta__.usage，断点续跑时接着加。"""
+    total = dict(total or {})
+    for k, v in (new or {}).items():
+        total[k] = round(total.get(k, 0) + v, 1)
+    return total
 
 
 def _agent_translate_md(P, n_seg, n_sent):
@@ -176,9 +184,12 @@ def run(root, pid, sections=None, translate="auto", review="auto", export=None, 
     if missing and translate in ("auto", "api") and _has_api("translator"):
         from .translate import OpenAICompatible
         eng = OpenAICompatible(role="translator")
-        tr.setdefault("__meta__", {})["translator"] = eng.model
+        meta = tr.setdefault("__meta__", {})
+        meta["translator"] = eng.model
         for t in missing:
             tr[t["id"]] = eng.translate(t)
+            meta["usage"] = _add_usage(meta.get("usage"), eng.usage)
+            eng.usage = dict.fromkeys(eng.usage, 0)
             _save(tr, P.d("translation.json"))
         missing = []
     if missing:
@@ -191,14 +202,15 @@ def run(root, pid, sections=None, translate="auto", review="auto", export=None, 
         if os.path.exists(P.o("AGENT_TRANSLATE.md")):
             os.remove(P.o("AGENT_TRANSLATE.md"))
         st["translate"] = {"status": "done", "translator": (tr.get("__meta__") or {}).get("translator", "未知"),
-                           "segments": len(tasks), "sentences": n_sent}
+                           "segments": len(tasks), "sentences": n_sent,
+                           "usage": (tr.get("__meta__") or {}).get("usage")}
 
     # 审校：只在翻译完成后进行
     tr_clean = {k: v for k, v in tr.items() if not k.startswith("__")}
     translator = (tr.get("__meta__") or {}).get("translator", "")
     if st["translate"]["status"] == "done" and review != "none":
         from .review import make_review_tasks
-        rtasks = [t for t in make_review_tasks(doc, tr_clean) if t["id"] in {x["id"] for x in tasks}]
+        rtasks = [t for t in make_review_tasks(doc, tr_clean, terms) if t["id"] in {x["id"] for x in tasks}]
         _save(rtasks, P.d("review_tasks.json"))
         existing = [f for f in glob.glob(P.d("review.*.json")) if not f.endswith(".raw.json")]
         mode = review if review in ("blind", "backtranslate") else None
@@ -209,16 +221,17 @@ def run(root, pid, sections=None, translate="auto", review="auto", export=None, 
             rv = ApiReviewer(mode)
             path = P.d(f"review.{mode}.json")
             done = _load(path, {})
-            inds = [independence(translator, m) for m in rv.models().values()]
-            ind = "same-model" if "same-model" in inds else ("unknown" if "unknown" in inds else "different-model")
+            ind = worst_independence([independence(translator, m) for m in rv.models().values()])
             done["__meta__"] = {"reviewer": rv.name(), "mode": mode, "models": rv.models(),
                                 "translator": translator, "independence": ind}
+            done["__meta__"]["usage"] = (_load(path, {}).get("__meta__") or {}).get("usage")
             for t in rtasks:
                 if t["id"] not in done:
                     try:
                         done[t["id"]] = rv.review(t)
                     except RuntimeError as e:
                         print(f"审校失败 {t['id']}：{e}")
+                    done["__meta__"]["usage"] = _add_usage(done["__meta__"]["usage"], rv.take_usage())
                     _save(done, path)
             existing = sorted(set(existing) | {path})
         elif not existing or review == "agent":
@@ -256,8 +269,9 @@ def run(root, pid, sections=None, translate="auto", review="auto", export=None, 
         next_steps.append(f"按 {P.o('AGENT_TRANSLATE.md')} 翻译，然后重新运行 run {pid}")
     if stage == "awaiting_review":
         next_steps.append(f"按 {P.o('AGENT_REVIEW.md')} 做盲审，导入后重新运行 run {pid}")
-    if any((r or {}).get("independence") == "same-model" for r in review_info):
-        next_steps.append("现有审校与翻译是同一模型，独立性不足；配置不同模型后运行 run --review backtranslate，或请人抽查 flags.md")
+    if any((r or {}).get("independence") in ("same-model", "same-vendor") for r in review_info):
+        next_steps.append("现有审校与翻译是同一模型或同一家的模型，独立性不足；"
+                          "配置另一家的模型后运行 run --review backtranslate，或请人抽查 flags.md")
     if counts["red"] or counts["orange"]:
         next_steps.append(f"人工看一下 flags.md 里的红色和橙色句子（{counts['red']} 红、{counts['orange']} 橙）")
 

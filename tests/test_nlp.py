@@ -24,6 +24,15 @@ assert not words["the"][1] if "the" in words else True
 assert not words["that"][1] and not words["their"][1], "虚词不应算实词"
 for a, b, _, _ in res:  # 位置要能对回原句
     assert s[a:b].isalpha()
+assert words["in"][1] and words["context"][1], "连字符复合词 in-context 的每一部分都算核心词"
+
+s2 = "The model does not use one-token words, and it cannot read the graph."
+w2 = {s2[a:b]: kw for a, b, _, kw in nlp.analyze(s2)}
+print([(k, v) for k, v in w2.items()])
+assert not w2["The"] and not w2["and"] and not w2["it"], "虚词不加粗"
+assert w2["not"] and w2["one"] and w2["token"], "否定词和连字符复合词要加粗"
+assert w2["cannot"], "cannot 是否定词"
+assert [nlp.bold_len(x) for x in ["a", "in", "LLM", "word", "study", "representation"]] == [0, 1, 1, 2, 2, 5]
 print("术语键：", [nlp.term_key(t) for t in ["topology", "random walk", "in-context representation learning", "DE"]])
 assert nlp.term_key("topology") == "topology" and nlp.term_key("random walk") == "random walk"
 assert nlp.term_key("DE") == "de"
