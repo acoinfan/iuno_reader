@@ -1,0 +1,308 @@
+{
+ "__meta__": {
+  "translator": "deepseek-v4-pro（关思考）",
+  "usage": {
+   "calls": 14,
+   "prompt_tokens": 11907,
+   "completion_tokens": 3033,
+   "seconds": 33.8,
+   "cached_tokens": 7168
+  }
+ },
+ "abs.p1": {
+  "sentences": [
+   {
+    "zh": "离线强化学习（RL）旨在利用预先收集的数据集找到接近最优的策略。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在现实场景中，数据收集可能成本高昂且存在风险；因此，当领域内数据有限时，离线强化学习变得尤为具有挑战性。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "鉴于大语言模型（LLMs）的最新进展及其少量示例学习能力，本文介绍了**La**nguage Models for **Mo**tion Control (**LaMo**)，这是一个基于决策Transformer的通用框架，旨在有效地将预训练语言模型（LMs）用于离线强化学习。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们的框架突出了四个关键组成部分：（1）使用顺序预训练的语言模型初始化决策Transformer，（2）采用LoRA微调方法，与全权重微调形成对比，以有效地结合来自语言模型的预训练知识和领域内知识，（3）使用非线性MLP变换而不是线性投影来生成嵌入，以及（4）在微调期间集成辅助语言预测损失，以稳定语言模型并保留其原有的语言能力。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "实证结果表明，**LaMo**在稀疏奖励任务中取得了优异的性能，并在密集奖励任务中缩小了基于价值的离线强化学习方法和决策Transformer之间的差距。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "特别是，我们的方法在数据样本有限的场景中表现出卓越的性能。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们的项目网站是**lamo2023.github.io**。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S0.F1": {
+  "sentences": [
+   {
+    "zh": "图1：**La**nguage Models for **Mo**tion Control（**LaMo**）、Decision Transformer（DT，Chen et al., 2021）、Wiki-RL（Reid et al., 2022）、Conservative Q-Learning（CQL，Kumar et al., 2020）和Behavior Cloning（BC）在D4RL（Fu et al., 2020）数据集上的**归一化得分**。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们对每个领域的任务和数据样本比例进行平均。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "（Mujoco和Atari为Medium，Kitchen为Complete和Partial，不同样本比例，详见附录B。）",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S1.p1.1": {
+  "sentences": [
+   {
+    "zh": "离线强化学习（RL）近年来因其利用预先收集的数据集来提升智能体性能的潜力而受到广泛关注（Lange et al., 2012; Prudencio et al., 2023; Levine et al., 2020）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在离线RL的著名算法中，决策Transformer（DT）（Chen et al., 2021）将RL重新构建为条件序列建模问题，并利用Transformer架构（Vaswani et al., 2017），展示了序列模型在决策制定中的潜力（Xu et al., 2022; Hu et al., 2023a; Hu et al., 2023b; Xie et al., 2023; Laskin et al., 2023）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然而，Transformer以数据饥渴著称（Khan et al., 2022; Brown et al., 2020; OpenAI, 2023），这意味着通常需要在海量数据上进行预训练才能获得令人满意的模型能力（Touvron et al., 2021）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "Transformer最显著的应用之一——大型语言模型（LLMs）——最近在语言理解方面取得了重大进展，例如GPT（Radford & Narasimhan, 2018; Radford et al., 2019; Brown et al., 2020; OpenAI, 2023）、ChatGPT（Ouyang et al., 2022）和LLaMA（Touvron et al., 2023a）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在丰富多样的语言数据上预训练后，LLMs获得了强大的少量示例和零样本学习能力（Brown et al., 2020; Kojima et al., 2022）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S1.p2.1": {
+  "sentences": [
+   {
+    "zh": "因此，一个自然的想法是将预训练语言模型（LM）的能力引入基于Transformer的序列决策方法中，这一想法已被许多近期工作初步探索（Ichter et al., 2022; Huang et al., 2022; Driess et al., 2023; Wu et al., 2023; Li et al., 2022; Reed et al., 2022; Lin et al., 2023; Brohan et al., 2023b; Brohan et al., 2023a; Tang et al., 2023; Wang et al., 2023b）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "其中，Li et al. (2022) 提出用LLM对环境状态进行编码，并基于解码后的状态学习策略，但他们的环境状态仅限于语言描述，这使得运动控制变得困难。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "Reid et al. (2022) 通过直接使用预训练LM作为DT的初始化，并直接处理低层智能体状态和动作，而不是处理语言描述，来解决这一弱点。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "因此，他们的架构成功地在运动控制任务（如 locomotion (Fu et al., 2020)）中利用了预训练LM。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然而，尽管Reid et al. (2022)提出的方法具有新颖性，他们仍未完全释放LM的潜力：他们的实证性能与纯DT方法相当，并且落后于CQL (Kumar et al., 2020)。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "因此，我们提出疑问，",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S1.p3.1": {
+  "sentences": [
+   {
+    "zh": "我们能否释放预训练语言模型的力量来解决序列决策问题？",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S1.p4.1": {
+  "sentences": [
+   {
+    "zh": "在这项工作中，我们提出了用于运动控制的语言模型（LaMo），这是一个有效利用预训练语言模型进行离线强化学习的框架。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "虽然动机很直接，但要让 LaMo 发挥作用需要四个关键设计：1）使用预训练语言模型作为决策Transformer（DT）的初始权重；2）冻结预训练权重，并使用参数高效微调方法 LoRA（Hu et al., 2022）在 0.7% 的参数上进行微调；3）我们用多层感知机（MLP）替换输入嵌入和输出线性投影；4）一个语言预测损失函数作为辅助目标。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "因此，我们发现这四个组件结合起来可以帮助 LaMo 保留从预训练中获得的先验知识和泛化能力，同时高效地适应离线强化学习的新领域。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S1.p5.1": {
+  "sentences": [
+   {
+    "zh": "我们在三个不同的环境中进行了全面的实验：Kitchen（Gupta et al., 2019）、MuJoCo（Todorov et al., 2012）和Atari（Bellemare et al., 2013），总共涵盖8个任务。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这些任务从稀疏奖励到密集奖励，从状态输入到图像输入。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "对于每个任务，我们在不同的数据比例下评估性能，以考察样本数量对结果的影响。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们观察到，如图1所示，LaMo在稀疏奖励任务中超越了DT和基于价值的基线；在密集奖励任务中，我们的方法显著优于DT，并缩小了基于价值的方法与基于DT的方法之间的差距。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "特别是，我们发现当数据规模有限时（例如，整个数据集的1%），LaMo表现出更强大的学习能力，这可以归功于预训练语言模型中的归纳偏置。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S1.p6.1": {
+  "sentences": [
+   {
+    "zh": "我们的贡献有三方面：",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S1.I1.i1": {
+  "sentences": [
+   {
+    "zh": "• 我们提出 LaMo，一个新颖的离线强化学习框架，释放了预训练语言模型的力量。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S1.I1.i2": {
+  "sentences": [
+   {
+    "zh": "• 为了更好地利用语言建模中的跨领域知识，我们提出了3项额外技术，包括LoRA微调、非线性MLP投影和辅助语言损失。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "每个模块都被证明对LaMo的最终结果有积极贡献。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S1.I1.i3": {
+  "sentences": [
+   {
+    "zh": "• 通过在8个跨不同领域、数据集规模和奖励密度的任务上进行大量实验，我们证明了LaMo相对于基于DT和基于价值的离线RL算法的优越性。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "具体来说，我们发现LaMo能够成功处理具有挑战性的低数据场景，而DT则不能。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这凸显了我们跨领域预训练在序列建模方面的巨大潜力。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S6.p1.1": {
+  "sentences": [
+   {
+    "zh": "我们提出 **LaMo**，一个利用预训练**语言模型**（LMs）进行低级**运动控制**的离线强化学习框架。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在稀疏奖励任务上，LaMo 取得了强劲的结果，并超越了近期强大的算法 CQL、IQL、TD3+BC 和 DT；在密集奖励任务上，LaMo 显著改进了决策 Transformer，并缩小了基于价值的方法与基于 DT 的方法之间的差距。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "值得注意的是，在低数据场景下，我们的方法展示了强大的少量示例学习能力，这可归因于预训练语言模型的归纳偏置。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S6.p2.1": {
+  "sentences": [
+   {
+    "zh": "同样重要的是承认我们工作的局限性。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在密集奖励的 MuJoCo 任务上，我们发现 CQL 与 LaMo 非常有竞争力，表明基于价值的方法在离线强化学习中仍然非常强大。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "此外，LaMo 中的辅助语言预测损失仅在非常低水平的任务（例如 Kitchen）中显示出其优势，而在其他任务中，它起到保留语言能力的作用，但并未显著提高性能。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "因此，如何更好地利用语言推理能力来进一步帮助离线强化学习是未来的方向。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "最后，受限于计算资源，我们尚未研究利用更大的语言模型（Touvron et al., 2023a; Touvron et al., 2023b; Chung et al., 2022），我们希望我们的工作能够激励社区探索 LLM 在离线强化学习中的进一步应用。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "__sections__": {
+  "__title__": "释放预训练语言模型在离线强化学习中的力量",
+  "Abstract": "摘要",
+  "1 Introduction": "1 引言",
+  "6 Conclusion": "6 结论"
+ }
+}

@@ -1,0 +1,599 @@
+{
+ "__meta__": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "models": {
+   "reviewer": "deepseek-v4-pro"
+  },
+  "translator": "deepseek-v4-pro（关思考）",
+  "independence": "same-model",
+  "usage": {
+   "calls": 15,
+   "prompt_tokens": 14608,
+   "completion_tokens": 33321,
+   "seconds": 316.0,
+   "cached_tokens": 9088
+  }
+ },
+ "abs.p1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "监督微调（SFT）改善了大语言模型（LLMs）中的端到端经典规划，但这些模型是否也学会了表示和推理它们正在解决的规划问题？"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "由于经典规划问题的相对复杂性以及端到端规划生成对LLMs构成的挑战，探索这个问题一直很困难。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在我们的工作中，我们设计并执行了一系列可解释性实验，通过检查微调LLMs的内部表示和生成能力，全面探究世界模型恢复。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "hedge"
+    ],
+    "issue": "原文 'yields' 表示一种事实性的结果，译文 '可以更准确地恢复' 加入了 '可以'，语气上弱化为可能性/能力，而非必然带来的结果。",
+    "suggestion": "我们发现：a) 对有效动作序列进行监督微调使LLMs能够线性编码动作有效性和一些状态谓词。b) 难以使用输出概率对动作有效性进行分类的模型可能仍然学习到将有效动作与无效动作分开的内部表示。c) 微调期间更广泛的状态空间覆盖，例如来自随机游走数据，会带来对底层世界模型更准确的恢复。",
+    "zh_reviewed": "我们发现：a) 对有效动作序列进行监督微调使LLMs能够线性编码动作有效性和一些状态谓词。b) 难以使用输出概率对动作有效性进行分类的模型可能仍然学习到将有效动作与无效动作分开的内部表示。c) 微调期间更广泛的状态空间覆盖，例如来自随机游走数据，可以更准确地恢复底层世界模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "总之，这项工作贡献了一种将可解释性技术应用于规划LLMs的方法，并产生了见解，这些见解揭示了关于知识如何在LLMs中表示这一开放问题。"
+   }
+  ]
+ },
+ "S1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "使用大型语言模型（LLMs）可靠地自动化复杂工作流程，取决于它们成功生成计划的能力。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "能够规划的LLMs可以帮助人类编写软件，在面对紧急情况时推荐应急措施，并为开放式科学发现做出贡献。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，当前的预训练LLMs在零样本和少量示例设置下生成计划存在显著困难（Valmeekam et al., 2024）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "随着问题复杂度超出训练期间所见范围，性能会下降，并且即使最终达到目标，LLMs也会虚构计划的中间步骤（Momennejad et al., 2023）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这推动了对微调以提升LLMs规划能力的兴趣（Pallagani et al., 2022; Hirsch et al., 2024）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "有理由感到乐观；监督微调（SFT）和强化学习（RL）微调，这两种主要的LLM微调范式，已被用于在其他领域（如数学问题求解和编码能力）大幅增强LLMs的推理能力。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "明确经过微调以解决需要深思熟虑的困难问题的LLMs，在规划基准上评估时，相比其非推理对应模型表现出显著改进（Valmeekam et al., 2025）。"
+   }
+  ]
+ },
+ "S1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "一个重要的问题是，经过微调后成为有效规划器的LLM是否也在表示和推理规划问题。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "LLM可能推理规划问题的一种方式是使用世界模型来决定在形成计划时采取哪些行动。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "有证据表明，LLM并非天生以这种方式推理规划问题（Hirsch et al., 2024）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，一个流行的假设是，在有利的训练条件下，LLM可以学会使用世界模型进行预测。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "最近的工作（Toshniwal et al., 2022; Li et al., 2022）研究了棋盘游戏Transformer中的世界模型恢复，将Othello和Chess中的恢复等同于识别编码游戏状态的内部表示。"
+   }
+  ]
+ },
+ "S1.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "令人信服的证据正在积累，表明LLM可能在一定程度上正在恢复世界模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例如，它们似乎学习到在对话过程中更新的意义内部表征（Li et al., 2021），以及数字的线性表征（Kadlčík et al., 2025），甚至它们自己的幻觉（CH-Wang et al., 2023）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Xie et al. (2024) 表明，对于合成逻辑谜题领域，LLM通过微调学习推理，同时学习对解决谜题至关重要的可解释表征。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "之前的研究提出了不同的观点：Transformer容易学习自动机（Liu et al., 2022; Vafa et al., 2024）和逻辑推理问题（Zhang et al., 2022）的捷径解决方案，这促使我们在经典规划环境中进行仔细研究。"
+   }
+  ]
+ },
+ "S1.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在这项工作中，我们在经典规划的背景下提出以下问题：使用计划示例的SFT是否会在LLM中归纳出世界模型恢复？"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们采用了世界模型恢复的两种流行定义（Toshniwal et al., 2022; Vafa et al., 2024）："
+   }
+  ]
+ },
+ "S1.F1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图1：我们的可解释性实验概览，考察监督微调LLM规划器中的世界模型恢复。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们同时考察内部表征和生成能力，以评估模型捕捉环境动态的程度。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**(a)** 我们研究擅长规划的规划LLM是否也能将动作分类为有效或无效。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**(b)** 我们还研究规划LLM的内部表征是否线性编码状态谓词的真值。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们发现：1）对有效动作序列的监督微调使得动作有效性和某些状态谓词的线性编码成为可能；2）即使输出概率未能区分有效与无效动作，模型也可能学习到区分二者的内部表征；3）微调期间更广泛的状态空间覆盖（例如，随机游走数据）改善了底层世界模型的恢复。"
+   }
+  ]
+ },
+ "S1.p6.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "本文开发了一个框架，用于在经典规划中根据这些定义研究世界模型恢复，并通过在端到端规划生成上使用SFT微调一组`gemma2-9b-instruct`（Team et al., 2024）模型，为这一持续争论贡献新的见解。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了从**内部表示**质量的角度（1）量化世界模型恢复，我们在微调后的LLM的隐藏状态上训练线性探针，以预测计划中间步骤的状态谓词真值和动作有效性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们还通过采用一种使用生成token概率对有效动作和无效动作进行分类的度量，从LLM作为**生成模型**的角度（2）量化世界模型恢复。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了加深我们对微调过程中哪些方面影响世界模型恢复的理解，我们使用三种不同的数据分布微调LLM，并探索使用链式思维风格技术进行微调，其中在动作之间生成中间状态。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的实验涵盖两个经典规划环境，结果表明"
+   }
+  ]
+ },
+ "S1.p6.2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的结果将在第6节中进一步详细讨论。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "本文的其余部分组织如下。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "第2节提供了经典规划的技术背景。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们在第3节中描述了我们的SFT设置，并在第4节中描述了评估任务和指标。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然后，第5节介绍了我们的两个规划环境，并展示了规划性能结果。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的可解释性结果在第6节中提供。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们在第7节中回顾了相关文献，然后在第8节中总结。"
+   }
+  ]
+ },
+ "S1.I2.i1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "直接在有效动作序列上进行监督微调，足以让大语言模型学习到内部表征，这些表征以线性方式编码动作有效性和某些（但并非全部）状态谓词的真值。"
+   }
+  ]
+ },
+ "S1.I2.i2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "2. 在利用预测概率区分有效动作与无效动作方面存在困难的LLM，可能仍具有能够做出这种区分的高质量内部表征。"
+   }
+  ]
+ },
+ "S1.I2.i3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "3. 在具有良好状态空间覆盖的规划数据（例如，由随机游走生成的数据）上进行微调，通常能实现更优的分布内和分布外世界模型恢复。"
+   }
+  ]
+ },
+ "S8.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "括号位置让“Plansformers”看起来是指监督微调过程，而不是指微调得到的模型。",
+    "suggestion": "对LLM在计划示例上进行监督微调得到的模型（所谓的Plansformers）是否学会了恢复规划世界模型？",
+    "zh_reviewed": "对LLM在计划示例上进行监督微调（所谓的Plansformers）是否学会了恢复规划世界模型？"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的工作通过设计并在两个规划环境中进行一系列严格实验，使用开放模型`gemma2-9b-instruct`，并采用同时考察内部表示质量和生成特性的指标，对这一问题进行了实证研究。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的结果是乐观的，表明我们可以微调LLM使其成为熟练的规划者，并在留出的、分布内的规划问题上部分恢复规划世界模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这包括观察到从内部表示线性预测动作有效性的强大能力，以及在中间计划步骤预测某些状态谓词真值的能力，尽管模型仅被训练来预测有效动作。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于分布外（OOD）规划问题，情况更为复杂。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "OOD实验表明，内部表示保持了对动作有效性的线性编码，但对于在随机游走上微调的Plansformers（最佳的分布内模型），其规划性能和生成式世界模型恢复指标崩溃了。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这种崩溃通过对随机游走数据生成过程进行干预而得到一定程度的缓解，该干预增强了结果训练集的状态空间覆盖（random walk++）。"
+   }
+  ]
+ },
+ "S8.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的研究结果应在关键局限性的背景下看待。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "原文用 show（表明）而非 prove，译文“证明”语气略强。",
+    "suggestion": "首先，我们仅展示了编码动作有效性和状态谓词真值的内部表征的存在，但并未进一步表明这些表征与模型预测之间存在因果关系。",
+    "zh_reviewed": "首先，我们仅展示了编码动作有效性和状态谓词真值的内部表征的存在，但并未进一步证明这些表征与模型预测之间的因果关系。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "最终，尚不清楚我们在微调LLM中发现的表征是否参与了LLM的规划过程。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "其次，我们的发现是否适用于参数数量显著更多的LLM尚属未知。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "第三，为开展本研究，我们做出了大量实验设计决策，虽然我们讨论并论证了其中许多决策，但未能控制所有决策的影响。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例如，我们的可解释性分析仅聚焦于LLM生成的有效计划，这为我们的结果增加了一层背景，即假设所有被分析的计划都是“好”计划。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "omission"
+    ],
+    "issue": "漏译了 immediate（紧随其后的）这一限定，弱化了后续研究的即时性。",
+    "suggestion": "一项紧接着的后续研究可以尝试在无效计划中隔离最后一个有效计划步骤，以在放宽该假设的情况下分析世界模型恢复。",
+    "zh_reviewed": "一项后续研究可以尝试在无效计划中隔离最后一个有效计划步骤，以在放宽该假设的情况下分析世界模型恢复。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "第四，我们的研究聚焦于使用受约束的、基于STRIPS的文本模板编码的计划，而非自然语言，这可能抑制LLM充分利用其在预训练期间学到的常识知识。"
+   }
+  ]
+ },
+ "S8.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "总之，我们认为本研究的发现对通过微调增强LLM规划能力的可行性持乐观态度，并鼓励探索强化学习微调等先进策略（Huang et al., 2024），以进一步提升端到端LLM规划器的分布外性能。"
+   }
+  ]
+ },
+ "S8.SS0.SSSx1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "major",
+    "category": [
+     "other"
+    ],
+    "issue": "原文中 'for the U.S.' 应与下一行 'Department of Energy' 连成 'for the U.S. Department of Energy'，译文在 '美国' 后加了句号，致使短语断裂，易被理解为 '为美国这个国家撰写'。",
+    "suggestion": "本工作由落基山国家实验室为美国能源部撰写。",
+    "zh_reviewed": "本工作由落基山国家实验室为美国撰写。"
+   },
+   {
+    "verdict": "major",
+    "category": [
+     "agent"
+    ],
+    "issue": "原文 'operated' 的逻辑主语是落基山国家实验室，不是能源部；译文因上一句句号使 '能源部（DOE）' 成为 '运营' 的主语，误指运营方。",
+    "suggestion": "美国能源部（DOE）下属的该实验室根据合同编号 DE-AC36-08GO28308 运营。",
+    "zh_reviewed": "能源部（DOE），根据合同编号 DE-AC36-08GO28308 运营。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "本工作得到落基山国家实验室的实验室指导研究与发展（LDRD）计划的支持。"
+   },
+   {
+    "verdict": "major",
+    "category": [
+     "scope",
+     "other"
+    ],
+    "issue": "原文中 'the U.S.' 与下一行 'Government' 构成 'the U.S. Government'，译文在 '美国' 后加了 '的观点' 和句号，切断了与 'Government' 的联系，使 'Government' 被孤立，整体句意变成 'DOE 或美国的观点'，遗漏了 '政府'。",
+    "suggestion": "文章中表达的观点不一定代表 DOE 或美国政府的观点。",
+    "zh_reviewed": "文章中表达的观点不一定代表 DOE 或美国的观点。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "政府。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "美国"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "政府保留，且出版商通过接受文章发表承认，美国"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "政府保留非排他性、已付费、不可撤销、全球性的许可，以出版或复制本作品的已发表形式，或允许他人为美国"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "政府目的这样做。"
+   }
+  ]
+ }
+}

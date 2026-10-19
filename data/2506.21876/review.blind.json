@@ -1,0 +1,694 @@
+{
+ "__meta__": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "models": {
+   "reviewer": "deepseek-v4-pro"
+  },
+  "translator": "deepseek-v4-pro（关思考）",
+  "independence": "same-model",
+  "usage": {
+   "calls": 21,
+   "prompt_tokens": 19435,
+   "completion_tokens": 18448,
+   "seconds": 172.4,
+   "cached_tokens": 12544
+  }
+ },
+ "abs.p1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "内部世界模型（WMs）使智能体能够理解世界的状态并预测状态转换，是高级审慎推理的基础。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "近期的大型视觉语言模型（VLMs），如OpenAI o3、GPT-4o和Gemini，展现出作为通用世界模型的潜力。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "虽然最新研究已评估并揭示了其在视觉理解等特定能力上的局限性，但对VLMs基本世界模型能力的系统性评估仍然缺失。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "借鉴比较心理学和认知科学，我们提出了一个两阶段框架，评估感知（视觉、空间、时间、数量和运动）和预测（机制模拟、传递推理、组合推理），以提供对VLMs作为世界模型的原子化评估。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在该框架指导下，我们引入了`WM-ABench`，一个大规模基准，包含23个细粒度评估维度，涵盖6个多样化的模拟环境，并带有受控的反事实模拟。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "通过对15个最新商业和开源VLMs进行的660次实验，我们发现这些模型在基本世界建模能力上表现出显著的局限性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例如，几乎所有模型在区分运动轨迹时都表现出接近随机的准确率。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此外，它们缺乏解耦的理解——例如，一些模型倾向于认为蓝色物体比绿色物体移动得更快。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "更丰富的结果和分析揭示了VLMs与人类水平世界建模之间的显著差距。"
+   }
+  ]
+ },
+ "S0.F1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图1：`WM-ABench` 概览。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "基于比较心理学和认知科学，我们的框架将世界模型的功能划分为两个不同的阶段：（1）感知阶段，包括视觉、空间、时间、数量和运动感知，以及（2）预测阶段，涉及机制模拟、传递推理和组合推理。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "大规模评估揭示了视觉语言模型作为世界模型的局限性。"
+   }
+  ]
+ },
+ "S1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "智能体中的世界模型（WMs）提供外部世界的内部表征（Johnson-Laird, 1983; Wooldridge and Jennings, 1995）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "它们模拟当前状态如何转变到下一状态（Kappes and Morewedge, 2016; Russell and Norvig, 2016），使智能体能够通过预测可能的未来状态并选择最有利的一个来进行深思熟虑的规划（Ha and Schmidhuber, 2018b; LeCun, 2022; Hu and Shu, 2023; Ai et al., 2024; Tian et al., 2025）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "不同环境在独特的机制和动力学下运行——例如，自动驾驶汽车、手术机器人和基于漫游车的航天器的转换机制差异显著。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "先前的工作通过构建特定环境的世界模型来处理这种多样性，但它们未能适应各种实际应用。"
+   }
+  ]
+ },
+ "S1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "近期的大规模视觉-语言模型（VLM；Google, 2023；OpenAI et al., 2024；Anthropic, 2024；Li et al., 2024b；OpenAI, 2025b，等等）用视觉语义增强了通用大语言模型，并封装了关于世界动态的广泛知识，使其成为通用领域有前景的潜在世界模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "与直接生成下一状态的视频生成世界模型不同，VLM 可以在其潜在表示空间中进行推理，并通过语言进行预测。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "term"
+    ],
+    "issue": "language grounding 译为「语言基础」不够准确，可能丢失技术含义（将语言与视觉/物理世界对齐）",
+    "suggestion": "然而，它们的语言接地和世界模拟能力在多个方面可能仍然不足。",
+    "zh_reviewed": "然而，它们的语言基础和世界模拟能力在多个方面可能仍然不足。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例如，现有基准测试已揭示它们在视觉或时空感知（Goyal et al., 2020；Shangguan et al., 2024；Fu et al., 2024b；Zhang et al., 2025）以及由直觉物理驱动的未来状态预测（Bakhtin et al., 2019；Yi et al., 2020a；Bear et al., 2022）方面的脆弱性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些局限性凸显了进行更系统评估的必要性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "一个稳健的世界模型必须整合感知和预测中的多种基本能力，然而以往孤立地评估这些方面的研究只提供了部分视角。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了解决这个问题，我们提出了一个原子评估框架，从第一性原理出发系统地测试 VLM 内部世界模型的基本方面（及其相互作用）。"
+   }
+  ]
+ },
+ "S1.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "借助比较心理学和认知科学中的理论与证据（Spelke, 2000; Knill and Pouget, 2004; Olmstead and Kuhlmeier, 2015），我们首先提出一个系统的概念框架，以形式化世界模型的运作方式（图1）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们将该过程分解为两个阶段：（1）感知阶段，涉及视觉、空间、时间、数量和运动感知（Baillargeon et al., 1985; Merleau-Ponty, 2004; Coren et al., 2004; Hoffmann et al., 2011）；以及（2）预测阶段，涉及机制模拟、传递推理和组合推理（Hegarty, 2004; Barsalou, 2008; Prystawski et al., 2023）。"
+   }
+  ]
+ },
+ "S1.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "遵循这一框架，我们创建了 `WM-ABench`，即世界模型原子基准，它涵盖了世界建模的23个细粒度维度（图2）以及从6个不同模拟器（Dosovitskiy et al., 2017a; Gan et al., 2021; Szot et al., 2021a; Tao et al., 2024; Bear et al., 2022; Gu et al., 2023）中整理出的超过100,000个实例。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "通过系统地操纵环境因素并模拟反事实动作，我们生成错误状态供模型与正确状态区分，以确保研究受控。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们还测量人类表现，以验证我们问题的公平性和可解性。"
+   }
+  ]
+ },
+ "S1.p5.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们对15个最先进的VLM进行了660项实验，发现尽管它们在视觉和定量感知的某些方面表现出色，但在许多其他维度上却出人意料地受限（图1）。"
+   }
+  ]
+ },
+ "S1.p6.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "具体而言，VLM 表现出（1）对空间、时间和运动的感知较弱；（2）在直觉物理和智能体动作方面对物理因果关系的知识不足；（3）传递性和组合性推理能力有限，准确率接近随机水平。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的进一步分析揭示了 VLM 缺乏独立且稳健的世界表示，例如错误地将颜色与速度相关联。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些发现揭示了当前 VLM 与人类水平的世界建模之间存在显著差距，表明在 VLM 真正能够作为通用世界模型之前，需要对感知世界及其转换机制有更深入的理解、接地和推理。"
+   }
+  ]
+ },
+ "S2.F2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图2：`WM-ABench` 任务概览。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "感知阶段（顶部）涵盖空间、时间、视觉、数量和运动维度，每个维度均以示例问题和输出展示。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "预测阶段（底部）包括机制模拟，涵盖直觉物理（例如，下落）、智能体导航（例如，左转）和智能体操作（例如，推动），以及基于这些转换的传递性和组合性任务。"
+   }
+  ]
+ },
+ "S5.F3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图3：模型性能随刺激差异增大的变化，如第5.2节所述。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这里，$\\Delta_{\\text{Object Num.}}$、$\\Delta_{\\text{Size}}$、$\\Delta_{\\text{Speed}}$ 和 $\\Delta_{\\text{Time}}$ 分别表示物体数量、物体大小、物体速度和物体运动持续时间的差异。"
+   }
+  ]
+ },
+ "S5.SS1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "major",
+    "category": [
+     "omission"
+    ],
+    "issue": "中文译文为空，未提供翻译。",
+    "suggestion": "世界模型应当学习关键感知维度（如颜色或空间位置）的解耦表征，以实现灵活的组合推理和类别区分。{fn1} 为评估纠缠程度，我们在保持其他维度不变的情况下扰动其中一个维度，并将标准化相对纠缠（s-RE）定义为不同扰动之间归一化性能偏差：$\\mathrm{s\\text{-}RE}=\\frac{1}{N}\\sum_{i=1}^{N}\\left|\\frac{\\bar{p}-p_{i}}{\\bar{p}}\\right|$，其中 $p_{i}$ 是模型在第 $i_{th}$ 个扰动下的性能，$\\bar{p}$ 是所有扰动上的平均性能。",
+    "zh_reviewed": ""
+   },
+   {
+    "verdict": "major",
+    "category": [
+     "omission"
+    ],
+    "issue": "中文译文为空，未提供翻译。",
+    "suggestion": "本质上，s-RE 计算的是相对于平均性能的平均相对偏差，反映了模型对该特定维度变化的敏感度。",
+    "zh_reviewed": ""
+   },
+   {
+    "verdict": "major",
+    "category": [
+     "omission"
+    ],
+    "issue": "中文译文为空，未提供翻译。",
+    "suggestion": "我们控制了 5 个感知维度（颜色、形状、大小、位置、材质），并在图 4 中展示了纠缠热图。",
+    "zh_reviewed": ""
+   },
+   {
+    "verdict": "major",
+    "category": [
+     "omission"
+    ],
+    "issue": "中文译文为空，未提供翻译。",
+    "suggestion": "我们的结果表明，VLM 对正交世界属性的表征存在显著纠缠。",
+    "zh_reviewed": ""
+   },
+   {
+    "verdict": "major",
+    "category": [
+     "omission"
+    ],
+    "issue": "中文译文为空，未提供翻译。",
+    "suggestion": "颜色和形状是多个任务中纠缠的主要来源。",
+    "zh_reviewed": ""
+   },
+   {
+    "verdict": "major",
+    "category": [
+     "omission"
+    ],
+    "issue": "中文译文为空，未提供翻译。",
+    "suggestion": "例如，颜色与离散数量（DQ）任务发生纠缠，s-RE 范围从 5%（Gemini-1.5 Pro）到 17%（Qwen-2.5 VL）。",
+    "zh_reviewed": ""
+   },
+   {
+    "verdict": "major",
+    "category": [
+     "omission"
+    ],
+    "issue": "中文译文为空，未提供翻译。",
+    "suggestion": "其他维度（如大小和绝对位置）也表现出相对较小的纠缠效应。",
+    "zh_reviewed": ""
+   }
+  ]
+ },
+ "fn1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "人类感知也依赖于视觉属性的相互依赖编码，例如，物体属性被表示为统计摘要而非孤立表示（Whitney and Yamanashi Leib, 2018）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，与VLM不同，人类认知能够将这些摘要区分为离散的符号状态，正如我们的评估所证明的那样，从而在存在潜在相互依赖的情况下实现精确的世界表示。"
+   }
+  ]
+ },
+ "S5.T3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "表3：物理转换任务中，过滤（正确状态感知）与未过滤输入之间的准确率差异（$\\Delta(\\cdot)\\%$）。"
+   }
+  ]
+ },
+ "S5.SS2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如图3所示，我们发现VLM的性能与刺激的物理可区分性（如大小、速度或移动持续时间的差异）呈正相关。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这与先前报道的模型感知中的“近视”现象一致（Rahmanzadehgervi et al., 2024）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的观察表明，VLM能够在某种程度上有效地将语言与相应的物理属性对应起来。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这体现在它们在刺激差异较大的场景中表现强劲，否则将无法解释。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "另一方面，VLM的感知能力受到刺激幅度的强烈影响，而与具体的物理属性无关。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这表明，虽然它们在差异明显时表现良好，但在细粒度、高分辨率的感知上存在困难，凸显了在建模细微物理变化方面的显著差距。"
+   }
+  ]
+ },
+ "S5.SS3.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "准确的下一状态预测依赖于两个关键因素：正确表示当前状态，以及拥有足够的机制知识来进行状态转移模拟。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的分析表明，模型在感知上经常出错，这可能导致了它们在预测任务中的表现不佳，这源于有限的世界建模能力或感知失败导致的累积误差。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了将感知与预测分离开来，我们对来自直观物理（碰撞、滑动、下落）的机制模拟进行了进一步分析。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们检索了所有模型都正确回答所有相关感知问题的实例，以确保准确的状态表示（详情见附录 D.2）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如表 3 所示，预测滑动和下落下一状态的表现仅略有提升，甚至对于碰撞有所下降，这表明有限的感知能力并非唯一原因。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "相反，模型缺乏准确模拟物体交互所需的基础物理知识。"
+   }
+  ]
+ },
+ "S5.T4": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "表4：从真实世界数据集改编为 `WM-ABench` 设计的8个维度的结果。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们从真实数据集中重新构建，并为每个选定的维度精心挑选约50个数据点。"
+   }
+  ]
+ },
+ "S5.SS4.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "将 WM-ABench 的受控设置迁移到现实世界场景具有挑战性，因为需要精确的属性操作（例如，改变物体颜色）和反事实状态生成（例如，对目标物体施加力）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了就我们的模拟发现是否可能推广到现实世界数据获得一些见解，我们重新利用了现有数据集 Walke et al. (2023); Liu et al. (2024a); Lai et al. (2014); Ammirato et al. (2018); Yu et al. (2023); Shangguan et al. (2025); Hwang et al. (2025)，并将它们重构为我们的评估格式。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "“curated” 在此处指整理、筛选数据点，译为“策划”不够准确，容易误解为计划而非实际整理数据。",
+    "suggestion": "对于每个维度，我们整理了约 50 个数据点，并评估了几个表现最佳的模型。",
+    "zh_reviewed": "对于每个维度，我们策划了约 50 个数据点，并评估了几个表现最佳的模型。"
+   }
+  ]
+ },
+ "S5.SS4.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "表4中的结果表明，真实世界与模拟性能模式之间具有一致的对齐关系。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例如，模型在空间定位（SP）和运动轨迹（MT）上表现不佳，这与模拟趋势相呼应。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "相反，它们在颜色和形状识别任务上取得了近乎完美的准确率。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此外，时间定位性能（70–90%）始终超过时间延伸（50–76%），证实了我们之前的发现。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些趋势表明，我们使用模拟数据所带来的偏差可能很小，而且我们的发现往往具有普遍性。"
+   }
+  ]
+ },
+ "S7.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的研究首次采用认知启发的框架，对视觉语言模型的内部世界建模能力进行了原子化评估。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "虽然视觉语言模型在差异明显的场景中表现出色，但它们在三维和动态感知方面存在困难，无法区分细微的物理差异，并且在理解传递性和组合性场景中的世界状态转换时表现不佳。"
+   }
+  ]
+ },
+ "Sx1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "虽然模拟器能够以可扩展的计算和低成本生成数据集的问题和答案，但大多数模拟器难以调整，或者无法生成照片级逼真的图像。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，我们可能是在有些分布外数据上评估视觉语言模型，因为这些图像看起来不真实，而用于训练视觉语言模型的大部分图像数据很可能来自真实世界的视频或图像。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "虽然在一些由 ManiSkill 生成的问题中使用了光线追踪，但如果使用更高质量的资产并更好地调整光照，可以实现更好的照片级逼真度。"
+   }
+  ]
+ },
+ "A4.F4": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图4：热图显示s-RE分数，量化不同物理维度对感知任务性能的相对影响。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "较高的值（深红色）表明物理维度与任务性能之间的纠缠更强，而较低的值（浅色）提示关系较弱。"
+   }
+  ]
+ }
+}

@@ -1,0 +1,379 @@
+{
+ "__meta__": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "models": {
+   "reviewer": "deepseek-v4-pro"
+  },
+  "translator": "deepseek-v4-pro（关思考）",
+  "independence": "same-model",
+  "usage": {
+   "calls": 9,
+   "prompt_tokens": 8778,
+   "completion_tokens": 12158,
+   "seconds": 114.0,
+   "cached_tokens": 5376
+  }
+ },
+ "abs.p1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "现代视频扩散模型生成越来越逼真且时间上连贯的视频，这促使人们将其用作候选世界模拟器。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，这些模型是否在内部编码了物理结构，还是仅仅复现了训练中见过的运动模式，目前仍不清楚。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们通过沿着与已知物理合理性的真实视频相对应的潜在轨迹探测视频扩散模型来研究这个问题。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了获得这样的轨迹，我们通过将学习到的速度场从干净的视频潜在变量向后积分到噪声，来近似反转确定性采样过程，从而获得模型的中间状态和注意力图。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "利用这些恢复的轨迹，我们表明物理合理性可以从扩散Transformer状态中线性解码，在IntPhys和InfLevel上达到约81.27%的平均准确率，并优于V-JEPA和VideoMAE等专用表示学习基线。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "令人惊讶的是，这个信号在VAE潜在输入中不存在，而是在去噪Transformer内部出现，尽管模型并未使用自监督预测目标进行训练。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些发现表明，物理上有意义的表示可以作为生成式去噪的副产品出现。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "代码可在此处获取。"
+   }
+  ]
+ },
+ "S1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "视频生成的发展轨迹一直由这些模型被期望捕捉的内容的不断扩展所驱动。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "早期生成模型（Vondrick et al., 2016; Tulyakov et al., 2017）旨在生成短小、视觉上合理的片段，但大规模基于扩散的生成器（Ho et al., 2022b）的兴起已将目标转向不仅建模视觉方面，还建模视觉世界本身的动力学。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在互联网规模的视频上训练后，当今领先的系统如Sora（OpenAI, 2024）、Veo（DeepMind, 2024）和Cosmos（NVIDIA et al., 2026）生成真实场景的延续，具有惊人的时间连贯性，并且现在被定位为通往用于机器人、规划和科学发现的通用物理世界模拟器的途径。"
+   }
+  ]
+ },
+ "S1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "尽管取得了这些进展，这些模型是否真正内化了支配其生成场景的物理定律，仍不清楚。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "视觉逼真本身并不要求模型将加速度表示为重力下的恒定值、将动量表示为碰撞中的守恒量，或将物质表示为接触中的不可穿透性；它只要求模型产生的轨迹在统计上与其训练中见过的轨迹相似。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "最近的评估（Kang et al., 2025; Huberman et al., 2026）表明，扩大视频扩散模型的规模无法在训练分布之外外推基本力学，生成结果反而模仿分布内最接近的示例。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "雪上加霜的是，大规模视频扩散模型在变分自编码器（VAE）的潜在空间中运行，该VAE纯粹为重建而训练，并未明确优化以捕获表示编码器已知能编码的语义或物理结构（Bardes et al., 2024; Garrido et al., 2025）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，该模型既没有明确的目标，也没有隐含的基础，来推动它恢复支配其被要求生成的动力学的定律。"
+   }
+  ]
+ },
+ "S1.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这提出了一个根本性问题：现代视频生成模型是否在内部编码了物理知识，即使其输出未能捕捉到这些知识？"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "先前的工作主要通过表示学习来探讨这个问题。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "诸如 V-JEPA（Bardes et al., 2024; Assran et al., 2025a）这类自监督编码器学习针对预测未来状态而优化的潜在空间，并且能够区分物理上合理与不合理的视频（Garrido et al., 2025）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些结果表明，当模型以预测目标进行训练时，物理结构可能会出现；然而，尚不清楚在为了生成而非预测而训练的扩散模型中是否存在类似的结构。"
+   }
+  ]
+ },
+ "S1.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "一个关键障碍是访问：扩散模型不暴露与真实视频相关的潜在轨迹，这使得难以探测内部表征如何演变。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们通过近似反转生成过程来解决这个问题。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "从干净的视频潜在变量开始，我们向后积分学习到的速度场，以恢复通过模型中间状态的近似轨迹，从而提供对其内部表征的访问。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "使用这个框架，我们发现视频扩散模型在其内部状态中包含清晰的、可解码的物理合理性信号，即使它们生成的输出违反了相同的物理定律。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这是令人惊讶的，因为这些模型没有用预测性或物理感知的目标进行训练，并且它们的输入来自基于重建的VAE，这些VAE不编码物理结构。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，我们的结果表明，物理上有意义的表征可以作为去噪计算本身的副产品出现。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的分析超越了线性探针，通过将轨迹重建与因果干预相结合，使我们能够研究物理信息在哪里可读以及它如何影响生成。"
+   }
+  ]
+ },
+ "S1.p5.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的贡献有三方面。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "首先，我们引入一种反向采样方法，用于在真实世界视频上对视频扩散模型进行线性探针。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "其次，我们表明，尽管模型在没有预测性表示目标的情况下训练，物理合理性和定量物理变量仍可从中间Transformer块中解码。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "scope"
+    ],
+    "issue": "原文“across depth and causal interventions”修饰“structure”，译文“该信号在深度上的结构以及因果干预”把“因果干预”并列处理，改变了修饰关系。",
+    "suggestion": "第三，我们刻画了该信号在深度和因果干预上的结构，表明物理信息自然涌现，并且当轨迹更紧密地遵循模型底层的连续动力学时，物理信号增强。",
+    "zh_reviewed": "第三，我们刻画了该信号在深度上的结构以及因果干预，表明物理信息自然涌现，并且当轨迹更紧密地遵循模型底层的连续动力学时，物理信号增强。"
+   }
+  ]
+ },
+ "S5.F9": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图9：**精确离散化提高可解码性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "使用Heun求解器的探针准确率超过Euler。**"
+   }
+  ]
+ },
+ "S5.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "minor",
+    "category": [
+     "omission"
+    ],
+    "issue": "原文中 'despite' 表达的让步关系在译文中弱化为条件陈述，未体现对比。",
+    "suggestion": "我们研究了视频扩散模型尽管纯粹为生成而训练，是否仍在内部编码了物理结构。",
+    "zh_reviewed": "我们研究了视频扩散模型是否在纯粹为生成而训练的情况下，内部编码了物理结构。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "通过近似反转采样过程，我们恢复了真实视频的潜在轨迹，并探测了多个扩散模型的内部状态。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们发现物理合理性可以从Transformer状态中线性解码，尽管它不存在于VAE潜在输入中。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这一信号在反向轨迹中持续存在，在中间深度最易获取，并编码了定量物理参数。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "hedge"
+    ],
+    "issue": "'suggest' 被译为 '表明'，语气比原文更肯定，丢失了不确定性。",
+    "suggestion": "这些结果提示，物理上有意义的表示可以作为生成式去噪的副产品出现。",
+    "zh_reviewed": "这些结果表明，物理上有意义的表示可以作为生成式去噪的副产品出现。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "未来的工作可以利用这些信号进行物理感知引导，并进一步探索它们作为世界模型潜在空间的潜在作用。"
+   }
+  ]
+ },
+ "S5.SS0.SSS0.Px1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的分析依赖于近似反向采样，这可能引入轨迹误差。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "虽然重建一致性支持其有效性，但细粒度结论可能取决于离散化。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "线性探针证明了可解码性，但并不意味着模型明确表示了物理定律，而且我们基于探针的度量可能从学习到的分类器中继承偏差。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "更广泛地说，我们的结果是相关性的：尽管干预提供了部分因果证据，但它们并未完全确立模型以机械论或人类可解释的形式内部编码了物理定律。"
+   }
+  ]
+ }
+}

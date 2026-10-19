@@ -1,0 +1,345 @@
+{
+ "__meta__": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "models": {
+   "reviewer": "deepseek-v4-pro"
+  },
+  "translator": "deepseek-v4-pro（关思考）",
+  "independence": "same-model",
+  "usage": {
+   "calls": 11,
+   "prompt_tokens": 10305,
+   "completion_tokens": 8528,
+   "seconds": 79.4,
+   "cached_tokens": 7040
+  }
+ },
+ "abs.p1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "利用大型语言模型（LLMs）丰富的世界知识来增强强化学习（RL）智能体，为实现通用智能提供了一条有前景的路径。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，一个根本性的先验-动态不匹配阻碍了现有方法：静态的LLM知识无法直接适应长时程任务复杂的转移动态。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "将LLM先验用作固定策略限制了探索的多样性，因为先验对环境特定的动态是盲目的；而端到端微调则遭受优化不稳定性和信用分配问题。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了弥合这一差距，我们提出了PriorZero，一个统一的框架，通过解耦的 rollout-训练设计将LLM衍生的概念先验集成到基于世界模型的规划中。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在 rollout 过程中，一种新颖的根先验注入机制仅在蒙特卡洛树搜索（MCTS）的根节点处纳入LLM先验，将搜索聚焦于语义上有前景的动作，同时保留世界模型的深度前瞻能力。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在训练过程中，PriorZero将世界模型学习与LLM适应解耦：世界模型在交互数据上持续精炼，以共同改进其动态、策略和价值预测，然后利用其价值估计为通过交替优化进行的稳定LLM微调提供细粒度的信用分配信号。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在包括Jericho中的基于文本的冒险游戏和BabyAI中的指令遵循网格世界任务在内的多样化基准上的实验表明，PriorZero持续提高了探索效率和渐近性能，为LLM赋能的决策制定建立了一个有前景的框架。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的代码可在 https://github.com/opendilab/LightZero 获取。"
+   }
+  ]
+ },
+ "S1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "大型语言模型（LLMs）编码了广泛的语义和常识知识，这些知识可以在语言条件、具身和交互式决策任务中显著有益于强化学习（RL）智能体（Huang et al., 2022; Ahn et al., 2022; Li et al., 2022; Carta et al., 2023）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这种知识在奖励稀疏的长时程环境中尤其有价值，因为纯粹的试错探索往往需要高昂的交互成本。"
+   }
+  ]
+ },
+ "S1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，将LLM的静态、声明性知识迁移到动态RL任务中仍然具有挑战性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "核心困难在于先验-动态不匹配：LLM擅长语义合理性和高层推理，而RL智能体必须建模环境特定的转移、分配长期信用并在反馈下进行规划。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "现有范式以不同方式暴露了这种不匹配。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "直接使用LLM作为策略（Huang et al., 2022; Ahn et al., 2022; Huang et al., 2023）通常会导致短视决策，因为语言似然并不等同于环境回报。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对LLM策略进行端到端RL微调（Carta et al., 2023）引入了环境反馈，但在长时程稀疏奖励任务中遭受高方差信用分配和可扩展性差的问题。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "使用语言模型作为动力学模型（Lin et al., 2024）可以利用语言条件预测，但准确的动作条件转移建模仍然困难：LLM通过token级自回归目标进行预训练，而潜在动力学模型必须在状态-动作层面预测状态转移——这种粒度差距阻碍了预训练知识被直接重用于动力学学习。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "最后，将LLM视为冻结表示（Li et al., 2022）提高了样本效率，但限制了任务特定的适应。"
+   }
+  ]
+ },
+ "S1.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了解决这些瓶颈，我们提出了 PriorZero，一个将 LLM 语义先验整合到基于世界模型的潜在规划中的统一框架。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "term"
+    ],
+    "issue": "「model-based RL」应译为「基于模型的强化学习」，译文「模型强化学习」遗漏了 based，术语不够准确。",
+    "suggestion": "基于模型的强化学习和潜在世界模型（Hansen et al., 2024; Wang et al., 2024b; Pu et al.,; Xuan et al., 2024; Niu et al., 2024; Pu et al., 2025）的最新进展，PriorZero 在 LLM 和环境之间放置了一个可学习的世界模型。",
+    "zh_reviewed": "基于模型强化学习和潜在世界模型（Hansen et al., 2024; Wang et al., 2024b; Pu et al.,; Xuan et al., 2024; Niu et al., 2024; Pu et al., 2025）的最新进展，PriorZero 在 LLM 和环境之间放置了一个可学习的世界模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这种设计使 LLM 能够提供有价值的语义指导，同时将转移建模、价值估计和多步规划委托给世界模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "PriorZero 通过两个互补机制解耦了 rollout 和训练过程。"
+   }
+  ]
+ },
+ "S1.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在推演过程中，我们引入了根先验注入：LLM 语义先验仅在潜在空间蒙特卡洛树搜索（MCTS）的根节点处融合。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这为搜索提供了信息丰富的初始方向，同时保留了世界模型进行更深层潜在探索的能力，有效防止 MCTS 陷入无意义的轨迹探索（例如奖励循环或逻辑不一致的路径）。"
+   }
+  ]
+ },
+ "S1.p5.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在训练过程中，我们引入了交替强化微调，它将世界模型学习与LLM适应解耦。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "首先，在LLM先验指导下收集的交互数据被用于更新世界模型，加速其组件的收敛。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然后，利用世界模型的动作价值估计来构建细粒度的信用分配信号，以实现稳定的LLM微调。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这种交替过程使LLM先验更紧密地与特定环境的决策结果对齐，同时避免了端到端优化的不稳定性。"
+   }
+  ]
+ },
+ "S1.p6.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在 Jericho Hausknecht et al. (2020) 和 BabyAI Chevalier-Boisvert et al. (2019) 上的实验表明，PriorZero 在基于文本的冒险游戏和网格世界指令遵循任务中提高了探索效率和最终性能。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的主要贡献是："
+   }
+  ]
+ },
+ "S1.I1.i1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• 我们分析了将大语言模型知识迁移到强化学习智能体的主要范式，并指出先验-动力学不匹配是长时程、稀疏奖励决策中的核心障碍。"
+   }
+  ]
+ },
+ "S1.I1.i2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• 我们提出 PriorZero，一个通过两种核心机制将 LLM 先验与世界模型规划协同起来的框架：根先验注入（Root-Prior Injection），在 MCTS 根节点注入语义引导以促进探索；以及交替强化微调（Alternating Reinforcement Fine-Tuning），利用世界模型的价值估计作为细粒度信用分配信号，实现稳定的 LLM 适应。"
+   }
+  ]
+ },
+ "S1.I1.i3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• 我们在 Jericho 和 BabyAI 基准上展示了强大的性能，并通过全面的消融实验验证了根先验注入、LLM 微调、基于 CoT 的先验提取、模型规模和 MCTS 的具体贡献。"
+   }
+  ]
+ },
+ "S6.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们提出了 PriorZero，一个统一的框架，通过解耦的 rollout-训练设计来解决预训练 LLM 与长时程 RL 优化之间的先验-动态不匹配问题。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在 rollout 期间，仅根节点注入将 LLM 先验专门融合在 MCTS 根节点，引导搜索朝向语义上合理的动作，同时保留世界模型的多步前瞻能力。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在训练期间，交替微调使用世界模型的价值估计来构建更好的优势信号，为 LLM 适应提供稳定的策略梯度。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些组件共同形成一个闭环，其中世界模型和 LLM 相互强化：LLM 的先验聚焦搜索，而世界模型的规划细化 LLM 的先验。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在 Jericho 和 BabyAI 上的实验验证了 PriorZero 持续改善探索和回报；消融实验确认每个组件都是必要的，并且该框架随着 LLM 容量而扩展。"
+   }
+  ]
+ }
+}

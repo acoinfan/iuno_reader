@@ -1,0 +1,408 @@
+{
+ "__meta__": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "models": {
+   "reviewer": "deepseek-v4-pro"
+  },
+  "translator": "deepseek-v4-pro（关思考）",
+  "independence": "same-model",
+  "usage": {
+   "calls": 12,
+   "prompt_tokens": 10928,
+   "completion_tokens": 18689,
+   "seconds": 184.8,
+   "cached_tokens": 6912
+  }
+ },
+ "abs.p1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们推测，与各个输入标记对应的隐藏状态向量编码了足以准确预测后续多个标记的信息。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "更具体地说，在本文中我们提出：给定输入中位置 $t$ 处单个标记的隐藏（内部）表示，我们能否可靠地预测将出现在位置 $\\geq t+2$ 的标记？"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了检验这一点，我们在 GPT-J-6B 中测量线性近似和因果干预方法，以评估网络中各个隐藏状态包含足够丰富信号以预测未来隐藏状态并最终预测标记输出的程度。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们发现，在某些层，通过单个隐藏状态，我们可以以超过 48% 的准确率近似模型对后续标记的预测。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "最后，我们提出一种“未来透镜”可视化方法，利用这些方法为 Transformer 状态创建新的视图。"
+   }
+  ]
+ },
+ "S1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "大型语言模型（LLM）中的隐藏状态是否编码了不止一个token之后的信息？"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如果是这样，我们如何从单个状态中解码出这个token序列？"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在这项工作中，我们使用GPT-J-6B（Wang and Komatsuzaki, 2021）实证研究了这些问题。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们训练模型，仅基于给定位置$t$处输入的上下文表示，来预测该位置之后几个token的隐藏状态。"
+   }
+  ]
+ },
+ "S1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "自回归Transformer语言模型通常被训练来预测下一个词元，但最近的工作提示，单个隐藏状态可能包含比仅下一个词元的概率更多的信息。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例如，Meng et al. (2022a) 追踪了从主语词元到许多步之后相关属性预测的信息流。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "hedge"
+    ],
+    "issue": "原文 suggest 有推测语气，译成「表明」后语气变得肯定，削弱了不确定性。",
+    "suggestion": "在其他地方，Gurnee et al. (2023) 提示，早期层中的神经元信息密集，而中间层有专门的神经元来表示高级上下文特征。",
+    "zh_reviewed": "在其他地方，Gurnee et al. (2023) 表明，早期层中的神经元信息密集，而中间层有专门的神经元来表示高级上下文特征。"
+   }
+  ]
+ },
+ "S1.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "其他相关工作直接将隐藏的中间状态传递给解码器头（跳过中间层），以“表达”此类嵌入 Din et al. (2023); Belrose et al. (2023); nostalgebraist (2020)。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "关于记忆的研究 Carlini et al. (2021); Carlini et al. (2023); Carlini et al. (2019) 已经识别出语言模型生成非常长的记忆序列的存在，并且 Zhang and He (2020) 表明，在计算过程中逐步丢弃层仍然可以实现与完全计算的模型运行相比相似的模型预测输出。"
+   }
+  ]
+ },
+ "S1.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "minor",
+    "category": [
+     "scope"
+    ],
+    "issue": "“subsequent” 被译为 “紧接着的”，缩小了原文的范围；subsequent 可指后续的，不限于紧接着的。",
+    "suggestion": "在这项工作中，我们提出一个问题：我们能在多大程度上从单个隐藏 token 表示中提取关于未来（而不仅仅是后续）token 的信息？",
+    "zh_reviewed": "在这项工作中，我们提出一个问题：我们能在多大程度上从单个隐藏 token 表示中提取关于未来（不仅仅是紧接着的）token 的信息？"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了回答这个问题，我们进行了三个实验。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "首先，扩展 Tuned Lens Belrose et al. (2023); Din et al. (2023) 和 Logit lens nostalgebraist (2020) 的思想，我们训练线性模型来近似未来几个 token 之后的模型预测，以揭示单个隐藏状态可能在多大程度上直接编码后续 token。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "其次，我们进行了一项因果干预研究，将单个隐藏状态从一个上下文移植到完全不同的上下文，并测量在原始上下文中预测的未来 token 在陌生上下文中能被预测的程度。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "最后，我们拟合一个“软提示”，以显式学习一个最优提示，从而允许从隐藏状态中读出关于后续 token 的信息。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的代码和数据可在 `https://future.baulab.info` 获取。"
+   }
+  ]
+ },
+ "S3.F4": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图4：使用移植的隐藏表示的准确率（Precision@1）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "$N=0$ 的情况模拟的是直接预测下一个 token，而 $N\\geq 1$ 的情况则是我们工作所关注的后续 token 预测。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "quantity"
+    ],
+    "issue": "原文“more than double the accuracy”表示“超过基线准确率的两倍”，即大于2倍；“高出两倍多”在中文中可能被理解为比基线高出两倍以上，即达到三倍以上，造成数量上的歧义。",
+    "suggestion": "学习到的提示最能够从前面单个 token 的隐藏状态中恢复未来 token 的信息，预测准确率在中间层达到峰值，超过二元语法基线准确率的两倍多。",
+    "zh_reviewed": "学习到的提示最能够从前面单个 token 的隐藏状态中恢复未来 token 的信息，预测准确率在中间层达到峰值，比二元语法基线的准确率高出两倍多。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "预测隐藏状态的线性模型与直接预测到输出词汇表的模型表现相当。"
+   }
+  ]
+ },
+ "S3.T2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "表2：每种方法的最佳准确率和惊异度结果。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "term"
+    ],
+    "issue": "原文方法名“Learned Prompt Causal Intervention Method”和“Fixed version”被全部意译为中文，未保留英文专有名称，可能影响术语一致性。",
+    "suggestion": "Learned 指 Learned Prompt Causal Intervention Method；Fixed 指 Fixed 版本。",
+    "zh_reviewed": "Learned 指学习提示因果干预方法；Fixed 指固定版本。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "HS 是预测隐藏状态的线性模型变体；Vocab 是直接预测词汇表上分布的线性模型变体。"
+   }
+  ]
+ },
+ "S5.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在本文中，我们探讨了仅基于特定标记的隐藏表示，能够在多大程度上解码该标记之后的多标记输出。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "表2以及图4和图5中的结果表明，这些表示在一定程度上编码了此类信息。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在我们评估的解码方法中，学习到的提示最能够预测此类未来标记。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在$N=1$时，线性模型和学习到的提示模型都比经验二元基线取得了更好的准确率。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "有趣的是，学习到的提示模型的预测准确率在中间层隐藏状态达到峰值，这表明后续标记信息是在这些层编码的；这种模式与直接预测下一个标记（$N=0$）的情况非常不同，后者的准确率在最后一层达到峰值。"
+   }
+  ]
+ },
+ "S5.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "学习到的提示模型实现的准确率足以潜在地用作“未来透镜”，以提供关于LLM中隐藏状态所包含的后续token信息的见解。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这提供了一种解码隐藏状态中编码的短token序列的方法，而不仅仅是单个直接token预测。"
+   }
+  ]
+ },
+ "S5.SS0.SSS0.Px1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "演示和实现的所有代码和数据均可在以下地址获取：`https://future.baulab.info`"
+   }
+  ]
+ },
+ "S5.SS0.SSS0.Px2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "award 在此处指美国国家科学基金会的资助或拨款，译作“奖项”不够准确。",
+    "suggestion": "这项工作得到了开放慈善基金会（Open Philanthropy）和美国国家科学基金会（NSF）第1901117号资助的支持。",
+    "zh_reviewed": "这项工作得到了开放慈善基金会（Open Philanthropy）和美国国家科学基金会（NSF）奖项1901117的支持。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们感谢人工智能安全中心（CAIS）为本研究提供计算能力。"
+   }
+  ]
+ },
+ "Ax2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在我们从单个隐藏状态中提取远期未来token的探索中，我们大多在英语数据上进行训练和测试，其规模为100,000，与GPT-J-6B实际训练所用的数据规模相比仍然相对较小。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此外，实验仅在GPT-J-6B上进行。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "虽然在该模型中，单个隐藏状态中存在后续token信息是明显的，但在其他LLM中运行这些实验将更为全面。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "由于没有专门关注从单个隐藏状态解码远期未来token的先前工作，我们没有可参考的先前基线。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "虽然我们在预测未来2个token（$N=1$）的情况下确实创建了一个二元基线，并且还创建了线性模型作为第一种解码方法，但可能存在其他架构的基线，如循环神经网络 Jordan (1997); Elman (1990) 和非自回归生成 Su et al. (2021); Xiao et al. (2023)。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "最后，我们的实验最多预测未来4个token，即$N=0,1,2,3$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "测试并扩展单个状态实际编码和预测未来多少个token将是很有趣的。"
+   }
+  ]
+ }
+}

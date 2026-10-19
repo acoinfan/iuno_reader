@@ -1,0 +1,1082 @@
+{
+ "__meta__": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "models": {
+   "reviewer": "deepseek-v4-pro"
+  },
+  "translator": "deepseek-v4-pro（关思考）",
+  "independence": "same-model",
+  "usage": {
+   "calls": 24,
+   "prompt_tokens": 29482,
+   "completion_tokens": 64219,
+   "seconds": 556.3,
+   "cached_tokens": 14336
+  }
+ },
+ "S1.p1.3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**制造经验。** 语言模型只有在看到某个领域大量真实、带标签的示例之后，才能学会在该领域进行泛化——而在大多数领域中，这类示例既稀缺又昂贵。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们研究一种廉价的方法来制造这些示例。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "当一个领域的动态可以写成代码时，一个模板就能变成许多世界模型——这些模拟器的动态是可执行、可验证的、作用于符号状态的程序——并且每个世界模型都能无休止地生成精确标注的轨迹。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在一个领域的许多此类世界上运行轨迹，并用这些轨迹对模型进行微调——即世界时间计算（§4.3），它是测试时间计算的训练时间对应物——能提高模型对从未训练过的留出世界的泛化能力。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "必须满足两个条件。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "首先，世界不能撒谎：只有当世界的动态正确时，它才能传授正确的规则，因此我们将它们构建为经过验证的代码，而不是学习到的近似。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "模型将转移写成程序，只有在该程序以所需签名解析、在沙箱中运行而不破坏世界声明的不可变式、并且（可选地）经受住第二个模型针对规则的批评之后，我们才接受它。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "被接受的程序在长时间展开中保持精确，没有复合误差（图1A）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "其次，世界时间计算需要许多世界，而只有当每个世界的构建成本低廉时，这才切实可行。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "使其成本低廉的工具是 OpenWorld，一个零依赖框架，它将编写一个经过验证的世界模型（感知 $\\to$ 世界 $\\to$ 发出 $\\to$ 行动，可服务且可共享）变成一项分钟级、一键式的任务（配套框架论文 [38]）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "没有任何通用工具能使编写所需的众多经过验证的世界模型变得廉价；OpenWorld 就是这样的工具，我们在这里用它来制造训练经验。"
+   }
+  ]
+ },
+ "S1.F1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图1：A：任务是根据当前状态和一个动作（这里是冲刺待办/债务/缺陷世界，连接到真实值预言机）预测世界的下一个符号状态。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "一次性合成并验证为代码的动力学（蓝色）在20步展开的每个深度都与预言机完全匹配，而逐步LLM下一状态预测（橙色）——作为学习到的神经动力学的结构替身——平均在第2.3步首次出错，并且从未完成一次精确展开。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（面板A是n=3次展开的逐深度精确匹配率，因此橙色轨迹有噪声且非单调；确凿的结论是与代码在每个深度都精确的线条的对比，而不是橙色的形状。）"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "程序编码规则而非统计，因此学习到的世界模型的复合误差失败在构造上就被排除，且训练成本为零。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "B（收益）：这种精确性带来的好处——世界时间计算。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在60个经过验证的训练世界模型上运行轨迹对LLM进行微调，将20个未见世界上的留出诊断准确率提升至接近规则给定的预言机，其中最小模型的增益最大（0.5B时+29分，32B时降至+3）——这是一个在能力最稀缺处最强的泛化杠杆（条形：留出专业上的95%自助置信区间；虚线：仅先验下限；E74，§4.3）。"
+   }
+  ]
+ },
+ "S1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "世界模型是智能体的内部模拟器：给定状态和动作，它预测下一个状态（和/或观测），使智能体能够“在想象中”规划，而不是在现实世界中试错 [18]。"
+   },
+   {
+    "verdict": "major",
+    "category": [
+     "agent"
+    ],
+    "issue": "原文中 'how it is obtained' 的 'it' 指代 'model'，而译文译成 '如何获得状态'，将指代对象从模型变成了状态，改变了施受关系。",
+    "suggestion": "整个领域共享这一属类；研究项目之间的分歧在于模型如何表示状态以及模型如何被获得，而如今这个术语指称两个大体上独立的物种。",
+    "zh_reviewed": "整个领域共享这一属类；研究项目之间的分歧在于模型如何表示状态以及如何获得状态，而如今这个术语指称两个大体上独立的物种。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "占主导地位、最显眼的一个是感知性和生成性的：一个从大量数据中学习得到的神经网络，其状态是连续的潜在变量（或像素、视频或3D场景），其输出是生成的观测。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "它从Ha和Schmidhuber [18]的V–M–C三元组，经过基于RSSM的Dreamer家族 [19]、MuZero中的价值等价规划 [37]、自回归token模型如IRIS [27]和$\\Delta$-IRIS [28]、DIAMOND中的扩散动力学 [3]，一直到在表示空间中预测的联合嵌入预测视频模型如V-JEPA [5]。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在最近的生成式AI中最为显眼的是，该物种现在延伸到了交互式生成环境和“空间智能”——互联网规模的视频和3D世界生成器，如Genie [6]、视频生成即模拟器（Sora）[31]以及李飞飞的World Labs [15]。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "尽管这些模型功能强大，但它们带有三个固有的代价：数据饥渴（数百万环境步骤，或互联网规模的视频）、误差累积（每个学习到的转换都会增加误差，并在整个推演过程中累积）以及不透明（动力学和值都存在于无法检查、编辑或审计的连续权重中）。"
+   }
+  ]
+ },
+ "S1.SS0.SSS0.Px1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "该术语已开始暗示生成式、像素和3D原生系统，但我们使用更简单、更狭窄的含义——一种用于规划的下一个状态的前向预测器——并且我们将状态限定为符号对象：命名变量的类型化记录（计数、价格、位置、标志），而非像素、潜在变量或3D几何。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，我们的世界模型是第二个物种，代码世界模型（CWM）：转换是显式、人类可读的程序，作用于该符号状态，由LLM根据声明的规则集合成并在使用前验证，并且一次展开精确返回下一个符号状态，而非生成的图像，且无需训练数据。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这与上述感知模型属于同一属（智能体向前展开的模拟器），但属于不同的物种——并且我们意在使其互补。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "OpenWorld面向你可以符号化指定的领域（库存、市场、日程、谈判、具有已知方程的物理）；它不是像素原生、感知或开放世界3D模型，并且不生成图像、视频或场景。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "空间智能系统学习无法言说的内容，而OpenWorld写下可以言说的内容，并对其进行验证。"
+   }
+  ]
+ },
+ "S1.SS0.SSS0.Px2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "世界模型只是四个独立对象之一。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "世界是作为模拟器的环境：一个符号状态、一组离散动作，以及将 $(\\textrm{state},\\textrm{action})$ 对映射到下一状态的已验证转移（加上可选的感知/发射边界）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "智能体是一个独立的策略（LLM 规划器或固定规则），它朝着目标选择动作；它是世界的使用者，而不是世界的一部分，因此一个世界可以服务于任何智能体，并且你可以在不重新合成动力学的情况下更换规划器。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "仿真闭合了循环：它将智能体置于世界中，并反复观察、选择动作并推进世界，产生由目标函数评分的轨迹。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "教科书定义将世界模型置于智能体内部（它用于规划的模拟器），并将其与真实环境区分开来；两者之间的差距（模型偏差、仿真到现实的误差）正是限制学习型世界模型的因素。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "一个经过验证的代码世界模型与其说是消除了这一差距，不如说是重新定位了它：一旦动力学被符号化地声明，并且被接受的程序精确地再现了它们，智能体用于规划的模型与其所作用的（符号）环境就可以是同一个经过验证的转移，因此动力学不会增加任何 rollout 误差——任何剩余的误差都完全存在于规范和感知（符号接地边界；参见配套框架论文 [38]）中，而不在转移中。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这就是为什么同一个 `World` 在我们的规划实验中既作为地面真值环境，又作为智能体用于规划的模型，保持不变；这也是为什么本文的范围仅限于可规范化的领域。"
+   }
+  ]
+ },
+ "S1.SS0.SSS0.Px2.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这种代码世界模型（Code World Model）的取舍（用程序代替权重）换来了可验证性、计算成本低廉的推演，以及构造上就具备的分布外泛化能力 [44, 13, 33, 22]。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，代码世界模型的研究一直停留在针对特定基准的一组一次性系统上——它们是为评估或训练后阶段而构建的，而不是为智能体提供一个可在推理过程中使用的可复用框架。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "目前还没有一个通用、轻量级的框架能让实践者声明一个世界，让本地模型编写并验证其动态，通过声明的价值权重来引导行为，并针对目标优化整个设置——正是这一工作流使监督学习变得无处不在。"
+   }
+  ]
+ },
+ "S1.SS0.SSS0.Px2.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "OpenWorld 就是这样一个框架，本文将这一框架所付诸实践的范式与学习动力学替代方案进行基准对比。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "term"
+    ],
+    "issue": "invariants 在代码/形式验证语境中通常译为“不变式”，译文“约束条件”弱化或偏移了其专门含义。",
+    "suggestion": "该框架增加了四种机制：（i）一个计划-生成-验证接力，其中生成器 LLM 编写转换代码，该代码必须通过语法检查、沙盒冒烟运行和声明的不变式，以及可选的第二模型批评者，之后我们才接受它；（ii）开放价值规范——目标是按可调旋钮加权的评分函数，因此道德配置是一个你可以编辑的工件，而不是冻结的权重，这直接针对规范陷阱 [42]；（iii）一个自动调谐器，它同时搜索世界设计、策略旋钮和道德旋钮（随机、局部改进和 Optuna TPE [1] 策略）；（iv）智能体作为评判者 [52, 51]：一个 LLM 评判者，在候选行为中进行选择，并根据书面评分标准对轨迹进行评分。",
+    "zh_reviewed": "该框架增加了四种机制：（i）一个计划-生成-验证接力，其中生成器 LLM 编写转换代码，该代码必须通过语法检查、沙盒冒烟运行和声明的约束条件，以及可选的第二模型批评者，之后我们才接受它；（ii）开放价值规范——目标是按可调旋钮加权的评分函数，因此道德配置是一个你可以编辑的工件，而不是冻结的权重，这直接针对规范陷阱 [42]；（iii）一个自动调谐器，它同时搜索世界设计、策略旋钮和道德旋钮（随机、局部改进和 Optuna TPE [1] 策略）；（iv）智能体作为评判者 [52, 51]：一个 LLM 评判者，在候选行为中进行选择，并根据书面评分标准对轨迹进行评分。"
+   }
+  ]
+ },
+ "S1.SS0.SSS0.Px2.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对世界模型领域的调查显示出不同的策略家族，并存在一种反复出现的张力——一边是保真度和规模；另一边是可验证性、样本效率和可操控性（与代表性策略的定位表见配套框架论文）。"
+   }
+  ]
+ },
+ "S1.SS0.SSS0.Px3.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "最近的两条工作线索使经过验证的、显式的世界模型所能带来的好处更加清晰。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "第一条线索询问一个训练好的模型是否甚至持有一个连贯的世界模型：从生成模型的预测中读出的隐式世界模型往往是不连贯的 [46]，而一个网络是否在内部表示一个世界模型本身就存在争议 [23]——OpenWorld 绕开了这个问题，因为模型就是人类可读的转移程序，所以连贯性是一种你可以检查的属性，而不是你推断出来的属性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "视频生成世界模型同样即使在规模上也错过了支配性的物理定律 [20]；OpenWorld 则声明并验证该定律，在定律已知的地方用学到的广度换取精确性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "第二条线索将世界模型用作策略评估环境 [34]；由于这些环境是学习得到的，策略的得分会包含模拟器的误差，而 OpenWorld 的评估世界精确运行，因此模型误差不会混淆得分。"
+   }
+  ]
+ },
+ "S1.SS0.SSS0.Px4.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "第三，全部围绕世界-时间-计算这一论点："
+   }
+  ]
+ },
+ "S1.I1.i1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "1. **真实领域上的世界-时间计算，并具有跨世界迁移。** 经过验证的世界模型就是训练信号：在一个领域的许多世界模型上运行轨迹来微调 LLM，可提升其对从未训练过的留出世界的泛化能力。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "新的跨世界轴——在一个家族上训练，泛化到未见过的世界——在一个真实的、人类创作的领域（列表函数，E84）上成立：一个在 128 个不相交世界上训练的适配器在 60 个留出世界上达到 40%，而损坏标签对照为 6%——精确度门控提升 +34 个百分点（CI [29, 39]，3 个种子）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在合成的家族上，增益在能力最稀缺处最大（0.5B 时为 $+29$，到 32B 时因任务饱和而在噪声范围内）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "损坏标签对照表明，精确标签而非任务多样性本身才是杠杆——这正是将其与领域随机化区分开来的原因。"
+   }
+  ]
+ },
+ "S1.I1.i2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "2. **为什么必须是经过验证的代码。** 运行一个世界只有在这些世界不说谎时才是安全的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在三个真实世界（ground-truth worlds）上，经过验证的合成动力学在 24/24 个 20 步 rollout 中完全精确（95% 置信区间 [0.86, 1.00]），并且从零转移开始以 100% 的准确率回答 $10\\times$ 分布外探针，而 LLM 下一状态代理完成 0/24，一个 10,000 转移的 MLP 在分布外得分为 0%。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们测量验证，而不是假设它（每个门控比盲目接受多获得 $+0.24$ 的探针准确率），并且它认证的是可执行、尊重不变量的代码，而不是规则正确性（在一个弱的 3B 生成器上，门控接受了每个程序，但没有一个是分支精确的）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在获得动力学后，通过验证模型进行规划优于通过幻觉模型进行规划，并且以 $0$-shot 解决了训练有素的 DreamerV3 / V-JEPA-2 需要 $10^{4}$–$10^{5}$ 步才能学会的问题 [19]（这是一个范围属性，而不是竞赛；§4.13）。"
+   }
+  ]
+ },
+ "S1.I1.i3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "major",
+    "category": [
+     "omission",
+     "scope"
+    ],
+    "issue": "原文中心词是“world-time compute needs”（世界时间计算需求），译文把“世界时间计算”当作修饰“worlds”的定语，漏译了“needs”，导致宾语从“计算需求”变成“世界”。",
+    "suggestion": "OpenWorld 是一个零依赖框架，将编写和满足众多已验证世界的世界时间计算需求变成一项分钟级的活动；该框架、其 100 个世界的原型基准以及更广泛的世界动物园见配套论文 [38]。",
+    "zh_reviewed": "3. **基底与完全可复现性。** OpenWorld 是一个零依赖框架，将编写和提供世界时间计算所需的众多已验证世界变成一项分钟级的活动；该框架、其 100 个世界的原型基准以及更广泛的世界动物园是配套论文 [38]。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "所有 79 项实验均固定随机种子、使用配对检验，并从一个公共代码库重新生成。"
+   }
+  ]
+ },
+ "S1.SS0.SSS0.Px5.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "OpenWorld 建立在程序化代码世界模型方案 [44, 13, 33, 22] 之上——即由 LLM 合成、经过验证的代码动力学，区别于在权重中学习动力学的神经代码世界模型 [12]，也区别于通过测试时扩展进行符号世界模型 LLM 合成 [48]——但其贡献在于这套机制所使之成为可能的东西：世界时间计算，它将许多经过验证的世界转化为精确标注的训练信号。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "与学习型世界模型家族——潜在动力学模型（Dreamer [19]、MuZero [37]）、分词和扩散视频模型（IRIS [27]、DIAMOND [3]、Genie [6]、Sora [31]）以及联合嵌入预测器（V-JEPA [5]）——相比，它以感知广度换取可审计、可精确执行的符号转移，且没有复合展开误差。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "其最接近的同类是自训练方法，这些方法在模型自身经验证器过滤的输出上重新训练模型（STaR [50]、ReST [16, 40]、专家迭代 [4]、拒绝采样微调 [49]、可验证奖励 [21]，以及通过多数投票伪奖励对无标注数据进行测试时强化学习 [53]）；我们的不同之处在于验证者是什么（一个具有动力学的完整世界模型，因此单位是经过验证的轨迹，而不是被检查的答案）以及泛化轴（一个家族中的留出世界）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "它也有别于域随机化和程序化任务生成 [45, 11, 29]——以及用于开放式学习的基础模型生成代码环境 [14]——在这些方法中，经验来自单一（通常是手工编码或学习得到的）模拟器，或者来自根据有趣程度而非标签精确性挑选的生成环境。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在这里，每个世界都是独立合成和验证的，我们提出的开放问题是，标签精确性（而非任务多样性）是否驱动了留出增益。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "标签仅相对于合成世界模型是精确的——“经过验证”意味着转移遵守声明的约束并通过探测集，而不是证明它等于领域的真实动力学（我们可能只能部分观察到真实动力学）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，一个声明规则存在细微错误的世界是一个自信地犯错的教师；损坏标签消融（§4.4）恰好测量了这种失败模式。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "支撑机制扩展了价值对齐文献 [42, 35] 和基于评判的行为选择 [52] 的开放规范立场。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们在消费级硬件上使用 7B/3B 本地模型进行基准测试，这是学习型世界模型最不可及、无训练方法最为重要的场景。"
+   }
+  ]
+ },
+ "S4.F6": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图6：**真实ARC-AGI（E80）上的世界时间计算。** 左图：每个世界的测试时训练将留出精确匹配从零样本提升到轻量再到重量级测试时计算；一个损坏示例臂（错误标签，相同结构）表明需要经过验证的标签——在损坏情况下提升消失（2%）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "右图：跨任务迁移（在$N$个真实世界上训练，在不相交的留出世界上评估）很弱，正如我们从ARC的每任务新颖性中所预期的那样。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "单个4位Qwen2.5-7B；机制，而非排行榜。"
+   }
+  ]
+ },
+ "S5.SS0.SSS0.Px1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "实验衡量了一种结构性权衡。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "学习到的世界模型花费训练计算来覆盖像素原生广度，并为此付出复合误差、不透明性和冻结值的代价。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "经过验证的代码合成换来精确性、速度、分布外迁移和可审计性，并在你能符号化陈述的边界处付出代价。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在该边界之内，结果是一边倒的：一个笔记本规模的本地模型，以规划-生成-验证方式运行，构建出的模拟器在学习型基线仅近似的地方是完美的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "消融研究许可了一个简单的工作流程：精确陈述规则；用不变量验证它们；针对你的意图测试被接受的工件；然后收紧并重新编译。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "每个门控都带来可衡量的正确性，且工件在每个阶段都保持为可差异比较的程序。"
+   }
+  ]
+ },
+ "S5.SS0.SSS0.Px2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "从机制上说，是的：没有新的优化器或架构，只有 LoRA-SFT。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "该主张关乎数据来源，而非优化器。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "普通微调需要标注语料库——稀缺、昂贵，有时还是错误的；而世界时间计算改为在来自已验证世界模型的轨迹上进行微调，这可以免费生成无限示例并精确标注，因为转移是代码，而预言机就是运行它。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "一句话：正确的世界模型将计算转化为无限的、正确的训练数据。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "“已验证”这个限定词真的起关键作用吗——还是只是普通 SFT 上的装饰？"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这是一个经验问题，有一个清晰的判别器，即**损坏标签消融**：随机化标签保留了微调和世界结构，但破坏了它们的正确性，因此如果准确率没有变化，那么该框架就没有增加任何东西。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "它确实崩溃到无微调的下限：在真实 ARC 世界上，损坏示例臂相对于已验证臂下降到 2%（§4.5，图 6）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，贡献是概念性的，而非算法性的，只有两点使该方法配得上其名称而非“带额外步骤的 SFT”：（i）这种对已验证标签的依赖，以及（ii）跨世界迁移——在一个世界家族上训练会提升在从未微调过的留出世界上的准确率（E74，E76），这是同世界微调无法做到的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在两者都不成立的情况下——没有共享技能的异质世界（E71，E73），或者一个每任务规则新颖、跨任务迁移仍然很弱的基准（ARC，§4.5）——公平地说，它只是昂贵的微调，我们也是这样说的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这将世界时间计算明确置于自训练谱系中——STaR [50]、ReST 和 ReST-EM [16, 40]、专家迭代 [4]、拒绝采样微调 [49]，以及从可验证奖励中学习 [21]——所有这些方法都在模型自身输出上重新训练模型，并通过正确性检查进行过滤。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "两个差异才是贡献，而非循环本身：验证器是一个具有动力学的完整世界模型，因此训练单元是一个已验证的轨迹（状态-动作-下一状态转移），而不是一个经过检查的最终答案；并且目标是泛化的不同轴——一个家族中的留出世界，而不是原地改进的同一任务。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在这些术语中，损坏标签消融正是一项验证器可靠性研究：自训练最担心的失败模式（在自信但错误的自标签上训练），在这里通过构造被排除了。"
+   }
+  ]
+ },
+ "S5.SS0.SSS0.Px3.p1.3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "minor",
+    "category": [
+     "quantity"
+    ],
+    "issue": "英文为“the same worlds”（复数），译文“同一世界的”易读作单数，丢失了多个世界这一数量信息。",
+    "suggestion": "我们直接检验第一个区别——训练单元是轨迹 $(s,a,s^{\\prime})$ 而非答案——在合成的迭代世界上：一个跨世界适配器在已验证的单步转移上训练，另一个在相同的这些世界的 $(s_{0}\\!\\to\\!\\text{final})$ 答案对上训练（3 个种子）。",
+    "zh_reviewed": "我们直接检验第一个区别——训练单元是轨迹 $(s,a,s^{\\prime})$ 而非答案——在合成的迭代世界上：一个跨世界适配器在已验证的单步转移上训练，另一个在同一世界的 $(s_{0}\\!\\to\\!\\text{final})$ 答案对上训练（3 个种子）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在训练时的水平上，轨迹单元获胜（70% 对答案单元的 58%，$+12$ 个百分点）——是单元而非循环承载了信号。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "推广到比训练更长的水平时，答案单元追了上来（75% 对 68%）——模型的逐步预测会复合，这正是已验证代码所避免的错误模式。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此轨迹是更好的训练信号，但在推理时组合它会将复合问题带回到学习侧。"
+   }
+  ]
+ },
+ "S5.SS0.SSS0.Px4.p1.3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "将结果汇总起来（§4.6）可以得到一个单一的工作区间。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "经过验证的世界模型和世界时间计算在任务归结为对可以符号化表示的状态进行几步推理时胜出：浅层规则归纳（List Functions，提升最大）、小型网格变换（ARC）和短视界规划（MiniGrid DoorKey，零样本解决，而 DreamerV3 需要 $10^{4}$–$10^{5}$ 次交互 [19]）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "性能沿两个轴下降——随着所需推理变长（CLRS 算法轨迹，符号域中最低；以及 E20 复杂度悬崖，超过约 8 条组合规则），以及当潜在规则必须从丰富感知中归纳而不是从符号状态中读取时（Bongard-RWR 视觉，处于随机水平）。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "hedge 在此指学术写作中的保留/模糊限制表述，译成“回避”不够准确。",
+    "suggestion": "这不是一个保留性声明，而是贡献的形态：一个经过验证、可审计、零数据的杠杆，它恰好在当今数据饥渴的学习型世界模型最薄弱的地方——短程、可指定的推理——最强，并将长视界、感知繁重的领域干净地交给它们。",
+    "zh_reviewed": "这不是一种回避，而是贡献的形态：一个经过验证、可审计、零数据的杠杆，它恰好在当今数据饥渴的学习型世界模型最薄弱的地方——短程、可指定的推理——最强，并将长视界、感知繁重的领域干净地交给它们。"
+   }
+  ]
+ },
+ "S5.SS0.SSS0.Px5.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "经过验证的世界模型是一种可复用的工件，无论你是否进行微调，它都是有用的；世界时间计算是使用它的三种方式之一（表7）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "路线1——作为工具：提供世界并调用它——通过它进行规划、请求精确的下一状态，或将其用作验证器（无需训练；精确、可审计；§4.12、§4.13）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "路线2——逐世界测试时训练：使用QLoRA将单个世界的精确标记轨迹蒸馏到权重中，从而摊销该世界的技能，实现无工具推理（§4.5）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "路线3——世界时间计算：遍历一系列经过验证的世界并进行微调，以泛化到留出的世界（§4.3、§4.8）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "混合方法将它们结合起来：使用工具生成精确轨迹，训练以将其内化，并保留精确工具作为高风险查询的后备——工具引导数据，训练摊销数据，精确性可按需恢复。"
+   }
+  ]
+ },
+ "S5.T7": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "表7：使用已验证世界模型的三种途径，以及混合途径。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "需要精确性/审计 → 途径1；摊销单个世界 → 途径2；泛化一个家族 → 途径3；两者兼得 → 混合途径。"
+   }
+  ]
+ },
+ "S5.SS0.SSS0.Px6.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "拨盘实验为对齐主张提供了依据：由于目标是声明式工件，福利-公平前沿是可操作的——操作者可以实时沿其移动，调谐器则联合世界设计搜索道德配置，呈现出解决任务的全部价值设置流形，而非单一冻结的折中方案。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "“归功于”带有褒义/感谢语气，原文 owed to 是中性归因。",
+    "suggestion": "两点限定，缘于哲学审阅。",
+    "zh_reviewed": "两点限定，归功于哲学审阅。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "第一，开放性仅及于可表达的结构：加权和是行为后果主义，而配套框架论文[38]表明，聚合器选择、边约束和理论不确定性是框架必须（且现在确实）表示而非用权重近似的不同道德对象。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "第二，开放规范在程序上管理规范陷阱[42]，而非解决它：陷阱从冻结的权重转移到操作者放在拨盘上的手，而那只手应该是谁——在契约论者意义上[36]对受影响者的可辩护性——是任何架构都无法解决的问题。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "调谐器的求解流形充其量只是一个粗糙的契约论表面：满足每个利益相关者声明的最低要求的配置集合。"
+   }
+  ]
+ },
+ "S5.SS0.SSS0.Px7.p1.10": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（i）范围：符号状态世界；像素原生领域仍是学习模型的地盘——这里的比较是在符号体制内进行的，LLM 代理和 numpy 基线都不是训练过的 Dreamer。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "主要比较还将规则文本交给了合成器；E37 表明，去除这种不对称性（仅从轨迹归纳）后，结构性 OOD 优势仍然存在，但归纳并不完美（0.43 对比规则文本的 1.00），因此主要差距的一部分反映了显式规范的价值，而不仅仅是表示本身。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（ii）复杂性：使用 7B 生成器进行单体合成在四条交互规则下是可靠的，而在大约八条规则以上则不可靠（E20）；主要世界位于该悬崖之下，更丰富的世界将需要组合合成 [33] 或更大的生成器。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（iii）规模：二十个修复任务和三个手写世界；配对检验使比较更加清晰，但基准仍然是一个原型套件，而非 HumanEval [7]，3B+ 智能体使其饱和，并且经典缺陷原型很可能存在于预训练数据中：智能体的解决率不应被解读为调试技能的测量——世界模型的主张不受影响，因为无论智能体记住了什么，环境都精确运行。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（iv）合成在三个模型系列中均可复现（E16），但评判者、批评者和修复智能体角色仅使用 Qwen。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "合成、评判和修复实验在所述量化条件下于一台消费级机器上运行；微调实验（E74、E78、E80–E83）则在单个云 A100 上运行（对 7B 及更大模型采用 4 位 QLoRA），我们明确说明这一点，以免消费级硬件框架被解读为涵盖训练运行。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（v）评判者：选择准确率和顺序一致性已测量但不完美，汇总选择边际处于临界状态（$p=0.078$）且推理成本约 $\\sim$4$\\times$，评分量规显示压缩；评判者裁决应作为门控，而非取代程序化验证。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（vi）集成自检（E23）在此达到完美的精确率/召回率，但在结构上容易受到不同生成器读取同一模糊规则时相关错误的影响；它是一种筛查，而非证明。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（vii）沙箱是针对意外的最佳努力隔离，而非对抗性安全边界（生成的补丁在基于 fork 的运行器之前两次击败了进程内超时；见仓库历史）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（viii）道德机制，即使经过扩展，评估的也是被声明的价值；谁的价值被声明——以及声明之手的合法性——是任何架构之外的程序性问题 [36]，而议会的置信度本身就是操作者设定的旋钮。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（ix）若干实验在试点和四轮内部评审后重新设计（E3、E5/E6、E11–E27）；试点饱和结果与最终方案一并报告，所有评审均随仓库发布。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（x）多重比较：在 79 个实验中，我们报告了许多 $p$ 值和秩相关，未应用任何族系或错误发现率校正；在如此多的检验下，临界结果（$p$ 在 $0.05$ 和 $0.10$ 之间——尤其是评判者边际和量规-释义相关性）应视为探索性的，只有大的确定性效应（精确匹配率、OOD 崩溃、复杂性悬崖）在多重性下仍然成立。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（xi）方差：确定性主张是与预言机的精确匹配，无需误差线，但若干随机（LLM）主要量是来自小规模、单种子样本的点估计（例如 E1 发散步骤，$n{=}3$，一个世界），没有跨种子方差；我们在重要之处添加了汇总多世界视图（E11），但每个模型的探测准确率应视为估计值，而非精确测量。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这一注意事项延伸至主要的世界-时间-计算结果：E74 的模型规模扩展每个规模仅一个微调种子，真实数据 ARC/CLRS 分支为单种子，$n{\\approx}30$–$40$，置信区间触及下限，因此规模趋势和较弱的真实数据领域应视为探索性的；对于 ARC，我们报告了 2 种子重跑——重度 11%（种子 10%、12%）对比损坏 4%——因此验证与损坏之间的差距在种子间保持，尽管绝对分数仍处于机制尺度。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（xii）两个说明性研究按构造即为真：E59 的架构提升从建模的固定能力骨干算术推导而来，E60 在精确键查找上的路由差距由比较设计保证（我们添加了一个公平的词汇基线并报告了其上的适度差距）；两者均在相应位置标记为工程示例，而非测量效应。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（xiii）移植到真实数据暴露出两个有效性条件：输入表示必须编码每个世界的结构（一个 ProteinGym 移植仅通过全局生化变化描述每个突变，使所有测定世界相同并压平了世界计数曲线，直到恢复每个世界的局部序列上下文），以及忠实的数据加载——例如野生型序列和基于一的突变索引——是主要的正确性风险。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们将两者视为任何真实领域移植必须通过的首要检查。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（xiv）轨迹与答案的区分在 E85（上文）中于合成迭代世界上被隔离；将这种头对头比较移植到多步骤真实领域（轨迹与答案分歧最大的地方）仍是未来工作。"
+   }
+  ]
+ },
+ "S6.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "minor",
+    "category": [
+     "omission"
+    ],
+    "issue": "原文中 symbolic（符号的/符号化）一词被省略，使世界模型的性质（符号化、与 learned-style 对比）不够明确。",
+    "suggestion": "一个免训练的符号世界模型——由本地模型合成为代码并在接受前经过验证——在学习式动力学累积误差之处是比特精确的，并且在通过幻觉模型进行规划比没有模型更糟的情况下，其规划效果与真实情况本身一样好。",
+    "zh_reviewed": "一个免训练的世界模型——由本地模型合成为代码并在接受前经过验证——在学习式动力学累积误差之处是比特精确的，并且在通过幻觉模型进行规划比没有模型更糟的情况下，其规划效果与真实情况本身一样好。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "除了作为进行规划的模拟器之外，同样的经过验证的世界也是训练信号：遍历一个领域的多个世界模型可以提升模型对留出世界的泛化能力，并随着遍历的世界数量而扩展——世界时间计算，是测试时间计算的训练时对应物。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "其边界同样被精确测量：单体7B合成在超过大约八条交互规则时失败。"
+   },
+   {
+    "verdict": "major",
+    "category": [
+     "term"
+    ],
+    "issue": "原文 values 指程序/模型中的可调数值或参数，不是道德层面的价值观，译成「价值观」改变了含义。",
+    "suggestion": "世界模型领域的路径一直是扩展参数直到幻觉被抑制；这些结果主张一条正交路径——使模型成为程序，验证程序，并保持数值可调节。",
+    "zh_reviewed": "世界模型领域的路径一直是扩展参数直到幻觉被抑制；这些结果主张一条正交路径——使模型成为程序，验证程序，并保持价值观可调节。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "下一步：组合式合成以跨越复杂度悬崖[33]，标准基准规模下的编码世界，混合感知到符号的流水线，以及提出——而不仅仅是选择——世界修复的评判器。"
+   }
+  ]
+ }
+}

@@ -1,0 +1,303 @@
+{
+ "__meta__": {
+  "translator": "deepseek-v4-pro（关思考）",
+  "usage": {
+   "calls": 12,
+   "prompt_tokens": 9859,
+   "completion_tokens": 2645,
+   "seconds": 28.1,
+   "cached_tokens": 6400
+  }
+ },
+ "abs.p1": {
+  "sentences": [
+   {
+    "zh": "潜在世界模型依赖表征几何进行规划，然而仅对潜在边缘分布进行正则化并不能确定用于动作选择的状态间关系。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们表明，当表征被转换为规划器使用的最终潜在变量时，这可能导致与规划相关的新颖性结构被削弱。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们引入了潜在结构对齐传输（ATLAS），这是一种训练目标，它在校准全局潜在分布的同时明确保留关系几何。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "ATLAS 将归一化的成对结构从信息丰富的编码器表征转移到规划潜在变量，并使用 Wasserstein 嵌入匹配（WEMReg）通过一维 Wasserstein-2 传输来校准其边缘分布。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们的分析表明，关系保留和边缘校准施加了非冗余约束，并将有限候选规划稳定性与关系失真、潜在尺度不匹配和预测误差联系起来。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在 LeWM 中实例化后，ATLAS 在 PushT、TwoRoom 和 OGBench-Cube 的低新颖性和高新颖性评估子集上均提高了平均目标达成成功率，其中在高新颖性 TwoRoom 回合上的提升最大。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "表征和 rollout 诊断进一步显示，规划潜在变量中与新颖性相关的结构更强，边缘校准得到改善，多步预测误差更低。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "总之，这些结果强调，保留与规划相关的潜在几何结构是实现可靠世界模型规划的重要因素。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "代码可在 `https://github.com/Annie969/atlas-world-model` 获取。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S1.F1": {
+  "sentences": [
+   {
+    "zh": "图1：PushT上潜在规划中与分布外相关的诊断差距。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S1.p1.1": {
+  "sentences": [
+   {
+    "zh": "潜在世界模型（WM）通过预测不同候选动作将导致何处，并选择其预测结果最接近期望目标的动作来进行规划（Hafner et al., 2019; Hansen et al., 2024）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "因此，学习到的表示空间的几何结构是规划问题的一部分：行为上相似的状态应保持适当接近，而在重要方面不同的状态应保持可区分。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "当规划遇到在离线训练数据中罕见或表示不佳的分布外（OOD）状态时，这一点变得尤为重要。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S1.p2.1": {
+  "sentences": [
+   {
+    "zh": "许多近期的世界模型通过预测未来潜在特征而非重建原始观测来学习这些表示，这种方法与联合嵌入预测架构（JEPAs）密切相关（LeCun, 2022; Assran et al., 2023; Bardes et al., 2024）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "此类模型的一个核心挑战是防止表示坍缩，即不同输入被映射到几乎相同的特征（Grill et al., 2020; Chen and He, 2021; Zbontar et al., 2021; Bardes et al., 2024）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "现有方法通过抗坍缩正则化来解决这一问题，该正则化约束潜在表示的统计特性，例如其方差、协方差或整体分布（Bardes et al., 2022; Balestriero and LeCun, 2025）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "例如，SIGReg 鼓励潜在投影遵循标准高斯分布（Balestriero and LeCun, 2025）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这些约束可以保持表示非退化，但它们并未指定哪些具体状态应保持接近或远离。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "因此，两个潜在空间可能具有同样良好的全局分布，却在状态之间保持显著不同的关系。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "对于规划而言，这种区别很重要，因为这些关系直接决定了预测结果如何与目标进行比较。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S1.p3.1": {
+  "sentences": [
+   {
+    "zh": "我们在 LeWM（Maes et al., 2026b）这一最近的 JEPA 风格世界模型中观察到了这一差距。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们测量了在所学表示的不同阶段，与训练数据的距离能在多大程度上预测下游规划失败。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这一信号在编码器的平均池化补丁特征中比在用于规划的最终潜在表示中强得多（图 1）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "例如，在 PushT（Florence et al., 2022）上，失败预测的 AUROC 从编码器表示中的 $0.76$ 下降到规划潜在表示中的 $0.44$。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "因此，表明状态不熟悉的信息存在于编码器中，但在最终用于规划的表示中被大幅削弱。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这表明，仅维持良好的潜在分布并不能确保保留与规划相关的状态关系。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S1.p4.1": {
+  "sentences": [
+   {
+    "zh": "因此，我们引入了潜在结构对齐传输（Aligned Transport of Latent Structure，ATLAS），它明确针对规划表示的两个互补特性。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "第一个是关系保持：在信息丰富的编码器表示中存在的状态间关系应保留在规划潜在空间中。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "因此，我们的OOD恢复目标将编码器平均池化补丁特征中的归一化成对距离转移到规划表示中。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "第二个是边缘校准：整体潜在分布应保持良好行为并抵抗坍缩。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "为此，我们引入了Wasserstein嵌入匹配（WEMReg），它使用Wasserstein-2距离将潜在分布的一维投影匹配到标准高斯分布（Bonneel et al., 2015）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "与预测目标一起，ATLAS针对规划表示的三个互补特性：保持状态关系、维持稳定的潜在分布以及准确预测未来状态。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S1.p5.1": {
+  "sentences": [
+   {
+    "zh": "我们的理论分析表明，关系保持和边缘校准对潜在表示施加了非冗余的约束。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们进一步将表示失真和 rollout 预测误差与有限候选目标条件规划的稳定性联系起来。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在三个基准数据集上，ATLAS 在分布内（ID）和分布外（OOD）回合中均比 LeWM 提高了平均规划成功率，其中最大的改进出现在 OOD 回合上。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "受控消融以及表示和 rollout 层面的诊断进一步支持了关系保持和 WEMReg 的互补作用（第 4 节和第 5 节）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "总体而言，我们的贡献如下：",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S1.I1.i1": {
+  "sentences": [
+   {
+    "zh": "• 我们表明，世界模型可以在其编码器中保留有用的分布外相关信息，同时在用于规划的潜在表示中丢失大部分该信号，从而暴露出抗坍缩正则化与保留规划相关几何结构之间的差距。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S1.I1.i2": {
+  "sentences": [
+   {
+    "zh": "• 我们引入了 ATLAS，一种潜在世界模型，它在通过 Wasserstein 传输校准全局潜在几何结构的同时，明确保留了与规划相关的关系结构。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S1.I1.i3": {
+  "sentences": [
+   {
+    "zh": "• 我们将表征失真和预测误差与规划稳定性联系起来，并通过受控消融以及表征和推演层面的诊断，在操作和导航任务上评估 ATLAS。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S6.p1.1": {
+  "sentences": [
+   {
+    "zh": "我们提出了 ATLAS，一种针对潜在世界模型的训练目标，它同时针对关系保持和边缘校准。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "OOD 恢复相对于内部补丁锚点保持归一化的状态到状态几何，而 WEMReg 校准全局潜在分布。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们的分析进一步通过关系失真、潜在尺度不匹配和终端预测误差，将这些表示属性与有限候选规划联系起来。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在 PushT、TwoRoom 和 OGBench-Cube 上，ATLAS 在低新颖性和高新颖性评估子集上均比 LeWM 提高了平均目标达成成功率。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "消融研究表明，关系保持和边缘校准提供了不同但部分重叠的益处，而表示和 rollout 诊断显示规划潜在空间中与新颖性相关的结构更强、边缘校准改善以及多步预测误差更低。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "总之，这些结果支持将保持与规划相关的潜在几何结构作为提高潜在世界模型规划可靠性的有用原则。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "__sections__": {
+  "__title__": "ATLAS：面向可靠世界模型规划的潜在结构对齐传输",
+  "Abstract": "摘要",
+  "1 Introduction": "1 引言",
+  "6 Conclusion": "6 结论"
+ }
+}

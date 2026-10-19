@@ -1,0 +1,457 @@
+{
+ "__meta__": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "models": {
+   "reviewer": "deepseek-v4-pro"
+  },
+  "translator": "deepseek-v4-pro（关思考）",
+  "independence": "same-model",
+  "usage": {
+   "calls": 13,
+   "prompt_tokens": 11317,
+   "completion_tokens": 9220,
+   "seconds": 96.4,
+   "cached_tokens": 8064
+  }
+ },
+ "abs.p1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "语言模型已展现出前所未有的能力，引发了关于其性能来源的争论。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这仅仅是学习句法模式和表面统计的结果，还是它们从文本中提取了语义和世界模型？"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Li 等人先前的工作通过在一个合成的、随机生成的奥赛罗游戏上训练 GPT 模型来研究这个问题，并发现该模型学习了棋盘状态的内部表示。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们将这项工作扩展到更复杂的国际象棋领域，在真实对局上进行训练，并使用线性探针和对比激活来研究我们模型的内部表示。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "该模型没有获得任何关于游戏的先验知识，仅通过预测下一个字符进行训练，但我们发现了棋盘状态内部表示的证据。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们通过使用这些内部表示对模型的激活进行干预并编辑其内部棋盘状态来验证它们。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "与 Li 等人先前的合成数据集方法不同，我们的分析发现，该模型还学会了估计玩家技能等潜在变量，以更好地预测下一个字符。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们推导出一个玩家技能向量并将其添加到模型中，将模型的胜率提高了最多 2.6 倍。{fn1}"
+   }
+  ]
+ },
+ "fn1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "代码见 https://github.com/adamkarvonen/chess_llm_interpretability"
+   }
+  ]
+ },
+ "S1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "大型语言模型（LLMs）已展现出前所未有的能力，这些能力远远超出了其最初为自然语言处理而设计的范围。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "通过下一词预测任务训练的模型能够编写代码、在语言之间进行翻译以及解决逻辑问题。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，这些模型也是黑箱，它们通常在私密的大规模数据集上进行训练。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "由于这种不透明性，关于这些能力如何涌现一直存在争论。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "一些人认为，LLMs 表面上的能力具有欺骗性，并且在很大程度上是由于模型学习了虚假的表面统计规律（Bender et al., 2021）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "另一些人则认为，在某种程度上，LLMs 正在发展对世界的内部表征（Bowman, 2023）。"
+   }
+  ]
+ },
+ "S1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "研究这个问题的一种方法是，在狭窄、受限的任务上训练一个通用语言模型架构。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Li et al. (2023a) 采用了这种方法，并在奥赛罗游戏上训练了一个语言模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "该模型 OthelloGPT 在一个奥赛罗游戏序列的数据集上进行了下一个词元预测任务的训练。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "尽管没有关于奥赛罗游戏的先验知识，该模型学会了走出合法的奥赛罗棋步。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "使用非线性探针（根据模型激活预测棋盘状态的分类器），作者能够恢复模型的内部棋盘状态。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "他们进一步能够使用这些探针进行干预，通过编辑模型的内部棋盘状态并确认它在新的棋盘状态下走出合法棋步。"
+   }
+  ]
+ },
+ "S1.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "作者只能使用非线性探针恢复模型的内部棋盘状态，而使用线性探针时未能成功。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在后续工作中，Nanda 等人（2023）发现该模型具有线性表示，可以使用线性探针恢复。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Nanda 等人还成功使用线性探针对模型的激活进行了干预。"
+   }
+  ]
+ },
+ "S1.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，作者们仅在检查一个在从奥赛罗游戏树中均匀采样的合成游戏数据集上训练的模型时取得了成功。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "他们在一个使用人类对局进行训练的模型上尝试了相同的技术，但结果不佳。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "由此产生一个自然的问题：语言模型是否仅在大型合成数据集上训练时才会形成稳健的世界模型？"
+   }
+  ]
+ },
+ "S1.p5.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们基于OthelloGPT，在更复杂的环境中通过在国际象棋棋谱上训练语言模型来研究这个问题。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们发现语言模型也能学会下合法且具有战略性的国际象棋着法，并且我们训练了线性探针来恢复内部棋盘状态，并使用这些探针成功进行了干预（图1）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，我们证明了语言模型在非合成数据集上训练时也能形成世界模型。"
+   }
+  ]
+ },
+ "S1.p6.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的模型是在真实人类对局上训练的，而不是合成对局。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，存在一些有趣的潜在变量可供我们探测。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们发现，为了更好地预测下一个字符，模型学会了估计对局中棋手的 Elo 等级分。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们通过使用该表示来提升和降低模型的棋力，从而验证了这一表示。"
+   }
+  ]
+ },
+ "S1.F1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图1：由探针输出得到的模型内部棋盘状态热图，这些探针是在独热分类目标上训练的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "探针输出每个格子上13种不同棋子类型的对数概率，我们可以用这些概率为任意棋子类型构建热图。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "左侧热图显示真实棋子位置。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "右侧热图显示模型对棋子位置的置信度梯度。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了查看更二值化的热图，我们可以将这些值裁剪到-2到0之间，如中间热图所示。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "模型具有合理的表示。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "它非常确信黑王不在棋盘的白方一侧。"
+   }
+  ]
+ },
+ "S6.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们提供证据表明，一个在下一个词元预测任务上训练的大语言模型能够发展出对国际象棋等复杂系统的世界模型，包括估计玩家技能等潜在变量的能力。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们通过对模型进行因果干预来验证这些表征，以提高和降低其技能并编辑其棋盘内部状态。"
+   }
+  ]
+ },
+ "S6.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "major",
+    "category": [
+     "agent"
+    ],
+    "issue": "比较主体弄反：原文说国际象棋相对于自然语言领域是受限环境，译文说成自然语言领域是受限环境。",
+    "suggestion": "与自然语言领域相比，国际象棋是一个受限的环境。",
+    "zh_reviewed": "与国际象棋相比，自然语言领域是一个受限的环境。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "omission"
+    ],
+    "issue": "原文说这种受限环境使“提供见解”也成为可能，译文变成它直接提供了见解，丢失了“使……成为可能”的含义。",
+    "suggestion": "这种受限的环境不仅使这些细致的测量和干预成为可能，也使为大型语言模型中导向向量和其他概念的底层机制提供宝贵见解成为可能。",
+    "zh_reviewed": "这种受限的环境使得进行这些细致的测量和干预成为可能，并为大型语言模型中导向向量和其他概念的底层机制提供了宝贵的见解。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此外，它还支持对各种可解释性和干预方法的探索与比较。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的干预方法还有改进空间，我们可以轻松衡量对模型激活进行细粒度更改的能力，例如从棋盘上删除一个棋子。"
+   }
+  ]
+ },
+ "S6.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，国际象棋归根结底是一个定义明确、基于规则的系统，它无法捕捉自然语言等结构化程度较低的环境中所存在的复杂性和模糊性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "准确理解大语言模型的世界模型可能实现许多应用，例如检测和减少幻觉。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们希望这些技术能够在这些领域变得实用。"
+   }
+  ]
+ },
+ "S6.SS0.SSSx1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们感谢 Walt Woods、Alexander Grushin、Martin Wattenberg、Kenneth Li、Nikola Jurkovic、Jannik Brinkman 和 Austin Davis 的反馈和建议。"
+   }
+  ]
+ }
+}

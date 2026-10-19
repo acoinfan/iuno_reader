@@ -1,0 +1,431 @@
+{
+ "__meta__": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "models": {
+   "reviewer": "deepseek-v4-pro"
+  },
+  "translator": "deepseek-v4-pro（关思考）",
+  "independence": "same-model",
+  "usage": {
+   "calls": 16,
+   "prompt_tokens": 14302,
+   "completion_tokens": 15336,
+   "seconds": 141.4,
+   "cached_tokens": 9984
+  }
+ },
+ "abs.p1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "思维链（CoT）推理已成为在大语言模型（LLMs）中引发多步推理的核心机制。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，最近的证据呈现出一种张力：隐藏状态似乎已在CoT完全展开之前编码了未来的推理，而显式步骤对于需要组合计算的任务仍然至关重要。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "term"
+    ],
+    "issue": "未采用术语表规定的“线性探针”译法，译成了“探针方法”。",
+    "suggestion": "为了加深对LLM内部状态与其言语化推理轨迹之间关系的理解，我们通过线性探针方法Tele-Lens，将其应用于跨不同任务领域的隐藏状态，来研究LLM的潜在规划强度。",
+    "zh_reviewed": "为了加深对LLM内部状态与其言语化推理轨迹之间关系的理解，我们通过探针方法Tele-Lens，将其应用于跨不同任务领域的隐藏状态，来研究LLM的潜在规划强度。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的实证结果表明，LLM表现出短视的视野，主要进行增量式转换，而没有精确的全局规划。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "利用这一特性，我们提出了一个关于增强CoT不确定性估计的假设，并验证了稀疏的关键位置集合可以有效地表示整个路径的不确定性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们进一步强调了利用CoT动态的重要性，并证明了可以在不降低性能的情况下实现CoT绕过的自动识别。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的代码、数据和模型已在 https://github.com/lxucs/tele-lens 发布。"
+   }
+  ]
+ },
+ "S1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "思维链（CoT）（Nye et al., 2021; Wei et al., 2022）从根本上重塑了自然语言处理中的问题解决方式，标志着从传统的模式匹配方法（例如基于编码器的分类（Devlin et al., 2019; Liu et al., 2019））向以自然语言明确表达的基于提示的推理（Zhou et al., 2023; Dong et al., 2024; Sahoo et al., 2025）的转变。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "CoT 的能力通过强化学习产生的大量思考得到进一步增强，以 DeepSeek-R1（DeepSeek-AI, 2025）等近期模型为特征。"
+   }
+  ]
+ },
+ "S1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "虽然思维链被广泛视为事实上的推理范式，但近期关于大语言模型（LLMs）的研究揭示了互补的、有时看似矛盾的视角。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "一方面，LLMs 已被证明在思维链明确出现之前，就对推理轨迹进行内部规划。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（Pal et al., 2023）揭示早期隐藏状态已经编码了关于后续生成的信息；（Sheng et al., 2025）发现推理能力在生成开始前就已在很大程度上预先规划；（Dong et al., 2025）观察到早期隐藏状态能够以高相关性可靠地预测推理步骤和关键属性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "类似地，大量研究表明思维链的初始阶段能够有效预测最终答案（Azaria and Mitchell, 2023; Gottesman and Geva, 2024; Afzal et al., 2025）。"
+   }
+  ]
+ },
+ "S1.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "LLM 的内部规划似乎削弱了 CoT 生成的重要性，这引发了思考过程是否只是在回显先前内部状态中已编码的预定路径的问题。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "另一方面，理论分析主张，由于 Transformer 受其架构限制而表达力有限，CoT 是不可或缺的（Bhattamishra et al., 2023; Merrill and Sabharwal, 2023; Li et al., 2024），并且只有 CoT 的中间步骤才能实现长度泛化（Anil et al., 2022; Xiao and Liu, 2025）和组合推理（Wies et al., 2023; Abbe et al., 2024; Zubic et al., 2025）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，在 CoT 开始之前通过内部规划表现出预先计算的轨迹似乎不太可能。"
+   }
+  ]
+ },
+ "S1.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "尽管如此，模型内部表征与其言语化推理 token 之间的关系在很大程度上仍然不透明。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在这项工作中，我们研究了 CoT 的内部动态，并针对以下关于潜在规划视野的问题："
+   }
+  ]
+ },
+ "S1.p5.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们认为回答这些问题不仅对加深我们对思维链动态的理解很重要，而且对为更广泛的模型思维设计场景提供关键见解也很重要。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例如，最近的工作利用大语言模型的内部状态来实现思维链推理的提前退出，从而缓解过度思考问题（Yong et al., 2025; Yang et al., 2026）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "最近，GPT-5{fn1}和Claude Code{fn2}都引入了自适应思维的形式，将用户请求路由到不同规模的模型或分配不同级别的推理工作量。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这类机制从根本上依赖于模型通过内部规划对输入复杂性的“感知”或“看穿”能力有多强。"
+   }
+  ]
+ },
+ "fn1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "https://openai.com/index/gpt-5-system-card"
+   }
+  ]
+ },
+ "fn2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking"
+   }
+  ]
+ },
+ "S1.p6.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了实现这一目标，我们通过考察显式思维链步骤与其潜在规划视野之间的协同作用来得出实证见解。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "基于这些观察，我们随后强调了利用思维链动态来估计思维链的不确定性和必要性的重要性。"
+   }
+  ]
+ },
+ "S1.p7.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "minor",
+    "category": [
+     "term"
+    ],
+    "issue": "probing 未使用项目规定译法“线性探针”，译文用了“探针实验”。",
+    "suggestion": "为了回答第一个问题，第2节展示了一系列旨在剖析LLM隐藏状态的线性探针实验，目的是评估其针对未来推理轨迹的内部规划强度。",
+    "zh_reviewed": "为了回答第一个问题，第2节展示了一系列旨在剖析LLM隐藏状态的探针实验，目的是评估其针对未来推理轨迹的内部规划强度。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "term",
+     "other"
+    ],
+    "issue": "probing 未使用项目规定译法“线性探针”（两处）；另外“将每个隐藏状态转换为预测多个维度的目的论信息”有歧义，容易理解为隐藏状态变成信息，建议改为“用于预测”。",
+    "suggestion": "我们首先介绍我们的线性探针方法，称为**Tele-Lens**，它使用一个训练过的低秩适配器（Houlsby et al., 2019），该适配器将CoT步骤中的每个隐藏状态进行转换，用于预测多个维度的目的论信息，包括后续token、最终答案、推理长度等。重要的是，与先前主要处理单领域任务的工作不同，我们在12个涵盖不同类别和领域的多样化数据集上进行线性探针实验，从直接的知识问答到经典的难题，例如Parity（计算数字个数是偶数还是奇数），这是Transformer的一个典型挑战（Chiang and Cholak, 2022; Hahn and Rofin, 2024）。",
+    "zh_reviewed": "我们首先介绍我们的探针方法，称为**Tele-Lens**，它使用一个训练过的低秩适配器（Houlsby et al., 2019），该适配器将CoT步骤中的每个隐藏状态转换为预测多个维度的目的论信息，包括后续token、最终答案、推理长度等。重要的是，与先前主要处理单领域任务的工作不同，我们在12个涵盖不同类别和领域的多样化数据集上进行探针实验，从直接的知识问答到经典的难题，例如Parity（计算数字个数是偶数还是奇数），这是Transformer的一个典型挑战（Chiang and Cholak, 2022; Hahn and Rofin, 2024）。"
+   }
+  ]
+ },
+ "S1.p8.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "通过实证结果，我们观察到不同探针维度和任务领域之间存在截然相反的行为，详见第2.5节。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例如，虽然早期隐藏状态可能在相对简单的任务中编码最终答案的预测信号，但在组合任务上它们可能表现得近乎随机，仅在思维链完成前的最后一两个推理步骤中才开始可靠地捕捉到精确答案。"
+   }
+  ]
+ },
+ "S1.p9.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "总体而言，我们的线性探针结果带来了对先前工作中互补信念的统一看法：LLM 表现出一种**短视的规划视野**，其中隐藏状态主要支持即时的局部转换，而非长程的全局轨迹。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，对于落在 LLM 单步模式匹配能力范围内的较简单任务，早期隐藏状态可能捕捉到最终答案的粗略要点——尽管是以一种更具启发式的方式，而非通过精确的、预先规划的推理过程。"
+   }
+  ]
+ },
+ "S1.p10.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "针对问题2，利用潜在的思维链信号，我们首先关注思维链上的不确定性校准，其中有效的置信度度量（例如 rollout 困惑度或熵）应当为正确的推理路径分配高分，为不确定的路径分配低分（Huang et al., 2024; Chen et al., 2024; Bakman et al., 2025）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们提出一个假设并随后进行实证验证：思维链的不确定性遵循木桶原理。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "正如木桶的容量不是由其平均木板高度决定，而是由其最短的木板决定，推理链的可靠性由少数关键位置决定。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "直观上，由于模型的潜在规划是短视的，大多数思维链 token 是高置信度的局部转换，可能稀释整个轨迹的潜在不确定性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，我们推测，关注少数关键位置而不是全局聚合可能实现更精确的不确定性估计。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "第3.1节的实证结果发现，即使是一种简单的 top-$k$ 选择策略，也能有效提高所有三种通用不确定性度量的估计准确性，带来高达6%的绝对改进。"
+   }
+  ]
+ },
+ "S1.p11.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "除了不确定性估计之外，我们还提出了一个概念验证，表明可以利用思维链的规划模式来识别是否需要思维链来推导最终答案，从而实现自动的**思维链绕过**，在性能下降最小的情况下直接输出答案。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "第3.2节的实验表明，我们提出的策略在使用Qwen3-32B时可以实现高达16.2%的思维链绕过，而总体准确率仅下降0.03。"
+   }
+  ]
+ },
+ "S1.p12.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "回到问题2，我们提出的关于思维链不确定性和必要性估计的策略进一步强调了分析思维链动态的重要性，这些动态编码了隐藏但有价值的信息。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们希望这项揭示潜在规划视野的工作能够推进对思维链协同作用的理解，并激发在更广泛的模型思考场景中识别更多可被利用的隐藏信号。"
+   }
+  ]
+ },
+ "S4.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在这项工作中，我们研究了LLMs的内部规划能力，并揭示了在CoT生成过程中的短视规划视野。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "term"
+    ],
+    "issue": "“probing experiments”未使用项目规定译法“线性探针”，译为“探测实验”。",
+    "suggestion": "为了进行分析，我们使用我们提出的方法Tele-Lens设计了一系列线性探针实验，并强调了利用这种潜在信号，在CoT不确定性和必要性估计上进行了演示。",
+    "zh_reviewed": "为了进行分析，我们使用我们提出的方法Tele-Lens设计了一系列探测实验，并强调了利用这种潜在信号，在CoT不确定性和必要性估计上进行了演示。"
+   }
+  ]
+ }
+}

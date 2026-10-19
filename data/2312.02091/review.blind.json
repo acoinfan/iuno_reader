@@ -1,0 +1,701 @@
+{
+ "__meta__": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "models": {
+   "reviewer": "deepseek-v4-pro"
+  },
+  "translator": "deepseek-v4-pro（关思考）",
+  "independence": "same-model",
+  "usage": {
+   "calls": 30,
+   "prompt_tokens": 24382,
+   "completion_tokens": 25284,
+   "seconds": 253.5,
+   "cached_tokens": 18304
+  }
+ },
+ "abs.p1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "大型语言模型（LLMs）能够解决一些本科到研究生水平的物理教科书问题，并且擅长编程。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "将这两种能力结合起来，有朝一日可能使人工智能系统能够模拟和预测物理世界。"
+   }
+  ]
+ },
+ "abs.p2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们呈现了对最先进（SOTA）大语言模型在博士级到研究级计算物理问题上的评估。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们将大语言模型的生成条件设定为使用文档完善且广泛使用的软件包，以激发其在物理和天体物理领域的编码能力。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们贡献了约50个原创且具有挑战性的问题，涵盖天体力学（使用`REBOUND`）、恒星物理（使用`MESA`）、一维流体动力学（使用`Dedalus`）和非线性动力学（使用`SciPy`）。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "“do not admit unique solutions”译作“不承认唯一解”不准确，admit 在此表示“有、允许”，整句意为“问题没有唯一解”。",
+    "suggestion": "由于我们的问题没有唯一解，我们根据几个软指标评估大语言模型的表现：包含不同类型错误（编码、物理、必要性和充分性）的行数，以及一个更具“教育意义”的通过-失败指标，该指标侧重于捕捉手头问题的显著物理成分。",
+    "zh_reviewed": "由于我们的问题不承认唯一解，我们根据几个软指标评估大语言模型的表现：包含不同类型错误（编码、物理、必要性和充分性）的行数，以及一个更具“教育意义”的通过-失败指标，该指标侧重于捕捉手头问题的显著物理成分。"
+   }
+  ]
+ },
+ "abs.p3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "minor",
+    "category": [
+     "hedge"
+    ],
+    "issue": "“could plausibly get a passing grade” 中的 “plausibly” 表示“看似合理地/有可能”，译成“勉强”增加了原文没有的勉强、擦边含义。",
+    "suggestion": "尽管约40%的解决方案可能合理地获得及格分数。",
+    "zh_reviewed": "正如预期的那样，当今最先进的LLM（GPT4）零样本无法解决我们的大多数问题，尽管约40%的解决方案可能勉强获得及格分数。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "生成的代码行中约有$70-90\\%$是必要的、充分的且正确的（编码和物理）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "物理和编码错误最为常见，还有一些不必要或不充分的代码行。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们观察到不同问题类别和难度之间存在显著差异。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们识别出`GPT4`在计算物理领域中的几种失败模式，例如物理单位处理不当、代码版本管理不佳、倾向于幻觉出看似合理的子模块、缺乏对全局运行参数（如模拟时间或参数探索的上下界）的物理依据，以及无法可靠地定义稳态或停止条件。"
+   }
+  ]
+ },
+ "abs.p4": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的侦察工作提供了当前经典物理计算能力的一个快照，并指出了明显的改进目标，如果人工智能系统要在物理模拟能力方面达到基本的自主水平的话。"
+   }
+  ]
+ },
+ "S1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "大型语言模型（LLMs）是一类人工智能模型，它们利用大量文本数据来学习和生成类似人类的文本，使其能够以令人印象深刻的性能执行广泛的自然语言处理任务 [25, 17]。"
+   }
+  ]
+ },
+ "S1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "LLM 展现出广泛的能力，包括在科学相关领域 [18]。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "表现最好的 LLM 具有强大的编码能力 [19, 20, 例如]，并且它们在生物学、化学、数学和物理学方面的能力正在被积极探索 [39, 7, 1, 40, 例如]。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "迄今为止，大多数 LLM 科学评估都集中在高中到本科教科书案例上，部分原因是这与当今最先进 LLM 的性能水平相匹配。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "与此同时，LLM 在标准基准上的表现显示出饱和的迹象 [21]，这表明需要针对下一代模型设计更具挑战性的评估方法。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "事实上，能力更强的基准和评估最近已经开始出现 [31, 23, 32, 例如]。"
+   }
+  ]
+ },
+ "S1.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "过去几年中，LLM能力的进步速度令人瞩目，通过扩展实现了稳步突破，从2019年的GPT 2到2023年的GPT 4[6等]，而多模态能力现在才刚刚开始可用[27, 41等]。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这种快速进步使得可以设想一个未来，其中LLM或相关AI系统达到受过广泛教育的人类的水平[26, 3等]，并最终达到科学研究助理的水平[34, 20]。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "scope",
+     "term"
+    ],
+    "issue": "“the exceptional alignment and safety challenges” 被译为「异常对齐和安全挑战」，“exceptional” 的修饰范围不清，容易被理解为「异常对齐」与「安全挑战」两个对象，而非原文中修饰整个挑战的「非同寻常的对齐与安全挑战」。",
+    "suggestion": "主要涉及这种情况将造成的非同寻常的对齐与安全挑战",
+    "zh_reviewed": "AI系统进一步发展到开始产生原创科学解决方案（大概会由人类专家验证）的可能性也已在文献中被考虑，主要涉及这种情况将造成的异常对齐和安全挑战[12, 16, 24, 8等]。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "可能相关的是，最近在特定国际象棋领域提出了一个原理验证，表明人类专家可以从超人类AI能力中学习[33]。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "从更广泛的角度来看，对LLM及相关AI系统的科学能力进行评估，最终可能对科学追求以及安全和对齐实践产生影响。"
+   }
+  ]
+ },
+ "S1.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在本文中，我们介绍一种在研究生/研究层面评估LLM物理能力的具体方法。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的主要关注点是LLM可靠地生成代码以模拟学术研究中感兴趣的复杂物理场景的能力，其水平相当于研究生和研究科学家通常执行的水平。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "通过构建，我们的评估框架接近给定学科中领域专业知识的极限。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们预计，我们方法的一些基本要素可以转移到其他模拟密集型学科。"
+   }
+  ]
+ },
+ "S1.p5.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "数值模拟是物理学各子领域科学研究的主力工具。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "它们需要结合编码和物理方面的专业技能。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在过去十年左右的时间里，为解决特定子领域中一般类别的科学问题而构建的灵活可靠的开源软件包的逐步普及，极大地提高了使用此类标准软件包进行模拟工作的可靠性和可重复性。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "{fn1}等脚注标记的位置从工具名后移至了领域名称后，改变了脚注与工具名的关联，易使读者误解脚注针对的是领域而非工具。",
+    "suggestion": "基于这一实践，我们在工作中使用了文档完善且经过充分测试的开源模拟工具：`REBOUND{fn1}` 用于天体力学 [30, 36]，`MESA{fn2}` 用于恒星物理 [28]，`Dedalus{fn3}` 用于流体/连续介质物理 [9]，以及 `SciPy{fn4}` 用于非线性动力学 [38]。",
+    "zh_reviewed": "基于这一实践，我们在工作中使用了文档完善且经过充分测试的开源模拟工具：用于天体力学{fn1}的 `REBOUND` [30, 36]，用于恒星物理{fn2}的 `MESA` [28]，用于流体/连续介质物理{fn3}的 `Dedalus` [9]，以及用于非线性动力学{fn4}的 `SciPy` [38]。"
+   }
+  ]
+ },
+ "fn1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "https://rebound.readthedocs.io/en/latest/"
+   }
+  ]
+ },
+ "fn2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "https://docs.mesastar.org/"
+   }
+  ]
+ },
+ "fn3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "https://dedalus-project.readthedocs.io/en/latest/"
+   }
+  ]
+ },
+ "fn4": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "https://docs.scipy.org/doc/scipy/"
+   }
+  ]
+ },
+ "S1.p6.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "使用这些开源工具不仅提高了我们分析的透明度，而且服务于一个特定的设计目的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些工具在网上广泛可用且有大量使用示例，这使得LLM在预训练期间更有可能见过大量相关代码示例，从而能够在新问题上使用这些工具进行泛化。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "omission"
+    ],
+    "issue": "译文省略了“in our problems”，未能体现生成任务限定在作者的问题上。",
+    "suggestion": "鉴于LLM强大的编码能力，但（目前）在物理方面能力有限，这种方法使我们能够将我们问题中的生成任务锚定在特定代码库上，从而可能揭示LLM所学物理世界模型中的不足。",
+    "zh_reviewed": "鉴于LLM强大的编码能力，但（目前）在物理方面能力有限，这种方法使我们能够将生成任务锚定在特定代码库上，从而可能揭示LLM所学物理世界模型中的不足。"
+   }
+  ]
+ },
+ "S1.p7.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "关注物理模拟（或一般科学模拟）的另一个原因是，模拟能力最终可能成为发布与世界交互的LLM智能体时的一个考量因素。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "事实上，可靠地模拟并由此预测物理世界的能力，可能成为强能力AI智能体的安全性和对齐性的额外考量，因为它们原则上可以基于对世界的模拟理解采取更明智的行动。"
+   }
+  ]
+ },
+ "S4.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "显然，我们的工作仅对LLM的一般计算物理能力提供了一个非常初步且有限的视角，这一视角可以通过多种方式加以扩展和改进。{fn9} 我们在此强调几个未来工作的潜在方向："
+   }
+  ]
+ },
+ "fn9": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "作为参考，我们估计我们分析中的问题与评估设计阶段需要约20小时的工作量，而解决方案评估阶段又需要约10小时。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "`GPT4` 在大约15分钟内生成了全部47个代码解决方案。"
+   }
+  ]
+ },
+ "S4.I1.i1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "开展更广泛、更系统的研究将有助于获得更可靠的统计数据，并加深对我们在所探讨的特定计算物理领域中大语言模型错误性质的理解。"
+   }
+  ]
+ },
+ "S4.I1.i2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• 通过引入超出本文所涵盖的狭窄范围的问题，例如纳入多维性、辐射输运以及研究级模拟中其他常见要素，进一步探索物理挑战也将是有益的。"
+   }
+  ]
+ },
+ "S4.I1.i3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "将LLM的性能与预训练中可用的开源软件包和代码示例的程度相关联可能是有趣的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "先前的工作表明，这种相关性可能是决定任何LLM生成任务性能的重要因素[22]。"
+   }
+  ]
+ },
+ "S4.I1.i4": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "尝试系统地改进我们所采用的简单提示策略也可能有价值（相关探索见附录 C）。"
+   }
+  ]
+ },
+ "S4.I1.i5": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "将我们的基准扩展到更多对话式、人在回路的设置，或者可能为更智能体的设置提供额外工具，可能是值得的。"
+   }
+  ]
+ },
+ "S4.I1.i6": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• 将基准扩展到经典物理之外，以涵盖固态物理、量子物理或相对论物理等领域，也将具有重大意义。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "可以推测，类似的一般性模拟工作也可以在计算生物学、化学或工程学中开展。"
+   }
+  ]
+ },
+ "S4.I1.i7": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• 如果能够在数值模拟任务上构建训练数据集或强化学习的奖励函数，那么对LLM进行微调将特别有意义，以尝试进一步激发它们在计算科学中超越提示限制的能力。"
+   }
+  ]
+ },
+ "S4.I1.i8": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "上下文学习可能是另一条值得探索的途径，以提高在计算科学任务上的表现。"
+   }
+  ]
+ },
+ "S5.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们评估了大型语言模型在研究生到研究级计算物理问题上的表现。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的主要结果可以概括为两个方面。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "首先，`GPT4` 目前是这项任务中最好的大型语言模型，但它无法在我们评估的研究生/研究水平上自主生成代码解决方案。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "其次，`GPT4` 在计算物理领域表现出持续性的失败模式，这提示了未来一代人工智能系统性能改进和监控的明显目标。"
+   }
+  ]
+ },
+ "S5.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "人们很容易推测这些失败模式的起源。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "其中一些似乎与LLM幻觉现象直接相关（例如，在调用不存在的函数时）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "跟踪包版本的能力差可能与幻觉和/或LLM的时间意识有限有关，因为它们的时间无关的下一个标记预训练目标{fn10}。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这两个缺点或许可以通过减少幻觉的通用策略[29, 42, 15]以及为LLM配备关于其训练文本的明确时间感[37, 例如]来（部分）解决。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "幻觉出不存在的子模块和函数也可能通过在问题解决过程中纳入机制来验证引用的模块和函数是否存在于已知库或数据集中而得到缓解。"
+   }
+  ]
+ },
+ "fn10": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "LLM 在大量文本数据“语料库”上进行预训练。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，这些数据并非按时间顺序组织。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如果语料库包含某个代码库的两个不同版本，两者会被同等对待，导致 LLM 难以区分这两个版本。"
+   }
+  ]
+ },
+ "S5.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "另一方面，我们识别出的一些失败模式似乎与 GPT4 学到的物理世界模型的局限性有关。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "scope"
+    ],
+    "issue": "原文 “sub-graduate level” 指研究生以下/本科水平，译文 “本科以下水平的挑战” 把范围缩小到了低于本科，程度有偏差。",
+    "suggestion": "例如，单位换算是一个本科水平的挑战，即使在代码特定单位的背景下，也可能通过专门的训练语料库来解决。",
+    "zh_reviewed": "例如，单位换算是一个本科以下水平的挑战，即使在代码特定单位的背景下，也可能通过专门的训练语料库来解决。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "相比之下，在定义稳态、停止准则或模拟的全局参数值方面的挑战，可能与 GPT4 在物理领域推理和规划能力的更根本限制有关。"
+   }
+  ]
+ },
+ "S5.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "确定未来一代模型在多大程度上改善 GPT4 的计算物理缺陷将是有趣的，无论是作为规模扩展的简单副产品，还是通过采用旨在减少幻觉并增强推理和规划能力的通用训练策略。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "也可能需要针对计算物理的定制训练策略来克服我们发现的一些缺陷，因为计算物理中实际选择背后的一些常识和推理步骤并未在学术文献（或教科书）中被系统地记录。"
+   }
+  ]
+ }
+}

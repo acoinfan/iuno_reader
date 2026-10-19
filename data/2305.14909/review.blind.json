@@ -1,0 +1,502 @@
+{
+ "__meta__": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "models": {
+   "reviewer": "deepseek-v4-pro"
+  },
+  "translator": "deepseek-v4-pro（关思考）",
+  "independence": "same-model",
+  "usage": {
+   "calls": 10,
+   "prompt_tokens": 10444,
+   "completion_tokens": 14319,
+   "seconds": 148.8,
+   "cached_tokens": 6400
+  }
+ },
+ "abs.p1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "将预训练的大语言模型（LLMs）应用于规划问题的兴趣日益增长。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，直接使用LLMs作为规划器的方法目前不切实际，原因包括计划正确性有限、强烈依赖与模拟器甚至实际环境的交互反馈，以及利用人类反馈的效率低下。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在这项工作中，我们引入了一种新颖的替代范式，该范式在规划领域定义语言（PDDL）中构建显式的世界（领域）模型，然后使用它通过可靠的领域无关规划器进行规划。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了解决LLMs最初可能无法生成完全可用的PDDL模型的问题，我们使用LLMs作为PDDL与纠正反馈来源（如PDDL验证器和人类）之间的接口。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于缺乏PDDL背景的用户，我们表明LLMs可以将PDDL翻译成自然语言，并有效地将纠正反馈编码回底层领域模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的框架不仅享有外部规划器提供的正确性保证，而且通过允许用户在开始时纠正领域模型，而不是像以前的工作那样检查和纠正（通过交互式提示）每个生成的计划，减少了人工参与。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在两个IPC领域和一个比常用基准（如ALFWorld）更复杂的家庭领域上，我们证明了GPT-4可以被利用来为40多个动作生成高质量的PDDL模型，并且纠正后的PDDL模型随后被用于成功解决48个具有挑战性的规划任务。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "包括源代码在内的资源发布在：`https://guansuns.github.io/pages/llm-dm`。"
+   }
+  ]
+ },
+ "S1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "人工智能领域随着大型预训练模型的出现而发生了革命性的变化。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "特别重要的是基于Transformer的大型语言模型（LLMs），它们在自然语言处理任务中展示了卓越的性能。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "除了这些任务之外，LLMs还被测试用于执行AI智能体的另一个广泛研究的关键方面，即顺序决策或规划。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "初步研究表明，在一些日常领域中，LLMs能够提出合理的行动计划[19, 1]。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，这些计划的正确性和可执行性往往有限。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例如，LLMs可能经常忽视某些状态下动作的物理合理性，并且可能无法有效处理跨多个动作的长期依赖关系。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "已经提出了几种方法来提高LLMs的规划能力。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "一种有前景的方法涉及在计划执行期间从环境中收集反馈，并随后完善计划。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "通过整合各种形式的反馈，如感官信息[20]、人类纠正[60]或未满足前提条件的信息[42, 56]，规划器可以重新规划并产生更接近满意计划的计划。"
+   }
+  ]
+ },
+ "S1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "尽管规划性能有所提升，但由于多种因素，LLM 仍远未成为可用且可靠的规划器："
+   }
+  ]
+ },
+ "S1.I1.i1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（a）LLM 尚未在推理和规划方面展现出足够的能力 [24, 55, 53, 54, 31]。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "近期研究表明，即使提供了详细的动作描述，例如 PDDL 领域模型 [33] 或 PDDL 模型的自然语言版本，LLM 仍然难以生成正确且可执行的计划 [48, 55]。"
+   }
+  ]
+ },
+ "S1.I1.i2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "现有的LLM规划范式只允许以完全在线的方式收集反馈，这意味着反馈信号只有在智能体开始执行计划之后才可用。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "faithful simulator 侧重模拟器对真实环境的高保真/忠实，译为「可靠的模拟器」偏向可靠而非保真，语义略有偏移。",
+    "suggestion": "然而，当没有高保真的模拟器或模拟器使用成本高昂时，通过实际执行计划来收集反馈可能代价高昂，并且可能无法充分利用经典规划文献中所见的可证明可靠规划的优势[11, 13]。",
+    "zh_reviewed": "然而，当没有可靠的模拟器或模拟器使用成本高昂时，通过实际执行计划来收集反馈可能代价高昂，并且可能无法充分利用经典规划文献中所见的可证明可靠规划的优势[11, 13]。"
+   }
+  ]
+ },
+ "S1.I1.i3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（c）LLM 表现出尚未被完全理解的复杂行为，尤其是在错误发生方面。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "LLM 规划器容易在略有不同的场景中重复相同的错误。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "反复提供相同的反馈可能导致最终用户感到沮丧。"
+   }
+  ]
+ },
+ "S1.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了克服这些局限性，我们不直接使用LLM作为规划器，而是提倡一种基于模型的范式，其中从LLM中提取出PDDL世界模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们遵循与现有方法相同的问题设置，即向规划器提供一组动作及其简短的自然语言描述。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，我们不直接将用户命令映射为计划，而是利用LLM以PDDL动作模型的形式提取动作的符号表示。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这个中间输出可以与外部领域无关的规划器一起使用，以可靠地搜索可行的计划，或者可以用来验证和纠正由LLM规划器生成的“启发式”计划。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此外，我们的模块化方法基本上将规划过程分为两个不同的部分，即建模动作的因果依赖关系和确定实现目标的适当动作序列。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "LLM经过广泛的网络规模知识训练，在前一项任务上比后一项任务表现出更高的熟练度。"
+   }
+  ]
+ },
+ "S1.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "尽管如此，我们仍然考虑到LLM可能无法在一开始就生成无错误的PDDL模型这一事实。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了解决这个问题，我们表明LLM还可以充当PDDL与任何能够以自然语言提供纠正性反馈的来源（例如人类和VAL [18]中的PDDL验证器）之间的接口。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "LLM中间层将PDDL表示翻译成自然语言，并将其呈现给用户进行检查。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然后，获得的反馈被整合并归档回PDDL模型中。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这向没有PDDL先验知识的用户隐藏了PDDL的复杂性，并实现了反馈的无缝纳入。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们在经典规划文献中的两个IPC领域[22]以及一个家庭领域上对我们的方法进行了广泛评估，该家庭领域比常用的基准（如ALFWORLD [47]）具有更多样化的动作和约束。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们通过人工评估来评估生成的PDDL模型的质量。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "结果表明，GPT-4 [37]为总共41个动作生成了包含400多个文字的高质量PDDL领域模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然后，通过重放和继续PDDL构建对话，我们表明GPT-4可以根据来自PDDL验证器和人类的自然语言反馈轻松纠正所有错误。"
+   }
+  ]
+ },
+ "S1.p5.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们考虑了生成的PDDL动作模型在下游规划任务中的两种用例。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "一方面，通过利用LLM将用户指令翻译成PDDL中的目标规范[58, 30]，我们可以使用任何标准的领域无关规划器来搜索计划。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "另一方面，提取的PDDL模型可用于验证LLM规划器建议的计划，并以未满足的前提条件或目标条件的形式提供纠正性反馈。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在这种情况下，PDDL模型本质上充当一个廉价的高级模拟器或人类代理，以确保计划的正确性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这减少了对忠实模拟器或领域专家对计划进行大量人工检查的依赖。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "与第一种方法相比，第二种方法由于LLM规划器，在常识领域中纳入显式和隐式用户约束方面可能提供更好的灵活性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例如，LLM规划器可以直接纳入顺序约束，如“先将土豆加热，然后再捣碎”和“先给我拿叉子，再拿盘子”。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "相反，纯粹基于经典规划器的方法需要额外的步骤，例如在PDDL模型中引入额外的状态变量，以适应此类约束。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，正如我们的实验所证明的，尽管验证反馈平均而言显著提高了计划的正确性，但第二种方法的性能仍然受到LLM“规划能力”的限制。"
+   }
+  ]
+ },
+ "S6.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们引入了一种在规划任务中利用LLM的新范式，该范式涉及维护一个显式的世界模型，而不是直接将用户提示映射到计划。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这一做法的动机源于这样的见解：LLM虽然无法进行生成正确计划所需的组合搜索，但可能更适合作为世界模型的来源。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们提出了一个完整的流程，首先使用GPT-4生成高质量的PDDL模型，然后通过自然语言反馈修正PDDL模型，最后利用提取的领域模型以多种方式进行可靠规划。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的实验表明，将LLM与外部规划器配对，在应用于两个IPC领域和一个家用机器人领域时，显著优于现有方法；该家用机器人领域比ALFWorld等常用基准具有更多的动作约束。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "除了我们之前提到的进一步研究方向之外，扩展这项工作还有几个令人兴奋的机会。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "首先，我们评估领域的复杂性仍然低于经典规划文献中使用的许多领域。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "LLM能否有效地扩展到编写表达更复杂逻辑的PDDL模型，仍有待观察。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "其次，我们的框架假设完全可观测性，这意味着智能体必须在开始时完全探索环境以获取对象状态。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "支持部分可观测性将是有用的。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "term"
+    ],
+    "issue": "“接地”直译 grounding 在“谓词值”这一语境下不够清晰，可能引起歧义。",
+    "suggestion": "最后，我们的实验假设谓词值的确定（grounding）是完美完成的。",
+    "zh_reviewed": "最后，我们的实验假设谓词值的接地是完美完成的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，考虑到实际中感知可能是有噪声的，这将是有用的。"
+   }
+  ]
+ }
+}

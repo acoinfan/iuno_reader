@@ -1,0 +1,288 @@
+{
+ "__meta__": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "models": {
+   "reviewer": "deepseek-v4-pro"
+  },
+  "translator": "deepseek-v4-pro（关思考）",
+  "independence": "same-model",
+  "usage": {
+   "calls": 7,
+   "prompt_tokens": 7148,
+   "completion_tokens": 9972,
+   "seconds": 89.3,
+   "cached_tokens": 4352
+  }
+ },
+ "abs.p1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "大型语言模型（LLMs）最近在构建自主智能体方面获得了广泛关注。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，当前基于LLM的网络智能体在长程任务中的表现远非最优，经常产生诸如反复购买不可退款机票之类的错误。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "相比之下，人类能够避免这种不可逆的错误，因为我们对自身行为的潜在结果（例如损失金钱）有意识，这也被称为“世界模型”。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "受此启发，我们的研究首先从初步分析开始，确认了当前LLM（例如GPT-4o、Claude-3.5-Sonnet等）中世界模型的缺失。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然后，我们提出了一种世界模型增强（WMA）的网络智能体，它模拟其行为的结果以做出更好的决策。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了克服将LLM训练为预测下一观察的世界模型所面临的挑战，例如观察中的重复元素和冗长的HTML输入，我们提出了一种以转移为中心的观察抽象，其中预测目标是自由形式的自然语言描述，专门突出时间步之间重要的状态差异。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在WebArena和Mind2Web上的实验表明，我们的世界模型无需训练即可改善智能体的策略选择，并且与最近的基于树搜索的智能体相比，展现出更优的成本和时间效率。"
+   }
+  ]
+ },
+ "S1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "大型语言模型（LLMs）已被广泛应用于解决多个领域的任务，包括网页导航，其中LLM生成动作序列（例如，`click`）以在网站上完成用户目标（Shi et al., 2017; Kim et al., 2024）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "尽管取得了一些成功（Yao et al., 2022），基于LLM的网页代理在长时程环境（如WebArena（Zhou et al., 2023））中的表现仍然显著较差，其中GPT-4的任务成功率为14.41%，而人类的成功率为78.24%。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这引出一个问题：尽管LLM取得了进步，为什么它们在网页导航中的表现远不如人类？"
+   }
+  ]
+ },
+ "S1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "人类通过事先考虑我们行动的可能结果来避免不想要的情况（Edwards, 1954）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这种对行动和结果的意识被称为“世界模型”（Forrester, 1995）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "与此同时，现有的基于LLM的网络代理严重依赖试错来做决策，因为它们缺乏世界模型来帮助它们在实际执行之前预见行动的结果（LeCun, 2022），导致不可逆的次优决策（例如，反复购买不可退款的物品）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "认识到世界模型的重要性，机器人学和强化学习（RL）领域的研究已经提出将世界模型纳入导航任务中的代理。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例如，Du et al. (2023) 和 Yang et al. (2024) 应用世界模型来模拟输入文本或机器人控制的视觉结果/观察。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Dreamer系列使用世界模型来预测图像的潜在状态，并利用它们来优化策略，减少在游戏环境中实际交互的需求（Hafner et al., 2019a; Hafner et al., 2020; Hafner et al., 2024）。"
+   }
+  ]
+ },
+ "S1.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "受这些启发，本文首先考察最先进的大语言模型对“环境动态”的理解，即动作与环境状态之间的关联。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们揭示：(i) 当前的大语言模型（例如 GPT-4o 和 Claude-3.5-Sonnet）难以预测其动作的结果；(ii) 对潜在结果的意识有助于它们做出符合用户目标的决策。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "基于这些发现，我们提出了一种世界模型增强（WMA）的网页智能体，它模拟其动作的结果以做出更好的决策。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，天真地训练一个世界模型来预测下一个观察状态（即整个网页）可能导致观察之间出现大量重复元素和冗长的 HTML 输入，从而对模型性能产生负面影响。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，我们提出了一种新颖的以转移为重点的观察抽象，其中世界模型被训练为生成自由形式的自然语言描述，专门突出时间步之间的重要状态差异（例如，网站上更新的价格）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在推理过程中，我们的智能体首先使用世界模型模拟每个动作候选（来自策略模型）的结果（即下一个观察）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然后，一个价值函数估计所有模拟观察的奖励，帮助智能体选择具有最高估计奖励的最终动作。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的贡献有两方面："
+   }
+  ]
+ },
+ "S1.I1.i1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• 我们是首个在基于LLM的网络智能体中开创世界模型的团队，为通过网络导航中模拟环境反馈进行策略适应奠定了基础。"
+   }
+  ]
+ },
+ "S1.I1.i2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• 我们提出了一种新颖的、以转移为重点的观察抽象方法，用于训练LLM作为世界模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们表明，使用以这种方法训练的世界模型可以通过模拟动作候选而不训练策略模型来改进动作选择。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "quantity"
+    ],
+    "issue": "原文“by 6.8x and 5.3x”表示效率是对比对象的6.8倍和5.3倍，译文“提高了6.8倍和5.3倍”严格数学上可能被理解为提高到7.8倍和6.3倍，存在歧义。",
+    "suggestion": "此外，我们证明了我们的智能体与最近的基于树搜索的智能体（Koh et al., 2024）相比，在成本和时间效率上分别提高到6.8倍和5.3倍。",
+    "zh_reviewed": "此外，我们证明了我们的智能体与最近的基于树搜索的智能体（Koh et al., 2024）相比，在成本和时间效率上分别提高了6.8倍和5.3倍。"
+   }
+  ]
+ },
+ "S7.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们是首个将世界模型融入基于LLM的网页智能体的研究，解决了当前最先进的LLM在理解环境动态方面的局限性。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "scope"
+    ],
+    "issue": "括号内容“以转移为重点的观察抽象”在中文中紧跟“世界模型”，容易被理解为对世界模型的说明，但原文中它是对训练方法（our approach）的说明。",
+    "suggestion": "通过在WebArena和Mind2Web上的大量实验，我们表明：(i) 我们的WMA网页智能体能够通过使用我们方法（即，以转移为重点的观察抽象）训练的世界模型模拟其动作的结果，从而在策略选择中展现出很高的效能。",
+    "zh_reviewed": "通过在WebArena和Mind2Web上的大量实验，我们表明：(i) 我们的WMA网页智能体能够通过使用我们方法训练的世界模型（即，以转移为重点的观察抽象）模拟其动作的结果，从而在策略选择中展现出很高的效能。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此外，(ii) 我们的WMA网页智能体以更低的探索成本和时间超越了强大的基线（即，树搜索智能体），并且(iii) 在Mind2Web上取得了新的最先进性能。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "通过用世界模型增强基于LLM的网页智能体，我们为未来网页导航研究奠定了坚实的基础。"
+   }
+  ]
+ }
+}

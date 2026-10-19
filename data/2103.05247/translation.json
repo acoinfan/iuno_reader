@@ -1,0 +1,490 @@
+{
+ "__meta__": {
+  "translator": "deepseek-v4-pro（关思考）",
+  "usage": {
+   "calls": 19,
+   "prompt_tokens": 17096,
+   "completion_tokens": 4938,
+   "seconds": 51.0,
+   "cached_tokens": 9728
+  }
+ },
+ "abs.p1": {
+  "sentences": [
+   {
+    "zh": "我们研究了在自然语言上预训练的Transformer在最小微调下泛化到其他模态的能力——特别是不微调残差块的自注意力和前馈层。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们考虑这样一个模型，我们称之为冻结预训练Transformer（FPT），并研究在涵盖数值计算、视觉和蛋白质折叠预测的各种序列分类任务上对其进行微调。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "与先前研究在与预训练数据集相同模态上进行微调的工作相比，我们表明在自然语言上进行预训练可以提高非语言下游任务的性能和计算效率。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "此外，我们对架构进行了分析，比较了随机初始化Transformer与随机LSTM的性能。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "结合这两个见解，我们发现语言预训练的Transformer可以在各种非语言任务上获得强大的性能{fn1}。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "fn1": {
+  "sentences": [
+   {
+    "zh": "代码可在 github.com/kzl/universal-computation 获取。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "有关更新后的 arXiv 版本所做更改的摘要，请参见附录 A。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S0.F1": {
+  "sentences": [
+   {
+    "zh": "图1：一个冻结的语言预训练Transformer（FPT）——不微调自注意力和前馈层——与在下游模态上从头完全训练的Transformer相比，可以在文献基准上取得强劲的性能（Tay et al., 2020; Rao et al., 2019）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们展示了在多种分类任务上的结果（见第2.1节）：数值计算（Bit Memory/XOR、ListOps）、图像分类（MNIST、CIFAR-10）和蛋白质折叠预测（Homology）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们还展示了一个完全训练的LSTM的结果，以提供一个基线。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S1.p1.1": {
+  "sentences": [
+   {
+    "zh": "Transformer架构（Vaswani et al., 2017）在深度学习中取得了广泛的成功，作为大型模型的骨干，用于诸如自然语言建模（Brown et al., 2020）、图像（Dosovitskiy et al., 2020）、蛋白质（Jumper et al., 2021）、行为（Abramson et al., 2020）以及包含图像和文本的多模态任务（Lu et al., 2019; Radford et al., 2021）等任务。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "受这些成功的启发，我们试图探索Transformer在从一种模态迁移到另一种模态时的泛化能力。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S1.p2.1": {
+  "sentences": [
+   {
+    "zh": "经典的序列处理方法使用循环神经网络（RNN）方法（Rumelhart et al., 1985; Hochreiter & Schmidhuber, 1997）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "相比之下，transformer 利用自注意力层来提取序列中各个 token 的特征，例如单词（Vaswani et al., 2017）或图像块（Dosovitskiy et al., 2020）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "此外，在针对下游任务进行微调或评估零样本泛化之前，先在大规模无监督或弱监督目标上训练大型模型已成为常见做法。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然而，所研究的下游任务通常局限于与原始训练集相同的模态：例如，在大型语言语料库上训练 GPT（Radford et al., 2018），然后在小型任务特定数据集上进行微调。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们在这项工作中的目标是研究在与训练模态不同的模态上进行微调。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S1.p3.1": {
+  "sentences": [
+   {
+    "zh": "我们假设，Transformer，即自注意力层，可以在数据丰富的模态（即数据充足的地方，如自然语言语料库）上进行预训练，并识别出对任意数据序列有用的特征表示，从而能够下游迁移到不同的模态。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "特别是，我们试图研究预训练语言模型（LM）在泛化到具有序列结构的其他模态方面的能力。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S1.p4.1": {
+  "sentences": [
+   {
+    "zh": "为了验证这一假设，我们采用了一个在自然语言数据上预训练的Transformer模型，即GPT-2（Radford等人，2019），并且仅微调线性输入层和输出层，以及位置嵌入和层归一化参数。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们将该模型称为冻结预训练Transformer（FPT）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在跨多种模态的一系列任务上——包括数值计算、图像分类和蛋白质折叠预测——FPT表现出与从头训练整个Transformer或LSTM模型相当的性能，达到了这些任务所报告基准的水平（图1）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "此外，我们发现FPT模型在训练过程中收敛速度也更快。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们的结果表明，语言模型学习到的自注意力层可能具有适合高效通用计算的特性。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "通过一系列实验，我们试图通过分离这些模型的各个子组件来探究是什么因素促成了FPT的性能。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS1.p1.1": {
+  "sentences": [
+   {
+    "zh": "Transformer（Vaswani et al., 2017）最初成功用于自然语言处理（Radford et al., 2018; Devlin et al., 2018; Radford et al., 2019; Brown et al., 2020）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "近年来，它们也被证明是适用于其他模态的有效架构。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "一个特别受关注的模态是计算机视觉（Chen et al., 2020a; Touvron et al., 2020）；特别是，Dosovitskiy et al. (2020) 表明，在 ImageNet 和 CIFAR 等标准物体识别基准上，Transformer 在高数据量条件下可以超越 CNN。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "此外，Transformer 还被用于蛋白质序列预测任务（Jumper et al., 2021; Rao et al., 2021）、强化学习（Parisotto et al., 2020）和模仿学习（Abramson et al., 2020）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS1.p2.1": {
+  "sentences": [
+   {
+    "zh": "专门处理多模态任务的工作包括 Kaiser 等人（2017），他们展示了单一模型可以通过注意力架构学习多种多模态任务。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "近期工作已将 Transformer 用于多模态预测任务，例如 ViLBERT（Lu 等人，2019）和 CLIP（Radford 等人，2021）中的图像和文本；这些方法通常使用两个独立的 Transformer 来嵌入图像和文本。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "Lu 等人（2020）应用 ViLBERT 训练单一模型以完成多种视觉和语言组合任务。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "OpenAI 的近期工作（Goh 等人，2021）发现，CLIP 学习到的一些神经元会被特定的语义概念激活，无论该概念是以语言还是图片形式呈现。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们的工作与 DALL-E（Ramesh 等人，2021）最为相似，后者使用单一 Transformer 同时嵌入图像和文本模态，我们认为这生成了一个“通用潜在空间”，将任何类型的输入投影到单一潜在空间中。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这样的潜在空间对于能够从多种监督来源学习的模型将是有用的。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS2.p1.1": {
+  "sentences": [
+   {
+    "zh": "也有许多工作专门研究模态内迁移背景下的Transformer，例如用于视觉的ViT（Dosovitskiy et al., 2020）、用于语言的T5（Raffel et al., 2019）以及用于蛋白质序列的UDSMProt（Strodthoff et al., 2020）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "CLIP（Radford et al., 2021）表明，在图像之外还使用文本进行训练，可以通过将下游标签作为文本提供来实现零样本分类。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "Hernandez et al. (2021) 对语言预训练的迁移进行了深入研究，特别展示了从英语到Python的迁移，他们认为Python与英语有相当的距离；许多工作也研究了从一种语言到另一种语言的迁移（Artetxe et al., 2019; Ponti et al., 2019）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "与我们的工作类似，Papadimitriou & Jurafsky (2020) 研究了LSTM在包括代码、不同语言和音乐在内的模态之间的迁移，发现对“具有潜在结构的非语言数据”进行预训练可以迁移到语言，并发现模态中的语法结构很重要，尽管我们通常研究相反的方向并探索距离更远的模态。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "Kiela et al. (2019) 对对齐语言和视觉的表示空间做出了类似的观察。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "Li et al. (2020) 在一个指称通信游戏上进行预训练，其中使用一种涌现的学习语言来迁移到NLP任务。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "Wu et al. (2021) 发现显式预训练计算原语可以迁移到数学任务。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS3.p1.1": {
+  "sentences": [
+   {
+    "zh": "深度学习模型的一个常见趋势是，首先在大型数据集上以无监督目标训练一个大模型（Dai & Le, 2015; Radford et al., 2018），然后在小型下游数据集上进行微调（例如，通过冻结模型并仅微调输出层）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "用于微调 transformer 的一种常见方法是适配器网络（Rebuffi et al., 2017; Houlsby et al., 2019），它为每个独特的下游任务添加一个全连接残差块，并且还微调层归一化参数。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "为简单起见，我们不添加完整的适配器块，而只训练层归一化参数，从而减少我们考虑的参数数量。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "所使用的这些技术与先前的方法类似，例如 FiLM（Perez et al., 2018）和自调制（Chen et al., 2018）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "最近的一个研究方向探索了为大型模型学习提示模板（Shin et al., 2020），这些模板只需要对 transformer 进行前向传递。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "与这些工作不同，我们考虑在一种模态（语言）上进行微调并在其他模态上进行微调，而先前的工作研究在与预训练任务相同的模态上进行微调。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "另一个有趣的相关工作，尽管没有研究 transformer，是由 Frankle et al. (2020) 发现的，他们发现随机初始化的 CNN，仅训练批归一化仿射参数，在 CIFAR-10 上表现良好。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "他们在 CIFAR-10 上的数字比我们的更强，但通过卷积架构包含了显著更多的归纳偏置，因此主要结论略微更适用于图像任务，而不是任意序列。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS4.p1.1": {
+  "sentences": [
+   {
+    "zh": "自注意力层所执行的计算性质也已被其他相关工作所探索。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "Bai 等人（2019）表明，单个 Transformer 自注意力块可以被训练来执行一个优化步骤，以寻找代表任务解的驻点。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "Ramsauer 等人（2020）表明，自注意力层是学习率为 1 的 Hopfield 网络中的梯度步骤，这提示 Transformer 能够通过隐式能量函数存储和检索大量模式。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "Goyal 和 Bengio（2020）的一个有趣讨论指出了一种联系，将注意力中使用的键值查询视为类似于计算机编程中的函数签名：键将输入映射到类型（例如，float），值将输入映射到其值（例如，$3.14$），如果类型与函数签名匹配，则函数可以应用于该值——当我们考虑将单个自注意力层应用于不同模态时，这可能特别相关，因为模态可能嵌入在类型中。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS5.p1.1": {
+  "sentences": [
+   {
+    "zh": "评估无监督模型学到的嵌入的一种常用技术是，在嵌入之上训练一个线性层用于下游任务（Donahue et al., 2016; Oord et al., 2018; Chen et al., 2020b），当你在与预训练相同的模态上进行微调时，这是合理的。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然而，当在不同模态上进行微调时，如我们的设置中那样，我们必须重新定义这种可泛化嵌入质量的概念——我们不仅微调输出层，还想微调输入层，并且转而评估冻结的中间模型执行可泛化计算的能力。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这让人联想到全局工作空间理论（Baars, 1993），该理论围绕这样一个概念：大脑的不同部分向一个“黑板”发送数据；在这种设置下，我们可能将冻结的语言模型视为一个黑板。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "语言也可能是这个黑板模型的一个自然选择，因为有假设认为语言可能作为认知行为和意识规划的良好多用途高级表征（Andreas et al., 2017; Goyal & Bengio, 2020）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS6.p1.1": {
+  "sentences": [
+   {
+    "zh": "与FPT设置和全局工作空间理论类似，在储备池计算（Tanaka et al., 2019）和回声状态网络（Jaeger, 2001; Jaeger & Haas, 2004）中，随机循环网络被冻结，仅训练输出读出层。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这些模型训练速度非常快，使用与第3.9节类似的设置，因为循环网络的激活可以被缓存，无需随时间反向传播。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "与FPT架构有些不同，回声状态网络是循环的，因此会反馈到自身，这使得随机冻结网络的输出能够调节未来的输入。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "与回声状态网络不同，我们还特别微调了输入和位置嵌入，这使得冻结网络的输入能够适应特定模态/学习对冻结网络的查询。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "回声状态网络也类似于自注意力对输入应用数据相关滤波器的视角，而1D卷积则是无论输入模态如何都固定的滤波器。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.p1.1": {
+  "sentences": [
+   {
+    "zh": "我们提出将预训练的Transformer语言模型迁移到非语言模态的下游任务中。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "通过广泛的实证评估，我们表明这些模型能够取得与在下游任务上完全训练的Transformer相竞争的性能，而无需微调自注意力和前馈层，仅依靠语言模型的冻结参数来完成大部分计算。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.p2.1": {
+  "sentences": [
+   {
+    "zh": "我们相信这项工作可以作为未来研究模态间迁移的基础。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "未来，我们有兴趣研究使用其他数据丰富的模态（例如视觉）或多个领域的混合体，为预训练通用计算引擎提供必要的基础。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "探索冻结的预训练模型用于预测建模之外的任务（例如强化学习（Abramson et al., 2020））也将是有趣的。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.p3.1": {
+  "sentences": [
+   {
+    "zh": "我们注意到，我们分析的一个局限性在于，我们是在一组受限的任务上分析特定的模型。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "更多的研究可以揭示类似的行为是否也出现在其他模型和其他任务上。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "例如，在第3.14节中，我们发现架构可能对结果产生显著影响。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "随着这些模型的训练方案不断演变，进行类似的实验可能会产生不同的结果，我们期待在这个方向上有更多的研究。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.p4.1": {
+  "sentences": [
+   {
+    "zh": "对于现实世界中的高风险应用，使用在大量未标记、未经整理的数据集上训练的预训练Transformer模型，可能存在将有害偏见从一种模态转移到另一种模态的潜在担忧（Sheng et al., 2019; Bender et al., 2021）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "缓解这些偏见是一个活跃的研究领域（Grover et al., 2019; Choi et al., 2020）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "相反，FPT模型能够更好地利用来自一种或多种模态的代表性数据集，也存在潜在的好处，这也值得未来研究。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "__sections__": {
+  "__title__": "预训练Transformer作为通用计算引擎",
+  "Abstract": "摘要",
+  "1 Introduction": "1 引言",
+  "4 Related Work and Discussion": "4 相关工作与讨论",
+  "4.1 Transformers in multimodal settings": "4.1 多模态环境中的Transformer",
+  "4.2 Transformers in transfer settings": "4.2 迁移环境中的Transformer",
+  "4.3 Pretraining and finetuning of transformer models": "4.3 Transformer模型的预训练与微调",
+  "4.4 Self-attention layers as optimization steps": "4.4 自注意力层作为优化步骤",
+  "4.5 Global workspace theory": "4.5 全局工作空间理论",
+  "4.6 Reservoir computing": "4.6 储备池计算",
+  "5 Conclusion": "5 结论"
+ }
+}

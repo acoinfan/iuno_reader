@@ -1,0 +1,318 @@
+{
+ "__meta__": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "models": {
+   "reviewer": "deepseek-v4-pro"
+  },
+  "translator": "deepseek-v4-pro（关思考）",
+  "independence": "same-model",
+  "usage": {
+   "calls": 10,
+   "prompt_tokens": 9078,
+   "completion_tokens": 10707,
+   "seconds": 94.9,
+   "cached_tokens": 6272
+  }
+ },
+ "abs.p1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "世界模型对于构建能够推理、规划并超越其训练数据进行泛化的智能体至关重要。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，当前世界模型的研究是碎片化的，不同的代码库、数据管道和评估协议阻碍了可重复性和公平比较。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "当前的实践进一步受到三个关键瓶颈的限制：脆弱的一次性代码库、缓慢的视频数据加载以及缺乏标准化的泛化基准。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们提出 `stable-worldmodel`（`swm`），一个用于标准化和可重复的世界模型研究与评估的开源平台。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "它提供（1）一个基于 Lance 的高性能数据层，原生支持 MP4、HDF5 和 LeRobot 数据集并提供转换工具，（2）现代世界模型基线和规划求解器的干净、经过充分测试的实现，以及（3）一套广泛的环境和任务，扩展了可控的视觉、几何和物理变化因素，用于系统性的计算机模拟评估动力学理解、控制性能、表示质量和分布外泛化。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "通过在单一、可扩展的框架下统一整个流程，`swm` 大幅减少了研究开销，并加速了朝着可靠世界模型的值得信赖的进展。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "代码可在此处获取。"
+   }
+  ]
+ },
+ "S1.F1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图1：`stable-worldmodel` 概览：数据从世界中高效采集，通过提供的基线用于训练世界模型，随后由求解器用于控制。"
+   }
+  ]
+ },
+ "S1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "使用预测模型来指导决策的想法可以追溯到20世纪60-70年代的控制理论界 [51, 56]。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些方法大多依赖解析的闭式模型或手工制作的模拟器来预测动作（控制变量）的结果 [37, 55]。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，深度学习的最新进展转而直接从原始数据中学习构建这些预测模型，利用神经网络 [20, 23, 25, 28, 5]，这种方法更常被称为世界模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些世界模型能够捕捉远为复杂的现实世界现象 [2, 19]，而无需显式推导动力学方程。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，对于任何学习系统，在真实世界部署之前进行优缺点审计至关重要。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，尽管取得了令人振奋的进展，世界建模社区仍然缺乏可靠的基线、标准化的基准和可复现的评估协议。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "大多数研究依赖自定义的、往往脆弱的代码库，迫使研究人员反复重新实现相同的算法。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "正如计算机科学的历史一再表明的那样，这种做法是隐藏错误、结果不一致的根源，导致出版物中报告的结果可信度和可信赖性降低 [9, 53, 34]。"
+   }
+  ]
+ },
+ "S1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了应对这些挑战，我们提出了 `stable-worldmodel`（`swm`），一个用于可复现世界建模研究和评估的开源平台。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "term"
+    ],
+    "issue": "representation probing 未使用项目规定的 probing 译法「线性探针」，译作「表征探针」。",
+    "suggestion": "`swm` 基于 PyTorch [48] 和 Gymnasium [64] 构建，提供了一个完整的模块化测试平台，支持研究人员贯穿整个世界模型流程：从数据集收集和训练工具到全面评估（包括控制、表征线性探针、分布外和零样本泛化）。",
+    "zh_reviewed": "`swm` 基于 PyTorch [48] 和 Gymnasium [64] 构建，提供了一个完整的模块化测试平台，支持研究人员贯穿整个世界模型流程：从数据集收集和训练工具到全面评估（包括控制、表征探针、分布外和零样本泛化）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "它能够对新算法进行系统评估，清晰识别计算机模拟模型的局限性，并与强基线进行公平比较。"
+   }
+  ]
+ },
+ "S1.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的贡献如下："
+   }
+  ]
+ },
+ "S1.I1.i1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• 一个基于 Lance 的高性能数据层，原生支持 MP4、HDF5 和 LeRobot 数据集并提供转换工具，消除了多模态世界模型训练中的 I/O 瓶颈。"
+   }
+  ]
+ },
+ "S1.I1.i2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• 现代世界模型基线（DINO-WM、LeWorldModel、PLDM、TD-MPC2 等）的干净、经过良好测试且可复现的实现，以及规划求解器（CEM、MPPI、GD 等）的高效可靠实现。"
+   }
+  ]
+ },
+ "S1.I1.i3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• 一个多样化的基准测试套件，涵盖经典控制、MuJoCo、Atari、机器人学和开放世界环境，并辅以系统性的可控变异因素（视觉、几何和物理），从而实现标准化的零样本泛化与鲁棒性评估。"
+   }
+  ]
+ },
+ "S1.F2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图2：`swm` 支持的环境系列。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**顶行：**每个环境的默认（未扰动）渲染。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**底行：**所有视觉变化因素（例如，智能体、物体、场景、几何、光照）联合扰动。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "动态物理参数（例如，质量、密度、重力或摩擦）也可以修改，但此处省略，因为它们在单帧中不可见。"
+   }
+  ]
+ },
+ "S6.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们介绍了 `stable-worldmodel`，一个用于世界模型可复现研究和评估的开源平台。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "`swm` 提供了高效、模块化且经过充分测试的工具，以减少整个世界建模流程中的摩擦，包括高性能数据管理、规划求解器，以及扩展了可定制视觉和物理属性的标准化评估基准。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的实验强调，当前的世界模型即使在温和的分布偏移下，也远未实现稳健的零样本泛化，这凸显了在视觉和物理稳健性以及长时程一致性方面取得进展的必要性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些发现表明，改进泛化能力可能既需要架构上的进步，也需要系统性的扩展。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "通过实现可靠且可扩展的评估工作流程，`swm` 使得严格研究扩展趋势及其对泛化的影响成为可能，从而支持对现有和未来架构进行更受控和可复现的研究。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "展望未来，我们的目标是将平台从仿真扩展到改进的仿真到现实迁移、支持异步实时交互和高效的在线训练，并将其适用性拓宽到更广泛的科学领域。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们希望这个统一的框架能够促进更公平的比较、更可靠的泛化研究，并加速朝着面向现实世界的稳健且值得信赖的世界模型取得进展。"
+   }
+  ]
+ }
+}

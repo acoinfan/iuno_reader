@@ -1,0 +1,539 @@
+{
+ "__meta__": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "models": {
+   "reviewer": "deepseek-v4-pro"
+  },
+  "translator": "deepseek-v4-pro（关思考）",
+  "independence": "same-model",
+  "usage": {
+   "calls": 19,
+   "prompt_tokens": 15919,
+   "completion_tokens": 15524,
+   "seconds": 155.0,
+   "cached_tokens": 11904
+  }
+ },
+ "abs.p1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "LLM智能体在需要深度推理的紧凑环境中表现出色，但在更广泛、更复杂的上下文中操作时仍然脆弱，这些上下文要求跨多种工具和模式的鲁棒性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为训练构建定制环境是繁重、脆弱的，并且限制了进展。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在本文中，我们证明LLM可以在不访问实际测试平台数据或API的情况下模拟真实的环境反馈。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "受此能力启发，我们提出了两个框架：**Simia-SFT**，一个通过以环境无关的方式将小种子集扩展为多样轨迹来合成SFT数据的流水线，以及**Simia-RL**，一个通过LLM模拟反馈实现无需真实环境实现的RL训练的框架。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对开放模型进行微调在多个基准测试上产生了一致的改进，在$\\tau^{2}$-Bench上超越了GPT-4o并接近o4-mini。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Simia-SFT和Simia-RL共同实现了无需环境工程的可扩展智能体训练，用灵活的基于LLM的模拟取代了繁重且脆弱的实现。"
+   }
+  ]
+ },
+ "S1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "大型语言模型（LLM）智能体正变得越来越强大和自主。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "推理机制的进步使它们能够进行多步规划、工具使用和问题解决，在数学竞赛（如国际数学奥林匹克（Luong and Lockhart, 2025））或编程竞赛（如ICPC（Lin and Cheng, 2025））等狭窄但认知要求高的领域，其表现甚至超越了人类专家。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们将这些称为复杂任务/简单环境设置：核心挑战在于解决困难的推理问题，而环境本身是明确规定的、紧凑的，并且易于搭建。"
+   }
+  ]
+ },
+ "S1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "minor",
+    "category": [
+     "scope"
+    ],
+    "issue": "原文“individually simple”指任务本身单独来看简单，译文“单个步骤简单”引入了“步骤”概念，修饰对象有偏差。",
+    "suggestion": "相比之下，LLM智能体在那些单独来看简单但处于广泛、杂乱或动态环境中的任务上仍然表现不佳。",
+    "zh_reviewed": "相比之下，LLM智能体在那些单个步骤简单但处于广泛、杂乱或动态环境中的任务上仍然表现不佳。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例子包括操作自动售货机、办公室工作流程或家务任务（Backlund and Petersson, 2025）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们将这些称为简单任务/复杂环境设置。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "每一步所需的推理可能很少，但成功取决于在广泛的环境、工具和边缘情况分布上的鲁棒性。"
+   }
+  ]
+ },
+ "S1.F1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图1：在我们的合成模拟轨迹上微调的模型性能，无需真实环境实现。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的32B模型（基于Qwen2.5-32B-Instruct）超越了GPT-4o和xLAM-2-70B模型，我们的8B模型（基于Qwen3-8B）在$\\tau^{2}$-Airline和Retail上优于Qwen2.5-32B-Instruct。"
+   }
+  ]
+ },
+ "S1.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们认为，在跨越广泛环境的多样化轨迹上训练智能体，对于应对简单任务/复杂环境挑战至关重要（Team et al., 2025）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，大规模构建此类数据并非易事。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "合成数据生成为可扩展的轨迹创建提供了一种有前景的替代方案（Patil et al., 2023; Tang et al., 2023; Qin et al., 2023; Zeng et al., 2023a）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，现有的合成流程严重依赖于环境。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "传统方法通过实现具有显式工具接口和API的环境来构建智能体轨迹（Patil et al., 2023; Zeng et al., 2023a）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "虽然这能产生逼真的交互，但它将数据生成与环境特定细节紧密耦合，限制了可迁移性和可扩展性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "每个新环境都需要大量的工程工作来设置和定义工具规范，使得广泛覆盖变得不切实际。"
+   }
+  ]
+ },
+ "S1.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在本文中，我们表明LLM可以充当环境模拟器，在无需访问真实环境的情况下生成连贯的状态转换和工具交互。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这揭示了LLM作为环境模拟器的能力，利用其世界建模能力在无需访问真实智能体环境的情况下生成连贯的环境动态、状态转换和工具交互。"
+   }
+  ]
+ },
+ "S1.p5.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "基于这一观察，我们提出：**Simia-SFT**，一种通过以环境无关的方式将小规模种子集扩增为多样化轨迹来合成SFT数据的流程，以及**Simia-RL**，一种通过生成LLM模拟反馈、无需真实环境实现即可进行RL训练的框架。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Simia-SFT和Simia-RL共同实现了跨多种任务的可扩展智能体训练，无需承担智能体环境工程的负担，用灵活的基于LLM的模拟取代了繁重且脆弱的环境实现。"
+   }
+  ]
+ },
+ "S1.p6.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "minor",
+    "category": [
+     "hedge"
+    ],
+    "issue": "译文增加了“可”，把原文确定的“delivers substantial gains”变成了“可以带来显著提升”，语气上略有减弱。",
+    "suggestion": "在模拟轨迹上微调开放模型（如 `Qwen3-8B` 和 `Qwen2.5-32B-Instruct`）在多个基准上带来显著提升（Wang et al., 2024; Barres et al., 2025; Liu et al., 2023）。",
+    "zh_reviewed": "在模拟轨迹上微调开放模型（如 `Qwen3-8B` 和 `Qwen2.5-32B-Instruct`）可在多个基准上带来显著提升（Wang et al., 2024; Barres et al., 2025; Liu et al., 2023）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图 1 显示，在 $\\tau^{2}$-Bench 上，我们的 32B 模型超越了 GPT-4o 和 xLAM-2-70B Prabhakar et al. (2025)，而我们的 8B 模型在 Airline 和 Retail 上优于 Qwen2.5-32B-Instruct。"
+   }
+  ]
+ },
+ "S1.p7.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "总之，本文做出了以下贡献："
+   }
+  ]
+ },
+ "S1.I1.i1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• **Simia-SFT 流水线**。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们提出了一种与环境无关的轨迹合成流水线，该流水线从小型种子集生成完整的智能体轨迹，而无需执行真实环境。"
+   }
+  ]
+ },
+ "S1.I1.i2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• **Simia-SFT 数据集**。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "该开源工具智能体训练数据集涵盖多轮对话和工具使用，为智能体训练做出贡献并提升智能体性能。"
+   }
+  ]
+ },
+ "S1.I1.i3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• **Simia-RL 框架**。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们提出在 LLM 模拟的环境上进行强化学习，从而规避智能体环境工程。"
+   }
+  ]
+ },
+ "S1.I1.i4": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• **实证收益。** 在多种基准测试中，基于模拟轨迹微调的开源模型和在模拟环境上进行强化学习均带来一致的提升，在不同基准测试上超越了闭源模型。"
+   }
+  ]
+ },
+ "S1.p8.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些结果表明了一种实用的智能体训练方法：用LLM模拟器替代特定环境的代码。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这将环境工程重新定义为摊销的提示和模式设计问题，从而在智能体LLM训练方面取得更广泛的进展。"
+   }
+  ]
+ },
+ "S1.F2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图2：LLM能够通过推理来模拟合理的环境反馈，而无需访问所有实际测试平台数据或系统信息。"
+   }
+  ]
+ },
+ "S1.F3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图3：Simia-SFT流水线，用于在不进行真实环境执行的情况下合成智能体轨迹数据。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "该图展示了从种子轨迹经过预过滤、提示设计、LLM模拟到最终合理性检查的流程。"
+   }
+  ]
+ },
+ "S4.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在这项工作中，我们观察到，即使没有实际的测试平台数据，LLM 也能通过推理来模拟智能体环境。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "通过利用这一能力，我们提出了 Simia-SFT，一个用于合成智能体 SFT 数据的 LLM 轨迹模拟框架。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "通过结合基于 LLM 的预过滤、LLM 模拟和基于规则的健全性检查，我们的流程在异构智能体环境中生成高质量轨迹，而无需费力的环境工程。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们进一步提出了 Simia-RL，一个 LLM 环境模拟框架，用于在没有真实智能体环境实现的情况下实现 RL。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "omission"
+    ],
+    "issue": "漏译了 much，未体现“大得多”的程度。",
+    "suggestion": "我们的实验表明，较小的开放模型超越了规模大得多的专有模型。",
+    "zh_reviewed": "我们的实验表明，较小的开放模型超越了更大的专有模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "总之，这些结果确立了环境模拟作为推进 LLM 智能体训练的实用途径，为跨多种现实世界任务的可扩展研究和部署开辟了机会。"
+   }
+  ]
+ },
+ "S4.SS0.SSSx1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "虽然我们的流程面向广泛的、与环境无关的轨迹合成，但目前的研究仍存在若干局限。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "实验集中在有限的智能体领域，如航空、零售、网页导航和办公场景。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "扩展到具有不同工具模式的更多领域非常重要。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此外，我们的数据生成和强化学习环境依赖于LLM模拟器。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "尽管提示通过锚定正式工具规范来约束动作空间，但模拟仍可能引入与真实部署不同的分布偏差。"
+   }
+  ]
+ },
+ "S4.SS0.SSSx2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "本研究探讨了用于智能体训练的合成数据和模拟环境。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "本研究不涉及人类受试者、用户研究或个人身份信息的收集。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们实验中使用的数据集和基准测试是公开可用的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们不引入或支持任何可能造成伤害或被滥用的应用。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "“present”译为“提出”不够准确，可能被理解为本文不讨论伦理问题，而非原文“不引起/不涉及伦理问题”之意。",
+    "suggestion": "本文不涉及任何伦理问题。",
+    "zh_reviewed": "本文不提出任何伦理问题。"
+   }
+  ]
+ }
+}

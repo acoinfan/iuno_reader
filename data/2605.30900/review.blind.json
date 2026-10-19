@@ -1,0 +1,921 @@
+{
+ "__meta__": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "models": {
+   "reviewer": "deepseek-v4-pro"
+  },
+  "translator": "deepseek-v4-pro（关思考）",
+  "independence": "same-model",
+  "usage": {
+   "calls": 35,
+   "prompt_tokens": 29186,
+   "completion_tokens": 29313,
+   "seconds": 246.1,
+   "cached_tokens": 22016
+  }
+ },
+ "S1.p5.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们引入 BilliardPhys-Bench，具有三项贡献："
+   }
+  ]
+ },
+ "S1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对物理世界的推理是通用人工智能的前提 NVIDIA et al. (2025); Wu et al. (2024); Upadhyay et al. (2026); Zhao et al. (2026); Zhou et al. (2026)。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "人类很容易做到这一点：从一张台球桌的单一图像中，大多数人能够预测可能的轨迹、碰撞和结果。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，当前的多模态大语言模型（MLLMs）仍然难以从2D图像中推断出准确的物理演化 Yao et al. (2024); Ye et al. (2024); Zhang et al. (2026a); Zhang et al. (2026b)。"
+   }
+  ]
+ },
+ "S1.p6.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（1）一个程序化生成的多层级基准。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的引擎创建随机化的台球场景，每个场景提供高分辨率的初始状态图像，并配有物理引擎的真实值。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "该基准将问题分解为三个层级：（a）离散碰撞预测（母球是否会碰撞，以及与哪个物体碰撞？），（b）连续最终状态估计（能量消散后所有球的精确坐标），以及（c）复杂交互链（通过二次和三次碰撞进行推理）。"
+   }
+  ]
+ },
+ "S1.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "现有的物理推理基准可分为三类。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "静态问答基准通过文本或图像查询来测试物理定律的知识 Wang et al. (2025); Shen et al. (2025); Xiang et al. (2025); Chung et al. (2025); Zhu et al. (2025); Ye et al. (2025); LSST Dark Energy Science Collaboration et al. (2026)——这些基准衡量陈述性知识，但不要求对演化环境进行推理。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "符号或基于代码的基准通过抽象界面呈现物理，减少了对感知基础的需求 Bakhtin et al. (2019); Matthews et al. (2025); Cherian et al. (2024); Li et al. (2025); Zhang et al. (2025)。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "视觉交互基准将视觉语言模型评估为通过试错进行规划和适应的智能体 Li et al. (2025); Zhang et al. (2025)。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "单帧前向模拟——从静态初始条件预测未来状态而不进行迭代交互——仍然研究较少。"
+   }
+  ]
+ },
+ "S1.p7.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "(2) 一个用于物理推理失败的诊断框架。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们评估了领先的专有和开源多模态大语言模型，并分析了失败模式——静止偏差、对动量传递的误解、对视觉细节的敏感性——为当前架构为何在视觉动力学推理上失败提供了具体见解。"
+   }
+  ]
+ },
+ "S1.p8.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（3）更强物理归纳偏置的方向。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的结果显示了下一词元预测在物理模拟方面的局限性，并概述了通过混合神经-物理方法 Achterhold et al. (2023)、因子图或可微物理引擎的路径。"
+   }
+  ]
+ },
+ "S1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "台球非常适合用于评估，因为它需要几何估计碰撞角度、多体跟踪以及基于动力学的因果推理 Zhao et al. (2015); Kiefl (2024); Alberico et al. (2025)。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "hedge"
+    ],
+    "issue": "“substantially different” 意为“显著不同”，并非“截然不同”，译文丢失了原文的程度限定，语气更强。",
+    "suggestion": "感知到的位置或速度的微小误差会累积成显著不同的结果 Wang et al. (2025); Xu et al. (2025b); Xu et al. (2025a); Yu et al. (2026); Mak et al. (2026)。",
+    "zh_reviewed": "与主要测试语义识别的标准视觉问答不同，台球预测对初始条件敏感：感知到的位置或速度的微小误差会累积成截然不同的结果 Wang et al. (2025); Xu et al. (2025b); Xu et al. (2025a); Yu et al. (2026); Mak et al. (2026)。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这种敏感性使台球成为预测性物理推理的测试，而非描述性场景理解 Yuan et al. (2025); Jiang et al. (2025); Liu et al. (2025)。"
+   }
+  ]
+ },
+ "S4.SS1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "GPT 系列既包含跨代变化（GPT-5.2 $\\to$ GPT-5.4 $\\to$ GPT-5.5），也包含同代内推理深度变体（基础版与 Pro 版）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "“Pro” 变体是更深推理的配置，而非独立的基础模型。"
+   }
+  ]
+ },
+ "S4.SS1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "额外的推理深度对事件推断帮助最大。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这在 GPT-5.2/GPT-5.2-Pro 的对比中可见，其中任务 1 和任务 2 的改进远大于终态预测。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在 GPT-5.4/GPT-5.4-Pro 这一对中这一点变得更清晰：在较轻的设置下，GPT-5.4 是“终态强、事件级弱”；在更深推理下，GPT-5.4-Pro 成为最均衡的模型之一。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这表明基础配置中的事件级弱点可以通过更多的测试时推理来缓解。"
+   }
+  ]
+ },
+ "S4.SS1.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "成本权衡：GPT-5.4-Pro 和 GPT-5.5 消耗的 token 数量约为其他模型（包括 GPT-5.4）的 $8\\times$，其中大部分额外预算用于推理 token。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "由于提示和客户端设置保持不变，这一差距反映的是模型端默认的推理行为，而非我们的评估设置所引入的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们无法直接检查隐藏的推理轨迹，因此这一结论基于使用元数据。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这并不削弱 GPT 的最佳结果，但在这一比较中，准确性与推理效率并不一致。"
+   }
+  ]
+ },
+ "S4.SS3.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Qwen3.6-Plus（57.36%）远超 Qwen3.5-Plus（43.09%）和 Qwen3-VL-Plus（22.23%）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "其特征十分鲜明："
+   }
+  ]
+ },
+ "S4.SS1.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "跨代变化并非单调。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "从GPT-5.2到GPT-5.4并未产生一致的增益；相反，该模型变得更加极化，终态预测更强，但事件推理持续薄弱。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "GPT-5.5随后在GPT-5.4-Pro所代表的高推理机制上有所改进，取得了最佳总分和任务2表现，但其优势是渐进式的，而非能力重构。"
+   }
+  ]
+ },
+ "S4.SS2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Gemini-3-Flash-Preview（58.06%）和 Gemini-3.1-Pro-Preview（53.84%）提供了均衡的表现，在终态预测上仍具竞争力，但在事件推理和总分上明显落后于顶尖的 GPT 模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Gemini 系列在各项任务上表现出有用的一致性，然而一旦纳入更强的事件推理模型，仅凭一致性已不足以确保顶尖排名。"
+   }
+  ]
+ },
+ "S4.SS3.p1.2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "尽管它在总体上不及最好的 GPT 模型，但它显然属于第二梯队，并且代表了一条通往强劲性能的不同路径：稳健的事件推理，而最终状态预测并不同样强劲。"
+   }
+  ]
+ },
+ "S4.I1.i1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• **强大的事件推理：** 任务2达到87.39%（在不同时间跨度上稳定在84.92%至91.29%之间），在任务1上以47.66%的成绩具有竞争力。"
+   }
+  ]
+ },
+ "S1.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这一空白反映了感知与推理之间的分离。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "scope"
+    ],
+    "issue": "原文中 correctly 同时修饰 describe scenes 和 state physical rules，译文仅明确修饰「描述场景」，「陈述物理规则」缺少正确性限定。",
+    "suggestion": "模型可能正确描述场景或正确陈述物理规则，却未能产生准确的预测 Xu et al. (2025c); Lee et al. (2025); Puyin et al. (2025); Lin et al. (2025)。",
+    "zh_reviewed": "模型可能正确描述场景或陈述物理规则，却未能产生准确的预测 Xu et al. (2025c); Lee et al. (2025); Puyin et al. (2025); Lin et al. (2025)。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在台球中，这表现为静止偏差和连续碰撞上的失败。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "先前关于球轨迹预测的工作主要使用视频中的逐帧跟踪 Yu (2025); Kienzle et al. (2025); Gomez-Gonzalez et al. (2020); Chiang et al. (2024)，而不是从静态状态进行预测。"
+   }
+  ]
+ },
+ "S4.I1.i2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• **较弱的终态预测：** 任务3从1秒时的57.00%下降到5秒时的44.71%，表明局部事件判断优于长时程物理推演。"
+   }
+  ]
+ },
+ "abs.p1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "当前的多模态模型能够很好地处理静态图像识别，但直观的物理推理仍然是一个弱点。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "从单张图像预测物体将如何移动和交互对这些系统来说仍然困难。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们提出了 BilliardPhys-Bench，一个用于合成台球环境中物理推理的基准。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "其程序化引擎生成具有摩擦和弹性碰撞的随机场景。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "该基准测试三种能力：（1）预测球与球之间的碰撞，（2）推理墙壁反弹，以及（3）估计运动停止后球的最终位置。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们评估了来自 GPT、Claude、Gemini 和 Qwen 系列的最新多模态大语言模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "随着模拟时间增加和场景几何变得更加复杂，性能下降。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们还观察到一个一致的失败模式，我们称之为“停滞偏差”：当正确的物理结果更难推断时，模型倾向于预测没有交互。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "\"break down\" 意为“失效/崩溃”，译文“存在不足”语气较弱。",
+    "suggestion": "这些发现表明当前多模态大语言模型在视觉动力学方面会在何处失效，并指出多模态架构中需要更好的物理归纳偏置。",
+    "zh_reviewed": "这些发现表明当前多模态大语言模型在视觉动力学方面存在不足，并指出在多模态架构中需要更好的物理归纳偏置。"
+   }
+  ]
+ },
+ "S4.SS4.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Claude 系列的进展是非单调的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Claude-Opus-4.5 和 Claude-Opus-4.6 在墙壁交互推理方面最强（4.6：任务 2 为 82.50%，5 秒最佳得分为 89.54%）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "即使整体得分处于中等范围，它们仍保留了有意义的边界反射能力。"
+   }
+  ]
+ },
+ "S4.SS7.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "一些模型近似地预测物体最终的位置（GPT-5.4：1秒时任务3为80.86%），却没有识别出产生该结果的碰撞事件（任务1为25.76%）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Qwen3.6-Plus则表现出相反的情况：在所有时间跨度上任务2表现强劲，但在任务3上较弱。"
+   }
+  ]
+ },
+ "S4.SS4.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Claude-Opus-4.7 则相反：在任务 3 上表现强劲（1 秒时 77.93%，5 秒时 62.27%），但在事件推理上较弱（任务 1 为 20.01%，任务 2 为 22.55%）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "与 GPT-5.4 类似，它“终态强，事件级弱”。该模型也有少量缺失样本。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Claude 系列并未表现出稳步提升；后续变体在反射推理和终态预测之间转移了平衡，而非均匀地改进。"
+   }
+  ]
+ },
+ "S4.SS5.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Kimi-K2.5（41.95%）处于不同的中间位置，其表现更为均衡：任务1为30.04%，任务2为71.26%，任务3为33.53%。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "它没有达到Doubao-Seed-2.0-Pro在任务2/3上的表现，但避免了Doubao-Seed-1.8的严重弱点，后者受限于3秒后`final.json`完整性差。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在这一组中，Doubao-Seed-2.0-Pro最具竞争力，而Kimi-K2.5最为均衡。"
+   }
+  ]
+ },
+ "S4.SS5.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Doubao-Seed-2.0-Pro（48.46%）相较于 Doubao-Seed-1.8（37.26%）的提升主要来自任务2（67.73% $\\to$ 78.11%）和任务3（21.07% $\\to$ 49.03%）的改善，而任务1则有所下降（33.36% $\\to$ 26.37%）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "混淆统计与更保守的预测风格一致：假阳性更少，但漏检的真实碰撞更多。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "其更强的整体结果来自墙壁交互推理和终态预测，而非碰撞事件检测。"
+   }
+  ]
+ },
+ "S5.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们引入了 `BilliardPhys-Bench`，一个通过程序化生成的台球场景来评估多模态大语言模型物理推理能力的基准。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "结果揭示了识别场景与推理其如何演变之间的一致差距。"
+   }
+  ]
+ },
+ "S4.SS7.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "任务3有时可以被视为从观察到的场景进行终态外推。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "任务1需要识别状态转换——即改变轨迹的碰撞。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "最强的模型将事件级推理与长时程预测联系起来，而不是只擅长其中一项。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这一差距表明，一些模型更擅长生成空间上合理的输出，而不是表征物理过程的因果结构。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "改善这种联系对于多模态系统中的物理推理很重要。"
+   }
+  ]
+ },
+ "S5.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**GPT-5.5** 和 **GPT-5.4-Pro** 构成领先梯队，其中 **GPT-5.5** 取得了最强的总体得分，而 **GPT-5.4-Pro** 则拥有最均衡的表现。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**Qwen3.6-Plus** 在事件推理上形成了强大的第二梯队。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**GPT-5.4** 和 **Claude-Opus-4.7** 表明，如果没有可靠的事件检测，仅靠终态预测是不够的。"
+   }
+  ]
+ },
+ "Sx1.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "该基准测试评估从单一初始状态图像进行预测的能力。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "模型不接收视频序列或多帧图像，因此该基准测试检验的是从静态输入进行前向模拟，而非动态状态估计。"
+   }
+  ]
+ },
+ "Sx1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "所有场景均为台球桌场景。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "仅凭在该基准上的表现，不能假定其能泛化到其他物理领域（流体动力学、可变形物体、铰接体）。"
+   }
+  ]
+ },
+ "Sx1.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们没有收集人类表现数据。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "人类基线将有助于将模型结果置于背景中，并将本质上困难的任务与暴露模型特定弱点的任务区分开来。"
+   }
+  ]
+ },
+ "Sx1.p5.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "大多数被评估的模型是通过商业API访问的，其架构、训练数据和参数数量未公开披露。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这限制了可重复性和详细的失败分析。"
+   }
+  ]
+ },
+ "Sx1.p6.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "所有场景在标准球桌上恰好包含七个球（ID 0–6）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "该基准测试不改变物体数量、球桌几何形状或障碍物配置。"
+   }
+  ]
+ },
+ "S4.SS6.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "物理推理不是单一的能力。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "不同的模型家族在终态预测和事件推理之间表现出不同的权衡。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "scope"
+    ],
+    "issue": "「随时间」在中文里的修饰对象不明确，可能被理解为修饰「推理」本身，而原文中 over time 限定的是 causal interactions。",
+    "suggestion": "强大的性能既需要可靠的空间定位，也需要一种对随时间发生的因果交互进行推理的机制。",
+    "zh_reviewed": "强大的性能既需要可靠的空间定位，也需要一种随时间推理因果交互的机制。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "仅在一个维度上强大的模型——GPT-5.4和Claude-Opus-4.7在空间定位上，Qwen3.6-Plus在事件推理上——即使单个任务性能很高，也无法获得最高的总分。"
+   }
+  ]
+ },
+ "S1.p9.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "minor",
+    "category": [
+     "term"
+    ],
+    "issue": "one-shot prediction 中的 shot 未按术语表译作「示例」，当前译作「一次性」与规定术语不一致，且可能产生歧义。",
+    "suggestion": "通过将评估从交互式动作转变为单示例预测，我们的基准测试检验了多模态大语言模型是否能够维持物理学的内部模型。",
+    "zh_reviewed": "通过将评估从交互式动作转变为一次性预测，我们的基准测试检验了多模态大语言模型是否能够维持物理学的内部模型。"
+   }
+  ]
+ },
+ "S5.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "性能随着模拟时间从1秒增加到5秒而下降：早期轨迹估计中的小误差会累积，更长的交互链变得更难预测。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "scope"
+    ],
+    "issue": "“随时间变化”在中文里修饰“稳定物理动力学模型”，容易被理解为模型本身随时间变化，与“稳定”矛盾；原文的 over time 修饰的是 physical dynamics。",
+    "suggestion": "当前的多模态大语言模型仍然缺乏一个稳定的模型来描述随时间变化的物理动力学。",
+    "zh_reviewed": "当前的多模态大语言模型仍然缺乏随时间变化的稳定物理动力学模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "`BilliardPhys-Bench` 提供了一种直接的方法来评估这些局限性，并衡量朝着具有更强物理归纳偏置的模型的进展。"
+   }
+  ]
+ },
+ "Sx1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "原文“with perfectly elastic collisions”表示模型具有完全弹性碰撞的属性，译文用“和”将其与模型并列，修饰关系不够准确。",
+    "suggestion": "我们的基准测试采用具有完全弹性碰撞的二维恒定摩擦模型。",
+    "zh_reviewed": "我们的基准测试采用二维恒定摩擦模型和完全弹性碰撞。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "真实的台球运动涉及旋转、非均匀摩擦、非完全弹性以及三维动力学，例如跳球。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "简化的设置隔离了核心推理能力，但并未涵盖真实台球物理的全部。"
+   }
+  ]
+ }
+}

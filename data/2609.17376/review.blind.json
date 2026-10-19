@@ -1,0 +1,2775 @@
+{
+ "__meta__": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "models": {
+   "reviewer": "deepseek-v4-pro"
+  },
+  "translator": "deepseek-v4-pro（关思考）",
+  "independence": "same-model",
+  "usage": {
+   "calls": 87,
+   "prompt_tokens": 85632,
+   "completion_tokens": 100540,
+   "seconds": 916.0,
+   "cached_tokens": 54016
+  }
+ },
+ "abs.p1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "大型语言模型（LLMs）通过下一词预测训练，展现出卓越的上下文学习（ICL）能力，但支撑ICL的表征仍未被充分理解。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们在受控环境中考察这些表征：用隐马尔可夫模型（HMMs）生成的数据提示LLMs，并探测相应的信念状态——即在给定观测词元历史条件下，HMM隐藏状态的后验分布。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在六个开源LLMs上，使用从40个具有非平凡信念结构的HMMs中选取的数据进行提示，我们发现信念状态可以从残差流激活中线性解码，峰值探针$R^{2}$值在HMM和LLM组合中为0.83–0.99，分布在从早期到后期的各层。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为确立功能相关性，我们通过补丁和导向直接干预探针识别的子空间，结果下游预测质量与未篡改模型相当，而对照组则显著降低性能。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "综合来看，这些结果提供了表征层面的证据，表明开源LLMs中的ICL近似于对上下文推断的生成模型进行最优贝叶斯预测。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "更广泛地说，我们的发现扩展了先前将输入分布结构与激活几何联系起来的结论：从明确在HMM数据上训练的玩具网络到生产规模的LLMs。"
+   }
+  ]
+ },
+ "S1.F1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图1：HMM在LLM中归纳出信念状态几何。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "(a) 一个HMM（左）通过在隐藏状态（S1、S2、S3）之间转移来发射token。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在上下文中以该序列为条件，LLM（中）预测下一个token。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "hedge"
+    ],
+    "issue": "“suggests” 语气较弱，译为“表明”有加强为已证实之意，建议保留推测语气。",
+    "suggestion": "计算力学认为，最优预测需要跟踪信念状态——即HMM隐藏状态上的后验分布——其可达集在激活空间中勾勒出特征几何（右）。",
+    "zh_reviewed": "计算力学表明，最优预测需要跟踪信念状态——即HMM隐藏状态上的后验分布——其可达集在激活空间中勾勒出特征几何（右）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "(b) 针对一个HMM（Wing）的结果预览。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "LLM在上下文中预测接近最优（左），线性探针恢复的信念几何远超对照（中），干预信念子空间会影响预测（右）。"
+   }
+  ]
+ },
+ "S1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "当大型语言模型（LLM）看到来自训练分布中不存在的过程的标记时，它们的激活是如何组织起来的？"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在这类任务上表现良好的能力被称为上下文学习（ICL），其行为层面已被广泛刻画（Wei et al., 2022; Min et al., 2022; Chan et al., 2022; Dong et al., 2024），而较小的一部分工作已经开始探究其背后的表征（Hendel et al., 2023; Todd et al., 2024; Park et al., 2025; Sarfati et al., 2026）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "但关于这些表征的、由理论推导出的、可证伪的预测大多缺失（尽管 Park et al., 2025 是一个显著的例外）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这样的预测不仅提供了可以被探测和干预的具体表征目标，而且也许更重要的是，这些预测背后的理论告诉我们这些表征的含义以及它们的来源。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在这项工作中，我们借助计算力学框架来做出一个具体的预测（Shalizi and Crutchfield, 2001; Crutchfield, 2012; Shai et al., 2024）：在上下文中学习预测由隐马尔可夫模型（HMM）生成的数据的 LLM 会表征该过程的信念状态——即在给定观测上下文的情况下，HMM 隐藏状态的后验分布（图 1）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们在一系列开源 LLM 中表明，当 LLM 执行接近最优的预测时，这种假设的信念状态表征可以从残差流中线性解码，并且对 LLM 的下游预测具有因果相关性。"
+   }
+  ]
+ },
+ "S1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "理论解释将上下文学习（ICL）框架化为对潜在结构的推断。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在 Xie et al. (2022) 的混合隐马尔可夫模型（mixture-of-HMMs）设定中，ICL 对应于对与上下文一致的生成模型类进行贝叶斯推断。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们认为这是 ICL 运作的两个层面中的第一个。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在第二个层面，与第一个层面同时运作，LLM 必须在上下文中的标记到达时推断每个候选过程的潜在状态。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "隐马尔可夫模型（HMM）是自然文本的简单生成模型，非常适合研究第二个层面，因为 HMM 允许一个明确定义的信念状态概念，这是该层面贝叶斯推断的规范表示（Shalizi and Crutchfield, 2001; Crutchfield, 2012）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "经过训练以预测 HMM 数据的玩具 Transformer 已被证明在其激活中线性编码信念状态（Shai et al., 2024），而开源 LLM 展示了在上下文中胜任地预测 HMM 生成序列的能力，尽管从未在这些序列上训练过（Dai et al., 2025）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "综合来看，这两个观察结果表明，计算力学所假设的信念状态表示也可能出现在生产规模的 LLM 中。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "关于相关工作的更广泛讨论，请参见附录 B。"
+   }
+  ]
+ },
+ "S1.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的设置结合了上述两个层次的推理。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们假设，一个被提示以来自未见过的隐马尔可夫模型（HMM）的数据的大语言模型（LLM）会同时识别该过程，并针对该过程跟踪隐藏状态上的后验概率。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在六个开源大语言模型中，我们选择了40个隐马尔可夫模型（其中30个是新设计的过程），在这些模型上，所选的大语言模型实现了接近最优的下一个词元预测（Dai et al., 2025），并发现信念状态可以在足够的上下文之后从残差流激活中线性解码。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了确立这种表示在计算上的相关性，我们对探针识别出的子空间施加了有针对性的干预，即导向和修补。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "两者都保持了下游预测质量（以与真实分布的Kullback–Leibler散度衡量）在未篡改模型的量级上，而替换子空间上无关点的干预则显著降低了性能。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "总之，这些结果提供了表示层面的证据，表明开源大语言模型中对隐马尔可夫模型数据的上下文学习近似于对真实生成过程的最优贝叶斯预测。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "更一般地，它们将信念状态几何的计算力学解释从在隐马尔可夫模型数据上训练的玩具变换器扩展到了开源大语言模型。"
+   }
+  ]
+ },
+ "S1.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的贡献总结如下："
+   }
+  ]
+ },
+ "S1.I1.i1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• **信念状态几何可从以 HMM 数据提示的 LLM 中线性解码。** 在六个开源 LLM 和 40 个因非平凡信念结构而选出的 HMM 中，线性探针从残差流激活中恢复了预测的几何结构，峰值 $R^{2}$ 值在早期到晚期层中从 0.83 到 0.99 不等。"
+   }
+  ]
+ },
+ "S1.I1.i2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• **信念状态子空间具有因果相关性。** 对子空间进行有针对性的干预（修补和导向）能保持下游预测质量与未干预模型相当，而替换单纯形上无关点的干预则使其显著下降。"
+   }
+  ]
+ },
+ "S1.I1.i3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• **计算力学适用于生产规模的LLM。** 我们的表征和因果发现将信念状态几何的计算力学解释从明确在HMM数据上训练的玩具Transformer扩展到接触过多种数据的开源LLM。"
+   }
+  ]
+ },
+ "S2.SS1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们研究边发射隐马尔可夫模型（HMM）作为自然文本的简单模型，其选择使得隐藏的令牌生成动态比下一个令牌分布更丰富（有一个对比案例，称为 Mess3（Marzen 和 Crutchfield，2017），其中动态恰好同样丰富）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "一个 HMM 由以下部分组成：一个包含 $m$ 个隐藏状态的有限集合 $\\mathcal{S}:=\\{s_{1},s_{2},\\ldots,s_{m}\\}$；一个包含 $n$ 个可观察令牌的有限集合 $\\mathcal{X}:=\\{x_{1},x_{2},\\ldots,x_{n}\\}$；一系列按令牌区分的转移矩阵 $(T^{(x)})_{x\\in\\mathcal{X}}$，其元素 $T_{ij}^{(x)}$ 是发射令牌 $x$ 并从隐藏状态 $s_{i}$ 转移到 $s_{j}$ 的联合概率；以及一个初始分布行向量 $\\eta^{(\\varnothing)}$，其元素是隐藏状态 $\\mathcal{S}$ 上的先验概率："
+   }
+  ]
+ },
+ "S2.SS1.p1.2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "其中 $i,j\\in\\{1,2,\\ldots,m\\}$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "观察到序列 $x_{1:t}:=(x_{i_{1}},x_{i_{2}},\\ldots,x_{i_{t}})\\in\\mathcal{X}^{t}$ 的概率，其中 $(i_{1},i_{2},\\ldots,i_{t})\\in\\{1,2,\\ldots,n\\}^{t}$，可以表示为："
+   }
+  ]
+ },
+ "S2.SS1.p1.3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "其中 $\\boldsymbol{1}:=[1\\,1\\,\\cdots\\,1]^{\\intercal}\\in\\mathbb{R}^{m}$ 是全一列向量。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在本文的其余部分，我们取初始分布为平稳分布，即 $\\eta^{(\\varnothing)}=\\pi=\\pi T$，其中 $T:=\\sum_{x\\in\\mathcal{X}}T^{(x)}$ 是隐藏状态上的转移矩阵。"
+   }
+  ]
+ },
+ "S2.SS2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "假设我们观察到由 HMM 发出的序列 $x_{1:t}$；应该如何最优地预测下一个 token？"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "隐藏状态是最优下一个 token 预测的充分统计量。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "由于它不能被直接观测到，最优预测归结为确定：（1）由观测历史所隐含的隐藏状态上的概率分布（下文公式 3），以及（2）从每个隐藏状态到相应的下一个 token 分布的映射（下文公式 5）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "遵循 Shai et al. (2024)，我们将给定观测 $x_{1:t}$ 的隐藏状态上的后验分布称为信念状态："
+   }
+  ]
+ },
+ "S2.SS2.p1.2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "信念状态几何由从初始分布出发、在所有有限长度词元发射下可达的所有信念状态构成的集合组成。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "由于大语言模型具有有限的固定上下文长度，我们将该几何的子集视为本文的核心表征目标。"
+   }
+  ]
+ },
+ "S2.SS2.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "信念状态如何用于预测？"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "自然的目标是下一词元概率（NTP）向量 $p^{(x_{1:t})}$，其元素由下式给出"
+   }
+  ]
+ },
+ "S2.SS2.p2.2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于任何隐马尔可夫模型，我们可以构造发射矩阵 $M\\in\\mathbb{R}^{m\\times n}$，它将每个信念状态映射到相应的下一词元概率。"
+   }
+  ]
+ },
+ "S2.SS2.p2.3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "其中 $i\\in\\{1,2,\\ldots,m\\}$ 且 $k\\in\\{1,2,\\ldots,n\\}$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们强调，反之不一定成立，即矩阵 $M$ 一般不是右可逆的。"
+   }
+  ]
+ },
+ "S2.SS3.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "LLM 可能仅通过使用仅以最近 token 为条件的启发式方法，就能很好地预测 HMM 生成的 token，而无需维护信念状态（或其近似）的表示。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们通过考虑 HMM 的马尔可夫 k 阶近似来形式化这种替代方案。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在后续的实验部分中，它们作为自然基线，用于评估 LLM 的性能。"
+   }
+  ]
+ },
+ "S2.SS3.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "一般来说，HMM 的输出序列是非马尔可夫的，因为下一个发射可能依赖于很久以前观察到的 token。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如果 $k$ 是使得每个 NTP 仅依赖于最近 $k$ 个 token 的最小整数，则称该 HMM 具有马尔可夫阶数 $k$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于每个 HMM，我们用 $k$-HMM 表示该 HMM 的马尔可夫 $k$ 阶近似，其 NTP 由下式给出"
+   }
+  ]
+ },
+ "S2.SS3.p2.2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "其中信念状态 $\\eta^{(\\cdot)}$ 和转移矩阵 $T^{(x)}$ 对应于原始 HMM 的那些。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "退化情形 $k=0$，在约定 $x_{1:0}:=\\varnothing$ 下恢复，对应于给定隐藏状态初始分布下的独立同分布 token 发射。"
+   }
+  ]
+ },
+ "S2.SS4.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "考虑一个具有残差流维度 $d\\in\\mathbb{N}$、上下文长度 $n_{\\mathrm{ctx}}\\in\\mathbb{N}$ 和词汇表 $\\mathcal{X}$ 的 $L$ 层仅解码器 Transformer 语言模型（Vaswani et al., 2017）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "全文用 $h_{\\ell,t}(x_{1:N})\\in\\mathbb{R}^{d}$ 表示在输入序列 $x_{1:N}\\in\\mathcal{X}^{N}$ 上，第 $\\ell$ 层第 $t$ 个 token 位置处、MLP 之后且 LayerNorm 之前的残差流激活，其中 $\\ell\\in\\{0,1,\\ldots,L-1\\}$（$\\ell=0$ 表示第一个 Transformer 块之后的残差流激活），$N\\in\\{1,2,\\ldots,n_{\\mathrm{ctx}}\\}$，$t\\in\\{1,2,\\ldots,N\\}$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "由于仅解码器 Transformer 使用因果注意力，$h_{\\ell,t}(x_{1:N})$ 仅通过前缀 $x_{1:t}$ 依赖于 $x_{1:N}$；即对所有 $t$ 有 $h_{\\ell,t}(x_{1:N})=h_{\\ell,t}(x_{1:t})$。"
+   }
+  ]
+ },
+ "S3.SS0.SSS0.Px1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们在40个具有非平凡信念几何的HMM上进行实验，涵盖四个家族——Mess3、Arch、Wing和Strata——每个家族有10种参数化；定义见附录C.1。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于这些过程中的每一个，我们考虑满足Dai等人（2025）所刻画的熵-混合率平面的参数设置；详见附录C.2。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "原文公式使用了 LaTeX 格式 $...$，译文改为 Unicode 字符，未按原样保留。",
+    "suggestion": "结果针对每个家族的一个说明性参数化呈现：Mess3($\\alpha=0.01,x=0.02$)、Arch($\\alpha=0.99$)、Wing($\\alpha=0.98,x=0.4$)、Strata($\\alpha=0.97,t_{0}=0.38,t_{1}=0.54$)。",
+    "zh_reviewed": "结果针对每个家族的一个说明性参数化呈现：Mess3(α=0.01, x=0.02)、Arch(α=0.99)、Wing(α=0.98, x=0.4)、Strata(α=0.97, t₀=0.38, t₁=0.54)。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "所有参数化的结果见附录G–Q。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "当任何参数化偏离所描述的结果时，我们会在正文中注意提及。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Arch、Wing和Strata是我们设计的过程，与Mess3相比，它们出现在训练数据中的可能性较小。"
+   }
+  ]
+ },
+ "S3.SS0.SSS0.Px2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们评估了六个LLM：Qwen3.5-9B和Qwen3.5-4B（Qwen Team, 2026）、Llama-3.1-8B和Llama-3.2-3B（Grattafiori et al., 2024）、Gemma-4-E4B和Gemma-4-E2B，其中E4B和E2B分别表示4B和2B有效参数（Farabet and Lacombe, 2026）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "正文图显示Qwen3.5-9B（$L=32$，$d=4{,}096$，$n_{\\mathrm{ctx}}=262{,}144$）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "所有LLM的结果见附录G–Q。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们预先指出，对于Gemma-4-E2B（按有效参数计数最小的模型），一些发现较弱或不存在；我们在出现这些情况时予以标记。"
+   }
+  ]
+ },
+ "S3.SS0.SSS0.Px3.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Mess3 和 Arch 输出三个 token；Wing 和 Strata 输出两个。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们分配字母 `F`、`Q` 和 `V`（对于两个 token 的家族，则为 `F` 和 `Q`），并将每个序列格式化为空格分隔的字符串，例如 `\"F Q V F Q...\"`。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这种格式确保分词器将序列拆分为单个字母的 token，除第一个外，每个 token 前面都有一个空格。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们验证每个 LLM 的分词器都能正确对齐 HMM token 和 LLM token。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "所有序列长度为 20,000 个 token（$N=20{,}000$），所有分析均在 10 个序列上运行并取平均；参见图 1。"
+   }
+  ]
+ },
+ "S4.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在考虑LLM是否表示信念状态之前，我们首先评估行为层面的主张：对于第3节中引入的LLM和HMM，LLM对HMM数据的预测效果如何？"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这里，我们将LLM的预测准确度量化为真实分布与模型输出之间的Kullback–Leibler（KL）散度，并将其与达到相同预测准确度的相应$k$-HMM的$k$进行比较（第2.3节）。"
+   }
+  ]
+ },
+ "S4.SS1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们将上下文预测准确率定义为：在观察到词元序列 $x_{1:t}$ 后，在词元位置 $t$ 处，HMM 的真实下一词元预测分布 $p^{(x_{1:t})}$（扩展到 LLM 的完整词汇表大小）与 LLM 在位置 $t$ 处的下一词元预测分布之间的 KL 散度。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "KL 散度为零意味着 LLM 的下一词元预测分布与真实下一词元预测分布完全匹配。"
+   }
+  ]
+ },
+ "S4.F2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图2：真实HMM的下一词元概率（NTP）与Qwen 3.5-9B及$k$-HMM预测器的下一词元概率之间的KL散度。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在每对图中，左图显示KL值随词元位置的变化，灰色带标记最后5,000个词元，收敛KL值即在该区间上计算。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "右图显示Qwen 3.5-9B的收敛KL值与$k$-HMM的收敛KL值之间的交叉点，作为$k$的函数。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "误差带为10个序列上的95%置信区间。"
+   }
+  ]
+ },
+ "S4.SS2.SSS0.Px1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "正如引言中所阐述的，在上下文学习（ICL）过程中存在两种形式的推理：（1）对生成模型类别的推理，即确定隐马尔可夫模型（HMM）的结构，以及（2）对所推断模型的内部结构的推理，即确定所推断的HMM的隐藏状态分布（Xie et al., 2022; Hahn and Goyal, 2023; Akyürek et al., 2023; Shai et al., 2024）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图2显示，KL散度在前$5{,}000\\text{-}10{,}000$个token内迅速下降，然后趋于平稳，在此期间我们称模型的预测已经收敛。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "虽然仅凭KL曲线无法区分这两种推理形式，但我们假设收敛后进行的推理主要是在一个固定的生成模型上进行的。"
+   }
+  ]
+ },
+ "S4.SS2.SSS0.Px2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们通过将收敛后的准确率与一族受限于 token 的最优预测器（第 2.3 节）进行比较来评估 LLM 预测的质量：0-HMM，即该过程的最优 i.i.d. 预测器；1-HMM，即仅给定最近一个 token 时进行最优预测；以及更一般的 $k$-HMM，即从最近 $k$ 个 token 进行最优预测。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于 Qwen3.5-9B，收敛后的 KL 远低于 0-HMM 和 1-HMM，并且在四个正文参数化下与 $k=4.2$–$11.0$ 的 $k$-HMM 相匹配；在每个 HMM 家族的 10 个参数化中，中位 $k=3.4$–$4.7$（范围 $2.2$–$11.0$）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在这些 $k$ 值下，收敛后的 KL 非常低（对于四个所示参数化为 0.009–0.018 nats），在更高的 $k$ 下进一步降低的幅度很小。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "其他五个 LLM 具有可比性（附录 H 和 G），但 Gemma-4-E2B 除外，它在 6/10 的 Wing 参数化和 4/10 的 Strata 参数化上并不比 1-HMM 更准确。"
+   }
+  ]
+ },
+ "S4.SS2.SSS0.Px2.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们强调，到目前为止，在本分析中，我们声称的是预测准确性的等价，而非LLM的底层机制。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "事实上，通过基于最近token的短后缀的启发式方法，无需计算信念状态，也有可能达到这一准确度水平。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在接下来的章节中，我们为LLM反而计算并使用信念状态进行预测这一非平凡的论断提供证据。"
+   }
+  ]
+ },
+ "S5.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在确立了LLM是HMM数据的近最优预测器之后，我们现在研究支持这一行为的表征。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "特别是，我们评估计算力学假设，即LLM激活在上下文中维持信念状态的表征。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在每一层，我们训练线性探针从激活中解码信念状态，并通过将探针的$R^{2}$值与一系列考虑替代假设（例如，LLM仅跟踪NTP表征；公式5）的对照进行比较来评估表征的质量。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在所有40个HMM中，我们发现激活中的信念信息，超出每个替代假设所能解释的部分，追踪了理论上推导出的信念关于过程的剩余信息。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Mess3说明了理论差异为零的情况，因为其信念和NTP是线性等价的，所以没有线性探针能够区分它们。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在这种情况下，激活正确地显示出相对于NTP没有剩余信息。"
+   }
+  ]
+ },
+ "S5.SS1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于每个输入序列 $x_{1:N}$，我们在收敛后（$t\\geq 15{,}000$）的每个 token 位置 $t$ 和每一层 $\\ell$ 提取残差流激活 $h_{\\ell,t}(x_{1:N})$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在每一层，我们通过普通最小二乘法从 $h_{\\ell,t}(x_{1:N})$ 到相应的信念状态 $\\eta^{(x_{1:t})}$ 拟合线性回归，在随机 20% 的位置（$1{,}000$ 个 token）上训练，并在留出的 80%（$4{,}000$ 个 token）上评估。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "探针按序列拟合。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "表征质量以 10 个序列上平均的留出 $R^{2}$ 来衡量。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "参见图 1 的直观概述。"
+   }
+  ]
+ },
+ "S5.F3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图3：线性探针从现成LLM的残差流激活中发现HMM的信念状态几何。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们仅通过提示HMM生成的令牌序列来获得这一结果。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "探针拟合（留出集上的$R^{2}$）很高，并超过了一系列严格的对照（例如，此处显示的对随机和打乱信念状态的拟合）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在最佳拟合层，真实几何与探针发现的几何并排显示，每个点按其信念状态着色（如RGB）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "两个几何面板都绘制了留出的4,000个令牌，针对10个序列中的每一个。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "所有HMM的几何显示在图11和12中。"
+   }
+  ]
+ },
+ "S5.SS2.SSS0.Px1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如图3所示，线性探针在早期到中间层取得了较高的$R^{2}$值，并在之后保持较高水平。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在所有HMM家族和所有LLM中，每个HMM的峰值$R^{2}$范围为0.83至0.99（附录I）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图11展示了Qwen3.5-9B中所有40个HMM的解码信念状态几何的可视化。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "两个对照探针无法解释这些较高的$R^{2}$值。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "打乱信念对照使用相同的激活和信念状态集合，但随机置换与给定激活相关联的信念状态（图13）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "随机信念对照使用相同的激活集合，但将信念状态替换为从对称狄利克雷分布中抽取的信念状态（图14）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些对照在所有层上的极低$R^{2}$值（图3）表明，激活携带了关于真实信念的信息，而不仅仅是虚假相关。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "参见图13和图14，查看所有40个恢复的打乱信念和随机信念几何。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "最后，我们发现，在序列的非常早期窗口评估时，拟合到前5,000个token位置的探针恢复出明显更粗糙的几何，且$R^{2}$较低（图15），这与模型在上下文早期预测准确性较差的情况一致（见图2）。"
+   }
+  ]
+ },
+ "S5.SS2.SSS0.Px2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "相对于这些对照的高 $R^{2}$ 值并不能证明激活编码了特定于某个 HMM 的信念状态信息。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "线性探针可能读取的是 HMM 家族通用的信息，这些信息在所有参数化之间共享。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如果激活纯粹是通用的，那么在一个参数化序列的激活上训练的“迁移探针”将同样好地解码所有其他参数化的信念状态（在同一序列上计算），并且 $R^{2}$ 在家族内所有可能的迁移探针之间将是均匀的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如果激活携带 HMM 特定信息，那么 $R^{2}$ 在信念状态几何更相似的参数化之间应该更高，在不相似的参数化之间更低。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "也就是说，参数化对之间的迁移 $R^{2}$ 模式应该与参数化的信念状态相互预测的程度共变。"
+   }
+  ]
+ },
+ "S5.SS2.SSS0.Px2.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了检验这一点，对于每个家族和层，我们构建一个 $R^{2}$ 矩阵，其元素 $(i,j)$ 是在参数化 $i$ 序列的激活上训练的迁移探针，用于从同一序列预测参数化 $j$ 的信念状态的 $R^{2}$（使用相同的 20-80 训练-测试划分）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然后，我们将该矩阵与相应的真实矩阵相关联——不涉及 LLM 激活——其元素 $(i,j)$ 是在参数化 $i$ 的信念状态上训练的迁移探针，用于从同一序列预测参数化 $j$ 的信念状态的 $R^{2}$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们发现，在大多数层中，对于所有 HMM 家族和所有六个 LLM，这两个矩阵确实相关，支持 HMM 特异性解释（图 4；附录 J）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "虽然相关性很高，但我们强调，迁移 $R^{2}$ 值在幅度上显著高于真实迁移 $R^{2}$，这表明激活中存在一些 HMM 通用信息。"
+   }
+  ]
+ },
+ "S5.F4": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图4：在一个参数化上训练的探针能很好地解码相似参数化的信念，但对不相似参数化的信念解码效果差。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这种跨参数化可解码性显示在一个“经验矩阵”中，其中条目（$i,j$）$=$ 从参数化 $i$ 的激活中解码出的参数化 $j$ 的信念。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "跨层来看，经验矩阵与真实跨参数化可解码性相关。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图中显示了最佳匹配层的经验矩阵（蓝线）。"
+   }
+  ]
+ },
+ "S5.SS2.SSS0.Px3.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "由序列诱导的信念状态 $\\eta^{(x_{1:t})}$ 可以通过仅以最近 $k$ 个 token 为条件来近似，即 $\\eta^{(x_{t-k+1:t})}$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，信念状态的高 $R^{2}$ 值可能由这种短后缀近似所解释。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了排除这一点，我们首先生成 (a) 来自完整 HMM 的序列，以及 (b) 具有“短后缀” token 依赖性的序列——具体来说，是由 0-HMM 生成的序列，其中序列中的 token 是独立同分布的，以及由 1-HMM 生成的序列，其中序列中每个 token 的分布仅依赖于前一个 token（第 2.3 节）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然后，对于来自 (a) 和 (b) 的每个序列 $x_{1:N}$，我们计算由该序列诱导的激活 $h_{\\ell,t}(x_{1:N})$ 在多大程度上预测完整 HMM 预测器的信念状态（而不是 0-HMM/1-HMM 预测器的信念状态），该信念状态是根据该序列的 $k$-后缀 $\\eta^{(x_{t-k+1:t})}$ 计算得出的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们对从 1 到 20 的每个 $k$ 都这样做，为每个序列生成一条关于 $k$ 的 $R^{2}$ 曲线。"
+   }
+  ]
+ },
+ "S5.SS2.SSS0.Px3.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如果激活编码的是完整HMM的短后缀近似的信念状态，那么无论激活是由完整HMM序列诱导的，还是由仅保留短程相关性的序列诱导的，完整HMM的信念状态都应该同样可解码。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "公式 $R^{2}$ 未保留原数学格式，译文中写成了 R²。",
+    "suggestion": "在这种情况下，我们预期完整HMM序列的 $R^{2}$ 曲线与0-HMM或1-HMM序列的曲线变化相似。",
+    "zh_reviewed": "在这种情况下，我们预期完整HMM序列的R²曲线与0-HMM或1-HMM序列的曲线变化相似。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "公式 $k$ 和 $R^{2}$ 未保留原数学格式，译文中写成了 k 和 R²。",
+    "suggestion": "相反，我们观察到，在足够的 $k$ 之后，对于大多数参数化，完整HMM激活的 $R^{2}$ 超过了短程序列诱导的 $R^{2}$，表明完整HMM激活编码了超出马尔可夫一阶近似的信念信息（图5，顶部；例外见表3）。",
+    "zh_reviewed": "相反，我们观察到，在足够的k之后，对于大多数参数化，完整HMM激活的R²超过了短程序列诱导的R²，表明完整HMM激活编码了超出马尔可夫一阶近似的信念信息（图5，顶部；例外见表3）。"
+   }
+  ]
+ },
+ "S5.SS2.SSS0.Px3.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们指出图5（上）的两个额外特征。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "首先，三条曲线在 $k=1$ 时重合，$R^{2}$ 接近完美。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这是因为 $1$-后缀信念状态最多取 $n$ 个值（token 数量），在高维 $d$ 空间中平凡可分。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "其次，对于除 Arch 过程外的所有过程，0-HMM 和 1-HMM 曲线在出人意料的高 $R^{2}$ 值处趋于平稳。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在附录 K 中，我们绘制了所有 HMM 和 LLM 在 $k=20$ 时相对于 1-HMM 曲线的 $\\Delta R^{2}$ 随层的变化。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在那里，我们还将每个序列的 $\\Delta R^{2}$ 与其理论对应值进行比较：即在同一序列上，从 1-HMM 信念状态线性预测 $k=20$ 时真实信念状态的 $1-R^{2}$，该值仅由真实 1-HMM 和完整 HMM 计算得出。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "两者在每个家族和 LLM 内相关（Pearson $r=0.59$–$0.86$），表明激活中额外可解码的信息追踪了 1-HMM 信念状态无法解释的信息。"
+   }
+  ]
+ },
+ "S5.F5": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图5：激活捕获的不仅仅是短后缀信念和下一token（对数）概率（NTP/log-NTP）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "顶部：我们仅从最后$k$个token解码完整HMM的信念，使用来自真实HMM、1-HMM和0-HMM序列的激活。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "底部：激活解码信念状态的效果优于真实NTP或log-NTP。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Mess3被省略，因为其发射矩阵是可逆的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "误差带是10个序列上的95%置信区间。"
+   }
+  ]
+ },
+ "S5.SS2.SSS0.Px4.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们考虑一种可能性：信念状态的高 $R^{2}$ 值并非因为激活表示信念状态，而是因为激活表示 NTP 或 log-NTP，而相应的信念状态是从这些表示中解码出来的。"
+   },
+   {
+    "verdict": "major",
+    "category": [
+     "other"
+    ],
+    "issue": "把线性回归的预测目标从「信念状态」变成了「信念状态的 R²」；R² 是回归的评估指标，不是被预测对象。",
+    "suggestion": "我们通过在地面真值 NTP 或 log-NTP 上训练的、用于预测信念状态的线性回归的 $R^{2}$，来量化每种表示在多大程度上解释了从激活中得到的信念状态高 $R^{2}$。",
+    "zh_reviewed": "我们通过在地面真值 NTP 或 log-NTP 上训练的线性回归来预测信念状态的 $R^{2}$，来量化每种表示在多大程度上解释了从激活中得到的信念状态高 $R^{2}$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如果从激活中得到的 $R^{2}$ 超过从地面真值 NTP/log-NTP 中得到的 $R^{2}$，那么激活携带了无法仅由这些候选对象解释的信念状态信息。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们强调，对于 Mess3 过程，从信念状态到 NTP 的映射是可逆的，因此从 NTP 到信念的 $R^{2}$ 为 1；由此可知，对于该过程，我们无法仅通过线性探针区分模型表示的是信念还是 NTP/log-NTP。"
+   }
+  ]
+ },
+ "S5.SS2.SSS0.Px4.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于 Wing 和 Strata，我们发现来自激活的 $R^{2}$ 超过了来自真实 NTP 和 log-NTP 的 $R^{2}$，表明激活中的信念状态信息超出了两者所能解释的范围（图 5，底部）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于 Arch 在 log-NTP 下也是如此，但在 NTP 下（见附录 L），来自激活的 $R^{2}$ 从在所有或几乎所有层略低于来自 NTP 的 $R^{2}$，转变为在大多数层超过它，这取决于具体的参数化，大约一半所选参数化在大多数 LLM 中超过它。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们发现这种跨参数化的渐变是由真实情况预测的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在附录 L 中，我们将每个序列的 $\\Delta R^{2}$（来自激活的 $R^{2}$ 减去来自 NTP 或 log-NTP 的 $R^{2}$）与其理论对应值（在同一序列上从真实 NTP 或 log-NTP 线性预测信念状态的 $1-R^{2}$）进行比较。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们发现两者在 HMM 和 LLM 之间相关（Pearson $r=0.85$–$1.00$，除了 Arch 在 log-NTP 下为 $0.43$–$0.88$）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "当对应值接近零时，NTP 无法解释的信念信息几乎没有，因此 $\\Delta R^{2}$ 接近零。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于这些参数化，与 Mess3 一样，信念和 NTP 通过线性探针几乎无法区分。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们强调，不可区分性是所选参数化的属性，而不是 LLM 的属性；可以选择一种参数化使信念状态与 NTP 任意更加不同（例如，通过使 Arch 的 $\\alpha$ 更大）。"
+   }
+  ]
+ },
+ "S5.SS2.SSS0.Px5.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "最后，我们计算了在每一层从激活中线性解码 NTP 和 log-NTP 的 $R^{2}$（图 5，底部）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些达到了与信念状态探针相似的 $R^{2}$ 值，有时甚至超过它。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这对于回归到 NTP 是预期的，因为存在从信念到 NTP 的精确线性映射（方程 5），因此从激活到信念的 $R^{2}$ 是从激活到 NTP 的 $R^{2}$ 的下界。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，同样的推理不适用于 log-NTP，因为不存在从信念到它的这种线性映射。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，log-NTP 的高线性可解码性并不由信念状态的高线性可解码性所隐含。"
+   }
+  ]
+ },
+ "S5.SS2.SSS0.Px5.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "鉴于 log-NTP 和信念状态在残差流中被联合表示，它们之间的因果关系仍有待确定。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们先验地排除一种可能性：对于发射矩阵（方程 5）不可右逆的 HMM，从 NTP 或 log-NTP 到信念状态的映射是不明确的，因此信念状态不能仅从 NTP 或 log-NTP 计算得出。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，这并不意味着 log-NTP 不能影响 LLM 各层中的信念表示，因为对 log-NTP 的更新可能仍会影响信念状态子空间。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们反而假设信念状态是用于计算残差流中 log-NTP 表示的中间表示。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在下一节中，我们使用因果干预来提供支持这一假设的证据。"
+   }
+  ]
+ },
+ "S6.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们检验对残差流的信念状态子空间的干预是否会传播到后续层中可线性解码的 log-NTP 表示。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为此，我们在固定层导向信念状态表示，并在后续层使用线性探针来解码由所安装的目标信念状态所隐含的 log-NTP 表示。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如果信念状态在因果上位于 log-NTP 的上游，那么导向目标信念应当会安装其隐含的 log-NTP。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "话虽如此，由于信念状态总是包含一个对应于 NTP 的子空间（方程 5），原则上任何此类效应都可能由导向 NTP 表示所驱动。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了排除这一点，我们沿着一个使 NTP 和 log-NTP 保持不变的信念方向 $\\delta$ 进行干预。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如果被干预的子空间是信念表示而不仅仅是 NTP 表示，那么沿着这个 $\\delta$ 方向导向应当会安装目标信念状态的 $\\delta$ 分量。"
+   }
+  ]
+ },
+ "S6.SS1.SSS0.Px1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了对信念状态进行干预，我们识别出低维信念空间到高维激活空间的一个嵌入。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "令 $\\mathrm{emb}_{\\ell}:\\mathbb{R}^{m}\\to\\mathbb{R}^{d}$ 表示将每个 $\\eta^{(x_{1:t})}$ 映射到相应激活 $h_{\\ell,t}(x_{1:N})$ 的仿射映射，该映射通过线性回归确定。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "每个层 $\\ell$ 和每个序列都训练一个独特的嵌入。"
+   }
+  ]
+ },
+ "S6.SS1.SSS0.Px2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们使用学习到的嵌入，将最后 $k=5{,}000$ 个 token 位置处的残差流激活修改为朝向目标信念状态序列 $(\\eta_{\\mathrm{target},t})_{t=N-k+1}^{N}$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们定义了两种干预方法：导向和修补（Meng et al., 2022; Turner et al., 2023）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于固定的 $\\ell\\in\\{0,1,\\ldots,L-1\\}$ 以及所有 $t\\in\\{N-k+1,N-k+2,\\ldots,N\\}$："
+   }
+  ]
+ },
+ "S6.SS1.SSS0.Px2.p1.2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在本节中，我们仅使用导向，因为它保留了嵌入像之外的激活分量。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "修补会覆盖整个激活，从而破坏可能存在的关于 log-NTP 的独立信息。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在第 7 节中，我们同时使用导向和修补。"
+   }
+  ]
+ },
+ "S6.I1.i1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• **导向。** 将激活 $h_{\\ell,t}(x_{1:N})$ 替换为 $h_{\\ell,t}(x_{1:N})+\\Delta_{\\ell,t}$，其中 $\\Delta_{\\ell,t}=\\mathrm{emb}_{\\ell}(\\eta_{\\mathrm{target},t})-\\mathrm{emb}_{\\ell}(\\eta^{(x_{1:t})})$ 是目标信念与当前信念在激活空间中嵌入像内的差异。"
+   }
+  ]
+ },
+ "S6.I1.i2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• **修补。** 将激活 $h_{\\ell,t}(x_{1:N})$ 替换为 $\\mathrm{emb}_{\\ell}(\\eta_{\\mathrm{target},t})$，即嵌入在激活空间中的像内的目标信念状态。"
+   }
+  ]
+ },
+ "S6.SS1.SSS0.Px3.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "一般来说，目标信念状态序列 $(\\eta_{\\mathrm{target},t})_{t=N-k+1}^{N}$ 是任意的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们考虑两种类型的目标序列，其信念状态由从 HMM 中采样的令牌序列诱导，区别在于目标信念序列是否与输入令牌序列 $x_{1:N}$ 一致。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于所有 $s=1,2,\\ldots,k$："
+   }
+  ]
+ },
+ "S6.SS1.SSS0.Px3.p1.2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "过去不一致的目标会在注入的信念与通过注意力传递过来的未干预位置的表征之间引入冲突。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于 log-NTP 导向实验，我们仅导向过去不一致的目标，因为这是更严格的测试，要求注入的信念必须在这种冲突下传播。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "第 7 节比较了两种条件。"
+   }
+  ]
+ },
+ "S6.I2.i1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• 过去一致的目标满足 $\\eta_{\\mathrm{target},N-k+s}=\\eta^{(x_{1:N-k}y_{1:s})}$，其中 $y_{1:k}$ 是另一个序列后缀。"
+   }
+  ]
+ },
+ "S6.I2.i2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• 过去不一致的目标满足 $\\eta_{\\mathrm{target},N-k+s}=\\eta^{(z_{1:N-k+s})}$，其中 $z_{1:N}$ 的前缀与输入序列不同，即 $z_{1:N-k}\\neq x_{1:N-k}$。"
+   }
+  ]
+ },
+ "S6.SS1.SSS0.Px4.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在导向之前，我们在每一层训练线性探针，以从与输入序列相关的激活中解码 log-NTP。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然后，我们将序列最后 $k=5{,}000$ 个 token 上的单层激活导向过去不一致序列的目标信念状态。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于受干预影响的所有层，我们使用相同的线性探针来评估从被导向的激活中线性解码目标 log-NTP 的能力。"
+   }
+  ]
+ },
+ "S6.SS1.SSS0.Px5.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "作为对照，我们构建目标信念状态，通过沿发射矩阵 $M$ 映射为零的方向 $\\delta$ 移动，即 $\\delta\\in\\mathrm{Ker}(M^{\\intercal})$，从而保持原始隐含的 NTP/log-NTP。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们定义 $\\eta_{\\mathrm{target},t}=\\eta^{(x_{1:t})}+\\gamma_{t}\\,\\delta$，其中 $\\gamma_{t}$ 设为保持概率分布的最大步长的 $90\\%$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "与 log-NTP 情况类似，我们在每一层训练线性探针，从与输入序列相关的激活中解码信念的 $\\delta$-方向。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然后，我们在序列最后 $k=5{,}000$ 个 token 上，在单层将激活引导至保持 NTP/log-NTP 的目标，并使用相同的线性探针从干预后的激活中解码目标信念的 $\\delta$-分量。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于 Arch，发射矩阵的核是二维的；为了一致性，我们选择一个单一方向进行引导。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Mess3 被排除在此分析之外，因为发射矩阵可逆，不存在 $\\delta$。"
+   }
+  ]
+ },
+ "S6.SS1.SSS0.Px6.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了确定激活中的 $\\delta$-信念分量受到 LLM 的优先处理，对 $\\delta$-方向的导向及其随后的可解码性应当与随机方向有所不同。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了检验这一点，我们在激活空间中选择一个随机单位方向 $v$，并设置新的激活 $h_{\\ell,t}(x_{1:N})=h_{\\ell,t}(x_{1:N})+\\lVert\\Delta_{\\ell,t}\\rVert\\,v$，其中 $\\Delta_{\\ell,t}$ 是上面定义的 $\\delta$-信念导向向量，因此随机导向与 $\\delta$-信念导向向量的幅度相匹配。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然后，我们在序列的最后 $k=5{,}000$ 个 token 上，在单层中导向这些随机目标，并在干预后将激活投影到 $v$-方向上。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们强调，与 $\\delta$-方向探针不同，这里描述的探针具有对 $v$-方向的地面真值访问，因此相应的 $R^{2}$ 值范围略宽。"
+   }
+  ]
+ },
+ "S6.F6": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图6：信念状态导向改变对数NTP可解码性，且保持NTP的信念导向改变信念的NTP不可见分量。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "顶部：每个单元格报告探针解码目标信念隐含对数NTP的$R^{2}$，跨信念导向层（行）和探针层（列）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "底部：我们导向到目标$\\eta_{\\mathrm{target}}=\\eta_{\\mathrm{original}}+\\delta$，其中$\\delta M=0$（左），或沿随机方向$v$以匹配幅度导向激活（右），并报告探针解码目标信念被导向分量的$R^{2}$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们排除Mess3，因为其$M$可逆且不存在$\\delta$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "蓝色表示可解码，红色表示不可解码。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "值为10个序列的平均值。"
+   }
+  ]
+ },
+ "S6.SS2.SSS0.Px1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图6（顶部）展示了热图，其中行索引为信念导向层，列索引为探针解码对数NTP的层。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "每个单元格报告线性探针解码目标信念所隐含的对数NTP的$R^{2}$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在大多数过程中，我们发现当在超过网络前三分之一的层进行导向时，目标信念所隐含的对数NTP在后续探针层上高度可解码（对于Arch而言，这一程度较低）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "信念导向在增加目标对数NTP方面的有效性，与信念状态在残差流中因果上游于对数NTP的观点一致。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "有趣的是，在导向有效的层之前导向信念，似乎存在一种自修复机制，即目标对数NTP被抹除，原始对数NTP被重新安装（Wang et al., 2023; McGrath et al., 2023）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "类似的结果适用于所有HMM和所有LLM，但不包括Gemma类；见附录M。"
+   }
+  ]
+ },
+ "S6.SS2.SSS0.Px2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图6（左下）显示热图，其中行索引δ方向导向层，列索引探针解码δ方向的层，每个单元格报告与导向所预期的解码相关的R²。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们发现目标δ分量在后续层中被安装，特别是在LLM的后半部分进行导向时，而在此之前干预会引发显著的自我修复。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图6（右下）显示了v方向的类似图。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "比较左右图，两者在自我修复机制的开始和结构上有所不同。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "“when δ-steering”应表示“当进行δ导向时”，译文“在δ导向后”引入了先后关系。",
+    "suggestion": "关键的是，当导向δ方向时，自我修复发生在较少的导向层中，并且当它发生时更为持久：在进行δ导向时，修复后的表示之后的层保持修复状态。",
+    "zh_reviewed": "关键的是，当导向δ方向时，自我修复发生在较少的导向层中，并且当它发生时更为持久：在δ导向后，修复后的表示之后的层保持修复状态。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "类似的结果适用于所有HMM和所有LLM，不包括Gemma类；见附录N和O。总之，这些观察表明，信念导向对NTP子空间之外的表示具有显著影响。"
+   }
+  ]
+ },
+ "S7.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在提供了信念状态位于对数NTP上游的证据之后，我们现在评估功能性主张：LLM的预测是否受到信念状态的影响？"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了证明这一点，我们通过修补或导向激活直接干预信念状态，并评估干预是否按照理论（公式5）影响LLM的预测。"
+   }
+  ]
+ },
+ "S7.SS1.SSS0.Px1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们按照第6节所述执行导向或修补。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，我们现在改变干预的$k$-后缀长度，使得$k\\in\\{1,5,10\\}$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在干预之后的层中，未干预的位置可以通过注意力重新引入冲突的上下文（$x_{1:N-k}$）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "更大的$k$扩展了被干预的后缀，并减少了这种冲突。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在干预之后，我们预期LLM的预测将更类似于目标信念状态所隐含的预测，而非原始信念状态所隐含的预测。"
+   }
+  ]
+ },
+ "S7.SS1.SSS0.Px1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**上下文内预测准确率。** 与第4节类似，我们测量干预后LLM在最终token位置$N$处的预测与最终目标信念状态$\\eta_{\\mathrm{target},N}$或最终原始信念状态$\\eta^{(x_{1:N})}$所隐含的真实NTP之间的KL散度（公式5）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们预期KL散度相对于$\\eta_{\\mathrm{target},N}$会减小，而相对于$\\eta^{(x_{1:N})}$会增大。"
+   }
+  ]
+ },
+ "S7.SS1.SSS0.Px2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们使用与过去一致和与过去不一致的目标进行干预（第6节）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "两者仅在注入的信念是否与未干预的前缀一致上有所不同，因此比较它们的性能可以量化冲突前缀对干预的影响。"
+   }
+  ]
+ },
+ "S7.F7": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图7：激活修补使预测向注入的信念偏移。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们用目标信念覆盖信念状态子空间，并测量LLM的下一词预测现在与注入信念（实线）匹配的程度，相对于其真实历史所隐含的原始信念（虚线）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "实线远低于虚线：模型预测的是注入的信念，而非原始信念。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "随机信念对照（蓝色）未显示此类偏移。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "列为HMM族；行为干预位置数$k$；灰色为未修改模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "误差带显示序列间的标准误差。"
+   }
+  ]
+ },
+ "S7.SS2.SSS0.Px1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图7展示了修补结果（导向类似；见附录E）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于每种条件，实线是干预后的LLM与目标信念状态的真实值之间的KL散度，虚线是其与原始信念状态的真实值之间的KL散度。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在各种后缀长度k下，目标的KL散度（实线）远低于原始KL散度（虚线）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这表明将目标信念状态注入子空间会使LLM的预测向目标方向移动，并远离其真实历史所暗示的预测。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此外，目标信念状态的KL散度与未修改的LLM对原始信念状态的KL散度（灰色）处于同一数量级。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "作为对照，我们注入一个随机信念状态（见第5节），但用与过去不一致条件相同的目标真实NTP对其进行评分。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "其与该真实值的KL散度（蓝色）没有下降（图7），这意味着将激活扰动到任意信念并不会使LLM的预测向目标预测移动。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，要达到目标的预测，需要注入那个特定的信念，而不仅仅是任意编辑激活。"
+   }
+  ]
+ },
+ "S7.SS2.SSS0.Px2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "正如预期的那样，LLM 输出分布向目标信念的偏移随着干预位置数 $k$ 的增加而增大（图 7，各行）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "将目标信念状态注入更多位置会使预测进一步向其真实 NTP 移动。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "值得注意的是，尽管目标信念与所有未干预位置相冲突（即目标信念的 KL 远低于原始信念的 KL），过去不一致条件仍然成功，这表明预测在很大程度上由写入干预位置的信念决定。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，在 $k$ 较小时，这种覆盖并非完全。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们发现，在 $k=1$ 时，过去一致条件优于过去不一致条件，并且这种优势随着 $k$ 增大而缩小，到 $k=10$ 时消失（附录 P）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这表明，只有当干预后缀足够短以至于未干预位置能够竞争时，冲突上下文才会对干预造成代价。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "本节中的所有结果在几乎所有 HMM 和所有 LLM 上均成立（附录 P）。"
+   }
+  ]
+ },
+ "S8.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了补充基于干预的证据，即信念状态被用于计算LLM的输出分布（第7节），我们提出了行为证据，表明信念状态的高逐层可解码性与LLM准确的早退输出分布相关。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于每一层，我们使用调谐透镜（nostalgebraist, 2020; Belrose et al., 2023）来产生早退输出分布，并通过计算与真实NTP的KL散度来评估结果。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然后，我们评估跨层的KL散度与信念状态线性可解码性（$R^{2}$）之间的相关性。"
+   }
+  ]
+ },
+ "S8.SS1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "调谐透镜是一种通过将中间残差流位置上的激活解码为词汇表上的概率分布来解释这些激活的技术。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于固定的层 $\\ell$，学习一个仿射变换来对齐残差流激活 $h_{\\ell,t}(x_{1:N})$，使得应用 LayerNorm、解嵌入矩阵和 softmax 后，能最好地近似目标分布 $q^{(x_{1:t})}$。"
+   }
+  ]
+ },
+ "S8.SS1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在调谐透镜的典型应用中（例如在自然语言任务上），真实分布不可获得，因此将 $q^{(x_{1:t})}$ 取为模型在给定输入 $x_{1:t}$ 下的输出分布。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在我们的设置中，我们将目标分布取为真实 NTP $p^{(x_{1:t})}$，此外还有打乱顺序和随机对照。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "实际上，通过在真实分布上训练调谐透镜，仿射映射可能揭示模型未使用的机制。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "就我们的目的而言，我们关注的是激活中是否存在对预测真实分布有用的结构，以及这与信念状态的线性可解码性如何相关。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了完整性，我们还训练了一个以模型输出分布为目标的调谐透镜，见附录 Q.1。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在每种情况下，我们遵循第 5 节中设定的惯例，在最后 5,000 个 token 窗口的随机 20% 上训练，并在留出的 80% 上测试。"
+   }
+  ]
+ },
+ "S8.F8": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图8：逐层调谐透镜准确率与线性探针 $R^{2}$ 的变化一致。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "顶部：逐层调谐透镜与各目标 NTP 之间的 KL 散度。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "底部：各层调谐透镜 KL 散度与 $1-R^{2}$ 之间的相关性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "误差带和误差条为 10 个序列上的 95% 置信区间。"
+   }
+  ]
+ },
+ "S8.SS2.SSS0.Px1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "针对真实下一词元分布训练的调谐透镜在大多数层上实现了较低的KL散度，低于LLM自身预测的KL散度，而针对打乱和随机下一词元分布训练的调谐透镜表现明显更差（图8，顶部）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这一结果在所有HMM和所有LLM上均成立（附录Q.2）。"
+   }
+  ]
+ },
+ "S8.SS2.SSS0.Px2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "调谐透镜在信念状态最可解码的层上最准确。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "真实分布与提前退出分布之间的逐层 KL 散度与信念状态线性探针的 $R^{2}$ 共变，远超提前退出对照（图 8，底部）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这种共变在大多数参数化下成立（见附录 Q.2 和 Q.3）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为完整起见，我们还考虑了标准调谐透镜（附录 Q.1），并发现了相同水平的共变。"
+   }
+  ]
+ },
+ "S8.SS2.SSS0.Px2.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些结果表明，包含信念状态表征的层也包含与输出相关的（NTP）结构。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "虽然这些结果未能证明高信念状态表征是高早期解码准确率的原因，但它们具有提示性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "事实上，log-NTP 的线性可解码性是早期解码准确率的另一个相关因素。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，正如第 6 节所论证的，log-NTP 是信念状态的下游，因此我们将信念状态视为更根本的相关因素。"
+   }
+  ]
+ },
+ "S9.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "计算力学提供了一个从理论上推导出的说明，阐述了最优预测在表征层面所暗示的内容。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的结果证实，这一说明经受住了从在HMM数据上训练的玩具Transformer到在上下文中遇到HMM数据的开源LLM的转变。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "信念状态可以从我们测试的每个模型的残差流中线性解码，并且相应的子空间在因果上被用于下一个词元预测。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "term"
+    ],
+    "issue": "“advance”在此修饰“predictions”，表示预先的或前瞻的，而非“可推进的”。",
+    "suggestion": "这将计算力学定位为关于生产规模LLM中激活几何的预先的、可证伪预测的来源，而不是一个仅限于在它所描述的过程上显式训练的网络的框架。",
+    "zh_reviewed": "这将计算力学定位为关于生产规模LLM中激活几何的可推进、可证伪预测的来源，而不是一个仅限于在它所描述的过程上显式训练的网络的框架。"
+   }
+  ]
+ },
+ "S9.SS0.SSS0.Px1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这里研究的HMM被选择为低熵（Dai et al., 2025, following）和非平凡的信念几何。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "同样的表征图景是否适用于任意HMM（满足熵和混合速率条件），特别是那些信念几何是高维或缺乏独特结构的HMM，尚未确定。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们还在Mess3、Wing和Strata家族中探索了更广泛的参数化范围；一个子集表现出期望的KL趋势，但与1-HMM和0-HMM短后缀信念可解码性没有差距（表3），证实了结果特定于特定参数区域。"
+   }
+  ]
+ },
+ "S9.SS0.SSS0.Px1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "“apparent structure”在此表示“看似存在/表面上的结构”，而不是“明显的结构”，译法容易让人理解为结构清晰明显。",
+    "suggestion": "线性回归可以在激活中恢复出表面上的结构，即使这种结构并未被真正编码，尤其是对于低维目标（Méloux et al., 2025）。",
+    "zh_reviewed": "线性回归可以在激活中恢复出明显的结构，即使这种结构并未被真正编码，尤其是对于低维目标（Méloux et al., 2025）。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "“address this concern”译为“解决这一问题”语气略强，address 在此更多是“处理/应对”而非彻底解决。",
+    "suggestion": "虽然我们通过一系列对照（例如随机和打乱的信念目标）努力应对这一问题，但该分析若辅以互补的无监督证据将会更有力，我们将其留待未来工作。",
+    "zh_reviewed": "虽然我们通过一系列对照（例如随机和打乱的信念目标）努力解决这一问题，但该分析若辅以互补的无监督证据将会更有力，我们将其留待未来工作。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "除了激活中的随机结构之外，信念的线性可解码性可能源于LLM表征了另一种特征或一组特征，而信念恰好可以从这些特征中解码出来。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在这项工作中，我们排除了NTP和log-NTP作为此类候选，但可能存在我们尚未考虑的相关替代方案。"
+   }
+  ]
+ },
+ "S9.SS0.SSS0.Px2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "几个方向自然随之而来。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "首先，Dai et al. (2025) 从熵和混合率的角度刻画了 HMM 数据的上下文学习；Jurgens and Crutchfield (2025) 的信息分类学提示了一种更细粒度的刻画，这可能也有助于澄清与将上下文学习视为下一词元预训练结果的更广泛解释之间的联系（Riechers et al., 2025a）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "其次，行为表现及其所反映的信息结构很可能都依赖于 LLM 的规模。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这促使我们研究上下文 HMM 预测的缩放定律，以及信念几何如何随着规模增大而锐化（或未能锐化）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些研究合在一起，可能为研究具有更丰富组合结构的 HMM 的信念几何打开大门，例如 Shai et al. (2026) 所考虑的因子化过程。"
+   }
+  ]
+ },
+ "A4.F11": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图11：线性探针在Qwen 3.5 9B中每个HMM的最佳拟合层上恢复的几何结构及其拟合度（留出的$R^{2}$，对10个序列取平均）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "每个面板绘制了10个序列（每个序列4,000个位置）的留出预测。"
+   }
+  ]
+ },
+ "A4.F13": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图13：由在打乱后的信念状态上训练的控制探针恢复的几何结构，以及它们在Qwen 3.5 9B中每个HMM的最佳拟合层上的拟合度（留出的$R^{2}$，在10个序列上取平均），针对如图11所示的所有10个序列。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "没有恢复出任何结构。"
+   }
+  ]
+ },
+ "A4.F14": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图14：由在随机信念状态上训练的控制探针恢复的几何结构，以及它们在Qwen 3.5 9B中每个HMM的最佳拟合层上的拟合度（留出的$R^{2}$，在10个序列上平均），针对如图11所示的所有10个序列。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "没有恢复出任何结构。"
+   }
+  ]
+ },
+ "A4.F15": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "minor",
+    "category": [
+     "omission"
+    ],
+    "issue": "漏译了核心对象“Geometries discovered”（发现的几何结构），图注只描述探针训练/评估和拟合情况，未说明图中展示的是这些几何结构。",
+    "suggestion": "图15：线性探针在每条序列的前5000个token位置中随机选取1000个位置进行训练，并在前250个token中留出的位置上评估所发现的几何结构；图中展示了在Qwen 3.5 9B中每个HMM的最佳拟合层上，所有10条序列（与图11相同）的拟合情况（在这些位置上的留出$R^{2}$，对10条序列取平均）。",
+    "zh_reviewed": "图15：线性探针在每条序列的前5000个token位置中随机选取1000个位置进行训练，并在前250个token中留出的位置上进行评估，图中展示了在Qwen 3.5 9B中每个HMM的最佳拟合层上，所有10条序列（与图11相同）的拟合情况（在这些位置上的留出$R^{2}$，对10条序列取平均）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "探针的大小与图11中的相同；只是评估的位置不同。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们只在前$250$个token上评估，因为模型在上下文中的预测准确率在前几百个token后几乎完全收敛（图2）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在前250个token中，信念状态几何结构明显较弱。"
+   }
+  ]
+ },
+ "A6.T3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "表3：具有期望的KL趋势但没有表征差距的参数化。"
+   }
+  ]
+ }
+}

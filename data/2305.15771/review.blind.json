@@ -1,0 +1,471 @@
+{
+ "__meta__": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "models": {
+   "reviewer": "deepseek-v4-pro"
+  },
+  "translator": "deepseek-v4-pro（关思考）",
+  "independence": "same-model",
+  "usage": {
+   "calls": 11,
+   "prompt_tokens": 11052,
+   "completion_tokens": 12824,
+   "seconds": 117.4,
+   "cached_tokens": 6912
+  }
+ },
+ "abs.p1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "受在通用网络语料上训练的大语言模型（LLM）涌现推理能力这一说法的吸引，本文着手探究其规划能力。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们旨在评估（1）LLM在常识规划任务中自主生成计划的有效性，以及（2）LLM在LLM-Modulo设置中作为外部规划器和验证器的启发式指导来源的潜力。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们通过在类似于国际规划竞赛所用领域上生成一组实例进行系统研究，并以两种不同模式评估LLM：自主模式和启发式模式。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的研究结果表明，LLM自主生成可执行计划的能力相当有限，最佳模型（GPT-4）在各领域的平均成功率约为12%。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，LLM-Modulo设置下的结果显示出更多前景。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在LLM-Modulo设置中，我们证明LLM生成的计划可以改善底层可靠规划器的搜索过程，并进一步表明外部验证器可以帮助对生成的计划提供反馈，并反向提示LLM以生成更好的计划。"
+   }
+  ]
+ },
+ "S1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "可以毫不夸张地说，基于Transformer的大型语言模型（LLMs）已经彻底改变了自然语言处理（NLP）领域。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "由OpenAI开发的GPT-x模型所取得的进展拉开了序幕[27]，这类语言模型目前在众多标准NLP任务中提供了最先进的性能。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "尽管LLMs最初主要是为了完成词序列补全任务而开发的，除了补全的连贯性之外没有任何保证，但越来越多的说法和轶事证据表明，它们具有其他通常与序列补全无关的涌现能力。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "事实上，这种涌现能力的迹象已经引发了一场名副其实的抢地热潮，研究人员几乎像对待人工生物一样探测（提示）和研究LLM行为（参见"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "[16]）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在本文中，我们特别感兴趣的是旨在研究（并展示）LLM推理能力的一系列努力——包括常识推理[35, 29, 7]、逻辑推理[33]，甚至伦理推理[15]。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些工作所传递的宏观基调一直在表明，LLM确实能够进行此类推理[19, 37, 4]。"
+   }
+  ]
+ },
+ "S1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在人工智能社区中，一种已被充分研究的推理任务是规划和顺序决策。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在最简单的形式中，规划涉及制定一系列行动（策略），当执行这些行动时，会将智能体带到期望的世界状态。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "规划通常主要被研究为对世界模型和奖励模型的推理——无论这些模型是由人类指定的，还是由智能体通过与其世界交互而学习到的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在本文中，我们感兴趣的是了解LLM可能已经具备哪些规划能力（如果有的话），鉴于它们具有在网页规模语料库上训练的高容量函数（具有数十亿可调参数）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "具体来说，我们感兴趣的是回答两个广泛的问题："
+   }
+  ]
+ },
+ "S1.I1.i1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "1. 在常识规划任务（人类通常相当擅长的类型）中，LLM 自身生成简单计划的效果如何？"
+   }
+  ]
+ },
+ "S1.I1.i2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "2. 在LLM-Modulo环境中，LLM作为其他智能体规划任务的启发式指导来源时，其表现如何？"
+   }
+  ]
+ },
+ "S1.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "请注意，理论上，LLM 有可能在计算机支持的协同工作场景中，作为外部可靠规划器或人类参与者的想法生成器非常有效，而它们自身却非常不擅长生成保证正确的计划。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这尤其可能，因为 LLM 的主要能力来自其模式发现能力，而非基于世界模型的第一性原理模拟。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "addition"
+    ],
+    "issue": "原文只表示 LLM 可能在更多领域中擅长生成，译文添加了比较级“更擅长”，可能让人误以为比前面的规划器更擅长。",
+    "suggestion": "与在狭窄领域集内保证正确的规划器相比，LLM 可能在更多领域中擅长生成看似合理（但不保证正确）的计划启发式/建议。",
+    "zh_reviewed": "与在狭窄领域集内保证正确的规划器相比，LLM 可能更擅长在更多领域中生成看似合理（但不保证正确）的计划启发式/建议。"
+   }
+  ]
+ },
+ "S1.p5.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了以系统而非轶事的方式研究这些问题，我们基于国际规划竞赛[14]中使用的领域类型，生成了一套规划问题实例{fn1}。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了消除构成许多早期评估LLM推理能力工作的核心部分的分析主观性，我们通过利用自动规划社区的模型和工具来自动化评估。"
+   }
+  ]
+ },
+ "fn1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "GitHub 仓库链接：`https://github.com/karthikv792/LLMs-Planning`"
+   }
+  ]
+ },
+ "S1.F1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图1：LLM用于规划的两种模式的图示概览。"
+   }
+  ]
+ },
+ "S1.p6.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "评估本身以两种模式进行（如图1所示）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在第一种“自主”模式下，LLM被单独使用，我们直接评估它们生成的计划的质量和正确性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "正如我们将看到的，自主模式下的结果相当惨淡。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "平均而言，最好的LLM（GPT-4）生成的计划中只有约12%能够实际无错误地执行并达到目标。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们将表明，特定LLM的选择（我们测试了GPT系列LLM，包括GPT-4 [25]、GPT-3.5 [24]、InstructGPT-3.5、InstructGPT-3 [26]和GPT-3 [3]）以及微调似乎对这种惨淡的表现没有重大影响。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们还表明，如果领域中的动作和对象名称被混淆，性能会进一步恶化——这一变化不会以任何方式影响标准AI规划器的性能。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了进一步阐明GPT4的性能，我们在一系列更宽松（更宽容）的可执行性条件下对它生成的计划进行了评估。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此外，我们为我们的领域集合中最简单的领域提供了人类基线，通过将规划实例呈现给人类受试者（通过IRB批准的研究）并评估他们计划的质量和正确性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些结果明显优于LLM的结果——证实了LLM即使在自主模式下的简单常识领域也无法进行规划。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在第二种LLM-Modulo模式下，LLM生成的计划被作为输入提供给一个基于正确领域模型工作的自动规划器，以检查LLM的计划是否有助于底层规划器的搜索过程，从而得出正确的计划。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "具体来说，我们表明一个著名的自动规划器LPG [6]，它使用局部搜索来定位和消除候选计划中的缺陷以使其正确，能够相对容易地修复LLM计划。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们将LLM+LPG组合与两个基线进行比较，一个是将空计划用作LPG的种子计划，另一个是将随机计划作为种子计划提供给LPG。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们表明，LLM+LPG组合的平均搜索步骤远少于两个基线，从而揭示了LLM的计划确实有助于底层规划器的搜索过程。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此外，我们没有让LPG纠正计划，而是使用外部验证器VAL [11]来指出LLM生成的计划中的错误，并将此反馈回传给LLM以生成新计划。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们表明，这种重复交互确实提高了常识领域中的计划正确性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "总体而言，我们的研究结果表明，在规划方面，LLM在自主模式下表现不佳，但生成的计划可以帮助AI规划器进行搜索过程，或者可以提供给外部验证器并回传LLM以获得更好的计划。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在本文中，我们首先概述相关工作。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "随后，我们描述必要的背景和提示生成流程。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "最后，我们提供在自主和启发式评估模式下进行的各种实验的结果和分析。"
+   }
+  ]
+ },
+ "S6.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在本文中，我们对大型语言模型（LLMs）的规划能力进行了批判性研究。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为此，我们在两种不同模式下评估了LLMs的计划生成能力。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在自主模式下，我们的结果表明，即使在人类可以轻松制定计划的简单常识规划领域中，像GPT-3这样的LLMs也表现出极差的性能。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "尽管较新的GPT-4在积木世界领域中的性能有所提升，但它在神秘积木世界领域仍然惨败，这表明它们无法以抽象方式进行推理。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在LLM-Modulo设置中，我们已经看到LLMs生成的计划可以帮助改进像LPG这样的可靠规划器的搜索。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此外，我们表明，使用外部验证器，我们可以指出错误并反向提示LLMs以获得更好的计划。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们表明，这在常识领域中确实有帮助。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在补充材料中，我们展示了所有配置的提示示例以及用户研究的详细信息（附录A.11）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "从我们的研究中，我们看到作为自主规划器的LLMs惨败，但我们也看到，当由底层可靠规划器使用时，生成的计划改进了搜索，并且通过使用来自外部验证器的反馈反向提示LLM，可以获得更好的计划。"
+   }
+  ]
+ }
+}

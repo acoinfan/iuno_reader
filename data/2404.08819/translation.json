@@ -1,0 +1,318 @@
+{
+ "__meta__": {
+  "translator": "deepseek-v4-pro（关思考）",
+  "usage": {
+   "calls": 13,
+   "prompt_tokens": 10863,
+   "completion_tokens": 3085,
+   "seconds": 35.0,
+   "cached_tokens": 6912
+  }
+ },
+ "abs.p1": {
+  "sentences": [
+   {
+    "zh": "状态空间模型（SSM）已成为Transformer的一种潜在替代方案。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "Transformer的一个理论弱点是它们无法表达某些类型的顺序计算和状态跟踪（Merrill & Sabharwal, 2023a），而SSM正是通过其与循环神经网络的紧密架构相似性被明确设计来解决这一问题的。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "但SSM在状态跟踪的表达能力上真的（比Transformer）有优势吗？",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "令人惊讶的是，答案是否定的。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们的分析表明，S4、Mamba及相关SSM的表达能力与Transformer非常相似地受到限制（在$\\mathsf{TC}^{0}$内），这意味着这些SSM无法解决简单的状态跟踪问题，如排列组合，因此可证明无法准确跟踪某些记法的国际象棋走法、评估代码或跟踪长叙事中的实体。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "为了补充我们的形式分析，我们报告了实验，显示S4和Mamba确实在状态跟踪上遇到困难。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "因此，尽管它们具有循环形式，常见SSM中的“状态”是一种错觉：S4、Mamba及相关模型具有与Transformer等非循环模型相似的表达局限性，这可能从根本上限制它们解决现实世界状态跟踪问题的能力。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "此外，我们表明，只需最小的改动就能让SSM表达和学习状态跟踪，这推动了新的、更具表达力的SSM架构的发展。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S1.F1": {
+  "sentences": [
+   {
+    "zh": "图1：我们证明，SSM与Transformer一样，无法解决本质上顺序性的问题，如置换复合（$S_{5}$），这类问题位于状态跟踪问题的核心，例如以源-目标记法跟踪国际象棋走法（见第3.2节）、评估Python代码或实体跟踪。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "因此，SSM通常也无法解决这些问题。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "**代码：** `http://jpetty.org/ssm-illusion`",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S1.p1.1": {
+  "sentences": [
+   {
+    "zh": "最近的理论工作表明，基于Transformer架构的模型无法表达固有的顺序计算（Merrill & Sabharwal, 2023a）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这些结果揭示了Transformer的一个令人惊讶的局限性：它们无法表达简单的状态跟踪问题，例如组合排列序列，而即使是简单的循环神经网络（RNN）也能自然地表达这些问题。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在另一条研究路线中，状态空间模型（SSM）架构（Gu et al., 2021; Gu et al., 2022a; Fu et al., 2023; Gu & Dao, 2023; Wang et al., 2024）被引入作为Transformer的替代方案，其目标是实现类似RNN的表达能力，以处理本质上具有状态性和顺序性的问题（Gu et al., 2021; Gu et al., 2022b）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "但是，SSM看似有状态的设计是否真的使它们能够解决Transformer无法解决的顺序和状态跟踪问题？",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "如果是这样，这将是SSM的一个有前景的特性，因为状态跟踪是大语言模型（LLM）能力的核心，例如在叙事中跟踪实体（Heim, 1983; Kim & Schuster, 2023）、在特定记谱法下下棋{fn1}或评估代码。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这将激励对SSM架构及其在下一代LLM中部署的进一步研究。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "fn1": {
+  "sentences": [
+   {
+    "zh": "国际象棋状态跟踪的困难性在（源，目标）记法下成立，但标准记法可能使状态跟踪更容易。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S1.p2.1": {
+  "sentences": [
+   {
+    "zh": "在这项工作中，我们表明，就表达力而言，SSM 看似有状态的设计是一种错觉。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "与 Gu et al. (2021); Gu et al. (2022b)（以及可能社区中更广泛的信念）所暗示的 SSM 具有类似于 RNN 的状态跟踪表达力相反，我们从理论上证明，线性和 Mamba 风格的 SSM 与 transformer 一样，无法表达固有的顺序问题，包括 RNN 可以轻松表达的状态跟踪问题，如组合排列。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "此外，我们的实验证实了这一预测：transformer 和这些 SSM 都无法在固定层数下学会组合排列，而 RNN 只需一层就能组合排列。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们的结果意味着，认为当前 SSM 由于“更具循环性”或能够跟踪状态而比 transformer 更有优势的论点是被误导的。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "事实上，我们所考虑的 SSM 架构在理论上与 transformer 一样，不具备状态跟踪和循环计算的能力。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S1.p3.1": {
+  "sentences": [
+   {
+    "zh": "我们首先通过证明线性SSM及其近似推广属于复杂度类$\\mathsf{L}$-uniform $\\mathsf{TC}^{0}$来确立其理论弱点，这一点此前已针对Transformer得到证明（Merrill & Sabharwal, 2023a）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这意味着这些SSM无法解决固有顺序问题（形式上，即$\\mathsf{NC}^{1}$-难问题），包括状态跟踪问题，如置换组合（Liu et al., 2023）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "置换组合是许多现实世界状态跟踪问题（如下棋、评估代码或跟踪叙事中的实体，见图1）的核心基础问题，这意味着这些问题的解决方案也无法由SSM表达，至少在最坏情况下如此。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S1.p4.1": {
+  "sentences": [
+   {
+    "zh": "乍一看，我们的结果似乎与 Gu et al. (2021) 的说法相矛盾，后者声称线性 SSM 可以模拟一般的循环模型，而循环模型可以表达置换合成。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "但这一矛盾通过假设的差异得到解决：Gu et al. (2021) 依赖无限深度（层数）来证明 SSM 可以模拟 RNN。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "另一方面，我们分析的是层数有界的现实设定，在该设定下我们发现 SSM 无法模拟 RNN 的循环状态，并且实际上在状态跟踪方面与 transformer 有着类似的局限。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S1.p5.1": {
+  "sentences": [
+   {
+    "zh": "经验上，我们发现 S4（Gu et al., 2022a）和 S6（Gu & Dao, 2023）状态空间模型以及 transformer 在固定层数下无法学会解决置换组合状态跟踪问题，而简单的 RNN 仅需一层就能做到。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这为我们在状态跟踪方面对状态空间模型和真正循环模型之间表达能力差异的理论分离提供了经验支持。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们还发现，在比置换组合更简单、且尚不清楚它们是否能表达解决方案的状态跟踪问题上，transformer 和状态空间模型与 RNN 相比都表现挣扎。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "因此，在实践中，状态空间模型可能不仅在置换组合等最难的状态跟踪问题上遇到困难，在更简单的变体上也可能如此。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S1.F2": {
+  "sentences": [
+   {
+    "zh": "图2：$\\mathsf{NC}^{1}$内的复杂度层级。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "Transformer只能识别$\\mathsf{TC}^{0}$内的语言（Merrill & Sabharwal, 2023a），我们证明SSM也是如此（定理4.2和4.4）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "因此，两种架构都无法表达由$\\mathsf{NC}^{1}$完全问题（如$S_{5}$）所捕捉的“困难状态跟踪”，而RNN可以轻松表达这些问题。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "该图假设了广泛接受的猜想$\\mathsf{TC}^{0}\\neq\\mathsf{NC}^{1}$。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S1.p6.1": {
+  "sentences": [
+   {
+    "zh": "最后，我们考虑线性SSM的一个最小扩展，使转移矩阵依赖于输入，类似于Liquid S4（Hasani et al., 2023）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们证明该扩展具有足够的状态跟踪和置换组合表达能力。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "经验上，我们表明该扩展的实现能够用单层学习解决置换组合问题，就像RNN一样，同时与其他SSM具有相似的可并行性。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这种对状态跟踪具有更强表达能力的SSM架构在大规模语言建模中是否实际可行，仍是一个悬而未决的问题。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S7.p1.1": {
+  "sentences": [
+   {
+    "zh": "我们形式化分析了一类广义线性状态空间模型，并表明与Transformer类似，包括S4和Mamba在内的常见状态空间模型变体只能表达高度并行计算复杂度类$\\mathsf{L}$-uniform $\\mathsf{TC}^{0}$内的计算。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这意味着它们无法解决固有的顺序问题，如图连通性、布尔公式求值，以及——对于状态跟踪特别重要的——置换复合问题$S_{5}$。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "$S_{5}$可以由真正的循环模型（如RNN）自然表达，并且由于其$\\mathsf{NC}^{1}$-完全性，它抓住了困难状态跟踪的本质。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在实践中，单层RNN可以轻松学习捕捉$S_{5}$的任务，而线性状态空间模型需要深度随序列长度增长。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这些结果揭示了S4、Mamba及相关的状态空间模型无法真正跟踪状态：相反，它们只能解决存在浅层捷径的简单状态跟踪问题（Liu et al., 2023）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S7.p2.1": {
+  "sentences": [
+   {
+    "zh": "另一方面，我们表明，一种类似于 \\NAT@partrue\\NAT@fullfalse\\NAT@citetphasani2023liquid Liquid S4 的输入依赖 SSM 既能表达也能学习 $S_{5}$ 字问题，这提供了证据，表明当前 SSM 的表达能力限制是可以被克服的。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "最终，这一研究方向可能解锁新的神经架构，这些架构在 transformer 和 SSM 的并行性与状态跟踪的完全表达能力之间取得平衡，从而使 LLM 既能从规模中受益，又具备更强的能力来推理游戏、代码和语言。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "__sections__": {
+  "__title__": "状态空间模型中的状态幻觉",
+  "Abstract": "摘要",
+  "1 Introduction": "1 引言",
+  "7 Conclusion": "7 结论"
+ }
+}

@@ -1,0 +1,311 @@
+{
+ "__meta__": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "models": {
+   "reviewer": "deepseek-v4-pro"
+  },
+  "translator": "deepseek-v4-pro（关思考）",
+  "independence": "same-model",
+  "usage": {
+   "calls": 9,
+   "prompt_tokens": 8952,
+   "completion_tokens": 11479,
+   "seconds": 106.5,
+   "cached_tokens": 5632
+  }
+ },
+ "abs.p1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "视觉-语言-动作（VLA）模型在机器人控制中表现出强大的泛化能力，但通过强化学习（RL）对其进行微调受到现实世界交互的高成本和安全风险的限制。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在交互式世界模型中训练VLA模型可以避免这些问题，但会引入若干挑战，包括像素级世界建模、多视角一致性以及稀疏奖励下的复合误差。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "基于大型多模态模型和基于模型的强化学习的最新进展，我们提出了VLA-MBPO，这是一个用于解决VLA微调中这些问题的实用框架。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "原文“adapting unified multimodal models”表示对统一多模态模型进行适配或改造，译文“采用统一多模态模型”丢失了这一改动含义，只表达了使用现有模型。",
+    "suggestion": "对统一多模态模型（UMM）进行适配以实现数据高效的世界建模",
+    "zh_reviewed": "我们的方法有三个关键设计选择：（i）采用统一多模态模型（UMM）进行数据高效的世界建模；（ii）一种交错视图解码机制以强制多视角一致性；以及（iii）块级分支展开以减轻误差复合。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "理论分析和跨仿真与真实世界任务的实验表明，VLA-MBPO显著提高了策略性能和样本效率，凸显了其在真实世界机器人部署中的鲁棒性和可扩展性。"
+   }
+  ]
+ },
+ "S1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "视觉-语言-动作（VLA）模型的出现代表了机器人控制领域的一项重大进展，主要归因于其增强的泛化能力（Kim et al., 2024; Intelligence et al., 2025b）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "通过将视觉-语言模型（VLM）的广泛世界知识和推理能力与在大量机器人数据集上的广泛预训练相结合，VLA模型能够有效地学习并执行跨多种机器人实体的多样化任务（Deng et al., 2025b; Intelligence et al., 2025b; Bjorck et al., 2025）。"
+   }
+  ]
+ },
+ "S1.F1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图1：VLA-MBPO的框架示意图，包括（A）基于UMM的世界模型，具有交错视图解码，用于多视图观测和奖励预测，以及（B）一种稳定且可扩展的策略更新算法，采用分块级分支展开。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（C）我们工作中模拟和真实世界任务设计的示意图。"
+   }
+  ]
+ },
+ "S1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "传统上，微调VLA模型通常依赖于模仿学习（IL），特别是行为克隆（BC），其中模型通过最小化模型动作与专家动作之间的差异来学习策略（Ghosh et al., 2024; Kim et al., 2024; Kim et al., 2025; Intelligence et al., 2025b）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，BC受到有限泛化能力和收集大量专家示例的高成本的限制（Xu et al., 2020; Rajaraman et al., 2020）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "作为微调的另一种选择，强化学习（RL）已被探索，以使策略能够直接从环境交互中学习，从而以更少的人类示例实现更强的泛化（Chen et al., 2025b; Liu et al., 2025; Zang et al., 2025; Li et al., 2025a）。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "“prohibitively expensive”译作“成本高昂”丢失了“高到令人却步”的程度强调。",
+    "suggestion": "然而，在现实环境中应用RL仍然具有挑战性，因为它通常需要与环境进行大量交互，这使得其成本高得令人望而却步、可能不安全且难以扩展（Zhang et al., 2025; Xiao et al., 2025）。",
+    "zh_reviewed": "然而，在现实环境中应用RL仍然具有挑战性，因为它通常需要与环境进行大量交互，这使得其成本高昂、可能不安全且难以扩展（Zhang et al., 2025; Xiao et al., 2025）。"
+   }
+  ]
+ },
+ "S1.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了克服这些问题，一种有前景的方法是使用世界模型作为模拟环境，使智能体能够完全在想象的空间中学习，从而避免现实世界交互的高昂成本和安全问题（Li et al., 2025b; Zhu et al., 2025; Fei et al., 2025）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，将世界模型应用于VLA模型面临几个根本性挑战。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "首先，VLA依赖视觉输入，要求世界模型生成像素级的未来帧和奖励信号，并且这些信号能够从有限的离线数据中很好地泛化。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "虽然一些方法微调预训练的视频模型作为世界模型，但这些模型推理效率低，并且不能直接预测奖励信号（Xiao et al., 2025; Zhu et al., 2025）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "其次，许多VLA任务，尤其是精细操作，依赖多视角视觉输入，这要求跨视角的预测具有一致性和连贯性（Guo et al., 2025; Qian et al., 2025）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此外，基于模型的学习本质上容易受到复合模型误差的影响（Janner et al., 2019; Yu et al., 2020），而在VLA设置中，由于奖励信号稀疏，这个问题被显著放大，微小的建模不准确可能导致相反的奖励结果，并严重误导策略学习。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "term"
+    ],
+    "issue": "原文 nontrivial 在该项目术语表中规定译为「非平凡的」，译文改为「并非易事」，意思正确但未采用规定译法。",
+    "suggestion": "这些挑战共同使得直接将现有的基于模型的强化学习方法应用于VLA微调成为一项非平凡的任务。",
+    "zh_reviewed": "这些挑战共同使得直接将现有的基于模型的强化学习方法应用于VLA微调并非易事。"
+   }
+  ]
+ },
+ "S1.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在这项工作中，我们提出了一个实用的基于世界模型的强化学习框架，明确应对这些挑战。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了实现样本高效且可泛化的像素空间世界建模，我们使用预训练的统一多模态模型（UMM）作为世界模型的骨干（Deng et al., 2025a; Cui et al., 2025; Sun et al., 2025），从而无需昂贵的视频推演即可联合预测视觉动态和奖励。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了支持精确控制所需的一致多视图生成，我们引入了交错视图解码技术，在保留视图特定细节的同时强制跨视图一致性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "最后，为了减轻稀疏奖励下的复合模型误差，我们采用块级分支推演来限制策略优化的误差累积（Park et al., 2025）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些组件共同构成了一个为VLA微调量身定制的基于世界模型的强化学习方法（VLA-MBPO），如图1所示，能够在有限的真实世界交互下实现有效的强化学习。"
+   }
+  ]
+ },
+ "S1.p5.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了验证 VLA-MBPO，我们提供了关于减小价值差距的理论分析，以及在模拟和现实世界任务中的实验。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "总体而言，我们的结果表明 VLA-MBPO 显著提高了策略泛化能力和数据效率。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "关键的是，我们的方法使用一组通用的超参数就取得了这一良好性能，为 VLA 模型在现实世界机器人应用中更可靠和可扩展的部署铺平了道路。"
+   }
+  ]
+ },
+ "S7.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在本文中，我们提出了 VLA-MBPO，一个用于微调 VLA 模型的实用的基于世界模型的强化学习框架。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "通过整合基于 UMM 的主干网络、用于多视图一致性的交错视图解码，以及用于缓解误差累积的分块级分支展开，VLA-MBPO 显著提升了策略改进和样本效率。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些进展为 VLA 模型提供了一种更实用、可扩展的后训练方法，为更可靠的现实世界部署铺平了道路。"
+   }
+  ]
+ },
+ "S7.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**局限性。** 尽管与视频模型相比，UMM-World 的推理效率更高，但样本生成阶段仍需要大量计算资源，详见附录 F。此外，由于我们框架中使用的 UMM 模型未在带动作标签的机器人数据上进行预训练，因此当应用于下游任务时，VLA-MBPO 仍需要少量数据来微调世界模型。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "term"
+    ],
+    "issue": "one-shot 在机器学习语境中通常指单样本，译为“一次性”可能被理解为只做一次而非单样本，造成歧义。",
+    "suggestion": "未来工作的一个有前景的方向是增强预训练过程，使世界模型能够实现单样本甚至零样本泛化。",
+    "zh_reviewed": "未来工作的一个有前景的方向是增强预训练过程，使世界模型能够实现一次性甚至零样本泛化。"
+   }
+  ]
+ }
+}

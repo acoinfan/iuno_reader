@@ -1,0 +1,320 @@
+{
+ "__meta__": {
+  "translator": "deepseek-v4-pro（关思考）",
+  "usage": {
+   "calls": 14,
+   "prompt_tokens": 10491,
+   "completion_tokens": 2648,
+   "seconds": 29.8,
+   "cached_tokens": 7168
+  }
+ },
+ "abs.p1": {
+  "sentences": [
+   {
+    "zh": "JEPA 风格的潜在世界模型可以使用到目标潜在状态的欧氏距离作为模型预测控制（MPC）的代价。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然而，任务变量的强解码并不能保证这种特定代价能够根据真实任务进展对候选动作序列进行排序。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们将后一种性质称为决策度量对齐。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们引入了 Plan-Real Spearman，它测量随机计划上潜在状态与真实状态的秩一致性，以及 CEM-stage Spearman，它测量交叉熵方法（CEM）搜索集中其提议时相同的秩一致性。",
+    "conf": "mid",
+    "note": "句子结构复杂，'as cross-entropy-method (CEM) search concentrates its proposal' 的翻译可能不够精确。"
+   },
+   {
+    "zh": "我们分析了潜在距离保持真实代价排序的充分条件，确定编码器失真、终端 rollout 误差和候选边际为控制量。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在观察到的经验对齐差距的指导下，DA-LeWM 用逆动力学和示例条件化的目标-动作头增强了 LeWM。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在我们所有的实验中，DA-LeWM 加速了收敛，并实现了比 LeWM 更高的在线成功率，而探针分数保持相似。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这些结果表明，动作条件化目标改善了基于欧氏代价、CEM 的潜在 MPC 所使用的几何结构。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S1.p1.1": {
+  "sentences": [
+   {
+    "zh": "在学习的潜在世界模型上进行模型预测控制是机器人操作的一种原则性方法：沿候选动作序列展开世界模型，选择成本最低的序列，执行，然后重新规划（Maes et al. 2026; Ha and Schmidhuber 2018; Hafner et al. 2019; Hafner et al. 2020; Hansen et al. 2024）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "当世界模型在JEPA风格的学习潜在空间中运行时（LeCun 2022; Assran et al. 2023），规划成本通常是预测潜在轨迹与编码目标观测之间的平方欧氏距离，从而无需显式奖励函数。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S1.p2.1": {
+  "sentences": [
+   {
+    "zh": "这一方法表现出一个显著的模式：训练目标的微小变化会归纳出在线规划成功率的大幅且常常违反直觉的变化，而针对状态、动作、奖励和价值的线性探针在同一批变体中几乎保持不变。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "因此，对潜在世界模型提出的主要问题——“潜在空间编码了什么？”——对于规划而言是不完整的。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S1.p3.1": {
+  "sentences": [
+   {
+    "zh": "缺失的属性是几何性的，而非信息性的。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "规划器的代价取决于潜变量之间的欧氏距离，因此为了使候选计划的排序能够追踪真实世界的结果，潜变量的度量结构必须与环境中的动作后果结构相容。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们将此形式化为信息充分性（任务相关量是否可以从潜变量中解码）与决策度量对齐（潜变量代价是否与环境结果一致地对候选计划进行排序）之间的区别。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "两者是独立的：如图1所示，一个潜变量可以是信息充分的，但在几何上却是错位的。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S1.F1": {
+  "sentences": [
+   {
+    "zh": "图1：信息充分性并不意味着决策度量对齐。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在每个面板中，左侧示意图将候选计划放置在目标潜在变量 $z_{g}$ 周围，而右侧图比较了它们的真实成本（水平轴）与潜在欧氏成本（垂直轴）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在（a）中，两种成本归纳出相同的排序。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在（b）中，候选1的真实成本低，但距离 $z_{g}$ 远，而候选3的真实成本较高，但距离近。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "因此，潜在距离颠倒了它们的偏好，尽管候选身份和排名仍然可解码。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S1.p4.1": {
+  "sentences": [
+   {
+    "zh": "为了使决策度量对齐可检验，我们引入了两种诊断方法。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "Plan-Real Spearman 度量随机候选计划上潜在成本与真实成本之间的秩相关性。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "CEM-stage Spearman 将其扩展到智能体实际执行的收敛精英候选。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们分析了潜在距离保持真实成本排序的充分条件（第4节）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "该分析将编码器失真、终端 rollout 误差和候选边际确定为控制量，这促使在 CEM 集中其提议时进行分阶段评估。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们将 SIGReg 测量视为经验性坍缩诊断，而非解析编码器常数的证明。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在观察到的经验对齐差距的指导下，我们随后通过 **DA-LeWM**（决策对齐的 LeWM）研究动作条件辅助监督，该模型为 LeWM 增加了两个轻量级辅助头：一个逆动力学头和一个目标条件动作头。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在我们所有的实验中，DA-LeWM 加速了收敛，并实现了比 LeWM 更高的在线成功率，而线性探测分数保持相似。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S1.p5.1": {
+  "sentences": [
+   {
+    "zh": "我们的主要贡献如下：",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S1.I1.i1": {
+  "sentences": [
+   {
+    "zh": "• 我们区分了信息充分性与决策度量对齐，并引入 Plan-Real Spearman 和 CEM-stage Spearman 来衡量后者。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S1.I1.i2": {
+  "sentences": [
+   {
+    "zh": "• 我们分析了秩保持的充分条件，识别出编码器失真、终端推演误差和候选边际作为控制量。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S1.I1.i3": {
+  "sentences": [
+   {
+    "zh": "• 基于观察到的对齐差距，我们引入了带有动作条件辅助监督的 DA-LeWM。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "它在我们的几何诊断中改善了潜在空间与真实空间的秩一致性，并且在所有四个环境中，尽管线性探测得分相似，仍比 LeWM 更快收敛并取得更高的在线成功率。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S7.p1.1": {
+  "sentences": [
+   {
+    "zh": "我们研究欧几里得目标距离何时为潜在 MPC 提供可靠目标，将信息充分性与决策度量对齐区分开来。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "Plan-Real 和 CEM 阶段 Spearman 将这一区分操作化，而充分条件分析识别出编码器失真、终端 rollout 误差和候选边际作为控制秩保持的量。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在非坍缩变体中，相似的线性探针分数与 Plan-Real 一致性和在线成功率的实质性差异共存，表明这种几何区分对控制很重要。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在这一经验差距的指导下，DA-LeWM 使用动作条件监督来改善暴露给规划器的成本几何。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在所有四个环境中，DA-LeWM 加速收敛并实现比 LeWM 更高的在线成功率。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "因此，用于控制的潜在世界模型应同时根据它们编码的内容和它们暴露的规划成本所诱导的排序来评估。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S7.SS0.SSS0.Px1.p1.1": {
+  "sentences": [
+   {
+    "zh": "我们的证据仅限于四个短时程模拟任务、使用 ViT-Tiny 的 LeWM 系列检查点、欧几里得目标代价和 CEM。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "每种配置只有一次训练运行，因此不确定性涵盖评估变异，而非训练初始化变异。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "Plan-Real 需要模拟器 rollout，并且在真实代价完全相同时会失去统计功效。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们固定 $\\alpha=0.1$，既未测试其敏感性，也未测试基于梯度的规划。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "推广到机器人、部分可观测性、更大的骨干网络、其他规划器，以及学习到的奖励、目标代价或半正定潜在度量，仍然有待研究。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S7.SS0.SSS0.Px2.p1.1": {
+  "sentences": [
+   {
+    "zh": "生成式人工智能辅助了语言编辑和代码审查。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "它不是方法或评估的组成部分，作者核实了所有生成的文本和代码。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "__sections__": {
+  "__title__": "潜在世界模型中的决策度量对齐：面向MPC规划的诊断与动作条件目标",
+  "Abstract": "摘要",
+  "1 Introduction": "1 引言",
+  "7 Conclusion": "7 结论",
+  "Limitations.": "局限性。",
+  "Generative-AI disclosure.": "生成式AI披露。"
+ }
+}

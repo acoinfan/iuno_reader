@@ -1,0 +1,362 @@
+{
+ "__meta__": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "models": {
+   "reviewer": "deepseek-v4-pro"
+  },
+  "translator": "deepseek-v4-pro（关思考）",
+  "independence": "same-model",
+  "usage": {
+   "calls": 6,
+   "prompt_tokens": 6572,
+   "completion_tokens": 11473,
+   "seconds": 100.4,
+   "cached_tokens": 3840
+  }
+ },
+ "abs.p1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "世界模型模拟候选动作的后果，但良好的规划并不需要保留准确预测所需的每一个物理区分。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们通过机制充分性、响应充分性和决策充分性的层级来形式化这一差距。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "给定候选集，规划查询决定了哪些物理变化是重要的，以及必须保留它们的精确程度：粗略决策可以丢弃预测所需的大量信息，而精细决策可能需要几乎相同的分辨率。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在实践中，规划器通常自适应地搜索以构建候选，最终选择所不需要的信息可能仍然是发现良好候选所必需的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，世界模型必须保留什么取决于查询、候选集和规划器。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们在碰撞系统、非线性动力学和机器人规划中研究了这些效应。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些不同的要求提出了一个设计问题：查询信息应该在哪里进入规划系统？"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在已见目标上，以查询为条件联合生成动作和结果的模型比以动作为条件的世界模型实现了更低的遗憾，但在泛化到未见目标时，这一优势在很大程度上消失了。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "受此启发，我们提出了一种模块化设计，其中查询决定在哪里看，以动作为条件的模型预测会发生什么，从而允许相同的预测在不同目标之间重用。"
+   }
+  ]
+ },
+ "S1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "世界模型通过预测候选动作的后果来支持规划（Ha and Schmidhuber, 2018; Hafner et al., 2019b）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "近期系统将这一方法扩展到连续控制和视觉机器人规划（Hansen et al., 2024; Zhou et al., 2024; Assran et al., 2025）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，并非物理世界之间每一个可预测的区别都对动作选择重要（Grimm et al., 2020）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例如，两个世界可能产生不同的轨迹，却倾向于相同的动作，而另一个物理属性的微小变化可能逆转首选动作。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这引出了一个超越预测将会发生什么的问题：世界模型必须为规划保留哪些物理区别，以及以何种分辨率保留？"
+   }
+  ]
+ },
+ "S1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "规划查询指定了如何评估候选结果。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "给定候选集，我们区分了三种逐渐减弱的充分性概念：保留物理动力学中的区别（机制）、保留查询下候选动作的成本（响应）、以及保留足够信息以选择低遗憾动作（决策）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "从机制到响应询问哪些物理变化会影响候选成本，而从响应到决策询问这些变化必须被解析到何种精度。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "由此产生的响应-决策差距依赖于查询：即使对于相同的物理量，粗略决策可能丢弃大量响应细节，而精细决策可能需要与预测候选成本几乎相同的分辨率。"
+   }
+  ]
+ },
+ "S1.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，决策本身并不足以支持规划器。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在实践中，候选动作通常在规划过程中构建，而非预先固定（Zhou et al., 2024; Assran et al., 2025）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "迭代式规划器利用模型预测来确定探索动作空间的哪些部分，并最终选择哪个动作。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们发现，足以支持最终选择的表示可能会丢弃发现有用候选动作所需的区分信息。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "更丰富的信息在搜索早期尤其有价值。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，世界模型必须保留的内容不仅取决于当前候选集，还取决于规划器如何使用其预测，例如用于更新搜索分布或做出最终选择。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "查询可以进一步指导考虑哪些动作。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在我们的受控实验中，让提议网络访问查询，与不访问查询生成候选动作相比，以少 $16\\times$ 的候选评估次数实现了更高的成功率。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些约束也塑造了表示的学习方式。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "当容量不足以保留所有预测细节时，与规划器决策更直接相关的监督能更好地保留对规划有用的信息，尽管这种优势随着容量增加而缩小。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "总之，这些发现引出了一个更广泛的设计问题：查询信息应在规划系统的何处引入？"
+   }
+  ]
+ },
+ "S1.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们评估了两种具有不同查询放置方式的范式。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在动作条件世界模型（ACWM）范式（Zhang and Du, 2026）中，结果预测不以查询为条件，允许同一预测在不同目标下进行评估。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "相比之下，世界-动作模型（WAM）范式（Ye et al., 2026; Team et al., 2026）使动作生成和结果预测都以查询为条件。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "当目标改变时，这一区别变得重要：新目标改变了结果的评估方式，但不改变给定动作的物理后果。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "经验上，WAM在已见目标上实现了更低的遗憾，但这一优势在未见目标组合上大多消失。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些发现促使了一种模块化设计，将搜索与物理预测分离：查询指导候选动作提议，而动作条件模型预测其结果。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这种设计实现了比ACWM更低的留出遗憾和比WAM更低的已见目标遗憾，使搜索能够跨目标适应，而无需将物理预测耦合到特定目标。"
+   }
+  ]
+ },
+ "S7.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "世界模型为规划必须保留的内容，不仅由预测保真度决定，还由搜索和动作选择所需的区分决定。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的机制–响应–决策层次使这种依赖性变得明确：查询决定了哪些物理变化重要以及它们必须被解析到何种精度，而自适应搜索可能需要最终选择不再需要的信息。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些要求也塑造了模型设计。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "当容量不足以保留所有预测细节时，面向规划者的监督有助于保留对规划最有用的区分。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "当目标变化时，查询引导的提议可以调整搜索，而无需使物理预测特定于目标。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的模块化接口实现了这种分离，在改善规划的同时保留了跨目标可复用的动作条件预测。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "更广泛地说，有效的世界模型不需要均匀地保留每一个可预测的细节。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "它应该在规划者需要它们的分辨率和阶段保留正确的区分。"
+   }
+  ]
+ }
+}

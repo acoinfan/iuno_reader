@@ -1,0 +1,506 @@
+{
+ "__meta__": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "models": {
+   "reviewer": "deepseek-v4-pro"
+  },
+  "translator": "deepseek-v4-pro（关思考）",
+  "independence": "same-model",
+  "usage": {
+   "calls": 13,
+   "prompt_tokens": 12580,
+   "completion_tokens": 18267,
+   "seconds": 171.4,
+   "cached_tokens": 8320
+  }
+ },
+ "abs.p1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "世界模型模拟世界在不同动作下的未来状态。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "它们促进交互式内容创作，并为有根据的、长程推理提供基础。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "当前的基础模型并未完全满足通用世界模型的能力：大型语言模型（LLMs）受限于其对语言模态的依赖和对物理世界的有限理解，而视频模型缺乏对世界模拟的交互式动作控制。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "本文通过引入一种混合自回归-扩散模型，向构建通用世界模型迈出了一步，该模型通过生成视频来模拟世界状态，并允许使用自由文本动作进行实时控制。通过大规模预训练和指令微调，实现了领域通用性、视频一致性和可控性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "关键的是，通过集成预训练的LLM（7B）和预训练的视频模型，绕过了从头训练的成本，仅需要额外的轻量级微调。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们展示了跨不同领域（室内/室外、自然/城市、人类/机器人、2D/3D等）的广泛输出。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "结果表明，通过更大规模的训练构建更强大的通用世界模型具有巨大潜力。"
+   }
+  ]
+ },
+ "S1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "世界模型（WM）是智能系统用来理解和模拟现实世界的抽象表示。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "该模型涵盖环境的各个方面，包括物理定律、时空知识、物体、场景、智能体及其动态交互。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "特别是，它允许预测世界在不同动作下的未来状态。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，构建通用世界模型可以服务于交互式内容创作，例如为视频游戏和电影生成逼真的虚拟场景，在虚拟现实和增强现实中开发沉浸式体验，以及为培训和教学目的创建动态模拟。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "也许更重要的是，通用世界模型为AI系统中稳健的、基于现实世界的推理提供了基础，使它们能够预测复杂环境并规划行动，例如机器人安全地穿越灾难现场。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "agent"
+    ],
+    "issue": "译文把“改善决策”的主语从“长期推理”变成了“世界模型”，施动关系有轻微变化。",
+    "suggestion": "世界模型还有可能推动长期推理，这种推理通过模拟各种情景和结果并确定最有效的解决方案，改善物流和医疗保健等领域的决策。",
+    "zh_reviewed": "世界模型还有可能推动长期推理，通过模拟各种情景和结果并确定最有效的解决方案，改善物流和医疗保健等领域的决策。"
+   }
+  ]
+ },
+ "S1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "当前的大型语言模型（LLMs）[1, 4, 37, 52, 68, 70, 71] 擅长生成人类语言，并在某些推理任务中被用作世界模型的替代品 [30, 78]。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，仅靠语言在描述世界的各个方面时从根本上是不充分且低效的，例如直觉物理（如根据流体的粘度预测其流动）[36]。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此外，LLMs 缺乏对现实世界中物理和时间动态的稳健理解，它们依赖于文本数据中的模式，而不理解其所描述的根本现实 [79, 43, 51]。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "另一方面，当代视频生成模型能够根据给定的初始帧或文本提示生成高质量的视频内容 [7, 9, 11, 25, 80, 83]。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "虽然这些模型可以生成连贯的序列来可视化各种场景，但它们忽略了现实世界复杂的交互本质，缺乏在模拟过程中进行因果控制和任意动作干预的能力。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "最近的工作还开发了大规模交互式世界模型，例如用于自动驾驶的 GAIA-1 [35]、用于机器人操作的 UniSim [81] 以及用于 2D 游戏的 Genie [12]。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些模型通常特定于某些领域，只允许有限的动作和/或状态集合。"
+   }
+  ]
+ },
+ "S1.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "major",
+    "category": [
+     "omission"
+    ],
+    "issue": "译文仅翻译了第一句，遗漏了关于自回归模型、输入输出以及分阶段训练策略（预训练和指令微调）的整段内容。",
+    "suggestion": "本文提出了，这是迈向通用世界模型的一步，该模型通过生成视频来模拟跨多个领域的世界状态，并允许通过自然语言表达的任意动作进行实时控制。它是一种自回归模型，按顺序处理动作（自由文本）和先前状态（视频）作为输入，并生成下一状态（视频）作为输出（图2）。它引入了分阶段训练策略，类似于训练 LLM 的成功方法 [52, 46, 77]，包括：(1) 分别使用大规模视频和文本数据进行大规模预训练，以学习领域通用的世界理解和生成一致的视频模拟；(2) 使用高质量文本-视频序列数据进行指令微调，以学习视频生成过程中随时可用的文本可控性。",
+    "zh_reviewed": "本文提出了，这是迈向通用世界模型的一步，该模型通过生成视频来模拟跨多个领域的世界状态，并允许通过自然语言表达的任意动作进行实时控制。"
+   }
+  ]
+ },
+ "S1.F2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图2：模型架构。"
+   }
+  ]
+ },
+ "S1.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "关键的是，预训练阶段允许分别训练文本和视频建模。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，我们可以简单地重用现有的预训练LLM和（文本到）视频生成模型，它们已经在各自的预训练中实现了领域通用性和视频一致性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们只需要将语言和视频模型拼接并对齐，并添加必要的额外模块和轻量级调优，如§2所述。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "更具体地说，在这项工作中，我们使用Vicuna-7B-v1.5语言模型[17]和DynamiCrafter文本到视频模型[80]作为骨干。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "使用更大、更复杂的预训练模型（如GPT-4和Sora）预计将产生更强的性能。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于指令调优阶段，我们通过重新标注通用领域视频，并使用各种模拟器合成机器人、室内/室外活动、驾驶、2D游戏等，构建了一个大型多样的动作-状态序列数据集。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "类似于LLM的指令调优提升其在一般未见领域中的可指令性，对精心整理的数据进行调优提升了世界模型的实时可控性，使其泛化到广泛的未见状态和动作。"
+   }
+  ]
+ },
+ "S1.p5.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们在第3节中展示了跨多个领域生成的大量输出。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "该模型展现了一系列先前模型所不具备的理想特性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "结果还表明，未来通过更大规模的训练，性能有进一步提升的巨大潜力。"
+   }
+  ]
+ },
+ "S1.I1.i1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**模型模拟广泛领域的视频状态：** 能够生成涵盖广泛通用领域的视频，例如室内/室外、自然/城市、人类/机器人、2D/3D 以及其他场景。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这种领域通用性主要归功于大规模视频预训练（继承自预训练视频模型）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**模型允许使用自由文本动作进行即时控制：** 在视频生成过程中接受自然语言动作作为输入，以引导未来的世界状态。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这与之前的文本到视频模型有本质区别，那些模型仅在视频开始时允许文本提示。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "即时控制实现了世界模型支持交互式内容生成并增强稳健推理和规划的承诺。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "该能力得益于模型的自回归架构（允许在任何时间输入文本）、预训练的 LLM 骨干（理解任何文本表达）以及指令调优阶段（大幅增强控制的有效性）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**动作可控性跨领域迁移：** 如上所述，使用高质量数据进行指令调优使模型能够学习有效的动作控制，并迁移到不同的未见领域。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们证明，从特定领域学到的动作可以无缝应用于各种新领域中的状态。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**自回归模型骨干支持更长的视频：** 现有基于扩散架构的视频生成模型通常生成固定长度的视频（例如 2 秒）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "通过将预训练视频模型与 LLM 自回归骨干相结合，能够以自回归方式无限延长视频时长。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "结合额外训练（例如指令调优），我们证明能够生成更长（例如 8 秒）且质量更高的视频。"
+   }
+  ]
+ },
+ "S1.I1.i1.I1.i1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**该模型模拟广泛领域的视频状态：** 能够生成涵盖室内/室外、自然/城市、人类/机器人、2D/3D 等多种一般领域的视频。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这种领域通用性主要归因于大规模视频预训练（继承自预训练视频模型）。"
+   }
+  ]
+ },
+ "S1.I1.i1.I1.i2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**该模型允许使用自由文本动作进行即时控制：** 在视频生成过程中接受自然语言动作作为输入，以指导未来的世界状态。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这与之前的文本到视频模型有本质区别，那些模型只允许在视频开始时提供文本提示。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "即时控制实现了世界模型支持交互式内容生成并增强稳健推理和规划的承诺。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "该能力得益于模型的自回归架构（允许在任何时间输入文本）、预训练的大语言模型骨干（理解任何文本表达）以及指令微调阶段（大幅增强控制的有效性）。"
+   }
+  ]
+ },
+ "S1.I1.i1.I1.i3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**动作可控性跨领域迁移：** 如上所述，使用高质量数据进行指令调优使模型能够学习有效的动作控制，并迁移到不同的未见领域。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们证明，从特定领域学到的动作可以无缝地应用于各种新领域中的状态。"
+   }
+  ]
+ },
+ "S1.I1.i1.I1.i4": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**自回归模型骨干支持更长视频：** 现有基于扩散架构的视频生成模型通常生成固定长度的视频（例如2秒）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "通过将预训练视频模型与LLM自回归骨干相结合，能够以自回归方式无限延长视频时长。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "结合额外训练（例如指令微调），我们表明能够生成更长（例如8秒）且质量更高的视频。"
+   }
+  ]
+ },
+ "S5.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们提出了 ，作为迈向构建通用世界模型的一步。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "该模型能够通过生成不同领域的视频来模拟世界状态，并用自然语言动作实时控制视频。 引入了一种分阶段训练方案，允许重用和集成现有的预训练语言和视频模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们相信，使用更大的骨干模型（例如 GPT-4 和 Sora）进行更大规模的训练，将在领域通用性、视频一致性和动作可控性方面带来进一步的改进。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们也对通过整合其他模态（如音频）来扩展模型感到兴奋，以更好地测量和模拟世界。"
+   }
+  ]
+ }
+}

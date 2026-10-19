@@ -1,0 +1,1169 @@
+{
+ "__meta__": {
+  "translator": "deepseek-v4-pro（关思考）",
+  "usage": {
+   "calls": 50,
+   "prompt_tokens": 44414,
+   "completion_tokens": 11324,
+   "seconds": 270.4,
+   "cached_tokens": 28416
+  }
+ },
+ "abs.p1": {
+  "sentences": [
+   {
+    "zh": "基于大语言模型（LLM）的语言智能体在自动化基于网络的任务中已展现出巨大潜力。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "近期研究表明，与反应式规划相比，引入先进的规划算法（如树搜索）对网络智能体更为有利。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然而，与模拟沙盒环境不同，网络等真实世界环境充斥着不可逆的操作。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这削弱了回溯的可行性，而回溯是（树）搜索的基石。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "过度依赖测试时搜索也会损害效率。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们主张为网络智能体采用基于模型的规划，即利用世界模型在采取行动前模拟并权衡每个候选行动的结果。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们通过以下方式系统地探索这一范式：**(1)** 提出基于模型的规划框架 WebDreamer，该框架利用 LLM 同时充当世界模型和价值函数；**(2)** 通过可扩展的数据合成流程训练专门的 LLM 作为世界模型。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "实证结果表明，WebDreamer 相比反应式基线取得了显著的性能提升。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在沙盒环境（VisualWebArena）中，它与树搜索相比具有竞争力，同时效率高出 $4$–$5$ 倍，并且在真实网站（Online-Mind2Web 和 Mind2Web-Live）上也能有效工作。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "此外，我们训练的世界模型 Dreamer-7B 的性能与 GPT-4o 相当，凸显了专用世界模型在复杂网络环境中实现高效且有效规划的潜力。{fn1}",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "fn1": {
+  "sentences": [
+   {
+    "zh": "所有资源均可在 `https://github.com/OSU-NLP-Group/WebDreamer` 获取。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S1.p1.1": {
+  "sentences": [
+   {
+    "zh": "规划（Mattar & Lengyel, 2022）——决定实现目标的最优动作序列——自人工智能诞生以来一直是其基础。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "对能够规划并执行一系列动作以在多样化网站上完成复杂任务的通用网络智能体的研究已获得显著关注（Deng et al., 2023; Zhou et al., 2024; Zheng et al., 2024; Koh et al., 2024a），部分原因是网络作为驱动智能体研究与开发的复杂而现实的环境的潜力。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然而，将现有规划算法（Yao et al., 2023a; Hao et al., 2023; Gu et al., 2023; Wang et al., 2025; Feng et al., 2023; Brown et al., 2024, 等）应用于在线网络环境带来了巨大挑战。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "现实世界环境（如网络）充满了改变状态且不可逆的动作——例如，像Amazon.com这样的单个网站就可能涉及大量此类动作，包括提交订单、创建账户、更改隐私设置等——这使得回溯（基于搜索的规划的基石（Koh et al., 2024b; Putta et al., 2024））极具挑战性，甚至不可行。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "测试时搜索中过度探索带来的延迟也损害效率并影响用户体验。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S1.F1": {
+  "sentences": [
+   {
+    "zh": "图1：不同网络代理策略作为搜索问题的示意图，其中每个节点代表一个网页。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "（a）反应式：代理在没有规划的情况下选择局部最优动作，通常导致次优结果。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "（b）带真实交互的树搜索：代理通过主动网站导航探索多条路径，可能允许回溯（虚线箭头）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然而，由于不可逆动作，回溯通常不可行。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "（c）基于模型的规划：代理在执行前模拟结果（云边框节点），减少真实交互，同时保持有效性。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S1.p2.1": {
+  "sentences": [
+   {
+    "zh": "解决这些挑战的一个有前景的方案是基于模型的规划（Pascanu et al., 2017; Moerland et al., 2023），它赋予智能体在世界模型——环境动态的计算表示——中模拟动作序列的能力。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "世界模型在传统强化学习（RL）任务中取得了显著成功（Ha & Schmidhuber, 2018; Hafner et al., 2020; Hafner et al., 2021），这些任务处于模拟环境中，如Atari游戏（Bellemare et al., 2013; Brockman et al., 2016），其中环境动态定义明确，动作空间小且固定，使得世界模型的训练相对直接。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然而，为网络环境构建世界模型仍处于探索不足的状态。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "与模拟环境相比，互联网是开放且不断演变的，具有复杂多样的页面结构和广泛的用户交互可能性。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这引出了一个问题：我们如何为互联网构建有效的世界模型？",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S1.p3.1": {
+  "sentences": [
+   {
+    "zh": "我们提出利用大型语言模型（LLMs）作为基础，为互联网构建世界模型。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "LLMs 在网页规模的数据上预训练，已经隐式地获得了网站的结构知识和预测所提议行动结果所需的常识，这可能使它们非常适合模拟复杂网页环境中的状态转移。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "为此，我们引入了 WebDreamer，一个基于模型的规划框架，该框架在执行动作之前使用 LLMs 来模拟和评分可能的未来状态，从而实现明智的决策（图 1）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在此框架的基础上，我们进一步训练了一个专用的世界模型 Dreamer-7B，使用了由我们可扩展的数据合成管道合成的超过 310 万个交互实例。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S1.p4.1": {
+  "sentences": [
+   {
+    "zh": "实证结果表明了我们方法的有效性：当由GPT-4o等最先进的大语言模型驱动时，WebDreamer在三个基准测试上相较于反应式基线取得了显著的性能提升，覆盖了在线和沙盒环境。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "它还与树搜索方法具有竞争力，同时在沙盒环境VisualWebArena上效率高出4–5倍，并且在真实世界网站（Online-Mind2Web和Mind2Web-Live）上表现有效，而树搜索方法在这些网站上难以实现和部署。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "此外，Dreamer-7B在两个在线基准测试上取得了与GPT-4o相当的性能。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在VisualWebArena中，我们可以继续使用我们的流程合成的领域内数据对Dreamer-7B进行微调。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "仅用25K个训练实例，得到的领域特定世界模型就产生了更强的结果，超越了GPT-4o。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这些发现不仅证明了使用大语言模型进行基于模型的规划的潜力，而且为通过数据合成、训练和评估构建开放网络的世界模型奠定了实践基础。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S2.SS1.p1.1": {
+  "sentences": [
+   {
+    "zh": "由（多模态）语言模型驱动的网络智能体（Su et al., 2024）旨在自动化基于网络的任务，基准测试从 MiniWoB++（Shi et al., 2017; Liu et al., 2018）发展到 WebShop（Yao et al., 2022）、Mind2Web（Deng et al., 2023）、WebArena（Zhou et al., 2024; Koh et al., 2024a），这些基准引入了更真实的环境和视觉挑战。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "**反应式智能体**基于即时观察做出决策，不进行模拟或搜索（Yao et al., 2023b）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "增强方法包括提示专有模型（Zheng et al., 2024; He et al., 2024; Deng et al., 2023）以及在 HTML 和网页截图上训练模型（Lee et al., 2023; Gur et al., 2023; Furuta et al., 2023; Hong et al., 2024; Baechler et al., 2024）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "接地改进来自动作坐标训练（You et al., 2024; Cheng et al., 2024; Gou et al., 2025），而人工标注（Shaw et al., 2023; Hong et al., 2024; Deng et al., 2023; Lai et al., 2024）和合成探索轨迹（Furuta et al., 2023; Song et al., 2024; Patel et al., 2024; Pahuja et al., 2025）进一步优化智能体行为。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然而，这些智能体由于短视而在多步决策中遇到困难。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "**具有树搜索的智能体**已被探索以增强决策能力。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "基于 GPT-4V 的奖励建模（Pan et al., 2024a）和树搜索算法（Koh et al., 2024b; Putta et al., 2024; Zhang et al., 2024）实现了多步规划，并具有最佳优先搜索（Koh et al., 2024b）和 MCTS（Putta et al., 2024; Zhang et al., 2024）等变体。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "尽管性能有所提升，搜索方法显著增加了推理时间，在真实网站上回溯面临挑战，并且存在意外改变状态的操作风险。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S2.SS2.p1.1": {
+  "sentences": [
+   {
+    "zh": "世界模型是基于模型的强化学习（RL；Moerland et al. (2023)；Sutton (1991)）的核心，它学习状态转移以提高样本效率（Ha & Schmidhuber, 2018）并支持规划（Pascanu et al., 2017；Schrittwieser et al., 2020）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "与RL中专注于提高智能体学习过程数据效率的传统世界模型不同，基于LLM的世界模型强调决策而非模拟保真度，利用广泛的世界知识进行规划（Hao et al., 2023；Kim et al., 2024）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们的工作通过探索复杂网络环境中的基于LLM的世界模型来扩展这一研究方向。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "一项同期工作（Chae et al., 2025）也探索了用LLM模拟的动作结果来增强网络智能体，然而，他们的重点是用小规模数据训练领域内世界模型，而我们的重点是使用GPT-4o（OpenAI, 2024）等先进LLM和自训练的通用世界模型来理解这一新范式的潜力。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS1.p1.1": {
+  "sentences": [
+   {
+    "zh": "负责在实时网站上自动执行活动的网络智能体面临着庞大而复杂的搜索空间。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "形式上，每个任务在给定指令 $I$ 的情况下，可以被建模为一个部分可观测马尔可夫决策过程（POMDP）：$(\\mathcal{S},\\mathcal{A},\\mathcal{O},T,R,\\Omega)$，其中 $\\mathcal{S}$ 是可能的环境状态集合，$\\mathcal{O}$ 是智能体可获得的观测集合，$\\mathcal{A}$ 表示诸如点击元素、输入文本或导航 URL 等动作。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "$T:\\mathcal{S}\\times\\mathcal{A}\\to\\mathcal{S}$ 是状态转移函数，而 $R$ 是一个表示任务完成的二元奖励。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "由于部分可观测性，智能体只能感知到观测 $o=\\Omega(s)$。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS1.p2.1": {
+  "sentences": [
+   {
+    "zh": "基于树搜索的规划与真实环境交互成本高昂，且存在不可逆操作的风险。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "基于模型的规划通过模拟来缓解这一问题，它使用学习到的模拟函数 $\\texttt{sim}(o,a)$ 在执行前预测结果。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这使得在线规划成为可能，智能体根据模拟的未来轨迹迭代地选择动作。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "一种常见的方法是模型预测控制（MPC；Garcia et al. (1989)），它在有限时域 $H$ 内为每个动作模拟可能的未来状态，使用评分函数 $\\texttt{score}(\\tau)$ 评估它们，并执行得分最高的动作。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在观察到新状态后，这一过程会重复进行，从而实现自适应决策，同时避免不必要的交互。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.F2": {
+  "sentences": [
+   {
+    "zh": "图2：WebDreamer使用GPT-4o为三个候选动作模拟结果的示意图：（1）点击“办公用品”，（2）点击“电子产品”，（3）在文本框中输入“磁盘”。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "每个虚线框显示一个提议动作后由LLM生成的状态。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "模拟轨迹被评分以确定最佳动作，得分最高（$v=0.8$）的最优动作点击“电子产品”被执行。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这个例子展示了一个两步规划视野。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在实践中，WebDreamer为每个动作模拟多条轨迹，以捕捉更广泛的可能结果，从而提高覆盖率并做出更明智的决策。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这里为了简洁，我们只展示每个动作的一条轨迹和最终得分。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS2.p1.1": {
+  "sentences": [
+   {
+    "zh": "WebDreamer 遵循第 3.1 节介绍的通过仿真进行规划的范式。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "图 2 以三个候选动作说明了这一过程，其中 WebDreamer 为每个动作仿真两步轨迹，选择得分最高的轨迹，并执行其对应的初始动作。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "其核心在于，WebDreamer 利用 LLM 来实现仿真函数（`sim`）和评分函数（`score`）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS2.fig1": {
+  "sentences": [
+   {
+    "zh": "**算法 1** WebDreamer",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS2.p2.1": {
+  "sentences": [
+   {
+    "zh": "**`sim` 的实现。** 我们的 `sim` 实现由两个模块组成：一个模块预测动作执行后的状态变化，近似状态转移函数 $T$，另一个模块基于预测的状态想象一个可能的动作，以实现长时程规划。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这两个模块共同生成长度为 $H$ 的轨迹，其中 $H$ 是一个可配置参数（模拟深度）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "具体来说，为了表示状态变化，我们提示一个 LLM（GPT-4o 或自训练的世界模型）生成一个简洁的自然语言描述，只关注动作的效果，如图 2 阶段 I 所示。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS2.p3.1": {
+  "sentences": [
+   {
+    "zh": "**`score` 的实现。** 在使用 `sim` 从每个候选动作 $a_{i}$ 模拟出一条轨迹 $\\tau_{i}$ 后，我们进一步使用 LLM 作为每次模拟的评分函数。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "遵循 Koh et al. (2024b)，我们提示 GPT-4o 用三档响应——完成（1.0）、在途（0.5）或不正确（0）——对每条模拟轨迹进行评分，以指示其向任务完成进展的程度。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "每个动作的最终得分是在多条模拟轨迹和评分上取平均，然后用于确定要执行的最优动作（例如，点击“Electronics”），如图 2 的阶段 I 所示。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS2.p4.1": {
+  "sentences": [
+   {
+    "zh": "除了 `sim` 和 `score` 之外，规划的一个先决条件是候选动作生成。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们采用两阶段方法：首先按照 Koh et al. (2024b) 采样 top-k 动作，然后使用 LLM 自我精炼不必要的动作以进行模拟。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这一自我精炼步骤源于我们的观察：在不同步骤中，相同的 k 可能引入不同程度的无关动作——有些步骤自然比其他步骤具有更少的合理动作。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们在算法 1 中展示了 WebDreamer 整体设计的伪代码。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "`termination_check` 验证模型是否输出 `stop` 动作、达到最大步数或重复某个动作超过 3 次，同样遵循 Koh et al. (2024b) 的实现。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "更多实现细节请参见附录 B。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.F3": {
+  "sentences": [
+   {
+    "zh": "图3：数据合成流程。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "该流程包括（1）网络随机游走，其中我们通过诸如输入搜索和点击等操作自主地与网页交互，以及（2）合成，其中Qwen2-VL-72B（Wang et al., 2024）基于动作前后的视觉快照生成状态变化的文本描述。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS3.p1.1": {
+  "sentences": [
+   {
+    "zh": "虽然像 GPT-4o 这样的通用大语言模型有潜力充当世界模型，但其成本和延迟可能限制它们在实时规划中的可行性。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "为了探索更可部署的替代方案，我们还旨在训练一个小型世界模型，以提供更低的推理成本和更容易适应新领域的能力。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS3.p2.1": {
+  "sentences": [
+   {
+    "zh": "如图3所示，我们开发了一个可扩展的数据合成流水线，它利用启发式引导自主地与网页交互。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们从2024年10月的Common Crawl索引{fn2}中采样起始URL，并执行随机网页操作，包括点击元素、悬停、在文本框中输入以及选择选项。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "为了更好地反映人类交互分布，我们调整了操作概率——偏向频繁的交互（如点击），同时确保对其他操作有足够的覆盖。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "此外，我们通过优先处理新出现的元素上的操作来鼓励因果依赖，例如点击悬停在下拉菜单后出现的按钮。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "对于与搜索相关的文本输入，我们使用GPT-3.5-turbo生成上下文相关的查询。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "fn2": {
+  "sentences": [
+   {
+    "zh": "https://commoncrawl.org",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS3.p3.1": {
+  "sentences": [
+   {
+    "zh": "一旦执行了交互，我们会在动作前后捕获视觉快照。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然后，我们提示 Qwen2-VL-72B（Wang et al., 2024）生成描述网页状态变化的文本描述（图 3 步骤 2），确保准确表示每个动作如何影响视觉内容。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "每个训练实例由初始视觉状态、所采取的动作以及生成的状态变化文本描述组成。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在数据收集之后，我们过滤掉失败的交互、被自动化阻止的内容以及潜在有害的数据，最终得到一个包含超过 310 万个交互实例的数据集，这些实例捕获了用户动作与网页状态转换之间丰富的因果关系。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS3.p4.1": {
+  "sentences": [
+   {
+    "zh": "由于我们通过实验发现视界步长 $H{=}1$ 是最有效且高效的配置，我们专注于训练 `sim` 中的状态转移函数，并用 Qwen2-VL-7B（Wang et al., 2024）对其进行初始化。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "最终模型 Dreamer-7B 被训练为在对当前状态执行动作后，以自然语言描述的形式预测下一状态，采用下一词元预测目标。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "为了高效监控自训练世界模型的进展，而不必为每个检查点依赖昂贵的下游评估，我们构建了一个用于检查点选择的内在评估集，详见附录 D。附录 C 提供了数据合成和训练的更多细节。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS1.p1.1": {
+  "sentences": [
+   {
+    "zh": "为了恰当地测试我们规划框架在真实世界中的表现，我们聚焦于三个具有代表性的网络智能体基准，它们捕捉了网络交互的动态特性：**VisualWebArena**（VWA；Koh et al. (2024a)）旨在评估多模态智能体在视觉基础任务中的表现。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "它包含233个经过人工验证的任务，分布在三个自托管网站上：分类广告、购物和Reddit。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "成功率指标计算为智能体生成的轨迹成功完成任务所占的百分比。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "**Online-Mind2Web**（Xue et al., 2025）是一个源自Mind2Web（Deng et al., 2023）的在线基准，包含300个更新或新建的高质量任务，涵盖136个真实世界网站。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这些任务可以根据完成所需的步骤数分为简单、中等和困难。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "为了降低成本，我们使用100个任务的子集，随机抽取30个简单任务、40个中等任务和30个困难任务。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "该基准采用自动评估流程来衡量任务成功率，与人类判断的一致性达到85%。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "**Mind2Web-Live**（Pan et al., 2024b）包含69个真实世界网站中的104个任务，这些任务从Mind2Web（Deng et al., 2023）中提炼而来。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "它为每个任务定义并标注了关键中间步骤作为关键节点，并且仅当所有关键节点都完成时才认为任务成功。{fn3} 对于所有基准，我们使用截图作为观察空间，并在VWA中添加Set-of-Mark（Yang et al., 2023），以便与树搜索基线进行公平比较。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在我们的实验中，我们根据经验将规划视界$H$设置为1。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "对该参数的全面分析在第5.1节中呈现。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "fn3": {
+  "sentences": [
+   {
+    "zh": "我们确保 Online-Mind2Web 和 Mind2Web-Live 之间没有重叠，以获得更好的任务多样性。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS1.p2.1": {
+  "sentences": [
+   {
+    "zh": "",
+    "conf": "low",
+    "note": "自动翻译失败：条数 5 与输入 4 不一致"
+   },
+   {
+    "zh": "",
+    "conf": "low",
+    "note": "自动翻译失败：条数 5 与输入 4 不一致"
+   },
+   {
+    "zh": "",
+    "conf": "low",
+    "note": "自动翻译失败：条数 5 与输入 4 不一致"
+   },
+   {
+    "zh": "",
+    "conf": "low",
+    "note": "自动翻译失败：条数 5 与输入 4 不一致"
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "fn4": {
+  "sentences": [
+   {
+    "zh": "为简洁起见，在我们的实验中，我们将带真实交互的树搜索简称为树搜索。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.T1": {
+  "sentences": [
+   {
+    "zh": "表1：在VisualWebArena（Koh et al., 2024a）、Online-Mind2Web（Xue et al., 2025）和Mind2Web-Live（Pan et al., 2024b）上的成功率（%）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们自己实现了所有基线，以避免因先前工作中的硬件和实验设置差异而产生偏差。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS2.SSS0.Px1.p1.1": {
+  "sentences": [
+   {
+    "zh": "我们在表1中呈现整体性能结果。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "WebDreamer在所有基准上均展现出相较于反应式基线的显著改进。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "值得注意的是，在VWA数据集上，我们提出的方法实现了34.1%的相对性能提升，仅略微落后于树搜索。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "需要指出的是，树搜索在真实网站上并不十分实用，而WebDreamer提供了一种更灵活、更具适应性的替代方案。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在Online-Mind2Web和Mind2Web-Live上，WebDreamer分别以42.3%和23.8%的相对增益优于反应式基线。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这些强劲的结果展示了WebDreamer在不同真实网站上的有效性。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS2.SSS0.Px1.p2.1": {
+  "sentences": [
+   {
+    "zh": "其次，在我们的大规模合成数据上训练世界模型被证明是有效的。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "如表1所示，将Qwen2-VL-7B微调为Dreamer-7B在VisualWebArena上带来了4.7%的绝对成功率提升，在Online-Mind2Web上为4.0%，在Mind2Web-Live上为4.8%，超过了原始的Qwen2-VL-7B模型，甚至超过了Qwen2-VL-72B。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "此外，Dreamer-7B在两个在线基准Online-Mind2Web和Mind2Web-Live上取得了与GPT-4o相当的性能，证明了为基于网络的决策训练世界模型的可行性。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS2.SSS0.Px2.p1.1": {
+  "sentences": [
+   {
+    "zh": "基于模型的规划的另一个关键优势是，与使用实际探索的树搜索相比，它的效率更高。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "表2显示，树搜索所需的步骤大约是反应式基线的3倍，而我们的方法保持了相当数量的动作步骤。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "值得注意的是，与反应式基线相比，树搜索由于额外的动作和回溯，引入了大约10倍的延迟（以墙钟时间计），而我们的方法中模拟的开销要低得多，使得WebDreamer比树搜索基线高效4-5倍。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.T2": {
+  "sentences": [
+   {
+    "zh": "表2：VWA上的效率分析。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "为公平比较，此处所有方法均使用GPT-4o。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.F4": {
+  "sentences": [
+   {
+    "zh": "图4：关于模拟阶段和自我精化阶段的消融研究。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.SS1.SSS0.Px1.p1.1": {
+  "sentences": [
+   {
+    "zh": "我们在 VWA 购物人工子集（这是经人工验证的最大子集）上对 WebDreamer 的模拟和自精化阶段进行了消融研究。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们特别关注模拟阶段，它是基于模型的规划的核心。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "有人可能会认为，主要改进源于对候选动作的重新排序，而不管这种排序是否依赖于模拟。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "为了检验这一想法，我们进行了一项实验，完全移除模拟阶段，而是让奖励模型（`score`）直接评估每个候选动作（Reranking）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "此外，我们在 WebDreamer 框架中移除了动作提议之后的自精化步骤，以评估其影响（w/o Self-Refinement）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.SS1.SSS0.Px1.p2.1": {
+  "sentences": [
+   {
+    "zh": "如图4所示，这种修改后的重排序方法确实比反应式基线有所改进，但改进幅度很小，并且仍然远落后于WebDreamer。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这些结果证实，基于LLM的世界模型模拟在规划过程中起着至关重要的作用。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "此外，我们观察到移除自我精炼阶段后性能有所下降。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "经过更仔细的检查，我们发现这种下降主要是由于自我精炼模块能够在下一个最优动作明确时有效过滤掉不太相关的候选动作。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "相比之下，直接模拟所有动作可能会引入额外的噪声，从而对性能产生负面影响。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.SS1.SSS0.Px2.p1.1": {
+  "sentences": [
+   {
+    "zh": "如第3.2节所述，WebDreamer支持可配置的规划视野$H$（即模拟深度）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "为了更深入地了解其有效性和当前的局限性，我们研究了规划视野如何影响最终性能。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "使用GPT-4o作为世界模型，我们在Online-Mind2Web（Xue et al., 2025）的同一子集上评估了规划视野为1、2和3的WebDreamer。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.F6": {
+  "sentences": [
+   {
+    "zh": "图5：WebDreamer 使用 GPT-4o 和不同规划视野 $H$ 在 Online-Mind2Web 上的性能。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.SS1.SSS0.Px2.p2.1": {
+  "sentences": [
+   {
+    "zh": "如图6所示，在所有规划步长设置下，性能均一致地优于反应式基线。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然而，当规划步长扩展到2步和3步时，效果开始减弱。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "经仔细检查，这主要是由于模拟中动作提议的幻觉所致。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "具体而言，模拟中的动作提议倾向于生成看似与任务完成相关的动作，即使根据预测结果这些动作并不可用。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "因此，随着规划步长的增加，从不同动作模拟出的轨迹变得难以区分，因为它们都显得在一定程度上正确。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "鉴于网络环境的复杂性，由于误差累积，向前模拟多步具有挑战性，这与之前的观察结果一致（Mendes & Ritter, 2025; Chae et al., 2025）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然而，通过更长的规划步长获得更好的性能并非本工作的主要目标；相反，我们旨在展示使用LLM进行基于模型的规划的可行性和潜力。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们将此留作未来改进的方向。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.SS2.SSS0.Px1.p1.1": {
+  "sentences": [
+   {
+    "zh": "我们通过逐步增加合成训练数据的规模来研究扩展趋势，如图6所示。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "对于Mind2Web-Live，性能随着训练数据集的增大而稳步提升，尽管提升速率在较高数据规模时趋于平缓，表明可能存在边际收益递减。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "相比之下，Online-Mind2Web在整体上表现出更一致的增益，尽管在小规模训练数据时性能略有下降。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这些观察结果表明，进一步扩展可能继续带来性能提升。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们省略了VWA中沙盒环境的扩展结果，并将分析重点放在另外两个在线基准上，因为它们更准确地反映了真实世界环境和网页代理任务。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.SS2.SSS0.Px2.p1.1": {
+  "sentences": [
+   {
+    "zh": "对于特定环境，我们可以合成领域特定的数据用于世界模型训练，从而实现更专业且基于上下文的模拟。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在 VWA（Koh et al., 2024a）中，我们采用第 3.3 节介绍的数据合成流程，为三个环境（Classifieds、Reddit 和 Shopping）各合成 25K 条领域内交互。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "为防止测试数据泄漏，我们过滤掉包含测试示例中出现过的查询的搜索动作。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "最终的领域内检查点是从 Dreamer-7B 模型持续训练得到的，从而产生三个独立的世界模型，每个模型专门针对其各自的环境。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.T3": {
+  "sentences": [
+   {
+    "zh": "表3：WebDreamer 在 VWA 上使用各种世界模型的成功率（%）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.SS2.SSS0.Px2.p2.1": {
+  "sentences": [
+   {
+    "zh": "如表3所示，持续训练相比Dreamer-7B模型提升了性能，并在某些环境中取得了与GPT-4o相当甚至更好的结果。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "Classifieds和Shopping领域从领域内适应中获益最多，表明领域特定的微调成功地改进了模型预测，使其更好地反映特定环境的动态。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然而，Reddit上的性能保持不变，可能是由于其密集的视口和有限的功能交互。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "与视觉组织更简单的Classifieds和Shopping不同，Reddit页面包含长而文本密集的内容，使得世界模型难以推断出超越表面文本可见性的有意义状态变化。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "此外，7B模型在密集网页视口中的有限感知能力（Gou et al., 2025; Zhang et al., 2025）可能进一步限制它们模拟文本密集环境中的细粒度变化。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这些结果强调了领域特定适应的有效性，同时指出了在特定网页领域中进一步改进的领域。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "未来的工作可以探索增强的表示技术，以更好地处理密集的网页布局，进一步扩大世界模型在各种真实世界网页环境中的适用性。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.F7": {
+  "sentences": [
+   {
+    "zh": "图7：比较GPT-4o和Dreamer-7B作为世界模型的示例。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "像GPT-4o这样的通用模型通常提供详细但有时嘈杂的预测，而我们的Dreamer-7B专注于简洁、与动作相关的结果。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.SS2.SSS0.Px3.p1.1": {
+  "sentences": [
+   {
+    "zh": "我们展示一个案例研究，以探讨 GPT-4o 和 Dreamer-7B 作为世界模型的差异。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "GPT-4o 通常提供更详细的状态变化描述，并考虑多种可能的结果，尽管其中一些细节不重要或不相关。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "例如，如图 7 所示，GPT-4o 成功预测了点击“Dosage”后的关键状态变化，概述了新网页上可能出现的信息。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然而，它的预测也包括不重要的细节，如 URL 和 UI 变化，这可能为策略模型引入噪声。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "相反，Dreamer-7B 提供更简洁且面向动作的预测，直接预测新网页上最重要的信息。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.SS2.SSS0.Px3.p2.1": {
+  "sentences": [
+   {
+    "zh": "为了进一步阐明模拟在规划中的作用，我们还在附录E中展示了以GPT-4o作为世界模型的案例研究，涵盖正反两方面的例子。这些例子说明了模拟如何帮助智能体探索环境，以及模拟中的不准确性如何导致错误的预测。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S6.p1.1": {
+  "sentences": [
+   {
+    "zh": "在本文中，我们系统地探索了将LLM用作网络环境中基于模型的规划的世界模型。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们的规划框架WebDreamer在三个基准上相较于反应式基线取得了显著改进，并提供了一种比树搜索效率高4到5倍且具有竞争力的替代方案，而树搜索由于在真实网站上的回溯和效率限制通常不切实际。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "除了使用现成的LLM作为世界模型外，我们还在由我们可扩展的数据合成管道合成的310万个网络交互示例上训练了Dreamer-7B，其性能可与GPT-4o相媲美。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "此外，持续的领域内微调使Dreamer-7B能够适应特定环境，进一步提高了模拟质量和下游性能——超越了GPT-4o。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这项工作为未来在网络环境中高效且有效的决策的基于模型的规划方法研究奠定了基础。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "它也为进一步扩展世界模型以处理一般网络任务奠定了基础。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "__sections__": {
+  "__title__": "你的大语言模型是否暗中是互联网的世界模型？面向网络智能体的基于模型的规划",
+  "Abstract": "摘要",
+  "1 Introduction": "1 引言",
+  "5 Discussions": "5 讨论",
+  "Ablation.": "消融。",
+  "Planning Horizon.": "规划视野。",
+  "Scaling Trend.": "扩展趋势。",
+  "In-Domain Continual Training.": "领域内持续训练。",
+  "Case Studies.": "案例研究。",
+  "6 Conclusion": "6 结论"
+ }
+}

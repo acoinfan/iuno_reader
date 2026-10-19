@@ -1,0 +1,780 @@
+{
+ "__meta__": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "models": {
+   "reviewer": "deepseek-v4-pro"
+  },
+  "translator": "deepseek-v4-pro（关思考）",
+  "independence": "same-model",
+  "usage": {
+   "calls": 21,
+   "prompt_tokens": 20012,
+   "completion_tokens": 18610,
+   "seconds": 190.6,
+   "cached_tokens": 12800
+  }
+ },
+ "abs.p1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "基于大语言模型（LLM）的语言智能体在自动化基于网络的任务中已展现出巨大潜力。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "近期研究表明，与反应式规划相比，引入先进的规划算法（如树搜索）对网络智能体更为有利。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，与模拟沙盒环境不同，网络等真实世界环境充斥着不可逆的操作。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这削弱了回溯的可行性，而回溯是（树）搜索的基石。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "过度依赖测试时搜索也会损害效率。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们主张为网络智能体采用基于模型的规划，即利用世界模型在采取行动前模拟并权衡每个候选行动的结果。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们通过以下方式系统地探索这一范式：**(1)** 提出基于模型的规划框架 WebDreamer，该框架利用 LLM 同时充当世界模型和价值函数；**(2)** 通过可扩展的数据合成流程训练专门的 LLM 作为世界模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "实证结果表明，WebDreamer 相比反应式基线取得了显著的性能提升。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在沙盒环境（VisualWebArena）中，它与树搜索相比具有竞争力，同时效率高出 $4$–$5$ 倍，并且在真实网站（Online-Mind2Web 和 Mind2Web-Live）上也能有效工作。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此外，我们训练的世界模型 Dreamer-7B 的性能与 GPT-4o 相当，凸显了专用世界模型在复杂网络环境中实现高效且有效规划的潜力。{fn1}"
+   }
+  ]
+ },
+ "fn1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "所有资源均可在 `https://github.com/OSU-NLP-Group/WebDreamer` 获取。"
+   }
+  ]
+ },
+ "S1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "规划（Mattar & Lengyel, 2022）——决定实现目标的最优动作序列——自人工智能诞生以来一直是其基础。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对能够规划并执行一系列动作以在多样化网站上完成复杂任务的通用网络智能体的研究已获得显著关注（Deng et al., 2023; Zhou et al., 2024; Zheng et al., 2024; Koh et al., 2024a），部分原因是网络作为驱动智能体研究与开发的复杂而现实的环境的潜力。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，将现有规划算法（Yao et al., 2023a; Hao et al., 2023; Gu et al., 2023; Wang et al., 2025; Feng et al., 2023; Brown et al., 2024, 等）应用于在线网络环境带来了巨大挑战。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "现实世界环境（如网络）充满了改变状态且不可逆的动作——例如，像Amazon.com这样的单个网站就可能涉及大量此类动作，包括提交订单、创建账户、更改隐私设置等——这使得回溯（基于搜索的规划的基石（Koh et al., 2024b; Putta et al., 2024））极具挑战性，甚至不可行。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "测试时搜索中过度探索带来的延迟也损害效率并影响用户体验。"
+   }
+  ]
+ },
+ "S1.F1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图1：不同网络代理策略作为搜索问题的示意图，其中每个节点代表一个网页。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（a）反应式：代理在没有规划的情况下选择局部最优动作，通常导致次优结果。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（b）带真实交互的树搜索：代理通过主动网站导航探索多条路径，可能允许回溯（虚线箭头）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，由于不可逆动作，回溯通常不可行。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（c）基于模型的规划：代理在执行前模拟结果（云边框节点），减少真实交互，同时保持有效性。"
+   }
+  ]
+ },
+ "S1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "解决这些挑战的一个有前景的方案是基于模型的规划（Pascanu et al., 2017; Moerland et al., 2023），它赋予智能体在世界模型——环境动态的计算表示——中模拟动作序列的能力。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "世界模型在传统强化学习（RL）任务中取得了显著成功（Ha & Schmidhuber, 2018; Hafner et al., 2020; Hafner et al., 2021），这些任务处于模拟环境中，如Atari游戏（Bellemare et al., 2013; Brockman et al., 2016），其中环境动态定义明确，动作空间小且固定，使得世界模型的训练相对直接。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，为网络环境构建世界模型仍处于探索不足的状态。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "与模拟环境相比，互联网是开放且不断演变的，具有复杂多样的页面结构和广泛的用户交互可能性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这引出了一个问题：我们如何为互联网构建有效的世界模型？"
+   }
+  ]
+ },
+ "S1.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们提出利用大型语言模型（LLMs）作为基础，为互联网构建世界模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "LLMs 在网页规模的数据上预训练，已经隐式地获得了网站的结构知识和预测所提议行动结果所需的常识，这可能使它们非常适合模拟复杂网页环境中的状态转移。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为此，我们引入了 WebDreamer，一个基于模型的规划框架，该框架在执行动作之前使用 LLMs 来模拟和评分可能的未来状态，从而实现明智的决策（图 1）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在此框架的基础上，我们进一步训练了一个专用的世界模型 Dreamer-7B，使用了由我们可扩展的数据合成管道合成的超过 310 万个交互实例。"
+   }
+  ]
+ },
+ "S1.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "实证结果表明了我们方法的有效性：当由GPT-4o等最先进的大语言模型驱动时，WebDreamer在三个基准测试上相较于反应式基线取得了显著的性能提升，覆盖了在线和沙盒环境。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "它还与树搜索方法具有竞争力，同时在沙盒环境VisualWebArena上效率高出4–5倍，并且在真实世界网站（Online-Mind2Web和Mind2Web-Live）上表现有效，而树搜索方法在这些网站上难以实现和部署。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此外，Dreamer-7B在两个在线基准测试上取得了与GPT-4o相当的性能。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在VisualWebArena中，我们可以继续使用我们的流程合成的领域内数据对Dreamer-7B进行微调。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "仅用25K个训练实例，得到的领域特定世界模型就产生了更强的结果，超越了GPT-4o。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些发现不仅证明了使用大语言模型进行基于模型的规划的潜力，而且为通过数据合成、训练和评估构建开放网络的世界模型奠定了实践基础。"
+   }
+  ]
+ },
+ "S5.F4": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图4：关于模拟阶段和自我精化阶段的消融研究。"
+   }
+  ]
+ },
+ "S5.SS1.SSS0.Px1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们在 VWA 购物人工子集（这是经人工验证的最大子集）上对 WebDreamer 的模拟和自精化阶段进行了消融研究。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们特别关注模拟阶段，它是基于模型的规划的核心。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "有人可能会认为，主要改进源于对候选动作的重新排序，而不管这种排序是否依赖于模拟。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了检验这一想法，我们进行了一项实验，完全移除模拟阶段，而是让奖励模型（`score`）直接评估每个候选动作（Reranking）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此外，我们在 WebDreamer 框架中移除了动作提议之后的自精化步骤，以评估其影响（w/o Self-Refinement）。"
+   }
+  ]
+ },
+ "S5.SS1.SSS0.Px1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如图4所示，这种修改后的重排序方法确实比反应式基线有所改进，但改进幅度很小，并且仍然远落后于WebDreamer。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些结果证实，基于LLM的世界模型模拟在规划过程中起着至关重要的作用。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此外，我们观察到移除自我精炼阶段后性能有所下降。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "经过更仔细的检查，我们发现这种下降主要是由于自我精炼模块能够在下一个最优动作明确时有效过滤掉不太相关的候选动作。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "相比之下，直接模拟所有动作可能会引入额外的噪声，从而对性能产生负面影响。"
+   }
+  ]
+ },
+ "S5.SS1.SSS0.Px2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如第3.2节所述，WebDreamer支持可配置的规划视野$H$（即模拟深度）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了更深入地了解其有效性和当前的局限性，我们研究了规划视野如何影响最终性能。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "使用GPT-4o作为世界模型，我们在Online-Mind2Web（Xue et al., 2025）的同一子集上评估了规划视野为1、2和3的WebDreamer。"
+   }
+  ]
+ },
+ "S5.F6": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图5：WebDreamer 使用 GPT-4o 和不同规划视野 $H$ 在 Online-Mind2Web 上的性能。"
+   }
+  ]
+ },
+ "S5.SS1.SSS0.Px2.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如图6所示，在所有规划步长设置下，性能均一致地优于反应式基线。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，当规划步长扩展到2步和3步时，效果开始减弱。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "经仔细检查，这主要是由于模拟中动作提议的幻觉所致。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "具体而言，模拟中的动作提议倾向于生成看似与任务完成相关的动作，即使根据预测结果这些动作并不可用。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，随着规划步长的增加，从不同动作模拟出的轨迹变得难以区分，因为它们都显得在一定程度上正确。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "鉴于网络环境的复杂性，由于误差累积，向前模拟多步具有挑战性，这与之前的观察结果一致（Mendes & Ritter, 2025; Chae et al., 2025）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，通过更长的规划步长获得更好的性能并非本工作的主要目标；相反，我们旨在展示使用LLM进行基于模型的规划的可行性和潜力。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们将此留作未来改进的方向。"
+   }
+  ]
+ },
+ "S5.SS2.SSS0.Px1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们通过逐步增加合成训练数据的规模来研究扩展趋势，如图6所示。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于Mind2Web-Live，性能随着训练数据集的增大而稳步提升，尽管提升速率在较高数据规模时趋于平缓，表明可能存在边际收益递减。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "原文 following 表示时间先后（在小规模数据下性能略有下降之后），译文用“尽管”改为让步关系，略有偏差。",
+    "suggestion": "相比之下，Online-Mind2Web在整体上表现出更一致的增益，此前在小规模训练数据时性能略有下降。",
+    "zh_reviewed": "相比之下，Online-Mind2Web在整体上表现出更一致的增益，尽管在小规模训练数据时性能略有下降。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些观察结果表明，进一步扩展可能继续带来性能提升。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们省略了VWA中沙盒环境的扩展结果，并将分析重点放在另外两个在线基准上，因为它们更准确地反映了真实世界环境和网页代理任务。"
+   }
+  ]
+ },
+ "S5.SS2.SSS0.Px2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于特定环境，我们可以合成领域特定的数据用于世界模型训练，从而实现更专业且基于上下文的模拟。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在 VWA（Koh et al., 2024a）中，我们采用第 3.3 节介绍的数据合成流程，为三个环境（Classifieds、Reddit 和 Shopping）各合成 25K 条领域内交互。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为防止测试数据泄漏，我们过滤掉包含测试示例中出现过的查询的搜索动作。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "最终的领域内检查点是从 Dreamer-7B 模型持续训练得到的，从而产生三个独立的世界模型，每个模型专门针对其各自的环境。"
+   }
+  ]
+ },
+ "S5.T3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "表3：WebDreamer 在 VWA 上使用各种世界模型的成功率（%）。"
+   }
+  ]
+ },
+ "S5.SS2.SSS0.Px2.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如表3所示，持续训练相比Dreamer-7B模型提升了性能，并在某些环境中取得了与GPT-4o相当甚至更好的结果。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Classifieds和Shopping领域从领域内适应中获益最多，表明领域特定的微调成功地改进了模型预测，使其更好地反映特定环境的动态。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，Reddit上的性能保持不变，可能是由于其密集的视口和有限的功能交互。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "与视觉组织更简单的Classifieds和Shopping不同，Reddit页面包含长而文本密集的内容，使得世界模型难以推断出超越表面文本可见性的有意义状态变化。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此外，7B模型在密集网页视口中的有限感知能力（Gou et al., 2025; Zhang et al., 2025）可能进一步限制它们模拟文本密集环境中的细粒度变化。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "原文 areas 指“方面/区域”，译文“领域”与前半句的“网页领域”（domains）容易混淆，建议改为“方面”。",
+    "suggestion": "这些结果强调了领域特定适应的有效性，同时指出了在特定网页领域中需要进一步改进的方面。",
+    "zh_reviewed": "这些结果强调了领域特定适应的有效性，同时指出了在特定网页领域中进一步改进的领域。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "未来的工作可以探索增强的表示技术，以更好地处理密集的网页布局，进一步扩大世界模型在各种真实世界网页环境中的适用性。"
+   }
+  ]
+ },
+ "S5.F7": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图7：比较GPT-4o和Dreamer-7B作为世界模型的示例。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "\"noisy predictions\" 在此指预测包含噪声/杂乱信息，而非声音上的嘈杂，\"嘈杂的预测\"不够准确。",
+    "suggestion": "像GPT-4o这样的通用模型通常提供详细但有时含噪声的预测，而我们的Dreamer-7B专注于简洁、与动作相关的结果。",
+    "zh_reviewed": "像GPT-4o这样的通用模型通常提供详细但有时嘈杂的预测，而我们的Dreamer-7B专注于简洁、与动作相关的结果。"
+   }
+  ]
+ },
+ "S5.SS2.SSS0.Px3.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们展示一个案例研究，以探讨 GPT-4o 和 Dreamer-7B 作为世界模型的差异。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "GPT-4o 通常提供更详细的状态变化描述，并考虑多种可能的结果，尽管其中一些细节不重要或不相关。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例如，如图 7 所示，GPT-4o 成功预测了点击“Dosage”后的关键状态变化，概述了新网页上可能出现的信息。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，它的预测也包括不重要的细节，如 URL 和 UI 变化，这可能为策略模型引入噪声。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "相反，Dreamer-7B 提供更简洁且面向动作的预测，直接预测新网页上最重要的信息。"
+   }
+  ]
+ },
+ "S5.SS2.SSS0.Px3.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了进一步阐明模拟在规划中的作用，我们还在附录E中展示了以GPT-4o作为世界模型的案例研究，涵盖正反两方面的例子。这些例子说明了模拟如何帮助智能体探索环境，以及模拟中的不准确性如何导致错误的预测。"
+   }
+  ]
+ },
+ "S6.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在本文中，我们系统地探索了将LLM用作网络环境中基于模型的规划的世界模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的规划框架WebDreamer在三个基准上相较于反应式基线取得了显著改进，并提供了一种比树搜索效率高4到5倍且具有竞争力的替代方案，而树搜索由于在真实网站上的回溯和效率限制通常不切实际。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "除了使用现成的LLM作为世界模型外，我们还在由我们可扩展的数据合成管道合成的310万个网络交互示例上训练了Dreamer-7B，其性能可与GPT-4o相媲美。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此外，持续的领域内微调使Dreamer-7B能够适应特定环境，进一步提高了模拟质量和下游性能——超越了GPT-4o。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这项工作为未来在网络环境中高效且有效的决策的基于模型的规划方法研究奠定了基础。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "它也为进一步扩展世界模型以处理一般网络任务奠定了基础。"
+   }
+  ]
+ }
+}

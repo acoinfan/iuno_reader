@@ -1,0 +1,475 @@
+{
+ "__meta__": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "models": {
+   "reviewer": "deepseek-v4-pro"
+  },
+  "translator": "deepseek-v4-pro（关思考）",
+  "independence": "same-model",
+  "usage": {
+   "calls": 15,
+   "prompt_tokens": 14328,
+   "completion_tokens": 10871,
+   "seconds": 98.1,
+   "cached_tokens": 9856
+  }
+ },
+ "abs.p1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在给定控制动作的情况下预测未来结果的能力是物理推理的基础。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "译文将原文的“with online policy learning”（伴随在线策略学习）译为“需要在线策略学习”，增加了必要条件的含义，而原文仅表示通常伴随在线策略学习发生。",
+    "suggestion": "然而，这类预测模型（通常被称为世界模型）的学习仍然具有挑战性，并且通常是结合在线策略学习为特定任务的解决方案而开发的。",
+    "zh_reviewed": "然而，这类预测模型（通常被称为世界模型）的学习仍然具有挑战性，并且通常是为特定任务的解决方案而开发的，需要在线策略学习。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了释放世界模型的真正潜力，我们认为它们应该 1) 能够在离线、预先收集的轨迹上进行训练，2) 支持测试时的行为优化，以及 3) 促进任务无关的推理。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为此，我们提出了 DINO 世界模型（DINO-WM），这是一种在不重建视觉世界的情况下建模视觉动态的新方法。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "DINO-WM 利用 DINOv2 预训练的空间块特征，通过预测未来的块特征，使其能够从离线行为轨迹中学习。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这使得 DINO-WM 能够通过动作序列优化来实现观测目标，通过将目标特征视为预测目标来促进任务无关的规划。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们证明，DINO-WM 在六个环境中实现了测试时的零样本行为解决方案，无需专家示例、奖励建模或预先学习的逆模型，在任意配置的迷宫、具有不同物体形状的推动操作以及多粒子场景等多种任务系列中优于先前的最先进工作。"
+   }
+  ]
+ },
+ "S1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "机器人学和具身人工智能近年来取得了巨大进展。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "模仿学习和强化学习的进展使智能体能够在各种任务中学习复杂行为（Agarwal et al., 2022; Zhao et al., 2023; Lee et al., 2024; Ma et al., 2024; Hafner et al., 2024; Hansen et al., 2024; Haldar et al., 2024; Jia et al., 2024）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "尽管取得了这些进展，泛化仍然是一个重大挑战（Zhou et al., 2023）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "现有方法主要依赖于策略，这些策略一旦训练完成，在部署期间以前馈方式运行——将观测映射为动作，而无需任何进一步的优化或推理。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在这种框架下，成功的泛化本质上要求智能体在训练完成后就拥有所有可能任务和场景的解决方案，而这只有在智能体在训练期间见过类似场景时才可能实现（Reed et al., 2022; Brohan et al., 2023b; Brohan et al., 2023a; Etukuru et al., 2024）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，预先为所有潜在任务和环境学习解决方案既不可行也不高效。"
+   }
+  ]
+ },
+ "S1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "与其在训练期间学习所有可能任务的解决方案，另一种方法是在训练数据上拟合一个动力学模型，并在运行时优化特定任务的行为。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些动力学模型，也称为世界模型（world model）（Ha & Schmidhuber, 2018），在机器人学和控制领域有着悠久的历史（Sutton, 1991; Todorov & Li, 2005; Williams et al., 2017）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "最近，一些工作表明，世界模型可以在原始感官数据上进行训练（Hafner et al., 2019; Micheli et al., 2023; Robine et al., 2023; Hansen et al., 2024; Hafner et al., 2024）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这使得基于模型的优化能够灵活地用于获取策略，因为它避免了显式状态估计的需要。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "尽管如此，在将其用于解决通用任务方面仍然存在重大挑战。"
+   }
+  ]
+ },
+ "S1.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了理解世界建模中的挑战，让我们考虑学习世界模型的两种广泛范式：在线和离线。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在在线设置中，通常需要访问环境，以便可以持续收集数据来改进世界模型，这反过来又改进了策略和随后的数据收集。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，在线世界模型仅在所优化策略的覆盖范围内是准确的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，虽然它可以用来训练强大的任务特定策略，但即使在相同的环境中，每个新任务都需要重新训练。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "相反，在离线设置中，世界模型是在环境中收集的轨迹的离线数据集上训练的，这消除了在数据集中有足够覆盖的情况下对任务特定性的依赖。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，当需要解决一个任务时，该领域的方法需要强大的辅助信息，这些信息可以采取专家示例（Pathak et al., 2018; Wang et al., 2023）、结构化关键点（Ko et al., 2023; Wen et al., 2024）、访问预训练的逆模型（Du et al., 2023; Ko et al., 2023）或密集奖励函数（Ding et al., 2024）的形式，所有这些都降低了使用离线世界模型的通用性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "构建更好的离线世界模型的核心问题是，是否存在不损害其通用性的替代辅助信息？"
+   }
+  ]
+ },
+ "S1.F1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图1：我们提出DINO-WM，一种通过使用预训练的DINOv2图像帧嵌入来训练视觉模型的方法（a）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "一旦训练完成，给定目标观测$o_{T}$，我们可以通过使用模型预测控制（b）在DINO-WM中进行规划来直接优化智能体行为。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "使用预训练嵌入显著提高了性能，超越了先前最先进的世界模型（c）。"
+   }
+  ]
+ },
+ "S1.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在这项工作中，我们提出了 DINO-WM，一种从离线轨迹数据集构建任务无关世界模型的新颖且简单的方法。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "DINO-WM 对世界的紧凑嵌入进行世界动力学建模，而不是对原始观测本身建模。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于嵌入，我们使用来自 DINOv2 模型的预训练补丁特征，该模型提供了空间和以对象为中心的表示先验。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们推测，这种预训练表示能够实现稳健且一致的世界建模，从而放宽了对任务特定数据覆盖的需求。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "给定这些视觉嵌入和动作，DINO-WM 使用 ViT 架构来预测未来的嵌入。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "一旦该模型在离线数据集上训练完成，解决任务的规划就被构建为视觉目标达成，即在给定当前观测的情况下到达未来期望的目标。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "由于 DINO-WM 的预测质量很高（见图 4），我们可以简单地使用带有推理时优化的模型预测控制来达到期望的目标，而无需在测试期间使用任何额外信息。"
+   }
+  ]
+ },
+ "S1.p5.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "DINO-WM 在六个环境套件上进行了实验评估，涵盖迷宫导航、滑动操作、机械臂控制和可变形物体操作任务。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的实验揭示了以下发现："
+   }
+  ]
+ },
+ "S1.p5.2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "DINO-WM 的代码和模型已开源以确保可复现性，规划视频可在我们的匿名项目网站上获取：`https://dino-wm.github.io`。"
+   }
+  ]
+ },
+ "S1.I1.i1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• DINO-WM 产生高质量的未来世界建模，这可以通过训练后的解码器改进的视觉重建来衡量。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在我们最困难的任务的 LPIPS 指标上，这比先前最先进的工作提高了 56%（见第 4.7 节）。"
+   }
+  ]
+ },
+ "S1.I1.i2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• 给定使用 DINO-WM 训练的潜在世界模型，我们展示了在最困难的任务上到达任意目标的高成功率，平均比先前工作提高了 45%（见第 4.3 节）。"
+   }
+  ]
+ },
+ "S1.I1.i3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• DINO-WM 可以在任务族内的环境变化中进行训练（例如导航的不同迷宫布局或操作的不同物体形状），并且与先前工作相比取得更高的成功率（见第 4.5 节）。"
+   }
+  ]
+ },
+ "S4.F4": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图4：世界模型在Push-T和Granular上的开环推演。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "给定第一帧和动作序列，每个模型预测未来帧，并由其解码器重建。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于每个环境，底行表示真实值。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "DINO-WM（我们的）推演以粗体显示，并且在视觉上与真实观测无法区分。"
+   }
+  ]
+ },
+ "S5.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们提出了DINO-WM，一种简单而有效的技术，用于在潜在空间中建模视觉动态，而无需像素空间重建。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们已经证明，DINO-WM能够捕捉环境动态并泛化到未见过的配置，独立于任务规范，从而在测试时实现视觉推理，并通过规划为下游任务生成零样本解决方案。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "DINO-WM朝着弥合任务无关的世界建模与推理和控制之间的差距迈出了一步，为现实世界应用中的通用世界模型提供了有前景的前景。"
+   }
+  ]
+ },
+ "S5.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**局限性与未来工作**：首先，DINO-WM 假设能够获得具有足够状态-动作覆盖的离线数据集，这对于高度复杂的环境来说可能难以获得。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这可以通过将 DINO-WM 与探索策略相结合，并在新经验可用时更新模型来潜在地解决。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "其次，DINO-WM 仍然依赖于来自智能体的真实动作的可用性，当使用来自互联网的大量视频数据进行训练时，这可能并不总是可行的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "最后，虽然我们目前在下游任务解决中在动作空间中进行规划，但这项工作的扩展可能涉及开发一种层次结构，将高层规划与低层控制策略相结合，以实现解决更细粒度的控制任务。"
+   }
+  ]
+ }
+}

@@ -1,0 +1,700 @@
+{
+ "__meta__": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "models": {
+   "reviewer": "deepseek-v4-pro"
+  },
+  "translator": "deepseek-v4-pro（关思考）",
+  "independence": "same-model",
+  "usage": {
+   "calls": 21,
+   "prompt_tokens": 20150,
+   "completion_tokens": 27809,
+   "seconds": 265.8,
+   "cached_tokens": 13440
+  }
+ },
+ "abs.p1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在这项工作中，我们考虑代码世界模型，即由大型语言模型（LLM）以 Python 代码形式生成的、用于基于模型的强化学习（RL）的世界模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "调用代码而非 LLM 进行规划有可能更精确、更可靠、更可解释，并且极其高效。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，编写合适的代码世界模型需要理解复杂指令的能力、生成具有非平凡逻辑的精确代码的能力，以及利用单元测试和环境轨迹的反馈来自我调试长程序的能力。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了应对这些挑战，我们提出了基于蒙特卡洛树搜索的生成、改进与修复（GIF-MCTS），这是一种新的面向 LLM 的代码生成策略。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了在离线 RL 设置中测试我们的方法，我们引入了代码世界模型基准（CWMB），这是一套程序合成和规划任务，由 18 个不同的 RL 环境组成，并配有相应的文本描述和精心整理的轨迹。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "GIF-MCTS 在 CWMB 和另外两个基准上超越了所有基线，并且我们表明，用它合成的代码世界模型可以成功用于规划，从而产生基于模型的 RL 智能体，其样本效率和推理速度都得到了极大的提高。"
+   }
+  ]
+ },
+ "S1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对世界进行建模的能力对于目标导向的智能体至关重要（Ha and Schmidhuber, 2018）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "当面对新环境时，智能体必须快速理解其机制以实现目标，例如通过构建世界的内部表示并利用它进行规划。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "term"
+    ],
+    "issue": "“grounding current observations in past knowledge” 的核心意思是用过去知识来理解/解释当前观察，译文“将当前观察与过去知识相结合”只表达了结合，未准确译出 grounding 的含义。",
+    "suggestion": "在此背景下，自然语言条件作用可用于将当前观察基于过去知识进行理解，并提升智能体对世界的理解。",
+    "zh_reviewed": "在此背景下，自然语言条件作用可用于将当前观察与过去知识相结合，并提升智能体对世界的理解。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，以自然语言向智能体传达新任务的信息尤其有前景，并且多项工作探索了遵循指令的智能体（Jang et al., 2022; Ahn et al., 2022）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，并非所有重要信息都能以命令式指令的形式传达。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "解决任务所需的许多关键事实涉及理解观察、预测不同动作的结果以及判断这些结果是否与智能体的目标一致。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，能够利用额外描述性信息的系统，例如基于模型的强化学习（RL）智能体，具有通过自然语言实现快速高效适应的更大潜力（Lin et al., 2024）。"
+   }
+  ]
+ },
+ "S1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "大型语言模型（LLMs）已经彻底改变了自然语言处理领域，并凭借其互联网规模的知识、推理和指令遵循能力，为世界建模提供了巨大的机会。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，如何最好地将LLMs与世界模型结合起来尚不清楚。"
+   }
+  ]
+ },
+ "S1.F1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图1：代码世界模型（CWM）框架概览。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "给定环境描述和任务，我们使用由GIF-MCTS方法引导的LLM迭代生成并优化候选CWM。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "候选模型的正确性通过检查其是否正确预测从真实环境收集的一组轨迹来评估。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如果模型不能完全预测所有转移，正确预测的比例和其他信息会作为反馈提供给LLM，然后循环重复。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在匹配所有转移或用尽计算预算后，返回最佳CWM，并通过基于模型的规划来完成任务。"
+   }
+  ]
+ },
+ "S1.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "一种选择是多模态系统，例如文本到视频模型（Gupta et al., 2023），它们在生成任务中表现出最高的预测保真度、语言理解和分布外泛化能力，但由于推理成本高，在规划循环中反复调用时速度太慢。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "term"
+    ],
+    "issue": "“模型基”是“model-based”的生硬直译，建议译为“基于模型的”。",
+    "suggestion": "另一方面，语言条件基于模型的强化学习智能体（Dainese et al., 2023; Lin et al., 2024）通常在规划时速度快且易于训练。",
+    "zh_reviewed": "另一方面，语言条件模型基强化学习智能体（Dainese et al., 2023; Lin et al., 2024）通常在规划时速度快且易于训练。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，由于它们专门的架构，它们不能方便地整合大型语言模型，因此语言理解和泛化能力较差。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "其他工作，例如（Hao et al., 2023），直接使用大型语言模型作为世界模型进行规划，但它们的推理速度慢，并且仅限于文本输入和输出，限制了它们在强化学习中的适用性。"
+   }
+  ]
+ },
+ "S1.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在本研究中，我们提出用代码来建模世界，而不是直接用 LLM 预测未来，因为后者已知成本高、速度慢且不可靠。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "相比之下，代码精确、快速、可靠且可解释。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "omission"
+    ],
+    "issue": "缩写 CWMs 被写作单数 CWM，丢失复数标记，建议统一为 CWMs。",
+    "suggestion": "因此，我们引入了代码世界模型（Code World Models，CWMs），这是一种通过用 LLM 编写 Python 代码来生成 RL 世界模型的新方法，其高层概览见图 1。",
+    "zh_reviewed": "因此，我们引入了代码世界模型（Code World Models，CWM），这是一种通过用 LLM 编写 Python 代码来生成 RL 世界模型的新方法，其高层概览见图 1。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "omission"
+    ],
+    "issue": "缩写 CWMs 被写作单数 CWM，丢失复数标记，建议统一为 CWMs。",
+    "suggestion": "CWMs 的概念已由 Tang 等人（2024b）独立且同时提出；然而，我们的方法在技术上是不同的（第 2 节），并且可扩展到更复杂的世界模型（第 5 节）。",
+    "zh_reviewed": "CWM 的概念已由 Tang 等人（2024b）独立且同时提出；然而，我们的方法在技术上是不同的（第 2 节），并且可扩展到更复杂的世界模型（第 5 节）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "伴随这一范式，我们引入了代码世界模型基准（Code World Models Benchmark，CWMB），它由 18 个用于离散和连续控制的多样化 RL 环境组成，并配有相应的自然语言描述和精选轨迹。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "该基准旨在通过从提供的数据中学习来促进代码世界模型的准确合成，并在不同复杂度的环境中评估不同的代码生成方法。"
+   }
+  ]
+ },
+ "S1.p5.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为世界模型合成程序需要复杂的推理、精确的指令遵循、对环境动态和奖励函数的准确实现，以及使用单元测试调试和优化长程序的编码技能。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了应对这些挑战，我们提出了基于蒙特卡洛树搜索的生成、改进和修复方法（GIF-MCTS），这是一种基于蒙特卡洛树搜索（MCTS，Kocsis and Szepesvári (2006)）的LLM代码生成新方法，特别适用于生成代码世界模型。{fn1} 我们在三个基准上评估了我们的方法性能：新的CWMB、APPS上的Competition划分（Hendrycks et al., 2021），这是一个流行且具有挑战性的编码基准，以及RTFM（Zhong et al., 2020），一个语言条件下的网格世界，展示了具有不同特征和复杂性的环境。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "GIF-MCTS在所有三个基准上都优于现有方法。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此外，我们展示了在几个环境中使用合成的CWM进行成功规划。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这产生了具有卓越样本效率和推理速度的基于模型的RL智能体（与直接查询LLM作为世界模型相比，速度快四到六个数量级，如附录H所示），同时，在CWM准确的前提下，与能够访问真实世界模型的预言机规划器的性能相匹配。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "最后，我们讨论了使代码世界模型更广泛适用所需克服的限制和挑战。"
+   }
+  ]
+ },
+ "fn1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们在 https://github.com/nicoladainese96/code-world-models 发布代码。"
+   }
+  ]
+ },
+ "S5.T2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "表2：**CWMB：主要结果。** 对于每种方法，我们报告CWM准确率和归一化回报$\\mathcal{R}$，分别对离散和连续动作空间的环境进行平均。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "预算表示LLM调用的次数。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于每个指标，我们报告跨环境的平均值（对于回报，还跨10个回合）及其误差。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于Llama 3，我们报告三个不同随机种子的平均值，以增加统计显著性。"
+   }
+  ]
+ },
+ "S6.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在本节中，我们首先讨论实证结果的一些启示，然后详细阐述我们方法的一些局限性。"
+   }
+  ]
+ },
+ "S6.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**GIF-MCTS 与 WorldCoder 对比。** 我们认为 GIF-MCTS 优于 WorldCoder，因为它能生成更多样化的程序集。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "WorldCoder 最初从头生成一个程序，然后在每次迭代中采样并精化一个完整程序。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "相比之下，GIF-MCTS 可以通过在根节点或后续节点采取“生成新行”动作，从头或从部分程序生成多个程序。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这种方法更好地探索了解空间，从而提高了性能。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们在附录表 6 中的消融研究“无生成动作”支持了这一发现。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "该研究使用类似 GIF-MCTS 的树搜索，但总是精化一个完整程序，类似于 WorldCoder，结果性能低于我们的方法。"
+   }
+  ]
+ },
+ "S6.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**准确率-回报差距。** 我们从表2中经验性地观察到，CWM的准确率始终高于其归一化回报，并且这两个指标只有在CWM完美无缺时才一致。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这通常是由于对终止状态的错误预测：这些状态在回放缓冲区中较为罕见，尤其是以成功/正奖励终止的状态。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这可能导致规划算法失败，因为它缺少奖励信号。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "性能差距的一部分也可能源于收集到的轨迹对环境覆盖的稀疏性。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "omission"
+    ],
+    "issue": "译文省略了“elaborating on this”中的“针对这一点/对此进行阐述”的指代含义，未明确说明结果是针对前文所述差距的详细阐述。",
+    "suggestion": "针对这一点的每个环境的单独结果在附录J中进行了阐述。未来的工作可以探索检索和组合互补的不同CWM，以提高在重要边缘情况下的性能。",
+    "zh_reviewed": "每个环境的详细结果在附录J中阐述。未来的工作可以探索检索和组合互补的不同CWM，以提高在重要边缘情况下的性能。"
+   }
+  ]
+ },
+ "S6.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**样本效率。** 生成 CWM 所需的与环境交互远少于传统的基于模型的方法。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "由于收集到的转移仅用于验证程序并作为上下文示例，一个小的精选集（足以覆盖可能的边缘情况和不同的奖励值）就足以正确验证生成的代码。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在我们的实验中，我们仅收集 10 条轨迹（每条最多 100 步）作为离线数据集，而专门为样本效率挑战设计的基准（Bellemare et al., 2013）要求智能体最多使用 100k 帧，这高出两个数量级。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们将 CWM 智能体样本效率的更深入实验留给未来工作。"
+   }
+  ]
+ },
+ "S6.p5.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "minor",
+    "category": [
+     "scope"
+    ],
+    "issue": "原文“in regimes with scarce data and environments that...”可能表示两种不同的情形（数据稀缺的情形，以及环境易于描述的情形），译文用“且”可能被理解为需同时满足，缩小了适用范围。",
+    "suggestion": "我们预期，在数据稀缺以及环境易于用语言描述并用代码建模的情况下，代码世界模型（CWM）相比经典强化学习方法具有优势。",
+    "zh_reviewed": "与离线强化学习的比较。我们预期，在数据稀缺且环境易于用语言描述并用代码建模的情况下，代码世界模型（CWM）相比经典强化学习方法具有优势。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们在附录 K 中报告了在 CWMB 上的初步比较，比较了使用我们的 CWM 或使用最先进的离线强化学习方法——保守 Q 学习（CQL）（Kumar et al., 2020）——在用于合成 CWM 的相同轨迹数量上训练所获得的回报。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "causal"
+    ],
+    "issue": "原文“which are harder to model”是非限定性定语从句，仅补充说明连续动作空间环境更难建模，并未明确表示这是CQL表现更佳的原因；译文添加了“因为”，引入了原文没有的因果关系。",
+    "suggestion": "我们发现，在具有离散动作空间的环境中，CWM 相比 CQL 表现更优，而 CQL 在连续动作空间环境中表现更佳，这些环境更难建模。",
+    "zh_reviewed": "我们发现，在具有离散动作空间的环境中，CWM 相比 CQL 表现更优，而 CQL 在连续动作空间环境中表现更佳，因为连续动作空间更难建模。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "强化学习方法，包括 CQL，可能会从更多经验中受益，因为它们在数据稀缺时会过拟合。"
+   }
+  ]
+ },
+ "S6.SS1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**代码世界模型。** CWMs框架是基于模型的规划的一个令人兴奋的方向，但我们仍然依赖于确定性和完全可观测环境的限制性假设。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "随机性和部分可观测性都会带来挑战，尤其是在验证CWM预测时，因为对于给定的输入没有固定的结果。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们将扩展该方法以考虑随机和部分可观测环境的工作留待未来。"
+   }
+  ]
+ },
+ "S6.SS1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "minor",
+    "category": [
+     "addition"
+    ],
+    "issue": "译文增译了“如何”，原文只是说“提供这样的描述”本身构成问题，并未明确询问提供方式。",
+    "suggestion": "另一个潜在问题是，当无法获得可以合理转换为 Python 函数的环境描述（例如记录关键变量的手册）时（例如当环境是用图像观测定义时），提供这样的描述。",
+    "zh_reviewed": "另一个潜在问题是，当无法获得可以合理转换为 Python 函数的环境描述（例如记录关键变量的手册）时（例如当环境是用图像观测定义时），如何提供这样的描述。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "先前的工作已开始解决这一问题（Migimatsu and Bohg, 2022），并且图像转文本模型（Ren et al., 2024）等预处理技术可在未来工作中用于解决该问题。"
+   }
+  ]
+ },
+ "S6.SS1.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "当环境需要适应不断变化的动态时，基于代码的模型也可能过于僵化，这意味着需要即时重写CWM。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "一个可能的解决方案是将CWM分解为更小的函数，这些函数可以由LLM单独重写，以应对环境中的某些变化，或者将可变因素建模为step函数的参数。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "CWM在复杂的基于物理的环境上尤其困难；因此，一个有前景的方向也可能是允许GIF-MCTS生成的程序利用外部工具和库，例如物理模拟器。"
+   }
+  ]
+ },
+ "S6.SS1.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**GIF-MCTS。** 我们验证了 GIF-MCTS 方法是一种高效的代码合成方法，其关键限制性假设是拥有可用的测试用例来评估代码，这在某些任务中可能难以提供。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在这些情况下，可以使用自生成的测试用例（Chen et al., 2023），但由于这不反映 CWM 设置，我们将其留作未来工作。"
+   }
+  ]
+ },
+ "S7.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们提出了代码世界模型（Code World Models），这是一个利用大语言模型为强化学习智能体构建世界模型的通用框架。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们进一步表明，GIF-MCTS 是一种强大的代码合成方法，能够成功整合外部反馈进行自我调试和改进代码，并在一系列环境中展示了世界建模和下游规划的示例。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们相信，代码世界模型方法将推动快速、可解释且样本高效的基于模型的强化学习智能体的发展，利用日益强大的大语言模型所提供的优势，而无需直接用它们预测环境动态。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们希望，底层大语言模型骨干的改进和代码生成方法本身的完善，将为比本工作中处理的环境更复杂的环境带来强大的代码世界模型。"
+   }
+  ]
+ },
+ "A3.T6": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "表6：**CWMB结果：消融研究。** 我们将完整的GIF-MCTS方法与三种消融变体进行比较，每种变体省略三种动作类型中的一种。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于每种方法，我们报告CWM准确率和归一化回报$\\mathcal{R}$，分别在具有离散和连续动作空间的环境中单独平均。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于每个指标，我们报告跨环境的平均值（对于回报，还跨10个回合），并附有其误差。"
+   }
+  ]
+ }
+}

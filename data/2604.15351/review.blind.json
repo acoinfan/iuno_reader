@@ -1,0 +1,484 @@
+{
+ "__meta__": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "models": {
+   "reviewer": "deepseek-v4-pro"
+  },
+  "translator": "deepseek-v4-pro（关思考）",
+  "independence": "same-model",
+  "usage": {
+   "calls": 26,
+   "prompt_tokens": 20285,
+   "completion_tokens": 13104,
+   "seconds": 130.7,
+   "cached_tokens": 16384
+  }
+ },
+ "abs.p1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "低秩适应（LoRA）已成为大型语言模型主流的参数高效微调方法，然而标准做法是将 LoRA 适配器统一应用于所有 Transformer 层，而不考虑它们与下游任务的相关性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们提出 **Aletheia**，一种梯度引导的层选择方法，通过轻量级梯度探针识别与任务最相关的层，并仅对这些层应用具有非对称秩分配的 LoRA 适配器。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在涵盖 **8 个架构家族**（0.5B–72B 参数，包括稠密和专家混合架构）的 **14 个成功模型** 的 **81 个实验行** 中，加上 Campaign 2 中一个额外记录的失败 Pythia/GPT-NeoX 尝试，Aletheia 实现了 **15–28% 的训练加速**（平均 23.1%，$p<0.001$），并在所评估的 MMLU、GSM8K 和 HumanEval 基准包上具有 **有界的额外遗忘和广泛匹配的下游行为**。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在测试的家族和规模中，Campaign 1 显示出 100% 的每模型加速胜率，Campaign 2 在有界退化框架内显示出广泛保留的下游行为。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些结果共同支持一个实用的模型经济学主张：智能层选择可以使 LoRA 微调在实质上更高效，而不会在所评估的集合上引入重大下游损害。"
+   }
+  ]
+ },
+ "S1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "参数高效微调（PEFT）方法，尤其是低秩适应（Low-Rank Adaptation，LoRA）（Hu et al., 2022），已成为将大型语言模型（LLMs）适配到下游任务而不必承担全量微调高昂成本的关键手段。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "标准 LoRA 在所有注意力和 MLP 层上均匀地应用低秩适配器，将每个 Transformer 块视为对目标任务同等重要。"
+   }
+  ]
+ },
+ "S1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这种统一的方法并非最优：并非所有层对任务特定学习的贡献都相同。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "先前关于结构化层丢弃和选择性适配的工作（Fan et al., 2020; Sharma et al., 2023; Zhang et al., 2023）表明，Transformer 层对微调数据表现出不同的敏感性，其中一些层主要充当“直通”块，添加的任务相关变换极少。"
+   }
+  ]
+ },
+ "S1.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们提出 **Aletheia**，一种简单而有效的方法，它："
+   }
+  ]
+ },
+ "S1.I1.i1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "1. 执行一次轻量级梯度探测（5次前向-反向传播）来测量每层梯度范数，作为任务相关性的代理指标；"
+   }
+  ]
+ },
+ "S1.I1.i2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "2. 根据梯度幅值选择前50%的层；"
+   }
+  ]
+ },
+ "S1.I1.i3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "3. 仅对选定的层应用具有**非对称秩分配**的 LoRA 适配器。"
+   }
+  ]
+ },
+ "S1.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "关键见解是，通过跳过低梯度层，我们消除了不必要的适配器计算和内存开销，同时保持——有时甚至提高——标准全层 LoRA 所达到的质量。"
+   }
+  ]
+ },
+ "S1.p5.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的贡献如下："
+   }
+  ]
+ },
+ "S1.I2.i1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "原文的 $<2\\%$ 已表示“不到2%”，译文又加上“不到”，形成重复，表述不够严谨。",
+    "suggestion": "• 一种**梯度引导的层选择**算法，仅需5个探测批次，且增加的开销可忽略不计（总训练时间的$<2\\%$）；",
+    "zh_reviewed": "• 一种**梯度引导的层选择**算法，仅需5个探测批次，且增加的开销可忽略不计（不到总训练时间的$<2\\%$）；"
+   }
+  ]
+ },
+ "S1.I2.i2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• 对选择性 LoRA 的广泛跨架构评估：14 个成功模型，8 个家族，0.5B–72B 参数，包括 MoE（Mixtral 8$\\times$7B）；"
+   }
+  ]
+ },
+ "S1.I2.i3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• 证据表明，在整个 Campaign 1 模型集上实现了**一致的加速**（100% 胜率，$p<0.001$），且**遗忘有界**（在核心评估集上额外 MMLU 退化 $\\leq 0.50$ 个百分点）；"
+   }
+  ]
+ },
+ "S1.I2.i4": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• 完全可复现性：每个模型 3 个随机种子、配对统计检验，以及覆盖所报告实验的冻结证据包。"
+   }
+  ]
+ },
+ "S6.SS0.SSS0.Px1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "梯度探针揭示，Transformer 各层对微调数据的敏感度高度不均匀。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在大多数模型中，按梯度范数排名前 50% 的层贡献了总梯度信号的 $>80\\%$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这表明，对于指令跟随任务，大约一半的层充当“直通”块，对任务相关表征的变换作用极小。"
+   }
+  ]
+ },
+ "S6.SS0.SSS0.Px2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "15–28% 的加速来自消除被跳过层中的适配器计算（通过 LoRA 模块的前向/反向传播）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "基础模型的冻结层仍然处理所有 token；仅移除了适配器开销。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于具有更多层（48–80）的更大模型，每层适配器成本占总计算量的比例更小，这解释了在 70B+ 规模下加速略有减少的原因。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图 5 展示了速度与质量的权衡：无论加速幅度如何，所有模型都聚集在接近零额外遗忘的位置。"
+   }
+  ]
+ },
+ "S6.F5": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图5：Campaign 1模型的速度-质量权衡。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "每个点代表一个模型的平均加速比（$x$）与额外MMLU遗忘（$y$），并带有95%置信区间误差条。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "大多数模型聚集在零遗忘带附近，支持有界退化解释，而非质量崩溃的权衡。"
+   }
+  ]
+ },
+ "S6.I1.i1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "1. **Pythia 失败**：Pythia-1.4B（GPT-NeoX 架构）在所有种子和两种配方下都产生了 fp16 NaN 损失。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这似乎是架构上的限制（GPT-NeoX 中的 fp16 不稳定性），而非 Aletheia 特有的失败，因为标准 LoRA 也失败了。"
+   }
+  ]
+ },
+ "S6.I1.i2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "2. **收尾扩展是异质的**：收尾后的Leonardo增编添加了一个Qwen2.5-3B层预算消融（25% / 50% / 75%）、三个新家族的抽查（SmolLM2-1.7B、Yi-1.5-6B、OLMo-7B-0724），以及一个修正的Llama-70B分词器评估。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些增强了实现置信度，但主论文表格仍锚定于原始的配对Campaign 1 / Campaign 2设计。"
+   }
+  ]
+ },
+ "S6.I1.i3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "3. **固定秩**：我们对所有模型使用固定的 LoRA 秩（$r=16$）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "与自适应秩方法（AdaLoRA）结合可能带来进一步改进。"
+   }
+  ]
+ },
+ "S6.I1.i4": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "4. **单一任务领域**：所有实验均使用指令遵循数据。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "领域特定的微调（医学、法律、代码）可能表现出不同的层重要性模式。"
+   }
+  ]
+ },
+ "S7.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们提出了 Aletheia，一种用于高效 LoRA 微调的梯度引导层选择方法。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "通过对选择性 LoRA 的广泛跨架构评估（14 个成功模型、8 个家族、81 个实验行、0.5B–72B 参数，外加一次有记录的失败 Pythia/GPT-NeoX 尝试），我们证明："
+   }
+  ]
+ },
+ "S7.I1.i1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "1. 梯度引导的层选择始终将 LoRA 训练加速 15–28%（平均 23.1%，$p<0.001$，100% 胜率）。"
+   }
+  ]
+ },
+ "S7.I1.i2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "2. 在评估集上，额外遗忘仍然有界：核心 Campaign 2 模型上的额外 MMLU 遗忘不超过 0.50 个百分点，GSM8K 和 HumanEval 在核心模型上大体持平。"
+   }
+  ]
+ },
+ "S7.I1.i3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "3. 该方法在测试的模型系列（Qwen、Llama、Mistral、Phi、TinyLlama、StableLM、GPT-J、Mixtral）和规模（0.5B 到 72B，包括 MoE）上具有泛化性。"
+   }
+  ]
+ },
+ "S7.I1.i4": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "4. 梯度探针增加了不到2%的开销，并且除了选择百分比之外不需要任何超参数调整。"
+   }
+  ]
+ },
+ "S7.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Aletheia 是一种实用的 LoRA 微调选择性适配方案，在测试的模型家族和规模上改善了模型经济性，且无需修改架构。"
+   }
+  ]
+ }
+}

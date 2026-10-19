@@ -1,0 +1,648 @@
+{
+ "__meta__": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "models": {
+   "reviewer": "deepseek-v4-pro"
+  },
+  "translator": "deepseek-v4-pro（关思考）",
+  "independence": "same-model",
+  "usage": {
+   "calls": 19,
+   "prompt_tokens": 16609,
+   "completion_tokens": 20845,
+   "seconds": 217.9,
+   "cached_tokens": 11776
+  }
+ },
+ "abs.p1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "语言模型展现出令人惊讶的广泛能力，但其表面能力的来源尚不清楚。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些网络只是记忆了一堆表面统计规律，还是依赖于对生成所见序列的过程的内部表征？"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们通过将GPT模型的一个变体应用于预测简单棋盘游戏奥赛罗中的合法走法这一任务，在合成环境中研究这个问题。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "尽管网络对游戏或其规则没有先验知识，我们发现了棋盘状态的非线性内部表征涌现的证据。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "干预实验表明，这种表征可以用来控制网络的输出。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "通过利用这些干预技术，我们生成了有助于解释预测的“潜在显著性图”。{fn1}"
+   }
+  ]
+ },
+ "fn1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "代码见 `https://github.com/likenneth/othello_world`。"
+   }
+  ]
+ },
+ "S1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "最近的语言模型展现了一系列引人入胜的能力。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在简单的“下一个词”预测任务上训练的网络显然能够完成许多其他事情，例如解决逻辑谜题或编写基本代码。{fn2} 然而，这种性能如何从序列预测中涌现出来，仍然是当前争论的主题。"
+   }
+  ]
+ },
+ "fn2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "参见 Srivastava 等人（2022）以获取示例的百科全书式列表。"
+   }
+  ]
+ },
+ "S1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "一些人提出，在序列建模任务上进行训练本质上具有局限性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些论点从哲学层面（Bender & Koller, 2020）到数学层面（Merrill et al., 2021）都有。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "一个共同的主题是，看似良好的表现可能源于记忆“表面统计”，即一长串不反映生成序列过程的因果模型的相关性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这个问题具有实际意义，因为依赖虚假相关性可能导致在分布外数据上出现问题（Bender et al., 2021; Floridi & Chiriatti, 2020）。"
+   }
+  ]
+ },
+ "S1.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "另一方面，一些诱人的线索表明，语言模型可能不仅仅是收集虚假相关性，而是构建可解释的世界模型——即对产生它们所训练序列的过程的可理解模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "最近的证据表明，语言模型可以为非常简单的概念发展内部表征，例如颜色、方向 Abdou et al. (2021)；Patel & Pavlick (2022)，或在合成任务中跟踪布尔状态 (Li et al., 2021)（更多细节见相关工作（第6节））。"
+   }
+  ]
+ },
+ "S1.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Toshniwal et al. (2021) 采用了一种有前景的方法来研究世界模型的涌现，他们探索了在棋步序列上训练的语言模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "其思路是在一个易于理解、受限的环境中分析标准语言建模架构的行为。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "该论文发现，这些模型学会了以高准确率预测合法棋步。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此外，通过分析预测的棋步，该论文表明模型似乎跟踪了棋盘状态。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，作者们没有进一步探索任何内部表征的形式。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这样的调查将是本文的重点。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "一个关键的动机是希望在这个简化环境中学到的思想和技术最终也可能在自然语言环境中发挥作用。"
+   }
+  ]
+ },
+ "S1.SS1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Toshniwal et al. (2021) 的观察提示了一种研究序列模型所学表示的新方法。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如果我们把棋盘视为“世界”，那么游戏为我们提供了一个有吸引力的实验测试平台，以探索中等复杂度的世界表示。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "作为我们的设置，我们选择了流行的奥赛罗游戏（图1），它比国际象棋更简单。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这种设置使我们能够在高度受控的环境中研究世界表示，其中被建模的任务和序列都是合成的且易于理解。"
+   }
+  ]
+ },
+ "S1.SS1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "作为第一步，我们训练一个语言模型（我们称之为 Othello-GPT 的 GPT 变体）来用合法走法扩展部分游戏记录（玩家所做走法的列表）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**该模型对游戏或其规则没有先验知识**。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "它在训练期间看到的所有内容都是从游戏记录中派生的一系列标记。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "每个标记代表玩家放置棋子的一个方格。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "请注意，我们并没有明确训练模型做出战略上好的走法或赢得比赛。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "尽管如此，我们的模型能够以高准确率生成合法的奥赛罗走法。"
+   }
+  ]
+ },
+ "S1.SS1.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的下一步是寻找网络可能使用的世界表示。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在奥赛罗中，“世界”由当前棋盘状态组成。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "一个自然的问题是，在模型内部，我们能否识别出参与产生其下一步走棋预测的棋盘状态表示。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了研究这个问题，我们训练了一组探针，即分类器，它们使我们能够从内部网络激活中推断出棋盘状态。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "term"
+    ],
+    "issue": "probing 按项目术语应译为「线性探针」，译文漏译「线性」，且将 probing（方法）译成了「探针」（工具）。",
+    "suggestion": "这种类型的线性探针已成为分析神经网络的标准工具（Alain & Bengio, 2016; Tenney et al., 2019; Belinkov, 2016）。",
+    "zh_reviewed": "这种类型的探针已成为分析神经网络的标准工具（Alain & Bengio, 2016; Tenney et al., 2019; Belinkov, 2016）。"
+   }
+  ]
+ },
+ "S1.SS1.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "major",
+    "category": [
+     "term",
+     "scope"
+    ],
+    "issue": "原文的 probing methodology 泛指用探针（包括线性与非线性）分析表示的方法，译文「线性探针方法」把范围缩小为线性探针，与后文非线性探针的结论相矛盾。",
+    "suggestion": "使用这种探针方法，我们发现了涌现世界表示的证据。",
+    "zh_reviewed": "使用这种线性探针方法，我们发现了涌现世界表示的证据。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "特别是，我们表明非线性探针能够以高准确率预测棋盘状态（第3节）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（然而，线性探针产生的结果较差。）"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这个探针定义了棋盘状态的内部表示。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然后我们提供证据表明，这种表示在网络预测中起着因果作用。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的主要工具是一种干预技术，它修改内部激活，使其对应于反事实棋盘状态。"
+   }
+  ]
+ },
+ "S1.SS1.p5.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们还讨论了如何将内部世界模型的知识用作可解释性工具。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "利用我们的激活干预技术，我们创建了潜在显著性图，这些图提供了关于网络如何做出给定预测的见解。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些图是通过在高层设置（棋盘）而不是低层设置（单个输入标记或走法）上执行归因来构建的。"
+   }
+  ]
+ },
+ "S1.SS1.p6.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "总而言之，我们提出四项贡献：（1）我们提供了证据，表明在一个经过训练以在奥赛罗中产生合法走法的 GPT 变体中存在一个涌现的世界模型；（2）我们比较了线性和非线性探针方法的性能，并发现非线性探针在此背景下更优；（3）我们提出了一种干预技术，该技术表明，在某些情况下，涌现的世界模型可用于控制网络的行为；以及（4）我们展示了如何使用探针生成潜在显著性图，以阐明模型的预测。"
+   }
+  ]
+ },
+ "S2.F1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图1：奥赛罗规则的可视化解释，从左到右：（A）棋盘始终以四枚棋子（两黑两白）置于棋盘中央作为初始状态。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（B）黑方始终先走。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "每一步都必须通过包夹——或夹击——对手的棋子来翻转一枚或多枚对手棋子。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（C）对手重复这一过程。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "当没有更多合法走法时，游戏结束。"
+   }
+  ]
+ },
+ "S7.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的实验提供了证据，表明 Othello-GPT 维持着对游戏棋盘状态——即奥赛罗“世界”——的表征，以生成它所训练过的序列。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这种表征似乎在本质上是以非线性方式存在的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此外，我们发现这些表征可以与模型做出预测的方式建立因果联系。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "理解序列模型的内部表征本身就很有趣，但也可能有助于更深入地解释网络。"
+   }
+  ]
+ },
+ "S7.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们还描述了如何利用干预实验来创建“潜在显著图”，该图以奥赛罗棋盘的形式展示了网络是如何做出预测的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "将潜在显著图应用于两个在不同数据集上训练的奥赛罗GPT版本，突显了在合成数据集上训练的奥赛罗GPT与其在锦标赛数据集上训练的对应版本之间底层表征的显著差异。"
+   }
+  ]
+ },
+ "S7.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "未来工作有几个潜在的方向。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "一个自然的扩展是对其他更复杂的游戏进行同类研究。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "比较在游戏记录上训练的序列模型与具有奥赛罗先验知识的模型所学到的策略也会很有趣。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "一种选择是比较奥赛罗-GPT的潜在显著性图与以实际棋盘状态为输入的奥赛罗对弈程序的标准显著性图。"
+   }
+  ]
+ },
+ "S7.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "更广泛地说，研究我们的结果如何推广到在自然语言上训练的模型将会很有趣。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "一个可能的中间步骤是考察训练数据中包含游戏记录的语言模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们会看到类似的棋盘状态表示吗？"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "语法工程工具（Weston et al., 2015; Hermann et al., 2017; Côté et al., 2018）可以帮助定义一个将世界表示映射到自然语言句子的合成数据生成过程，从而在缩小与自然语言距离的同时，提供与奥赛罗类似的同样可控的设置。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于更复杂的自然语言任务，我们能找到有意义的世界表示吗？"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们希望本文中描述的工具——非线性探针、逐层干预和潜在显著性图——可能在自然语言环境中被证明是有用的。"
+   }
+  ]
+ },
+ "S7.SS0.SSSx1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们感谢哈佛大学视觉计算小组和Insight + Interaction实验室的成员在早期讨论和反馈中提供的帮助。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们特别感谢Aoyu Wu在制作部分图表和其他宝贵建议方面提供的帮助。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们衷心感谢哈佛大学SEAS奖学金（授予KL）、Siebel奖学金（授予AH）、Open Philanthropy（授予DB）以及FTX未来基金再资助计划（授予DB）的支持。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这项工作部分得到了NSF基金IIS-1901030的支持。"
+   }
+  ]
+ }
+}

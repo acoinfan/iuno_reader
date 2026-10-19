@@ -1,0 +1,588 @@
+{
+ "__meta__": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "models": {
+   "reviewer": "deepseek-v4-pro"
+  },
+  "translator": "deepseek-v4-pro（关思考）",
+  "independence": "same-model",
+  "usage": {
+   "calls": 17,
+   "prompt_tokens": 15922,
+   "completion_tokens": 22633,
+   "seconds": 227.5,
+   "cached_tokens": 10240
+  }
+ },
+ "abs.p1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "difficult to ground 译为 \"难以落地\" 略有偏差，原意更接近难以与现实世界对齐/接地，而非难以实现。",
+    "suggestion": "训练用于长程工具使用的大型语言模型智能体通常依赖于与真实或合成的可执行环境交互，而这些环境的构建和验证成本高昂，或者依赖于难以与现实对齐的外部模拟器。",
+    "zh_reviewed": "训练用于长程工具使用的大型语言模型智能体通常依赖于与真实或合成的可执行环境交互，而这些环境的构建和验证成本高昂，或者依赖于难以落地的外部模拟器。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们引入了 EnvACE，一种智能体强化学习方法，在训练期间用世界排练取代外部环境交互。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "策略在行动和排练之间交替：它首先生成一个工具调用，然后扮演环境的角色，产生由该行动引发的响应，并基于排练的响应来条件后续决策。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "两个角色都使用任务成功奖励进行端到端联合优化。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "通过世界排练，策略将行动与其环境响应之间的关系内化到其参数中，产生一个直接支持决策的智能体世界模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在 BFCL-v4、$\\tau^{2}$-Bench、VitaBench 和 FinMCP-Bench 上，EnvACE 取得了强大且可迁移的性能，在总体评估中优于环境扩展基线。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对照研究进一步表明，世界排练在不同模型规模上一致地改善策略学习。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在测试时，内化的世界模型能够在提交执行之前进行私有排练，在适度的排练预算下无需额外外部交互即可获得进一步增益。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的发现将世界排练确立为一条超越外部环境限制、扩展 LLM 智能体训练的新路径。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的代码可在 `https://github.com/Within-yao/EnvACE` 获取。"
+   }
+  ]
+ },
+ "S1.F1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图1：三种智能体推演范式的比较：真实环境推演、外部模拟器推演和EnvACE世界预演。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "现有方法从外部来源获取环境响应，而EnvACE通过世界预演将环境响应内化到策略中。"
+   }
+  ]
+ },
+ "S1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "大型语言模型（LLMs）越来越多地被期望在现实世界应用中充当智能体，与用户交互以收集信息，并调用工具来查询或更新特定环境的状态（Z.ai, 2026; OpenAI, 2025; Team et al., 2026）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在此类场景中取得成功需要有效地结合对话和工具使用，根据环境反馈调整行动，并在长交互周期内运作。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了培养这种能力，我们期望让LLMs接触到足够多样化的工具和用户请求，同时提供有效的优化信号。"
+   }
+  ]
+ },
+ "S1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了让 LLM 接触到丰富多样的工具交互环境，早期工作收集了工具使用和用户交互的轨迹用于监督微调（Zeng et al., 2024; Liu et al., 2025; Qin et al., 2024）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "随着带有可验证奖励的强化学习（RLVR）的成功（Lambert et al., 2024; Guo and others, 2025），近期工作自动合成了可执行环境，智能体在其中通过交互生成在线策略轨迹，并从可验证的任务奖励中学习（Dong et al., 2026; Tu et al., 2026）。为了提供更具信息量的训练信号，一些方法还额外训练策略预测自身动作所导致的观测结果，作为辅助目标（Lu et al., 2026a; Guo et al., 2025）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，扩展此类环境依赖于昂贵且复杂的合成流程，而随着复杂性的增长，其正确性也变得更难验证。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "基于 LLM 的模拟器通过直接生成环境响应（包括工具输出和用户反馈）提供了一种成本更低、更灵活的替代方案，而无需完全可执行的环境（Li et al., 2025b; Ruan et al., 2024）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，它们的响应可能不准确或不一致，并且将其与实际环境对齐仍然需要来自真实环境的监督。"
+   },
+   {
+    "verdict": "major",
+    "category": [
+     "scope"
+    ],
+    "issue": "原文中的 ones 指代 interactions（与前面的 executable interactions 并列），译文将其译为“模拟环境”，改变了所指对象。",
+    "suggestion": "因此，现有方法从根本上仍然依赖于对真实环境的访问，无论是为了生成可执行的交互，还是为了对模拟交互进行对齐和验证。",
+    "zh_reviewed": "因此，现有方法从根本上仍然依赖于对真实环境的访问，无论是为了生成可执行的交互，还是为了对模拟环境进行对齐和验证。"
+   }
+  ]
+ },
+ "S1.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如图1所示，现有的训练范式从外部环境或单独的模拟器获取继续展开所需的响应。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在这两种情况下，策略学习基于外部提供的响应来行动，将环境建模置于行动策略之外。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们认为，有效的智能体策略不仅应行动以完成任务，还应建模环境对其行动的反应。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "受学习的世界模型（world model）成功的启发（Zuo et al., 2026; Chen et al., 2025），我们通过赋予策略两个角色来实现这一想法：一个与环境交互的行动者和一个为行动者提供反馈的环境，无需外部真实环境交互。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "策略不是仅仅消费或预测外部提供的观察，而是自身扮演环境的响应，从而将行动与其引发的响应之间的关系内化到自己的参数中。"
+   }
+  ]
+ },
+ "S1.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为此，我们提出 EnvACE，一种智能体强化学习方法，训练单一策略同时进行行动和预演其环境。"
+   },
+   {
+    "verdict": "major",
+    "category": [
+     "term",
+     "causal"
+    ],
+    "issue": "术语表中的 induce 译为“归纳出”，但此处 induce 表示“引起、引发”，不是“归纳”；译为“归纳出”丢失了工具调用引发环境响应这一因果关系。",
+    "suggestion": "在每一轮中，策略首先发出工具调用，然后预演该工具调用会引发的环境响应，并基于此预演来调节其下一步行动。",
+    "zh_reviewed": "在每一轮中，策略首先发出工具调用，然后预演该工具调用将归纳出的环境响应，并基于此预演来调节其下一步行动。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，轨迹不再是与外部环境的对话，而是由策略自身展开的过程。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "行动和预演行为通过任务成功奖励进行端到端联合优化。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们将这一过程称为世界预演：先前工作分配给独立模拟器的世界建模能力被吸收到策略中并在线执行，使策略能够在行动和世界建模作为一个统一过程展开的同时，内化其行动如何塑造环境响应。"
+   }
+  ]
+ },
+ "S1.p5.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在包括 BFCL-v4、$\\tau^{2}$-Bench、VitaBench 和 FinMCP-Bench 在内的广泛智能体基准上的大量实验表明，EnvACE 始终优于强基线。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "通过行动和演练的联合优化，EnvACE 捕捉了行动与其所引发的环境响应之间的关系，将这些动态内化到策略中，以支持更具泛化性的决策。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在测试时，这种内化的世界模型使策略能够在实际执行前演练候选行动，预测其结果，避免代价高昂的错误，并在无需与外部环境进行额外交互的情况下收集有用的经验。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的实验进一步考察了性能如何随演练尝试次数变化，并表明适度的演练预算能提高测试时性能。"
+   }
+  ]
+ },
+ "S1.p6.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "总体而言，我们的贡献可以总结如下："
+   }
+  ]
+ },
+ "S1.I1.i1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• 我们引入了**世界排练**，其中策略通过生成由智能体动作引发的响应来扮演环境的角色，从而无需查询外部环境即可内化环境动态。"
+   }
+  ]
+ },
+ "S1.I1.i2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• 我们提出 **EnvACE**，一种智能体强化学习方法，在自我展开的轨迹中将行动与世界排练交替进行。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "EnvACE 对两种角色使用共享策略，并利用任务成功奖励端到端地联合优化它们的行为。"
+   }
+  ]
+ },
+ "S1.I1.i3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• 我们在 BFCL-v4、$\\tau^{2}$-Bench、VitaBench 和 FinMCP-Bench 上评估了 EnvACE，它在这些基准上一致地优于强基线。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "控制分析进一步证明了在不同模型规模下联合学习行动和演练的好处。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在测试时，世界演练提供了额外的性能增益。"
+   }
+  ]
+ },
+ "S6.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们提出了 EnvACE，一种围绕世界排练构建的智能体强化学习方法。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "通过将行动和排练分配给单一共享策略，并用角色级 GRPO 优化两个角色，EnvACE 不仅学会选择动作，还学会生成相应的环境响应。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "通过反复排练，这些知识被吸收到策略参数中，使策略能够将环境动态内化为智能体世界模型，并利用它们指导后续决策。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在 BFCL V4、$\\tau^{2}$-Bench、VitaBench 和 FinMCP-Bench 上，EnvACE 实现了强大且可迁移的工具使用性能，在整体评估中优于现有的环境扩展基线。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对照分析进一步证明了世界排练的有效性、行动与排练之间共享参数的重要性，以及这些益处在不同模型规模上的泛化性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "最后，由此产生的智能体世界模型通过私有排练实现了测试时扩展，无需与外部环境进行额外交互即可改善最终执行。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "总之，这些结果确立了世界排练作为一种有效且可扩展的替代方案，可替代基于真实环境交互或独立外部模拟器的智能体训练。"
+   }
+  ]
+ },
+ "S7.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "由于计算资源限制，我们仅在8B规模上评估了EnvACE，其在更大模型上的有效性留待未来研究。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此外，我们当前的评估主要集中于工具交互任务，将世界排练扩展到更广泛的智能体设置仍是未来工作的一个有趣方向。"
+   }
+  ]
+ },
+ "S7.SSx1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在这项工作中，我们仅将生成式人工智能工具用于写作辅助。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "具体而言，我们使用基于大语言模型的助手来润色稿件语言，包括语法纠正、提高我们已起草句子的清晰度和简洁性，以及为标题和章节标题建议替代措辞。"
+   }
+  ]
+ },
+ "S7.SSx1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们没有将生成式人工智能工具用于研究构思、所提方法的设计、实验设计、数据分析或科学主张或结果的生成；这些均由作者完成。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "scope"
+    ],
+    "issue": "中文可能被误读为所有AI生成文本均未纳入稿件，而原文仅否定“未经审阅即纳入”的情况；建议明确条件关系。",
+    "suggestion": "任何人工智能生成的文本均未在未经作者审阅、必要改写和核实的情况下被纳入稿件。",
+    "zh_reviewed": "未经作者审阅、必要时改写和核实，任何人工智能生成的文本均未被纳入稿件。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "所有数字、表格、图和实验结果均由我们自己的实验流程产生。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "term"
+    ],
+    "issue": "trained policies 译作“训练策略”易被理解为用于训练的策略，而原文指训练得到的策略。",
+    "suggestion": "生成式人工智能工具未用于审阅或评价与本提交相关的其他研究人员的工作，并且它们不属于所提方法的贡献，除了论文中明确描述为训练得到的策略和基线的语言模型之外。",
+    "zh_reviewed": "生成式人工智能工具未用于审阅或评价与本提交相关的其他研究人员的工作，并且它们不属于所提方法的贡献，除了论文中明确描述为训练策略和基线的语言模型之外。"
+   }
+  ]
+ },
+ "S7.SSx2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这项工作在公开可用的模型和基准上训练和评估用于工具使用的语言模型智能体，不涉及人类受试者、个人身份信息或新用户数据的发布。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们使用的所有基准（$\\tau^{2}$-Bench、VitaBench、BFCL-v4 和 FinMCP-Bench）都是现有的公开基准，按照其预期条款使用，其模拟服务环境包含的是合成而非真实的客户记录。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "由于我们的方法允许策略在内部预演环境响应，预演的响应是模型预测，而不是关于世界的已验证事实；因此我们强调，预演用于训练和执行前审议，并且在重要领域（例如我们评估的金融工具使用场景）的任何部署都应保持真实执行和验证在循环中。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们没有发现与这项工作相关的其他伦理问题。"
+   }
+  ]
+ },
+ "S7.SSx3.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "minor",
+    "category": [
+     "term"
+    ],
+    "issue": "“formulation” 译为“公式”可能让人误解为数学公式，这里更像是“表述/形式化”。",
+    "suggestion": "我们在第4节中描述了世界排练的表述和按角色的优化目标，并给出了完整的训练过程，在第5.1节中报告了每个基准的数据集、骨干模型、基线和评估协议。",
+    "zh_reviewed": "我们在第4节中描述了世界排练的公式和角色分工的优化目标，并给出了完整的训练过程，在第5.1节中报告了每个基准的数据集、骨干模型、基线和评估协议。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "所有基准都是公开的，我们遵循每个基准的官方评估协议，未做修改，因此报告的数字与之前发表的结果直接可比。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "完整的训练和评估超参数，包括学习率、rollout配置、序列长度和最大交互轮数，在第5.1节中报告，附录A中的定性排练轨迹说明了用于actor和环境角色的确切提示格式。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的代码、提示和配置文件发布在摘要中链接的匿名仓库中。"
+   }
+  ]
+ }
+}

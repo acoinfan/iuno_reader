@@ -1,0 +1,453 @@
+{
+ "__meta__": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "models": {
+   "reviewer": "deepseek-v4-pro"
+  },
+  "translator": "deepseek-v4-pro（关思考）",
+  "independence": "same-model",
+  "usage": {
+   "calls": 14,
+   "prompt_tokens": 12718,
+   "completion_tokens": 13656,
+   "seconds": 131.9,
+   "cached_tokens": 8576
+  }
+ },
+ "abs.p1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "基于LLM的智能体正在日益推进科学和工程问题的解决，其中物理模拟作为一个具有挑战性但实用的测试平台，用于再现复杂的物理现象，并应用于具身AI、游戏和电影。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "作为此类模拟的主力，求解器计算动态系统状态如何随时间演化。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "构建此类求解器需要物理理解来识别合适的模型，数学推理来表述底层动力学，以及软件工程将其实现为可执行代码，然而LLM智能体的这一能力仍未得到充分探索。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为此，我们引入了**WorldSolver**，一个包含168个模拟任务的基准，这些任务源自61篇经典计算机图形学论文中的物理现象，涵盖7个物理领域。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "每个任务包含一个代码脚手架，为场景提供固定的模拟环境，求解器实现留给智能体完成。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "具体来说，我们从三个维度评估它们：**执行检查**用于成功执行，**视觉保真度**用于在渲染模拟中再现预期的动态行为，以及**物理合理性**用于对生成的动力学进行基于物理的验证。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在前沿智能体上的实验表明，生成可执行的求解器本身就很困难，而满足视觉和物理正确性则更加困难。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "GPT-5.6-Sol和Claude-Opus-5的表现相对优于其他评估的智能体，但总体得分分别仅为48.7%和46.7%。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "WorldSolver是朝着智能体求解器生成迈出的早期一步，我们希望它有助于推动智能体能够忠实模拟动态物理世界的进展。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "代码可在`https://github.com/sirujiang/WorldSolver`获取。"
+   }
+  ]
+ },
+ "S1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "大型语言模型（LLM）智能体越来越有能力处理复杂的现实世界任务（Huang et al., 2024b; Guo et al., 2024），涵盖从软件工程（Jimenez et al., 2024; Yang et al., 2024; Chi et al., 2026; Luo et al., 2026）到科学发现（Huang et al., 2024a; Majumder et al., 2024; Somasekharan et al., 2026）的各个领域。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "最近的研究显示出对3D世界物理真实感模拟日益增长的兴趣，在具身人工智能、游戏和电影中有广泛应用（Liu et al., 2026; Wang et al., 2025）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "一系列工作专注于通过资产组合和空间布局进行静态场景构建（Hu et al., 2024; Xia et al., 2025）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "另一类工作探索动态场景生成，以再现物理现象及其时间演化（Zhang et al., 2026; Lv et al., 2026; Xie et al., 2026; Wang et al., 2026）。"
+   }
+  ]
+ },
+ "S1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "作为此类仿真的主力，求解器将物理模型的控制方程转化为数值程序，使模拟系统随时间演化（Baraff and Witkin, 2023; Stam, 1999）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "构建它们需要物理理解来识别合适的模型，需要数学推理来表述底层动力学，还需要软件工程将其实现为可执行代码（Guendelman et al., 2003）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例如，布料求解器在高自由度下处理刚性弹性动力学和摩擦接触（Li et al., 2018），而流体求解器则专注于不可压缩性约束和自由表面跟踪（Enright et al., 2002）。"
+   }
+  ]
+ },
+ "S1.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，现有针对动态场景生成的工作要么以无求解器的方式生成动画（Wang et al., 2026），要么依赖现有的仿真引擎（Zhang et al., 2026; Xie et al., 2026; Liu et al., 2026）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "相比之下，科学计算基准评估的是针对给定控制方程的数值求解器生成，其中待求解的物理模型是预先给定的（Li et al., 2026; Hang et al., 2026; Somasekharan et al., 2026）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这两种设置都没有评估物理动力学仿真所需的完整能力，包括用于模型选择的物理理解、用于数值公式化的数学推理，以及用于可执行实现的软件工程。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "它们共同引出了我们的问题："
+   }
+  ]
+ },
+ "S1.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "“描述性的物理现象”可能被理解为“具有描述性质的物理现象”，而原文指的是“被描述出来的物理现象”。",
+    "suggestion": "LLM智能体能否将被描述出来的物理现象转化为动力学仿真求解器？",
+    "zh_reviewed": "LLM智能体能否将描述性的物理现象转化为动力学仿真求解器？"
+   }
+  ]
+ },
+ "S1.F1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图1：WorldSolver任务示例。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "给定任务描述和固定的代码框架，智能体利用物理理解、数学建模和软件工程构建物理求解器。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "求解器随时间推进系统状态，生成状态轨迹，并渲染为模拟视频。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "场景几何、物理输入和渲染设置在不同智能体之间保持不变。"
+   }
+  ]
+ },
+ "S1.p5.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在这项工作中，我们提出了 **WorldSolver**，一个用于评估 LLM 智能体为物理动力学仿真任务生成求解器能力的基准。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如图 1 所示，WorldSolver 通过固定的代码框架将求解器生成隔离开来，并通过状态轨迹和渲染的视频输出来评估生成的物理动力学。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了确保一个具有挑战性但又物理真实的环境，我们从经典计算机图形学文献中整理物理现象，并围绕它们构建仿真任务（Guendelman et al., 2003; Kaufman et al., 2005; Li et al., 2018）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "给定目标现象的描述，智能体在一个固定的代码框架内实现求解器，该框架指定了仿真环境，包括场景几何、物理参数、外部输入和渲染配置。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "一旦执行，求解器不仅产生渲染的视频，还产生一个状态轨迹，该轨迹通过随时间演变的量（如位置、速度和力）揭示底层的物理动力学。"
+   }
+  ]
+ },
+ "S1.p6.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，我们通过三种协议评估每个求解器：执行检查用于成功且完整的执行，视觉保真度用于在渲染视频中再现预期的动态行为，以及物理合理性用于对生成的轨迹进行基于物理的验证。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "表1总结了WorldSolver在任务制定和评估方面与现有基准的不同之处。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在WorldSolver基准上的评估表明，即使对于前沿的编码智能体，从描述的物理现象生成可执行的求解器仍然具有挑战性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "GPT-5.6-Sol和Claude-Opus-5表现最佳，但总体得分分别仅为48.7%和46.7%，而大多数其他智能体的得分徘徊在20%左右。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的贡献有三方面："
+   }
+  ]
+ },
+ "S1.I1.i1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "minor",
+    "category": [
+     "addition"
+    ],
+    "issue": "译文添加了“的工作”，原文是说“我们是第一个将……的”，而非“第一个工作”。",
+    "suggestion": "据我们所知，我们是第一个将物理动力学求解器生成表述为智能体编码任务的，其中智能体在物理理解、数学形式化和软件工程方面的能力受到考验。",
+    "zh_reviewed": "• 据我们所知，我们是第一个将物理动力学求解器生成表述为智能体编码任务的工作，其中智能体在物理理解、数学形式化和软件工程方面的能力受到考验。"
+   }
+  ]
+ },
+ "S1.I1.i2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• 我们引入了 **WorldSolver**，它包含 168 个任务，这些任务源自 61 篇经典计算机图形学论文中跨越七个领域的物理现象，并配有固定的任务特定脚手架，以隔离求解器实现。"
+   }
+  ]
+ },
+ "S1.I1.i3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• 我们提出了一种评估协议，结合了执行检查、渲染模拟评估和基于物理的轨迹验证，在这一统一协议下对前沿编码智能体进行基准测试。"
+   }
+  ]
+ },
+ "S2.T1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "表1：与相关基准的比较。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "WorldSolver涵盖七个物理领域，并支持对生成的求解器进行视觉和数值评估。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "值得注意的是，WorldSolver是第一个使用固定代码脚手架在受控条件下隔离求解器实现的基准。"
+   }
+  ]
+ },
+ "S5.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们引入了 WorldSolver，一个用于评估 LLM 智能体能否将物理现象描述转化为可执行物理求解器的基准。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "它包含 168 个任务，取自 61 篇计算机图形学论文，涵盖七个物理领域。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在固定的代码脚手架下，智能体实现求解器，其输出通过执行检查、视觉保真度和物理合理性进行评估。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "“visually faithful” 译为“视觉逼真”，更强调看起来真实，而原文指对参考结果的视觉忠实/保真，含义略有偏移。",
+    "suggestion": "我们的实验表明，可靠的求解器生成仍然极具挑战性：许多智能体难以在时间预算内提交可运行的求解器，而能生成既在视觉上忠实又在物理上合理的求解器的智能体则更少。",
+    "zh_reviewed": "我们的实验表明，可靠的求解器生成仍然极具挑战性：许多智能体难以在时间预算内提交可运行的求解器，而能生成既视觉逼真又物理合理的求解器的智能体则更少。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "WorldSolver 为通过智能体生成的求解器研究基于物理的计算提供了一个测试平台。"
+   }
+  ]
+ },
+ "S5.SS0.SSS0.Px1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "WorldSolver 覆盖了七个物理领域共 168 个任务，但仍只代表物理现象的一个子集。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "term"
+    ],
+    "issue": "“physically grounded” 译为 “物理基础” 不够准确，原文更强调“有物理依据/基于物理的”。",
+    "suggestion": "未来，我们可以扩展这一覆盖范围，并探索用于生成具有物理依据的求解器的训练方法。",
+    "zh_reviewed": "未来，我们可以扩展这一覆盖范围，并探索用于物理基础求解器生成的训练方法。"
+   }
+  ]
+ }
+}

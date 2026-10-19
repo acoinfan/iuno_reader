@@ -1,0 +1,1674 @@
+{
+ "__meta__": {
+  "translator": "deepseek-v4-pro（关思考）",
+  "usage": {
+   "calls": 86,
+   "prompt_tokens": 65671,
+   "completion_tokens": 15438,
+   "seconds": 173.3,
+   "cached_tokens": 44416
+  }
+ },
+ "p2.5": {
+  "sentences": [
+   {
+    "zh": "Crafter（Hafner，2021）或 Minecraft（Fan 等，2022）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "因此，解决强化学习的优点和缺点对于实现样本高效的解决方案至关重要。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p2.4": {
+  "sentences": [
+   {
+    "zh": "图1：SPRING概览。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "中间列所示的上下文字符串是通过解析Hafner（2021）的LATEX源代码获得的。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然后，基于LLM的智能体从视觉游戏描述符和上下文字符串中获取输入。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "该智能体使用组成DAG的问题进行思维链推理，并将DAG的最后一个节点解析为动作。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p1.2": {
+  "sentences": [
+   {
+    "zh": "像 Minecraft（Fan et al., 2022）和 Crafter（Hafner, 2021）这样的开放世界生存游戏，由于多种因素的综合作用，对 AI 算法提出了重大挑战：程序化生成需要强大的泛化能力；多样化的动作空间需要多任务能力；科技树需要长期规划和深度探索；多样且相互冲突的目标需要目标优先级排序。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "特别是，Crafter 是为高效模拟和快速迭代而设计的。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "与 Minecraft 类似，Crafter 具有多任务处理、深度且宽广的科技树探索等关键挑战，要求智能体制作多种工具并与多个物体交互以在游戏中生存。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p2.6": {
+  "sentences": [
+   {
+    "zh": "另一方面，大型语言模型（LLMs）（Brown et al., 2020; Smith et al., 2022; Chowdhery et al., 2022）在被提示用于各种任务时表现出显著的成功，包括具身规划与行动（Ahn et al., 2022; Du et al., 2023; Wang et al., 2023; Shinn et al., 2023）、问答或对话（Ouyang et al., 2022; Bubeck et al., 2023）以及一般问题解决（Brown et al., 2020; Bubeck et al., 2023）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "它们独特的规划（Ahn et al., 2022）、推理（Shinn et al., 2023）和问题解决（Bubeck et al., 2023; Madaan et al., 2023）能力使它们成为将先验知识和上下文推理融入基于游戏的问题的有希望的候选者，特别是在解决上述强化学习的局限性时。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p1.3": {
+  "sentences": [
+   {
+    "zh": "强化学习（RL）一直是基于游戏的问题的首选方法，在围棋（Silver et al., 2017）、机器人技术（Fu et al., 2020; Hafner et al., 2023）和各种视频游戏（Vinyals et al., 2019; Schrittwieser et al., 2020; Badia et al., 2020; Hafner et al., 2023）中取得了众多成功。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "尽管强化学习表现出了令人印象深刻的性能，但它仍然受到某些限制，例如高样本复杂性和难以融入先验知识。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这些缺点使得将强化学习应用于多样且复杂的开放世界基准测试（如∗在微软实习期间完成的工作）变得异常具有挑战性。",
+    "conf": "low",
+    "note": "句子结构不完整，原文在“like”后直接跟了脚注，可能缺少基准测试名称，导致翻译不完整。"
+   },
+   {
+    "zh": "如需联系，请发送邮件至 ywu5@andrew.cmu.edu。第37届神经信息处理系统会议（NeurIPS 2023）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p2.10": {
+  "sentences": [
+   {
+    "zh": "我们的贡献如下：",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p1.1": {
+  "sentences": [
+   {
+    "zh": "开放世界生存游戏因其多任务、深度探索和目标优先级排序的要求，对AI算法提出了重大挑战。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "尽管强化学习（RL）在解决游戏问题方面很流行，但其高样本复杂度限制了它在Crafter或Minecraft等复杂开放世界游戏中的有效性。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们提出了一种新方法SPRING，通过阅读Crafter的原始学术论文，并利用所学知识通过大型语言模型（LLM）进行推理和玩游戏。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "以LATEX源代码作为游戏上下文，并描述智能体当前观察，我们的SPRING框架采用有向无环图（DAG），其中与游戏相关的问题作为节点，依赖关系作为边。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们通过遍历DAG并按拓扑顺序计算每个节点的LLM响应来确定在环境中采取的最优动作，LLM对最终节点的答案直接转化为环境动作。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在我们的实验中，我们研究了在Crafter环境设置下，不同形式的提示所诱导的上下文“推理”的质量。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们的实验表明，当LLM被提示以一致的思维链时，在完成复杂的高层轨迹方面具有巨大潜力。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "定量来看，使用GPT-4的SPRING在没有任何训练的情况下，优于所有训练了100万步的最先进的RL基线。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "最后，我们展示了Crafter作为LLM测试平台的潜力。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "代码位于github.com/holmeswww/SPRING",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p2.9": {
+  "sentences": [
+   {
+    "zh": "定性来看，我们的实验表明，当使用一致的思维链提示时，LLM 能够在 Crafter（Hafner, 2021）中独立执行复杂的轨迹。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "定量来看，SPRING 在 GPT-4 上的零样本性能超过了所有训练了 100 万步的最先进强化学习算法（表 2）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p2.7": {
+  "sentences": [
+   {
+    "zh": "因此，在这项工作中，我们在游戏环境中研究大语言模型理解和推理人类知识的可能性与可靠性。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们考虑一种两阶段方法 SPRING（图 1）：(1) 研读论文：第一阶段阅读 (Hafner, 2021) 论文的 LATEX 源码；(2) 推理：第二阶段通过问答框架对该知识进行推理，以采取环境动作。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "请注意，Crafter 环境是在 GPT-3.5 和 GPT-4（OpenAI, 2023）模型的数据收集日期之后发布的，因此该环境对它们而言是未见过的。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们首先使用大语言模型从 Hafner (2021) 原始论文的 LATEX 源代码中提取先验知识。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然后，我们采用与 Wu et al. (2023) 类似的问答摘要框架，生成关于游戏机制的问答对话。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "SPRING 处理的上下文信息比 (Wu et al., 2023) 显著更多样化，利用了所有 17 种动作/交互类型，甚至包括论文中记录的理想行为信息。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p2.8": {
+  "sentences": [
+   {
+    "zh": "我们专注于在 SPRING 的第一阶段阅读相关学术论文，首先确定与玩游戏相关的段落。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然后我们通过一系列问题提取关键信息，例如“以编号列表形式写出所有对游戏有帮助的信息。”",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在第二阶段，我们促进并规范 LLM 中的上下文链式思维推理，以解决复杂游戏。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "推理模块是一个有向无环图（DAG），以问题为节点，以依赖关系为边。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "例如，问题“对于每个动作，是否满足要求？”依赖于问题“排名前 5 的动作是什么？”，从而创建从后者到前者的边。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "对于每个环境步骤，我们遍历 DAG，按图的拓扑顺序计算每个节点的 LLM 答案。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "DAG 的最终节点是一个关于最佳动作的问题，该问题的 LLM 答案直接转化为环境动作。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p3.12": {
+  "sentences": [
+   {
+    "zh": "本节结构如下。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们首先在第2.1节描述如何从Hafner (2021)的LATEX源代码生成上下文。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然后我们在第2.2节描述我们的SPRING框架以及如何计算动作。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p3.14": {
+  "sentences": [
+   {
+    "zh": "此外，我们定义 Sj",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p2.11": {
+  "sentences": [
+   {
+    "zh": "2GPT-3.5/4 训练数据根据 OpenAI API 于 2021 年 9 月结束 • SPRING 是第一个通过直接从学术论文中显式提取多个交互和科技树依赖关系来应对竞争性 RL 基准的方法。 • 我们是第一个在具有挑战性的开放世界游戏中展示基于零样本 LLM（GPT-4）策略的 SOTA 性能的方法 • 我们研究了由不同提示引起的上下文“推理”的质量，并提出了一种通过问题 DAG 进行决策的受控思维链提示。",
+    "conf": "mid",
+    "note": "原文以项目符号列表形式呈现，但被作为单个句子处理；翻译时保留了项目符号和换行，但未改变内容。"
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p3.13": {
+  "sentences": [
+   {
+    "zh": "问题设定 我们的目标是证明LLM可以在控制任务要求较低的环境中合理地规划和行动。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在Crafter的设置中，我们将状态s定义为状态分布S的样本。我们感兴趣的是创建一个目标条件策略π，它将状态s映射到动作a ∈ A，π: S → A。由于使用了LLM，我们进一步将策略分解为两部分：一个描述符D，它以纯文本描述视觉观察的关键方面（d = D(s)）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "以及一个基于LLM的行动者，它接受状态描述d并输出动作a。将para定义为环境论文（Hafner, 2021）的LATEX源代码中的第j段，并将MLLM定义为LLM，它接受上下文字符串和问题字符串作为输入，并输出问题的答案。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p3.18": {
+  "sentences": [
+   {
+    "zh": "首先，我们根据相关性筛选段落，只保留至少被 Qrel 中的一个问题识别为相关的段落。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们将 P rel q 设为相关段落的集合。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p3.17": {
+  "sentences": [
+   {
+    "zh": "对于特定的游戏玩法特定问题 q ∈ Qgame，我们的目标是计算 Cq，即以论文为条件的 q 的答案。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然而，由于论文的长度超过了大多数 LLM 的输入长度限制，我们必须将论文分解为各个段落 Sj para。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们在图 2 中提供了该过程的图示。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p3.15": {
+  "sentences": [
+   {
+    "zh": "图2：论文研读模块。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "从Hafner（2021）的LATEX源代码计算Cq的三步方法。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "首先，如左列所示，对于每个段落，我们计算所有相关性问题Qrel的LLM答案，并仅保留相关段落。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "其次，如中间列所示，我们计算针对q的段落级LLM答案。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "第三，我们使用摘要提示将答案总结为Cq；我们将所有q∈Qgame的Cq连接起来，得到C。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p4.19": {
+  "sentences": [
+   {
+    "zh": "Sj P rel",
+    "conf": "low",
+    "note": "原文 'Sj P rel' 含义不明，可能为公式或符号，无法确定其具体意义，故保留原文。"
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p4.24": {
+  "sentences": [
+   {
+    "zh": "存在一个相关查询 qr ∈ Qrel，使得",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "MLLM",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p4.30": {
+  "sentences": [
+   {
+    "zh": "MLLM（Spara，q）：Spara ∈ P rel",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p4.29": {
+  "sentences": [
+   {
+    "zh": "其次，我们从LATEX源代码中，为P rel q中的每个相关段落计算问题q的答案集合Aq。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p4.32": {
+  "sentences": [
+   {
+    "zh": "Aq =",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p4.21": {
+  "sentences": [
+   {
+    "zh": "Sj",
+    "conf": "low",
+    "note": "输入句子仅为 'Sj'，无法确定其含义，可能为占位符或截断文本。"
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p4.26": {
+  "sentences": [
+   {
+    "zh": "para，qr",
+    "conf": "low",
+    "note": "输入句子仅为“para, qr”，缺少上下文，无法确定其含义，可能为占位符或代码片段，无法准确翻译。"
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p3.16": {
+  "sentences": [
+   {
+    "zh": "与 Wu et al. (2023) 类似，我们编写针对游戏玩法的问题，然后针对 LaTeX 文件中的每个小节计算 LLM 对这些问题的回答。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "由于论文中有相当一部分内容与游戏玩法无关，我们使用一组 2 个问题 Qrel={“这段内容能帮助我在这个游戏中取得成功吗？”, “这段内容是否包含有关游戏机制或游戏策略的信息？”} 来识别相关性，并使用一组 4 个问题 Qgame={“以编号列表的形式写出所有对游戏有帮助的信息。”, “用纯文本。",
+    "conf": "mid",
+    "note": "原文句子在“In plain text.”处被截断，且引号嵌套复杂，可能属于同一问题的一部分，但按输入句子切分处理。"
+   },
+   {
+    "zh": "列出我在游戏中生存需要互动或避开的所有物体。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在每个步骤中使用“我想对物体 Y 做 X”。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "将 Y 替换为实际物体，将 X 替换为实际互动。”, “以编号列表的形式写出所有游戏目标。",
+    "conf": "mid",
+    "note": "原文句子在“Replace Y by the actual object, X by the actual interaction.”后引号闭合，但后续内容“Write all game objectives numbered list.”可能属于同一问题，但按输入句子切分处理。"
+   },
+   {
+    "zh": "对于每个目标，列出其要求。”, “以编号列表的形式写出所有动作。",
+    "conf": "mid",
+    "note": "原文句子在“For each objective, list its requirements.”后引号闭合，但后续内容“Write all actions as a numbered list.”可能属于同一问题，但按输入句子切分处理。"
+   },
+   {
+    "zh": "对于每个动作，列出其要求。”} 来总结游戏玩法和动作空间的相关信息。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们在所有 Qgame 问题中添加提示“不要用 LaTeX 回答。”，以防止 LLM 以 LATEX 格式输出列表。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p4.37": {
+  "sentences": [
+   {
+    "zh": "表1：Qact中全部9个问题的列表。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这些问题旨在促进一致的思维链。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "实验上，我们发现LLM对问题的不同措辞具有鲁棒性。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p4.34": {
+  "sentences": [
+   {
+    "zh": "第三，为了从集合 Aq 中获得答案字符串 Cq，我们使用摘要提示 qsummarize = “删除重复项。” 来查询 LLM。Cq = MLLM (concat(Aq), qsummarize) (3) 最后，我们将所有问题-上下文对（用换行符）连接起来，形成 SPRING 的上下文字符串 C。",
+    "conf": "low",
+    "note": "原文句子结构复杂，包含多个步骤和公式，且 'qsummarize' 和 'MLLM' 等术语未在术语表中给出，翻译时需保留原文。"
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p5.39": {
+  "sentences": [
+   {
+    "zh": "为了在一轮游戏中的数百个步骤内实现一致的思维链推理（Wei et al., 2021），我们组成一组固定的问题 Qact = {q1,..., qa}，在游戏的每一步查询 LLM，问题之间的依赖关系为 D = {(qu, qv)|qu, qv ∈ Qact 且回答 qv 需要 qu 的答案}。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "注意，上述规范形成了一个有向无环图（DAG），节点为 Qact，边为 D（图 3 b）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p4.38": {
+  "sentences": [
+   {
+    "zh": "图3：推理。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "(a) 视觉描述器以最后两个游戏画面作为输入，并输出它们的语言描述（dt, dt−1）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "(b) SPRING 按拓扑顺序遍历表1中的问题DAG。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "对最终问题 qa 的回答通过子串匹配映射到环境动作。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "(c) 每个问题（节点）的LLM回答以之前2步的观察、上下文C以及当前节点的直接父节点的回答为条件。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "为了让LLM能够理解游戏过程，我们首先遵循Du等人（2023）；Wang等人（2023）定义一个视觉描述器Mdesc，它将状态s∈S转换为文本描述d（图3a）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p4.36": {
+  "sentences": [
+   {
+    "zh": "节点问题 q1 列出当前观察中的对象。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "对于每个对象，简要回答它提供什么资源及其需求。 q2 玩家采取的最后行动是什么？ q3 对于列表中的每个对象，交互的需求是否满足？ q4 玩家的最后行动是否成功？",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "如果没有，为什么？ q5 列出玩家应遵循的前3个子任务。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "用5分制表示它们的优先级。 q6 顶部子任务的需求是什么？",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "玩家首先应该做什么？ q7 列出玩家应采取的前5个行动以及每个行动的需求。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "仅从所有行动的列表中选择。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "用5分制表示它们的优先级。 q8 对于列表中的每个行动，需求是否满足？ qa 从以上选择最佳可执行行动。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p5.45": {
+  "sentences": [
+   {
+    "zh": "在",
+    "conf": "low",
+    "note": "句子不完整，仅一个词，无法确定准确含义。"
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p5.43": {
+  "sentences": [
+   {
+    "zh": "qv = MLLM concat",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p5.41": {
+  "sentences": [
+   {
+    "zh": "At",
+    "conf": "low",
+    "note": "原文仅为符号 'At'，无上下文可确定其含义，可能表示时间步 t 的答案或动作，无法准确翻译。"
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p5.40": {
+  "sentences": [
+   {
+    "zh": "对于任何问题（节点）qv ∈ Qact，我们在时间步 t 计算答案 At qv，条件是游戏上下文 C、最近 2 步的游戏描述 dt−1、dt，以及对其依赖项的答案（图 3 c）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p5.50": {
+  "sentences": [
+   {
+    "zh": "qu |(qu, qv) ∈ D, qv",
+    "conf": "low",
+    "note": "输入句子不完整，看起来是公式或集合符号的一部分，无法确定其含义和翻译方式。"
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p5.52": {
+  "sentences": [
+   {
+    "zh": "实验上，我们发现仅向LLM提供问题的直接父节点能大幅缩短上下文长度，并帮助LLM聚焦于最相关的上下文信息。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p5.54": {
+  "sentences": [
+   {
+    "zh": "我们如下呈现我们的实验。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "首先，我们解释我们的实验设置和实验的基线。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然后，我们在 Crafter 基准上将 SPRING 与流行的 RL 方法进行比较。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "最后，我们对架构的不同部分进行实验和分析，以研究每个部分对 LLM 的上下文“推理”能力的影响。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p5.53": {
+  "sentences": [
+   {
+    "zh": "我们使用改进的拓扑排序算法遍历DAG，根据每个问题的拓扑顺序计算LLM答案。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "最后，我们将节点qa中最后一个问题的答案通过子串匹配直接映射到环境中的17个命名动作之一（a = At a）。",
+    "conf": "mid",
+    "note": "原文中“a = At a”可能为笔误，应为“a = A_t a”或类似表示，但按原文保留。"
+   },
+   {
+    "zh": "当子串匹配失败时，我们采取默认动作“Do”。3",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p5.55": {
+  "sentences": [
+   {
+    "zh": "Crafter 环境（Hafner, 2021）是一个程序化生成的开放世界生存游戏，用于基准测试强化学习算法，包含 22 项成就，分布在深度为 7 的科技树中。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "该环境是一个网格世界，具有俯视观察和大小为 17 的离散动作空间。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "观察还显示玩家当前的库存状态，包括其生命值、食物、水、休息水平和库存。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "该游戏灵感来自 Minecraft，并具有类似的获取钻石挑战。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "相比之下，Crafter 在一个更简单、更快的环境中捕捉了 Minecraft 的许多关键研究挑战，从而加快了实验和结果收集。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p5.56": {
+  "sentences": [
+   {
+    "zh": "环境描述符 游戏画面（图3左上角）由一个9×9的网格（{(i, j) | 1 ≤ i, j ≤ 9}）组成。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "顶部7行是世界局部视图；每个单元格(i, j)关联一个预定义背景（例如，“草地”、“水”、“无”）并可能关联一个对象“资产”（例如，“树”、“生命值”、“玩家”）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "底部2行表示智能体状态（例如，“生命值”）和物品库存，其中包括资产图像（例如，“石剑”）以及库存中每种资产的数量。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p5.58": {
+  "sentences": [
+   {
+    "zh": "环境描述符随后获得观察中的对象集合 O = {(obj, dist, direction)}、库存物品集合 I = {(object, count)} 以及智能体状态 H = {(attribute, value, max)}。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "仅包括每种对象中最近的一个，我们将观察描述 d 组合为：“你看到：- <obj> <dist> 步在你的 <direction>。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "你的状态：<attribute>: <value>/ <max>。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "你的库存：- <object>: <count>”。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们使用“北”、“南”、“东”、“西”来描述对象的方向。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p5.59": {
+  "sentences": [
+   {
+    "zh": "3我们将在 github.com/anonymous 发布我们智能体的代码。方法 得分 奖励 训练步数4",
+    "conf": "low",
+    "note": "句子结构不完整，似乎缺少标点或上下文，且包含表格标题式文本，无法确定完整语义。"
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p5.57": {
+  "sentences": [
+   {
+    "zh": "我们的环境描述器接受游戏画面作为输入，并输出该画面的文本描述。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们首先创建背景和物体（外观）资产的组合。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然后我们添加数字资产来识别库存/状态的数量。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们使用 cv2.filters 以 0.9 的匹配阈值将这些组合与游戏画面进行匹配。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们在夜间观察不可靠时禁用检测器。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "最后，对于每个 (i, j)，我们过滤匹配的组合，并选择匹配分数最高的一个。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "根据这些信息，我们可以测量每个物体相对于玩家的距离和方向；同时，我们可以统计智能体状态和库存物品。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p6.63": {
+  "sentences": [
+   {
+    "zh": "评估指标 Crafter 中的智能体主要基于两个指标进行评估：奖励和得分。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "游戏在智能体于一个回合中解锁新成就时给予稀疏的 +1 奖励，并在智能体失去/获得一点生命值时给予 −0.1/0.1 的奖励。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "得分指标（Hafner, 2021）通过聚合每个成就的成功率来计算：",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p6.62": {
+  "sentences": [
+   {
+    "zh": "表2：比较SPRING与流行强化学习算法在游戏得分、奖励和训练步数方面的表格。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "SPRING的结果在5次独立试验中进行了总结。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "SPRING在所有指标上都优于之前的SOTA。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "此外，由于SPRING通过阅读论文获取知识，因此它不需要训练。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p6.64": {
+  "sentences": [
+   {
+    "zh": "S = exp",
+    "conf": "low",
+    "note": "句子不完整，只有 'S = exp'，无法确定完整公式，可能原文截断或有误。"
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p6.71": {
+  "sentences": [
+   {
+    "zh": "其中 si 是智能体在第 i 项成就上的成功率，N = 22 是成就的数量。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "注意，RL 智能体仅在奖励上进行训练，而 SPRING 不需要任何训练。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p6.66": {
+  "sentences": [
+   {
+    "zh": "N X",
+    "conf": "low",
+    "note": "输入句子仅为“N X”，缺乏上下文，无法确定其含义，可能是公式、缩写或占位符。"
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p6.74": {
+  "sentences": [
+   {
+    "zh": "我们在表2中将RL基线的性能与以环境论文（Hafner, 2021）为条件的SPRING（使用GPT-4）进行了比较。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p6.73": {
+  "sentences": [
+   {
+    "zh": "LLMs。对于LLM访问，我们使用来自OpenAI API的GPT-3.5-turbo（OpenAI，OpenAI）和GPT-4（OpenAI，2023）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p6.72": {
+  "sentences": [
+   {
+    "zh": "RL基线：我们纳入了流行的方法的结果，包括演员-评论家方法如PPO（Schulman et al., 2017）；DQN变体如Rainbow（Hessel et al., 2018）；内在激励方法如RND（Burda et al., 2018）、Plan2Explore（Sekar et al., 2020）、EDE（Jiang et al., 2022）；LLM辅助解决方案如ELLM（Du et al., 2023）；基于模型的方法如DreamerV2（Hafner et al., 2020）；以及目前保持最先进水平的DreamerV3（Hafner et al., 2023）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p6.77": {
+  "sentences": [
+   {
+    "zh": "我们的比较基于 Hafner (2021) 设定的 1M 硬性上限。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p6.75": {
+  "sentences": [
+   {
+    "zh": "SPRING 大幅超越了此前的 SOTA，包括此前在 Crafter 上使用 LLM 的尝试，在游戏得分上实现了 88% 的相对提升，在奖励上比表现最佳的 RL 方法（Hafner et al., 2023）提升了 5%。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "由于模型通过阅读论文获取知识，SPRING 需要 0 个训练步骤，而 RL 方法通常需要数百万个训练步骤4。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p7.78": {
+  "sentences": [
+   {
+    "zh": "我们的 DreamerV3 Rainbow",
+    "conf": "low",
+    "note": "原文为三个并列的模型名称，缺少上下文，无法确定其语法关系，可能为表格标题或列表项。"
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p6.76": {
+  "sentences": [
+   {
+    "zh": "我们在图4中绘制了按任务划分的解锁率图，将我们的方法与流行的RL基线进行比较。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "借助先验知识的SPRING在“制作石镐”、“制作石剑”和“收集铁”等成就上比RL方法高出10倍以上，这些成就位于科技树中深度最多为5的位置，通过随机探索很难达到。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "对于“吃牛”和“收集饮料”成就，SPRING实现了完美表现，而像Dreamer-V3这样的基于模型的RL框架在“吃牛”上的解锁率低5倍以上，因为牛是移动的，通过随机探索更难到达。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "最后，我们注意到SPRING没有采取“放置石头”的动作，这个动作可以通过随机探索轻松达到，因为论文（Hafner, 2021）中没有讨论放置石头对智能体有益。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p7.84": {
+  "sentences": [
+   {
+    "zh": "图4：能力谱展示了所有22项成就的解锁百分比。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "Rainbow设法饮水和觅食。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "DreamerV3采集煤、铁、石头，并锻造更高级的工具和武器。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "由于SPRING一开始就具备关于游戏的知识，它在以前难以完成的任务上实现了超过10倍的解锁率，例如“吃植物”、“制作石镐”、“制作石剑”和“采集铁”。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p7.87": {
+  "sentences": [
+   {
+    "zh": "我们通过一系列消融实验研究框架的不同方面如何影响智能体的行为，如表3所示。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p6.61": {
+  "sentences": [
+   {
+    "zh": "SPRING + paper（本文方法）27.3 ± 1.2% 12.3 ± 0.7 0 DreamerV3（Hafner 等，2023）14.5 ± 1.6% 11.7 ± 1.9 1M ELLM（Du 等，2023）N/A 6.0 ± 0.4 5M EDE（Jiang 等，2022）11.7 ± 1.0% N/A 1M DreamerV2（Hafner 等，2020）10.0 ± 1.2% 9.0 ± 1.7 1M PPO（Schulman 等，2017）4.6 ± 0.3% 4.2 ± 1.2 1M Rainbow（Hessel 等，2018）4.3 ± 0.2% 5.0 ± 1.3 1M Plan2Explore（Sekar 等，2020）2.1 ± 0.1% 2.1 ± 1.5 1M RND（Burda 等，2018）2.0 ± 0.1% 0.7 ± 1.3 1M Random 1.6 ± 0.0% 2.1 ± 1.3 0",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p7.85": {
+  "sentences": [
+   {
+    "zh": "方法 成就 深度 奖励 每步问题数 SPRING + 完整论文 6 12.3 ± 0.7 9 SPRING + 修改了C的论文 4 9.4 ± 1.8 9 SPRING + 动作描述 4 8.2 ± 0.2 9 SPRING + 无C 1 0.5 ± 0.2 9 SPRING + 完整论文 6 12.3 ± 0.7 9 逐步提示 + 完整论文 5 7.3 ± 4.4 2 无DAG的QA + 完整论文 4 4.3 ± 3.9 9 无QA + 完整论文 2 2.4 ± 1.3 1 SPRING + 完整论文 6 12.3 ± 0.7 9 SPRING + 完整论文（使用GPT-3.5） 2 3.3 ± 2.9 9",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p7.86": {
+  "sentences": [
+   {
+    "zh": "表3：分析SPRING的不同部分对其性能的贡献，比较科技树中的最大成就深度、奖励以及提示中人工编写问题的数量。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "结果在5次独立试验中汇总。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "前4行研究上下文字符串C中先验知识的必要性。中间4行研究不同的思维链提示技术。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "最后2行研究LLM的作用。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "所有三个方面对于SPRING达到最佳报告性能都很重要。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p7.88": {
+  "sentences": [
+   {
+    "zh": "在表3的前4行中，我们研究了来自LATEX论文的游戏玩法上下文对智能体性能的贡献。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们报告了SPRING在无上下文信息（w/o C）下的性能（第4行）；SPRING仅以来自（Hafner, 2021）表F.1的动作描述和依赖关系为条件（仅来自Q game的问题4）（第3行）；SPRING以手动修改的上下文为条件，该上下文通过从上下文C中删除两行对应内容来排除wooden_pickaxe的“crafting table”依赖关系（第2行）；SPRING以论文中的完整上下文为条件（第1行）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p7.89": {
+  "sentences": [
+   {
+    "zh": "正如预期的那样，由于 Crafter 环境对 GPT 来说是未知的，智能体在没有任何游戏上下文的情况下取得了与随机智能体相似的性能。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "当仅提供动作描述和动作依赖关系时，仅使用第 2.1 节中 Qgame 的问题 4，SPRING 取得了 67% 的强劲性能，与 DreamerV2（Silver et al., 2017）相当。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p8.93": {
+  "sentences": [
+   {
+    "zh": "总体而言，SPRING 取得了最佳性能，且性能标准差仅为 6%，这得益于在时间步上更一致的推理、更好的专注度以及更少的干扰。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p8.91": {
+  "sentences": [
+   {
+    "zh": "推理 在表3的中间4行中，我们研究了不同提示方法对模型性能的贡献。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在基于LATEX论文的完整上下文的条件下，我们报告了GPT-4的性能：仅使用最后一个问题qa直接提示输出动作（第8行）；使用来自Qact的所有问题但以列表形式呈现且没有DAG依赖关系D的GPT-4（第7行）；提示“让我们逐步思考”（Kojima等人，2022年）关于下一个动作，并提示选择一个允许的动作qa，随后再次使用“让我们逐步思考”后跟qa（第6行）；使用SPRING的GPT-4（第5行）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p7.90": {
+  "sentences": [
+   {
+    "zh": "在实验的下一部分，我们手动从上下文中移除了木镐（wooden_pickaxe）的“靠近工作台”依赖关系，该依赖关系是后续11项成就所必需的。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "使用GPT-4的SPRING性能下降了24%。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "有趣的是，我们发现LLM具有一定从错误上下文信息中恢复的能力。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们观察到，在没有工作台的情况下制作木镐失败后，智能体改为先尝试制作木剑以维持生存。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "最终，智能体在几次不成功的尝试后，通过猜测和尝试识别出了缺失的要求，并制作出了木镐。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然而，这种困惑延迟了智能体的进展，因此导致了与基于完整上下文的智能体之间的性能差距（第5行）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p8.94": {
+  "sentences": [
+   {
+    "zh": "在表3的最后两行中，我们展示了相同的架构在GPT-3.5-turbo上效果不佳。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们认为观察到的73%性能差距主要源于GPT-3.5-turbo在遵循每个问题中的细粒度指令方面表现较差，而这些指令是SPRING进行思维链推理所必需的。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p8.95": {
+  "sentences": [
+   {
+    "zh": "每步的查询次数为9（与问题数量相同）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "每局游戏可能大约需要300步，但在最坏情况下可能达到500步。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "因此，每局游戏的最大查询次数可能达到4500次。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "根据GPT-4 API的公开价格，每次查询的费用约为0.065美元。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "使用GPT-4时，每局游戏的总费用应低于270美元。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "鉴于芯片组开发的进展，我们希望推理成本将会降低，使LLM对公众更加可及。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p8.96": {
+  "sentences": [
+   {
+    "zh": "在表4中，我们在Crafter上以相同设置比较了流行的公开可用LLM，包括GPT-4（OpenAI，2023）、GPT-3.5（text-davinci-003）（OpenAI，OpenAI）、Bard（Manyika，Manyika）、Claude（Anthropic，Anthropic）、Alpaca-30b（Taori et al.，2023），遵循与第3.3节和表3相同的逐步提示。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们观察到在我们的设置下性能存在明显差距。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p9.98": {
+  "sentences": [
+   {
+    "zh": "表4：在相同设置下，使用由 text-davinci-003 按照与第3.3节和表3相同的逐步提示生成的上下文 C，对不同 LLM 进行比较。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p8.92": {
+  "sentences": [
+   {
+    "zh": "相对于我们的方法，我们观察到直接提示LLM输出动作会导致性能下降80%，因此无法产生一个有意义的智能体。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "流行的思维链推理提示“让我们一步一步思考”（Kojima et al., 2022）获得了合理的奖励，但性能下降了40%，且标准差高达60.27%。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "从定性角度看，我们观察到LLM在不同时间步产生不一致的输出，这是因为模型的思维链没有通过提示进行引导或控制。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "因此，仅用“让我们一步一步思考”提示的LLM无法可靠地遵循好的策略。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "用来自Qact（第2.2节）的9个问题控制思维链，在定性上成功地控制了LLM输出在不同时间步的一致性。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然而，我们观察到，当所有先前的问题以列表形式呈现时，LLM在问答的后期阶段经常忽略较早的问题，导致答案出现随机的不一致。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "例如，LLM可能在前几个问题中正确识别出它需要“木镐”来开采前方的石头，但后来在提示输出动作时却忘记了这个要求。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "从定量角度看，没有DAG时模型性能下降65%，方差为90%。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "DAG的引入通过将问答上下文长度减少到仅包含一个问题的直接父节点，消除了这个问题。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p9.99": {
+  "sentences": [
+   {
+    "zh": "在足够的试验次数下不断改进。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然而，强化学习算法通常使用精心设计的奖励函数进行训练，以覆盖游戏中的所有成就（Hafner, 2021; Hafner et al., 2023）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "此类奖励函数往往需要大量专家知识和细致的公式化设计。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p8.97": {
+  "sentences": [
+   {
+    "zh": "RL 对比",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "LLM 将基于 LLM 的智能体与 RL 智能体进行比较，引发了一个有趣的讨论。",
+    "conf": "low",
+    "note": "原文句子结构不完整，'LLMs' 后缺少谓语，且 'a intriguing' 应为 'an intriguing'。"
+   },
+   {
+    "zh": "RL 算法不需要先验知识，例如说明书，并且可以持续 5 定价根据截至 2023 年 10 月 17 日的 OpenAI API 估算 方法 成就 深度 奖励 每步问题数 逐步提示 + GPT-4 5 7.3 ± 4.4 2 逐步提示 + text-davinci-003 4 4.5 ± 2.1 2 逐步提示 + Bard 0 −0.9 ± 0 2 逐步提示 + Claude 1 0.1 ± 0.1 2 逐步提示 + Alpaca-30b 1 0.1 ± 0.1 2 随机 1 2.1 ± 1.3 0",
+    "conf": "low",
+    "note": "句子不完整，且包含表格数据，翻译时保留了原文内容。"
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p9.101": {
+  "sentences": [
+   {
+    "zh": "我们希望未来的工作能够利用两种范式的优势，以实现高效规划与细粒度控制。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p9.102": {
+  "sentences": [
+   {
+    "zh": "在指令遵循设定中，当环境奖励稀疏时，逐步指令已被用于生成辅助奖励。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "Goyal et al. (2019); Wang et al. (2019) 使用离线训练的辅助奖励学习模块来预测轨迹片段是否与专家轨迹的自然语言标注相对应。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p9.100": {
+  "sentences": [
+   {
+    "zh": "另一方面，像 SPRING 这样的 LLM 智能体不需要奖励（我们报告奖励是为了比较目的，SPRING 在推理过程中不使用奖励），而是使用来自 LATEX 源代码的外部知识。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "此外，当前的 LLM 智能体缺乏从交互中改进的能力。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p9.103": {
+  "sentences": [
+   {
+    "zh": "已有许多尝试超越指令跟随，转向从非结构化自然语言中学习（Branavan et al., 2012; Goldwasser and Roth, 2014; Zhong et al., 2021; Wang and Narasimhan, 2021）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "Zhong et al. (2021); Wang and Narasimhan (2021) 利用特殊架构在带有模板生成指令的网格世界上学习推理。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然而，该模型需要来自与测试环境相同模板的2亿个训练样本。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这样的训练要求限制了模型的泛化能力，并导致即使在具有相同机制的稍大网格世界上也会出现性能损失。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p9.104": {
+  "sentences": [
+   {
+    "zh": "Wu et al. (2023) 通过一个带有开源问答大语言模型（Tafjord and Clark, 2021）的问答提示框架，提出了一种摘要（阅读）和推理（奖励）的方法。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "该框架展示了使用真实世界人类编写的手册来提升流行游戏上强化学习性能的可能性，尽管交互类型仅限于“击打”。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们的框架处理游戏中所有17种可用的交互方式。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "此外，我们的框架利用了科技树依赖关系的信息，以及从学术论文中提取的关于期望策略的建议。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p9.106": {
+  "sentences": [
+   {
+    "zh": "与流行的室内操作任务相比，在开放世界游戏环境中进行规划带来了以下额外挑战。1）长时程。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "由于游戏内成就/技术进展的性质，一次成功的游戏过程很容易超过200步（Hafner, 2021）。2）并行目标。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "开放世界环境包含可以并行追求的目标，并且通常需要确定优先级（Wang et al., 2023）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "因此，开放世界游戏比当前的室内具身操作环境更具挑战性。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p9.105": {
+  "sentences": [
+   {
+    "zh": "LLM 在室内具身操作环境中的高层规划方面已显示出有前景的结果。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "Huang et al. (2022); Ahn et al. (2022) 主要探索为具身任务生成规划，其动作空间和轨迹长度有限。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "Song et al. (2022); Wu et al. (2022) 通过更大的动作多样性和实时重新规划增强了 Ahn et al. (2022)。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然而，许多高层规划缺乏可执行性，必须进行后处理以满足特定任务要求，从而限制了向复杂开放世界任务的泛化。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "此外，这一方向上的所有先前工作都基于少量示例的人类/专家生成的示例，其中包含最多 17 条轨迹，以为 LLM 提供上下文，这需要更多的人工劳动，并可能限制向未见场景的泛化。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "相比之下，我们的 SPRING 框架不需要任何示例。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p10.107": {
+  "sentences": [
+   {
+    "zh": "Du et al. (2023) 将 LLM 用作高层规划器，以辅助 Crafter 中的强化学习探索。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "Wang et al. (2023)；Yuan et al. (2023) 将 LLM 用作高层规划器和目标选择器，以控制 Minecraft 中的低层策略。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "Tsai et al. (2023) 研究了 ChatGPT 在文本游戏上的能力。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "值得注意的是，所有先前的工作都需要专家或人类生成的示例轨迹作为 LLM 的上下文。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "由于示例轨迹并未覆盖所有场景，所有先前的工作在评估期间可能遇到未见过的情形，导致整体性能不如未使用 LLM 训练的最先进的强化学习算法（Hessel et al., 2018; Guss et al., 2021; Hafner et al., 2023）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "据我们所知，我们是首个展示 LLM（GPT-4）在具有挑战性的开放世界游戏中取得超越最先进强化学习算法的性能的工作。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p10.108": {
+  "sentences": [
+   {
+    "zh": "使用LLM支持与环境交互的一个主要限制是需要对象识别和接地。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然而，这些限制在提供准确对象信息的环境中不存在，例如当代游戏（Fan et al., 2022）和虚拟现实世界（Kolve et al., 2017）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "虽然预训练的视觉骨干（He et al., 2017）在游戏上表现不佳，但它们在更接近真实世界的环境中表现合理（Shridhar et al., 2020）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "此外，随着视觉语言模型的最新进展（Bubeck et al., 2023; Driess et al., 2023; Liu et al., 2023; Zou et al., 2023），我们相信在可预见的未来将有可靠且可推广的视觉语言理解解决方案。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "未来的工作可以专注于解决使用大型视觉语言模型时对单独视觉描述符的需求。",
+    "conf": "mid",
+    "note": "原文中 'address' 可能是 'addressing' 的笔误，但按原文翻译为 '解决'。"
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p10.109": {
+  "sentences": [
+   {
+    "zh": "在这项工作中，我们探索通过阅读关于该基准的学术论文的 LATEX 源代码，使用最新的 LLM 来解决 Crafter（Hafner, 2021）RL 基准。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们研究了在 Crafter 开放世界环境设置下，不同形式的提示所诱导的上下文“推理”和“规划”的质量。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "为了在数百个环境步骤中强制实现一致的规划和执行，我们引入了 SPRING，这是一个创新的 LLM 提示框架，旨在实现上下文链式思考规划和推理。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "定量地看，使用 GPT-4 的 SPRING 在没有任何训练的情况下，优于所有训练了 1M 步的最先进的 RL 基线。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p10.110": {
+  "sentences": [
+   {
+    "zh": "我们的工作证明了LLM在理解和推理人类知识方面的可靠性。",
+    "conf": "mid",
+    "note": "原文为 demonstrates，按规则应译「表明」或「证明」？规则中 suggest/indicate 译「表明」「提示」，不能译「证明」；但 demonstrates 不在规则中，通常可译「证明」，但为保持谨慎，可译「表明」。"
+   },
+   {
+    "zh": "我们希望我们的工作指向一种通过内在奖励（Wu et al., 2023）、分层强化学习（Shu et al., 2017）或子目标规划（Wang et al., 2023; Wu et al., 2023）将人类先验知识整合到强化学习训练中的新方法。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "p10.111": {
+  "sentences": [
+   {
+    "zh": "我们对LLM的研究可能产生积极和消极两方面的影响。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "其益处包括更好地理解LLM的能力以及增强先验知识的整合，这可能推动各种AI主题的进展。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然而，风险可能涉及对计算要求高的模型的依赖、游戏作弊或利用，以及对先验知识的依赖。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "__sections__": {
+  "__title__": "SPRING：研读论文并推理以玩游戏",
+  "Abstract": "摘要",
+  "1 Introduction": "1 引言",
+  "2 Method": "2 方法",
+  "2.1 Studying the paper: Context from LATEX source": "2.1 研读论文：从 LATEX 源码获取上下文",
+  "2.2 Reasoning: QA-DAG for SPRING": "2.2 推理：用于 SPRING 的 QA-DAG",
+  "3 Experiments and Results": "3 实验与结果",
+  "3.1 Experimental Details": "3.1 实验细节",
+  "3.2 Overall Results": "3.2 总体结果",
+  "3.3 Component Analysis": "3.3 组件分析",
+  "Studying the LATEX Paper": "研读 LATEX 论文",
+  "3.4 Cost for running SPRING": "3.4 运行 SPRING 的成本",
+  "3.5 Potential for Benchmarking LLMs": "3.5 用于基准测试 LLM 的潜力",
+  "4 Related Work": "4 相关工作",
+  "Policy Informed by Natural Language Instructions": "基于自然语言指令的策略",
+  "LLMs for Planning": "用于规划的 LLM",
+  "LLMs for Open World Games": "用于开放世界游戏的 LLM",
+  "5 Limitations and Future Work": "5 局限性与未来工作",
+  "6 Conclusions": "6 结论",
+  "Broader Impacts": "更广泛的影响"
+ }
+}

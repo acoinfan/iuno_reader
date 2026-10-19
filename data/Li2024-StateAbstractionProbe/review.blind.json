@@ -1,0 +1,2405 @@
+{
+ "__meta__": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "models": {
+   "reviewer": "deepseek-v4-pro"
+  },
+  "translator": "deepseek-v4-pro（关思考）",
+  "independence": "same-model",
+  "usage": {
+   "calls": 75,
+   "prompt_tokens": 66637,
+   "completion_tokens": 95572,
+   "seconds": 893.9,
+   "cached_tokens": 45440
+  }
+ },
+ "p1.4": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "∗本工作是在 Borealis AI 的 Mitacs 实习期间完成的。"
+   }
+  ]
+ },
+ "p2.6": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们认为，这些矛盾源于一个事实：恢复完整的世界状态并非总是解决每项任务所必需的，而以往的研究并未对此进行系统控制。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "相反，世界状态的抽象表示有时可能就足够了，而且所需的抽象程度也可能有所不同。"
+   }
+  ]
+ },
+ "p1.5": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "minor",
+    "category": [
+     "omission"
+    ],
+    "issue": "译文未保留原文开头的脚注编号“1”。",
+    "suggestion": "1代码和数据集：https://github.com/BorealisAI/llm-world-abs 第38届神经信息处理系统大会（NeurIPS 2024）。",
+    "zh_reviewed": "代码和数据集：https://github.com/BorealisAI/llm-world-abs 第38届神经信息处理系统大会（NeurIPS 2024）。"
+   }
+  ]
+ },
+ "p1.2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "受人类心智模型 [9, 12, 22] 的启发，AI 研究人员引入了世界模型（world model）的概念，用于构建样本高效且稳健的机器学习系统 [13, 25]。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "具体而言，世界模型被定义为承担双重角色：（1）它估计可能无法从输入信号中直接观测到的世界状态信息，以及（2）它提炼关键信息以预测未来状态，从而基于这些预测为后续行动提供依据。"
+   }
+  ]
+ },
+ "p2.9": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们通过应用状态抽象理论来形式化这一直觉，该理论最初在强化学习（RL）[29, 3]中提出，旨在通过将相似状态聚合为抽象状态来简化状态空间，而不改变任务或底层世界的核心方面。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "抽象程度是一个谱系，从更一般的与世界无关的抽象（允许恢复世界动态）到更面向目标的抽象（引导任务完成，同时放弃预测未来状态）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些包括Q∗无关抽象和π∗无关抽象；前者保留动作的长期影响，而后者保留最优策略。"
+   }
+  ]
+ },
+ "p2.8": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图1：一段话语及其所描述的世界状态的两种可能抽象（图的上半部分）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "一种通用抽象（后文称为世界无关抽象）使人们能够回答广泛的问题。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "另一方面，面向计数的抽象仅适用于计数任务。"
+   }
+  ]
+ },
+ "p2.10": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "通过状态抽象这一视角，我们提出了一个用于考察LLM所构建的世界表示的新框架。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "该框架研究LLM构建的表示中可能编码的各种抽象类型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了展示其效用，我们给出了一个具体应用。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "首先，我们设计了一个基于文本的规划任务REPLACE，该任务需要改变一个由容器和物体组成的简单世界的状态。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们有意将任务的状态空间设计得高度结构化和模块化，从而能够精确而简单地推导出不同层次的世界状态抽象。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "尽管任务简单，但不同层次的抽象状态是截然不同且可识别的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "随后，我们提示预训练和微调的LLM完成此规划任务，并在解码过程中提取它们的表示。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "最后，我们在表示中探测不同的抽象状态。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们在广泛的Transformer模型和LLM上进行了实验，即Pythia [6]、Llama2 [35]、Llama3 [1]、Mistral [20]和Phi3 [2]。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的实验表明，在REPLACE上取得合理性能的LLM，无论是通过微调还是先进的预训练，在解码过程中倾向于维持目标导向的抽象，而不是更一般的世界表示。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此外，性能接近随机的预训练模型无法有效保留任何类型的抽象。"
+   }
+  ]
+ },
+ "p3.12": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "机器学习中的世界模型概念与认知科学中的人类内部模型 [9] 有着深厚的联系，后者通常被称为心智模型 [12, 22]。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "按照最初的定义，心智模型可以构建现实世界或周围环境中实体及其关系的抽象和符号化表征 [12]。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此类心智模型最重要的特征之一，是在表征复杂性与完成特定任务的效用之间取得最佳平衡 [18]。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "类似地，AI 研究人员开发了符号化 [33] 或神经世界模型 [13, 14]，以压缩大量输入信息并提取简化且必要的表征来预测未来状态。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的工作与这两个领域都相关，并应用强化学习中的状态抽象理论 [29, 3] 来评估 LLM 所编码的底层世界和任务表征（如果有的话）。"
+   }
+  ]
+ },
+ "p3.14": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，现有工作主要侧重于探测对底层世界的全面描述，该世界被定义为一组状态变量。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这种方法有两个主要局限。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "首先，它未能区分特定状态变量的功能：它是旨在维持对世界的一般表征，还是仅对特定任务至关重要，还是两者兼有？"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "没有这种区分，我们就无法准确解释探测的积极结果。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "其次，现有研究没有考虑到LLM可能在其表征中构建的世界的潜在抽象。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的工作通过引入一个通用框架来克服这些局限，该框架检查LLM表征中编码的世界抽象。"
+   }
+  ]
+ },
+ "p1.3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "最近，人们对研究预训练的Transformer模型[36]，尤其是大型语言模型（LLMs）[32]，是否构建了隐式世界模型越来越感兴趣。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些研究旨在确定文本中描述的世界状态（无论是隐式还是显式）能否从Transformer模型构建的内部表示中恢复出来。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，该领域在不同任务上的研究得出了相互矛盾的结论。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "omission"
+    ],
+    "issue": "漏译了“representations”，原文指实体状态及语义关系编码在LLM的表示中，译文只说LLM编码，未体现“表示”。",
+    "suggestion": "例如，[27]表明，可以准确地探测话语内LLM表示中编码的实体状态及其语义关系。",
+    "zh_reviewed": "例如，[27]表明，可以准确地探测LLM在话语中编码的实体状态及其语义关系。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "相反，[24]在尝试类似但更具挑战性的设置时报告了负面结果。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "“partially played”译为“部分下完”不够准确，可能产生歧义，应表达为“部分进行”或“尚未下完”。",
+    "suggestion": "此外，[28]成功地从一个小规模GPT模型[7]的内部表示中提取了部分进行的奥赛罗棋局的棋盘状态，该模型经过训练以补全游戏脚本。",
+    "zh_reviewed": "此外，[28]成功地从一个小规模GPT模型[7]的内部表示中提取了部分下完的奥赛罗棋局的棋盘状态，该模型经过训练以补全游戏脚本。"
+   }
+  ]
+ },
+ "p3.13": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "人们对在LLM中探测可解释特征的兴趣日益增长，其中大多数特征本质上是语言性的，例如形态学[30]、句法[17]和词级语义[5]。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "最近，研究者已超越对浅层语言特征的探索，开始研究LLM的隐藏表征是否以及如何在运行中编码文本所描述的实体及其关系。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "更具体地说，[27]在LLM的话语表征之上训练一个浅层神经分类器，以恢复文本中所描绘的真实情境。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这种方法被[24]进一步修改并表述为下一句预测任务。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "类似地，[28, 21, 37]探测了Transformer模型在阅读（半）结构化输入（如游戏脚本和具身序列）时世界状态的内部表征。"
+   }
+  ]
+ },
+ "p2.11": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的贡献如下：1) 我们提出了一个新的框架，用于从LLM构建的表征中探测世界抽象，该框架可适用于其他NLP任务。2) 我们发布了一个新的合成任务REPLACE及配套数据集，这些数据集是模块化且可扩展的。3) 使用我们的框架和任务进行的实验得出了新的发现：LLM表征优先考虑目标导向的抽象，这些抽象在解码过程中保留了动作对任务完成的影响，同时抽象掉了世界状态和动态。4) 我们的发现还调和了先前工作中相互矛盾的结论。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例如，[21, 28]成功探测到诸如圆盘颜色和障碍物位置等状态变量，这属于模型被优化解决的任务的目标导向抽象，而[24]难以恢复实体状态，这超出了这些抽象的范围。"
+   }
+  ]
+ },
+ "p3.15": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "与[28, 21, 37]相比，我们任务中的输入是文本数据，而不是游戏脚本或环境布局。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，从我们的实验中得出的结论更适用于LLM和用于NLP任务的Transformer模型。"
+   }
+  ]
+ },
+ "p3.17": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的框架建立在世界抽象的一个严格定义之上。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "具体而言，我们遵循强化学习文献 [29]，推导出状态抽象函数 ϕ: S →Sϕ，该函数将每个状态 s 映射到一个抽象状态 ϕ(s)（|Sϕ| ≤|S|）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "除了原始状态 S 之外，我们考虑三种类型的抽象："
+   }
+  ]
+ },
+ "p4.18": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "世界无关抽象 ϕw 2 确保对于所有 s1, s2，若 ϕw(s1) = ϕw(s2)，则意味着对于所有 a, x′ ∈Sϕw，有 R(s1, a) = R(s2, a)，且 P"
+   }
+  ]
+ },
+ "p4.20": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "w (x′) T (s′|s2, a)。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "直观地说，它保留了底层世界的转移动态和奖励函数，从而能够预测由后续动作引起的未来状态。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "回顾第1节中世界模型的定义，这种抽象能够精确恢复世界模型。"
+   }
+  ]
+ },
+ "p4.21": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Q∗-无关抽象 ϕQ 确保对于所有 s1, s2，如果 ϕQ(s1) = ϕQ(s2)，那么对于所有 a，Q∗(s1, a) = Q∗(s2, a)，其中 Q∗(s, a) = maxπ Qπ(s, a)。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这种抽象形式保留了所有动作 a ∈A 在其最优 Q 值方面的效果，即最大期望未来奖励。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，它丢弃了世界动态，使得未来状态预测不可行。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "LLM 可以利用这种抽象来对成本敏感，最小化动作次数并避免因违反世界约束而受到惩罚。"
+   }
+  ]
+ },
+ "p4.23": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在实践中，人们可能使用学习 [23, 4] 或启发式方法 [10, 11] 来推导每个层次的抽象。"
+   }
+  ]
+ },
+ "p3.16": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "minor",
+    "category": [
+     "term"
+    ],
+    "issue": "probing 未采用项目规定译法“线性探针”。",
+    "suggestion": "在本节中，我们引入一个新的线性探针框架，以研究大型语言模型（LLMs）在被提示执行决策任务时所编码的世界状态抽象。",
+    "zh_reviewed": "在本节中，我们引入一个新的探针框架，以研究大型语言模型（LLMs）在被提示执行决策任务时所编码的世界状态抽象。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们从强化学习（RL）公式开始，该公式足够通用，可以涵盖广泛的NLP任务以及先前工作采用的其他任务，例如完成奥赛罗游戏脚本[28]。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "强化学习问题由一个四元组表征：(S, A, T, R)，其中s ∈S表示世界状态，a ∈A表示模型可以采取的可能动作，转移函数T (s′|s, a)度量在s下由a引起转移到状态s′的概率，R(s, a)是奖励。"
+   }
+  ]
+ },
+ "p4.22": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "π∗-无关抽象 ϕπ 保证可以恢复最优动作，从而恢复最优策略。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "形式上，∀s1, s2 ∈ S，ϕπ(s1) = ϕπ(s2) 意味着 π∗(s1) = π∗(s2)。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，这是可以恢复最优策略的最粗抽象。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，我们期望至少这种类型的抽象可以从在给定任务中表现出色的 LLM 中被准确探测出来。"
+   }
+  ]
+ },
+ "p4.26": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在下一节中，我们在强化学习框架内设计了一个规划任务，并据此合成了一个数据集。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在第5节中，我们提示大语言模型执行此任务，并从它们的内部表示中探测不同类型的抽象。"
+   }
+  ]
+ },
+ "p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "大型语言模型（LLM）如何编码文本所描述的世界状态，包括实体的状态及其关系？"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "虽然现有工作直接探测完整的世界状态，但我们的研究探索LLM是否以及如何在其内部表示中抽象这个世界状态。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "term"
+    ],
+    "issue": "probing 未采用项目规定译法「线性探针」。",
+    "suggestion": "我们提出了一个新的框架，通过强化学习中的状态抽象理论视角对世界表示进行线性探针，该理论强调不同的抽象层次，区分促进预测未来状态的一般抽象和指导后续行动以完成任务的面向目标的抽象。",
+    "zh_reviewed": "我们提出了一个新的框架，通过强化学习中的状态抽象理论视角来探测世界表示，该理论强调不同的抽象层次，区分促进预测未来状态的一般抽象和指导后续行动以完成任务的面向目标的抽象。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了实例化这个框架，我们设计了一个基于文本的规划任务，其中LLM在环境中充当代理，并与容器中的对象交互以达到指定的目标状态。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的实验表明，微调以及先进的预训练加强了LLM构建的表示在解码过程中保持面向目标的抽象的趋势，优先考虑任务完成而不是恢复世界的状态和动态。1"
+   }
+  ]
+ },
+ "p2.7": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "原文 \"get by on one that omits this information\" 表示任务可依赖一个省略了该信息的表示；译文 \"只需省略这些信息的表示\" 容易被理解为只需把表示省略掉，而非使用这种省略信息的表示。",
+    "suggestion": "而另一些任务可能只需一种省略这些信息的表示即可，因为这些信息对任务完成并非必要。",
+    "zh_reviewed": "有些任务可能需要完整恢复世界动态以预测未来状态，而另一些任务可能只需省略这些信息的表示即可，因为这些信息对任务完成并非必要。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例如，考虑图1。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在将话语解析为世界状态表示时，可以记录每个物体的位置，也可以只记录每个盒子中物体的数量。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "前者能够回答各种问题，包括操作后的未来状态预测，例如“将钥匙移到盒子C”。然而，后者仅限于计数任务，无法预见未来状态。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "忽视这一细微差别可能导致证据与结论不匹配，从而对LLM缺乏世界意识产生过度悲观，或对其发展通用世界表示的能力产生过度乐观。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例如，在图1中对所有类型的问题进行微调可能会促使LLM捕捉世界动态，但这并不能保证仅在计数任务上微调时也能得到相同结果。"
+   }
+  ]
+ },
+ "p5.30": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图2：REPLACE中任务输入的一个示例。"
+   }
+  ]
+ },
+ "p5.31": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图3：从原始谓词推导抽象谓词和动作。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "建议彩色查看。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "用多色方块表示的谓词表示与多个抽象层级相关联。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "灰色方块表示中间谓词，不与任何抽象相关联，用于推导抽象谓词。"
+   }
+  ]
+ },
+ "p4.28": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "minor",
+    "category": [
+     "omission"
+    ],
+    "issue": "原文开头的引用/脚注标记“3”在译文中未保留。",
+    "suggestion": "3为简便起见，我们将在以下各节中省略层索引。",
+    "zh_reviewed": "为简便起见，我们将在以下各节中省略层索引。"
+   }
+  ]
+ },
+ "p5.32": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图4：图2中描述的状态的原始谓词和抽象谓词。u、g：当前情境和目标情境。"
+   }
+  ]
+ },
+ "p5.34": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在本节中，我们首先在强化学习框架内形式化规划任务，然后介绍强化学习元素的文本实现，最后介绍提示词的构建方法。"
+   }
+  ]
+ },
+ "p5.29": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "{{任务指令}} 一系列容器从左到右排列如下：桶A、篮子A、篮子B、板条箱A、篮子C。你位于篮子B。初始情况：桶A被一辆汽车、一把钥匙占据。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "篮子A装有一个生物、一封信。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "篮子B有一瓶啤酒。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "板条箱A装有一件外套。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "篮子C装有一顶王冠。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "期望情况：桶A装有一辆汽车。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "篮子A被一个生物占据。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "篮子B是空的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "板条箱A装有一瓶啤酒、一件外套。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "篮子C有一顶王冠。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "已应用的操作：你向左移动。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "实现期望状态的操作是什么？"
+   }
+  ]
+ },
+ "p5.35": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "形式上，RL框架内各要素的具体设计描述如下："
+   }
+  ]
+ },
+ "p5.33": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "LLM 在一个由一组容器和物体组成的简单世界中充当智能体。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "LLM 的目标是预测能够改变物体状况以匹配所描述目标状况的动作。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们设计这个任务有三个原因。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "首先，在其符号形式下，该任务具有简单且模块化的状态结构，使得分析和推导抽象状态空间更加容易。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "其次，它与抓取器问题 [31] 和实体跟踪任务 [24] 密切相关，这些任务在规划和 NLP 可解释性研究中被广泛采用。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "第三，正如我们将展示的，每种抽象类型都有独特的状态空间，从而能够评估 LLM 构建的表征是否编码了特定的抽象。"
+   }
+  ]
+ },
+ "p5.36": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "状态 s = [u, g] ∈S：世界的当前情境 u 和目标情境 g，其中每一个都被分解为一组谓词对实体 e（包括物体 o 和容器 b）的赋值的笛卡尔积。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "谓词包括："
+   }
+  ]
+ },
+ "p5.37": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• store(i, o)：物体 o 存放在从左到右第 i 个容器中。 • held(o)：智能体持有物体 o。 • agentLoc(i)：智能体位于第 i 个容器处。 • boxName(i, b)：从左到右第 i 个容器的名称是 b。 2."
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "可能的动作 a ∈ A 包括： • move(d)：沿方向 d（左或右）移动一步。 • grab(o)：从附近的容器中抓取物体 o。"
+   }
+  ]
+ },
+ "p4.27": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "major",
+    "category": [
+     "scope"
+    ],
+    "issue": "“probing discourse representation in LLMs”被译为“探针LLM中话语表征”，将 probing 误作修饰 LLM 的定语，改变了原文“在LLM中探测话语表征”的结构和含义。",
+    "suggestion": "为了实例化我们的框架，我们从近期关于探测LLM中话语表征的工作[27, 24]中汲取灵感，并设计了一个名为REPLACE的基于文本的规划任务。",
+    "zh_reviewed": "为了实例化我们的框架，我们从近期关于探针LLM中话语表征的工作[27, 24]中汲取灵感，并设计了一个名为REPLACE的基于文本的规划任务。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在REPLACE中，2它最初被称为模型无关抽象[29]。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在这里，我们将其重命名，以避免世界模型和大型语言模型之间的混淆。"
+   }
+  ]
+ },
+ "p6.39": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "奖励函数 R(s, a) 检查执行 a 所导致的 o 的新情境是否与目标情境匹配：若 Po(u′) = Po(g)，则 R(s, a) = r；若 a ∉ C(s)，则为 −(r + r′)；否则为 −r。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这里 u′ 表示新情境，Po(u′) 表示新情境 u′ 中涉及对象 o（store 和 held）的谓词赋值集合，C: S → A 是将状态映射到允许动作的约束函数。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们纳入三个空间约束：（1）智能体分别不能在最左和最右位置向左和向右移动；（2）只有当目标对象 o 在附近容器中时才能 grab；（3）put 只允许用于智能体当前持有的对象。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "鉴于 LLM 对提示中精确数值不敏感，我们不设定 r 和 r′ 的具体值，而只是假设 r > 0 且 r′ > 0。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "值得注意的是，Q∗ 和 π∗ 以及抽象状态都对 r 和 r′ 的实际大小不变。"
+   }
+  ]
+ },
+ "p6.38": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "minor",
+    "category": [
+     "addition"
+    ],
+    "issue": "中文增加了「手中的」，原文只说从智能体处取物体放入容器，未明确该物体在手中。",
+    "suggestion": "将智能体的一个物体放入附近的容器中。",
+    "zh_reviewed": "• put(o)：将智能体手中的一个物体放入附近的容器中。3."
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "转移函数 T：遵循先前工作 [27]，我们考虑一个静态环境。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这意味着 T (s′|s, a) ∈{0, 1}。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "scope"
+    ],
+    "issue": "「only」在原文限定受影响的对象（只影响 ut），译文改为限定方式（仅通过动作效果），范围略有偏移。",
+    "suggestion": "此外，转移通过采取动作 a 的效果，仅影响 st 中的当前情境 ut。",
+    "zh_reviewed": "此外，转移仅通过采取动作 a 的效果影响 st 中的当前情境 ut。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例如，如果 agentLoc(2) 在 ut−1 中为真，执行动作 move(left) 会导致 agentLoc(1) 在 ut 中变为真。"
+   }
+  ]
+ },
+ "p4.25": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "minor",
+    "category": [
+     "term"
+    ],
+    "issue": "“probing”项目规定译法为“线性探针”，译文用“探针”未采用规定术语。",
+    "suggestion": "备注：为了从线性探针实验得出可靠的结论，关键在于精心设计或选择任务，以确保不同层级的抽象状态空间彼此不同（Sϕw̸ = SϕQ̸ = Sϕπ）。",
+    "zh_reviewed": "备注：为了从探针实验得出可靠的结论，关键在于精心设计或选择任务，以确保不同层级的抽象状态空间彼此不同（Sϕw̸ = SϕQ̸ = Sϕπ）。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "term"
+    ],
+    "issue": "“probing”项目规定译法为“线性探针”，译文用“探针”未采用规定术语。",
+    "suggestion": "否则，就无法确定线性探针的成功是源于LLM偏好学习通用世界模型，还是源于在学习最优策略时恢复世界状态的必要性。",
+    "zh_reviewed": "否则，就无法确定探针的成功是源于LLM偏好学习通用世界模型，还是源于在学习最优策略时恢复世界状态的必要性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例如，在奥赛罗游戏中，从所有可能的合法走法中可以恢复出大部分当前棋盘状态。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，原始状态空间几乎等同于用于预测合法走法的最粗π∗-无关抽象。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "term"
+    ],
+    "issue": "“probing”项目规定译法为“线性探针”，译文用“探针”未采用规定术语。",
+    "suggestion": "因此，对[28]中线性探针成功的一种合理解释可能是，Transformer模型学习的是π∗-无关抽象，而不是刻意学习通用世界模型。",
+    "zh_reviewed": "因此，对[28]中探针成功的一种合理解释可能是，Transformer模型学习的是π∗-无关抽象，而不是刻意学习通用世界模型。"
+   }
+  ]
+ },
+ "p6.43": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "COOK 将 GRIPPER 的设置推广到一个包含容器的网格世界，并使用 TextWorld [8] 生成。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "类似地，我们对初始和目标情境进行采样并转换为文本描述。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "COOK 与 GRIPPER 的主要区别在于：（1）方向 d 的常量不同：COOK 中的智能体可以向北、南、东或西移动；（2）COOK 使用了一组不同的文本模板，这些模板取自 TextWorld 中的烹饪领域。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "有关 COOK 的更多详细信息，请参见附录 D。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "值得注意的是，两个数据集在所有层次上都共享相同的世界抽象。"
+   }
+  ]
+ },
+ "p6.44": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于每个被提示求解 REPLACE 的 LLM，我们在按照第 3 节所述收集 {(st, ht)} 对之后，评估其解码过程中表示 ht 中保留了状态 st 的哪些类型的抽象。"
+   }
+  ]
+ },
+ "p6.42": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "4.2 数据集 我们为 REPLACE 合成了两个英文数据集：GRIPPER 和 COOK。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于 GRIPPER 中的每个实例，我们首先从容器名称列表中采样一组 o，并从英国国家语料库（BNC）[26] 的常用名词列表中采样 b。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "随后，我们通过随机为 u0 和 g 中的谓词赋值来生成初始情境和目标情境对 [u0, g]，使得从 u0 过渡到 g 需要执行 2 到 6 个动作。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了更贴近现实场景，我们引入了以下数据集变体：（1）词汇变体，包括从 BNC 中收集的用于 b 的罕见名词，添加颜色和大小修饰语来描述对象，并使用多样化的文本模板来翻译谓词；（2）部分 τ(g)，省略了目标情境中关于 held 的显式信息，需要 LLM 进行逻辑推理；（3）部分 [τ(ut), τ(g)]，是（2）的扩展，包括智能体之前执行的操作，因此需要推断 ut。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "附录 C 提供了每个变体的具体示例。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "最终数据集是这四种变体的均匀混合，并按照 [u0, g] 对划分为训练集、验证集和测试集，分别分配 50k、1k 和 1k 个实例。"
+   }
+  ]
+ },
+ "p6.45": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "REPLACE 中的模块化状态结构使我们能够解析地推导出每种世界状态抽象类型的一组谓词。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "首先，我们引入一组对于制定任务完成的最优计划至关重要的抽象谓词："
+   }
+  ]
+ },
+ "p6.40": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们将情境（u 或 g）和先前动作（A1:t = {a1,.., at}）映射到它们各自的自然语言描述 τs(u)、τs(g)、τa(A1:t)，并使用一组文本模板：τs(·) 和 τa(·)。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，输入给模型的文本包含两个主要部分：（1）一般任务指令（见附录 C），指定智能体可以采取的动作 {τa(a)|a ∈A} 以及它必须遵守的约束 τ (C)，以及（2）世界初始情境和目标情境的文本描述，以及先前动作 [τs(u); τs(g); τa(A1:t)]。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图 2 展示了一个示例。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "以此为条件，LLM 生成后续动作的文本描述 ˆY，这些描述由基于规则的解析器 τ −1 解析回其符号形式 ˆAt+1:T。"
+   }
+  ]
+ },
+ "p7.49": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "现在，我们利用原始谓词和抽象谓词来推导每种类型的世界抽象："
+   }
+  ]
+ },
+ "p7.48": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "附录 E 详细解释了这些谓词的定义和推导。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "最后，我们可以通过结合 nextObj 和 nextObjDirect 来推断下一步的最优动作。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图 3 展示了如何基于原始谓词推导抽象谓词和动作。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图 4 提供了谓词的具体示例。"
+   }
+  ]
+ },
+ "p6.46": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• nearby(o)：物体 o 位于智能体附近的容器内。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "类似地，我们有 distant(l, o)，其中 l 是相对于智能体当前位置的距离，例如，distant(−1, o) 为 True 表示左侧一步的容器包含 o。"
+   }
+  ]
+ },
+ "p7.47": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• subgoal(l, j)：智能体需要访问一系列容器来操作物体，且第 j 个要访问的容器位于智能体当前位置的相对距离 l 处。 • nextObjDirect(v)：下一个要操作的物体的相对方向，其中 v 可以是智能体的左侧或右侧、在附近容器中，或与智能体在一起。 • nextObj(o)：下一步要操作的物体 o（如果适用）。"
+   }
+  ]
+ },
+ "p7.50": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "原始状态 完整的世界状态 S 包括当前情境和目标情境 u 和 g 中的 store、held、agentLoc，以及 boxName。"
+   }
+  ]
+ },
+ "p7.54": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "附录 G 提供了更正式的证明。"
+   }
+  ]
+ },
+ "p7.51": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "世界无关抽象 为了保持世界动态，我们必须跟踪当前情况的所有原始谓词，不包括 boxName，因为动作不会影响它。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此外，我们包括目标情况 g 中的所有谓词以保持奖励函数。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，Sϕw 包括 u 和 g 中的谓词 store、held 和 agentLoc。"
+   }
+  ]
+ },
+ "p7.53": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "π∗-无关抽象 Sϕπ 由谓词 nextObjDirect 和 nextObj 分解。nextObjDirect 指定下一步的动作类型（移动或操作物体）和移动方向（左或右）。nextObj 识别抓取或放置操作中的特定物体 o。"
+   }
+  ]
+ },
+ "p7.52": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Q∗-无关抽象 为了构造 SϕQ，我们纳入 agentLoc、heldu 和 nearbyu，以区分动作合法执行与非法执行的效果。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此外，我们纳入 subgoal，其中 subgoal(l, j = 1) 区分最优动作与非最优动作的效果，subgoal(l, j > 1) 量化执行每个动作的效果。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "进一步地，我们纳入 nextObj，以区分最优与非最优的 put 或 grab 动作的效果。"
+   }
+  ]
+ },
+ "p7.57": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们实验了两组LLM，以分别研究微调和预训练如何影响其表示中编码的世界抽象。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "细节如下。"
+   }
+  ]
+ },
+ "p7.56": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "评估指标 我们使用 F1 分数评估每个谓词的探针模型性能。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了考虑不同谓词候选数量的差异，我们将谓词 p 的分数 xp 归一化为 max(xp−βp,0) 1−βp × 100%，其中 βp 是 RANDOM 基线的分数。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "它根据标签候选的频率按比例抽样来预测结果。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们将这个归一化分数称为恢复率。"
+   }
+  ]
+ },
+ "p8.59": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "由于上述LLM在未微调时表现接近随机，我们还实验了一个更近期的先进LLM，Phi3-17b [2]，它在G RIPPER 4上取得了比其他预训练LLM高得多的性能。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了进行比较分析，我们还纳入了Phi3-3.8b、Pythia-70m [6]和一个微调后的Phi3-17b。"
+   }
+  ]
+ },
+ "p8.61": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图5：不同LLM在GRIPPER上对每种世界抽象的平均恢复率。"
+   }
+  ]
+ },
+ "p7.58": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们在两个数据集上适配了 Llama2-7b/13b [35]、Mistral-7b [20] 和 LLama3-8b [1]，使用了上下文学习（ICL）和带 LoRA 适配器的监督微调（SFT）[19]。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "附录 F 提供了更多细节。"
+   }
+  ]
+ },
+ "p8.60": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "minor",
+    "category": [
+     "term"
+    ],
+    "issue": "probing 未采用项目规定译法「线性探针」，而是译为「探测」。",
+    "suggestion": "此外，我们从头训练一个6层仅解码器的Transformer，通过线性探针从其内部表示中探测抽象，作为基线。",
+    "zh_reviewed": "此外，我们从头训练一个6层仅解码器的Transformer，从其内部表示中探测抽象，作为基线。"
+   }
+  ]
+ },
+ "p8.62": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（a）来自 Llama2 和 Mistral。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（b）来自 Pythia 和 Phi3。"
+   }
+  ]
+ },
+ "p7.55": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们遵循[28]，通过训练两层神经模型来探测LLM表示中的谓词。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于单变量谓词（例如，nearby(o)），我们为每个谓词训练一个单独的探针。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于其中一个变量表示位置索引的双变量谓词（例如，boxName(i, b)），我们为每个第i个位置训练一个单独的探针。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于某些谓词，例如store(i, o)，涉及变量o，其域在数据集中有所不同，探针的输入是[ht, φ(o)]的拼接，其中φ(o)是o的嵌入。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "遵循条件探测原则[15]，我们将每个谓词的嵌入方法视为一个超参数，选择在使用[ht, φ(o)]和仅使用φ(o)作为输入之间具有最大性能差距的方法。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "具体来说，我们探索两种嵌入方法：（1）对o中所有标记的词嵌入进行平均，以及（2）选择并平均o所有提及处的隐藏状态H。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于其他谓词，例如agentLoc和subgoal，探针以ht作为输入。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "附录H提供了关于探测任务表述以及探针设计（例如层数）和优化的更多细节。"
+   }
+  ]
+ },
+ "p9.66": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图7：在COOK上，不同LLM在不同世界抽象中谓词的恢复率。"
+   }
+  ]
+ },
+ "p8.63": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图6：不同LLM在GRIPPER上对所有谓词的恢复率。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "谓词根据它们所属的最粗抽象进行分组。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "建议彩色查看。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "颜色表示谓词关联的所有抽象层级。"
+   }
+  ]
+ },
+ "p8.65": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们没有对预训练的 Phi3-17 在 COOK 上进行线性探针实验，因为它没有显著优于随机基线。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "(a) 每种世界抽象的平均恢复率。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "(b) 来自 Llama2-13b 和 Mistral 的所有谓词的恢复率。"
+   }
+  ]
+ },
+ "p9.68": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "尽管如此，图5显示，虽然Phi3-17bICL在目标导向抽象与更一般抽象之间的恢复率差距较小，但这一差距仍然显著。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图6(b)通过揭示Phi3-17bICL的nextObj、nextObjDirect和subgoal的恢复率远低于LLMsSFT来解释这一点，这并不令人意外，因为Phi3-17bICL在REPLACE上的成功率远低于LLMsSFT。"
+   }
+  ]
+ },
+ "p10.71": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "发现2。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "监督微调和高级预训练主要增强目标导向的世界抽象。"
+   }
+  ]
+ },
+ "p8.64": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在进行线性探针实验之前，我们首先验证微调后的LLM和Phi3-17bICL能够在REPLACE上取得合理的性能，从而可以得出有信息量的结论。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们采用三个评估指标来评价REPLACE：合法率（符合约束的预测比例）、成功率（达到目标状态的预测比例）和最优率（以最少动作数达到目标状态的情况比例）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Llama2-13b和Mistral的结果报告在表1中，所有LLM的全面结果在附录I中提供。如表1所示，两个LLM在仅依赖上下文示例时最初几乎在所有情况下都失败。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，一旦微调，它们就能以合理的成功率和最优率完成任务，并且大多数预测的动作符合约束。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "接下来，我们在相同数据集上对LLM的每个变体进行线性探针实验。"
+   }
+  ]
+ },
+ "p9.70": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们创建了GRIPPER的另外两个变体，以进一步巩固这一发现。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "第一个是一个反事实设置，其中原本与目标无关的谓词变得与目标导向的抽象相关。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的结果表明，它相应地编码在LLMSFT表示中。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在另一种设置下，LLM在次优动作序列上进行微调，结果表明随机探索并不一定改善世界动态的编码。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些实验的细节分别可以在附录K和附录L中找到。"
+   }
+  ]
+ },
+ "p4.24": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们旨在评估LLM表示中编码了哪些类型的状态抽象。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "scope"
+    ],
+    "issue": "“可选地”修饰范围有偏差：原文中 optionally 修饰的是“描述中是否包含反馈 z”，译文可能读作“反馈 z 是否被接收”。",
+    "suggestion": "τ是初始状态s0、先前执行的动作A1:t−1以及（可选的）从世界接收的反馈z的文本描述。",
+    "zh_reviewed": "为此，我们首先用τ (s0, A1:t−1, z)提示预训练或微调的LLM，τ是初始状态s0、先前执行的动作A1:t−1以及可选地从世界接收的反馈z的文本描述。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "反馈可能是奥赛罗游戏中的对手走法或对话系统中的用户话语。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "接下来，我们从LLM的第m层提取隐藏状态H (m)，将m视为超参数。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "遵循[28]，我们选择最后一个隐藏状态h(m) 3，LLM用它来预测后续动作。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "term"
+    ],
+    "issue": "probed 未使用项目规定的“线性探针”译法。",
+    "suggestion": "我们通过评估ϕ(st)能否从ht中以超过随机基线的准确率被线性探针检测到，可能达到近乎完美的性能，来检测LLM表示中st抽象的存在。",
+    "zh_reviewed": "在收集(st, ht)对之后，其中st是由s0、A1:t−1和z诱导的世界状态，我们通过评估ϕ(st)能否从ht中以超过随机基线的准确率被探针检测到，可能达到近乎完美的性能，来检测LLM表示中st抽象的存在。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "term"
+    ],
+    "issue": "probing 未使用项目规定的“线性探针”译法。",
+    "suggestion": "先前关于线性探针的工作[16, 17]提出了一个挑战，即区分表示是编码了语言属性，还是探针本身学会了任务。",
+    "zh_reviewed": "先前关于探针的工作[16, 17]提出了一个挑战，即区分表示是编码了语言属性，还是探针本身学会了任务。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "虽然这些工作关注低级句法特征[16, 30]，但我们的重点是世界状态及其抽象从LLM表示中的可恢复性，质疑这些在解码过程中是被保留还是被丢弃。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "term"
+    ],
+    "issue": "probes 未使用项目规定的“线性探针”译法。",
+    "suggestion": "因此，我们遵循先前工作[27, 28]训练线性探针来分类原始状态和抽象状态，这本质上估计了抽象与表示之间的互信息[34]。",
+    "zh_reviewed": "因此，我们遵循先前工作[27, 28]训练探针来分类原始状态和抽象状态，这本质上估计了抽象与表示之间的互信息[34]。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "term"
+    ],
+    "issue": "probing 未使用项目规定的“线性探针”译法。",
+    "suggestion": "正如我们将在第6节中展示的，用线性探针从LLM表示中检测原始状态或抽象状态并不总是成功的。",
+    "zh_reviewed": "正如我们将在第6节中展示的，从LLM表示中探测原始状态或抽象状态并不总是成功的。"
+   }
+  ]
+ },
+ "p9.67": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们为所有适配到 R E P LACE 的 LLM 变体（ICL 或 SFT）以及从头训练的 Transformer 测量探针。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图 5 和图 7(a) 报告了来自不同 LLM 的每种世界抽象类型中谓词的平均恢复率（RR）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图 6 和图 7(b) 更仔细地观察了来自七个 LLM 变体的每个谓词的 RR，以分析微调和预训练的效果。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "完整结果报告在附录 J 中。接下来，我们提出从结果中得出的四个关键发现。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "发现 1。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "表现合理的 LLM 在解码过程中倾向于维持面向目标的世界抽象，而不是更一般的抽象。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "所有 SFT 的 LLM 和 Phi3-17b ICL，它们以显著优势超过随机基线，主要保留 Q ∗ - 和 π ∗ -无关的抽象。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "比较图 5 和图 7(a) 中的 SFT 的 LLM 和 ICL 的 LLM，从 SFT 的 LLM 中探测到的 Q ∗ - 和 π ∗ -无关抽象的 RR 远高于原始抽象和世界无关抽象。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "关注单个谓词的 RR，图 6(a) 和图 7(b) 揭示，π ∗ -无关抽象的谓词 nextObj 和 nextObjDirect 已大部分从 SFT 的 LLM 中恢复。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这一结果与这些 LLM 实现的高任务成功率一致。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "类似地，Q ∗ -无关抽象的谓词从 SFT 的 LLM 中被有效探测到，尽管在不同谓词间方差较大。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这表明 LLM 表示不仅仅编码用于推导下一个动作的最粗粒度世界抽象。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "相反，它们保留足够的信息来估计每个动作在改变世界状况以匹配目标方面的长期效果，从而促进高效规划。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "成功恢复 nearby、held u 和 agentLoc 表明 LLM 表示捕获了世界约束以告知合法动作，正如 SFT 的 LLM 近乎完美的合法率所证明的那样。"
+   }
+  ]
+ },
+ "p10.74": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "受我们最初两个发现的启发，我们探究了 boxName 和 store 是否以及如何被 Llama213b SFT 编码在上下文化表示中。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为此，我们使用标签候选的上下文化嵌入 Ctxt(·)，比较仅使用嵌入 Ctxt(e) 与使用拼接 [ht; Ctxt(e)] 的情况，灵感来自 [15]。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们还检查了 nearby 以进行比较分析。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "表 2 中的结果表明，物体的位置可以从上下文化表示中以近乎完美的性能探测到，而加入 ht 反而可能降低性能。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "至于更面向目标的谓词，nearby 无法从上下文化表示中以高准确率探测到，而与 ht 的拼接大幅提升了性能，这表明 LLM 丢弃了 store 的信息，并将其与 agentLoc 整合以推导出 nearby。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "发现 4。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "LLM 在构建世界表示方面能力有限，无论是通用表示还是面向目标的表示。"
+   }
+  ]
+ },
+ "p9.69": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "相反，更一般的世界抽象在所有 LLM 表示中大多不存在。"
+   },
+   {
+    "verdict": "major",
+    "category": [
+     "scope"
+    ],
+    "issue": "原文中“the raw state”和“the world-irrelevant abstraction”是并列的两个对象，谓词与这两者相关联；译文“与原始状态和世界无关的抽象”容易被理解为“与原始状态和世界无关的抽象”这一单个对象，改变了修饰关系和范围。",
+    "suggestion": "唯一与原始状态以及与世界无关的抽象相关联的谓词无法被准确恢复。",
+    "zh_reviewed": "唯一与原始状态和世界无关的抽象绑定的谓词无法被准确恢复。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "boxName 的低 RR 表明 LLM 丢弃了与任务完成无关的世界细节。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "类似地，storet（重建世界模型的关键谓词）上的最小 RR 意味着推导世界动态所需的信息在解码过程中大多被省略。"
+   }
+  ]
+ },
+ "p10.77": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们提出了一个新框架，通过状态抽象的视角来探测LLM表征中的抽象世界状态。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "使用我们的框架在合成任务上进行的实验表明，LLM在解码过程中倾向于保留以目标为导向的世界抽象，而不是更一般的抽象，从而抽象掉世界的转移动态。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "总体而言，我们的实验发现强调了探测LLM表征中编码的不同类型抽象的重要性，以得出全面而细致的结论。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，我们的工作并非没有局限性，这些局限性在附录A中进行了讨论。"
+   }
+  ]
+ },
+ "p10.72": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图6和图7(b)展示了在有无监督微调的模型对比中，从LLM表示中恢复目标导向抽象的能力存在显著差异。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "具体而言，在谓词nextObjDirect、agentLoc和subgoal上的性能差距显著，恢复率约为40−70。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "相比之下，对于boxName和store，差异则小得多，不到5。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这种差距表明，当通过教师强制进行微调时，LLM在解码过程中会发展出更目标导向的世界抽象。"
+   },
+   {
+    "verdict": "major",
+    "category": [
+     "scope"
+    ],
+    "issue": "中文使“随着模型被优化以解决任务而得到增强”的主语指向“状态信息”，而原文 which 指“目标导向抽象”整体被增强。",
+    "suggestion": "这一发现也为[21, 28]中成功探测Transformer模型中世界状态的研究提供了新视角：状态信息是其任务中目标导向抽象的一个组成部分，而该抽象随着模型被优化以解决任务而得到增强。",
+    "zh_reviewed": "这一发现也为[21, 28]中成功探测Transformer模型中世界状态的研究提供了新视角：状态信息是其任务中目标导向抽象的一个组成部分，随着模型被优化以解决任务而得到增强。"
+   }
+  ]
+ },
+ "p10.73": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "minor",
+    "category": [
+     "addition"
+    ],
+    "issue": "原文没有“也”，译文多了“也”，增添了“另外还有”的预设。",
+    "suggestion": "有趣的是，先进的预训练有类似的效果。",
+    "zh_reviewed": "有趣的是，先进的预训练也有类似的效果。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图5和图7(a)显示，从头训练的Transformer与LLMsSFT之间的关键区别在于它们对Q∗-和π∗-无关抽象的保留。"
+   },
+   {
+    "verdict": "major",
+    "category": [
+     "other"
+    ],
+    "issue": "原文“maintain goal-oriented abstractions over a more general one”中“over”表示“而不是/优先于”的选择关系，译文“在更一般的抽象之上保持”误译成空间或层级上的上下关系。",
+    "suggestion": "尽管如此，随着LLM在规模和能力上的提升（Pythia<Phi3-3.8b<Phi3-17b），它们更有可能保持目标导向的抽象，而非更一般的抽象。",
+    "zh_reviewed": "尽管如此，随着LLM在规模和能力上的提升（Pythia<Phi3-3.8b<Phi3-17b），它们更有可能在更一般的抽象之上保持目标导向的抽象。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这从图6(b)中可以明显看出，其中谓词的RR在Phi3-17b中并未增加，除非这些谓词属于目标导向的抽象。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "scope"
+    ],
+    "issue": "原文中“essential for world-irrelevant abstraction”修饰“store and heldg”，译文括号放在“RR”之后，容易被理解为修饰RR。",
+    "suggestion": "相比之下，store和heldg（对于世界无关的抽象至关重要）的RR在所有预训练的LLM中几乎相同。",
+    "zh_reviewed": "相比之下，store和heldg的RR（对于世界无关的抽象至关重要）在所有预训练的LLM中几乎相同。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这意味着先进的预训练并不一定会导致对世界动态的更好编码。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "发现3。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "原始状态和世界无关的抽象在解码过程中大多被抑制。"
+   }
+  ]
+ },
+ "p10.75": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "虽然LLM倾向于保留目标导向的抽象，但它们并未完全丢弃boxName（LLMsSFT的RR为15-20，Phi3-17b甚至达到43），而boxName与任务完成或转移动态均无关。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "term"
+    ],
+    "issue": "probing 未使用规定译法「线性探针」",
+    "suggestion": "此外，某些目标导向谓词（如subgoal）的线性探针性能仍有很大提升空间。",
+    "zh_reviewed": "此外，某些目标导向谓词（如subgoal）的探针性能仍有很大提升空间。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "而且，世界动态信息（如store）大多被丢弃。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "备注。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "term"
+    ],
+    "issue": "probing 未使用规定译法「线性探针」",
+    "suggestion": "对谓词线性探针性能的解释应取决于其所属的具体抽象类型。",
+    "zh_reviewed": "对谓词探针性能的解释应取决于其所属的具体抽象类型。"
+   }
+  ]
+ },
+ "p10.76": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "仅关注原始世界状态可能会得出一个肤浅的结论，即LLM只部分地捕捉了世界。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "相比之下，我们的框架提供了更全面和系统的解释，表明表现良好的LLM在解码过程中保持了面向目标的世界表示。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "term"
+    ],
+    "issue": "未使用项目规定译法「线性探针」，而是译为「探针/探测」。",
+    "suggestion": "这强调了我们线性探针框架的核心原理：有必要使用线性探针探测不同的世界抽象，而不仅仅是原始状态。",
+    "zh_reviewed": "这强调了我们探针框架的核心原理：有必要探测不同的世界抽象，而不仅仅是原始状态。"
+   }
+  ]
+ }
+}

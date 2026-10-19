@@ -1,0 +1,640 @@
+{
+ "__meta__": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "models": {
+   "reviewer": "deepseek-v4-pro"
+  },
+  "translator": "deepseek-v4-pro（关思考）",
+  "independence": "same-model",
+  "usage": {
+   "calls": 22,
+   "prompt_tokens": 20717,
+   "completion_tokens": 23478,
+   "seconds": 245.8,
+   "cached_tokens": 14336
+  }
+ },
+ "abs.p1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "大型语言模型（LLMs）在语言中心任务中已取得强劲表现。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，在智能体环境中，LLMs 往往难以预测行动后果并适应环境动态，这凸显了基于 LLM 的智能体对世界建模能力的需求。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们提出强化世界模型学习（RWML），一种自监督方法，利用仿真到真实差距奖励，在文本状态上为基于 LLM 的智能体学习以行动为条件的世界模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的方法将模型产生的模拟下一状态与环境观察到的实际下一状态对齐，在预训练嵌入空间中鼓励内部世界模拟与实际环境动态之间的一致性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "与下一状态标记预测不同，后者优先考虑标记级保真度（即复现精确措辞）而非语义等价，并可能导致模型崩溃，我们的方法提供了更稳健的训练信号，并且经验上比 LLM 作为评判者更不易受到奖励黑客攻击。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们在 ALFWorld 和 $\\tau^{2}$ Bench 上评估了我们的方法，尽管完全自监督，仍观察到相对于基础模型的显著提升。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "当与任务成功奖励结合时，我们的方法在 ALFWorld 和 $\\tau^{2}$ Bench 上分别比直接任务成功奖励强化学习高出 6.9 和 5.7 分，同时达到专家数据训练的性能。"
+   }
+  ]
+ },
+ "S1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "大型语言模型（LLMs）在广泛的语言中心任务中取得了显著成功，包括问答、代码生成和多步推理（Brown et al., 2020; Wei et al., 2022; Lample and Conneau, 2019; Rozière et al., 2024; DeepSeek-AI et al., 2025; OpenAI and et al., 2024）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些进展激发了人们日益增长的兴趣，将LLMs用作自主智能体，与真实环境交互并完成长期任务（Yao et al., 2023; Deng et al., 2023）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "尽管具备强大的语言和推理能力，基于LLM的智能体在许多需要预测行动后果和适应环境动态的智能体场景中仍面临困难（Liu et al., 2025）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这种差异凸显了预训练获得的语言能力与基于LLM的智能体所需的智能体智能之间的区别。"
+   }
+  ]
+ },
+ "S1.F1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图1：我们提出RWML作为一种可扩展的自监督方法，通过从下一状态学习来提升基于LLM的智能体的世界建模能力，先于从任务成功奖励中学习的下游策略强化学习。"
+   }
+  ]
+ },
+ "S1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这一局限的一个关键原因是标准预训练目标与智能体使用场景之间的错位。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "标准预训练目标，例如在静态文本语料库上的下一个词元预测，强调语言理解和生成。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "相比之下，现代基于LLM的智能体在复杂、长时程的环境中运行，其中成功完成任务需要同时推理当前状态以及环境可能如何响应动作而演变（LeCun, 2022; Hu and Shu, 2023; Hao et al., 2023）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对自身行为潜在未来结果进行建模的能力是生物智能的核心。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "神经科学和心理学的研究表明，人类、动物和智能系统使用内部世界模型来高效地进行推理、规划、探索和从极少的尝试中学习（Craik, 1944; Tolman, 1948; Daw et al., 2005; Daw and Dayan, 2014; Bennett, 2023）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们相信，这种世界建模能力对于基于LLM的智能体中的有效推理和规划同样至关重要。"
+   }
+  ]
+ },
+ "S1.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "最近的工作探索了为基于LLM的智能体配备世界建模能力，通过下一词元预测（即SFT）训练LLM预测下一状态。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例子包括Zhang et al. (2025a)；Yu et al. (2025c)，它们使用专家策略提供的轨迹或由更强语言模型生成的高质量合成数据来教LLM对环境转移进行建模。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "虽然在某些环境中有效，但这些方法面临可扩展性挑战：（1）它们严重依赖来自专家/强LLM的高质量数据；以及（2）它们基于SFT，SFT优先考虑词元级保真度（即重现确切措辞）而非语义等价，并可能导致模型崩溃。"
+   }
+  ]
+ },
+ "S1.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在本文中，我们提出了强化世界模型学习（RWML），这是一种基于强化学习的自监督训练方法，用于为基于大语言模型的智能体学习以动作为条件的世界模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "RWML 不是通过监督微调来优化词元级别的保真度，而是训练大语言模型最小化模型产生的模拟下一状态与从环境中观察到的实际下一状态之间的差异，该差异在预训练的嵌入空间中度量。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这种从模拟到真实的对齐促进了智能体内部世界模型与真实环境动态之间的语义一致性，同时保留了与任务相关的转移，使其适用于下游决策。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们在两个长时程智能体基准（ALFWorld 和 $\\tau^{2}$ Bench）上评估了我们的方法，发现 RWML 在不使用任何专家数据、强大语言模型或任务成功奖励信号的情况下，将基础模型性能显著提高了 19.6 和 6.9 个百分点。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "当与任务成功奖励结合时，使用 RWML 训练的智能体在 ALFWorld 和 $\\tau^{2}$ Bench 上分别比直接使用任务成功奖励的强化学习高出 6.9 和 5.7 个百分点，同时达到了与使用专家数据训练相当的性能。"
+   }
+  ]
+ },
+ "S1.p5.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "总之，我们的贡献是：（1）我们提出RWML作为一种可扩展的、自监督的训练方法，用于基于LLM的智能体，从模拟到现实的差距奖励中学习动作条件世界模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（2）我们在两个长时程基准（ALFWorld和$\\tau^{2}$ Bench）上评估了我们的方法，发现RWML显著提高了基础模型的性能。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "当与任务成功奖励结合时，我们的模型优于标准RL，并达到与使用专家数据训练相当的性能。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（3）我们进行了全面的分析——包括消融研究、模型遗忘、定性分析等——以突出RL和世界模型学习对基于LLM的智能体的益处。"
+   }
+  ]
+ },
+ "S1.F2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图2：RWML概述。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "给定目标模型 $\\pi_{\\theta}$，我们首先通过使用 $\\pi_{\\theta}$ 与环境收集轨迹 $(s_{0},a_{0},s_{1},a_{1},...s_{T})$ 来收集RWML的训练数据，然后在根据公式1定义的“过于简单”样本进行下采样后，将这些轨迹转换为所有 $t$ 的 $\\left\\langle s_{\\leq t},a_{t},s_{t+1}\\right\\rangle$ 三元组。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然后，我们通过GRPO训练 $\\pi_{\\theta}$ 作为世界模型进行推理，使用轻量级奖励函数（例如基于嵌入的余弦相似度）将预测的 $\\hat{s}_{t+1}$ 与真实的 $s_{t+1}$ 进行比较。"
+   }
+  ]
+ },
+ "S4.F3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图3：比较使用不同算法训练的模型各层的参数变化比率。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "causal"
+    ],
+    "issue": "“contributing to”表示“促成、是原因之一”，译文“导致了”将其变为更直接的因果关系，语气略强。",
+    "suggestion": "这可能促成了第3.3节中的模型遗忘。",
+    "zh_reviewed": "我们发现，与RWML和策略RL相比，WM SFT训练的模型显示出显著更多的参数变化，这可能导致了第3.3节中的模型遗忘。"
+   }
+  ]
+ },
+ "S4.SS1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在本节中，我们对模型在RWML训练前后的决策行为进行一些定性和定量分析。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "定性来看，在图5中我们发现经过RWML训练的模型能够利用其对环境改进的知识，做出更准确和高效的决策。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例如，在ALFWorld中，我们的模型正确预测“刀”最有可能在“台面”上而不是其他位置，并在5步内完成任务。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在$\\tau^{2}$ Bench中，它正确考虑了飞行模式开启的可能性——这是基础模型遗漏的情况。"
+   }
+  ]
+ },
+ "S4.SS1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "定量来看，我们发现 RWML 在两个基准上都有效减少了无效或低效动作的产生，尽管模型并未被明确训练来做到这一点。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在 ALFWorld 上，无效（例如格式错误）或低效动作（例如“look”和“examine”动作）的比例在 RWML 后从 59.30% 下降到 39.45%。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "类似地，在 $\\tau^{2}$ Bench 上，每次工具调用中无效工具调用（例如编造的工具名称或错误的参数）的比例从 24.90% 下降到 8.84%。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "“meaningfully”被译为“显著”，语气比原文强，可能让人误解为统计显著。",
+    "suggestion": "总体而言，我们的定性和定量结果表明，RWML 有意义地提升了 LLM 在智能体环境中的决策能力。",
+    "zh_reviewed": "总体而言，我们的定性和定量结果表明，RWML 显著提升了 LLM 在智能体环境中的决策能力。"
+   }
+  ]
+ },
+ "S4.F4": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图4：在$\\tau^{2}$ Bench上使用不同基础模型进行RWML训练。"
+   }
+  ]
+ },
+ "S4.SS2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了理解 RWML 的有效性，我们还分析了它在训练过程中如何重塑模型参数。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "遵循 Zhu et al. (2025)，我们考察了相对于未训练基础模型的逐参数权重变化，采用相同的定义和阈值 $\\eta=10^{-3}$ 来识别主要的逐点更新："
+   }
+  ]
+ },
+ "S4.SS2.p1.2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "其中 $w_{i},\\hat{w_{i}}\\in\\mathbb{R}$ 是模型在调优前后权重点的有限非零标量。"
+   }
+  ]
+ },
+ "S4.SS2.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于每一层，我们计算经历重大更新的参数比例。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Qwen3-8B 在 $\\tau^{2}$-Bench 上以及 Qwen2.5-7B-Instruct 在 ALFWorld 上的结果如图 3 所示。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "完整结果见附录 E。一个一致的模式浮现出来：与 WM SFT 相比，RWML 在各层中归纳出的参数变化明显更少，表明它用更小且更有针对性的更新集来编码任务相关信息（另见附录 E）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这表明 RWML 以更具参数效率和结构保守性的方式学习，避免了对预训练表示空间的大范围修改。"
+   }
+  ]
+ },
+ "S4.SS2.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "重要的是，这种紧凑的更新行为也有助于解释为什么 RWML 与后续的策略学习能够很好地结合，如图 3 所示。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "当随后进行策略强化学习时，所得的权重变化比率与直接对基础模型应用策略强化学习时的比率保持非常接近。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "相比之下，用 WM SFT 初始化的模型在策略优化后表现出显著更高的变化比率，反映出更强的参数干扰。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "hedge"
+    ],
+    "issue": "原文 suggest 语气较弱，译文“表明”更接近 indicate/show，语气有所加强。",
+    "suggestion": "这些观察结果似乎表明，RWML 维持了一个与策略学习更兼容的参数景观，减少了后训练期间的冲突和冗余。",
+    "zh_reviewed": "这些观察结果表明，RWML 维持了一个与策略学习更兼容的参数景观，减少了后训练期间的冲突和冗余。"
+   }
+  ]
+ },
+ "S4.SS2.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "总体而言，我们发现 RWML 的这种参数更新行为在两个基准测试中表现一致，并且对不同 Transformer 组件（包括注意力（Q/K/V/O）和 MLP 投影层）基本不变（见附录 E）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "与 WM SFT 相比，RWML 训练的模型始终具有更低的变化比率，这也与我们在第 3.3 节中的发现一致，即 RWML 能更好地缓解灾难性遗忘。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些结果提供了一个不同于传统 SFT-then-RL 范式的视角：在“中期训练”和后期训练阶段都应用 RL 似乎能产生更稳定、更一致的参数更新，并可能有助于解释性能的提升。"
+   }
+  ]
+ },
+ "S4.SS3.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在具有挑战性的 $\\tau^{2}$ 基准上，我们发现从 RWML 学习并迁移世界模型知识到决策的能力取决于基础模型的能力。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在图 4 中，我们使用三种不同的基础模型进行 RWML 训练：Qwen2.5-7B、Qwen3-8B 和 Qwen3-30B-A3B{fn3}。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们发现，像 Qwen2.5-7B 这样的较弱模型在具有挑战性的 $\\tau^{2}$ 基准上难以将世界知识迁移到决策中，而较强的模型（Qwen3-8B 和 Qwen3-30B-A3B）则显示出显著的提升，接近 Qwen3-235B-A22B-Thinking-2507 的性能。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这表明 RWML 对（足够）强的基础模型最为有效。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们将提高较弱模型迁移能力的工作留给未来研究。"
+   }
+  ]
+ },
+ "fn3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们使用 Qwen3-30B-A3B-Thinking-2507，这是 Qwen3-30B-A3B 的增强版本，经过额外的推理和智能体数据后训练，留下的进一步改进空间较小。"
+   }
+  ]
+ },
+ "S4.F5": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图5：经过RWML后，模型通过利用其对环境改进的知识，产生更准确和高效的决策。"
+   }
+  ]
+ },
+ "S6.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们提出 RWML，一种可扩展的自监督方法，在下游使用任务成功奖励的强化学习之前，增强基于 LLM 的智能体的环境理解和决策能力。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在没有专家/强 LLM 标注或任务成功信号的情况下，RWML 通过在预训练嵌入空间中将模拟的下一状态与观察到的环境状态对齐，将 LLM 训练为动作条件世界模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们在两个长时程智能体基准 ALFWorld 和 $\\tau^{2}$ Bench 上评估 RWML，发现仅使用交互数据就能显著提升性能。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "当与策略强化学习中的任务成功奖励结合时，我们的方法在两个基准上均优于直接策略强化学习，并达到与使用专家数据训练相当的性能。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们相信，我们的工作为可扩展的自监督训练方法开辟了新途径，以在智能体强化学习时代进一步推进基于 LLM 的智能体。"
+   }
+  ]
+ }
+}

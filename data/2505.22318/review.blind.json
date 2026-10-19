@@ -1,0 +1,506 @@
+{
+ "__meta__": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "models": {
+   "reviewer": "deepseek-v4-pro"
+  },
+  "translator": "deepseek-v4-pro（关思考）",
+  "independence": "same-model",
+  "usage": {
+   "calls": 18,
+   "prompt_tokens": 15254,
+   "completion_tokens": 13254,
+   "seconds": 123.3,
+   "cached_tokens": 11008
+  }
+ },
+ "abs.p1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "推理中的一个根本性挑战是在假设的、反事实的世界中导航，其中逻辑可能与根深蒂固的知识相冲突。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们通过提出以下问题来研究大型语言模型（LLMs）的这一前沿：当上下文与其参数化知识相矛盾时，LLMs能否进行逻辑推理？"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了便于系统分析，我们首先引入CounterLogic，这是一个专门设计用于将逻辑有效性与知识对齐分开的基准。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "「plummets」意为骤降/大幅下降，译文「下降了」语气较弱，未体现下降幅度之剧烈。",
+    "suggestion": "与知识对齐的场景相比，模型在反事实场景中的准确率平均骤降了14%。",
+    "zh_reviewed": "对11个LLMs在六个不同推理数据集上的评估揭示了一致的失败：与知识对齐的场景相比，模型在反事实场景中的准确率平均下降了14%。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们假设这一差距并非源于逻辑处理的缺陷，而是源于无法管理上下文与知识之间的认知冲突。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "受人类元认知的启发，我们提出了一种简单而有效的干预措施：标记与推理（FaR），即模型在推理之前首先被提示标记潜在的知识冲突。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这一元认知步骤非常有效，将性能差距缩小到仅7%，并将整体准确率提高了4%。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的研究结果诊断并研究了现代LLMs推理中的一个关键局限性，并展示了元认知意识如何使它们成为更稳健、更可靠的思考者{fn1}。"
+   }
+  ]
+ },
+ "fn1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的数据和代码可在 https://github.com/Sukin272/CounterLogic.git 获取。* 作者对本文贡献相同。"
+   }
+  ]
+ },
+ "S1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "LLM 已在多个领域展现出卓越的推理能力，在从基础问题求解到复杂多步推理挑战等任务中均表现出色 [1, 2, 3, 4, 5, 6]。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "尽管取得了这些进展，但当推理所用信息与其在训练期间获得的参数化知识（知识冲突）相冲突时，它们往往会出现显著的性能下降（见图 1）[7, 8, 9, 10, 11, 12, 13]。"
+   }
+  ]
+ },
+ "S1.F1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图1：当被要求仅基于给定前提进行推理时，LLM 能可靠地验证与知识一致的论证（上图），但在逻辑相同但与知识冲突的论证上表现下降（下图）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这是因为它们的参数化知识干扰了推理过程（例如，“猪不是鸟”）。"
+   }
+  ]
+ },
+ "S1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在信息可能相互冲突的场景中进行有效推理的能力，对于将LLM部署到现实世界应用中至关重要，在这些应用中，它们必须处理可能新颖、意外甚至与其训练数据相矛盾的信息[11]。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例如，从事科学探索或理解历史辩论需要从反事实前提进行推理，例如：“假设太阳绕地球运行，描述火星在夜空中的预测路径。”这种情况对于创造性和科学思维至关重要[14]，而无法对其进行推理可能导致不可靠的性能[15]。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此外，先前的研究还表明，在反事实情境中评估推理可能作为对模型推理能力更稳健的评估[12]，因为标准推理任务可能通过模式匹配被破解[16, 17, 18, 19, 12]。"
+   }
+  ]
+ },
+ "S1.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "虽然知识冲突已被积极研究，但先前的研究主要集中在涉及信息提取或单步推理的相对简单任务上（例如：美国现任总统是谁？）"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "[20]。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，现有基准要么在不控制知识冲突的情况下测试复杂逻辑推理，要么用浅层的单步推理测试简单的知识冲突。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如表I所总结的，尚无基准被设计用于在反事实压力下系统地探究多步逻辑推理。"
+   }
+  ]
+ },
+ "S1.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为弥补这一空白，我们引入了 CounterLogic，一个旨在将逻辑有效性与知识一致性区分开来的基准。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的框架易于扩展，目前实现了 9 种逻辑模式，问题复杂度从 1 到 9 个推理步骤系统性地递增。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "利用 CounterLogic 和其他五个数据集（见表 I），我们对 11 个 LLM 的大规模评估揭示了一个普遍存在的失败：在反事实场景中，模型准确率平均骤降 14%。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "进一步分析表明，这一性能差距并未因推理步骤数的增加而加剧，而是关键性地取决于逻辑模式。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "具体而言，在需要否定的任务上，差距飙升至超过 30%，而在较简单的形式上则很小。"
+   }
+  ]
+ },
+ "S1.p5.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们假设，这种失败不仅源于推理能力的不足，还源于当前提与参数化知识相矛盾时，模型无法管理由此产生的认知冲突。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "受人类元认知（即反思自身思维以解决此类冲突的能力 [21]）的启发，我们提出了一种简单而有效的干预措施，称为 Flag & Reason (FaR)。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在推理之前，我们提示模型首先标记结论在事实上是否可信，迫使它直面知识冲突。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的实验表明 FaR 非常有效，将性能差距缩小到仅 7%，并将整体准确率平均提高了 4%。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们对模型思维链的分析表明，这种干预通过将推理过程锚定在最初对冲突的承认上，防止知识偏见破坏后续的逻辑步骤，从而发挥作用。"
+   }
+  ]
+ },
+ "S1.p6.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在本文中，我们首先使用 CounterLogic（第三节）和其他基准来诊断 LLM 推理中普遍存在的失败（第四节）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然后，我们提出一种元认知干预 FaR 来解决这一失败（第五节），并分析其有效性。"
+   }
+  ]
+ },
+ "S1.p7.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的贡献可以总结如下："
+   }
+  ]
+ },
+ "S1.I1.i1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们引入了 CounterLogic，一个用于在知识冲突场景中评估多步逻辑推理的平衡基准。"
+   }
+  ]
+ },
+ "S1.I1.i2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "2. 我们量化并分析了LLM中普遍存在的推理失败：当逻辑有效性与模型的参数化知识发生冲突时，性能会出现显著且系统性的下降。"
+   }
+  ]
+ },
+ "S1.I1.i3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "3. 我们提出并讨论了 Flag & Reason (FaR)，这是一种简单的元认知干预，能显著缓解这一失败，缩小已识别的性能差距并提高整体准确率。"
+   }
+  ]
+ },
+ "S1.T1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "表 I：逻辑推理基准的比较。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "CounterLogic 独特地将多步推理与知识冲突场景相结合，同时保持标签的平衡。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这使得能够严格评估参数化知识如何影响 LLM 的逻辑推理能力，解决了现有基准的局限性，这些基准通常在重要评估维度上缺乏适当的平衡。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "*我们提供了一个数据集生成框架，数字可以根据要求轻松更改。"
+   }
+  ]
+ },
+ "S6.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的工作证实，当逻辑与其参数化知识相冲突时，LLM 表现出严重的推理失败，在六个推理数据集（包括我们新的 CounterLogic 基准）上测得反事实场景中的准确率一致下降 14%。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们将此归因于信念抑制的失败，这是一种类似于人类认知偏差的现象。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了解决这个问题，我们引入了 Flag & Reason (FaR)，这是一种简单的元认知干预，不仅将这一性能差距缩小一半至 7%，还将整体准确率提高了 4%。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们对模型推理链的分析揭示了这一成功背后的机制：FaR 帮助模型隔离知识冲突，从而将其推理锚定在所提供的逻辑上下文中，而不是其矛盾的参数化知识上。"
+   }
+  ]
+ },
+ "S6.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "未来的工作可以探索这些知识冲突的内部模型表征，将元认知策略扩展到更复杂的现实世界推理领域，并开发从根本上解决参数记忆与上下文逻辑之间张力的方法，从而推动真正稳健的AI推理器的发展。"
+   }
+  ]
+ },
+ "S7.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "虽然我们的研究提供了有价值的见解，但应指出若干局限性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "首先，我们的 CounterLogic 数据集无法涵盖所有现实世界的逻辑冲突，因为它主要关注范畴三段论和命题逻辑等基础结构。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "其次，我们的发现仅限于所测试的模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "架构创新的快速步伐意味着未来的模型可能以不同的方式处理反事实信息。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "第三，我们的评估仅限于英语和常识概念。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "干预措施的有效性可能因其他语言、文化和专业领域而异。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "第四，与人类认知的类比是概念框架，不应被解释为 LLM 中相同认知过程的证据。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "最后，使用 LLM 合成生成查询可能引入了生成器模型本身未被注意的不一致或偏差。"
+   }
+  ]
+ },
+ "S7.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "尽管存在这些局限性，我们的研究结果表明反事实推理能力有了显著提升，这表明我们的核心见解在模型演进过程中仍将具有相关性。"
+   }
+  ]
+ }
+}
