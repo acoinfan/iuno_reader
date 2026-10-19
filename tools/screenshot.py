@@ -7,7 +7,8 @@ from playwright.sync_api import sync_playwright
 src, dst = sys.argv[1], sys.argv[2]
 width = int(sys.argv[3]) if len(sys.argv) > 3 else 1400
 height = int(sys.argv[4]) if len(sys.argv) > 4 else 0
-anchor = sys.argv[5] if len(sys.argv) > 5 else None
+anchor = sys.argv[5] if len(sys.argv) > 5 and sys.argv[5] else None
+clicks = sys.argv[6].split("||") if len(sys.argv) > 6 and sys.argv[6] else []  # 截图前依次点击的元素
 
 with sync_playwright() as p:
     b = p.chromium.launch()
@@ -16,6 +17,12 @@ with sync_playwright() as p:
     pg.wait_for_timeout(4000)  # 等 MathJax 和网页字体
     fonts = pg.evaluate("document.fonts.check('16px \"CMU Serif\"')")
     print("CMU Serif 已加载：", fonts)
+    for c in clicks:
+        pg.locator(c).first.click()
+        pg.wait_for_timeout(400)
+        print("已点击", c)
+    if clicks:
+        print("高亮的元素数：", pg.locator(".f1,.f2,.f3").count(), "；其中中文栏：", pg.locator(".zh .f1,.zh .f2,.zh .f3").count())
     if anchor:
         pg.locator(anchor).first.scroll_into_view_if_needed()
         pg.wait_for_timeout(500)
