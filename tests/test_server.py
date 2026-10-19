@@ -88,6 +88,34 @@ try:
     shutil.rmtree(os.path.join(server.OUT, PID), ignore_errors=True)
     print("批注：保存、读取、写复盘笔记 通过")
 
+    # 生词本：不分论文，存 data/vocab.json；较新的为准、例句合并；设置了知识库目录时写 vocab/生词本.md
+    vf = os.path.join(ROOT, "data", "vocab.json")
+    vbak = open(vf, encoding="utf-8").read() if os.path.exists(vf) else None
+    kb = os.path.join(TMP, "kb")
+    os.makedirs(kb)
+    try:
+        if os.path.exists(vf):
+            os.remove(vf)
+        call("POST", "/api/settings", {"max_jobs": 2, "export_dir": "", "library_dir": kb})
+        c1 = {"pid": PID, "title": "T", "en": "It elicits X.", "zh": "它引出 X。", "time": "2026-10-19 10:00"}
+        c2 = dict(c1, en="We elicit Y.", zh="我们引出 Y。")
+        e = {"w": "elicit", "p": "i'lisit", "t": "vt. 引出", "d": "", "time": "2026-10-19 10:00", "ctx": [c1]}
+        assert call("POST", "/api/vocab", {"vocab": {"elicit": e}})[0] == 200
+        assert call("POST", "/api/vocab", {"vocab": {"elicit": dict(e, time="2026-10-19 11:00", ctx=[c2])}})[0] == 200
+        got = call("GET", "/api/vocab")[1]["vocab"]["elicit"]
+        assert [c["en"] for c in got["ctx"]] == ["It elicits X.", "We elicit Y."], got
+        md = open(os.path.join(kb, "vocab", "生词本.md"), encoding="utf-8").read()
+        assert md.startswith("# 生词本") and "## elicit" in md and "> We elicit Y." in md, md
+        assert call("POST", "/api/vocab", {"vocab": {"elicit": dict(e, deleted=True, time="2026-10-19 12:00")}})[0] == 200
+        assert "## elicit" not in open(os.path.join(kb, "vocab", "生词本.md"), encoding="utf-8").read()
+    finally:
+        if vbak is None:
+            if os.path.exists(vf):
+                os.remove(vf)
+        else:
+            open(vf, "w", encoding="utf-8").write(vbak)
+    print("生词本：合并例句、删除、写知识库 通过")
+
     call("POST", f"/api/jobs/{j['n']}/delete")
     assert server.Q.find(j["n"]) is None
     assert call("GET", "/out/../../etc/passwd")[0] == 404

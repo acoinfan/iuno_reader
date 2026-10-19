@@ -246,6 +246,24 @@ class Queue:
             self._save()
 
 
+def vocab_md(vocab):
+    """生词本 → Markdown（和网页里「导出 Markdown」同样的格式），按收录时间排序。"""
+    vs = sorted((v for v in vocab.values() if not v.get("deleted")), key=lambda v: v.get("time", ""))
+    out = ["# 生词本", "", f"> iuno_reader 双语网页里收的生词，共 {len(vs)} 个；每个词附上它出现的句子和出处。"
+           "这是生成文件，在网页里增删生词会整个重写。", ""]
+    for v in vs:
+        out.append(f"## {v.get('w', '')}" + (f"  /{v['p']}/" if v.get("p") else ""))
+        out.append("")
+        out += [f"- {x}" for x in (v.get("t") or "").split("\n") if x]
+        if v.get("d"):
+            out.append(f"- *{v['d']}*")
+        for c in v.get("ctx") or []:
+            out += ["", f"> {c.get('en', '')}", f"> {c.get('zh', '')}",
+                    f"> —— {c.get('title', '')}（arXiv {c.get('pid', '')}）· {c.get('time', '')}"]
+        out.append("")
+    return "\n".join(out) + "\n"
+
+
 def settings():
     return {"max_jobs": 2, "export_dir": "", "library_dir": ""} | (pv._load("settings.json", {}) or {})
 
@@ -344,6 +362,29 @@ class Handler(BaseHTTPRequestHandler):
                         os.makedirs(os.path.dirname(t), exist_ok=True)
                         with open(t, "w", encoding="utf-8") as fh:
                             fh.write(md)
+                    return self._send(200, {"ok": True})
+            if path == "/api/vocab":  # 双语网页里的生词本（不分论文）
+                f = os.path.join(ROOT, "data", "vocab.json")
+                if method == "GET":
+                    return self._send(200, _json(f, {"vocab": {}}) or {"vocab": {}})
+                if method == "POST":
+                    b = self._body()
+                    old = (_json(f, {"vocab": {}}) or {}).get("vocab", {})
+                    new = b.get("vocab", {}) or {}
+                    for k, v in new.items():  # 以较新的为准，例句合并去重
+                        o = old.get(k)
+                        if not o or str(v.get("time", "")) >= str(o.get("time", "")):
+                            ctx = (o or {}).get("ctx", []) + v.get("ctx", [])
+                            v["ctx"] = [c for i, c in enumerate(ctx) if c.get("en") not in [x.get("en") for x in ctx[:i]]]
+                            old[k] = v
+                    os.makedirs(os.path.dirname(f), exist_ok=True)
+                    with open(f, "w", encoding="utf-8") as fh:
+                        json.dump({"vocab": old}, fh, ensure_ascii=False, indent=1)
+                    lib = settings().get("library_dir", "").strip()
+                    if lib and os.path.isdir(lib):
+                        os.makedirs(os.path.join(lib, "vocab"), exist_ok=True)
+                        with open(os.path.join(lib, "vocab", "生词本.md"), "w", encoding="utf-8") as fh:
+                            fh.write(vocab_md(old))
                     return self._send(200, {"ok": True})
             if method == "GET" and path == "/api/models":
                 p = pv.provider(q.get("provider", [""])[0])

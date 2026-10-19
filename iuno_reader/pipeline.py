@@ -16,6 +16,7 @@ import datetime
 import glob
 import json
 import os
+import re
 import shutil
 from collections import Counter
 
@@ -216,6 +217,24 @@ def _cite_info(P, doc, only):
     return {"refs": refs, "lib": lib["papers"] if lib else {}, "vault": lib["vault"] if lib else ""}
 
 
+def _dict_words(P, doc, only):
+    """渲染范围内出现的英文词 → 本地词典里的简要词条（给网页「查词」用）。没有词典或出错时返回 None。"""
+    from . import dictionary
+    try:
+        db = dictionary.open_db(P.root)
+        if db is None:
+            return None
+        words = set()
+        for s in doc["segments"]:
+            if s["id"] in only:
+                for sent in s.get("sentences") or []:
+                    words.update(w.lower() for w in re.findall(r"[A-Za-z][A-Za-z']*", re.sub(r"\$[^$]*\$", " ", sent)))
+        return dictionary.lookup(db, words) or None
+    except Exception as e:  # noqa: BLE001  查词只是辅助，不能挡住渲染
+        print(f"本地词典查词失败，网页里不提供查词：{type(e).__name__}: {e}")
+        return None
+
+
 def run(root, pid, sections=None, translate="auto", review="auto", export=None, force_fetch=False, workers=1,
         review_workers=None):
     """workers：翻译时同时处理几段；review_workers：审校时同时审几段（默认同 workers）。按接口允许的并发数设。"""
@@ -324,7 +343,8 @@ def run(root, pid, sections=None, translate="auto", review="auto", export=None, 
     st["refs"] = {"cited": len(cite_info["refs"]), "arxiv": sum(1 for v in cite_info["refs"].values() if v["arxiv"]),
                   "in_library": sum(1 for v in cite_info["refs"].values() if v["lib"])}
     _write(render_markdown(doc, stats, sections_zh, only, review_info, cite_info), P.o("paper.zh.md"))
-    _write(render_html(doc, stats, sections_zh, only, review_info, cite_info), P.o("paper.zh.html"))
+    _write(render_html(doc, stats, sections_zh, only, review_info, cite_info, _dict_words(P, doc, only)),
+           P.o("paper.zh.html"))
     _write(paper_en_md(doc), P.o("paper.en.md"))
     _write(flags_md({"segments": [s for s in doc["segments"] if s["id"] in only]}, pid), P.o("flags.md"))
     counts = {lv: stats.get(lv, 0) for lv in LEVELS}

@@ -62,7 +62,19 @@ cd /home/a_coin_fan/work/iuno_reader
 
 - **引用**：正文里的引用（「Lepori et al. (2026)」「[17, 39]」）中英两边都加了下划线，悬停看是哪篇，点开有标题、作者、arXiv 和出版页链接，还能跳到本文下一处引用它的地方。**在你知识库里的论文**用绿色实线加「库」字标出，卡片里写着它在库里的位置（如「cvpr4 · 精读-反面 #1」），并链到它的中文译文、PDF 和论文卡片（Obsidian）。侧栏底部列出「引用了你库里的 N 篇」，点一下跳到第一次引用的地方。Markdown 版在文末列出库内论文的双链，全部参考文献放在一个折叠框里。
 
+- **查词与生词本**：标题区「点词：高亮 / 查词」切到查词后，点英文单词弹出词卡（音标、考试标签、中文释义、英文释义、原形）；任何模式下按住 Alt 点词也是查词。词卡上「＋ 生词本」会记下这个词的原形、释义，以及**它所在的句子（原文和译文）和出处**。收进生词本的词，在所有译文里都带淡黄色点状下划线。侧栏「生词本」可以导出 Markdown 或 Anki 用的 TSV。生词本不分论文，存在浏览器里；通过 `serve` 打开时还会存到 `data/vocab.json`，并写成知识库的 `vocab/生词本.md`（设置了「知识库目录」时）。词典查不到的词，词卡上有有道词典的链接。
+
 开关状态保存在浏览器里。点词高亮和加粗需要 spaCy 与 `en_core_web_sm`（没有时自动关闭这两项）。
+
+### 本地词典
+
+查词用开源的 [ECDICT](https://github.com/skywind3000/ECDICT)（MIT 协议，七十多万词条），体积大，不进 git，自己下载一次：
+
+```bash
+mkdir -p dict && curl -L -o dict/ecdict.csv https://raw.githubusercontent.com/skywind3000/ECDICT/master/ecdict.csv
+```
+
+第一次渲染时自动转成 `dict/ecdict.db`（约 5 秒）。渲染时把这篇论文里出现的词查好嵌进网页（每篇大约多出 300KB），所以离线双击打开也能查。没有词典文件时网页里不显示「查词」。
 
 ### 引用怎么对应到论文
 
@@ -71,6 +83,19 @@ cd /home/a_coin_fan/work/iuno_reader
 - 知识库目录：前端「设置」里的「知识库目录」，或环境变量 `IUNO_LIBRARY`（research-KB 的根目录）。会读 `pdfs/**/*.pdf`（文件名里的 arXiv 编号；`按优先级/<档>/<序号>_` 给出阅读顺序位置）、`pdfs/**/INDEX.md` 里的标题、`translations/<编号>-zh.html` 和 `papers/*.md` 卡片。没设时只做 arXiv 对应。
 - 不想联网查 arXiv：`IUNO_ARXIV_LOOKUP=0`。
 - 网页里链到译文、PDF 的是相对 `translations/` 目录的路径，网页放在知识库的 `translations/` 里打开才能点通；卡片用 `obsidian://` 链接打开，库名取知识库目录的名字。
+
+### 引用统计：一次调研里大家都在引用什么
+
+```bash
+.venv/bin/python -m iuno_reader citations --project cvpr4   # 一个调研（知识库 pdfs/cvpr4/ 下的论文）
+.venv/bin/python -m iuno_reader citations                   # 整个知识库，按调研分列，另有「跨调研共同引用」
+```
+
+把调研里每篇论文的参考文献合起来，同一篇被引论文去重（arXiv 编号；没有编号时按标题，会议版会并到有编号的那条上），数它「被我们几篇论文引用」。只用已经抓过网页的论文（`cache/<编号>.html`；不翻译也可以只 `fetch`），不调用模型。报告分四块：被引最多但不在知识库里的（可能值得补读）、被引的库内论文和它现在的阅读档次、库内论文之间谁引用了谁、跨调研共同引用（全库报告才有）。
+
+- 报告写到知识库的 `citations/<项目>.md` 和 `citations/全库.md`（知识库里没有 `citations/` 时写到 `out/_citations/`），是生成文件，每次整个覆盖；明细 JSON 在 `out/_citations/`。
+- `citations/通用论文.md` 是人人都引的通用论文名单（模型报告、Transformer、Adam 之类），名单里的不进主表，放在报告末尾的折叠框里。每行「- <arXiv 编号> · <标题>」，随时增删。
+- `--min`：不在库里的论文至少被引几次才列出（默认 2）；`--top`：每张表最多几篇（默认 40）。
 
 ## 颜色
 
@@ -180,7 +205,7 @@ export IUNO_BT_BASE_URL=...        IUNO_BT_MODEL=...        IUNO_BT_API_KEY=... 
 .venv/bin/python tests/test_api_mock.py                  # 用假回复测试接口流程（不联网），含 JSON 模式退回、401 不重试
 .venv/bin/python tests/test_nlp.py                       # 词性、核心词与首字母加粗长度
 .venv/bin/python tests/test_server.py                    # 网页前端的服务端（接口、方案、任务队列、进度与花费）
-.venv/bin/python tests/test_cites.py                     # 引用与参考文献：抽取、逐句定位（含中文）、对应知识库（不联网）
+.venv/bin/python tests/test_cites.py                     # 引用与参考文献：抽取、逐句定位（含中文）、对应知识库、引用统计；本地词典（不联网）
 .venv/bin/python tests/smoke_extract.py 2602.04212 ...   # 抽取冒烟测试（先 fetch + extract）
 .venv/bin/python tests/coverage_vs_pdf.py 2602.04212 <PDF 纯文本>   # 用 PDF 文本独立检查有没有漏段落
 ```

@@ -126,7 +126,10 @@ def _titles_from_index(path, papers, titles_by_file, entry):
             cells = [c.strip() for c in line.strip("|").split("|")]
             m = re.search(rf"\[({_ID})\]", cells[0]) if cells else None
             pdf = next((re.search(r"([^/`\s]+\.pdf)", c).group(1) for c in cells if re.search(r"\.pdf", c)), "")
-            title = next((c for c in cells[1:] if len(c.split()) >= 3 and ".pdf" not in c), "")
+            if m and len(cells) > 1:  # 「| [编号](链接) | 标题 | 作者 | ...」：编号后面那一格就是标题
+                title = cells[1]
+            else:
+                title = next((c for c in cells[1:] if len(c.split()) >= 3 and ".pdf" not in c), "")
             title = re.sub(r"\*\*|`", "", title).strip()
             if m and title:
                 titles_by_file.setdefault(m.group(1), title)

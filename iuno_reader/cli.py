@@ -235,6 +235,16 @@ def cmd_probe(a):
     run(a.roles.split(","))
 
 
+def cmd_citations(a):
+    from .citations import run
+    from .library import library_root, load_library
+    root = a.library or library_root()
+    if not root:
+        raise SystemExit("没有知识库目录：用 --library 指定，或在前端「设置」里填「知识库目录」")
+    path, n_src, n_cited = run(ROOT, load_library(root), a.project, a.out, a.top, a.min)
+    print(f"统计了 {n_src} 篇论文的参考文献，共 {n_cited} 篇不同的被引论文 → {path}")
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser(prog="iuno_reader", description="arXiv 论文逐句双语对照与置信度标注")
     sub = ap.add_subparsers(dest="cmd", required=True)
@@ -284,6 +294,13 @@ def main(argv=None):
     s.add_argument("--port", type=int, default=8780)
     s.add_argument("--host", default="127.0.0.1", help="默认只监听本机")
     s.set_defaults(fn=cmd_serve)
+    s = sub.add_parser("citations", help="引用统计：一次调研里各篇论文都在引用哪些论文、库内论文之间谁引用了谁")
+    s.add_argument("--project", help="知识库 pdfs/ 下的项目名，例如 cvpr4；不写就统计整个知识库")
+    s.add_argument("--library", help="知识库目录（默认用设置里的「知识库目录」）")
+    s.add_argument("--out", help="输出目录（默认 out/_citations/）")
+    s.add_argument("--top", type=int, default=40, help="每张表最多列几篇")
+    s.add_argument("--min", type=int, default=2, help="不在库里的论文，被引至少几次才列出")
+    s.set_defaults(fn=cmd_citations)
     s = sub.add_parser("import-kb-glossary")
     s.add_argument("path")
     s.set_defaults(fn=cmd_import)

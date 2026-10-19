@@ -246,8 +246,19 @@ body.kw .en .w.k{color:var(--ink);-webkit-text-stroke:calc(var(--enstroke) + .4p
 .nb{cursor:pointer;font-size:.8em;margin-left:2px;vertical-align:.1em;user-select:none}
 .clear{display:none}
 body.focusing .clear{display:inline}
-.weights span,.bolds span{cursor:pointer;padding:0 6px;border-radius:3px}
-.weights span.on,.bolds span.on{background:#e4f1e8;color:#2f7a4c}
+.weights span,.bolds span,.clickmode span{cursor:pointer;padding:0 6px;border-radius:3px}
+.weights span.on,.bolds span.on,.clickmode span.on{background:#e4f1e8;color:#2f7a4c}
+/* 查词：生词本里的词带一条淡黄的点状下划线；词卡沿用引用卡片的样子 */
+.en .w.vb{text-decoration:underline dotted #c9a200 2px;text-underline-offset:4px}
+body.dictmode .en .w{cursor:help}
+.dict-pop .ph{font-family:var(--en);color:var(--sub);margin-left:8px;font-weight:400}
+.dict-pop .tg{display:inline-block;font-size:11px;color:#8a6d00;background:#fbf3d0;border-radius:3px;padding:0 4px;margin:2px 4px 2px 0}
+.dict-pop .tr{white-space:pre-line;margin:4px 0}
+.dict-pop .df{font-family:var(--en);font-size:13px;color:var(--sub);font-style:italic}
+.dict-pop button{font:12.5px var(--zh);border:1px solid #3b915d;background:#fff;color:#2f7a4c;border-radius:6px;padding:2px 10px;cursor:pointer}
+.dict-pop button.on{background:#3b915d;color:#fff}
+.toc .vocab-row{display:flex;gap:6px;flex-wrap:wrap;padding:0 8px;font-size:12.5px}
+.toc .vocab-row span{cursor:pointer;color:#2f7a4c;text-decoration:underline;text-underline-offset:3px}
 main{max-width:1320px;margin:0 auto;padding:48px 56px 120px}
 .pair{display:grid;grid-template-columns:1fr 1fr;column-gap:56px}
 .en{font-family:var(--en);font-size:17.5px;line-height:1.72;hyphens:auto;text-align:justify}
@@ -580,9 +591,83 @@ document.addEventListener('click',e=>{
   if(t){e.preventDefault();const a=occ(t.dataset.b)[0];if(a)go(a);return;}
   if(pop&&pop.contains(e.target))return;
   const c=e.target.closest('.ct');
-  if(c&&!String(getSelection())){e.stopPropagation();show(c);return;}  // 点引用不算点词高亮
+  if(c&&!String(getSelection())){e.stopImmediatePropagation();show(c);return;}  // 点引用不算点词高亮，也不查词
   close();},true);
 document.addEventListener('keydown',e=>{if(e.key==='Escape')close();});
+})();
+</script>"""
+
+DICT_JS = r"""<script>
+// ---- 查词与生词本 ----
+// 「点词：查词」模式下点英文单词（任何模式下按住 Alt 点词）弹出词卡，词条是渲染时从本地 ECDICT 查好嵌进来的。
+// 生词本不分论文，存在浏览器里（localStorage）；通过 iuno_reader 前端服务打开时，同时存到服务器 data/vocab.json，
+// 并写成知识库里的 vocab/生词本.md。每个词记下它出现的句子（原文和译文）和出处。删除留 deleted 标记，免得合并时又冒出来。
+(()=>{
+const el=document.getElementById('dictdata');if(!el)return;
+const D=JSON.parse(el.textContent),PID=document.body.dataset.pid||'',TITLE=document.title;
+const VK='iuno-reader-vocab',MK='iuno-reader-clickmode';
+const SERVER=/^https?:/.test(location.protocol)&&location.pathname.startsWith('/out/');
+let V={};try{V=JSON.parse(localStorage.getItem(VK)||'{}')}catch(e){}
+const now=()=>new Date().toISOString().slice(0,16).replace('T',' ');
+const entry=w=>D[w.textContent.toLowerCase()]||D[(w.dataset.l||'').toLowerCase()]||null;
+const keyOf=(e,w)=>((e&&(e.l||e.w))||w.dataset.l||w.textContent).toLowerCase();
+const has=k=>!!(V[k]&&!V[k].deleted);  // 必须是真假值：classList.toggle 的第二个参数是 undefined 时会来回切换
+function mark(){document.querySelectorAll('.en .w').forEach(w=>w.classList.toggle('vb',has(keyOf(entry(w),w))));
+  const n=Object.values(V).filter(v=>!v.deleted),here=n.filter(v=>(v.ctx||[]).some(c=>c.pid===PID)).length;
+  const c=document.getElementById('vocabCount');if(c)c.textContent=`本篇 ${here} 个，共 ${n.length} 个`;}
+function md(){const vs=Object.values(V).filter(v=>!v.deleted).sort((a,b)=>(a.time<b.time?-1:1));
+  let s=`# 生词本\n\n> iuno_reader 双语网页里收的生词，共 ${vs.length} 个；每个词附上它出现的句子和出处。\n\n`;
+  vs.forEach(v=>{s+=`## ${v.w}${v.p?`  /${v.p}/`:''}\n\n${(v.t||'').split('\n').map(x=>'- '+x).join('\n')}\n`;
+    if(v.d)s+=`- *${v.d}*\n`;
+    (v.ctx||[]).forEach(c=>{s+=`\n> ${c.en}\n> ${c.zh}\n> —— ${c.title}（arXiv ${c.pid}）· ${c.time}\n`;});s+='\n';});
+  return s;}
+function save(sync=true){try{localStorage.setItem(VK,JSON.stringify(V))}catch(e){}mark();
+  if(sync&&SERVER)fetch('/api/vocab',{method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({vocab:V,markdown:md()})}).catch(()=>{});}
+function merge(o){for(const[k,v]of Object.entries(o||{})){const m=V[k];
+  if(!m||(v.time||'')>(m.time||'')){const ctx=[...((m&&m.ctx)||[]),...(v.ctx||[])];
+    V[k]={...v,ctx:ctx.filter((c,i)=>ctx.findIndex(x=>x.en===c.en)===i)};}}save(false);}
+function ctxOf(w){const s=w.closest('.s');if(!s)return null;const z=document.querySelector(`.zh .s[data-s="${s.dataset.s}"]`);
+  return {pid:PID,title:TITLE,en:s.innerText.trim(),zh:z?z.innerText.trim():'',time:now()};}
+let pop=null;const close=()=>{if(pop){pop.remove();pop=null;}};
+function add(p,tag,cls,text){const x=document.createElement(tag);if(cls)x.className=cls;if(text!=null)x.textContent=text;p.appendChild(x);return x;}
+function show(w){close();const e=entry(w),k=keyOf(e,w),word=w.textContent;
+  pop=document.createElement('div');pop.className='ref-pop dict-pop';
+  const h=add(pop,'div','ti',e?e.w:word);if(e&&e.p)add(h,'span','ph','/'+e.p+'/');
+  if(e&&e.g){const g=add(pop,'div');e.g.split(' ').forEach(t=>add(g,'span','tg',t));}
+  if(e&&e.l)add(pop,'div','au','原形：'+e.l);
+  if(e){add(pop,'div','tr',e.t);if(e.d)add(pop,'div','df',e.d);}else add(pop,'div','au','本地词典里没有这个词。');
+  const row=add(pop,'div','row');const L=add(row,'span');
+  const b=add(L,'button',has(k)?'on':'',has(k)?'✓ 在生词本里（点击移除）':'＋ 生词本');
+  b.onclick=ev=>{ev.stopPropagation();
+    if(has(k)){V[k]={...V[k],deleted:true,time:now()};}
+    else{const c=ctxOf(w),old=V[k]&&!V[k].deleted?V[k].ctx||[]:[],b=D[k]||e;  // 记原形的音标和释义
+      V[k]={w:k,p:b?b.p:'',t:b?b.t:'',d:b?b.d||'':'',time:now(),ctx:c&&!old.some(x=>x.en===c.en)?[...old,c]:old};}
+    save();show(w);};
+  const y=add(row,'a','','有道 ↗');y.href='https://dict.youdao.com/result?lang=en&word='+encodeURIComponent(e?e.w:word);y.target='_blank';
+  document.body.appendChild(pop);const r=w.getBoundingClientRect();
+  pop.style.top=(scrollY+r.bottom+6)+'px';pop.style.left=Math.max(8,Math.min(scrollX+r.left,scrollX+innerWidth-pop.offsetWidth-12))+'px';}
+let mode='hl';try{mode=localStorage.getItem(MK)||'hl'}catch(e){}
+const MS=document.querySelectorAll('.clickmode span[data-m]');
+function setMode(m){mode=m;MS.forEach(x=>x.classList.toggle('on',x.dataset.m===m));document.body.classList.toggle('dictmode',m==='dict');
+  try{localStorage.setItem(MK,m)}catch(e){}}
+MS.forEach(x=>x.addEventListener('click',()=>setMode(x.dataset.m)));setMode(mode);
+document.addEventListener('click',ev=>{
+  if(pop&&pop.contains(ev.target))return;
+  const w=ev.target.closest('.en .w');
+  if(w&&(mode==='dict'||ev.altKey)&&!String(getSelection())){ev.stopImmediatePropagation();show(w);return;}
+  close();},true);
+document.addEventListener('keydown',ev=>{if(ev.key==='Escape')close();});
+// 侧栏：生词本计数和导出
+const TOC=document.getElementById('toc');
+if(TOC){const h=add(TOC,'div','toc-h','生词本');const r=add(TOC,'div','vocab-row');add(r,'em','',' ').id='vocabCount';
+  const r2=add(TOC,'div','vocab-row');
+  const dl=(name,text,type)=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([text],{type}));a.download=name;a.click();};
+  add(r2,'span','','导出 Markdown').onclick=()=>dl('生词本.md',md(),'text/markdown');
+  add(r2,'span','','导出 Anki（TSV）').onclick=()=>dl('生词本-anki.tsv',Object.values(V).filter(v=>!v.deleted)
+    .map(v=>[v.w,v.p,(v.t||'').replace(/\n/g,'<br>'),((v.ctx||[])[0]||{}).en||''].join('\t')).join('\n'),'text/tab-separated-values');}
+mark();
+if(SERVER)fetch('/api/vocab').then(r=>r.ok?r.json():null).then(d=>{if(d&&d.vocab)merge(d.vocab);}).catch(()=>{});
 })();
 </script>"""
 
@@ -881,8 +966,9 @@ def _cite_data(doc, ordered, cite_info):
     return data, list(inlib.values())
 
 
-def render_html(doc, stats, sections_zh=None, only=None, review_info=None, cite_info=None):
-    """cite_info：参考文献的对应结果 {"refs": {条目 id: {arxiv, lib}}, "lib": {库内键: 条目}, "vault": 知识库名}。"""
+def render_html(doc, stats, sections_zh=None, only=None, review_info=None, cite_info=None, dictionary=None):
+    """cite_info：参考文献的对应结果 {"refs": {条目 id: {arxiv, lib}}, "lib": {库内键: 条目}, "vault": 知识库名}。
+    dictionary：这篇论文里出现的词 → 简要词条（见 dictionary.lookup），嵌进网页给「查词」用；没有就不显示查词。"""
     sections_zh = sections_zh or {}
     s, total = _counts(stats)
     title_zh = sections_zh.get("__title__", "")
@@ -900,6 +986,8 @@ def render_html(doc, stats, sections_zh=None, only=None, review_info=None, cite_
            "　·　<span class='bolds' title='只作用于核心词（名词、动词、形容词、副词、数词、否定词和连字符复合词），the、of 这类虚词不变'>加粗 "
            "<span data-w='none'>关</span><span data-w='bio'>首字母</span><span data-w='kw'>整词</span></span>"
            "　·　<span class='toggle' id='wst'>加宽词距：关</span>"
+           + ("　·　<span class='clickmode' title='查词模式下点英文单词弹出词卡；任何模式下按住 Alt 点词都是查词'>点词 "
+              "<span data-m='hl'>高亮</span><span data-m='dict'>查词</span></span>" if dictionary else "") +
            "　·　<span class='toggle clear' id='clear'>清除高亮</span><br>"
            f"<span class='chips'>{chips}</span><br>{html.escape(_review_line(stats, review_info))}"
            "　点任意英文单词，全文同一个词（含中文栏里对应的术语）一起高亮，最多三个；"
@@ -950,7 +1038,10 @@ def render_html(doc, stats, sections_zh=None, only=None, review_info=None, cite_
     out.append(_toc_html(title_zh or doc["title"], toc, figs, inlib))
     out.append("<script id='refdata' type='application/json'>"
                + json.dumps(cdata, ensure_ascii=False).replace("</", "<\\/") + "</script>")
-    out.append(JS + ANN_JS + CITE_JS + "</main></body></html>")
+    if dictionary:
+        out.append("<script id='dictdata' type='application/json'>"
+                   + json.dumps(dictionary, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/") + "</script>")
+    out.append(JS + ANN_JS + CITE_JS + (DICT_JS if dictionary else "") + "</main></body></html>")
     return "\n".join(out)
 
 

@@ -4,6 +4,8 @@ __pycache__/
 # 可重新生成的中间文件和输出
 cache/
 out/
+# 本地词典（ECDICT，体积大，自己下载）
+dict/
 data/*/doc.json
 data/*/tasks.json
 data/*/review_tasks.json
