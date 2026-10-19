@@ -59,6 +59,38 @@ def reading_order(segments, only=None):
     return out
 
 
+def is_arxiv_id(pid):
+    return bool(re.fullmatch(r"\d{4}\.\d{4,5}", pid or ""))
+
+
+def source_line(doc):
+    """出处：arXiv 论文链到 arXiv；不是 arXiv 的写 PDF 文件名。返回 (文字, 链接或空串)。"""
+    pid = doc["arxiv_id"]
+    if is_arxiv_id(pid):
+        return f"arXiv {pid}", f"https://arxiv.org/abs/{pid}"
+    return f"PDF：{(doc.get('pdf') or {}).get('file', pid)}", ""
+
+
+def _source_html(doc):
+    src, url = source_line(doc)
+    return f"<a href='{url}'>{html.escape(src)}</a>" if url else html.escape(src)
+
+
+def pdf_warning(doc):
+    """来自 PDF 的译文要醒目提醒准确度；网页版返回空串。"""
+    if doc.get("source") != "pdf":
+        return ""
+    info = doc.get("pdf") or {}
+    why = "arXiv 上没有这篇的网页版" if is_arxiv_id(doc["arxiv_id"]) else "这篇不是 arXiv 论文"
+    msg = (f"这份译文来自 PDF（{why}），准确度低于网页版：段落、节标题、阅读顺序是按版面猜的，可能拆错、合错或漏掉；"
+           "公式和表格只裁成图片，正文里的引用没有链接。引用之前请对照 PDF 原文。")
+    if info.get("coverage") is not None:
+        msg += f"拆分覆盖率 {info['coverage']:.0%}（PDF 正文里的词有多少进了这份对照）。"
+    if info.get("warnings"):
+        msg += "另外：" + "；".join(info["warnings"]) + "。"
+    return msg
+
+
 def _review_line(stats, review_info=None):
     from .roles import INDEPENDENCE_ZH
     names = {"blind": "盲审", "backtranslate": "回译比对"}
@@ -124,7 +156,11 @@ def render_markdown(doc, stats, sections_zh=None, only=None, review_info=None, c
     ]
     if title_zh:
         lines += [f"<small>{doc['title']}</small>", ""]
-    lines += [f"<small>arXiv {doc['arxiv_id']} ｜ https://arxiv.org/abs/{doc['arxiv_id']}</small>", "",
+    src, url = source_line(doc)
+    lines += [f"<small>{src}" + (f" ｜ {url}" if url else "") + "</small>", ""]
+    if pdf_warning(doc):
+        lines += ["> [!warning] 来自 PDF，准确度较低", f"> {pdf_warning(doc)}", ""]
+    lines += [
               f"> [!info]- 关于这份译文（共 {total} 句，有标记 {total - s.get('ok', 0)} 句）",
               "> 每段先是英文原文，接着是中文译文。有底色的句子值得核对：鼠标悬停看原因，段落后的折叠框里有逐句对照。",
               f"> {chips}",
@@ -141,8 +177,8 @@ def render_markdown(doc, stats, sections_zh=None, only=None, review_info=None, c
             zh = sections_zh.get(cur_sub)
             lines += [f"### {zh or cur_sub}" + (f" <small>{cur_sub}</small>" if zh else ""), ""]
         kind = seg["kind"]
-        if kind == "equation":
-            lines += [f"$${seg.get('math', '')}$$", ""]
+        if kind == "equation":  # 来自 PDF 的公式没有 LaTeX，只有裁下来的图片
+            lines += [f"![{seg.get('eqtag', '')}]({seg['image']})" if seg.get("image") else f"$${seg.get('math', '')}$$", ""]
             continue
         en = _fn(seg["en"])
         zh = _zh_md(seg["pairs"]) if seg.get("pairs") else "*（这一段还没有翻译）*"
@@ -267,6 +303,8 @@ header{margin-bottom:40px;border-bottom:1px solid var(--rule);padding-bottom:28p
 header .title .en{font-size:28px;line-height:1.3;font-weight:normal;text-align:left}
 header .title .zh{font-size:25px;line-height:1.45;font-weight:600;text-align:left}
 .meta{font-size:13px;color:var(--sub);font-family:var(--zh);margin-top:14px;line-height:1.8}
+.pdfwarn{font-family:var(--zh);font-size:14px;line-height:1.7;margin-top:12px;padding:8px 12px;border-radius:6px;
+  background:#fff4e5;border:1px solid #f0c27b;color:#7a4b00}
 .meta a{color:var(--sub)}
 .chips span{display:inline-block;padding:1px 8px;border-radius:3px;margin-right:8px}
 .toggle{cursor:pointer;user-select:none;color:#3b915d;text-decoration:underline;text-underline-offset:3px}
@@ -980,7 +1018,8 @@ def render_html(doc, stats, sections_zh=None, only=None, review_info=None, cite_
            "<script src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js' async></script>",
            f"</head><body data-pid='{html.escape(doc['arxiv_id'])}'><main><header id='top'>",
            f"<div class='pair title'><div class='en'>{html.escape(doc['title'])}</div><div class='zh'>{html.escape(title_zh)}</div></div>",
-           f"<div class='meta'><a href='https://arxiv.org/abs/{doc['arxiv_id']}'>arXiv {doc['arxiv_id']}</a>　·　"
+           (f"<div class='pdfwarn'>⚠ {html.escape(pdf_warning(doc))}</div>" if pdf_warning(doc) else ""),
+           f"<div class='meta'>{_source_html(doc)}　·　"
            f"共 {total} 句，有标记 {total - s.get('ok', 0)} 句　·　<span class='toggle' id='toggle'>隐藏标记</span>"
            "　·　<span class='weights'>字体粗细 <span data-w='w1'>细</span><span data-w='w2'>中</span><span data-w='w3'>粗</span></span>"
            "　·　<span class='bolds' title='只作用于核心词（名词、动词、形容词、副词、数词、否定词和连字符复合词），the、of 这类虚词不变'>加粗 "
@@ -1015,7 +1054,8 @@ def render_html(doc, stats, sections_zh=None, only=None, review_info=None, cite_
                        f"<div class='zh'>{html.escape(sections_zh.get(cur_sub, ''))}</div></h3>")
         kind = seg["kind"]
         if kind == "equation":
-            out.append(f"<div class='eq'>$${html.escape(seg.get('math', ''))}$$</div>")
+            out.append(f"<div class='eq'><img src='{seg['image']}' alt='' style='max-width:100%'></div>" if seg.get("image")
+                       else f"<div class='eq'>$${html.escape(seg.get('math', ''))}$$</div>")
             continue
         en, zh, notes = _pair_html(seg, terms_all, canon, refs, bib)
         note_html = f"<div class='notes'>{''.join(notes)}</div>" if notes else ""

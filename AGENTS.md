@@ -33,7 +33,8 @@ cd /home/a_coin_fan/work/iuno_reader
 - 引用论文内容时，以**英文原文**为准（`paper.en.md` 或 `checked.json` 里的 `en`），并注明章节或片段 id。
 - 红色和橙色标记的句子，引用前必须对照原文确认。
 - 「没有标记」不等于「译文正确」：要看 manifest 里有没有经过**不同模型**的审校。
-- 整理进 Research-KB 时：把 `paper.zh.md` 复制为知识库的 `translations/<编号>-zh.md`，遵守知识库自己的 AGENTS.md（先拉取 D 盘、再改、提交前给用户看）。
+- 整理进 Research-KB 时：用 `kb sync`（见 README「kb 命令」），它把译文、跳转文件、总表和索引表格写进知识库；遵守知识库自己的 AGENTS.md（先拉取 D 盘、再改、提交前给用户看）。
+- `source` 是 `pdf` 的译文来自 PDF（没有网页版），准确度较低，`manifest.json` 的 `accuracy_note` 写了原因；引用时一定对照 PDF 原文。
 
 ## 接手翻译（stage = awaiting_translation）
 

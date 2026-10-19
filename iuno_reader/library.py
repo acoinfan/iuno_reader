@@ -27,6 +27,16 @@ def norm(title):
     return re.sub(r"[^a-z0-9]", "", (title or "").lower())
 
 
+def pid_from_name(name):
+    """PDF 文件名 → 流水线编号：有 arXiv 编号就用它；否则去掉阅读顺序前缀（「06_」）和扩展名，只留字母、数字、点、横线。"""
+    stem = os.path.splitext(os.path.basename(name.split("?")[0]))[0]
+    m = re.search(_ID, stem)
+    if m:
+        return m.group(0)
+    stem = re.sub(r"^\d{1,3}_", "", stem)
+    return re.sub(r"[^A-Za-z0-9._-]+", "-", stem).strip("-.")[:100]
+
+
 def library_root():
     """知识库目录：环境变量优先，其次是前端设置；目录不存在时返回 None（不做库内对应）。"""
     d = os.environ.get("IUNO_LIBRARY", "").strip()
@@ -68,8 +78,9 @@ def _frontmatter(path):
 
 
 def load_library(root):
-    """扫描知识库 → {"root", "vault", "papers": {键: 条目}}。键是 arXiv 编号；没有编号的 PDF 用 "file:<文件名>"。
-    条目：{id, title, where: [位置说明], pdf, translation, card}"""
+    """扫描知识库 → {"root", "vault", "papers": {键: 条目}}。键是 arXiv 编号；没有编号的 PDF 用流水线编号
+    （文件名去掉序号前缀，见 pid_from_name），和它的译文 translations/<编号>-zh.html 对得上。
+    条目：{id（arXiv 编号，非 arXiv 为空）, title, where: [位置说明], pdf, translation, card}"""
     papers, titles_by_file = {}, {}
 
     def entry(key):
@@ -80,9 +91,9 @@ def load_library(root):
     for dirpath, _, files in os.walk(pdf_root):
         for fn in sorted(files):
             rel = os.path.relpath(os.path.join(dirpath, fn), root).replace("\\", "/")
-            if fn.endswith(".pdf"):
+            if fn.endswith((".pdf", ".html")) and not fn.endswith("-zh.html"):
                 m = re.search(rf"(?:^|_)({_ID})(?=_|\.pdf|v\d)", fn)
-                key = m.group(1) if m else "file:" + re.sub(r"^\d+_", "", fn)
+                key = m.group(1) if m else pid_from_name(fn)
                 e = entry(key)
                 lab, ordered = _label(os.path.relpath(os.path.join(dirpath, fn), root))
                 if lab and lab not in e["where"]:
@@ -96,7 +107,7 @@ def load_library(root):
             papers[key]["title"] = t
     tdir = os.path.join(root, "translations")
     for fn in sorted(os.listdir(tdir)) if os.path.isdir(tdir) else []:
-        m = re.fullmatch(rf"({_ID})-zh\.html", fn)
+        m = re.fullmatch(r"([A-Za-z0-9][A-Za-z0-9._-]*)-zh\.html", fn)
         if m:
             e = entry(m.group(1))
             e["translation"] = "translations/" + fn
@@ -134,7 +145,7 @@ def _titles_from_index(path, papers, titles_by_file, entry):
             if m and title:
                 titles_by_file.setdefault(m.group(1), title)
             elif pdf and title and not re.search(_ID, pdf):
-                titles_by_file.setdefault("file:" + re.sub(r"^\d+_", "", pdf), title)
+                titles_by_file.setdefault(pid_from_name(pdf), title)
         for m in re.finditer(rf"\*\*([^*]{{8,}}?)\*\*（[^）]*?({_ID})", line):
             titles_by_file.setdefault(m.group(2), m.group(1).strip())
 

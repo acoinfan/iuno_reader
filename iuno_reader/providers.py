@@ -188,6 +188,31 @@ def delete_preset(name):
     _save("presets.json", [x for x in _load("presets.json", []) if x["name"] != name])
 
 
+def r2_name(role):
+    """审校二的结果文件名：review.<模型名>.json。"""
+    return re.sub(r"[^a-z0-9.]+", "-", role["model"].lower()).strip("-")
+
+
+def preset_steps(pid, p):
+    """按方案跑一篇要的几步子进程：[(说明, 命令行参数, 环境变量)]。接口配置有问题时抛 ValueError。
+    前端的任务队列和 kb translate 都用它。"""
+    scope = p.get("scope", "body")
+    env = role_env("IUNO_TRANSLATE", p["translator"])
+    review = "none"
+    if p.get("reviewer"):
+        env |= role_env("IUNO_REVIEW", p["reviewer"])
+        review = "blind"
+    rw = str((p.get("reviewer") or {}).get("workers", 1))
+    steps = [("翻译和审校一", ["run", pid, "--sections", scope, "--translate", "api", "--review", review,
+                              "--workers", str(p["translator"].get("workers", 1)), "--review-workers", rw], env)]
+    r2 = p.get("reviewer2")
+    if r2:
+        steps += [("审校二", ["review", pid, "--mode", "blind", "--name", r2_name(r2), "--sections", scope,
+                             "--workers", str(r2.get("workers", 1))], role_env("IUNO_REVIEW", r2)),
+                  ("重新渲染", ["run", pid, "--sections", scope], {})]
+    return steps
+
+
 def role_env(prefix, role):
     """方案里一个角色的设置 → 流水线认的环境变量（IUNO_TRANSLATE_* / IUNO_REVIEW_*）。"""
     p = provider(role["provider"])

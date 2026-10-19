@@ -30,26 +30,20 @@ OUT = os.path.join(ROOT, "out")
 JOBS = os.path.join(OUT, "jobs.json")
 LOGS = os.path.join(OUT, "jobs")
 WEB = os.path.join(os.path.dirname(os.path.abspath(__file__)), "web")
-ARXIV = re.compile(r"\d{4}\.\d{4,5}")
+PID = r"([A-Za-z0-9][A-Za-z0-9._-]{1,99})"  # arXiv 编号，或者来自 PDF 的论文编号（如 Li2024-StateAbstractionProbe）
 
 
 def _to_arxiv(texts):
-    """输入框或拖进来的文字 → arXiv 编号。DOI、论文页面链接、标题先查（见 resolve.py），换不到的连同原因返回。"""
-    from .resolve import ARXIV_ID, Finder, find_inputs
-    ids, bad, finder = [], [], None
-    for it in [x for t in texts for x in find_inputs(t)]:
-        if ARXIV_ID.fullmatch(it):
-            ids.append(ARXIV_ID.fullmatch(it).group(1))
-            continue
-        finder = finder or Finder(ROOT)
-        r = finder.find(it)
-        (ids.append(r["arxiv"]) if r.get("arxiv") else bad.append(r))
-    return list(dict.fromkeys(ids)), bad
+    """输入框或拖进来的文字 → 流水线编号（见 pipeline.to_pids）：DOI、论文页面链接、标题先找 arXiv 版本，
+    找不到但有开放获取 PDF 的改用 PDF；都不行的连同原因返回。"""
+    from .pipeline import to_pids
+    from .resolve import find_inputs
+    return to_pids(ROOT, [x for t in texts for x in find_inputs(t)], log=lambda s: None)
 
 
 def _why(r):
     name = f"《{r['title'][:50]}》" if r.get("title") else r["input"][:60]
-    return f"{name}没有 arXiv 版本，暂时翻不了（{r.get('error', '')}）"
+    return f"{name}没有 arXiv 版本，也没有能下载的 PDF，翻不了（{r.get('error', '')}）"
 
 
 def _json(path, default=None):
@@ -60,9 +54,7 @@ def _json(path, default=None):
         return default
 
 
-def r2_name(role):
-    """审校二的结果文件名：review.<模型名>.json。"""
-    return re.sub(r"[^a-z0-9.]+", "-", role["model"].lower()).strip("-")
+r2_name = pv.r2_name
 
 
 # ---------- 进度与花费：直接数数据文件 ----------
@@ -225,30 +217,16 @@ class Queue:
 
     def _work(self, j):
         p, pid = j["preset"], j["pid"]
-        scope = p.get("scope", "body")
         try:
-            env = pv.role_env("IUNO_TRANSLATE", p["translator"])
-            review = "none"
-            if p.get("reviewer"):
-                env |= pv.role_env("IUNO_REVIEW", p["reviewer"])
-                review = "blind"
-            r2 = p.get("reviewer2")
-            env2 = pv.role_env("IUNO_REVIEW", r2) if r2 else None
+            steps = pv.preset_steps(pid, p)
         except ValueError as e:
             with self.lock:
                 j["status"], j["step"], j["error"] = "error", "接口配置有问题", str(e)
                 self._save()
             return
-        rw = str((p.get("reviewer") or {}).get("workers", 1))
-        ok = self._step(j, "翻译和审校一", ["run", pid, "--sections", scope, "--translate", "api", "--review", review,
-                                           "--workers", str(p["translator"].get("workers", 1)),
-                                           "--review-workers", rw], env)
-        if ok and r2:
-            ok = self._step(j, "审校二", ["review", pid, "--mode", "blind", "--name", r2_name(r2),
-                                         "--sections", scope, "--workers", str(r2.get("workers", 1))], env2)
-            ok = ok and self._step(j, "重新渲染", ["run", pid, "--sections", scope], {})
-        if not ok:
-            return
+        for label, args, env in steps:
+            if not self._step(j, label, args, env):
+                return
         dest = settings().get("export_dir", "").strip()
         if dest:
             try:
@@ -336,7 +314,7 @@ class Handler(BaseHTTPRequestHandler):
             if method == "GET" and path in ("/", "/index.html"):
                 return self._send(200, open(os.path.join(WEB, "index.html"), "rb").read(), "text/html; charset=utf-8")
             if method == "GET" and path.startswith("/out/"):
-                m = re.fullmatch(r"/out/(\d{4}\.\d{4,5})/(paper\.zh\.(?:html|md)|flags\.md)", path)
+                m = re.fullmatch(rf"/out/{PID}/(paper\.zh\.(?:html|md)|flags\.md)", path)
                 if not m:
                     return self._send(404, {"error": "没有这个文件"})
                 f = os.path.join(OUT, m.group(1), m.group(2))
@@ -362,7 +340,7 @@ class Handler(BaseHTTPRequestHandler):
                         rows.append({"pid": pid, "title": title, "sentences": n, "total": c, "parts": parts,
                                      "upper": upper})
                 return self._send(200, {"rows": rows, "prices": pv.prices()})
-            m = re.fullmatch(r"/api/notes/(\d{4}\.\d{4,5})", path)
+            m = re.fullmatch(rf"/api/notes/{PID}", path)
             if m:  # 双语网页里的标签批注
                 pid = m.group(1)
                 f = os.path.join(ROOT, "data", pid, "notes.json")

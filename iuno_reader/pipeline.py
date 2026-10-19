@@ -24,8 +24,9 @@ from . import extract as ex
 from .check import LEVELS, check_doc
 from .glossary import load_hedges, load_terms
 from .images import fix_images
+from .library import pid_from_name
 from .parallel import pmap
-from .render import ICON, render_html, render_markdown
+from .render import ICON, pdf_warning, render_html, render_markdown, source_line
 from .roles import INDEPENDENCE_ZH, independence, load_prompt, model_config, worst_independence
 from .translate import make_tasks
 
@@ -36,6 +37,7 @@ class Paths:
     def __init__(self, root, pid):
         self.root, self.pid = root, pid
         self.cache = os.path.join(root, "cache", f"{pid}.html")
+        self.pdf = os.path.join(root, "cache", f"{pid}.pdf")  # 没有网页版时用的 PDF
         self.data = os.path.join(root, "data", pid)
         self.out = os.path.join(root, "out", pid)
         for d in (os.path.dirname(self.cache), self.data, self.out):
@@ -85,13 +87,110 @@ def download_html(pid):
     raise RuntimeError("arXiv 和 ar5iv 都没有这篇的网页版：" + "；".join(tried))
 
 
+ARXIV_PID = re.compile(r"\d{4}\.\d{4,5}")
+PID_OK = re.compile(r"[A-Za-z0-9][A-Za-z0-9._-]{1,99}")
+
+
+def _download(url, limit=200_000_000):
+    import urllib.request
+    with urllib.request.urlopen(urllib.request.Request(url, headers={"User-Agent": "iuno_reader"}), timeout=120) as r:
+        return r.read(limit)
+
+
 def fetch(P, force=False):
-    if os.path.exists(P.cache) and not force:
-        return {"status": "cached"}
-    data, url = download_html(P.pid)
+    """arXiv 论文：网页版（arXiv、ar5iv）→ 都没有时下 arXiv 的 PDF。不是 arXiv 的论文要先用 add_pdf 放进 cache/。"""
+    if not force and (os.path.exists(P.cache) or os.path.exists(P.pdf)):
+        return {"status": "cached", "source": "html" if os.path.exists(P.cache) else "pdf"}
+    if not ARXIV_PID.fullmatch(P.pid):
+        raise RuntimeError(f"{P.pid} 不是 arXiv 编号，cache/ 里也没有它的 PDF；请用 run <PDF 路径或链接> 来翻译")
+    try:
+        data, url = download_html(P.pid)
+    except RuntimeError as e:
+        data = _download(f"https://arxiv.org/pdf/{P.pid}")
+        if data[:5] != b"%PDF-":
+            raise RuntimeError(f"{e}；arXiv 的 PDF 也没下载下来") from e
+        with open(P.pdf, "wb") as f:
+            f.write(data)
+        return {"status": "downloaded", "source": "pdf", "bytes": len(data),
+                "note": f"{e}。改用 arXiv 的 PDF，准确度低于网页版"}
     with open(P.cache, "wb") as f:
         f.write(data)
-    return {"status": "downloaded", "bytes": len(data), "url": url}
+    return {"status": "downloaded", "source": "html", "bytes": len(data), "url": url}
+
+
+def pid_from_title(title):
+    words = [w for w in re.findall(r"[A-Za-z0-9]+", title or "") if w.lower() not in
+             {"a", "an", "the", "of", "in", "on", "for", "and", "to", "with", "do", "does", "is", "are", "via", "from"}]
+    return "".join(w[:1].upper() + w[1:] for w in words[:6])[:80] or "paper"
+
+
+def add_pdf(root, src, pid=None):
+    """本地 PDF 或 PDF 链接 → cache/<编号>.pdf，返回编号。文件名里有 arXiv 编号的不放 PDF，走 arXiv（先找网页版）。"""
+    pid = pid or pid_from_name(src)
+    if not PID_OK.fullmatch(pid):
+        raise RuntimeError(f"认不出编号：{src}")
+    if ARXIV_PID.fullmatch(pid):
+        return pid
+    dst = os.path.join(root, "cache", f"{pid}.pdf")
+    os.makedirs(os.path.dirname(dst), exist_ok=True)
+    if src.startswith(("http://", "https://")):
+        data = _download(src)
+        if data[:5] != b"%PDF-":
+            raise RuntimeError(f"{src} 下载到的不是 PDF")
+        with open(dst, "wb") as f:
+            f.write(data)
+    elif os.path.abspath(src) != os.path.abspath(dst):
+        shutil.copyfile(src, dst)
+    return pid
+
+
+def describe(r):
+    if r.get("arxiv"):
+        extra = f"《{r['title'][:70]}》" if r.get("title") else ""
+        return f"{r['input']} → arXiv {r['arxiv']}{extra}（{r.get('via', '')}）"
+    head = f"{r['input'][:80]}：没找到 arXiv 版本"
+    if r.get("title"):
+        head += f"，查到的是《{r['title'][:70]}》"
+    oa = f"；全文：{r['oa_url']}" if r.get("oa_url") else ""
+    return f"{head}（{r.get('via') or '无'}；{r.get('error') or ''}）{oa}"
+
+
+def to_pids(root, items, log=print):
+    """论文标识 → 流水线编号。返回 (编号列表, 换不到的 [{input, title, error…}])。
+    arXiv 编号原样用；本地 PDF 放进 cache/（文件名里有 arXiv 编号的走 arXiv）；以前放进来过的编号（cache/<编号>.pdf）直接用；
+    DOI、链接、标题先找 arXiv 版本（resolve.py），找不到但有开放获取的 PDF 就下载 PDF 来翻（准确度较低）。"""
+    from .resolve import ARXIV_ID, Finder
+    ids, bad, finder = [], [], None
+    for it in items:
+        it = it.strip()
+        if ARXIV_ID.fullmatch(it):
+            ids.append(ARXIV_ID.fullmatch(it).group(1))
+            continue
+        if it.lower().endswith(".pdf") and os.path.isfile(it):
+            ids.append(add_pdf(root, it))
+            log(f"{it} → {ids[-1]}" + ("" if ARXIV_PID.fullmatch(ids[-1]) else "（来自 PDF，准确度较低）"))
+            continue
+        if PID_OK.fullmatch(it) and os.path.exists(os.path.join(root, "cache", f"{it}.pdf")):
+            ids.append(it)
+            continue
+        finder = finder or Finder(root)
+        r = finder.find(it)
+        if r.get("arxiv"):
+            log(describe(r))
+            ids.append(r["arxiv"])
+            continue
+        pdf_url = r.get("oa_url") or ""
+        if pdf_url and r.get("title") is not None:
+            try:
+                pid = add_pdf(root, pdf_url, pid_from_title(r["title"]) if r.get("title") else None)
+                log(describe(r) + f"。改用 PDF 翻译 → {pid}（准确度较低）")
+                ids.append(pid)
+                continue
+            except (OSError, RuntimeError) as e:
+                r["error"] = (r.get("error") or "") + f"；PDF 也下载不了：{e}"
+        log(describe(r) + "，流水线翻不了")
+        bad.append(r)
+    return list(dict.fromkeys(ids)), bad
 
 
 def _has_api(role):
@@ -172,7 +271,10 @@ def _agent_review_md(P, n_seg, n_sent, title):
 
 def paper_en_md(doc):
     """英文全文，保留结构，给 agent 引用和整理。"""
-    out = [f"# {doc['title']}", "", f"arXiv: {doc['arxiv_id']} ｜ https://arxiv.org/abs/{doc['arxiv_id']}", ""]
+    src, url = source_line(doc)
+    out = [f"# {doc['title']}", "", src + (f" ｜ {url}" if url else ""), ""]
+    if pdf_warning(doc):
+        out += [f"> {pdf_warning(doc)}", ""]
     sec = sub = None
     for s in doc["segments"]:
         if s["section"] != sec:
@@ -182,10 +284,12 @@ def paper_en_md(doc):
             sub = s["subsection"]
             out += [f"### {sub}", ""]
         k = s["kind"]
-        if k == "equation":
-            out += [f"$${s.get('math', '')}$$ {s.get('eqtag', '')}".rstrip(), ""]
-        elif k == "caption":
-            out += ([f"![]({s['image']})"] if s.get("image") else []) + [f"*{s['en']}*", ""]
+        if k == "equation":  # 来自 PDF 的公式没有 LaTeX，写 PDF 里抽出来的原始文字
+            out += [(f"$${s.get('math', '')}$$" if s.get("math") else f"`{s.get('text', '')}`（公式，见 PDF）")
+                    + f" {s.get('eqtag', '')}".rstrip(), ""]
+        elif k == "caption":  # 来自 PDF 的图是嵌在网页里的大段图片数据，这里不放
+            img = s.get("image") or ""
+            out += ([f"![]({img})"] if img and not img.startswith("data:") else []) + [f"*{s['en']}*", ""]
         elif k == "footnote":
             out += [f"[^{s.get('footnote')}]: {s['en']}", ""]
         elif k == "table":
@@ -250,20 +354,34 @@ def _dict_words(P, doc, only):
         return None
 
 
+def prepare(root, pid, force_fetch=False):
+    """下载（网页或 PDF）并拆分，存 data/<编号>/doc.json。返回 (doc, 下载状态)。不调用模型，不花钱。"""
+    P = Paths(root, pid)
+    st = fetch(P, force_fetch)
+    if os.path.exists(P.cache):
+        doc = ex.extract(open(P.cache, encoding="utf-8").read(), pid)
+        for old, new in fix_images(doc, P.cache[:-5] + ".images.json"):
+            print(f"图片坏了，改用：{new}（原地址 {old}）")
+    else:
+        from .pdfextract import extract_pdf
+        doc = extract_pdf(P.pdf, pid, root=root)
+        print(f"{pid} 来自 PDF（准确度较低）：覆盖率 {doc['pdf']['coverage']:.0%}"
+              + ("；" + "；".join(doc["pdf"]["warnings"]) if doc["pdf"]["warnings"] else ""))
+    _save(doc, P.d("doc.json"))
+    return doc, st
+
+
 def run(root, pid, sections=None, translate="auto", review="auto", export=None, force_fetch=False, workers=1,
         review_workers=None):
     """workers：翻译时同时处理几段；review_workers：审校时同时审几段（默认同 workers）。按接口允许的并发数设。"""
     review_workers = review_workers or workers
     P = Paths(root, pid)
     st = {}
-    st["fetch"] = fetch(P, force_fetch)
-
-    doc = ex.extract(open(P.cache, encoding="utf-8").read(), pid)
-    for old, new in fix_images(doc, P.cache[:-5] + ".images.json"):
-        print(f"图片坏了，改用：{new}（原地址 {old}）")
-    _save(doc, P.d("doc.json"))
+    doc, st["fetch"] = prepare(root, pid, force_fetch)
     st["extract"] = {"status": "ok", "segments": len(doc["segments"]),
                      "sentences": sum(len(s["sentences"]) for s in doc["segments"])}
+    if doc.get("pdf"):
+        st["extract"]["pdf"] = doc["pdf"]
 
     terms, hedges = load_terms(), load_hedges()
     tasks = make_tasks(doc, terms, hedges, sections)
@@ -380,9 +498,12 @@ def run(root, pid, sections=None, translate="auto", review="auto", export=None, 
         next_steps.append(f"人工看一下 flags.md 里的红色和橙色句子（{counts['red']} 红、{counts['orange']} 橙）")
 
     manifest = {
-        "arxiv_id": pid, "title": doc["title"], "abs_url": f"https://arxiv.org/abs/{pid}",
-        "html_url": f"{ex.AR5IV if doc.get('source') == 'ar5iv' else 'https://arxiv.org/'}html/{pid}",
+        "arxiv_id": pid, "title": doc["title"],
+        "abs_url": f"https://arxiv.org/abs/{pid}" if ARXIV_PID.fullmatch(pid) else "",
+        "html_url": "" if doc.get("source") == "pdf" else
+        f"{ex.AR5IV if doc.get('source') == 'ar5iv' else 'https://arxiv.org/'}html/{pid}",
         "source": doc.get("source", "arxiv-html"), "tool": f"iuno_reader {VERSION}",
+        "accuracy_note": pdf_warning(doc),
         "generated_at": datetime.datetime.now().isoformat(timespec="seconds"),
         "sections_selected": sections or "all", "stage": stage, "stages": st,
         "review_summary": [f"{m.get('reviewer')}（{m.get('mode')}，{INDEPENDENCE_ZH.get(m.get('independence'), '?')}）"

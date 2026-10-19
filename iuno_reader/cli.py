@@ -192,49 +192,55 @@ def cmd_review(a):
         print(f"[{n}/{len(todo)}] {t['id']}")
 
 
-def _describe(r):
-    if r.get("arxiv"):
-        extra = f"《{r['title'][:70]}》" if r.get("title") else ""
-        return f"{r['input']} → arXiv {r['arxiv']}{extra}（{r.get('via', '')}）"
-    head = f"{r['input']}：没找到 arXiv 版本"
-    if r.get("title"):
-        head += f"，查到的是《{r['title'][:70]}》"
-    reason = r.get("error") or ""
-    oa = f"；全文：{r['oa_url']}" if r.get("oa_url") else ""
-    return f"{head}（{r.get('via') or '无'}；{reason}）{oa}，流水线暂时翻不了"
-
-
-def to_arxiv(items):
-    """arXiv 编号原样返回；DOI、链接、标题先换成 arXiv 编号（见 resolve.py）。返回 (编号列表, 换不到的)。"""
-    from .resolve import ARXIV_ID, Finder
-    ids, bad, finder = [], [], None
-    for it in items:
-        if ARXIV_ID.fullmatch(it.strip()):
-            ids.append(ARXIV_ID.fullmatch(it.strip()).group(1))
-            continue
-        finder = finder or Finder(ROOT)
-        r = finder.find(it)
-        print(_describe(r))
-        (ids.append(r["arxiv"]) if r.get("arxiv") else bad.append(r))
-    return list(dict.fromkeys(ids)), bad
-
-
 def cmd_find(a):
+    from .pipeline import describe
     from .resolve import Finder, find_inputs
     finder = Finder(ROOT)
     items = [x for t in a.items for x in find_inputs(t)]
     rc = 0
     for it in items:
         r = finder.find(it)
-        print(_describe(r))
+        print(describe(r) + ("" if r.get("arxiv") else ("，可以用 PDF 翻译（准确度较低）" if r.get("oa_url") else "")))
         rc |= not r.get("arxiv")
     sys.exit(rc)
 
 
+def cmd_kb(a):
+    from . import kb
+    from .library import library_root
+    root = a.library or library_root()
+    if not root:
+        sys.exit("没有知识库目录：用 --library 指定，或在前端「设置」里填「知识库目录」")
+    if a.action == "import":
+        if not a.src or not a.project:
+            sys.exit("用法：kb import <调研目录> --project <名字>")
+        added, same, conflict = kb.import_survey(a.src, root, a.project, dry=a.dry_run)
+        print(f"{'（试运行，没有复制）' if a.dry_run else ''}新增 {len(added)} 个，内容相同跳过 {same} 个，"
+              f"同名但内容不同、没覆盖 {len(conflict)} 个")
+        for x in added[:200]:
+            print("  +", x)
+        for x in conflict:
+            print("  ! 没覆盖：", x)
+        return
+    if a.action in ("plan", "translate"):
+        projects = [a.src] + (a.more or []) if a.src else None
+        todo, skipped = kb.plan(root, projects, prepare_docs=not a.no_prepare, untiered=a.untiered,
+                                only=set(a.only.split(",")) if a.only else None)
+        print(kb.plan_md(todo, skipped))
+        if a.action == "translate" and a.go and todo:
+            kb.translate(todo, workers=a.workers, log=lambda s: print(s, flush=True))
+        elif a.action == "translate" and todo:
+            print("\n确认没问题后加 --go 开始翻译。")
+        return
+    if a.action == "sync":
+        n = kb.sync(root, citations=not a.no_citations)
+        print("已同步：" + "，".join(f"{k} {v}" for k, v in n.items()))
+
+
 def cmd_run(a):
-    from .pipeline import run
+    from .pipeline import run, to_pids
     secs = _sections(a)
-    ids, bad = to_arxiv(a.ids)
+    ids, bad = to_pids(ROOT, a.ids)
     rc = 1 if bad else 0
     for pid in ids:
         try:
@@ -330,6 +336,20 @@ def main(argv=None):
     s.add_argument("--port", type=int, default=8780)
     s.add_argument("--host", default="127.0.0.1", help="默认只监听本机")
     s.set_defaults(fn=cmd_serve)
+    s = sub.add_parser("kb", help="调研 → 知识库 → 译文：import 导入调研、plan 列出没翻的和估价、translate 按档次翻译、sync 同步进知识库")
+    s.add_argument("action", choices=["import", "plan", "translate", "sync"])
+    s.add_argument("src", nargs="?", help="import：调研里放论文的目录；plan / translate：项目名（可以写几个）")
+    s.add_argument("more", nargs="*", help="更多项目名")
+    s.add_argument("--project", help="import：放到知识库 pdfs/ 下的哪个项目名，例如 cvpr7")
+    s.add_argument("--library", help="知识库目录（默认用设置里的「知识库目录」）")
+    s.add_argument("--dry-run", action="store_true", help="import：只列出要复制的，不复制")
+    s.add_argument("--no-prepare", action="store_true", help="plan：没下载拆分过的论文不去下载（不估句数）")
+    s.add_argument("--untiered", action="store_true", help="plan / translate：没分档（只在分类文件夹里）的论文也排进来，按略读翻")
+    s.add_argument("--only", help="plan / translate：只看这几篇（编号，逗号分隔）")
+    s.add_argument("--go", action="store_true", help="translate：真的开始翻译（会花钱）")
+    s.add_argument("--workers", type=int, default=3, help="translate：几篇同时翻（默认 3）")
+    s.add_argument("--no-citations", action="store_true", help="sync：不重算引用统计")
+    s.set_defaults(fn=cmd_kb)
     s = sub.add_parser("find", help="只查不翻：把 DOI、论文页面链接或标题换成 arXiv 编号")
     s.add_argument("items", nargs="+", help="arXiv 编号或链接、DOI、doi.org 链接、ACL/OpenReview/NeurIPS 等论文页面链接、标题（标题要加引号）")
     s.set_defaults(fn=cmd_find)

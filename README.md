@@ -35,7 +35,19 @@ cd /home/a_coin_fan/work/iuno_reader
 | PMC 编号或 Europe PMC 链接 | Europe PMC 接口查标题和 DOI |
 | 标题 | 去 arXiv 搜，标题几乎完全一致才算 |
 
-找不到 arXiv 版本时会说明查到的是哪篇、为什么翻不了，并给出全文地址（例如只在 NeurIPS 发表的 Li 2024）。OpenReview 拦截程序请求，它的链接认不出来，请直接给标题。查询结果缓存在 `cache/resolve.json`。
+找不到 arXiv 版本、但有开放获取的 PDF 时，改用 PDF 翻译（见下一节）；连 PDF 也没有的，会说明查到的是哪篇、为什么翻不了。OpenReview 拦截程序请求，它的链接认不出来，请直接给标题或下载好的 PDF。查询结果缓存在 `cache/resolve.json`。
+
+### 没有网页版时：从 PDF 翻译（准确度较低）
+
+```bash
+.venv/bin/python -m iuno_reader run /path/to/Li2024-StateAbstractionProbe.pdf --sections skim   # 本地 PDF
+.venv/bin/python -m iuno_reader run 2506.02996                                                 # arXiv 和 ar5iv 都没有网页版时自动下 arXiv 的 PDF
+```
+
+- 需要 PyMuPDF：`.venv/bin/pip install pymupdf`。
+- 编号：文件名里有 arXiv 编号就用它（先找网页版）；否则用文件名（去掉「06_」这类序号前缀），例如 `Li2024-StateAbstractionProbe`；从 DOI 或链接下载的用标题拼一个。PDF 放在 `cache/<编号>.pdf`，以后直接 `run <编号>` 就行。
+- 拆分（`pdfextract.py`，PyMuPDF）：按栏排阅读顺序，去掉页眉页脚和侧边水印；节标题靠粗体或字号、编号顺序和常见节名认，也认 Nature 一类期刊嵌在段首的粗体标题；跨栏、跨页的段落拼回去，行尾断词查本地词典决定留不留连字符；图（图注上方）、表（表题下方）和行间公式裁成图片嵌进网页，公式不翻译；参考文献拆成条目供引用统计用，正文里的引用没有链接。
+- **准确度**：网页和 Markdown 的标题下面有醒目的提醒，manifest 里有 `accuracy_note`。拆分覆盖率 = PDF 页面上正文字号的词有多少进了对照（逐词核对，不经过拼段），低于 90%、认不出节标题、没找到摘要或参考文献时另有警告。实测 NeurIPS、ACL、arXiv 预印本和 Nature 期刊各一篇，覆盖率 94%～99%。
 
 ## 网页前端
 
@@ -101,6 +113,25 @@ mkdir -p dict && curl -L -o dict/ecdict.csv https://raw.githubusercontent.com/sk
 - 知识库目录：前端「设置」里的「知识库目录」，或环境变量 `IUNO_LIBRARY`（research-KB 的根目录）。会读 `pdfs/**/*.pdf`（文件名里的 arXiv 编号；`按优先级/<档>/<序号>_` 给出阅读顺序位置）、`pdfs/**/INDEX.md` 里的标题、`translations/<编号>-zh.html` 和 `papers/*.md` 卡片。没设时只做 arXiv 对应。
 - 不想联网查 arXiv：`IUNO_ARXIV_LOOKUP=0`。
 - 网页里链到译文、PDF 的是相对 `translations/` 目录的路径，网页放在知识库的 `translations/` 里打开才能点通；卡片用 `obsidian://` 链接打开，库名取知识库目录的名字。
+
+### 调研 → 知识库 → 译文：kb 命令
+
+每轮调研收的论文接进知识库，按阅读档次翻译，结果都沉淀在知识库里，一轮轮累积下去。
+
+```bash
+.venv/bin/python -m iuno_reader kb import ~/research/cvpr7/papers --project cvpr7 [--dry-run]   # 1. 论文补进知识库 pdfs/cvpr7/
+# 2. 在知识库里分档：放进 pdfs/cvpr7/按优先级/1-精读-正面/01_<编号>_<简称>.pdf 这类文件夹（或 1-精读、2-细读、3-略读）
+.venv/bin/python -m iuno_reader kb plan cvpr7                  # 3. 列出要翻的、估句数和花费（会下载、拆分，不调用模型）
+.venv/bin/python -m iuno_reader kb translate cvpr7 --go        # 4. 按档次翻译（花钱）
+.venv/bin/python -m iuno_reader kb sync                        # 5. 结果写进知识库
+```
+
+- **import**：调研目录里的 PDF、网页和 `INDEX.md` 按原来的子目录复制到 `pdfs/<项目>/`；跳过 `.venv`、`node_modules`、`text/` 和点开头的目录。已有的同名文件内容一样就跳过，内容不一样不覆盖、列出来（`INDEX.md` 例外，以调研那边为准）。
+- **档次 → 方案**：精读 →「尤诺推荐 · 精读」（正文 + Kimi K3 审校）；细读 →「尤诺推荐」（正文）；略读 →「尤诺推荐 · 略读」（摘要、引言、讨论和结论）。档次从文件夹名认（`精读`、`细读`、`略读`），一篇在几个位置时取最高的。没分档的（只在分类文件夹里）默认不翻，加 `--untiered` 才按略读排进来。
+- **plan** 的估价按实测单价：pro 翻译 + pro 盲审每百句约 0.6 元，K3 审校每百句约 2 元（DeepSeek 空闲时段；高峰时段 DeepSeek 翻倍）。精读论文以前没加 K3 的，也会列出来补审。没有网页版的论文先找 arXiv 版本，再不行用 PDF（准确度较低，表里注明）。
+- **translate --go**：几篇同时跑（`--workers`，默认 3），每篇按方案依次翻译、审校，和前端任务队列用的是同一套步骤；日志在 `out/_kb/<编号>.log`。接口从 cc-switch 读（默认 `~/.cc-switch/cc-switch.db`）；用别的账号跑时要指定路径，例如 `IUNO_CCSWITCH_DB=/home/a_coin_fan/.cc-switch/cc-switch.db`，否则会报「找不到接口」。
+- **sync** 只写工具生成的文件：`translations/<编号>-zh.md/.html`；知识库里这篇论文每一份 PDF 旁边的 `.译文.md` 跳转文件；`library/papers.tsv`（每篇一行：编号、arXiv、标题、档次、位置、译文范围、来源、审校、红橙、卡片、文件）和 `library/README.md`（各调研的统计、分了档还没翻的）；`translations/README.md` 里两个标记之间的表格（标记外面的内容不动）；`citations/` 下各调研的引用统计。
+- 同一篇论文的会议版 PDF（文件名没有 arXiv 编号）按标题找到 arXiv 版本后并成一条；清单里没写标题的，读 PDF 第一页的标题。
 
 ### 引用统计：一次调研里大家都在引用什么
 
@@ -224,13 +255,16 @@ export IUNO_BT_BASE_URL=...        IUNO_BT_MODEL=...        IUNO_BT_API_KEY=... 
 .venv/bin/python tests/test_nlp.py                       # 词性、核心词与首字母加粗长度
 .venv/bin/python tests/test_server.py                    # 网页前端的服务端（接口、方案、任务队列、进度与花费）
 .venv/bin/python tests/test_cites.py                     # 引用与参考文献：抽取、逐句定位（含中文）、对应知识库、引用统计；本地词典（不联网）
+.venv/bin/python tests/test_resolve.py                   # 论文标识识别：arXiv、DOI、链接、PMC、标题（不联网）
+.venv/bin/python tests/test_kb.py                        # kb：导入调研、总表合并与档次、计划、索引表格、跳转文件、sync 只改标记之间
+.venv/bin/python tests/test_pdf.py                       # PDF 拆分：现场生成两栏 PDF，查节标题、拼段、断词、图注、参考文献、覆盖率
 .venv/bin/python tests/smoke_extract.py 2602.04212 ...   # 抽取冒烟测试（先 fetch + extract）
 .venv/bin/python tests/coverage_vs_pdf.py 2602.04212 <PDF 纯文本>   # 用 PDF 文本独立检查有没有漏段落
 ```
 
 ## 已知限制
 
-- 只支持 arXiv 论文。arXiv 自己没有 HTML 版时（2023 年 12 月以前的论文，或转换失败），自动改用 [ar5iv](https://ar5iv.labs.arxiv.org/) 由 TeX 源码转出的同格式网页；ar5iv 也转换失败的（例如 2305.15486）暂时翻不了。
+- arXiv 自己没有 HTML 版时（2023 年 12 月以前的论文，或转换失败），自动改用 [ar5iv](https://ar5iv.labs.arxiv.org/) 由 TeX 源码转出的同格式网页；ar5iv 也转换失败的（例如 2305.15486）和不是 arXiv 的论文从 PDF 翻译，段落和节标题靠版面猜，准确度较低，见上文。
 - 表格只翻译表题，表格内容请看原文。
 - 图片直接引用 arXiv 上的图片地址，离线时看不到。
 - 用罗马数字编号的论文（如 I、II、III），正文和附录的节编号可能重复，`--sections` 按编号选节时会同时选中两者；`body` 不受影响。
