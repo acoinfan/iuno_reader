@@ -1,0 +1,3625 @@
+{
+ "__meta__": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "models": {
+   "reviewer": "deepseek-v4-pro"
+  },
+  "translator": "deepseek-v4-pro（关思考）",
+  "independence": "same-model",
+  "usage": {
+   "calls": 124,
+   "prompt_tokens": 109865,
+   "completion_tokens": 115097,
+   "seconds": 1331.6,
+   "cached_tokens": 77568
+  }
+ },
+ "abs.p1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "通过将时间序列编码为数字字符串，我们可以将时间序列预测构建为文本中的下一个标记预测。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "发展这种方法，我们发现大型语言模型（LLMs）如GPT-3和LLaMA-2能够令人惊讶地零样本外推时间序列，其水平与在下游任务上训练的专业时间序列模型相当或超过它们。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了促进这种性能，我们提出了有效标记化时间序列数据并将标记上的离散分布转换为连续值上高度灵活的密度的程序。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们认为LLMs在时间序列上的成功源于它们自然表示多模态分布的能力，结合对简单性和重复的偏好，这与许多时间序列中的显著特征（如重复的季节性趋势）相一致。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们还展示了LLMs如何通过非数值文本自然地处理缺失数据而无需插补，容纳文本辅助信息，并回答问题以帮助解释预测。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "“poor uncertainty calibration” 被译成 “较差的校准不确定性”，容易误解为 “校准不确定性” 这一概念，实际指不确定性校准较差。",
+    "suggestion": "虽然我们发现增加模型大小通常会提高时间序列上的性能，但我们表明GPT-4可能比GPT-3表现更差，因为它如何标记化数字，以及不确定性校准较差，这可能是对齐干预（如RLHF）的结果。",
+    "zh_reviewed": "虽然我们发现增加模型大小通常会提高时间序列上的性能，但我们表明GPT-4可能比GPT-3表现更差，因为它如何标记化数字，以及较差的校准不确定性，这可能是对齐干预（如RLHF）的结果。"
+   }
+  ]
+ },
+ "S1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "尽管与其他序列建模问题（如文本、音频或视频）有相似之处，时间序列具有两个特别具有挑战性的特性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "与通常具有一致输入尺度和采样率的视频或音频不同，聚合的时间序列数据集往往包含来自截然不同来源的序列，有时还带有缺失值。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此外，时间序列预测的常见应用（如天气或金融数据）需要从仅包含可能信息极小部分的观测中进行外推，这使得精确的点预测几乎不可能，而不确定性估计尤为重要。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "虽然大规模预训练已成为视觉和文本领域训练大型神经网络的关键要素，使性能能够直接随数据可用性而扩展，但预训练通常不用于时间序列建模，因为该领域没有公认的无监督目标，且大型、内聚的预训练数据集不易获得。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，简单的时间序列方法（例如"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "ARIMA [8] 和线性模型 [53]）在流行基准测试上往往优于深度学习方法 [25]。"
+   }
+  ]
+ },
+ "S1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在本文中，我们展示了大型语言模型（LLM）如何自然地弥合传统方法的简单偏置与现代深度学习的复杂表征学习和生成能力之间的差距。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "特别是，我们引入了一种极其简单的方法 LLMTime{fn1}，将预训练的 LLM 应用于连续时间序列预测问题，如图 1 中的高层次示意。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "其核心是将时间序列表示为数字字符串，并将时间序列预测视为文本中的下一个标记预测，从而解锁了强大的预训练模型和概率能力的使用，例如似然评估和采样。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了实现强大的性能，我们提出了以下技术：（1）有效地将时间序列编码为数字字符串；（2）将 LLM 的离散分布调整为能够建模复杂多模态分布的连续密度。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "addition"
+    ],
+    "issue": "译文补充了“而其他模型则需要进行微调”，原文只说明该下游数据也被其他模型使用，并未明确断言其他模型都需要微调。",
+    "suggestion": "利用这些技术，我们发现 LLMTime 可以在零样本方式下，在一系列不同问题上超过或达到专门构建的时间序列方法，这意味着 LLMTime 无需在（其他模型所使用的）下游数据上进行任何微调即可使用。",
+    "zh_reviewed": "利用这些技术，我们发现 LLMTime 可以在零样本方式下，在一系列不同问题上达到或超过专门构建的时间序列方法，这意味着 LLMTime 无需在下游数据上进行任何微调即可使用，而其他模型则需要进行微调。"
+   }
+  ]
+ },
+ "fn1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "`https://github.com/ngruver/llmtime`"
+   }
+  ]
+ },
+ "S1.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "LLMTime 的零样本特性具有几个天然优势：（1）它便于直接应用 LLM，无需掌握微调过程的专业知识，也无需这些过程所需的大量计算资源，同时避开了围绕用于 LLM 训练或微调的专有源代码或 API 的访问问题；（2）它天然适合数据可用性有限的场景，在这些场景中几乎没有用于训练或微调的信息；（3）通过利用广泛预训练 LLM 的广泛模式外推能力，它绕过了通常需要为构建专用时间序列模型而投入的大量时间、精力和领域专业知识。"
+   }
+  ]
+ },
+ "S1.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了理解LLMTime出色表现的来源，我们研究了LLM如何表达对简单或重复序列的偏好[20]，并表明这些偏差实际上与时间序列的显著结构（如季节性）是相容的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "除了这些偏差之外，LLM还可以自然地容纳缺失数据，并表达多模态分布，这对于时间序列特别有用。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们还展示了LLM如何实现吸引人的功能，例如通过提示提供额外辅助信息的能力，以及查询LLM以解释其预测的能力。"
+   }
+  ]
+ },
+ "S1.p5.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "minor",
+    "category": [
+     "hedge"
+    ],
+    "issue": "broadly 在此表示“总体上/大致上”，译文“广泛”偏向“范围广”，略有偏差。",
+    "suggestion": "最后，除了总体上令人信服的预测性能外，我们发现性能往往随着规模而提升，点预测的质量也随着不确定性表示的质量而提升。",
+    "zh_reviewed": "最后，除了广泛令人信服的预测性能外，我们发现性能往往随着规模而提升，点预测的质量也随着不确定性表示的质量而提升。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，我们还发现 GPT-4 的不确定性校准比 GPT-3 更差，这可能是由于诸如基于人类反馈的强化学习（RLHF）等干预措施所致。"
+   }
+  ]
+ },
+ "S1.F1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "minor",
+    "category": [
+     "term"
+    ],
+    "issue": "原文 extrapolations 指时间序列的外推/延拓，译为“推断”不够准确，易与 inference 混淆。",
+    "suggestion": "图1：我们提出LLMTime，一种利用大型语言模型（LLMs）进行时间序列预测的方法，通过将数字编码为文本，并将可能的外推采样为文本补全。",
+    "zh_reviewed": "图1：我们提出LLMTime，一种利用大型语言模型（LLMs）进行时间序列预测的方法，通过将数字编码为文本，并将可能的推断采样为文本补全。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "LLMTime无需在目标数据集上进行任何训练（即零样本）即可超越许多流行的时间序列方法。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "LLMTime的性能也随着底层基础模型的能力而扩展。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "值得注意的是，经过对齐的模型（例如"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "RLHF）并不遵循这种扩展趋势。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例如，GPT-4的表现不如GPT-3（第6节）。"
+   }
+  ]
+ },
+ "S2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**语言建模** 语言模型在一组序列 $\\mathcal{U}={\\{U_{1},U_{2},\\dots U_{i},\\dots,U_{N}\\}}$ 上进行训练，其中 $U_{i}=(u_{1},u_{2},\\dots,u_{j},\\dots,u_{n_{i}})$，且每个 token $u_{i}$ 属于词汇表 $\\mathcal{V}$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "大型语言模型通常编码一个自回归分布，其中每个 token 的概率仅依赖于序列中先前的 token，$p_{\\theta}\\left(U_{i}\\right)=\\prod_{j=1}^{n_{i}}p_{\\theta}\\left(u_{j}\\mid u_{0:j-1}\\right)$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "参数 $\\theta$ 通过最大化整个数据集 ${p_{\\theta}(\\mathcal{U})=\\prod_{i=1}^{N}p_{\\theta}(U_{i})}$ 的概率来学习。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "每个语言模型都有一个关联的分词器，它将输入字符串分解为 token 序列，每个 token 都属于 $\\mathcal{V}$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "正确的分词极其重要，微小的细节可能产生令人惊讶的显著影响。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "自回归语言模型最常用的分词方法是字节对编码（BPE），它将输入视为比特串，并根据训练语料库中的出现频率分配 token，从而在平均意义上优化为更短的 token 序列。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "从语言模型中采样通常从一个提示 $u_{0:k}$ 开始，然后使用 $p_{\\theta}\\left(u_{j}\\mid u_{0:j-1}\\right)$ 顺序进行，该分布通常经过预处理，例如通过温度缩放或核采样 [26]。"
+   }
+  ]
+ },
+ "S2.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**大型语言模型** Brown 等人 [9] 表明，增加语言模型的参数量和训练数据规模会带来新的能力，例如零样本泛化，即模型可以在不针对任何任务特定数据训练模型参数的情况下执行文本格式的任务。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "大型语言模型，例如 GPT-3 [9] 或 LLaMA-2 [45]，通过上下文学习实现这种泛化形式，上下文学习识别语言模型提示中的模式，并通过下一个词元预测进行外推。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "许多作者推测，上下文学习源于语言模型对输入数据的广泛压缩 [20, 43, 15]。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "压缩有利于那些以程序化抽象对输入数据进行操作的学习算法，例如上下文无关文法 [2] 或归纳头 [35]，它们可以实现复制粘贴类型的操作，以生成具有高度结构化语法的样本。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在这项工作中，我们表明 LLM 的零样本泛化能力及其对可压缩模式的偏好远远超出了语言理解，并可用于时间序列预测。"
+   }
+  ]
+ },
+ "S2.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "零样本泛化已使大语言模型作为助手变得显著更有用，从而催生了使大语言模型与人类偏好和指令对齐的方法，例如基于人类反馈的强化学习（RLHF）[39]和指令微调[47]。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "虽然对齐方法对现代大语言模型产品至关重要，但它们也可能显著影响底层模型的能力和校准[37, 10]。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在这里，我们表明这些方法也可能影响预测能力。"
+   }
+  ]
+ },
+ "S2.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**时间序列数据** 时间序列数据通常采用与语言建模数据完全相同的形式，即序列集合 $\\{U_{i}=(u_{1},\\dots,u_{j},\\dots,u_{n_{i}})\\}$，但在时间序列中 $u_{j}$ 是数值。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "由于语言模型旨在表示序列上的复杂概率分布，它们在理论上非常适合时间序列建模。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，在实践中，语言模型受到数字分词细节的制约。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "BPE 根据数字在训练数据中出现的频率对其进行压缩，因此数字可能被分解成不合适的块，这使得学习基本的数值运算变得困难。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "“将数字映射为单个数字”存在歧义，可能让人理解为映射到一个单独的数值；原文“individual digits”指各个数位，建议明确。",
+    "suggestion": "因此，Touvron 等人 [44] 设计了 LLaMA 分词器，将数字映射为各个数位，这可以显著提高数学能力，小型 LLaMA 模型的表现优于 GPT-4 [31]。",
+    "zh_reviewed": "因此，Touvron 等人 [44] 设计了 LLaMA 分词器，将数字映射为单个数字，这可以显著提高数学能力，小型 LLaMA 模型的表现优于 GPT-4 [31]。"
+   }
+  ]
+ },
+ "S2.p5.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "将语言模型应用于时间序列数据的另一个挑战是恰当的评估。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "平均绝对误差（MAE）常用，但忽略了预测中的不确定性，这对随机数据来说限制很大 [25, 6]。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "连续分级概率评分（CRPS）捕捉分布特性，并能比较那些生成样本而不提供似然的模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于单个预测，CRPS 分数相对于估计的累积分布函数（CDF）$\\hat{F}$ 定义为 $\\text{CRPS}(\\hat{F},y)=\\int_{\\mathbb{R}}\\left(\\hat{F}(z)-\\mathbb{I}_{(z-y)>0}\\right)^{2}dz,$ 其中 $\\hat{F}(z)$ 是通过采样预测得到的经验 CDF，$\\mathbb{I}$ 是指示函数。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "虽然 CRPS 比 MAE 有所改进，但它也忽略了数据中的关键结构，例如时间步之间的相关性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "幸运的是，语言模型可以为时间序列数据的完整序列分配似然，我们展示了如何对 LLM 的离散似然进行小幅修改，从而产生对模型比较有用的连续密度。"
+   }
+  ]
+ },
+ "S2.p6.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**用于时间序列的语言模型** 一些作者探索了使用预训练语言模型编码器作为时间序列模型的初始化。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例如，Zhou et al. [57] 提出了 FPT，它微调一个 BERT 编码器来执行时间序列预测。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "类似地，Zhang et al. [54] 引入了 Meta-Transformer，这是一个用于微调语言模型以处理非文本模态（包括时间序列）的框架。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "更少的论文探索了在不进行微调的情况下使用 LLM 作为预测器。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们所知的唯一方法是 PromptCast [51]，它将预测表述为通过提示进行的问答。"
+   }
+  ]
+ },
+ "S2.p7.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**我们的工作** 与利用LLM主干的方法不同，我们的方法完全是零样本的，不需要微调。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "与PromptCast不同，我们表明，如果仔细预处理数值本身，LLM可以直接用作预测器，无需任何添加的文本或提示工程。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的方法仅依赖于LLM推断一般序列模式的能力，而不依赖于英语或任何其他语言的特定内容。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "超越先前的工作，我们还培养了大型语言模型的概率性质及其捕捉高度随机时间序列不确定性的能力。"
+   }
+  ]
+ },
+ "S3.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "使用 LLMTime 进行预测的步骤相对较少。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "一旦数值被处理成字符串，用语言模型进行预测就遵循标准的采样程序。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，正如我们接下来所展示的，正确的预处理并不总是直观的，但极其重要，错误的处理可能导致无法使用的预测。"
+   }
+  ]
+ },
+ "S3.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**分词** 分词尤为重要，因为它直接影响模式如何在分词后的序列中形成，以及语言模型能够学习的操作类型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "遗憾的是，BPE 等常见分词方法往往会把单个数字拆分成与数位不对齐的 token，这可能使算术运算变得相当困难 [31]。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例如，数字 $42235630$ 被 GPT-3 分词器分词为 $[422,35,630]$，即使只改变一位数字也可能导致完全不同的分词结果。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "相比之下，在许多新的开源 LLM 中（例如"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "LLaMA [44]），数字默认被分词为单个数字。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了修正 GPT 模型的分词方式，我们用空格分隔数字以强制每个数字单独分词，并使用逗号（\",\"）分隔时间序列中的每个时间步。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "由于在固定精度下小数点冗余，我们在编码中省略它们以节省上下文长度。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，例如在 $2$ 位精度下，我们在输入分词器之前按如下方式预处理时间序列："
+   }
+  ]
+ },
+ "S3.p2.2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在图2中，我们表明这种编码所添加的空格对GPT模型有帮助，可防止模型在采样过程中因输出异常标记而偏离正轨。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于LLaMA模型，由于其独特的数字标记化方式，添加空格会产生相反的效果。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "“nuisance”译为“多余的”不够准确，原文强调麻烦、干扰，而非单纯多余。",
+    "suggestion": "每个数字和空格已经被分配了自己的标记，空格标记成为干扰性输入，增加了序列长度，却没有简化序列的结构，并且可能使序列对模型而言变得分布外。",
+    "zh_reviewed": "每个数字和空格已经被分配了自己的标记，空格标记成为多余的输入，增加了序列长度，却没有简化序列的结构，并且可能使序列对模型而言变得分布外。"
+   }
+  ]
+ },
+ "S3.F2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图2：仔细的分词对于使用LLM进行良好预测非常重要。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "使用来自Darts [24]的澳大利亚葡萄酒数据集，其值为[151, 167, …, 267]，我们展示了GPT-3 [9]和LLaMA-2 [45]所使用的分词方式及其对预测性能的相应影响。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "添加空格使GPT-3能够为每个数字创建一个标记，从而获得良好的性能。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "另一方面，LLaMA-2单独对数字进行分词，添加空格会损害性能。"
+   }
+  ]
+ },
+ "S3.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**重缩放** 为了避免在输入值非常大时浪费标记，我们将值缩小，使得重缩放后时间序列值的 $\\alpha$ 百分位数为 $1$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们避免按最大值缩放，以便 LLM 能看到一部分示例（$1-\\alpha$），其中数字位数发生变化，并在其输出中重现这种行为，从而产生比它所见过的更大的值。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们还尝试了一个基于输入数据百分位数计算的偏移量 $\\beta$，并在验证对数似然上调整这两个参数（详情见附录 A）。"
+   }
+  ]
+ },
+ "S3.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**采样/预测** 为了进行预测，从LLM中抽取多个样本（例如20个），并使用每个时间步样本的统计量来构建点估计（例如中位数）或概率预测（例如分位数）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了控制采样，我们使用温度缩放、logit偏置和核采样（附录C）。"
+   }
+  ]
+ },
+ "S3.p5.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "连续似然 对单个数字序列建模除了能产生好的样本之外，还有其他好处。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在基数 $B$ 下以 $n$ 位数字表示精度时，小数点后每 $n$ 位数字序列对应 $B^{n}$ 个可能区间（图 3）中的一个，每个区间宽度为 $B^{-n}$。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "term"
+    ],
+    "issue": "原文“each individual number”指由多位数字组成的完整数，译文“每个单独数字”易被理解成单个数字/数位。",
+    "suggestion": "我们可以将每个单独的数上的分布视为分层 softmax [32]，其中 $p(u_{1},...,u_{n})=p(u_{n}|u_{n-1},...,u_{0})\\,p(u_{1}|u_{0})\\,p(u_{0})$。",
+    "zh_reviewed": "由于每个分布 $p(u_{j}\\mid u_{0:j-1};\\theta)$ 都是对可能数字的 softmax，我们可以将每个单独数字上的分布视为分层 softmax [32]，其中 $p(u_{1},...,u_{n})=p(u_{n}|u_{n-1},...,u_{0})\\,p(u_{1}|u_{0})\\,p(u_{0})$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "尽管语言模型的概率分布是离散的，但我们可以通过在每个区间内放置均匀分布，轻松地将其调整为提供连续密度。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "term"
+    ],
+    "issue": "原文“numbers”指模型产生的完整数，译文“数字”在上下文中易与数位（digit）混淆。",
+    "suggestion": "枚举模型可以产生的可数无穷多个数（因为模型可以在小数点前输出任意位数的数字），用索引 $k\\in\\mathbb{N}$ 表示，每个数的概率为 $p_{k}$，我们可以将分布写成区间上不相交均匀分布的混合 $p(x)=\\sum_{k\\in\\mathbb{N}}p_{k}U_{k}(x)$，其中 $U_{k}(x)=B^{n}\\mathbb{I}_{x\\in[B^{-n}k,B^{-n}(k+1))}$。",
+    "zh_reviewed": "枚举模型可以产生的可数无限个数字（因为模型可以在小数点前输出任意位数的数字），用索引 $k\\in\\mathbb{N}$ 表示，每个数字的概率为 $p_{k}$，我们可以将分布写成区间上不相交均匀分布的混合 $p(x)=\\sum_{k\\in\\mathbb{N}}p_{k}U_{k}(x)$，其中 $U_{k}(x)=B^{n}\\mathbb{I}_{x\\in[B^{-n}k,B^{-n}(k+1))}$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，如果给定的数据点位于区间 $k$ 中，其连续对数似然为 $\\log p(x)=\\log p_{k}+n\\log B$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "最后，为了获得原始输入空间中的似然 $\\log p(z)$，我们添加一个变量变换因子 $\\log|\\tfrac{dx}{dz}|,$，其中 $z\\mapsto x=s(z)$ 是预处理中的缩放操作。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，尽管使用了数字的离散标记化，我们的构造所实现的指数级数量的区间和指数级小的区间宽度，使得用 LLM 表示灵活且高分辨率的连续分布出奇地高效。"
+   }
+  ]
+ },
+ "S3.p6.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**语言模型作为灵活分布** LLM 能够表达对数字的灵活分布，这一事实对于时间序列数据至关重要。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "不确定性量化对于预测至关重要，而时间序列中表示不确定性的典型方法可能因模型设定错误而受到限制。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例如，创建概率预测的一种常见方法是拟合高斯或拉普拉斯观测模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "当底层数据分布是多峰时，这两种模型都会表现不佳。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "高斯混合模型（GMM）等方法解决了多峰性问题，但给优化和模型选择带来了额外的挑战。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "scope"
+    ],
+    "issue": "括号“如图3右所示”紧接“模型”，可能被理解为模型或训练过程如图3右所示，但原文是分布如图3右所示。",
+    "suggestion": "我们通过在多种一维分布（如图3右所示）上训练一个小型自回归模型，表明语言模型是一种被低估的解决方案。",
+    "zh_reviewed": "我们通过在多种一维分布上训练一个小型自回归模型（如图3右所示），表明语言模型是一种被低估的解决方案。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些分布来自指数随机变量、均匀分布与学生t分布的混合，以及来自`MonthlyMilk`数据集[24]的ARIMA模型时间序列预测残差的重尾分布。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们通过计算Wasserstein距离来定量评估这些拟合，并与拉普拉斯观测模型、使用期望最大化训练的GMM以及基于平坦分箱（调整箱大小）的逻辑回归进行比较。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "每个模型仅使用来自分布的200个样本进行训练。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "scope"
+    ],
+    "issue": "“这些是时间序列数据特征的多样类型之一”中“之一”与复数主语不搭配，原文“are among the diverse types”表示属于多种类型中的一些，不是“之一”。",
+    "suggestion": "结果表明，十进制自回归语言模型（“Decimal AR”）表现极佳，能够处理不对称、多峰和重尾分布，这些属于时间序列数据特征的多样类型之列。",
+    "zh_reviewed": "结果表明，十进制自回归语言模型（“Decimal AR”）表现极佳，能够处理不对称、多峰和重尾分布，这些是时间序列数据特征的多样类型之一。"
+   }
+  ]
+ },
+ "S3.F3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图3：**左：** 数字序列上的自回归模型相当于对应数字上的分层softmax分布。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "当与每个离散桶中的均匀分布结合时，字符串上的分布可以成为连续域上富有表现力的分布。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**右：** 使用简单的自回归模型（例如"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "RNN）在数字的字符串表示上训练，我们可以拟合其他方法难以处理的复杂分布，例如重尾或多模态分布。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "一个简单的自回归模型可以匹配或优于众所周知的密度估计方法，例如高斯混合模型（GMM）或固定分辨率的装箱，以样本之间的Wasserstein距离衡量。"
+   }
+  ]
+ },
+ "S4.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们通过将 LLMTime 与 GPT-3 和 LLaMA-2 70B 以及许多流行的时序基线模型在各种基准时序数据集上进行比较，来评估 LLM 的零样本预测能力。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "LLMTime 不仅能够生成真实和合成时序的合理补全，而且在零样本评估中取得了比 ARIMA、TCN 和 N-HiTS 等专用时序模型更高的似然值和 CRPS 值。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在 MAE 等确定性指标上评估时，LLM 也表现良好，在每个基准上都取得了最佳或第二佳的 MAE 值。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "由于我们使用的 LLM 数据集未公开，数据泄漏是一个重要问题，我们在附录 B 中直接处理了该问题。除了在标准基准上的强劲表现（这些基准最有利于比较）之外，我们发现 LLMTime 在不可能出现在基础模型训练数据中的数据集上也表现良好。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "LLMTime 和基线方法使用的完整超参数集详见附录 C.1。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于一些较长的时序，并非所有历史都能放入上下文窗口中，因此超参数隐式地捕捉了更高精度与捕获更长时序历史之间的权衡。"
+   }
+  ]
+ },
+ "S4.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**数据集** 我们使用深度学习研究中常见的三个基准数据集，以及伴随这些基准数据集的许多基线方法。"
+   }
+  ]
+ },
+ "S4.I1.i1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• **Darts** [24]：一个包含8个真实单变量时间序列数据集的集合。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于Darts，我们使用包中直接实现的几种方法，包括神经网络模型（TCN [29]、N-BEATS [38]、N-HiTS [11]）和简单移动平均模型（ARIMA [8]）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Darts能够学习具有可处理似然的观测模型，因此特别适用于对LLMTime的概率预测进行基准测试。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们还包括谱混合高斯过程（SM-GP）[49]，一种贝叶斯非参数方法（详见附录C.1）。"
+   }
+  ]
+ },
+ "S4.I1.i2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• **Monash** [19]：Monash 预测档案包含 30 个公开可用的数据集，以及 12 个预测模型的基线数值，包括简单指数平滑（例如"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "ETS [27]）、梯度提升（例如"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "CatBoost [40]）和深度学习模型（例如"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "DeepAR [41]、WaveNet [36]）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Monash 档案包含超过 400,000 条单独的时间序列，这使得使用最大的可用 LLM 完整处理它不可行。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了减少计算负担，我们在附录 C.2 中描述的 19 个数据集上评估 GPT-3 的零样本性能。"
+   }
+  ]
+ },
+ "S4.I1.i3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• **Informer** [55]：我们在广泛用于基准测试高效Transformer模型的多变量数据集上进行了评估 [16, 55]。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了用LLMTime预测多变量数据，我们独立地预测每个协变量。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们以通过运行Autoformer [50]和FEDFormer [56]代码库的公开实现获得的数字作为基线（附录C.3）。"
+   }
+  ]
+ },
+ "S4.F4": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图4：使用基础模型GPT-3或LLaMA-2 70B的LLMTime在几个确定性时间序列基准[24, 19, 55]上取得了最佳或次佳的聚合性能，同时完全为零样本。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些基准总共包含29个独立数据集，具有不同的来源、长度和噪声水平。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于Monash MAE数值，已有结果是在未归一化数据上报告的，因此我们在聚合前对数值进行归一化（附录C.2）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Informer数据集是多变量的，我们用LLMTime独立预测每个协变量（附录C.3）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "由于API查询的成本，跳过了在Informer数据集上的GPT-3评估。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "误差条显示每个基准中各个数据集的标准误差。"
+   }
+  ]
+ },
+ "S4.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**确定性结果** 为了计算 LLMTime 的 MAE 值，我们使用基础模型（GPT-2 或 LLaMA-2 70B）20 个样本的逐点中位数。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图 4 显示，LLMTime 的确定性预测在所有考虑的基准上排名第一或第二，同时没有可训练参数。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们在附录 C.5/C.7/C.8 中提供了预测的可视化。"
+   }
+  ]
+ },
+ "S4.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**概率结果** 在图5中，我们展示了在Darts数据集上的若干概率评估，包括聚合的NLL和CRPS数值，以及关于每个模型对输入数据量减少的反应的分析。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在log likelihood和CRPS的评估中，LLMTime在总体上以及在几乎每个单独数据集上（每个数据集的结果见附录C.5）都显著优于基线。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "鉴于第3节中对语言模型导出密度的分析，语言模型在概率评估中表现出色并不令人意外，它们甚至更显著地优于基线。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在图5（左）中，我们展示了两个捕捉LLMTime性能的信息性示例。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在推断AirPassengers数据集时，LLMTime成功识别并延续了趋势和周期成分，且不确定性随着预测远离输入数据而增长。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在GasRateCO2上，当全局结构相对较少时，LLMTime复现了局部结构。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在图5（右）中，我们展示了LLMTime不仅在访问完整训练数据时表现优于基线，而且在仅使用训练数据的一小部分时也是如此。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "由于时间序列经常以相对数据稀缺和迁移学习挑战为特征，LLM的数据效率尤其具有吸引力。"
+   }
+  ]
+ },
+ "S4.p5.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**与 PromptCast 的比较** 尽管已包含在上述结果中，我们仍想明确强调，根据在 Darts 数据集上聚合的 CRPS 和 MAE，LLMTime 在应用于 GPT-3 和 LLaMA-2 70B 时显著优于 PromptCast [51]。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这一性能差距凸显了两种方法之间的重要差异。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "与我们的方法不同，PromptCast 通过向预训练语言模型提出关于时间序列未来值的明确问题，将预测表述为 NLP 中的传统问答任务。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例如，PromptCast 输入提示“WoolyDataset 过去 95 个时间步的值是 6172, 6709, 6633, …, 6077。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "接下来 5 个时间步的值会是多少？"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "接下来 5 个时间步的值将是”，以从 LLM 中提取预测。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "PromptCast 也没有应用我们的分词和数据重缩放策略（第 3 节），我们表明该策略对于良好性能至关重要。"
+   }
+  ]
+ },
+ "S4.F5": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图5：在Darts数据集上的扩展实验。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**左：** 带有基线每维负对数似然（NLL/D）的示例概率预测。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "LLM可以轻松外推趋势（例如"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "AirPassengers），并在数据有噪声时重现局部模式（例如"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "GasRateCO2）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**中：** 当使用NLL和CRPS等概率指标时，LLMTime优于所有基线，包括PromptCast [51]，一种竞争的LLM方法。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "误差条显示了Darts数据集上的标准误差。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**右：** LLMTime比竞争方法样本效率高得多。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "虽然其他方法的性能在我们将它们限制在原始训练集的一小部分时会迅速下降，但LLMTime只需少量示例就能赋予高似然。"
+   }
+  ]
+ },
+ "S5.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了理解为什么大语言模型能够以零样本方式外推时间序列，让我们退一步考虑简单的数值序列，例如 [$1,4,9,16,\\dots$] 或 [$0,0,1,0,1,2,0,1,2,3,\\dots$]。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于任何输入序列，存在任意多个与输入一致的生成规则（例如"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "$f(x)=x^{2}$ 对于 $x\\in[1,2,3,4,...]$），但有些生成规则过于复杂，泛化能力会很差。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "大语言模型能够有效预测，是因为它们偏好由简单规则推导出的补全，采用了一种奥卡姆剃刀先验 [20, 43, 15]。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了明确展示这一现象，我们使用函数 $f(x)=x+\\cos(x)$ 并加入加性高斯噪声，构造了一个合成示例。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们使用 PySR [14] 将符号表达式拟合到前 70% 的时间步，符号集为 [\"$+$\", \"$\\cdot$\", \"-\", \"$/$\", \"$\\sin$\", \"$\\cos$\", \"$\\exp$\",\"square\"]，以识别具有已知复杂度的生成规则，复杂度由回归表达式中的符号数量量化（附录 D）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图 5（左）显示了 GPT-3 将最高似然赋予那些在一致性与复杂度之间取得平衡的符号回归生成规则的可能性。"
+   }
+  ]
+ },
+ "S5.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在图5（右）中，我们展示了LLM中的程序归纳如何为时间序列数据中常见的许多确定性模式带来良好的零样本预测。"
+   },
+   {
+    "verdict": "major",
+    "category": [
+     "scope"
+    ],
+    "issue": "译文改变了 unlike those seen in the observed history 的修饰对象，原文是标准模型无法识别程序化生成规则以做出不同于已观察历史中所见的预测，译文却变成“像在历史中看到的那样识别规则”。",
+    "suggestion": "后者往往难以外推这些简单模式，因为它们无法识别出程序化生成规则，从而做出观察历史中所未见过的预测。",
+    "zh_reviewed": "除了样本之外，我们还展示了似然，并与标准时间序列模型进行比较，后者往往难以外推这些简单模式，因为它们无法像在观察到的历史中看到的那样识别出程序化生成规则来进行预测。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "虽然通用的简单性偏置有助于识别和外推输入中的模式，但时间序列模型中常见的许多模式也直接转化为语言模型的已知能力，例如"
+   }
+  ]
+ },
+ "S5.p2.2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "将多种模式组合在一起提出了更困难的挑战，因为这既需要识别复合模式，又需要在相同的令牌预算内执行多种操作。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "假设一个模型能够在一次前向传递中执行复制，并在一次前向传递中执行加法，这并不一定意味着它能够同时完成这两项操作。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们发现 GPT-3 只能有时执行这些组合，尽管 GPT-4 如附录 E 所示更一致地做到这一点。很可能在计算和花费的令牌上的限制可能使这种组合不必要地困难，并且额外的递归结构，例如来自草稿板 [34]、思维链（CoT）提示 [48] 或自适应计算 [42, 3]，会使这项任务更容易。"
+   }
+  ]
+ },
+ "S5.I1.i1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• **重复偏差与周期性**：LLM 对重复序列的偏差 [26]（在 NLP 中通常不受欢迎）恰好对应于识别并外推输入中周期性结构的能力。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "$4.2,8.6,1.0,4.2,8.6$ 将导致 $1.0$ 成为可能的下一个输出，而无需任何时间序列或算术知识（$x_{t}=x_{t-T})$。"
+   }
+  ]
+ },
+ "S5.I1.i2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• **算术与趋势成分**：LLM 执行加法和乘法的能力 [52, 31] 对应到外推线性和指数趋势。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例如，预测 $0.2,1.6,3.,4.4$ 的下一个元素，LLM 只需要将 $1.4$ 加到最后一个元素上（$x_{t+1}=x_{t}+c$）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "类似地，指数趋势的生成规则为 $x_{t+1}=c\\cdot x_{t}$，S 形趋势的生成规则为 $x_{t+1}=x_{t}+cx_{t}(1-x_{t})$。"
+   }
+  ]
+ },
+ "S6.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "到目前为止，我们已经表明，LLM 在各种数据集上都是有效的预测器，并且它们的预测能力源于生成式预训练所产生的偏差。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "LLMTime 提供了一种大规模预训练机制，这在时间序列的机器学习中并不常见。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "LLM 减少了为预训练而必须聚合的时间序列数据量，用文本预训练取而代之，并实现了更强大的扩展结果。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "除了摆脱任务特定数据的限制之外，文本预训练还具有许多测试时的好处，这些好处源于基础模型处理和生成自然语言的能力。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "正如我们在下一节中所展示的，LLM 可以利用它们的能力来无缝地整合缺失数据或回答有关时间序列的问题。"
+   }
+  ]
+ },
+ "S6.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**基础模型与预测性能** 鉴于开源LLM的快速增长和改进[44, 45]，LLMTime预测性能与底层基础模型性能之间的关系尤为重要，并具有广泛的影响。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "LLM基准性能的稳步提升可以直接转化为预测能力的稳步提高。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在图6（右）中，我们展示了一项使用OpenAI模型（davinci、babbage、curie、ada）、LLaMA[44]变体（7B、13B、33B、65B）和LLaMA-2[45]模型（7B、13B、70B）的研究，测量了大规模多任务语言理解（MMLU）基准上的准确率和概率预测误差。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "正如我们所期望的，当推理（MMLU）性能提高时，预测也会改善。"
+   }
+  ]
+ },
+ "S6.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**聊天模型** 尽管便捷的缩放关系似乎对基础模型成立，但当我们考虑那些为聊天机器人应用而进行后处理的模型时，这种相关性开始失效。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例如，GPT-4 [37] 在自然语言任务中表现出比 GPT-3 和 LLaMA 模型高得多的智能，但将其有效应用于时间序列具有挑战性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在图 6（中）中，我们展示了 GPT-4 在 Darts 数据集上的预测误差（CRPS）显著大于 GPT-3。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "性能下降是 GPT-4 方法中几个小细节的结果。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "由于分词方式的改变，GPT-4 无法轻易被强制将单个数字分词为连续的数字流。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "由于 API 的限制，也不允许进行似然评估，这就是我们只呈现 CRPS 结果的原因。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "虽然 GPT-4 在第 5 节讨论的合成示例上表现良好（见附录 E），但我们发现 GPT-4 在随机数据上的校准比 GPT-3 差得多，这可能是上述预处理细节以及该模型经过 RLHF [13] 处理的结果，而 RLHF 已知会降低问答任务上的校准 [37]。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "GPT-4 并不是为聊天功能设计的模型中性能下降的唯一例子。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们在 LLaMA-2 模型中观察到了同样的现象，这些模型对于每种模型大小都有相应的聊天版本。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图 6（右）显示，聊天版本的预测误差往往明显比其非聊天对应版本更差，尽管仍然保持规模和推理能力的趋势。"
+   }
+  ]
+ },
+ "S6.F6": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图6：**左：** 时间序列预测性能（Darts [24] 上的 NLL/D 和 CRPS）随着底层 LLM 的推理性能而提升，推理性能以大规模多任务语言理解（MMLU）基准 [23] 上的准确率来衡量。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "展示的结果涵盖所有 GPT-3、LLaMA [44] 和 LLaMA-2 [45] 基础模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**中：** GPT-4 的表现比 GPT-3 差。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**右：** 预测性能（Darts 上的 NLL/D 和 CRPS）似乎普遍受到对齐过程（例如指令微调和 RLHF）的负面影响。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "LLaMA-2 聊天模型通常比相应的基础模型表现更差。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "误差条表示各个数据集上的标准误差。"
+   }
+  ]
+ },
+ "S6.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**缺失数据** 将预测视为文本补全任务并使用 LLM 的一个主要优势是，我们可以轻松输入任何可以编码为文本的内容。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在时间序列中，序列往往是不完整的，某些观测值会缺失。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "简单的插补方法，如最近邻插补，仍然是常见数据科学工作流程中的核心预处理步骤 [33]，而插补方法的选择对临床数据尤其重要，因为临床数据通常包含不规则采样的测量值，且缺失本身可能就是有意义的信号 [28]。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "就像人类阅读不完整的报告一样，LLM 可以通过采用特殊符号来处理缺失值而无需插补，例如，"
+   }
+  ]
+ },
+ "S6.p4.2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在图7中，我们比较了传统时间序列方法和LLaMA-2 70B在数据被缺失值破坏、然后经过线性插值和上述字符串格式化处理后的预测的似然值和CRPS值。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "虽然传统方法的似然值随着破坏迅速恶化，但我们发现LLaMA-2 70B更具弹性，并且在比较CRPS值时，LLaMA-2 70B与使用插值的方法具有竞争力。"
+   }
+  ]
+ },
+ "S6.p5.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**连接时间序列与文本理解** 由于LLM是为自然语言和代码设计的，我们可以用有用的文本来增强数值时间序列。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们可以通过提供文本侧信息作为输入，或者从给定时间序列生成文本输出来做到这一点。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "一个有趣的问题是，GPT-4能否用文本解释其对给定时间序列的理解。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们通过向GPT-4提供生成合成时间序列的代码，提供其中一个时间序列的值，然后要求它以零样本方式推断哪个函数产生了数据，来探究这一能力。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "预测准确率如图7所示，其余三行均为$0$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "使用CoT [48]提示时，模型的表现远好于随机猜测；然而，它在直接外推数值数据时识别模式的能力更好，这表明其数值理解并未完全与其文本理解相连接。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在进行预测时，模型经常解释时间序列的属性以从列表中选择正确的候选项，我们在附录F中展示了几个这样的示例解释。我们还展示了这个任务如何被封装在一个简单的（未提示的）下一个标记预测问题中，该问题位于Jupyter笔记本的单元格上，说明了为什么我们期望这种能力会随着足够强大的语言模型而出现。"
+   }
+  ]
+ },
+ "S6.F7": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图7：**左：** LLMTime 可以通过用文本（例如‘NaN’）表示缺失来处理缺失值，而无需插值。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于基线方法，我们进行线性插值，然后照常拟合模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "LLMTime 对添加了‘NaN’预处理的数据集赋予的对数似然高于基线方法对插值数据集赋予的对数似然。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "以 CRPS 评判的预测性能在 LLMTime 与使用显式插值的替代方法之间具有竞争力。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "填充区域显示各个数据集和3个随机种子上的标准误差。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**右：** LLM 可用于回答以文本形式提出的关于时间序列数据的问题。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们展示了 GPT-4 在预测生成时间序列的函数方面的准确率，该准确率通过思维链提示获得。"
+   }
+  ]
+ },
+ "S7.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们已经证明，通过将数值编码为文本，大型语言模型可以用作预训练的时间序列预测器。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "scope"
+    ],
+    "issue": "原文 that 从句修饰的是 “biases”（偏差），指没有预训练时这些偏差需通过架构设计工程化到模型中；译文写成“这些模式”需要工程化，修饰对象变了。",
+    "suggestion": "与其他“基础”模型一样，预训练赋予了有用的偏差，使其偏向可泛化的模式，否则这些偏差需要通过架构设计来工程化到模型中[22]，并且随着基础预训练模型的改进，性能可以自然扩展。",
+    "zh_reviewed": "与其他“基础”模型一样，预训练赋予了有用的偏差，使其偏向可泛化的模式，否则这些模式需要通过架构设计来工程化到模型中[22]，并且随着基础预训练模型的改进，性能可以自然扩展。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "由于LLM预测器是在语言上训练的，它们还赋予了非常规的能力，例如问答。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "更广泛地说，将时间序列预测构建为自然语言生成，可以看作是朝着在单个大型且强大的模型中统一更多能力迈出的又一步，其中理解可以在许多任务和模态之间共享。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此外，零样本预测可以在不需要大量计算资源、领域专业知识或许多下游训练数据点的情况下，实现广泛引人注目的性能。"
+   }
+  ]
+ },
+ "S7.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "虽然LLM预测器受益于预训练Transformer的优势，但它们也继承了其弱点，其中可能包括有限的上下文窗口。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "虽然许多单变量时间序列问题可以轻松适应越来越大的上下文窗口，但多变量问题构成了更重大的挑战。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "最近有几项进展将LLM上下文窗口扩展到10-100K个token [37, 4, 5, 1]。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "将这些进展与时间序列预测相结合是未来研究的一个特别令人兴奋的方向。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "使用当前LLM架构的另一个潜在挑战可能是它们在算术和执行递归及组合操作方面的弱点，这可能对特别具有挑战性的时间序列构成限制。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "另一方面，许多时间序列不需要精确的算术。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "理解这种情况的程度，并放宽这一限制，也是未来研究的一个有前景的途径。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "除了任何限制之外，研究在时间序列上微调LLM的有效程序也将是有前景的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们希望将LLM研究与时间序列预测联系起来能为两个社区带来好处。"
+   }
+  ]
+ },
+ "S7.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**致谢。** 我们感谢 Micah Goldblum、Greg Benton 和 Wesley Maddox 的有益讨论。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这项工作得到了 NSF CAREER IIS-2145492、NSF I-DISRE 193471、NSF IIS-1910266、BigHat Biosciences、Capital One 以及 Amazon Research Award 的支持。"
+   }
+  ]
+ },
+ "A1.SS1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于所有基线方法，我们使用 sklearn 中的 MinMaxScaler。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于 GPT-3，由于它可以通过使用不同数量的数字来处理跨越多个数量级的输入，我们对时间序列 $(x_{1},...,x_{T})$ 的每个元素 $x_{t}$ 应用仿射变换：$x_{t}\\mapsto(x_{t}-b)/a,$ 其中 $b=\\min_{t}x_{t}-\\beta(\\max_{t}x_{t}-\\min_{t}x_{t}),$ 且 $a$ 是平移后序列 $(x_{1}-b,...,x_{T}-b)$ 的 $\\alpha$-百分位数。我们还考虑了一种基本缩放器，它只进行缩放而不进行平移，当序列只有微小值时，将 $a$ 裁剪到最大值 $0.01$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这里 $\\alpha$ 和 $\\beta$ 是超参数，控制语言模型使用的数字位数发生变化的阈值。"
+   }
+  ]
+ },
+ "A1.SS2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们从训练序列的最后 $T$ 个观测值构建验证时间序列，其中 $T$ 是测试序列的长度。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "当训练序列短于 $2T$ 时，我们取训练序列的后一半作为验证序列。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "生成验证序列（以剩余训练序列为条件）的似然被用来选择超参数。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "由于 LLMTime 是零样本的，似然是在没有训练的情况下计算的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于 ARIMA 等其他方法，似然是在剩余训练序列上训练后计算的。"
+   }
+  ]
+ },
+ "A1.SS3.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了将语言模型赋予的 token 概率转换为连续密度，我们必须把对所有可能 token 的分布转换为仅对数值编码方案中使用的 token 的分布。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "当我们能够访问语言模型的 logits 时，进行这种调整很容易。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们可以简单地将任何非必要 token 的概率设为零，并对分布进行重新归一化。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，当使用黑盒 API（例如 OpenAI API）时，我们需要近似这一过程，因为通常不可能获得完整的 token 离散分布。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例如，在 OpenAI API 中，生成过程的每一步只返回前 5 个对数概率。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "由于我们无法正确地重新归一化分布，我们必须进行调整，以尽可能接近真实的重新归一化分布，如下面的计算所示。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们取 $p$ 为语言模型赋予的原始概率，$\\tilde{p}$ 为调整后的概率，其中"
+   }
+  ]
+ },
+ "A1.SS3.p1.2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "其中 $l_{0}$ 是分配给不属于数值编码方案的标记的质量概率。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "当对对数概率的访问受限时，$l_{0}$ 可以近似为前 $k$ 个中非数值标记的对数概率之和。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "从 $\\tilde{p}$ 的定义我们可以推导出"
+   }
+  ]
+ },
+ "A2.F8": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图8：在GPT-3训练截止日期之后记录的一组短单变量时间序列上的评估。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "omission"
+    ],
+    "issue": "漏译了原文中的“our”，但基本不影响理解。",
+    "suggestion": "我们将我们的GPT-3预测器与流行的时间序列模型进行了性能比较。",
+    "zh_reviewed": "我们将GPT-3预测器与流行的时间序列模型进行了性能比较。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于给定上下文的GPT-3，显示了预测中位数和10-90百分位区间，并且我们比较了测试负对数似然。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "仅通过上下文学习，GPT-3在所有任务上继续与基线模型竞争或优于基线模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这一结果强化了我们的信念，即GPT-3的性能并非源于对测试数据的记忆。"
+   }
+  ]
+ },
+ "A2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "当底层模型的训练数据未知时，评估像OpenAI提供的这类黑盒API的性能可能具有挑战性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在我们的时间序列设置中，自然会想知道我们使用的常见基准数据集是否包含在GPT-3的训练数据中。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "众所周知，LLM会逐字记忆其训练数据中的大量内容，包括常见的基准文本数据集和受版权保护的材料[7, 12]。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "除了完全记忆之外，还可能发生更良性的密切相关数据的数据泄漏，导致对泛化性能的高估。"
+   }
+  ]
+ },
+ "A2.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "即使我们的评估数据集出现在 GPT-3 的训练数据中，GPT-3 的良好表现也不太可能是记忆的结果，至少有两个先验理由。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "首先，即使数值及其顺序相同，我们特有的格式也不太可能出现在训练数据集中。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "其次，时间序列数据集不太可能在 GPT-3 的训练数据中足够频繁地出现而导致记忆，因为记忆与冗余度成正比增加 [30]。"
+   }
+  ]
+ },
+ "A2.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了进一步解决记忆化担忧，我们还进行了一项直接实验，以表明 GPT-3 在评估其训练数据截止日期（2021 年 9 月）之后记录的时间序列时也表现出强劲的性能。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们使用以下 3 个时间序列："
+   }
+  ]
+ },
+ "A2.I1.i1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• 伊斯坦布尔交通（来源：https://www.kaggle.com/datasets/leonardo00/istanbul-traffic-index）：该数据集提供了伊斯坦布尔从2022年10月到2023年5月的逐分钟交通指数数据。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们选择“TI”列，并将序列降采样为小时频率，时间范围为2023年5月5日至2023年5月18日，共得到267个观测值。"
+   }
+  ]
+ },
+ "A2.I1.i2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• 台积电股票（来源：https://www.kaggle.com/datasets/yeemeitsang/tsmc-stock-exchange-2022）：该数据集包含台湾积体电路制造股份有限公司2022年的每日股市交易数据。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们使用收盘价列，该列共包含246个观测值。"
+   }
+  ]
+ },
+ "A2.I1.i3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• 土耳其电力（来源：https://www.kaggle.com/datasets/dharanikra/electrical-power-demand-in-turkey）：该数据集包含土耳其从2020年1月1日到2022年12月31日的每小时发电量和用电量数据。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们选择“Total”列，并将其降采样为2022年的每日数据，得到366个观测值。"
+   }
+  ]
+ },
+ "A2.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于每个时间序列，我们保留最后30个观测值作为测试数据，并对每种方法在与附录C.1相同的网格上进行超参数调优。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如图8所示，GPT-3不仅预测了每个时间序列的合理延续，而且在所有任务中，仅基于上下文学习，其性能与基线模型相当甚至超越基线模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这一结果强化了我们的信念，即GPT-3的性能并非源于对测试数据的记忆。"
+   }
+  ]
+ },
+ "A3.SS1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于 Darts 数据集，我们使用 GPyTorch 库 [17] 实现高斯过程，并使用 Darts 库 [24] 实现 ARIMA、TCN、N-BEATS、N-HiTS。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于下文未描述的超参数，我们使用默认值。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "测试集是每个序列的最后 $20\\%$。"
+   }
+  ]
+ },
+ "A3.SS1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们使用 Darts [24] 中直接实现的几种基线方法："
+   }
+  ]
+ },
+ "A3.SS1.p2.2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们还将谱混合高斯过程（**SM-GP**）[49]作为一种贝叶斯非参数时间序列建模方法纳入其中。"
+   }
+  ]
+ },
+ "A3.I1.i1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• **ARIMA**：ARIMA [8]，即自回归积分滑动平均模型（AutoRegressive Integrated Moving Average），几十年来一直是时间序列预测的常用选择。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Darts 中的 ARIMA 封装了来自 [18] 的代码。"
+   }
+  ]
+ },
+ "A3.I1.i2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• **TCN**：时间卷积网络（TCN）[29] 是一种带有空洞一维卷积的残差网络。"
+   }
+  ]
+ },
+ "A3.I1.i3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• **N-BEATS**：N-BEATS [38] 是一种专为时间序列预测定制的深度学习模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "它采用了一种深层架构，具有后向和前向残差连接以及堆叠的全连接层。"
+   }
+  ]
+ },
+ "A3.I1.i4": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• **N-HiTS**：N-HiTS [11] 是一种深度学习模型，它结合了分层插值和多速率数据采样技术，以生成强调输入信号不同频率和尺度的预测。"
+   }
+  ]
+ },
+ "A3.SS1.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们在下面列出了每种方法的确切超参数："
+   }
+  ]
+ },
+ "A3.SS1.SSS0.Px1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们在 $\\alpha\\in[0.5,.7,0.9,0.99],\\beta\\in[0,.15,0.3,.5]$、精度（小数位数）$\\in[2,3]$ 以及 $\\mathrm{temperature}=0.7$ 上进行网格搜索。"
+   }
+  ]
+ },
+ "A3.SS1.SSS0.Px2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "由于无法对 GPT-4 进行似然评估，我们将其在所有数据集上的超参数固定如下：我们使用基本缩放器，设置 $\\alpha=0.3$ 和 $\\mathrm{temperature}=1.0$，并采用 $\\mathrm{top\\>p}=0.8$。对于 GPT-4，我们不在数字之间插入空格，因为它使用的分词器与 GPT-3 不同，该策略对其无效。"
+   }
+  ]
+ },
+ "A3.SS1.SSS0.Px3.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于模型 LLaMA-1（7B/13B/30B/70B）和 LLaMA-2（7B/7B-chat/13B/13B-chat），我们在 $\\mathrm{temperature}\\in[0.2,0.4,0.6,0.8]$ 上进行网格搜索，并使用 $\\alpha=0.99,\\beta=0.3,\\mathrm{precision}=3,\\mathrm{nucleus}=0.9$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于 LLaMA-2 70B 和 LLaMA-2 70B-chat，我们使用 $\\mathrm{temperature}=1.0,\\alpha=0.99,\\beta=0.3,\\mathrm{precision}=3,\\mathrm{nucleus}=0.9$。"
+   }
+  ]
+ },
+ "A3.SS1.SSS0.Px4.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们使用一个高斯过程，其核函数由一个包含12个混合成分的谱混合核与一个RBF核之和构成。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们从[5e-3, 1e-2, 5e-2, 1e-1]中调整学习率。"
+   }
+  ]
+ },
+ "A3.SS1.SSS0.Px5.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们对 $p\\in[12,20,30],d\\in[1,2]$ 和 $q\\in[0,1,2]$ 进行网格搜索。"
+   }
+  ]
+ },
+ "A3.SS1.SSS0.Px6.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们对 input_chunk_length $\\in[10,100,400],$ output_chunck_length $\\in[1,10]$、kernel_size $\\in[3,5]$、num_filters $\\in[1,3]$ 以及 likelihood $\\in$ [Laplace, Gaussian] 进行网格搜索。"
+   }
+  ]
+ },
+ "A3.SS1.SSS0.Px7.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们对 input_chunk_length $\\in[10,100,400]$、output_chunk_length $\\in[1,10]$、layer_widths $\\in[64,16]$、num_layers $\\in[1,2]$ 以及 likelihood $\\in$ [Laplace, Gaussian] 进行网格搜索。"
+   }
+  ]
+ },
+ "A3.SS1.SSS0.Px8.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "原文中参数名拼写为 output_chunck_length（chunck 有拼写错误），中文将其改为 output_chunk_length，虽更标准但与原文拼写不一致。",
+    "suggestion": "我们对 input_chunk_length $\\in[10,100,400],$ output_chunck_length $\\in[1,10]$、layer_widths $\\in[64,16]$、num_layers $\\in[1,2]$ 以及 likelihood $\\in$ [Laplace, Gaussian] 进行了网格搜索。",
+    "zh_reviewed": "我们对 input_chunk_length $\\in[10,100,400],$ output_chunk_length $\\in[1,10]$、layer_widths $\\in[64,16]$、num_layers $\\in[1,2]$ 以及 likelihood $\\in$ [Laplace, Gaussian] 进行了网格搜索。"
+   }
+  ]
+ },
+ "A3.SS2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们在 Monash 中评估了满足两个标准的 19 个数据集："
+   }
+  ]
+ },
+ "A3.SS2.p1.2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "当我们应用这些标准时，我们得到了以下19个被选中的数据集：covid deaths、solar weekly、tourism monthly、australian electricity demand、pedestrian counts、traffic hourly、hospital、fred md、tourism yearly、tourism quarterly、us births、nn5 weekly、nn5 daily、traffic weekly、saugeenday、cif 2016、bitcoin、sunspot。"
+   }
+  ]
+ },
+ "A3.I2.i1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "单个序列的总数不能过大，以便实验能够在没有大型集群和没有不必要的 API 费用的情况下及时运行。"
+   }
+  ]
+ },
+ "A3.I2.i2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "2. 预测区间的长度不能延伸到使预测和历史都无法放入语言模型上下文窗口的长度。"
+   }
+  ]
+ },
+ "A3.SS2.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了跨数据集进行汇总，我们将平均绝对误差按简单预测测试序列前最后一个观测值（一种朴素基线）所达到的 MAE 进行了归一化。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这种归一化对方法表现显著优于或劣于朴素预测器的数据集赋予了较高权重。"
+   }
+  ]
+ },
+ "A3.SS2.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "该档案中的若干基线方法与 Darts 共享，所有描述和代码可在 [19] 中找到。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "一些值得注意的补充包括"
+   }
+  ]
+ },
+ "A3.I3.i1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• **CatBoost**：CatBoost [40] 是一种用于连续或分类数据的梯度提升框架。"
+   }
+  ]
+ },
+ "A3.I3.i2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• **FFNN**：一种前馈神经网络，具有固定的输入和输出窗口，灵感来自 Goodfellow 等人 [21]。"
+   }
+  ]
+ },
+ "A3.I3.i3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• **PR**：Trapero 等人 [46] 提出的线性合并回归（PR）模型。"
+   }
+  ]
+ },
+ "A3.SS2.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们在附录 C.7 中包含了 GPT-3 在这些数据集上的预测可视化。"
+   }
+  ]
+ },
+ "A3.SS2.SSS0.Px1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们对 GPT-3 使用以下超参数：$\\alpha=0.9,\\beta=0,\\mathrm{temperature}=0.7.$ 为避免超出上下文窗口，我们将历史截断为最多 500 个最近的观测值。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于基线，我们报告其性能，如 [19] 中所示。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图 4（中）所示的归一化 MAE 值是通过在聚合前按每个数据集上最低基线 MAE 进行归一化得到的。"
+   }
+  ]
+ },
+ "A3.SS2.SSS0.Px2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们为 LLaMA-2 70B 使用以下超参数：$\\alpha=0.99,\\beta=0.3,\\mathrm{temperature}=1.0,\\mathrm{nucleus}=0.9$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为避免超出上下文窗口，我们将历史截断以适应 LLaMA-2 的上下文窗口（4096 个 token）。"
+   }
+  ]
+ },
+ "A3.SS3.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Zhou 等人 [55] 使用的 6 个数据集已成为评估高效 Transformer 的标准基准。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们在通常使用预测时长为 96 或 192 的 5 个数据集上进行评估：“ETTm2”、“exchange_rate”、“electricity”、“traffic”和“weather”。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "正文中提供的结果是针对预测时长为 96 的，我们在附录 C.6 中包含了预测时长为 192 的结果。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了使 LLMTime 的评估可行，我们对每个数据集使用较小的评估集，将每个数据集中每个序列的最后 96 或 192 个时间步作为测试集。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "由于每个多变量数据集中有许多单独的序列，测试集中单个时间步的数量仍然很大。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了用 LLMTime 预测多变量序列，我们只需独立预测每个序列，合并结果，并像先前工作那样进行评估。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的高效 Transformer 基线包括"
+   }
+  ]
+ },
+ "A3.I4.i1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• **Informer**：Informer [55] 是一种高效的 Transformer 模型，采用稀疏注意力机制，专为长序列设计。"
+   }
+  ]
+ },
+ "A3.I4.i2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• **Reformer**：Reformer [55] 使用局部敏感哈希机制来改善注意力的内存使用。"
+   }
+  ]
+ },
+ "A3.I4.i3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• **Autoformer**：Autoformer [50] 是一种针对长时序的模型设计，用傅里叶空间中的机制取代了标准注意力。"
+   }
+  ]
+ },
+ "A3.I4.i4": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• **FEDformer**：与 Autoformer 类似，FEDformer [56] 使用基于频率的分解来构建一种高效的注意力替代方案。"
+   }
+  ]
+ },
+ "A3.SS3.SSS0.Px1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们使用 LLaMA-2 70B，参数为 $\\alpha=0.99,\\beta=0.3,\\mathrm{temperature}=1.0,\\mathrm{nucleus}=0.9,\\mathrm{precision}=3$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Informer 数据集中的序列非常长，我们尽可能多地将它们放入 LLaMA-2 的上下文窗口（4096）中。"
+   }
+  ]
+ },
+ "A3.SS4.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于基线，我们使用第 C.1 节中的相同超参数网格。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于 GPT-3，我们发现进行验证调优没有用处。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们使用基本缩放器，其中 $\\alpha=0.1$ 和 $\\mathrm{temperature}=0.7.$"
+   }
+  ]
+ },
+ "A3.SS5.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在图9中，我们展示了使用GPT-3和LLaMA-2 70B作为基础模型的LLMTime预测的负对数似然和预测结果。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "LLMTime通常获得比基线好得多的似然值，并成功识别时间序列中的趋势和季节性成分。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们将这种强劲表现部分归因于时间序列相对较短这一事实。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "由于输入的标记化，只有大约$300$个观测值能放入上下文窗口，而在数据集中只有`Sunspots`和`HeartRate`超过这个数量（分别有$705$和$900$个观测值）。"
+   }
+  ]
+ },
+ "A3.F9": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图9：LLMTime（GPT-3）的中位数预测以及LLMTime（GPT-3和LLaMA-2 70B）在Darts [24]中每个数据集上的NLL。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "阴影区域显示了样本分布的第10至第90分位数。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "LLMTime始终获得比基线更好的似然值，并且经常通过有效外推趋势和周期成分做出令人惊讶的准确预测。"
+   }
+  ]
+ },
+ "A3.SS6.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图10展示了我们在论文中使用的Informer数据集上每个数据集以及汇总的MAE结果。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "扩展正文中的结果，我们还包含了预测时长为192的MAE数值。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们观察到总体趋势相似，尽管LLMTime的相对表现略有下降，这主要是由于“electricity”和“traffic”数据集。"
+   }
+  ]
+ },
+ "A3.F10": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图10：LLMTime（LLaMA-2 70B基础模型）和基线在Informer数据集上的聚合和非聚合MAE数值。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "总体而言，LLMTime作为一种零样本方法在聚合上表现良好，但其性能高度可变，在某些数据集上是最好的方法，在另一些数据集上则是最差的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于更长的预测范围，LLMTime的相对性能略有下降，但LLMTime在聚合上仍然与最佳方法非常有竞争力。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "误差条显示数据集上误差的两个标准差。"
+   }
+  ]
+ },
+ "A3.SS7.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图11展示了LLMTime的中位数预测（GPT-3基础模型）在Monash数据集子集上的可视化。"
+   }
+  ]
+ },
+ "A3.F11": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图11：LLMTime（GPT-3基础模型）在每个Monash数据集上最多随机选择的4个序列上的中位数预测。"
+   }
+  ]
+ },
+ "A3.SS8.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图12展示了LLMTime的中位数预测（LLaMA-2 70B基础模型）在Informer数据集上的可视化，针对每组多变量序列的一个子集。"
+   }
+  ]
+ },
+ "A3.F12": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图12：LLMTime（LLaMA-2 70B基础模型）在Informer数据集中每个数据集随机选取的4个序列上的中位数预测。"
+   }
+  ]
+ },
+ "A4.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们从函数 $f(x)=\\cos(x)+x$ 生成数据，并添加均值为零、方差为 $0.05$ 的高斯噪声。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们使用 PySR [14] 对前 140 个时间步拟合符号表达式，符号集为 [\"$+$\", \"$\\cdot$\", \"-\", \"$/$\", \"$\\sin$\", \"$\\cos$\", \"$\\exp$\",\"square\"]，参数为 $\\mathrm{maxsize}=70,\\mathrm{maxdepth}=10,\\mathrm{population\\_size}=50,\\mathrm{loss}=\\mathrm{abs(prediction-target)},\\mathrm{model\\_selection}=\\mathrm{accuracy}$ 和 $\\mathrm{niterations}=100$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "解被保存并按复杂度排序，复杂度即符号回归函数中的项数。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图 5 中显示的五个解是"
+   }
+  ]
+ },
+ "A4.I1.i1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "1. $(x_{0}+0.3652524)$"
+   }
+  ]
+ },
+ "A4.I1.i2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "2. $\\cos(\\cos(x_{0}/-0.031412385)*(-1.5252972+x_{0}))$"
+   }
+  ]
+ },
+ "A4.I1.i3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "3. $(\\sin(\\cos(\\cos(x_{0}/0.031470172)*-1.4668792))+(\\cos(0.81965065)*x_{0}))$"
+   }
+  ]
+ },
+ "A4.I1.i4": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "4. $(\\sin(\\cos(\\cos((x_{0}/\\sin(-0.03127001))+0.07646165)*-1.4539052))+(\\sin(\\sin(\\cos(\\cos(\\exp(\\cos(-0.03127001)+x_{0})))))*x_{0}))$"
+   }
+  ]
+ },
+ "A4.I1.i5": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "5. $(\\cos((\\cos((x_{0}/-0.03127001)+0.07646165)/-0.957405)/\\sin(\\sin(\\cos(x0-x0))*\\exp(\\cos(\\sin(x_{0}/-0.983214)))))/(\\cos(\\sin(\\sin(\\sin(\\sin(x_{0}))-(x_{0}*(-0.47036648-(x_{0}/0.5857117))))))--0.10476875))$"
+   }
+  ]
+ },
+ "A4.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了获得似然，我们使用 $\\mathrm{alpha}=0.99,\\mathrm{beta}=0.3,\\mathrm{basic}=\\mathrm{True},\\mathrm{precision}=1,\\mathrm{signed}=\\mathrm{True}$ 运行 GPT-3（‘text-davinci-003’）。"
+   }
+  ]
+ },
+ "A4.SS1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图13展示了LLMTime使用GPT-3在全部合成数据集上的似然和预测。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们看到一些组合任务如线性+余弦具有挑战性，而其他任务（线性*正弦或X*正弦）完全在模型的能力范围内。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如上所示，GPT-3通过其似然展示了对线性+余弦的良好理解，但在采样方面有更多困难。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这种差异可能是由于好的解具有高似然但不具有典型性。"
+   }
+  ]
+ },
+ "A4.F13": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图13：使用GPT-3作为基础模型，LLMTime在所有合成数据集上的中位数预测。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "所使用的超参数在附录C.4中描述。"
+   }
+  ]
+ },
+ "A5.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们研究了使用 GPT-4 进行时间序列预测。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "由于分词器的限制，我们采用了朴素的标记化策略，即输入数字时不添加额外空格。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此外，由于界面中系统与用户之间的强制分离（通过我们无法修改的额外标记），仅输入时间序列输入会导致 GPT-4 谈论时间序列或提供分析，而不是简单地继续数字流。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了引导 GPT-4 生成可解码的数值预测，我们添加了额外的命令，系统：“你是一个执行时间序列预测的有用助手。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "用户将提供一个序列，你将预测剩余的序列。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "序列由逗号分隔的十进制字符串表示。”"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "用户：“请继续以下序列，不要生成任何额外文本。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "不要说类似‘序列中的下一项是’这样的话，只返回数字。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "序列：”。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们发现这样做足以对 GPT-4 的输出进行一致的数值解码，但对 GPT-3.5-turbo 则不行。"
+   }
+  ]
+ },
+ "A5.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们在图14中展示了合成基准（来自第5节）上的预测结果。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "正如可以观察到的，GPT-4在这些合成基准上的表现明显更好，尽管模型的数值解码有时在完整输出之前就失败了。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于非确定性时间序列问题（如DARTS数据集），预测结果比GPT-3略差，但不确定性校准程度差得多，如图15所示。"
+   }
+  ]
+ },
+ "A5.F14": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图14：GPT-4在合成数据上的外推（阴影区域为第10至第90百分位数）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "GPT-4能够识别并外推每个确定性时间序列的模式，但有时表现不稳定。"
+   }
+  ]
+ },
+ "A5.F15": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图15：GPT-4在真实（DARTS）时间序列上的外推（10-90百分位数阴影）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "外推结果看似合理但比GPT-3差，且不确定性往往校准得更差，导致CRPS较高。"
+   }
+  ]
+ },
+ "A6.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们评估语言模型以零样本方式通过文本推理输入时间序列的能力。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了测试这一点，我们设计了一个简单的实验，其中我们从几个候选函数之一生成一个合成时间序列。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们向 GPT-4 提供生成代码和数值（清单 1），但由于随机性，GPT-4 必须推断是哪个函数生成了这些值。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们注意到，由于这段代码很容易在互联网上的 Jupyter notebook 中找到，而并非有意设计为针对 LLM 的实验，我们应该预期这个文本时间序列识别任务将落在数据分布之内，并且原则上在语言模型具有足够能力的情况下应该能够解决。"
+   }
+  ]
+ },
+ "A6.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了使问题稍微容易一些，我们在清单1中的文本前后添加了额外的引导提示。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们在前面加上"
+   }
+  ]
+ },
+ "A6.p2.3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "到代码中，并在时间序列之后附加以下任一内容"
+   }
+  ]
+ },
+ "A6.p2.5": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "或"
+   }
+  ]
+ },
+ "A6.p2.7": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "用于思维链提示。"
+   }
+  ]
+ },
+ "A6.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在20次试验中计算出的预测准确率如图7所示，其中`x_times_sine`、`beat`和`sinc`未在表中显示，因为GPT-4在100%的情况下预测错误。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "通过CoT提示，这个预测任务引发了对时间序列的一些有趣的文本分析。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "下面展示了几个（非精心挑选的）例子。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "值得注意的是，这个任务促使模型以文本形式分析时间序列，推理其趋势和周期性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，模型有时会对其所见数据的行为或候选函数的预期行为做出错误的推断。"
+   }
+  ]
+ }
+}

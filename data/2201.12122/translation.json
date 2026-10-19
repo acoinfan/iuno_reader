@@ -1,0 +1,1271 @@
+{
+ "__meta__": {
+  "translator": "deepseek-v4-pro（关思考）",
+  "usage": {
+   "calls": 68,
+   "prompt_tokens": 52923,
+   "completion_tokens": 11928,
+   "seconds": 191.1,
+   "cached_tokens": 35072
+  }
+ },
+ "abs.p1": {
+  "sentences": [
+   {
+    "zh": "强化学习（RL）模型的微调一直具有挑战性，因为缺乏大规模现成的数据集，以及不同环境之间可迁移性的高方差。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "最近的工作从序列建模的角度处理离线强化学习，由于引入了Transformer架构，结果有所改善。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然而，当模型从头开始训练时，它收敛速度较慢。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在本文中，我们旨在利用这种将强化学习视为序列建模的表述，并研究在其他领域（视觉、语言）预训练的序列模型在离线强化学习任务（控制、游戏）上微调时的可迁移性。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "为此，我们还提出了改进这些领域之间迁移的技术。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "结果表明，在各种环境中，在收敛速度和奖励方面都有一致的性能提升，训练加速了3-6倍，并在使用维基百科预训练和GPT2语言模型的各种任务中实现了最先进的性能。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们希望这项工作不仅揭示了利用通用序列建模技术和预训练模型进行强化学习的潜力，而且能激发未来在不同领域的生成建模任务之间共享知识的工作。{fn1}",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "fn1": {
+  "sentences": [
+   {
+    "zh": "我们在 `https://github.com/machelreid/can-wikipedia-help-offline-rl` 发布代码以供复现。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S0.F1": {
+  "sentences": [
+   {
+    "zh": "图1：将预训练语言模型（例如来自维基百科的）适配到离线强化学习（例如连续控制和游戏）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S1.p1.1": {
+  "sentences": [
+   {
+    "zh": "大型预训练语言模型在自然语言（Devlin et al., 2019; Radford et al., 2018）和视觉（Dosovitskiy et al., 2021）任务中表现出令人印象深刻的性能。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "此外，基于Transformer的自回归语言模型（Vaswani et al., 2017; Baevski & Auli, 2019; Radford et al., 2019）已被证明是零样本和少量示例性能的强大来源（Brown et al., 2020），在低资源环境中具有显著的快速适应能力，展示了它们在各自领域中轻松适应和迁移到多种任务的能力。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "自回归语言模型的适应也已扩展到多模态环境（Tsimpoukelli et al., 2021），用于视觉问答等任务。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S1.p2.1": {
+  "sentences": [
+   {
+    "zh": "与此同时，离线强化学习（RL）已被视为类似于序列建模（Chen et al., 2021; Janner et al., 2021; Furuta et al., 2021），被框架化为简单的监督学习，以拟合离线数据集中带有回报增强的轨迹。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这种放宽，摆脱了许多通常与强化学习相关的复杂性（Watkins & Dayan, 1992; Kakade, 2001），使我们能够利用在序列建模任务中流行的技术来用于强化学习。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S1.p3.1": {
+  "sentences": [
+   {
+    "zh": "预训练，特别是，是缓解使用更具表达力的模型（如 Transformer）所带来的更高计算成本的一项关键技术。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然而，这一概念在强化学习中仍然相对较新（Singh et al., 2020; Tirumala et al., 2020），原因在于难以通过单一网络参数化不同的场景和任务（Wang et al., 2018b; Jiang et al., 2019; Zeng et al., 2020），以及缺乏用于预训练的大型现成数据集（Cobbe et al., 2020; Zhu et al., 2020; Yu et al., 2020）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "如果我们只在强化学习内部寻找，将预训练作为近期基于 Transformer 的方法（Chen et al., 2021; Janner et al., 2021; Furuta et al., 2021）的默认选项似乎还很遥远。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S1.p4.1": {
+  "sentences": [
+   {
+    "zh": "在序列建模的统一框架下，我们考察基于Transformer的预训练语言模型是否能够适配到与语言无关的标准离线强化学习任务中。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在拥有一个在自然语言上预训练的单一模型、并针对每个离线强化学习任务单独微调的设定下，我们证明了在收敛速度和最终策略性能上的显著提升。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们还考虑了进一步的技术（例如位置嵌入的扩展、嵌入相似性鼓励），以更好地利用预训练语言模型学到的特征，并展示了更大的改进。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S1.p5.1": {
+  "sentences": [
+   {
+    "zh": "我们证明，在流行的 OpenAI Gym（Brockman et al., 2016）和 Atari（Bellemare et al., 2013）离线强化学习基准上，与决策 Transformer（Chen et al., 2021）相比，对自然语言进行自回归建模的预训练能带来一致的性能提升。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们还注意到收敛速度显著加快，比普通决策 Transformer 提高了 3-6 倍，将数小时的训练缩短到几十分钟，这表明语言预训练具有长期的算力效率优势。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S1.p6.1": {
+  "sentences": [
+   {
+    "zh": "我们的发现暗示了大规模预训练对强化学习的潜在影响，鉴于其从自然语言等遥远序列建模领域迁移时表现出的惊人有效性。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "值得注意的是，与其他多任务离线强化学习的工作不同，我们的模型在奖励和收敛性方面无论环境和设置如何都提供了一致的结果，这表明一个可预见的未来，即每个人都应该使用预训练的语言模型进行离线强化学习。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S2.SS0.SSS0.Px1.p1.1": {
+  "sentences": [
+   {
+    "zh": "我们考虑一个标准的马尔可夫决策过程（MDP），其状态空间为 $s\\in\\mathcal{S}$，动作空间为 $a\\in\\mathcal{A}$，由初始状态分布 $p(s_{1})$、动态分布 $p(s_{t+1}|s_{t},a_{t})$ 和标量奖励函数 $r(s,a)$ 指定。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "强化学习（RL）的目标是找到最优策略 $\\pi^{*}(a|s)$，该策略在智能体与环境交互时最大化 $\\gamma$ 折扣期望回报，",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S2.SS0.SSS0.Px1.p1.2": {
+  "sentences": [
+   {
+    "zh": "在离线强化学习中，目标保持不变，但必须在固定的轨迹集 $\\tau_{i}$ 上进行优化，且不能进行交互式数据收集，每条轨迹的形式如下，其时间范围为 $N$，",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S2.SS0.SSS0.Px1.p1.3": {
+  "sentences": [
+   {
+    "zh": "常见方法包括带正则化的基于价值或基于模型的目标（Fujimoto et al., 2019; Levine et al., 2020），以及最近出现的以事后回报为条件对这些轨迹进行直接生成建模的方法（Chen et al., 2021; Janner et al., 2021; Furuta et al., 2021）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S2.SS0.SSS0.Px2.p1.1": {
+  "sentences": [
+   {
+    "zh": "在本小节中，我们简要回顾用于序列建模的Transformer架构（Vaswani et al., 2017）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "Transformer由多个相同的Transformer层堆叠而成。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "每一层接收一组$n$维向量，这些向量经过两个主要构建块：多头自注意力子层和前馈MLP，如下所示：",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S2.SS0.SSS0.Px2.p1.2": {
+  "sentences": [
+   {
+    "zh": "其中 $Q,K$ 和 $V$ 表示线性投影，它们将输入 $x$ 参数化地投影到查询、键和值空间；而 $L_{1}$、$L_{2}$ 和 $g$ 分别表示组成前馈 MLP 的第一个线性投影、第二个线性投影和激活函数。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "随后是残差连接（He et al., 2015）和层归一化（Ba et al., 2016）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S2.SS0.SSS0.Px3.p1.1": {
+  "sentences": [
+   {
+    "zh": "尽管现在有多种语言模型预训练技术（例如掩码语言建模；Devlin et al., 2019），鉴于自回归语言建模与我们为离线强化学习任务采用的序列建模目标之间的对应关系，我们将回顾自回归语言建模。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S2.SS0.SSS0.Px3.p2.1": {
+  "sentences": [
+   {
+    "zh": "给定一个由标记 ${\\mathbf{x}}_{i}$ 组成的序列 ${\\mathbf{x}}=[{\\mathbf{x}}_{1},{\\mathbf{x}}_{2},\\dots{\\mathbf{x}}_{N}]$，我们旨在通过以逐步或自回归的方式（通常从左到右）建模预测每个标记 ${\\mathbf{x}}_{i}$ 的概率来建模序列的似然 $P({\\mathbf{x}})$。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "自然，每个标记的预测将以序列中所有先前的元素 ${\\mathbf{x}}_{<i}$ 为条件，如下所示（Bengio et al., 2001）：",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.p1.1": {
+  "sentences": [
+   {
+    "zh": "在本节中，我们讨论我们提出的方法和技巧，以更好地使预训练语言模型适应轨迹建模，就像在离线强化学习任务中那样，对架构和目标进行最小程度的修改，如图1所示。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS1.p1.1": {
+  "sentences": [
+   {
+    "zh": "遵循 Chen et al. (2021)，我们通过以下方式表示轨迹，以自回归方式对轨迹进行建模：",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS1.p1.2": {
+  "sentences": [
+   {
+    "zh": "其中轨迹 ${\\mathbf{t}}$ 的建模方式与公式 5 中序列 ${\\mathbf{x}}$ 的建模方式类似，$\\hat{R}_{i}=\\sum_{t=i}^{N}r_{t},s_{i},a_{i}$ 分别表示在给定 $N$ 个时间步的情况下，每个时间步 $i$ 的回报、状态和动作。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS2.SSS0.Px1.p1.1": {
+  "sentences": [
+   {
+    "zh": "我们发现状态、动作和奖励输入表示与语言表示之间缺乏对齐的问题——这在一定程度上阻碍了语言模型能力的进一步提取。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "为此，我们使用基于相似度的目标，以最大化词汇量为 $V$ 的语言嵌入集合 $E=[E_{1},\\dots,E_{V}]$ 与输入表示集合 $I=I_{1},\\dots,I_{3N}$ 之间的相似度。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "输入表示由线性投影 $L_{r},L_{a},L_{s}$ 参数化，分别对应目标奖励投影、动作投影和状态投影。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS2.SSS0.Px1.p2.1": {
+  "sentences": [
+   {
+    "zh": "给定以下余弦相似度函数：",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS2.SSS0.Px1.p2.2": {
+  "sentences": [
+   {
+    "zh": "我们计算每个嵌入 $E_{1},\\dots,E_{j},\\dots,E_{V}$ 与每个输入表示 $I_{0},\\dots,I_{i},\\dots,I_{N}$ 的最大相似度值之和的负值（因为我们使用梯度下降来优化该目标），如下所示：{fn2}",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS2.SSS0.Px1.p2.3": {
+  "sentences": [
+   {
+    "zh": "这使我们能够鼓励输入嵌入变得更类似于其语言对应物。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然而，由于对于较大的 $V$ 值计算此损失的计算成本较高，我们提出在嵌入上使用 $K$-均值聚类，以将 $V$ 的大小减少到聚类数 $K$。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然后，我们将聚类中心视为与原始嵌入类似，以计算我们的损失。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "此外，我们通过向量化来优化此计算。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "fn2": {
+  "sentences": [
+   {
+    "zh": "我们研究了在该目标中使用平均池化而非最大池化，发现采用平均池化目标的模型未能收敛。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS2.SSS0.Px2.p1.1": {
+  "sentences": [
+   {
+    "zh": "我们还尝试继续联合训练语言建模和轨迹建模。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这使我们能够鼓励模型的 Transformer 主干同时处理语言和轨迹。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS3.p1.1": {
+  "sentences": [
+   {
+    "zh": "我们现在将各目标合并为如下最终目标：",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS3.p1.2": {
+  "sentences": [
+   {
+    "zh": "其中 ${\\mathcal{L}}_{\\text{MSE}}$ 表示用于主要轨迹建模目标的均方误差损失，${\\mathcal{L}}_{\\text{LM}}$ 表示基于负对数似然的语言建模目标，$\\lambda_{1},\\lambda_{2}$ 分别表示用于控制余弦相似度损失和语言建模损失权重的超参数。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.T1": {
+  "sentences": [
+   {
+    "zh": "表1：1% DQN-replay Atari 数据集上的 Gamer 归一化得分。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们报告三个随机种子上的均值和方差。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "最高平均得分以粗体突出显示。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.T2": {
+  "sentences": [
+   {
+    "zh": "表2：D4RL数据集的结果{fn3}。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们报告三个种子的均值和方差。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "语言模型预训练模型始终优于决策Transformer，并且优于/与其他基线相当。",
+    "conf": "mid",
+    "note": "原文中“pre-trainined”拼写错误，应为“pre-trained”；“outperform/are competitive other baselines”语法不完整，可能缺少介词“with”，译为“优于/与其他基线相当”。"
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "fn3": {
+  "sentences": [
+   {
+    "zh": "脚注标记：",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS1.SSS0.Px1.p1.1": {
+  "sentences": [
+   {
+    "zh": "我们使用流行的 **GPT2**-small 模型来基准测试仅语言预训练的影响。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "为了与决策 Transformer（Chen et al., 2021）直接比较，我们还在流行的语言建模 Wikitext-103 数据集（Merity et al., 2016）上预训练了一个具有相同参数数量的语言模型，该数据集包含来自完整维基百科文章的超过 1 亿个标记。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们将此模型称为 **ChibiT**。{fn4}",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "fn4": {
+  "sentences": [
+   {
+    "zh": "“Chibi”在日语中意为“小”或“迷你”。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS1.SSS0.Px1.p2.1": {
+  "sentences": [
+   {
+    "zh": "为了探究在视觉数据集上进行预训练的效果，我们还研究了 **CLIP**（Radford et al., 2021）和 **ImageGPT**（Chen et al., 2020）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "CLIP 由一个图像编码器和一个文本编码器组成，并被训练来预测哪个标题与哪张图像匹配。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "文本编码器是自回归 Transformer，而图像编码器是视觉 Transformer，不是自回归的。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "因此，对于离线强化学习的自回归设置，我们使用预训练的文本编码器作为初始化器，同时丢弃图像编码器部分。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "ImageGPT 基于与 GPT2 相同的 Transformer 架构，但不同于语言，它以自回归方式在展开为长像素序列的图像上进行训练。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS1.SSS0.Px2.p1.1": {
+  "sentences": [
+   {
+    "zh": "除了对我们的预训练语言模型进行基准测试外，我们还与以下流行的最先进离线强化学习算法进行了比较：决策Transformer（DT）（Chen et al., 2021）、CQL（Kumar et al., 2020）、TD3+BC（Fujimoto & Gu, 2021）、BRAC（Wu et al., 2019）和AWR基线（Peng et al., 2019）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS1.SSS0.Px3.p1.1": {
+  "sentences": [
+   {
+    "zh": "我们为语言模型预训练使用以下超参数：架构与 Chen et al. (2021) 相同（128 模型维度，1 个注意力头，3 层），学习率为 $3\\text{e-}4$，批量大小为 65536 个 token，训练 6 小时（80000 步），在前 10000 步使用预热调度。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们使用与 GPT-2 (Radford et al., 2019) 相同的字节对编码（BPE; Sennrich et al., 2016; Kudo & Richardson, 2018）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "对于我们的离线强化学习任务，我们遵循 (Chen et al., 2021) 使用的超参数。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "对于我们的额外目标，我们衰减 $\\lambda_{1},\\lambda_{2}$，使其在 5000 步后各自达到 $0.0$。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们为 $\\lambda_{1}$ 在 $\\{0.1,0.2\\}$ 中调整初始值，为 $\\lambda_{2}$ 在 $\\{0.0,0.2,0.4\\}$ 中调整初始值。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们在附录中包含了更多细节。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS1.SSS0.Px3.p2.1": {
+  "sentences": [
+   {
+    "zh": "我们在 D4RL 离线强化学习基准数据集（Fu et al., 2020）上，针对 OpenAI Gym MuJoCo（Brockman et al., 2016）和 Atari（Bellemare et al., 2013）任务，对我们的模型进行基准测试。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS2.p1.1": {
+  "sentences": [
+   {
+    "zh": "我们在具有挑战性的 Atari 数据集（Bellemare et al., 2013）上运行我们的 ChibiT 和 GPT2 模型。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们使用 Agarwal et al. (2020) 中评估的四个 Atari 任务，即 Breakout、Qbert、Pong 和 Seaquest。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "行为克隆和 Decision Transformer 模型的基线数字由 Chen et al. (2021) 提供，而 CQL、REM 和 QR-QDN 基线数字由 Kumar et al. (2020)；Agarwal et al. (2020) 提供。",
+    "conf": "mid",
+    "note": "原文中分号的使用可能表示两个来源分别提供不同基线，但结构略有歧义。"
+   },
+   {
+    "zh": "遵循 Hafner et al. (2021)，我们根据评估集上职业玩家的得分对分数进行归一化。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS2.p2.1": {
+  "sentences": [
+   {
+    "zh": "我们在表1中展示了结果。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "可以看出，ChibiT和GPT2的结果一致地优于或持平于强大的普通决策Transformer基线。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们的模型在所有四个游戏上与决策Transformer具有竞争力，并在3/4的游戏上与CQL具有竞争力。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.F2": {
+  "sentences": [
+   {
+    "zh": "图2：**注意力分析。** 我们可视化了GPT-2、iGPT和随机初始化的DT模型在Hopper-medium上计算的早期、中期和最后注意力权重，以研究在不同模态上的预训练如何影响模型对先前时间步的注意力。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "x轴表示键（被“查看”的表示），而y轴表示查询（即“查看”其他表示的表示），针对给定的时间步。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "较浅的颜色表示较高的注意力权重，而较深的颜色表示较低的权重。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS3.p1.1": {
+  "sentences": [
+   {
+    "zh": "在本节中，我们考虑来自 D4RL 基准（Fu et al., 2020）的 OpenAI Gym 任务（HalfCheetah、Walker2d 和 Hopper）上的结果。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS3.p2.1": {
+  "sentences": [
+   {
+    "zh": "我们总共训练模型100k个时间步，每5000个时间步评估一次，每次评估包含10个回合。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "注意我们执行了早停。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "基线结果直接取自D4RL论文（Fu et al., 2020），Decision Transformer结果直接取自Chen et al. (2021)。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "类似地，遵循Fu et al. (2020)，我们计算回报的归一化得分，计算方式为$100\\times\\frac{\\texttt{score-random score}}{\\texttt{expert score - random score}}$。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS3.p3.1": {
+  "sentences": [
+   {
+    "zh": "我们在表4中展示了ChibiT、GPT2和CLIP与最先进的离线强化学习算法的对比结果。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "预训练在绝大多数任务中大幅提升了Decision Transformer的性能，清楚地表明语言预训练在奖励方面优于使用序列建模技术的随机初始化。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们还注意到ChibiT、CLIP和GPT2之间的差异很小，表明在这个规模上，离线强化学习的改进不一定与模型大小强相关，这与在大规模视觉和语言任务中显示的情况不同。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们注意到，CLIP虽然比普通的DT模型有所改进，但通常比我们纯语言建模目标略逊一筹。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们的ChibiT和GPT2模型分别取得了78.3和80.1的平均性能，在所有设置下与所有基线相比都表现出强大的竞争力。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这些预训练语言模型通过显著超越强大的Decision Transformer和TD3+BC基线3.0-5.4分，取得了最先进的结果。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.p1.1": {
+  "sentences": [
+   {
+    "zh": "在本节中，我们通过OpenAI Gym上的消融实验，更细致地考察将预训练语言模型适配到离线强化学习任务时各个方面的细节和性质。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.T3": {
+  "sentences": [
+   {
+    "zh": "表3：在OpenAI Gym任务上，Decision Transformer与两个预训练模型（ChibiT和GPT2）在中等专家设置下的训练时间比较（在单个V100 GPU上以小时和分钟为单位测量）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "请注意，GPT2拥有8400万个模型参数，比其他模型大144倍。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.SS1.p1.1": {
+  "sentences": [
+   {
+    "zh": "我们使用前两者的自有实现和后者的作者提供实现，评估了 GPT2、ChibiT 和 DT 的收敛时间。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "结果报告在表 3 中。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们发现，在语言上进行预训练使我们能够加快基于 Transformer 的离线 RL 模型的训练过程，以墙钟时间衡量。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "收敛被定义为平均性能达到最佳分数 2 分（标准化分数）以内的点。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "有趣的是，我们还发现 GPT2 尽管模型规模更大，拥有 84M 模型参数，但仍然比 DT 训练得更快。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这表明了大规模预训练和微调期间提高效率的潜在好处。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们在单个 NVIDIA V100 16GB GPU 和 Intel Xeon Gold 6148 处理器上运行实验。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.SS2.p1.1": {
+  "sentences": [
+   {
+    "zh": "既然我们证实了在语言数据上预训练的 Transformer 在加速离线强化学习任务的训练收敛时间方面出奇地有效，那么不禁要问，这种现象是语言预训练所固有的，还是同样适用于视觉预训练。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "为了回答这个问题，我们比较了两个 GPT 模型：分别在语言和视觉数据上预训练的 ImageGPT-small（iGPT）和 GPT2-small（GPT2）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "由于 Transformer 架构与领域无关，这些模型可以在任何形式的一维序列上进行训练。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "因此，我们可以比较在大量离散语言标记序列上预训练的 GPT2 和在像素级别进行自回归图像生成预训练的 iGPT（注意，两个模型都在约 $10^{10}$ 个标记上进行了训练）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "鉴于表 4 中 iGPT 的结果，我们发现该模型的回报极低，并且没有达到收敛。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "值得注意的是，在某些种子下，该模型在 Walker medium 上训练后的表现甚至比随机分数还差，归一化分数为 $-0.1$，而 GPT-2 预训练使我们在归一化奖励方面比 Decision Transformer 平均提高了 $5.1$ 分。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.SS2.p2.1": {
+  "sentences": [
+   {
+    "zh": "此外，当我们将注意力转向GPT2与CLIP之间的差异时，我们看到基于纯语言预训练的GPT2表现更好。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "虽然CLIP的文本编码器也是一个在文本数据上预训练的自回归Transformer，但CLIP的目标与GPT2不同，前者试图将文本描述与其对应的图像匹配，而后者是在纯自回归语言建模上预训练的。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "鉴于此，我们假设生成式（相对于判别式）训练目标对于迁移到生成式任务更有用。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.SS2.p3.1": {
+  "sentences": [
+   {
+    "zh": "我们认为，这暗示了语言建模与轨迹建模之间存在潜在的相似性，而图像建模与轨迹建模之间则存在较大差异。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "也许这可以归因于语言和轨迹的“自然”序列性质，而预训练 iGPT 时使用的是强制的 2D$\\rightarrow$1D 性质。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.SS2.SSS0.Px1.p1.1": {
+  "sentences": [
+   {
+    "zh": "为了进一步理解基于语言和基于视觉的预训练之间的差异，我们可视化了在 Hopper medium 上微调后从 GPT2 和 iGPT 中提取的注意力权重，作为一个离线强化学习任务的示例。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "作为参考，我们还从随机初始化的决策变换器网络中提取了注意力权重。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在图 2 中，我们绘制了每个模型中所有注意力头平均后的注意力权重，并分别展示了早期、中期和最后层的可视化结果。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "由于我们任务的自回归性质，右上三角区域的注意力权重被屏蔽，因此模型只能关注过去的序列。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.SS2.SSS0.Px1.p2.1": {
+  "sentences": [
+   {
+    "zh": "作为一个总体趋势，我们看到在较早的层中，GPT2 和随机初始化的模型倾向于关注当前位置之前 3 个时间步倍数的位置。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这表明动作关注先前的动作，状态关注先前的状态，而回报目标关注先前的回报目标。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "与此形成对比的是，iGPT 的注意力可解释性较差，但表现出明显更强的近期偏差。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在中间层，DT 延续了其早期层的趋势，而 iGPT 倾向于固定在一个单一状态上（鉴于时间步 $2$ 的亮度极高），GPT2 开始表现出对先前回报目标的更强偏好（鉴于较浅的颜色始终出现在时间步 $1$、$4$ 等）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "最后，在模型的最后一层，虽然 iGPT 和随机初始化倾向于表现出更接近对所有先前输入进行平均池化的行为，但 GPT 的最终预测似乎严重依赖于初始回报目标。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这或许表明目标条件化在 GPT2 中更强。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.SS3.p1.1": {
+  "sentences": [
+   {
+    "zh": "我们探索预训练如何改变模型规模对这些离线强化学习任务的影响。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们训练了具有各种参数数量（约 600K、3M、18M、84M）的随机初始化模型，以及在 WikiText-103 上具有相同参数数量的语言预训练模型。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "本实验的确切超参数在附录中给出。{fn5}",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "fn5": {
+  "sentences": [
+   {
+    "zh": "请注意，在预训练具有600K、3M和18M参数的语言模型时，我们控制预训练在4块V100 GPU上恰好耗时6小时。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.SS3.p2.1": {
+  "sentences": [
+   {
+    "zh": "我们在图3中可视化了Medium-Expert结果在Hopper、Walker2d和HalfCheetah上的平均值。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "不出所料，我们观察到随机初始化的Decision Transformer随着参数规模的增大，相对回报趋于降低，这可能是由于在有限数据上过拟合所致。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然而有趣的是，预训练语言模型随着参数数量的增加，性能趋于提升，尽管随着参数数量的增加收益递减。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "尽管如此，这令人兴奋，因为它表明即使语言预训练也可能在大规模下有益，特别是对于未来更大、更多样化的离线RL数据集。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.F3": {
+  "sentences": [
+   {
+    "zh": "图3：OpenAI Gym上不同模型规模的平均Medium-Expert奖励比较。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.T4": {
+  "sentences": [
+   {
+    "zh": "表4：在中等设置下，使用预训练模型对增加上下文长度的实验",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.SS4.p1.1": {
+  "sentences": [
+   {
+    "zh": "我们尝试了有预训练和无预训练的各种上下文长度：上下文 = 20（遵循 Chen et al. (2021)）和上下文 = 60。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "结果如表 4 所示。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "可以看出，即使在长程语言建模上进行预训练，额外的上下文似乎也没有帮助，这或许暗示了长程上下文对于 OpenAI Gym 任务的效用有限。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.SS5.p1.1": {
+  "sentences": [
+   {
+    "zh": "我们还考察了当模型权重（Transformer 块：自注意力和前馈网络）被冻结、仅训练动作、状态和回报投影 $L_{a},L_{s},L_{r}$ 时，ChibiT 的表现。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "先前的工作（Tsimpoukelli et al., 2021; Lu et al., 2021）已经证明，冻结的语言模型有能力以可观的性能扩展到视觉领域，我们旨在通过这个实验来检验这一点。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们在表 5 中展示了 OpenAI Gym 中 D4RL medium 设置的结果。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "当冻结模型权重时，性能不佳，性能大幅下降多达约 40%。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们推测这是因为我们的任务是复杂的生成式建模，而不是判别式分类（Lu et al., 2021），其中输出分布的维度更高——因此需要更密集的微调。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.T5": {
+  "sentences": [
+   {
+    "zh": "表5：在OpenAI Gym上冻结模型权重与微调模型权重的实验。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.SS6.p1.1": {
+  "sentences": [
+   {
+    "zh": "我们对所提出的辅助技术进行了消融研究，并比较了包含与不包含预训练位置嵌入的影响。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "结果见表6。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "可以看出，我们的目标组合能够持续提升性能。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们还注意到，移除预训练位置嵌入导致ChibiT的平均性能下降最大，这表明该位置信息很重要且可迁移到离线强化学习。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.T6": {
+  "sentences": [
+   {
+    "zh": "表6：我们提出的技术的消融",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S6.SS0.SSS0.Px1.p1.1": {
+  "sentences": [
+   {
+    "zh": "基于Transformer的模型（Vaswani et al., 2017）的预训练最初由Radford et al. (2018)在其生成式预训练Transformer（GPT）中提出。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "他们在相对较大的数据集上进行了自回归语言建模，不仅在扩展到大规模模型的能力上，而且在针对任务特定的自然语言理解（NLU; Wang et al., 2018a）数据集进行微调时表现出的出色性能上，都显示出有希望的初步成功。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "BERT（Devlin et al., 2019）通过其用于预训练的掩码语言建模目标扩展了这一预训练$\\rightarrow$微调范式，使模型能够利用其双向注意力能力来完成NLU任务。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "此外，最近这一范式已扩展到计算机视觉领域，出现了视觉Transformer（ViT; Dosovitskiy et al., 2021）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "SwinTransformer（Liu et al., 2021）通过引入分层多分辨率特征图扩展了ViT。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "通过在ImageNet-22k上预训练SwinTransformer，并在下游任务（如目标检测和语义分割）上进行微调，SwinTransformer的性能优于先前基于卷积神经网络（CNN）的最先进模型（Su et al., 2020）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S6.SS0.SSS0.Px2.p1.1": {
+  "sentences": [
+   {
+    "zh": "离线强化学习（Offline RL）的流行始于一个简单的观察：许多性能良好的离策略算法（Mnih et al., 2015; Lillicrap et al., 2015; Gu et al., 2016; Haarnoja et al., 2018; Fujimoto et al., 2018）在完全离策略（即离线）的批量设置中无法学习（Fujimoto et al., 2019）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "随后出现了大量的算法研究（Wu et al., 2019; Jaques et al., 2020; Ghasemipour et al., 2021; Kumar et al., 2020; Fujimoto & Gu, 2021），并应用于各种场景（Jaques et al., 2020; Chebotar et al., 2021）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在奖励条件模仿学习（Srivastava et al., 2019; Kumar et al., 2019）的基础上，Transformer 架构最近被用于以序列建模替代离线强化学习（Chen et al., 2021; Janner et al., 2021; Furuta et al., 2021）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "尽管取得了初步成功，但语言建模中许多流行的技术尚未在这些离线强化学习基准上进行实验，而我们的工作构成了连接这两个领域的第一步。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S6.SS0.SSS0.Px3.p1.1": {
+  "sentences": [
+   {
+    "zh": "与语言或视觉（Devlin et al., 2019; Dosovitskiy et al., 2021）相反，深度强化学习的重大成功大多集中在孤立的任务或领域上（Mnih et al., 2015; Silver et al., 2016; Gu et al., 2017; Kalashnikov et al., 2018; Vinyals et al., 2019）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "预训练的结果通常仅限于视觉或语言处理（Yen-Chen et al., 2020; Lynch & Sermanet, 2021）或专门设计的领域（Singh et al., 2020; Tirumala et al., 2020）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "可以说，强化学习中预训练的一个根本瓶颈是难以在观察空间、动作空间、奖励、场景和智能体形态各不相同的任务之间重用同一个网络。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "初步工作通过用于形态泛化的图神经网络（Wang et al., 2018b; Pathak et al., 2019; Chen et al., 2018; Kurin et al., 2020）、用于通用奖励指定的语言（Jiang et al., 2019; Lynch & Sermanet, 2021; Shridhar et al., 2022）以及以对象为中心的动作空间（Zeng et al., 2020; Shridhar et al., 2022; Noguchi et al., 2021）探索了该问题的各个方面。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们的工作与这些方法正交，因为我们本质上将强化学习算法本身（表示为使用 Transformer 的序列建模）进行摊销，而不是针对特定的强化学习领域信息，并且可以毫不费力地与领域特定的预训练技术（Yen-Chen et al., 2020; Lynch & Sermanet, 2021）相结合。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S6.SS0.SSS0.Px4.p1.1": {
+  "sentences": [
+   {
+    "zh": "最近在语言建模领域，人们对预训练语言模型的领域自适应产生了兴趣（Gururangan et al., 2020），研究表明，在特定领域数据集上持续建模往往会提高领域相关下游任务的性能。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "此外，Tsimpoukelli et al. (2021) 研究了通过添加辅助视觉编码器来适应冻结的自回归语言模型，以进行少量示例的问答。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "与我们的工作更相关的是 Lu et al. (2021) 的工作，他们研究了将冻结的语言模型适应到图像分类等各种任务。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们的工作延续了这些工作的精神，将语言模型适应到强化学习这一新领域，然而，据我们所知，我们是第一个提出利用生成模型（在语言中）在另一个领域（强化学习）进行生成，而不是像分类这样的判别性任务。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S7.p1.1": {
+  "sentences": [
+   {
+    "zh": "我们研究了预训练模型如何改进通用的离线强化学习问题，该问题最近被表述为序列建模。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "令我们惊讶的是，我们发现从维基百科训练的小型Transformer（ChibiT）或GPT2模型进行微调，在策略性能和收敛性方面大幅优于基本的决策Transformer（DT）和其他基于强化学习的离线基线，在具有竞争力的D4RL基准测试中，在Gym和Atari上均取得了最先进的分数，并将DT训练时间缩短了3-6倍。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们进行了广泛的消融研究和分析，发现语言预训练（相对于视觉预训练）、模型大小以及微调（相对于冻结参数）在最终性能中起着关键作用。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们希望我们的工作能够加速预训练在强化学习中的应用，并引起更多兴趣，将语言和视觉中的其他序列建模技术应用于强化学习。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S7.p2.1": {
+  "sentences": [
+   {
+    "zh": "在强化学习之外，据我们所知，我们的工作首次成功地将一个领域（语言）中的预训练生成模型迁移到完全不同的领域（连续控制和游戏中的强化学习）中的生成建模任务。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这提示了序列建模领域之间存在某种潜在的通用结构，并且可能有助于实现统一的生成建模预训练，以提高它们之间的可迁移性。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在未来的工作中，我们期望更深入地研究语言结构的哪些特性对强化学习和其他领域的序列建模有用，以及先前研究语言结构的工作（Hupkes et al., 2019）是否确实与神经网络的组合泛化有关。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "__sections__": {
+  "__title__": "维基百科能帮助离线强化学习吗？",
+  "Abstract": "摘要",
+  "1 Introduction": "1 引言",
+  "2 Background": "2 背景",
+  "Offline Reinforcement Learning": "离线强化学习",
+  "Transformer model": "Transformer 模型",
+  "Autoregressive Language Model Pre-training": "自回归语言模型预训练",
+  "3 Methodology": "3 方法",
+  "3.1 Modeling": "3.1 建模",
+  "Encouraging similarity between language representations and offline RL input representations": "鼓励语言表示与离线强化学习输入表示之间的相似性",
+  "Language model co-training": "语言模型联合训练",
+  "3.3 Final Objective": "3.3 最终目标",
+  "4 Experiments": "4 实验",
+  "Pre-trained Models": "预训练模型",
+  "RL Baselines": "强化学习基线",
+  "Hyperparameters": "超参数",
+  "4.2 Atari": "4.2 Atari",
+  "4.3 Gym": "4.3 Gym",
+  "5 Analysis": "5 分析",
+  "5.1 Convergence Speed": "5.1 收敛速度",
+  "5.2 Language initialization versus vision initialization": "5.2 语言初始化与视觉初始化",
+  "Attention Analysis": "注意力分析",
+  "5.3 How important is the model size of Transformer?": "5.3 Transformer 的模型大小有多重要？",
+  "5.4 Context length": "5.4 上下文长度",
+  "5.5 Can we freeze model parameters?": "5.5 我们能冻结模型参数吗？",
+  "5.6 Ablation of proposed techniques": "5.6 所提技术的消融",
+  "6 Related Work": "6 相关工作",
+  "Transformer Pre-training": "Transformer 预训练",
+  "Sequence Modeling for Offline RL": "用于离线强化学习的序列建模",
+  "Pre-training for RL": "用于强化学习的预训练",
+  "Adapting language models to new modalities and domains": "将语言模型适配到新的模态和领域",
+  "7 Conclusion": "7 结论"
+ }
+}

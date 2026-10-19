@@ -1,0 +1,1730 @@
+{
+ "__meta__": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "models": {
+   "reviewer": "deepseek-v4-pro"
+  },
+  "translator": "deepseek-v4-pro（关思考）",
+  "independence": "same-model",
+  "usage": {
+   "calls": 62,
+   "prompt_tokens": 54023,
+   "completion_tokens": 47960,
+   "seconds": 661.8,
+   "cached_tokens": 37248
+  }
+ },
+ "abs.p1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "本文使用 GRASP 和 IntPhys 2 数据集，对最先进的多模态大语言模型（MLLMs）在直觉物理任务上进行了系统评估。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们评估了开源模型 InternVL 2.5、Qwen 2.5 VL、LLaVA-OneVision 以及专有模型 Gemini 2.0 Flash Thinking，发现即使是最新的模型也难以可靠地区分物理上合理与不合理的场景。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了超越性能指标，我们对模型嵌入进行了线性探针分析，提取关键处理阶段的中间表示，以考察任务相关信息被保留的程度。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的结果表明，根据任务难度的不同，可能会出现关键的视觉-语言错位：视觉编码器成功捕获了物理合理性线索，但这些信息并未被语言模型有效利用，导致推理失败。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这种错位表明，MLLMs 在直觉物理任务中的主要限制不是视觉组件，而是视觉和语言信息的无效整合。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的发现强调视觉-语言对齐是一个关键的改进领域，为未来 MLLMs 的发展提供了见解。"
+   }
+  ]
+ },
+ "S1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "随着Transformer的兴起（Vaswani et al. (2017)），在广泛语言数据集上进行的大规模预训练已经改变了自然语言处理（NLP）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "诸如GPT（Radford et al. (2018)）、BERT（Devlin et al. (2019)）和T5（Raffel et al. (2020)）等模型已经在各种NLP任务中展现出强大的能力。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "最近，多模态大语言模型（MLLMs），包括GPT-4（Achiam et al. (2023)）和Gemini（Gemini Team (2024)），已经出现，整合了文本和视觉输入。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "虽然传统语言模型已被广泛研究（Chang et al. (2024)），但MLLMs由于其新颖性、计算需求和评估复杂性，仍然相对未被充分探索（Wang et al. (2024)）。"
+   }
+  ]
+ },
+ "S1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在本文中，我们研究了最先进的多模态大语言模型（MLLMs）推理直观物理概念的能力。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们使用GRASP Jassim et al. (2023)和IntPhys 2 Bordes et al. (2025)数据集评估这些模型，这些数据集包含描绘物理上合理和不合理场景的模拟视频。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些场景测试了对基本物理原理（如物体恒存性和重力）的遵循情况。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例如，模型应该认识到球必须因重力而下落，而不是像GRASP中描绘的那样悬浮在半空中。"
+   }
+  ]
+ },
+ "S1.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "当GRASP被引入时，Jassim等人（2023）报告称，开源多模态大语言模型（MLLM），如Video-LLaMA Zhang等人（2023）和Video-ChatGPT Maaz等人（2023），在其数据集上的表现未能优于随机水平。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "尽管多模态大语言模型在视觉-语言任务上已有所进步，但我们表明，即使是最先进的模型在区分物理上合理与不合理的视频方面仍然存在困难——而人类在这项任务上达到了80%的准确率。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "像Qwen 2.5 VL Bai等人（2025）、InternVL 2.5 Chen等人（2024）、LLaVA-OneVision Li等人（2024）和Gemini 2.0 Flash Thinking这样的模型，准确率未能超过54%。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "term"
+    ],
+    "issue": "项目术语表中 probing 应译为「线性探针」，译文使用了「探测」。",
+    "suggestion": "为了理解这种持续失败背后的原因，我们不仅进行了系统的性能评估，还进一步通过线性探针分析这些模型的内部表征。",
+    "zh_reviewed": "为了理解这种持续失败背后的原因，我们不仅进行了系统的性能评估，还进一步通过探测这些模型的内部表征来深入探究。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们从关键处理层提取嵌入，并训练简单的分类器，以确定模型是否编码了与任务相关的物理合理性线索。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此外，我们使用t-SNE聚类来可视化这些嵌入的结构，揭示出虽然视觉特征形成了对应于不同物理概念的清晰簇，但这种结构在经过语言模型后变得不那么可区分，特别是在GRASP的第2级中。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这一分析揭示了视觉和语言组件之间的关键错位：虽然视觉编码器成功捕获了合理与不合理场景之间的区别，但这一信息并未被语言模型有效利用。"
+   }
+  ]
+ },
+ "S1.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "本文的主要贡献可总结如下："
+   }
+  ]
+ },
+ "S1.I1.i1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• 我们使用 GRASP 和 IntPhys 2 数据集系统地评估了最先进的多模态大语言模型在直觉物理任务上的表现，结果表明，即使是最新的模型，包括 Qwen 2.5 VL、InternVL 2.5、LLaVA-OneVision 和 Gemini 2.0 Flash Thinking，也难以超过随机水平。"
+   }
+  ]
+ },
+ "S1.I1.i2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "minor",
+    "category": [
+     "term",
+     "omission"
+    ],
+    "issue": "probing model embeddings 被译成名词短语「线性探针模型嵌入」，缺少动作，未明确是对模型嵌入进行线性探针分析。",
+    "suggestion": "我们超越准确率指标，通过对模型嵌入进行线性探针分析，证明根据任务难度，视觉编码器保留了与任务相关的信息，而语言模型往往未能利用这些信息。",
+    "zh_reviewed": "• 我们超越准确率指标，通过线性探针模型嵌入，证明根据任务难度，视觉编码器保留了与任务相关的信息，而语言模型往往未能利用这些信息。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此外，t-SNE 聚类显示，视觉表征自然地按照物理概念聚类，但这种结构在与语言模型对齐后恶化。"
+   }
+  ]
+ },
+ "S1.I1.i3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• 我们将视觉-语言不对齐确定为核心瓶颈，表明信息在通过语言模型时发生退化，提示视觉-语言对齐不佳。"
+   }
+  ]
+ },
+ "S2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "由于我们的工作考察多模态大语言模型的物理推理能力，我们回顾了关于多模态大语言模型的相关文献，包括用于评估其物理推理能力的研究和数据集。"
+   }
+  ]
+ },
+ "S2.SS1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "MLLM 是在将图像块集成到 Transformer 之后出现的 Dosovitskiy et al. (2020)，使研究人员能够将视觉和语言模型中的类似架构结合起来。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "通常，MLLM 将预训练的图像编码器（如 CLIP Radford et al. (2021)）与来自 LLaMA 系列 Touvron et al. (2023) 或 Vicuna 系列 Chiang et al. (2023) 等模型的预训练语言解码器配对。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "CLIP 是一个开创性模型，通过使用数亿在线图像-文本对预训练图像编码器来对齐视觉和文本。"
+   }
+  ]
+ },
+ "S2.SS1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "视觉与语言之间的有效对齐仍然至关重要，通常通过引入可训练的连接器来桥接视觉和语言特征来实现。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "一些模型遵循这种方法，包括 Flamingo Alayrac et al. (2022) 和 BLIP-2 Li et al. (2023a)。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在我们的实验中，我们评估了 InternVL 2.5 Chen et al. (2024)、Qwen 2.5 VL Bai et al. (2025) 和 LLaVA-OneVision Li et al. (2024)，它们都通过连接层将预训练的 Vision Transformer (ViT) Dosovitskiy et al. (2020) 编码器与各自的 LLM 集成。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些模型分两个主要阶段进行训练：首先，进行特征对齐的预训练，其中 LLM 和 ViT 保持冻结，而连接器被训练（除了 Qwen 2.5 VL，其中 ViT 也被训练）；其次，对所有模型层进行端到端微调。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "训练数据由匹配的图像-文本对和视觉问答数据集组成。"
+   }
+  ]
+ },
+ "S2.SS1.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "当前专有模型如 GPT-4o {fn1}（OpenAI）和 Gemini {fn2}（Google）也集成了视觉组件。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，它们的闭源性质限制了详细的实现洞察，并阻碍了对潜在特征的分析。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "截至本文撰写时，只有 Gemini 官方支持视频提示。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "虽然 GPT-4o 可以处理视频帧，但我们的初步测试显示其性能非常不准确，且经常出现幻觉。"
+   }
+  ]
+ },
+ "fn1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "`https://openai.com/index/hello-gpt-4o`"
+   }
+  ]
+ },
+ "fn2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "`https://deepmind.google/technologies/gemini`"
+   }
+  ]
+ },
+ "S2.SS1.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "已经开发了多个图像和视频数据集来评估模型对物理学的理解。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在MLLM出现之前，诸如VQA Antol等人（2015）、CLEVR Johnson等人（2017）和CLEVRER Yi等人（2020）等数据集被设计用于研究视觉常识推理。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "随着MLLM的发展，更具挑战性的数据集被引入。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例如，PIQA Bisk等人（2020）使用图像评估语言模型中的物理常识推理，而VEC Li等人（2023b）通过关注质量、温度和硬度等概念来评估基础物理理解。iVISPAR Mayer等人（2025）引入了一个交互式基准，突出了MLLM在视觉空间推理中的优势和局限性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "虽然一些研究Liu等人（2022）；Zhang等人（2022）表明MLLM可以获得空间常识知识，但其他研究Liu等人（2023）表明它们在理解物体方向和关系方面存在困难。"
+   }
+  ]
+ },
+ "S2.SS1.p5.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此外，已经开发了多个视频数据集来评估模型的直觉物理推理能力。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "诸如 Physical Concepts Piloto et al. (2022)、IntPhys Riochet et al. (2021)、IntPhys 2 Bordes et al. (2025)、InfLevel Weihs et al. (2022)、AVoE Dasgupta et al. (2021b); Dasgupta et al. (2021a) 和 GRASP Jassim et al. (2023) 等基准就是为此目的而设计的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Weihs et al. (2022) 在婴儿级物理任务上评估了十个不同的视觉模型，发现它们的表现仅略高于随机水平。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "类似地，Jassim et al. (2023) 证明，即使是先进的多模态大语言模型在直觉物理任务上也表现挣扎，表现处于随机水平（50%），而人类表现达到约 80%。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此外，Garrido et al. (2025) 发现，在 IntPhys、GRASP 和 InfLevel 基准上，多模态大语言模型的表现显著低于自监督视觉模型，这与 IntPhys 2 Bordes et al. (2025) 中的发现一致。"
+   }
+  ]
+ },
+ "S2.SS1.p6.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "基于多模态大语言模型（MLLMs）的最新进展和新模型的发布，我们使用更新的模型和额外的技术进一步研究了 GRASP Jassim et al. (2023) 和 IntPhys 2 Bordes et al. (2025) 数据集。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "term"
+    ],
+    "issue": "将动词 “probing” 译为名词短语 “线性探针潜在特征”，丢失了动作含义，可能被误解为 “线性探针的潜在特征”。",
+    "suggestion": "具体来说，我们通过直接分析它们的响应并对潜在特征进行线性探针来评估 MLLMs 在 GRASP 和 IntPhys 2 上的表现。",
+    "zh_reviewed": "具体来说，我们通过直接分析它们的响应和线性探针潜在特征来评估 MLLMs 在 GRASP 和 IntPhys 2 上的表现。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们选择这两个数据集是因为之前的 MLLMs 在它们上的表现接近随机水平，并且它们提供了最全面和多样化的直观物理视频集。"
+   }
+  ]
+ },
+ "S3.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "GRASP Jassim et al. (2023) 和 IntPhys 2 Bordes et al. (2025) 是可用于评估多模态语言模型（MLLMs）中直观物理理解的基准。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "GRASP 分为两个层级：基础视觉理解（第 1 级）和直观物理（第 2 级）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于第 1 级，我们使用四个场景，涵盖形状、颜色、方向性和运动等概念，每个概念包含 128 个视频。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "第 2 级包含 16 个场景，按碰撞、连续性、重力、惯性、客体永久性、坚固性和不变性等物理概念分类，每个场景包括 128 个合理视频和 128 个不合理视频。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "IntPhys 2 通过 1,416 个逼真视频扩展了直观物理评估，涵盖四个核心原则：客体永久性、客体不变性、时空连续性和坚固性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在主集中，视频按简单、中等和困难难度级别排列，每个场景由成对的合理和不合理事件组成，旨在使用期望违背框架来探测模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "鉴于之前的 MLLM 表现接近随机水平，这些数据集有助于深入分析物理推理能力的局限性。"
+   }
+  ]
+ },
+ "S4.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "major",
+    "category": [
+     "term"
+    ],
+    "issue": "MLLM 应指多模态大语言模型，译文“多语言模态模型”把“多模态”误作“多语言”，改变了模型类型。",
+    "suggestion": "Jassim 等人（2023）表明，开源多模态语言模型，如 Video-LLaMA Zhang 等人（2023）、PandaGPT Su 等人（2023）、VTimeLLM Huang 等人（2024）和 Video-ChatGPT Maaz 等人（2023），在其 GRASP 数据集上的表现并不比随机水平更好。",
+    "zh_reviewed": "Jassim 等人（2023）表明，开源多模态语言模型，如 Video-LLaMA Zhang 等人（2023）、PandaGPT Su 等人（2023）、VTimeLLM Huang 等人（2024）和 Video-ChatGPT Maaz 等人（2023），在其 GRASP 数据集上的表现并不比随机水平更好。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "他们假设，这可能是因为这些模型的规模相对较小（7B 和 13B 参数），而最先进的大语言模型通常要大一个数量级。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "最近发布的更大规模多模态语言模型使得对这一假设的进一步研究成为可能。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "与此同时，这些较新的模型在视觉语言基准测试上表现出显著改善，如 MathVista Lu 等人（2024）、MMMU Yue 等人（2024）和 MMBench Liu 等人（2024），这促使我们重新评估多模态语言模型在 GRASP 上的表现，我们预期也会看到改进。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了加强我们的结论，我们还在新引入的 IntPhys 2 基准上评估这些模型，该基准补充了 GRASP，并能够提供更具普遍性的见解。"
+   }
+  ]
+ },
+ "S4.F1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图1：最大模型在GRASP和IntPhys 2的直觉物理测试中的平均准确率（%）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "虚线表示随机水平。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "误差线表示相应数据集所有测试的标准差。"
+   }
+  ]
+ },
+ "S4.SS1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在这项工作中，我们使用三个不同的模型系列评估了 MLLM 在 GRASP 和 IntPhys 2 上的当前性能：LLaVA-OneVision（0.5B、7B、72B）Li et al. (2024)、Qwen 2.5 VL（3B、7B、72B）Bai et al. (2025) 和 InternVL 2.5（2B、8B、78B）Chen et al. (2024)。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些模型通过使用提示-视频对进行评估，该提示-视频对由一个物理上合理或不合理的场景视频以及数据集中相应的问题组成。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例如，对于 GRASP 中的 Gravity 场景，问题是："
+   }
+  ]
+ },
+ "S4.SS1.p1.3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "IntPhys 2 使用类似的提示；然而，它不包含任何像 GRASP 提示那样的场景特定信息。"
+   }
+  ]
+ },
+ "S4.SS1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们使用三种不同的方法评估模型："
+   }
+  ]
+ },
+ "S4.I1.i1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "1. **自由生成**：模型自由生成回答，我们解析其输出以识别“是”和“否”标记。"
+   }
+  ]
+ },
+ "S4.I1.i2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "2. **贪心解码**：鉴于大语言模型文本生成的概率性质，我们直接比较“是”和“否”标记的对数几率，选择对数几率更高的标记。"
+   }
+  ]
+ },
+ "S4.I1.i3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "3. **思维链（CoT）**：我们首先用“你在这个视频中看到了什么？”提示模型，并允许其自由生成。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在第二步中，我们询问关于视频合理性的实际问题，并应用贪婪解码。"
+   }
+  ]
+ },
+ "S4.SS1.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于自由生成和思维链方法，我们在三个不同随机种子的运行上对结果取平均。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们不将这一过程应用于贪心解码，因为它不涉及从输出分布中采样。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于所有模型，我们使用温度0.6、top-p 0.9和top-k 40。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "视频以1 FPS采样，这意味着由于每个视频长度为10秒，因此提取10帧。"
+   }
+  ]
+ },
+ "S4.T1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "表1：最大模型在GRASP第1级上使用自由形式生成、贪婪解码和CoT提示的准确率（%）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于运动和形状测试，随机水平为50%，而对于方向性和颜色测试则为25%。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们突出显示每个测试的最佳结果。"
+   }
+  ]
+ },
+ "S4.SS1.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "最大的开源模型的结果如图1所示，所测试系列中较小模型的结果如图4所示。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "大多数模型在GRASP上的表现处于或低于随机水平，但Qwen 2.5 VL和InternVL 2.5在其最大配置下准确率超过53%。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "尽管这优于较小的模型，但改进仍不足以支持Jassim等人（2023）的假设，即仅增加模型规模就能解决该任务。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这与在IntPhys 2上观察到的结果一致，其中最大的模型略优于较小的模型，准确率最高达到52%，但InternVL 2.5除外，其78B模型的表现甚至略差于8B变体。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "与GRASP中评估的模型规模相当的模型仅显示出比随机水平略高的改进（例如，Qwen 2.5 VL（3B）使用CoT达到51.5%）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "总体而言，GRASP上的提升明显小于其他视觉语言基准中观察到的提升——例如，Qwen 2.5 VL（78B）在OpenCompass排行榜上比PandaGPT（13B）提高了近50个百分点{fn3}。"
+   }
+  ]
+ },
+ "fn3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "`https://rank.opencompass.org.cn/leaderboard-multimodal`"
+   }
+  ]
+ },
+ "S4.SS1.p5.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "major",
+    "category": [
+     "agent"
+    ],
+    "issue": "原文指“相对于在 GRASP 上评估的模型，所提方法/模型有轻微的总体提升”，译文变成了“在 GRASP 上评估的模型整体略有提升”，主语/比较对象改变。",
+    "suggestion": "除了相对于在 GRASP 上评估的模型有轻微的总体提升之外，我们观察到各个 GRASP 场景之间的性能差异更大，如图1中的误差条所示。",
+    "zh_reviewed": "除了在GRASP上评估的模型整体略有提升之外，我们观察到各个GRASP场景之间的性能差异更大，如图1中的误差条所示。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在场景层面，Qwen 2.5 VL（7B）使用自由生成在重力-惯性场景上达到68.9%，而InternVL 2.5（78B）使用CoT提示在重力-支撑场景上达到97.7%。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "所有模型在IntPhys 2上的标准差都很小，而IntPhys 2的测试是按难度分组的，这表明该基准测试通常比GRASP更难。"
+   }
+  ]
+ },
+ "S4.SS1.p6.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们还在表3中展示了最大模型为一段GRASP视频生成的描述。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在这个简单的视频中——一个橙色球滚上木板且没有减速——所有模型要么出现幻觉，要么未能捕捉到场景的关键方面。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "hedge"
+    ],
+    "issue": "suggest 译为「表明」语气更强，丢失了原文的推测意味。",
+    "suggestion": "这些频繁的幻觉和遗漏在多个视频和模型中一致观察到，提示当前MLLM中视觉和语言模态之间可能存在错位。",
+    "zh_reviewed": "这些频繁的幻觉和遗漏在多个视频和模型中一致观察到，表明当前MLLM中视觉和语言模态之间存在错位。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "鉴于这些定性观察，模型糟糕的定量表现就不那么令人惊讶了。"
+   }
+  ]
+ },
+ "S4.SS1.p7.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "除了开源模型，我们还在 GRASP 上评估了专有的最先进模型 Gemini 2.0 Flash Thinking，其准确率达到 53.7%——这表明还有很大的改进空间。"
+   }
+  ]
+ },
+ "S4.SS2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "由于多模态语言模型在直觉物理任务上表现不佳，GRASP基准测试引入了专注于基础视觉理解的Level 1。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些视频遵循与直觉物理视频相同的格式，但测试的是较低层次的属性，如物体颜色、形状和简单动力学。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "由于本工作中评估的模型在直觉物理上仍然表现不佳，我们也在Level 1上对它们进行了评估。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在这些任务上表现不佳将进一步支持视觉与语言模态之间不一致的假设。"
+   }
+  ]
+ },
+ "S4.SS2.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "与上一节一样，我们使用自由形式生成、贪婪解码和 CoT 提示来评估模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "相应的提示在附录 D 中提供。表 1 显示了所有最大模型在 Level 1 测试中的结果。"
+   }
+  ]
+ },
+ "S4.SS2.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "所有模型在至少一种评估方法下，在所有测试上的表现都显著高于随机水平。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "值得注意的是，Qwen 2.5 VL（72B）使用贪婪解码时平均准确率达到99.7%。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在基本视觉理解任务上的这种强劲表现表明，这些模型在低层视觉属性方面对齐良好。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "相比之下，它们在GRASP和IntPhys 2的直觉物理任务上的较差表现表明，更高层次的对齐和推理仍然有限。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "定性分析表明，这些失败是由于模型忽略了理解物理合理性所需的关键细节。"
+   }
+  ]
+ },
+ "S5.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "鉴于所有被评估的多模态大语言模型整体表现不佳，我们探究其根本原因。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "具体而言，我们通过从不同模型层提取嵌入并训练线性探针来分析它们的内部表征，以确定它们是否编码了区分物理上合理与不合理视频的信息。"
+   }
+  ]
+ },
+ "S5.SS1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们选择了几个关键位置进行嵌入提取，主要聚焦于视觉-语言投影层，这是一个负责将视觉特征与语言模型嵌入对齐的关键模块。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为简单起见，尽管不同模型中该层的命名有所不同，我们将其统称为投影层。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "一些模型，如 InternVL 2.5 和 LLaVA-OneVision，专门设置了一个独立的训练阶段来优化该层，同时冻结其他参数。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "鉴于这一对齐步骤的重要性，我们从两个位置提取了嵌入：（1）投影层之前，具体是从最后一个视觉 Transformer 块；（2）投影层之后，即整个视觉编码器的末端。"
+   }
+  ]
+ },
+ "S5.SS1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了从提取的嵌入中获得统一表示，我们对序列维度进行了平均，将多个token级嵌入压缩为每个视频一个向量。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这种变换将高维特征张量缩减为紧凑的嵌入，通过在时空维度上取平均来创建输入的全局表示。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "得到的向量保留了视觉编码器的特征维度，确保了分类输出的一致性和表达力。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "每个模型的嵌入维度列于附录B的表2中。"
+   }
+  ]
+ },
+ "S5.SS1.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此外，我们在两种不同的提示条件下，从语言模型的最后一层（输出 MLP 之前）提取了嵌入，以更全面地评估视觉-语言对齐。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "第一个提示是一个简单的查询，询问视频在物理上是否合理。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "第二个是一个详细的提示，结构如下："
+   }
+  ]
+ },
+ "S5.SS1.p3.3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "每个概念都用展示遵守或违反物理定律的例子来说明。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "完整的提示包含在附录E中。"
+   }
+  ]
+ },
+ "S5.SS2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "GRASP 第 1 级包含四个与我们的分析相关的任务：检测颜色、运动、方向和形状，每个任务有 128 个视频。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "运动和形状是二分类任务，而颜色和方向涉及四个类别。"
+   }
+  ]
+ },
+ "S5.SS2.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "GRASP Level 2 包含 4,096 个视频，均匀分布在 16 个不同场景中，每个场景有 128 个合理和 128 个不合理的示例。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "类似地，IntPhys 2 包含 1,012 个视频（506 个合理和 506 个不合理）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了进行线性探针，我们将这些数据集重新表述为二元分类任务（合理与不合理）。"
+   }
+  ]
+ },
+ "S5.SS2.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于所有数据集，我们训练了单隐藏层 MLP 探针（隐藏层大小=512，ReLU 激活，无 dropout），使用交叉熵损失训练 500 个 epoch，数据划分为 80% 训练、10% 验证和 10% 测试。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "超参数通过网格搜索优化，报告的结果是三个随机种子的平均值。"
+   }
+  ]
+ },
+ "S5.F2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图2：三个模型家族的性能比较。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "每个子图显示了相应模型规模（InternVL 2.5：2B、8B、78B；LLaVA-OneVision：0.5B、7B、72B；Qwen 2.5 VL：3B、7B、72B）在所有GRASP场景中的平均准确率，涵盖四个嵌入类别：视觉-投影前、视觉-投影后、语言-简单提示和语言-详细提示。"
+   }
+  ]
+ },
+ "S6.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "minor",
+    "category": [
+     "hedge"
+    ],
+    "issue": "demonstrating 译为「证明了」语气过强，原文只是展示/表明，不是严格证明。",
+    "suggestion": "在本节中，我们展示了对各种嵌入集的分析结果，表明它们具有编码能区分合理与不合理视频的信息的能力。",
+    "zh_reviewed": "在本节中，我们展示了对各种嵌入集的分析结果，证明了它们编码区分合理与不合理视频信息的能力。"
+   }
+  ]
+ },
+ "S6.SS0.SSS0.Px1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例如，在 GRASP 数据集的第 1 级上，所有测试模型中从不同位置（视觉编码器或语言编码器）提取的所有探测特征都达到了 100% 的准确率。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于第 1 级，我们只测试了形状和运动，因为方向性和颜色各分为 4 类，每类仅剩 32 个样本用于训练、验证和测试。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "尽管如此，形状和运动上的完美准确率表明模型有效地编码了形状和运动等基本视觉属性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "相比之下，在更具挑战性的动态 IntPhys 2 数据集上，如第 4.1 节所示且符合数据集创建者的意图，来自视觉和语言编码器的所有探测特征都处于随机水平，表明两个组件都没有捕获关于物理合理性的有意义信息。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在 GRASP 的第 2 级上，它代表了 GRASP 第 1 级和 IntPhys 2 之间的中等难度，我们观察到性能因模型和嵌入位置而异，如图 2 所示。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**因此，以下见解专门来自对 GRASP 数据集第 2 级的分析，该级别包含 4,096 个视频，涵盖 16 个不同场景中的 8 个直观物理概念。**"
+   }
+  ]
+ },
+ "S6.SS0.SSS0.Px2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "结果表明，所有测试的嵌入都包含足够的信息，能够在高于随机水平上判断视频的合理性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例如，来自 InternVL 2.5 (78B) 等模型的视觉嵌入达到了 85.0% 的准确率，其次是 LLaVA-OneVision (0.5B) 的 80.2%，以及 Qwen 2.5 VL (7B) 的 70.8%。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些分数显著高于 0.5 的随机基线，表明嵌入捕获了有意义的区别。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这表明编码的表示对于评估视频合理性是有效的。"
+   }
+  ]
+ },
+ "S6.F3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图3：LLaVA-OneVision-72B在不同模态和提示策略下视频特征（GRASP，第2级）的2D t-SNE可视化：视觉-投影前、视觉-投影后、语言-简单提示和语言-详细提示。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "每个图区分了合理（红色三角形）和不合理（蓝色圆圈）的视频特征。"
+   }
+  ]
+ },
+ "S6.SS0.SSS0.Px3.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "结果中的一个关键观察是，视觉编码器并不是提取有意义表征以区分合理与不合理视频的限制因素；相反，瓶颈在于语言模型无法从视觉嵌入中充分提取相关信息。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "比较视觉编码器性能（在投影层之前测量）与使用详细提示处理的嵌入的语言模型性能，揭示了一个一致的模式：所有九个模型，无论其大小，在探测视觉嵌入时表现更好。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这一差距凸显了视觉到语言对齐过程中的一个关键缺陷，表明语言模型未能有效利用视觉编码器提供的丰富信息。"
+   }
+  ]
+ },
+ "S6.SS0.SSS0.Px3.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如果视觉-语言对齐得当，鉴于详细提示中提供的明确信息，这项任务本应是平凡的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，观察到的性能凸显了明显的对齐差距。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例如，在评估重力概念时，模型只需要识别出球没有完全落到地面，就能正确地将视频分类为不合理——提示中明确给出了一个例子：“重力：如果球落下并落到地板上，则合理；如果球停在空中，则不合理。”"
+   }
+  ]
+ },
+ "S6.SS0.SSS0.Px4.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "详细提示明确描述了相关物理定律，并规定了何时应将视频分类为合理或不合理，但在不同模型上产生了不一致的结果。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "具体来说，该提示通过清晰定义视觉条件（例如，如果球悬停在半空中，则视频不合理）来作为视觉-语言对齐的探针。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "term"
+    ],
+    "issue": "probing 项目规定译法为「线性探针」，此处译为「探针」，缺少「线性」。",
+    "suggestion": "在这个对齐线性探针任务中，InternVL 2.5 (78B) 和所有 LLaVA-OneVision 模型的表现优于使用较简单提示时的表现，表明它们从额外的解释性上下文中受益。",
+    "zh_reviewed": "在这个对齐探针任务中，InternVL 2.5 (78B) 和所有 LLaVA-OneVision 模型的表现优于使用较简单提示时的表现，表明它们从额外的解释性上下文中受益。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "相反，所有 Qwen 2.5 VL 模型的表现更差，表明它们在此任务上的对齐能力较弱。"
+   }
+  ]
+ },
+ "S6.SS0.SSS0.Px5.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "投影层将视觉嵌入与语言模型嵌入对齐，在大多数评估模型中通常降低性能。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "具体而言，这一对齐步骤持续降低准确率，表明投影过程常常降低从视觉编码器获得的信息质量，对于此任务而言。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，值得注意的例外包括 InternVL 2.5 (2B) 和 InternVL 2.5 (78B)，其中投影层提高了性能。"
+   }
+  ]
+ },
+ "S6.SS0.SSS0.Px6.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了分析聚类行为，我们应用t-SNE降维来可视化嵌入，如图3所示。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "提取的嵌入并没有明显分离为“合理”和“不合理”两类，这可能是由于底层模式的复杂性，而t-SNE将其降至二维。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，投影前的视觉嵌入明显按场景聚类，16个数据集场景中的每一个都对应一个特定的物理概念。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图3(a)揭示了15个不同的簇，其中一个较大的簇合并了两个相似的场景，这可能是由于它们固有的相似性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在嵌入通过投影层之后，这种聚类效应逐渐减弱，无论使用简单提示还是详细提示。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这表明视觉嵌入在投影并对齐到语言模型空间时被稀释了。"
+   }
+  ]
+ },
+ "S7.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在本文中，我们表明，尽管最先进的多模态大语言模型（MLLM）——无论是开源的还是专有的——在直觉物理任务上略有改进，但它们仍然面临显著困难。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "即使是像 Gemini Flash 2.0 Thinking、InternVL 2.5 和 Qwen 2.5 VL 这样的先进模型，在对视频的物理合理性进行分类时，准确率也未能超过 54%。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了理解其根本局限性，我们从开源模型的架构中关键位置提取并分析了嵌入，以识别潜在的瓶颈。"
+   }
+  ]
+ },
+ "S7.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的分析表明，视觉编码器始终编码了足够的信息来区分合理与不合理的视频，在 InternVL 2.5 等模型的视觉嵌入上训练的探针达到了 85% 的准确率。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，我们在视觉-语言对齐中发现了一个明显的瓶颈：视觉嵌入上的探针表现优于语言嵌入上的探针，即使语言模型被详细提示也是如此。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这表明语言组件在直观物理推理方面存在困难，从而限制了模型的整体性能。"
+   }
+  ]
+ },
+ "S7.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "未来的研究可以对视觉编码器和语言解码器进行逐层分析，以进一步探究这些瓶颈。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "理解为什么在一般任务中表现出色的模型在基本直觉物理推理上表现不佳，可以为更好的视觉-语言对齐策略提供信息，最终提高多模态大语言模型在基于物理的推理任务中的性能。"
+   }
+  ]
+ },
+ "S8.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "本文研究了为什么最先进的多模态大语言模型在直觉物理任务上表现不佳。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "虽然我们的发现表明性能瓶颈在于视觉-语言对齐而非视觉编码器，但它们并未完全确定这一局限的确切原因。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "尽管视觉嵌入似乎保留了足够的信息，但这些信息在对齐过程中是如何丢失或被错误表示的，还需要进一步研究。"
+   }
+  ]
+ },
+ "S8.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此外，由于无法获取 Gemini 及其他闭源模型的特征，我们的分析仅限于开源模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，评估它们失败的具体原因仍然具有挑战性。"
+   }
+  ]
+ },
+ "A1.F4": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图4：所评估模型家族较小规模在GRASP和IntPhys 2直觉物理测试中的平均准确率（%）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "虚线表示随机水平。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "误差线表示相应数据集所有测试的标准差。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "所有模型的表现都接近随机水平。"
+   }
+  ]
+ },
+ "A2.T2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "表2：各模型系列嵌入类型与维度的比较。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "“Proj.”指投影，“Lang.”指语言嵌入。"
+   }
+  ]
+ },
+ "A3.T3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "表3：最大模型变体为GRASP中一个不合理的重力场景视频生成的描述。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图像显示视频中的一帧，其中橙色球滚上斜坡——如红色箭头所示——没有减速。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "所有模型在其回答中都表现出某种程度的幻觉。"
+   }
+  ]
+ }
+}

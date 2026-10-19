@@ -1,0 +1,2556 @@
+{
+ "__meta__": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "models": {
+   "reviewer": "deepseek-v4-pro"
+  },
+  "translator": "deepseek-v4-pro（关思考）",
+  "independence": "same-model",
+  "usage": {
+   "calls": 78,
+   "prompt_tokens": 72783,
+   "completion_tokens": 82313,
+   "seconds": 982.2,
+   "cached_tokens": 48128
+  }
+ },
+ "abs.p1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "实体追踪（Entity tracking, ET），即跟踪状态的能力，是一项支撑复杂推理的基本技能。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "越来越多的工作研究Transformer语言模型（LMs）如何在没有状态变化的情况下解决实体绑定问题。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，对于非玩具级语言模型如何处理以自然语言表达的、具有现实难度的实体追踪问题，目前的理解仍然有限。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为此，我们研究了在涉及多个状态改变操作的更复杂场景中实体追踪的底层机制。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "hedge"
+    ],
+    "issue": "第二个分句未译出“增量地”，可能被理解为完全不追踪，而原文只是否定增量追踪。",
+    "suggestion": "我们发现，语言模型并不会跨token增量地追踪世界状态，也不会跨层增量地追踪与查询相关的状态，而是在查询变得明确时，在最后一个token处并行地聚合相关信息。",
+    "zh_reviewed": "我们发现，语言模型并不会跨token增量地追踪世界状态，也不会跨层追踪与查询相关的状态，而是在查询变得明确时，在最后一个token处并行地聚合相关信息。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们进一步研究了单个操作（`PUT`、`REMOVE`、`MOVE`）的机制，以刻画这种非增量式实体追踪机制。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "令人惊讶的是，语言模型通过一个脆弱的全局抑制标签来实现`REMOVE`操作；这种全局移除机制预测了多种失败模式，我们在行为上证实了这些模式。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们提供了一种机制性的解决方案，即通过消除该标签来部分解决这一问题。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "总体而言，我们的发现揭示了语言模型使用非顺序策略来解决本质上顺序的任务。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "更广泛地说，我们的工作说明了行为分析和机制分析如何能够富有成效地相互作用。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "行为结果指导机制假设，而机制分析的见解通过预测现有评估中缺失的失败模式，帮助构建更强的行为评估。{fn1}"
+   }
+  ]
+ },
+ "fn1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的代码和数据可在 `https://github.com/PootieT/entity-tracking-mi` 找到。"
+   }
+  ]
+ },
+ "S1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "实体追踪（ET）是一种对人类和语言模型（LM）都至关重要的能力，在广泛的任务情境中都会被调用，包括下棋（Karvonen, 2024）、在长上下文中进行扩展对话（Karttunen, 1969; Nieuwland and Van Berkum, 2006b; Kamp et al., 2011），或解决复杂推理问题（Prakash et al., 2025）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "评估ET能力的一个基准是Kim和Schuster（2023）的盒子数据集（我们建议读者参考该工作以了解其他针对性ET基准的讨论）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在该基准上的评估表明，预训练的Transformer确实表现出非平凡的（但仍然有限的）涉及多次状态变化的ET能力，并且代码训练显著提高了ET（Kim et al., 2024）。"
+   }
+  ]
+ },
+ "S1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "总体而言，研究语言模型中实体追踪的工作有两条主线。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "一个方向以 Merrill et al. (2024) 和 Li et al. (2025) 为代表，通过在简化合成语言表达的实体追踪问题上训练玩具模型，研究极限情况下的追踪能力。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这类研究刻画了 Transformer 在特定状态变化次数下解决实体追踪问题所需的层数或 token 数的基本要求。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此外，Merrill and Sabharwal (2024); Li et al. (2024a); Zhang et al. (2025); Bavandpour et al. (2025) 发现思维链（CoT）可以通过将计算卸载到上下文长度来缓解层数约束。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "另一条工作线（Feng and Steinhardt, 2023; Feng et al., 2024; Prakash et al., 2024; Prakash et al., 2025; Dai et al., 2024）旨在理解实体追踪的一个前提条件——绑定（即表示和使用静态状态的能力，不考虑状态变化）——背后的机制。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这类研究表明，模型使用绑定顺序 ID（实体在上下文中出现的索引），这些 ID 可以在残差流中检测到，用于“标记并检索”绑定的实体。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "最近，Gur-Arieh et al. (2025) 还表明，这些 ID 实际上是三种（可能更多）类型的绑定机制的组合，这些机制在不同上下文中有所不同。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "后一条工作线还考虑了相对更自然的环境，研究了在自然语言表达的状态下预训练模型的表现。"
+   }
+  ]
+ },
+ "S1.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "虽然先前在自然语言环境下的机制研究探讨了实体绑定，例如“苹果在盒子1里。……盒子1里装的是 ”，但在现实世界中追踪实体需要理解状态如何随时间变化。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "棋子在整个棋局中移动，信息随着话语的展开而引入，变量在程序中被删除。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "尽管状态变化对于揭示非平凡的追踪能力至关重要（Kim and Schuster, 2023），但它们尚未在非玩具模型中得到机制层面的探索。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，在这项工作中，我们探究模型如何超越静态绑定并更新其状态（即“……从盒子1中取出桃子。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "将手表放入盒子1。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "盒子1里装的是 ”（完整示例见2.1节）。"
+   }
+  ]
+ },
+ "S1.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们将贡献总结如下："
+   }
+  ]
+ },
+ "S1.I1.i1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• 我们提供证据表明，语言模型解决实体跟踪问题不是通过累积的世界构建，而是通过在上下文中并行检索目标标记（第3节）。"
+   }
+  ]
+ },
+ "S1.I1.i2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• 我们提供了关于语言模型如何实现单个状态改变操作（如 `PUT`（添加对象）和 `REMOVE`（撤销绑定操作））的机制分析。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们将 `PUT` 描述为类似于先前描述的实体绑定电路（Prakash et al., 2024），并将 `REMOVE` 描述为一个全局抑制待预测标记的标签（第 4.1、4.2 节）。"
+   }
+  ]
+ },
+ "S1.I1.i3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• 我们证明，对个体机制的更好理解使我们能够预测新的失败模式，补充现有的行为测试，并通过干预部分修复它们（第4.4节）。"
+   }
+  ]
+ },
+ "S2.SS1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例2.1展示了我们使用的盒子数据集中的一个实例（Kim and Schuster, 2023）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "第一句话描述了世界中七个盒子各自的初始内容；我们称这句话为`DESCRIPTION`。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "其后是三种类型的状态改变`OPERATIONS`的序列："
+   }
+  ]
+ },
+ "S2.I1.i1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• `PUT`：将当前上下文中不存在的新物体放入一个盒子（将手表放入盒子1）。"
+   }
+  ]
+ },
+ "S2.I1.i2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• `REMOVE`：从其中一个盒子中移除现有物体（从盒子2中移除罐子）。"
+   }
+  ]
+ },
+ "S2.I1.i3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• `MOVE`：从一个盒子中移除现有物体并将其添加到另一个盒子（将 Box 0 中的苹果移动到 Box 1）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "该操作可以理解为 `MOVE-IN`（针对 Box 1）和 `MOVE-OUT`（针对 Box 0）的链式组合。"
+   }
+  ]
+ },
+ "S2.SS1.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然后，模型必须用正确的内容完成 `QUERY`。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "有关数据集的详细信息，请参见附录 A。"
+   }
+  ]
+ },
+ "S2.SS2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们在0示例补全设置中研究Gemma-2-2B、CodeLlama-13B和Llama-3.1-70B。{fn2} 我们呈现的主要结果基于CodeLlama-13B，但在相关处补充其他模型的结果。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "CodeLlama-13B和Gemma-2-2B在单一操作上表现出非平凡的性能，且计算成本较低；Llama-3.1-70B在多个操作上表现良好，因此用于多操作问题的分析。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "行为准确率报告在附录C、G和H中。"
+   }
+  ]
+ },
+ "fn2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "模型和提示的详细信息见附录 B 和 I。"
+   }
+  ]
+ },
+ "S3.SS1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "鉴于实体追踪任务的顺序性质，我们的第一个问题是，语言模型是否随着描述和操作的展开而逐步构建世界状态。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "具体而言，我们考虑以下假设："
+   }
+  ]
+ },
+ "S3.I1.i1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "1. **H1**：模型在从左到右处理上下文时增量地构建世界状态。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如果这是真的，那么将存在一个固定长度的表示（例如，最后一个标记的残差流），它编码所有盒子的最终状态，而不管查询的是哪个盒子（表示全局状态）。"
+   }
+  ]
+ },
+ "S3.I1.i2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "2. **H2**：模型并非逐步构建世界状态，而是仅在查询变得明确时才提取并整合与所查询盒子相关的信息（表示局部状态）。"
+   }
+  ]
+ },
+ "S3.SS1.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们旨在通过考虑两种类型的线性探针（Belinkov, 2022; Köhn, 2015; Gupta et al., 2015; Tenney et al., 2019）来寻找支持或反对 H1 和 H2 的证据。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于 **H1**，我们训练 100 个 **全局** 8 路探针，每个探针对应数据集中可能放入盒子里的每个对象。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "每个探针预测特定对象所在的盒子，其中第 0 类表示该对象不在任何盒子中。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如果全局探针能够准确预测每个对象的位置，这将为 H1 提供证据：增量构建的世界状态独立于被查询的盒子。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于 **H2**，我们训练 100 个 **局部** 二分类探针（对应 100 个可能对象中的每一个），测试每个对象是否出现在被查询的盒子中。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如果全局探针无法解码世界状态，但局部探针成功解码当前盒子的状态，这将为 H2 提供证据。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此外，我们训练一组 **提及** 探针，以查看模型是否表示某个对象是否在上下文中被提及。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "该基线检查不特定于被查询盒子的基本信息是否在语言模型中得到表示。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "有关探针的更多细节，请参见附录 D。"
+   }
+  ]
+ },
+ "S3.SS1.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "所有探针的输入是最后一个词“the”{fn3}（即生成被查询盒子中第一个对象之前的最后一个输入词）在不同层的残差流。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们为每一层独立训练一组探针。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "由于每个盒子一次最多只包含三个对象（共100个），探针标签高度偏向于“不存在”类别。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，我们还报告了非平凡探针准确率，该准确率仅考虑上下文中已提及对象的探针结果。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们在此提供CodeLlama-13B的结果；Llama-3.1-70B的结果和探针训练细节见附录D。"
+   }
+  ]
+ },
+ "fn3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们还测试了查询短语中所有其他标记（例如“contains”）以及最后一个操作的句号标记的表示，发现“the”能产生最佳性能。"
+   }
+  ]
+ },
+ "S3.F1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图1：CodeLlama-13B中跨层的局部、全局和提及探针准确率。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "较低的全局非平凡准确率表明，模型并未在最后一个标记的残差流中编码全局状态，这支持了**H2**。"
+   }
+  ]
+ },
+ "S3.SS1.p5.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图1显示，尽管全局探针的表现始终高于随机水平（约0.12），其非平凡准确率仍低于0.3，而局部探针的准确率接近0.9（随机水平约0.5）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "提及探针的高准确率表明，一些全局信息被表示出来，但并未按盒子组织。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "quantity",
+     "omission"
+    ],
+    "issue": "漏译了“only”，丢失了“仅整合相关信息”的限定含义。",
+    "suggestion": "而是在最后查询特定盒子时，仅动态整合相关信息。",
+    "zh_reviewed": "这为**H2**提供了证据：在上下文处理过程中，Transformer语言模型并非逐步更新一组全局状态，而是在最后查询特定盒子时动态整合相关信息。"
+   }
+  ]
+ },
+ "S3.SS2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "模型并非跨词元累积地构建全局状态，但它们在结尾确实编码了被查询盒子的局部状态。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "由于查询只在结尾才变得明显，在自回归模型中，针对被查询盒子的增量跟踪不可能跨描述和操作上下文发生。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "一种可能性是，如果每个操作短语编码了受该操作影响的盒子的增量局部状态，那么来自最后一个与查询相关的操作的信息可以被提取出来。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，在附录E中，我们表明与操作相关的盒子的增量局部状态也无法从操作短语中解码。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "另一种可能性是在查询短语中跨层增量地跟踪局部状态。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们通过询问先验状态——被查询盒子在状态改变操作之前的状态——是否线性可分离来研究这种可能性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "局部操作越多，一个示例可以拥有的先验状态就越多。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们在下面概述具体的竞争假设和预期结果（也在附录F的图11中可视化）："
+   }
+  ]
+ },
+ "S3.I2.i1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• **H3**：模型在最后一个 token 上跨层顺序处理（局部）状态变化。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如果这是真的，人们会预期看到先前状态比最终状态在更早的层中可解码。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "较早先前状态的探针准确率应在较早的层中达到峰值。"
+   }
+  ]
+ },
+ "S3.I2.i2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "minor",
+    "category": [
+     "scope"
+    ],
+    "issue": "原句中“at the last token across layers”修饰的是“in parallel”，即并行处理发生的位置；译文将其移入否定顺序处理的从句，可能改变范围，暗示顺序处理仅在该位置被否定，而未明确并行处理的位置。",
+    "suggestion": "• **H4**：模型并非顺序处理状态变化，而是在层间于最后一个标记处并行处理。",
+    "zh_reviewed": "• **H4**：模型并非在层间于最后一个标记处顺序处理状态变化，而是并行处理。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如果这是真的，人们会看到先前状态在与最终状态大致相同的层上以较低的准确率被解码，因为先前状态与最终状态仅相隔 $n$ 次操作，并且部分共享标签。"
+   }
+  ]
+ },
+ "S3.SS2.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "major",
+    "category": [
+     "quantity"
+    ],
+    "issue": "原文 sets of 100 binary linear probes 表示每组包含100个探针，组数未说明；译文「100组二元线性探针」误将组数译为100。",
+    "suggestion": "我们使用最后一个标记处的隐藏状态（类似于局部状态探针）训练了多组二元线性探针（每组100个，随机概率约0.5），每组探针针对局部状态变化的不同时间步。",
+    "zh_reviewed": "我们使用最后一个标记处的隐藏状态（类似于局部状态探针）训练了100组二元线性探针（随机概率约0.5），每组探针针对局部状态变化的不同时间步。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "每个探针检测目标时间步时物体是否出现在查询框中。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们在此报告CodeLlama-13B的结果，Llama-3.1-70B的结果见附录F。"
+   }
+  ]
+ },
+ "S3.F2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图2：对CodeLlama-13B中先前状态的线性探针显示，该模型也没有在层间顺序构建状态，支持**H4**。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "每个子图显示具有固定数量局部操作的测试示例子集。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "子图中的每一列显示最终状态或先前状态的非平凡准确率。"
+   }
+  ]
+ },
+ "S3.SS2.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如图2所示，探针准确率呈现的模式类似于**H4**（图11右）：**语言模型不会在层中顺序处理状态改变操作。** 对于先前状态探针，早期层中的探针准确率没有一致性的提升；这一模式在不同局部操作数量的示例中普遍存在。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这与Li等人（2025）的发现形成对比，他们微调了玩具模型以在层中聚合状态置换。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们怀疑差异的主要原因是我们的目标实体标记出现在上下文中，并且我们的操作明确地按名称指代被操作的对象。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些明确的实体提及可能会抑制模型增量地表示状态变化，并且正如我们将在后续分析中看到的，这种非增量处理会导致各种失败。"
+   }
+  ]
+ },
+ "S3.F3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图3：CodeLlama-13B中具有一个`PUT`操作的`DESCRIPTION`和`PUT`电路（**a**）；它们的重叠（**b**）；以及使用LOO分析的跨组功能相似性（**c**）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "A组显示出最多的头部重叠，而D组共享最多的功能相似性。"
+   }
+  ]
+ },
+ "S4.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们在第3节的结果表明，语言模型不会随着描述的展开而在标记上逐步跟踪全局状态，也不会在层上跟踪局部状态。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "相反，它们似乎在查询变得明显时，并行地从先前的上下文中聚合相关信息。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "由于状态改变操作会改变初始世界状态，模型需要一种比例如复制所有出现在提及特定盒子ID的上下文中的对象更复杂的机制，才能成功完成任务。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "那么，当模型确实表现出行为上的成功时，它们实现状态改变操作的确切机制是什么？"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们接下来转向这个问题，并在第4.1节中研究`PUT`，在第4.2节中研究`REMOVE`。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们将`MOVE`在语义上视为其他两种操作的组合，并在第4.3节中讨论它。"
+   }
+  ]
+ },
+ "S4.SS1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如例2.1所示，`PUT`引入一个新对象并将其添加到现有盒子中。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了正确回答查询，模型必须同时预测`PUT`对象（手表）和`DESCRIPTION`对象（桃子）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们假设`PUT`遵循与`DESCRIPTION`（Prakash et al., 2024）中发现的类似的“回溯”机制（Prakash et al., 2025），迄今为止仅在无状态更改操作的情况下进行了研究。"
+   }
+  ]
+ },
+ "S4.F4": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图4：DCM的反事实设计（**a**）；CodeLlama-13B中的子空间激活修补结果（**b,c**）。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "英文“is on the query box”意为“位于查询箱上/在查询箱上”，中文“作用于查询箱”变成了对其施加作用，意思有偏差。",
+    "suggestion": "我们包含两个`PUT`短语，其中一个位于查询箱上。",
+    "zh_reviewed": "我们包含两个`PUT`短语，其中一个作用于查询箱。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在反事实中，所有`DESCRIPTION`和`PUT`短语分别在各自组内打乱，对象映射到一组新对象。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "当在最后一个标记位置（“the”）从反事实修补到原始句子时，来自中间层B组头的位置信息使模型预测**jade**（$o_{\\text{desc}}$）和**map**（$o_{\\text{put}}$）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在右侧，我们识别了`DESCRIPTION`（**b**）和`PUT`（**c**）电路中使用的子空间，并看到两组子空间都恢复了$o_{\\text{desc}}$和$o_{\\text{put}}$的大部分性能，表明两个电路之间使用了相似的子空间。"
+   }
+  ]
+ },
+ "S4.SS1.SSS1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "电路是由语言模型组件构成的端到端因果图（Olah et al., 2020; Elhage et al., 2021; Conmy et al., 2023b）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "通常，电路是通过对组件进行反事实干预（Balke and Pearl, 1994; Pearl, 2001）来发现的（Vig et al., 2020; Geiger et al., 2021），这些干预估计组件对模型行为的影响程度。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们利用路径修补（Goldowsky-Dill et al., 2023）依次识别出四组注意力头（命名为A/B/C/D，沿用Prakash et al. 2024），它们负责了模型行为的大部分（图3a）："
+   }
+  ]
+ },
+ "S4.SS1.SSS1.p1.2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在高层次上，我们使用原始输入运行一次前向传播，并在最后一个标记位置获得目标对象标记（$o$）的对数概率 $\\log p^{o}_{\\text{orig}}$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们使用反事实输入重复此过程，并缓存激活值。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然后，我们迭代地将每个注意力头的输出从干净激活修补为修补激活，获得 $\\log p^{o}_{\\text{patch}}$，并通过度量 $S^{o}=\\frac{\\log p^{o}_{\\text{patch}}-\\log p^{o}_{\\text{orig}}}{\\log p^{o}_{\\text{orig}}}$ 选择恢复性能的顶级头。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "具体来说，我们感兴趣的是负责 `DESCRIPTION` 的电路（Prakash 等人（2024）所表征的）与负责 `PUT` 的电路之间的相似性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为此，我们专注于具有一个 `DESCRIPTION` 对象（$o_{\\text{desc}}$）和一个 `PUT` 对象（$o_{\\text{put}}$）的示例。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们通过改变目标度量 $S^{o},o\\in\\{o_{\\text{desc}},o_{\\text{put}}\\}$ 来捕获负责每个对象的电路（例如，$S^{o_{\\text{put}}}$ 优先考虑提升 $o_{\\text{put}}$ 的 logit 的头，这是 `PUT` 电路行为；详见附录 G）。"
+   }
+  ]
+ },
+ "S4.I1.i1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• **A 组**：在后续层的最后一个 token 位置活跃；关注上下文中的目标对象，并提高目标对象 token 的 logit。"
+   }
+  ]
+ },
+ "S4.I1.i2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• **B组**：在中间层的最后一个token位置活跃；关注查询短语中的查询框ID token，并将目标token的位置信息（即顺序ID）发送给A组。"
+   }
+  ]
+ },
+ "S4.I1.i3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• **组 C**：在中间层的查询框 ID 处活跃；关注前一个框 ID 标记，并将位置信息发送给组 B。"
+   }
+  ]
+ },
+ "S4.I1.i4": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• **D组**：在早期层的上一个盒子ID标记处活跃；关注整个`DESCRIPTION`短语，并将目标对象位置发送给C组。"
+   }
+  ]
+ },
+ "S4.SS1.SSS1.Px1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在图3b中，我们展示了每组头在 `DESCRIPTION` 和 `PUT` 电路之间的重叠系数（$\\frac{|A\\cap B|}{\\min(|A|,|B|)}$）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们发现A组和B组存在非平凡的重叠，而C组和D组共享的重叠极少。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这表明，尽管这两种操作都将新实体绑定到箱子上，但它们使用了不同的头集合。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这一发现也适用于Gemma-2-2B（附录G.2.1）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "G.2.1）。"
+   }
+  ]
+ },
+ "S4.SS1.SSS1.Px1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "模型组件的重叠并不意味着功能相似，反之亦然。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了刻画两个电路中头组之间的功能相似性，我们遵循 Nikankin et al. (2025) 的方法，进行留一法（LOO）分析，每次将一组头从 `DESCRIPTION` 修补到 `PUT`（反之亦然）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们测量 top-$k$ 准确率：每个目标对象出现在 top-$k$ 可能 token 中的频率，其中 $k$ 是目标对象的数量（此处为两个）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "更多细节见附录 G.3、G.4。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如图 3c 所示，D 组表现出最高的 LOO 准确率。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这表明，尽管在头方面几乎没有重叠，且在不同的 token 位置活跃，但两个电路中 D 组的头具有相似的功能：将对象绑定到盒子 ID。"
+   }
+  ]
+ },
+ "S4.SS1.SSS2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "除了组相似性之外，先前工作的一个重要发现是，模型从B组向A组传递的是位置信息（顺序ID），而不是词元身份（Prakash et al., 2024; Prakash et al., 2025）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "使用基于需求的反事实掩蔽（DCM; Davies et al., 2023），我们设计了反事实示例（图4a），在激活修补（Vig et al., 2020; Geiger et al., 2021）下，揭示模型是否传递由`DESCRIPTION`或`PUT`电路使用的位置信息。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "除了修补最后一个词元的整个残差流之外，我们通过在隐藏残差流空间的PCA基上学习稀疏布尔掩码$\\mathbf{m}\\in[0,1]^{d}$来修补子空间，损失为$\\mathcal{L}=\\text{logit}^{o}_{\\text{patch}}+\\lambda\\sum\\mathbf{m}$，其中$d$是模型隐藏状态的维度，$\\lambda$是控制掩码稀疏性强度的超参数。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "详见附录G.5。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "至关重要的是，如果`DESCRIPTION`和`PUT`使用不同的子空间来发送信号，那么通过将第一个损失项从$\\text{logit}_{\\text{patch}}^{o_{\\text{desc}}}$切换到$\\text{logit}_{\\text{patch}}^{o_{\\text{put}}}$所识别出的子空间将揭示不同的修补行为。"
+   }
+  ]
+ },
+ "S4.SS1.SSS2.Px1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在图4b、c中，我们展示了使用完整激活（实线）以及针对 $o_{\\text{desc}}$ 或 $o_{\\text{put}}$ 优化的子空间（虚线）的修补结果。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "子空间忠实地恢复了完整激活的性能，如虚线和实线接近所示。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们还展示了 $o_{\\text{desc}}$（蓝色）和 $o_{\\text{put}}$（橙色）的干预准确率，它衡量每个对象的位置信息是否在给定层被编码。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们观察到中间层中实线蓝色和橙色线的干预准确率非零，表明这些层包含两个对象的位置信息。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这提出了一个问题：两个回路是否依赖不同的子空间来表示这些信息。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如果两个回路使用的子空间不同，我们预期 `DESCRIPTION` 子空间（图4b）能恢复 $o_{\\text{desc}}$ 的性能而不能恢复 $o_{\\text{put}}$ 的性能，而 `PUT` 子空间（图4c）则相反。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "相反，我们发现 `DESCRIPTION` 子空间恢复 $o_{\\text{put}}$ 的性能与恢复 $o_{\\text{desc}}$ 的性能一样好（图4b），同样地，`PUT` 子空间也能恢复 $o_{\\text{desc}}$ 的性能。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这表明两个回路依赖功能上等价的子空间来编码位置信息。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "子空间重叠（图5）支持这一发现。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们在附录G.6和G.7中分别展示了Gemma-2-2B和A组头部的类似结果。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "干预准确率对于 $o_{\\text{put}}$ 高于 $o_{\\text{desc}}$，这与Gur-Arieh等人（2025）的发现一致，即位置绑定在上下文开头和结尾最强。"
+   }
+  ]
+ },
+ "S4.F5": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图5：CodeLlama-13B中`DESCRIPTION`和`PUT`电路之间的子空间重叠在第15-25层附近较高，这些层使用了位置信息。"
+   }
+  ]
+ },
+ "S4.SS2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "`REMOVE` 操作从盒子中移除现有物体，使得模型不应预测这些物体（例如示例 2.1 中的罐子）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "分析 `REMOVE` 从根本上比 `PUT` 更具挑战性，因为它依赖于信号的缺失，而标准的可解释性工具（如激活修补）并非旨在捕捉这种缺失。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此外，`REMOVE` 的反事实通常会导致非法的状态变化（例如，无法移除不存在的物体）。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "term"
+    ],
+    "issue": "“non-trivial”未使用项目规定译法“平凡的”，译作“并非易事”意思正确但不符合术语表。",
+    "suggestion": "这些局限性使得在 `REMOVE` 上应用现有技术并非平凡之事。",
+    "zh_reviewed": "这些局限性使得在 `REMOVE` 上应用现有技术并非易事。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，我们设计了下面将要描述的几种替代方法。"
+   }
+  ]
+ },
+ "S4.SS2.SSS1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "由于被移除的对象不应被预测，`REMOVE` 的机制（在行为正确的模型中）必然涉及对被移除对象的 logit 抑制。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这种抑制的程度可能还取决于 `REMOVE` 是否应用于被查询的盒子。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了验证 `REMOVE` 机制的效果和范围，我们选择一组句子，其中包含一个单独的 `REMOVE` 短语，该短语针对查询盒子或无关盒子。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们获取被移除对象在最后一个 token 处的 logit 和排名（$\\text{logit}_{\\text{remove}}$），并将其与从排除 `REMOVE` 短语的上下文中获得的同一对象的 logit/排名（$\\text{logit}_{\\text{no-op}}$）进行比较。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然后我们绘制 logit 差值 $=\\text{logit}_{\\text{remove}}-\\text{logit}_{\\text{no-op}}$（以及相应的排名差值），按 `REMOVE` 是应用于**查询**盒子还是**无关**盒子进行分箱。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们还分析了**目标**对象（查询盒子中未被移除的对象）和上下文中**所有其他**对象（任何未被移除的对象，包括目标对象）的差值，以进行比较。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "示例和更多细节见附录 H.2。"
+   }
+  ]
+ },
+ "S4.SS2.SSS1.Px1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "也许令人惊讶的是，当上下文中存在 `REMOVE` 短语时，大多数对象的 logit 都会增加，甚至一些被移除的对象也是如此（图 6，顶部）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们将此解释为模型只是上调了上下文中提到的大多数对象标记的权重。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，被移除对象的增加幅度显著小于其余对象，其中查询 `REMOVE` 对被移除对象 logit 的增加最少（均值接近 0）。"
+   },
+   {
+    "verdict": "major",
+    "category": [
+     "other"
+    ],
+    "issue": "原文中 rank increasing 在此语境下指排名数值变大（即名次变差），从而抑制预测；译文“排名上升”在中文里通常表示名次变好，与后文“抑制预测”逻辑相反，容易造成误解。",
+    "suggestion": "这导致被移除对象相对于所有其他对象的排名数值变大（图 6，底部），从而有效地抑制了对被移除对象的预测。",
+    "zh_reviewed": "这导致被移除对象的排名相对于所有其他对象上升（图 6，底部），从而有效地抑制了对被移除对象的预测。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "有趣的是，无关的 `REMOVE` 仍然导致相对抑制（无关移除与所有其他对象相比显著），这表明一种启发式机制，即全局移除对象，而不是从提到的盒子中移除对象。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在少量示例设置和其他模型中也发现了类似的趋势（附录"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "H.3）。"
+   },
+   {
+    "verdict": "major",
+    "category": [
+     "quantity"
+    ],
+    "issue": "原文强调“每种类型在所有盒子中只有一个对象”，译文“所有盒子中只有一种相同类型的对象”容易被理解为只有一种类型，丢失了数量限定的核心含义，导致逻辑原因不清晰。",
+    "suggestion": "从行为上看，这种全局移除仍然产生正确的结果，因为 `REMOVE` 在数据集中的操作方式：在所有盒子中，同一类型的对象只有一个，因此在不考虑其所在盒子的情况下从世界中移除一个对象将始终是正确的。",
+    "zh_reviewed": "从行为上看，这种全局移除仍然产生正确的结果，因为 `REMOVE` 在数据集中的操作方式：所有盒子中只有一种相同类型的对象，因此在不考虑其所在盒子的情况下从世界中移除一个对象将始终是正确的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们在以下部分提供了更多全局移除的证据，并设计了补充评估示例，在行为上区分全局移除与局部移除。"
+   }
+  ]
+ },
+ "S4.F6": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图6：CodeLlama-13B中`REMOVE`对象的logit和排名差异表明，在`REMOVE`短语之后它们的排名上升，并且无论`REMOVE`是否针对查询的箱子，都能观察到这一现象。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**黑色**虚线是0基线（即无差异），**红色**虚线是所有其他对象的平均差异。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们使用了双尾Mann-Whitney检验。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "********：$p\\leq 0.0001$。"
+   }
+  ]
+ },
+ "S4.SS2.SSS2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对数几率和排名分析表明，模型（间接地）抑制了被移除对象的预测。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们假设模型通过给要移除的对象打上“移除标签”来实现这一点，该标签导致模型稍后抑制这些预测。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这在概念上类似于绑定回溯（Prakash et al., 2025），其中在残差流中形成了对象-盒子-状态的三元组。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们尝试通过设计一个三元探针来定位这样的标签，该探针对每个盒子-对象对的状态进行分类，类别为 $\\{\\texttt{does not exist, exists, removed}\\}$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们训练了700个（每个对应一个 $(\\text{object},\\text{box})$ 对）三元探针，条件是在所有描述和操作短语中的对象或盒子ID标记上。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "更多细节见附录 H.6，Llama-3.1-70B 的结果见 H.9。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "由于大多数标签是 `does not exist`，对所有探针取平均会导致平凡的高准确率。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "相反，在每个条件标记处，我们关注当前短语中盒子-对象对的探针准确率（**局部盒子-对象**，例如，示例2.1中 `REMOVE` 短语的 $(\\textit{jar},\\textit{2})$）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们还绘制了当前盒子下所有100个对象的平均准确率（**局部盒子**，例如，$(o,\\textit{2}),o\\in\\text{all objects}$）以及当前对象下所有7个盒子的平均准确率（**局部对象**，例如，$(\\textit{jar},\\textit{b}),b\\in\\text{all boxes}$），以检查表示中对象/盒子信息的存在性。"
+   }
+  ]
+ },
+ "S4.F7": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图7：CodeLlama-13B在**对象**和**盒子ID**标记上条件化的高**局部盒子-对象**探针准确率表明两者都包含“移除标签”信号（大约在第5-10层）。"
+   }
+  ]
+ },
+ "S4.SS2.SSS2.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在图7中，我们看到**局部盒-物体**准确率在物体和盒ID标记处都很高（尽管盒ID处更高），表明两者都可能是移除标记的来源。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在按操作类型分析物体探针的探针错误时（附录"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "H.7和图8，橙色线），我们发现大多数错误源于`MOVE`操作。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这是预期的，因为被移动物体的类别标签在盒ID被处理之前是不确定的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在附录H.13中，我们还确认移除标记不会随着操作的展开而跨短语边界累积，并且只在特定短语内发现。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "总体而言，结果表明移除标记信息同时存在于物体和盒ID标记处，但这一信息如何在最终整合中被使用仍有待观察。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们将在干预实验（第4.2.3节）中回到这个问题。"
+   }
+  ]
+ },
+ "S4.F8": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "major",
+    "category": [
+     "scope"
+    ],
+    "issue": "原文说探针准确率以 Object 和 Box ID 为条件、跨 phrase index 展示；译文把“短语索引”当作条件，把 Object 和 Box ID 说成“针对”的对象，条件关系颠倒。",
+    "suggestion": "图8：以对象和盒子ID为条件、跨短语索引的局部盒子-对象探针准确率（CodeLlama-13B）表明，“标签”信号在上下文中逐渐减弱，尤其是在盒子ID上。",
+    "zh_reviewed": "图8：以短语索引为条件、针对对象和盒子ID的局部盒子-对象探针准确率（CodeLlama-13B）表明，“标签”信号在上下文中逐渐减弱，尤其是在盒子ID上。"
+   }
+  ]
+ },
+ "S4.SS2.SSS2.Px1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图8展示了第5层中跨短语索引的局部盒子-物体准确率，该层的标签信息最为显著。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "以盒子ID为条件的探针准确率随着操作数量的增加而线性下降，表明更长的操作链会削弱标签。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "有趣的是，如果我们丢弃所有`MOVE`示例（因为它们在物体标记处的标签是非确定性的），物体探针几乎完美，而盒子ID探针的准确率显著下降。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们在附录H.8中对探针权重进行了额外的结构分析。"
+   }
+  ]
+ },
+ "S4.SS2.SSS3.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "探针分类仅提供相关性证据。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，人们可以使用探针来干预模型的行为（Ravfogel et al., 2020; Ravfogel et al., 2021）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了确认移除标签的因果相关性，我们对单个操作示例进行干预实验。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "具体来说，我们将操作短语中标记（对于相应探针，是对象和盒子ID标记）的隐藏状态逐层投影到探针权重的零空间中（有关详细信息，我们请读者参考Ravfogel et al. (2020)和我们的代码），然后展开模型生成。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "直觉是，通过擦除移除/存在标签的任何信号，我们可以改变模型关于对象的行为。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于具有一个`REMOVE`操作的示例，我们将**目标对象**成功视为原本被移除的对象现在被预测出来的情况。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们将**其他对象**成功视为来自`DESCRIPTION`短语中查询盒子的其他对象仍然被预测出来的情况。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于`PUT`，我们将**目标对象**成功视为原本放入的对象不再被预测出来的情况。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "成功的干预将在两个指标上都获得高分（**所有对象**）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于每个操作，我们使用100个模型最初做出正确预测的示例。"
+   }
+  ]
+ },
+ "S4.F9": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图9：单层干预结果（CodeLlama-13B）显示，消除移除标签（在 `REMOVE/MOVE-OUT` 中）和存在标签（在 `PUT/MOVE-IN` 中）表明，因果相关的移除标签位于对象标记中，而存在标签可以在盒子ID标记中找到。"
+   }
+  ]
+ },
+ "S4.SS2.SSS3.Px1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "令我们惊讶的是，在 box ID 处进行干预并不影响被移除的物体，而在物体 token 处进行干预在较早的层中取得了成功（图 9，Remove）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们还通过否定 remove 标签或增强 exist 标签，发现了负面的 box ID 干预结果，这与 Ravfogel et al. (2021) 类似（附录"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "H.11）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这进一步支持了我们的全局移除假设，即模型实际使用的移除信号是物体级别的 remove 标签（而非 box-物体级别的），从而导致全局移除。"
+   }
+  ]
+ },
+ "S4.SS2.SSS3.Px2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于 `PUT`（图 9，Put），在少数（早期）层中，干预在 box ID 处正确导致省略目标对象，同时保持原始对象完好（绿色和橙色线较高），在对象 token 处效果较弱。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这表明两个 token 都具有因果相关性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些信号很可能被图 3 中的 Group D 使用，因为它们将短语内对象绑定到 box ID。"
+   }
+  ]
+ },
+ "S4.SS3.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "`MOVE` 在语义上可以理解为 `PUT` 和 `REMOVE`。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "干预（图 9）显示了 `MOVE-IN`/`PUT` 与 `MOVE-OUT`/`REMOVE` 之间的相似行为：仅对移除标签预测了退化，而对存在标签没有预测退化。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，我们对 `MOVE` 的理解可以直接从三元探针结果推广：`MOVE` 相当于给对象添加一个移除标签，并给它移入的盒子添加一个存在标签。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如图 9（右下）所示，全局移除假设同样适用于 `MOVE-OUT`。"
+   }
+  ]
+ },
+ "S4.SS4.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的机制分析揭示了模型在行为上并不明显的局限性，即它们采用了全局移除机制。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为此，我们提出了原始盒子数据集中不存在的三种场景，以区分全局移除与局部移除，其中我们的全局移除假设预测了行为失败："
+   }
+  ]
+ },
+ "S4.I2.i1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• **无操作移除：** 药丸在盒子 0 中，…… 帽子在盒子 3 中，…… 将帽子从盒子 0 中移除。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "盒子 3 包含"
+   }
+  ]
+ },
+ "S4.I2.i2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• **多个盒子中的共享标签对象：** 药丸在盒子0中，……罐子和药丸在盒子3中，……从盒子0中移除药丸。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "盒子3包含"
+   }
+  ]
+ },
+ "S4.I2.i3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• **重新引入被移除的物体：** 苹果在盒子0中，桃子在盒子1中。…… 移除盒子1中的桃子。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "把桃子放进盒子0中。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "盒子0包含"
+   }
+  ]
+ },
+ "S4.SS4.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们为每个场景创建300个句子，其中查询箱非空，并从CodeLlama-13B和Llama-3.1-70B进行贪婪解码。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们报告**召回率**、**精确率**和退化率（**DR**，即对象被全局移除从而导致不良行为的比率）。"
+   }
+  ]
+ },
+ "S4.T1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "表1：高退化率（**DR**）和最佳单层干预成功率（**IS**）证实了我们全局移除假设所预测的失败模式及修复方法。"
+   }
+  ]
+ },
+ "S4.SS4.SSS0.Px1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "表1显示，所有三种场景都导致高DR，尤其是对于13B模型，这证实了我们从机制分析中得出的行为预测。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "聚合标签是一种脆弱的机制：它可能因为长上下文中标签强度减弱（图8）、忽略操作顺序（重新引入）以及绑定失败（无操作、共享标签）而失效。"
+   }
+  ]
+ },
+ "S4.SS4.SSS0.Px2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们提供了一项概念验证研究，其中机制性干预为这一失败提供了部分解决方案。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "具体而言，对于上述每种场景，我们测试了消除全局移除标签是否能恢复对对象的预测。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为此，我们在发生退化的示例中，对移除短语的对象标记执行单层干预。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们在表1的最后一列（IS）中报告了最佳单层干预结果。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们看到前两种情况下的干预成功率很高，这表明全局移除机制是这些失败模式的主要原因。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "干预在重新引入场景下的成功率较低，这可能是因为重新引入要求模型在整合多个操作时正确排序，而仅靠对移除标签的干预无法解决这一问题。"
+   }
+  ]
+ },
+ "S5.SS0.SSS0.Px1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "语言模型不会增量式地构建世界状态（第3节）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "尽管如此，累积式状态跟踪仍然具有吸引力，因为它能够以常数时间访问任何盒子状态。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "由于实体跟踪是复杂推理的构建模块，文献中识别出的架构限制是一个主要瓶颈（Deng et al., 2023; Merrill et al., 2024; Li et al., 2024a; Li et al., 2025; Bavandpour et al., 2025）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这引发了有趣的问题：在当前架构限制下，以实用规模（而非极限情况）实现全局跟踪的最有效方式是什么？"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "跟踪是否应该卸载到外部机制？"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此外，当前模型倾向于只计算与目标相关的变量（Li et al., 2024b），这可能进一步导致在查询未指定时世界状态未被完全跟踪。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "一个可能的解决方案是鼓励模型隐式地计算世界状态（Zelikman et al., 2024）。"
+   }
+  ]
+ },
+ "S5.SS0.SSS0.Px1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**竞争机制与思维链。** 我们在不同上下文中的三元探针准确率（第4.2.2节）凸显了两个有趣的趋势。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "首先，更好的因果信号存在于盒子ID标记处，但会随上下文线性衰减。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "相比之下，对象标记处的退化信号（被语言模型因果地用作移除标签）在整个上下文中保持相对稳定。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这引出了进一步的问题：对退化机制的偏好从何而来？"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们能否鼓励模型偏好更稳健的机制？"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "关于标签信号衰减的这一观察也为思维链为何在行为上改善实体追踪提供了机制性解释：它将追踪分解为更短的上下文，模型在这些上下文中需要维持标签信号。"
+   }
+  ]
+ },
+ "S5.SS0.SSS0.Px1.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "major",
+    "category": [
+     "omission"
+    ],
+    "issue": "译文完全缺失。",
+    "suggestion": "**`REMOVE` 的完整机制是什么？** 我们提出 `REMOVE` 通过使用 remove 标签来起作用，这些标签随后用于查询短语中。",
+    "zh_reviewed": ""
+   },
+   {
+    "verdict": "major",
+    "category": [
+     "omission"
+    ],
+    "issue": "译文完全缺失。",
+    "suggestion": "我们最初试图定位更具体回路的尝试得到了负面结果（附录",
+    "zh_reviewed": ""
+   },
+   {
+    "verdict": "major",
+    "category": [
+     "omission"
+    ],
+    "issue": "译文完全缺失。",
+    "suggestion": "H.14），表明 `REMOVE` 与先前已知的机制不同。",
+    "zh_reviewed": ""
+   },
+   {
+    "verdict": "major",
+    "category": [
+     "omission"
+    ],
+    "issue": "译文完全缺失。",
+    "suggestion": "跨模型的排名差异分析（附录",
+    "zh_reviewed": ""
+   },
+   {
+    "verdict": "major",
+    "category": [
+     "omission"
+    ],
+    "issue": "译文完全缺失。",
+    "suggestion": "H.3）表明存在特定于 box ID 的机制，但这些机制太弱，无法克服退化的全局移除机制。",
+    "zh_reviewed": ""
+   },
+   {
+    "verdict": "major",
+    "category": [
+     "omission"
+    ],
+    "issue": "译文完全缺失。",
+    "suggestion": "我们将此留给未来工作。",
+    "zh_reviewed": ""
+   },
+   {
+    "verdict": "major",
+    "category": [
+     "omission"
+    ],
+    "issue": "译文完全缺失。",
+    "suggestion": "更广泛地说，我们对 `REMOVE` 的研究有助于从机制上理解语言模型如何解除实体绑定——这是先前工作的逆过程（Wu et al., 2025a）。",
+    "zh_reviewed": ""
+   },
+   {
+    "verdict": "major",
+    "category": [
+     "omission"
+    ],
+    "issue": "译文完全缺失。",
+    "suggestion": "这一现象也反映了心理学中的“白熊问题”{fn4}，这可能为未来工作提供启发。",
+    "zh_reviewed": ""
+   }
+  ]
+ },
+ "fn4": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "当试图避免思考“白熊”时，这个问题反而使人更多地想到它（Wegner and Schneider, 2003）。"
+   }
+  ]
+ },
+ "S6.SS0.SSS0.Px1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "线性探针研究使用在模型隐藏状态上训练的线性分类器来识别感兴趣的信号（Gupta et al., 2015; Belinkov, 2022），这些信号可用于干预实验，以建立信号与模型行为之间的因果关系（Giulianelli et al., 2018; Ravfogel et al., 2020; Ravfogel et al., 2021; Elazar et al., 2021）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Li et al. (2022) 表明，在合成奥赛罗游戏状态上训练的模型表示可通过探针解码的世界状态。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "相比之下，Mamidanna et al. (2025) 发现语言模型在解决多步数学问题时不会计算中间答案。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "与潜在学习相关的工作（Lampinen et al., 2025）表明，预训练并不鼓励学习与当前任务不直接相关的信息，这可能解释了我们的模型倾向于根据需要聚合相关上下文来计算所查询的盒子状态，而不是逐步跟踪完整的世界状态。"
+   }
+  ]
+ },
+ "S6.SS0.SSS0.Px2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "准确地在上下文中表示实体是理解和推理等重要技能的关键前提（Heim, 2002; Nieuwland and Van Berkum, 2006a; Kamp et al., 2010），可能潜在地导致语言模型难以追踪长上下文依赖（Merrill and Sabharwal, 2023; Bhattamishra et al., 2020; Deletang et al., 2023; Strobl et al., 2024）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Kim and Schuster (2023) 在初步调查（Li et al., 2021; Toshniwal et al., 2022; Li et al., 2022）的启发下，提出了盒子与物体格式的受控实体追踪任务，Kim et al. (2024) 进一步发现代码预训练是使语言模型展现出这种能力的关键。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Feng and Steinhardt (2023); Dai et al. (2024); Feng et al. (2024) 发现语言模型通常通过在实体组之间创建顺序 ID（残差流中的低秩信号）来解决实体绑定任务。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然后，这个 ID 被用于通过注意力和复制（Prakash et al., 2024）（“回看”机制；Prakash et al. 2025）来检索答案标记。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "与我们的工作不同，这些研究没有调查涉及状态改变操作的机制。"
+   }
+  ]
+ },
+ "S6.SS0.SSS0.Px3.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因果干预方法和工具箱的发展为回答语言模型中的“如何”和“为什么”问题开辟了新途径（Meng et al., 2022; Nanda and Bloom, 2022; Wang et al., 2022; Fiotto-Kaufman et al., 2024）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Meng et al. (2022); Wang et al. (2022); Prakash et al. (2024); Prakash et al. (2025) 使用激活修补和路径修补，结合精心构建的反事实句子，来构建并验证语言模型用于解决特定任务的因果模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "电路发现方法利用近似归因算法来识别语言模型中能够很好地执行任务的连接节点和边的子集（Conmy et al., 2023a; Nanda, 2023; Hanna et al., 2024; Hsu et al., 2025）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "由于因果变量可能与Transformer模型的计算单元（例如注意力头；Geiger et al. 2024）不一致，许多研究使用子空间来识别残差流中的通信信号（Prakash et al., 2025; Merullo et al., 2024; Franco and Crovella, 2025; Wu et al., 2025b）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的工作利用logit分析和因果修补来识别实体追踪机制。"
+   }
+  ]
+ },
+ "S7.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "实体追踪是许多推理问题所需的一项基本技能。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们利用具有多种状态改变操作的自然实体追踪进行的调查，为理解Transformer语言模型贡献了若干发现。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们发现模型并非跨token或跨层逐步追踪状态，而是在最终的查询短语处动态聚合先前上下文中的信息。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "机制性调查揭示，`PUT`类似于先前工作中发现的实体绑定回路，而`REMOVE`则利用对象token中的移除标签信息来抑制被移除的对象。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，因果相关的移除标签出现在对象token上这一事实意味着移除是全局性的，这预测了现有行为测试中未显现的几种退化行为。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "基于这一预测，我们设计了新的诊断示例，以揭示所预测的退化现象。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的工作展示了行为分析和机制分析如何能够富有成效地相互作用。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "行为测试可以为机制假设提供信息，而机制分析可以通过预测现有评估中缺失的失败模式来帮助构建更强的行为测试。"
+   }
+  ]
+ },
+ "Sx2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "本文介绍的工作旨在推进语言模型的可解释性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "由于本工作所研究的实体追踪能力是许多复杂推理任务的核心，如果本工作有助于开发出能够进行更强大推理的模型，则可能产生二阶影响。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "原文 immediate 意为“立即的/当下的”，译文将其译为“直接的”，与后文 directly 的译法重复，造成语义略有偏移。",
+    "suggestion": "然而，我们预计本文所呈现的工作不会直接带来任何即刻的伦理或社会影响，因为该工作并不直接涉及应用用途。",
+    "zh_reviewed": "然而，我们预计本文所呈现的工作不会直接产生任何直接的伦理或社会影响，因为该工作并不直接涉及应用用途。"
+   }
+  ]
+ },
+ "A6.F11": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "minor",
+    "category": [
+     "term"
+    ],
+    "issue": "术语“probing”项目规定译为“线性探针”，此处译作“探针实验”，未采用规定译法但意思可理解。",
+    "suggestion": "图11：假设的线性探针实验证据，在具有两个局部操作（三种不同状态）的示例数据点中，支持**H3**（左）和**H4**（右）。",
+    "zh_reviewed": "图11：假设的探针实验证据，在具有两个局部操作（三种不同状态）的示例数据点中，支持**H3**（左）和**H4**（右）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如果模型通过层**H3**顺序处理状态，我们预期较早的先验状态探针在层中较早处具有更高的准确率。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "每列显示最终状态或先验状态的探针准确率。"
+   }
+  ]
+ }
+}

@@ -1,0 +1,2734 @@
+{
+ "__meta__": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "models": {
+   "reviewer": "deepseek-v4-pro"
+  },
+  "translator": "deepseek-v4-pro（关思考）",
+  "independence": "same-model",
+  "usage": {
+   "calls": 83,
+   "prompt_tokens": 75861,
+   "completion_tokens": 82912,
+   "seconds": 1016.8,
+   "cached_tokens": 49664
+  }
+ },
+ "abs.p1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "基础模型的前提是，序列预测可以揭示更深层的领域理解，就像开普勒对行星运动的预测后来导致了牛顿力学的发现一样。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，评估这些模型是否真正捕捉到更深层的结构仍然是一个挑战。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们开发了一种评估基础模型的技术，该技术考察它们如何适应从某个假设的世界模型生成的合成数据集。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的技术测量基础模型的归纳偏置是否与世界模型一致，因此我们将其称为归纳偏置探针。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在多个领域中，我们发现基础模型可以在其训练任务上表现出色，但在适应新任务时却未能发展出对底层世界模型的归纳偏置。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们特别发现，在轨道轨迹上训练的基础模型在适应新的物理任务时，始终未能应用牛顿力学。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "agent"
+    ],
+    "issue": "原句主语是模型，译文让“行为”成为发展出启发式的主语，施受关系略有变化。",
+    "suggestion": "进一步的分析表明，这些模型表现得好像发展出了无法泛化的任务特定启发式方法。",
+    "zh_reviewed": "进一步的分析表明，这些模型的行为似乎发展出了无法泛化的任务特定启发式方法。"
+   }
+  ]
+ },
+ "S1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "基础模型的前景依赖于一个核心假设：学习预测序列可以揭示更深层的真理，或者乐观地说，甚至是一个世界模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这个想法在一种意义上是新的，在另一种意义上却是旧的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "数百年前，像开普勒这样的天文学家发现了能够精确预测夜空中行星未来位置的几何模式。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "牛顿后来在这一进展的基础上发展出了牛顿力学，这些基本定律不仅能够预测行星的运动，还能解释整个宇宙中的物理性质（Koestler, 1959; Gingerich, 2004）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这条道路——从预测序列到理解其背后的更深层机制——并非物理学所独有。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在生物学中，动物育种者早在他们的预测性见解启发孟德尔发展出遗传学理论之前，就注意到了后代性状中的模式。"
+   }
+  ]
+ },
+ "S1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们如何知道基础模型是否也实现了从做出准确预测到发展出可靠世界模型的飞跃？"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "本文提出了一个回答这一问题的框架。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "具体来说，我们创建了一个程序，当给定一个基础模型和一个世界模型时，该程序测试基础模型是否已经学习了那个世界模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们将这种技术称为归纳偏置探针，它建立在一个简单的见解之上：基础模型的隐式世界模型通过它如何从少量信息中外推而揭示出来。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这受到科学家使用世界模型的方式的启发——即从少量数据中做出推断。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "类似地，基础模型的归纳偏置揭示了它的世界模型。"
+   }
+  ]
+ },
+ "S1.F1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图1：每对面板展示了太阳系中一颗行星的轨迹及其引力矢量，比较了真实的牛顿力（左）与来自一个Transformer基础模型的预测力（右），该模型在轨道序列上预训练并微调以预测力。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "虽然该模型在生成行星轨迹的准确预测方面表现出色，但它并不具有朝向真实牛顿力学的归纳偏置；此外，其力的预测恢复出一个无意义的力定律，正如符号回归所揭示的那样。"
+   }
+  ]
+ },
+ "S1.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们首先用一个物理学的例子来演示这一程序。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "具体来说，我们的目标是复现开普勒和牛顿的实验，不过将物理学家替换为轨道力学的基础模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "与开普勒非常相似，该模型能够预测轨道轨迹，即使对于它未曾见过的太阳系也是如此。"
+   }
+  ]
+ },
+ "S1.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "原句是假设性提问（若归纳偏置朝向牛顿力学意味着什么），译文表述更像在陈述该偏置已经朝向牛顿力学，丢失了假设语气。",
+    "suggestion": "如果这个基础模型的归纳偏置朝向牛顿力学，那意味着什么？",
+    "zh_reviewed": "这个基础模型的归纳偏置朝向牛顿力学，这意味着什么？"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们展示一种具体的检验方法：我们在一个小数据集上微调基础模型，其中输出正是轨迹上每一点的力向量（牛顿力学的基石）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如果基础模型的世界模型朝向牛顿力学，它应该对这些力向量有归纳偏置。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "相比之下，图1显示该模型产生的力向量很差。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "更极端的是，当我们在许多太阳系上以更大规模进行这一操作时，它用于泛化的引力定律与牛顿定律毫无相似之处（表1）。"
+   }
+  ]
+ },
+ "S1.p5.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们进一步将归纳偏置探针应用于其他具有已知世界模型的领域：格问题和奥赛罗游戏（Liu et al., 2022; Hazineh et al., 2023; Nanda et al., 2023b; Vafa et al., 2024）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在这些领域中，我们发现神经序列模型对给定世界模型的归纳偏置较弱。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们还强调一个实际意义：在归纳偏置探针上表现更好的模型，在微调以执行依赖于底层世界模型的新任务时，性能也更好。"
+   }
+  ]
+ },
+ "S1.p6.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "综合来看，我们的结果为理解基础模型的缺陷提供了一个方向：如果模型的归纳偏置不朝向已知的现实模型，那么它朝向什么？"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们通过检验这些基础模型是否具有替代的归纳偏置来探索这个问题。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的分析揭示，这些模型反而表现得好像它们发展出了无法泛化的任务特定启发式。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于物理学，基础模型不是学习一个普适的物理定律，而是根据所应用的任务应用不同的、看似荒谬的定律。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在格问题和奥赛罗中，模型具有朝向合法下一个标记集合（例如棋盘的合法下一步走法）的归纳偏置，而不是朝向世界模型本身。"
+   }
+  ]
+ },
+ "S2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在本节中，我们阐述用于评估基础模型是否已学习到所假设的世界模型的框架。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们开发了一种归纳偏置探针，这是一种评估基础模型在适应新任务时行为的程序。"
+   }
+  ]
+ },
+ "S2.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**数据与任务。** 令 $x\\in\\mathcal{X}$ 表示输入，$y\\in\\mathcal{Y}$ 表示某个输出。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "数据集 $D=\\{(x_{1},y_{1}),\\ldots,(x_{n},y_{n})\\}$ 是 $n$ 个输入-输出对的集合。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "任务 $f\\colon\\mathcal{X}\\to\\mathcal{Y}$ 是输入与输出之间的映射。"
+   }
+  ]
+ },
+ "S2.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "基础模型：基础模型是一种学习算法，当给定数据集 $D$ 时，返回一个预测函数 $\\widehat{m}_{D}\\colon\\mathcal{X}\\to\\mathcal{Y}$，该函数将输入与输出关联起来。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "基础模型可以采取多种形式；例如，$\\widehat{m}_{D}$ 可以是在数据集 $D$ 上微调的某个预训练模型，也可以是获得上下文内 $D$ 的大语言模型。"
+   }
+  ]
+ },
+ "S2.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**世界模型：** 一个假设的世界模型由状态空间 $\\Phi$ 和一个映射 $\\phi\\colon\\mathcal{X}\\to\\Phi$ 概括，该映射将每个输入与某个状态 $\\phi(x)\\in\\Phi$ 关联起来。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如果对于每个 $(x,y)\\in D$，输出是状态的确定性函数，即对于某个 $g:\\Phi\\rightarrow\\cal{Y}$ 有 $y=g(\\phi(x))$，则数据集 $D$ 与该世界模型一致。"
+   }
+  ]
+ },
+ "S2.F2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图2：归纳偏置探针测量基础模型是否对给定的世界模型具有归纳偏置。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "该探针涉及反复将基础模型拟合到小型合成数据集，并将其学习到的函数与给定世界模型中的函数进行比较。"
+   }
+  ]
+ },
+ "S2.SS1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在定义基础模型恢复世界模型意味着什么时存在一个挑战：基础模型和世界模型在不同的空间中运作。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "基础模型在给定数据时输出一个新的预测模型，而世界模型描述数据中隐含的状态结构。"
+   }
+  ]
+ },
+ "S2.SS1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "minor",
+    "category": [
+     "term"
+    ],
+    "issue": "“mechanistically”在此指从机制/机理层面进行探测，译作“机械地”容易被理解为机械式、自动地，不够准确。",
+    "suggestion": "一种方法是从机制上探测基础模型，例如将其权重层面的表示与世界模型中假设的状态进行比较。",
+    "zh_reviewed": "一种方法是机械地探测基础模型，例如将其权重层面的表示与世界模型中假设的状态进行比较。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，理解大型模型的内部机制具有挑战性（Olah, 2022），而且即便如此也可能无法反映模型在新数据上的实际行为（Casper et al., 2023）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "另一种方法是静态地研究模型在单一任务上的行为（Toshniwal et al., 2022; Vafa et al., 2024），但这并未捕捉到基础模型在现实世界中的使用方式：作为新任务的工具。"
+   }
+  ]
+ },
+ "S2.SS1.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们采取一种不同的方法，其动机来自无免费午餐定理（Wolpert, 1996）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "粗略地说，无免费午餐定理表明，如果任何函数都可能生成其应用的数据，那么没有一种学习算法在平均意义上能优于另一种算法。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在数据有限的情况下，学习算法必须外推到未见过的输入，而如果任何底层函数都是可能的，那么任何这样的外推都必然同样好或同样差。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这意味着每种学习算法都更适合某些可能的函数集合——即那些它在从有限数据外推时倾向于学习的函数。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "学习算法倾向于学习的函数代表了它的归纳偏置。"
+   }
+  ]
+ },
+ "S2.SS1.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "归纳偏置的概念为基座模型与世界模型之间提供了联系。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "世界模型是对从输入到输出的可能函数的一种限制：只有那些遵循其状态结构的函数才是可能的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，一个已经学习了所假设的世界模型的基座模型，应该具有偏向于遵循该世界模型状态结构的函数的归纳偏置。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "quantity"
+    ],
+    "issue": "英文为复数 sequences，中译文加了“一个”使之变为单数，可能缩小范围。",
+    "suggestion": "例如，物理学家可能在行星轨道序列上训练一个基座模型。",
+    "zh_reviewed": "例如，物理学家可能在一个行星轨道序列上训练一个基座模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "由于行星轨道遵循牛顿力学，他们可能希望该模型具有偏向于牛顿力学函数的归纳偏置（例如，预测两个行星之间的力矢量）。"
+   }
+  ]
+ },
+ "S2.SS1.p5.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们开发了一种归纳偏置探针，用于检验基础模型的归纳偏置是否与所假设的世界模型的状态结构相匹配。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "该归纳偏置探针将基础模型反复应用于与世界模型一致的合成数据集，并共同研究外推函数（图2）。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "原文“there is no one accurate function”强调没有唯一准确的函数，译文“不存在一个准确的函数”容易被理解为不存在任何准确的函数。",
+    "suggestion": "在每次这样的模拟中，我们不计算所得外推的“准确度”，因为不存在唯一准确的函数；真实世界模型可能允许多种外推方式。",
+    "zh_reviewed": "在每次这样的模拟中，我们不计算所得外推的“准确度”，因为不存在一个准确的函数；真实世界模型可能允许多种外推方式。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "相反，我们评估这些外推是否类似于真实世界模型所允许的外推。"
+   }
+  ]
+ },
+ "S2.F3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图3：当给定的世界模型具有有限状态空间时，归纳偏置探针的示意图。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "每一行表示一个函数，每一列表示一个输入 $x_{i}$，属于同一状态的输入被分组在一起。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "阴影说明了每个函数在相应输入处的值。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如果基础模型学习到划分状态的函数，则其 R-IB 较低（中图）；如果基础模型学习到合并状态的函数，则其 D-IB 较低（右图）。"
+   }
+  ]
+ },
+ "S2.SS2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了给归纳偏置探针提供更多直观理解，我们首先考虑二元输出 $\\mathcal{Y}=\\{0,1\\}$ 以及具有有限状态空间 $\\Phi$ 的假定世界模型的特殊情况。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们在这一设定中引入的两个度量是下一节定义的一般归纳偏置探针的特殊情形。"
+   }
+  ]
+ },
+ "S2.SS2.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "归纳偏置探针评估基础模型的归纳偏置是否朝向一个假定的世界模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在高层次上，该探针反复将基础模型应用于与假定世界模型一致的合成数据集，并每次评估其在留出输入上的预测。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如果基础模型的归纳偏置朝向假定世界模型，那么其外推应具有两个性质。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "首先，基础模型的预测应尊重状态：如果两个输入 $x,x^{\\prime}$ 映射到相同状态（$\\phi(x)=\\phi(x^{\\prime})$），那么当基础模型应用于合成数据集时，应具有相同的预测输出（$\\widehat{m}_{D}(x)=\\widehat{m}_{D}(x^{\\prime})$）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如果不是，则意味着基础模型拟合了不属于世界模型的函数。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "其次，基础模型的预测应区分状态：如果两个输入 $x,x^{\\prime}$ 映射到不同状态（$\\phi(x)\\neq\\phi(x^{\\prime})$），那么基础模型在合成数据集上通常应具有不同的预测输出（$\\widehat{m}_{D}(x)\\neq\\widehat{m}_{D}(x^{\\prime})$）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如果不是，那么基础模型没有拟合完全覆盖世界模型允许函数的函数。"
+   }
+  ]
+ },
+ "S2.SS2.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些性质可以用两个指标来衡量。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "令 $1(y,y^{\\prime})$ 表示 $y=y^{\\prime}$ 是否成立的指示函数。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们指定一个在一致数据集上的采样分布 $D\\sim P_{D}$，以及一个在输入上的采样分布 $(X_{i},X_{j})\\sim P_{X}\\times P_{X}$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "基础模型对尊重状态的归纳偏置（R-IB）为"
+   }
+  ]
+ },
+ "S2.SS2.p3.2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "R-IB 衡量基础模型在假定世界模型下对同一状态输入的推断之间的相似性：R-IB 越高，表明对相同状态的预测越相似。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "基础模型对区分状态的归纳偏置（D-IB）为"
+   }
+  ]
+ },
+ "S2.SS2.p3.3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "D-IB 衡量的是，在假设的世界模型下属于不同状态的输入，是否仍然得到基础模型一致相似的预测：D-IB 越高，表明对不同状态的预测越不相似。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图 3 展示了这两个指标。"
+   }
+  ]
+ },
+ "S2.SS2.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "“contrasting” 意为“形成对比/不同”，译文“互补的视角”带有互补含义，与原意略有偏差。",
+    "suggestion": "综合来看，R-IB 和 D-IB 为基座模型隐式世界模型提供了形成对比的视角，类似于二分类中的精确率和召回率。",
+    "zh_reviewed": "综合来看，R-IB 和 D-IB 为基座模型隐式世界模型提供了互补的视角，类似于二分类中的精确率和召回率。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例如，虽然基座模型可以通过对每个输入做出相同预测来平凡地获得高 R-IB，但其 D-IB 会受损。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "需要同时使用这两个指标来对比基座模型的归纳偏置与所假设的世界模型。"
+   }
+  ]
+ },
+ "S2.SS2.p5.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在这个意义上，归纳偏置探针捕捉了标准探针测试（Nanda et al., 2023b）未能捕捉到的基础模型行为，标准探针测试衡量的是一个简单预测模型（例如线性模型）从基础模型的中间表示预测状态的能力。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "相比之下，归纳偏置探针直接分析基础模型在适应来自假设世界模型的合成任务时的行为。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "当存在许多不同的状态映射可以从基础模型的内部表示中预测时，标准探针无法区分模型实际使用的是哪一个。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此外，标准探针对所选世界模型如何机械地表示状态很敏感。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例如，Nanda et al. (2023b) 发现，奥赛罗棋盘的不同表示（一种基于标准棋盘，另一种根据轮到谁走棋而翻转棋盘）会导致标准探针得出不同的结果。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "相比之下，由于归纳偏置探针仅依赖于状态相等性，它们对等价表示不敏感。"
+   }
+  ]
+ },
+ "S2.SS2.p6.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了实现归纳偏置探针，实践者必须提供一个在一致数据集上的采样分布 $P_{D}$ 和一个在输入上的采样分布 $P_{X}$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在我们有限状态空间和二元输出的实验中（见第4节），我们通过为每个唯一状态均匀随机地分配输出 $0$ 或 $1$ 来采样一致数据集。"
+   }
+  ]
+ },
+ "S2.SS3.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们现在描述允许一般输出、状态空间和任务的归纳偏置探针。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例如，对于两颗行星相互绕转的序列，状态可以对应于它们在牛顿力学下的相对位置、相对速度以及每颗行星的质量。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们进一步引入状态上的一组可容许函数 $\\mathcal{G}$，这些函数在世界模型下支配状态空间与输出之间的关系，其中每个 $g\\in\\mathcal{G}\\colon\\Phi\\to\\mathcal{Y}$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例如，在某些设置中，我们可能期望输出随状态平滑变化，在这种情况下，$\\mathcal{G}$ 可以是 $K$-Lipschitz 函数的集合。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "现在，如果对于每个 $(x,y)\\in D$，存在某个 $g\\in\\mathcal{G}$ 使得 $y=g(\\phi(x))$，则数据集与世界模型一致。"
+   }
+  ]
+ },
+ "S2.SS3.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "给定一致数据集上的采样分布 $P_{D}$ 和输入上的采样分布 $P_{X}$，归纳偏置探针反复将基础模型应用于采样得到的数据集，然后在留出的输入上评估其预测。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "它衡量的是，在众多合成数据集中，基础模型对一个输入的预测输出在多大程度上可以从对另一个输入的预测输出中预测出来。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "其直觉不变：处于“相似”状态的输入应比处于“不同”状态的输入更能相互预测。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们接下来将这一性质形式化。"
+   }
+  ]
+ },
+ "S2.SS3.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**外推可预测性。** 我们进一步指定一个预测器族 $\\mathcal{H}$，其中 $h\\in\\mathcal{H}$ 满足 $h:\\mathcal{Y}\\to\\mathcal{Y}$，以及一个输出上的损失函数 $\\ell:\\mathcal{Y}\\times\\mathcal{Y}\\to\\mathbb{R}_{+}$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们将两个输入之间的外推可预测性定义为"
+   }
+  ]
+ },
+ "S2.SS3.p3.2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "它衡量的是基础模型对一个输入的预测输出在多大程度上可以从另一个输入预测出来。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "外推可预测性的值越高，表明可预测性水平越高。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如果基础模型的行为表现得像是基于所假设的世界模型进行外推，那么对于状态更相似的输入，外推可预测性应该更大。"
+   }
+  ]
+ },
+ "S2.SS3.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**Oracle 基础模型。** 作为校准，我们为“oracle”基础模型计算外推可预测性，该模型可以访问真实状态空间 $\\Phi$ 和可容许函数 $\\mathcal{G}$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "当应用于一致数据集 $D$ 时，oracle 基础模型返回"
+   }
+  ]
+ },
+ "S2.SS3.p4.2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（这里使用的损失函数不必与用于计算外推可预测性的损失函数相同。）"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "预言机外推可预测性为"
+   }
+  ]
+ },
+ "S2.SS3.p5.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**对世界模型的归纳偏置。** 归纳偏置探针将基础模型的外推可预测性与预言机的外推可预测性进行比较。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "具体而言，基础模型对世界模型的归纳偏置定义为，对于任意 $0\\leq\\underline{s}\\leq\\overline{s}$，"
+   }
+  ]
+ },
+ "S2.SS3.p5.2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们在一个值网格 $0=s_{0}<s_{1}<\\dots<s_{m}$ 上计算这一量，可视化 $\\text{IB}(\\underline{s},\\overline{s})$ 在网格上的变化。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "基础模型对世界模型的归纳偏置可以像校准曲线一样解释：如果基础模型在应用于许多小数据集时表现得像预言机，那么 $\\text{IB}(\\underline{s},\\overline{s})$ 在此可视化中应位于45度线上（如图4所示）。"
+   }
+  ]
+ },
+ "S2.SS3.p6.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "R-IB 和 D-IB 是基础模型对世界模型的归纳偏置（公式 6）的特例。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "考虑输出为二元、$\\Phi$ 有限且 $\\mathcal{G}$ 为所有映射的集合的情形。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "只要 $P_{D}$ 对所有可能的一致数据集赋予正概率，且 $\\mathcal{H}$ 仅限于恒等函数，那么预言机的外推可预测性只有两个可能值，分别出现在 $\\phi(x_{i})=\\phi(x_{j})$ 和 $\\phi(x_{i})\\neq\\phi(x_{j})$ 时。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，基础模型对世界模型的归纳偏置在前一种情形下退化为 R-IB（公式 1），在后一种情形下退化为 D-IB（相差一个符号变化）（公式 2）。"
+   }
+  ]
+ },
+ "S2.F4": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图4：在轨道轨迹上预训练的Transformer的归纳偏置探测性能（公式6）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "所示数值为归纳偏置度量的绝对值。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "hedge"
+    ],
+    "issue": "译文将“would indicate”译为“表示”，丢失了原文的假设/条件语气，变成了直接陈述。",
+    "suggestion": "45度线将表示对基于牛顿状态向量进行外推的预言机的完美归纳偏置。",
+    "zh_reviewed": "45度线表示对基于牛顿状态向量进行外推的预言机的完美归纳偏置。"
+   }
+  ]
+ },
+ "S3.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们通过测试一个经过训练以预测运动行星位置的 transformer 是否已经恢复了牛顿力学来说明这些想法。{fn1} 我们首先训练一个模型来预测太阳系中行星的位置。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "尽管该模型能够准确预测行星的未来轨迹，但归纳偏置探针揭示它对牛顿力学的归纳偏置较低。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这一点得到了以下事实的佐证：当该模型被微调以预测行星的力矢量——牛顿力学的基石——时，它的预测暗示了一个荒谬的万有引力定律。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们发现该模型恢复的是零散的启发式方法，而不是紧凑的世界模型；它根据所应用的数据切片恢复出不同的万有引力定律。"
+   }
+  ]
+ },
+ "fn1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的代码可在 `https://github.com/keyonvafa/inductive-bias-probes` 获取。"
+   }
+  ]
+ },
+ "S3.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**背景。** 几个世纪以来，天文学家和物理学家一直致力于预测行星绕太阳的轨道。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "17世纪，天文学家约翰内斯·开普勒提出了一个开创性的模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "他的模型基于几何模式：例如，每颗行星的轨道都遵循一个椭圆，太阳位于其中一个焦点上。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "虽然该模型能以近乎完美的精度预测轨道，但它无法解释行星为何遵循这些几何轨道，也无法应用于预测轨迹之外的新问题。"
+   }
+  ]
+ },
+ "S3.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "后来，艾萨克·牛顿利用新的运动定律扩展了这一模型，这些定律现在被称为牛顿力学。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些定律涉及计算运动中的行星集合的性质，例如它们的相对速度和质量。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "利用这些性质，他能够推导出开普勒早期的轨道轨迹定律，但也更进一步，理解和形式化了力和引力等其他概念。"
+   }
+  ]
+ },
+ "S3.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "从开普勒到牛顿，科学家们得以超越对序列的良好预测模型，走向对它们的更深理解。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在本节中，我们检验一个能够预测轨道轨迹序列的 transformer 是否仅仅是一个良好的序列模型，还是它也完成了向提供世界模型的转变。"
+   }
+  ]
+ },
+ "S3.p5.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**数据与预训练。** 我们首先模拟一个序列数据集，其中每个序列描述行星围绕太阳的运动。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为此，我们随机采样初始条件（例如行星的质量和位置及其初始相对速度），以匹配已知系外行星中观测到的轨道形状（Kipping, 2013）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们使用牛顿运动定律模拟每颗行星围绕太阳的轨迹；由于行星质量远小于太阳质量，行星之间的相互作用很小，因此我们将其忽略。"
+   }
+  ]
+ },
+ "S3.p6.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了将轨道转换为序列，我们以固定间隔记录每颗行星和太阳的 $(x,y)$ 坐标，并将所有位置交错排列成一个包含 1,000 个观测值的单一序列。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这意味着每个序列表示一个不同的太阳系。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们随机抽取一半序列使用 6 个月的时间间隔进行观测，另一半使用 1 周的时间间隔，并在序列开头使用一个特殊标记来指示间隔长度。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例如，在一个有 $K$ 颗行星的太阳系中，第一个时间步编码间隔长度，接下来的 $K$ 个观测值是每颗行星在第一个时间点的 $(x,y)$ 坐标，再接下来的 $K$ 个是每颗行星在适当时间步之后的坐标，依此类推。（我们也考虑了使用固定长度间隔，并发现了类似的结果。）"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们使用包含 1000 万个序列和 200 亿个 token 的训练集。"
+   }
+  ]
+ },
+ "S3.p7.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们训练了一个109M参数的Transformer（Vaswani et al., 2017）来预测训练集中每个序列的下一个token。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们尝试了两种方案：a) 连续坐标（使用MSE损失）和 b) 离散化坐标（使用交叉熵损失），发现后者效果更好。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们通过为每个坐标$(x,y)$创建7K个区间来离散化太阳系中每个天体的每个位置向量，其中坐标范围从-50到50 AU。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们使用8块H100 GPU训练了25个epoch。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "更多训练细节见附录A。"
+   }
+  ]
+ },
+ "S3.p8.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们在留出的数据上评估模型预测。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "模型做出了良好的预测：其 $R^{2}$ 高于 $0.9999$，并且显著优于总是预测最近位置或每轨道均值的基线模型（表 7）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "它还能以高精度生成长轨道。"
+   }
+  ]
+ },
+ "S3.p9.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "模型是否已经恢复了牛顿力学？该Transformer的预测反映了一个非常好的序列模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "但它是否已经恢复了牛顿力学？"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了检验这一点，我们注意到牛顿力学规定，轨道序列中的每个观测都由一个状态向量支配，该状态向量包含每个行星的质量、相对速度和相对位置。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "给定轨迹的当前状态，轨道的下一个位置是确定性的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这就是我们的世界模型；如果基础模型的归纳偏置依赖于牛顿力学，那么它必定是基于这个状态向量进行外推的。"
+   }
+  ]
+ },
+ "S3.p10.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们使用第2节中描述的归纳偏置探针来评估模型的归纳偏置。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们创建了100个合成数据集，其中输出是序列状态的线性函数。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然后，我们通过训练模型来预测这些函数，从而对Transformer进行微调。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们通过考虑 $\\mathcal{H}$ 由恒等函数组成且损失函数 $\\ell$ 为MSE，来衡量模型在输入上的外推可预测性（公式3）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们通过将模型与直接基于状态进行外推的预言机进行比较来评估公式6（我们考虑线性模型和2层神经网络作为预言机，发现结果相似）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对牛顿状态的简单函数的归纳偏置很差；可视化见图4。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "换句话说，模型的归纳偏置并不朝向牛顿状态；当它必须外推时，它对状态非常不同的轨道做出相似的预测，而对状态非常相似的轨道做出不同的预测。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "实现细节和消融见B.1节。"
+   }
+  ]
+ },
+ "S3.T1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "表1：通过对在轨道数据上预训练并针对不同星系样本微调的Transformer进行符号回归，恢复出的力方程。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "模型为每个样本恢复出不同的方程，从未恢复出真实定律。"
+   }
+  ]
+ },
+ "S3.p11.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了理解模型在多大程度上未能应用牛顿力学，我们测试了它预测由牛顿力学导出的特定量的能力。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "具体来说，我们考虑每颗行星的力矢量，这是由牛顿万有引力定律给出的状态的简单变换：$\\textbf{F}=G\\frac{m_{1}m_{2}}{||\\mathbf{r}||^{2}}\\textbf{e}_{r}$，它将行星与太阳之间的力 **F** 与它们的质量 $m_{1},m_{2}$ 以及它们距离的平方 $||\\mathbf{r}||^{2}$（沿其相对位置方向 $\\textbf{e}_{r}$）联系起来。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "力矢量可以为序列中的每个观测值计算；力是状态的简单变换，因此一个已经恢复牛顿力学的模型的预测应该遵守这一定律。"
+   }
+  ]
+ },
+ "S3.p12.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们通过创建一个序列到序列数据集来测试这一点，其中每个输入是一条轨迹，每个输出是由轨道状态所隐含的作用在行星上的力矢量 **F**。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们首先微调预训练的Transformer，以预测我们太阳系中轨道上的力矢量，并提供1%的真实力作为训练数据。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图1显示这些力的预测结果很差。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了评估模型接近恢复牛顿万有引力定律的程度，我们进一步在包含1万个太阳系的更大数据集上微调它，以预测力的大小。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然后，我们对预测的力大小关于 $m_{1},m_{2},$ 和 $r$ 的真实值进行符号回归（使用PySR软件（Cranmer, 2023））。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "符号回归是一种搜索符号表达式的方法，该表达式优化类似回归的目标（Cranmer et al., 2020）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "当符号回归应用于Transformer的预测时，得到的物理定律是荒谬的（图1）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "相比之下，在真实状态上训练的神谕模型能很好地预测力矢量，并且符号回归恢复了真实的物理定律（附录C中的图8）。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "scope"
+    ],
+    "issue": "原文“a similar experiment with LLMs”指在LLM上进行的类似实验，译文“与LLM类似的实验”容易被理解成实验与LLM相似，修饰关系发生了偏移。",
+    "suggestion": "实现细节见附录C，使用LLM进行的类似实验见附录D。",
+    "zh_reviewed": "实现细节见附录C，与LLM类似的实验见附录D。"
+   }
+  ]
+ },
+ "S3.p13.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "一个模型如何能在预测轨道位置方面表现如此出色，却对支配它们的物理定律没有归纳偏置？"
+   },
+   {
+    "verdict": "major",
+    "category": [
+     "scope",
+     "omission"
+    ],
+    "issue": "漏译了“sets of”，将“五组随机采样星系”误译为“五个随机采样星系”，改变了数量和结构。",
+    "suggestion": "我们通过将微调模型的力预测应用于五组不同的随机采样星系（每个星系包含许多太阳系）来研究这个问题。",
+    "zh_reviewed": "我们通过将微调模型的力预测应用于五个不同的随机采样星系（每个星系包含许多太阳系）来研究这个问题。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然后我们对每个样本的力大小进行符号回归。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "符号回归为每个样本找到了不同的隐含引力定律（表1）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "相比之下，在真实状态上训练的预言机为每个星系恢复了相同的（正确的）定律。"
+   },
+   {
+    "verdict": "major",
+    "category": [
+     "term"
+    ],
+    "issue": "“transformer”被译成“变压器”，在深度学习语境中指 Transformer 模型，而非电气变压器。",
+    "suggestion": "这些结果表明，Transformer 不是构建一个单一的普遍定律，而是外推，仿佛它为每个样本构建了不同的定律。",
+    "zh_reviewed": "这些结果表明，变压器不是构建一个单一的普遍定律，而是外推，仿佛它为每个样本构建了不同的定律。"
+   }
+  ]
+ },
+ "S4.T2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "表2：尊重状态的归纳偏置（R-IB）和区分状态的归纳偏置（D-IB）指标（1表示完美表现，0表示等同于无信息模型）。“NTP-trained”表示在下一词元预测上预训练的模型，而“untrained”指从头初始化、在相同合成任务上训练的模型。"
+   }
+  ]
+ },
+ "S4.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们现在应用归纳偏置探针来评估基础模型在其他领域遵循已知世界模型的程度。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "评估世界模型需要研究具有状态结构且真实状态已知的领域。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们研究两类这样的数据集：格点问题和棋盘游戏奥赛罗。"
+   }
+  ]
+ },
+ "S4.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**格点。** 评估模型时常用的一种结构类型是空间结构，即格点（Vafa et al., 2024; Liu et al., 2022）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们研究一个格点设置，模拟一个智能体在具有有限数量位置的线段上移动。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "存在一个由 $S$ 个状态组成的真实状态空间：$\\Phi=\\{1,2,\\dots,S\\}$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "语言 $x$ 由包含三个标记的序列组成：$\\Sigma=\\{L,\\perp,R\\}$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "序列的初始状态为 1。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于标记 $\\sigma=R$，状态增加 1；对于 $\\sigma=L$，状态减少 1；对于 $\\sigma=\\perp$，状态保持不变。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "当状态为 1 时，状态处于边界，因此 $\\sigma=L$ 不是有效标记；类似地，当状态为 $S$ 时，$\\sigma=R$ 不是有效标记。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于所有其他状态，所有标记都是有效的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们通过在每个时间步从有效移动集合中均匀随机采样一个移动，在语言上随机生成长度为 100 的序列。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们考虑格点问题的不同版本，将状态数量从 2 变化到 5。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们考虑来自包含 1000 万个标记的训练集的序列，以及 10 万个留出标记。"
+   }
+  ]
+ },
+ "S4.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**奥赛罗。** 我们还研究了棋盘游戏奥赛罗，这是评估序列模型世界模型的常见测试平台（Li et al., 2023; Nanda et al., 2023b; Hazineh et al., 2023; Vafa et al., 2024）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "游戏由两名玩家轮流在8x8棋盘上放置棋子组成。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "每局奥赛罗游戏被标记化为最多60步的序列，其中每个标记指示最近一枚棋子被放置在60个方格中的哪一个（中间四个方格始终被占据）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "真实状态空间 $\\Phi$ 对应于所有8x8棋盘，映射 $\\phi$ 将游戏序列转换为状态。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们考虑来自包含2000万局游戏的训练集的游戏序列，以及380万局留出游戏。"
+   }
+  ]
+ },
+ "S4.F5": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图5：格点问题的归纳偏置探测结果（R-IB和D-IB）随底层状态数量的变化。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "针对每种状态数量，在与之相符的数据上预训练一个不同的模型，并使用第2节中的指标记录其对该状态结构的归纳偏置。"
+   }
+  ]
+ },
+ "S4.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "模型。我们研究了五类预训练序列模型的性质：RNN（Elman, 1990）、LSTM（Hochreiter, 1997）、Transformer（Vaswani et al., 2017）、Mamba（Gu & Dao, 2023）和 Mamba-2（Dao & Gu, 2024）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们在每个领域使用下一词元预测来训练每个模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "作为比较，我们还将这些预训练模型与从随机初始化进行微调的未训练模型进行比较。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "更多信息见附录 A。"
+   }
+  ]
+ },
+ "S4.p5.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "所有预训练模型在下一词元预测上都表现良好，生成的输出似乎遵守状态。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "遵循 Toshniwal et al. (2022)，我们测量模型最高预测中在底层状态下合法的比例。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "附录 G 中的表 6 显示了结果。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "所有模型在所有数据集上都表现很好，例如，对于奥赛罗，每个模型的最高预测约 90% 的时间是合法的，而对于具有五个状态的格问题，100% 的时间是合法的。"
+   }
+  ]
+ },
+ "S4.p6.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**归纳偏置探测结果。** 我们使用第2节中的程序测量每个模型的归纳偏置，以评估这些模型的归纳偏置。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "该程序涉及将每个模型微调到随机生成输出的小型数据集，并评估模型的归纳偏置——通过其外推来衡量——是否遵循状态结构。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们对两个模型都使用该程序的离散版本。"
+   }
+  ]
+ },
+ "S4.p7.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "格点问题的结果如图5所示。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "当状态数量较少时，模型具有较高的归纳偏置，但随着状态数量的增加，归纳偏置会下降。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "值得注意的是，Transformer模型始终比其他模型表现更差，而其他模型的架构都基于循环或状态空间模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "奥赛罗的结果如表2所示。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在这里，所有模型的表现都比在格点问题上更差，表明归纳偏置较差。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "尽管在预训练玩奥赛罗时，这些模型几乎100%的时间都能生成合法走法，但它们在新任务上并未将棋盘用作归纳偏置。"
+   }
+  ]
+ },
+ "S4.F6": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图6：左侧是由序列隐含的真实奥赛罗棋盘，右侧是经过微调以预测棋盘的模型所预测的棋盘。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "尽管预测存在误差，但预测的下一个标记集合与真实棋盘完全匹配。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "右侧是微调过程中棋盘重建的指标。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "一致地，即使Mamba模型难以恢复完整棋盘，它们也能恢复得足够好，使得有效下一步移动的集合与真实棋盘中的集合相匹配。"
+   }
+  ]
+ },
+ "S4.p8.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了理解这些结果的含义，我们研究了不同模型如何迁移到新的状态函数（棋盘）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "具体来说，我们采用 Othello 数据集并构建新的序列到序列数据集。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "每个数据集的输入序列是原始游戏记录，我们考虑三种不同的输出变换，它们都是状态的函数。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "omission"
+    ],
+    "issue": "漏译了原文“where”所表达的位置含义，译文容易让人理解为在棋盘整体上比较黑色和白色棋子的数量，而不是指出哪些位置黑色或白色棋子更多。",
+    "suggestion": "在“多数棋子”中，输出的每个元素为 1 或 0，表示到目前为止序列所隐含的棋盘上哪个位置黑色或白色棋子更多。",
+    "zh_reviewed": "在“多数棋子”中，输出的每个元素为 1 或 0，表示到目前为止序列所隐含的棋盘上黑色或白色棋子哪个更多。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在“棋盘平衡”中，输出序列的每个元素表示黑色棋子在棋盘上半部分更多还是在下半部分更多。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "最后，在“边缘平衡”中，输出衡量黑色棋子在棋盘边缘方格上是否更多。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些函数中的每一个都是状态（棋盘）的确定性函数，因此对状态具有归纳偏置的基础模型应该更擅长迁移。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "结果如图所示。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "最后一行显示了每个指标的无符号相关性以及比率 $\\frac{\\text{R-IB}}{1-\\text{D-IB}}$，该比率总结了表 2 中的归纳偏置度量。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "所有指标之间存在很强的相关性；在归纳偏置指标上表现更好的模型能更好地迁移到这些状态函数。"
+   }
+  ]
+ },
+ "S4.p9.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**归纳偏置是什么？** 这些结果表明，模型可以在预测 token 序列方面表现良好，而似乎并未学习底层世界模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这引出一个问题：如果基础模型的归纳偏置不是朝向给定的世界模型，那它朝向什么？"
+   }
+  ]
+ },
+ "S4.p10.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在这里，我们考虑一个由下一词元预训练目标所启发的假设：当基础模型被应用于新任务时，它们会将具有不同状态但合法下一词元集合却相同的序列归为一组。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例如，在棋盘游戏奥赛罗中，两个不同的棋盘可能具有相同的允许下一步走法集合。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，模型的归纳偏置可能倾向于具有相同允许下一步走法集合的棋盘，而不是真实棋盘本身。"
+   }
+  ]
+ },
+ "S4.p11.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了首先用奥赛罗棋演示这一概念，我们对一个基础模型进行微调，该模型最初是在100万局游戏上进行下一token预测预训练的，现在要预测每个序列的真实棋盘。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们在微调时记录两个指标：1）预测的棋盘是否与真实棋盘完全匹配，以及2）预测棋盘中的合法走法集合是否与真实棋盘中的合法走法集合匹配。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "结果如图6所示：令人惊讶的是，即使预测的棋盘不正确，合法走法集合也经常与真实棋盘的合法走法集合相匹配。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "基础模型往往不是恢复完整的棋盘，而是恢复“足够多的”棋盘来计算合法的下一步走法。"
+   }
+  ]
+ },
+ "S4.p12.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了普遍地量化这一假设，我们修改了归纳偏置探针，以测试模型的归纳偏置是否倾向于状态的下一个标记划分。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "回想一下，D-IB 衡量的是两个具有不同状态的点之间的外推有多相似。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如果模型是基于哪些下一个标记是合法的来进行外推，那么恰好具有相同合法下一个标记的不同状态中的序列，将比具有不同合法下一个标记的不同状态中的序列具有更相似的预测。"
+   }
+  ]
+ },
+ "S4.p13.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "具体而言，令 $q$ 表示状态空间的下一词元粗化，使得 $q(x)=q(x^{\\prime})$ 当且仅当 $\\text{NextTokens}(\\phi(x))=\\text{NextTokens}(\\phi(x^{\\prime}))$，其中 $\\text{NextTokens}(s)$ 是状态 $s$ 的有效下一词元集合。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们将 D-IB 分解为两个量。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "首先，定义 $\\text{Same}(X_{i},X_{j})$ 为事件：$\\phi(X_{i})\\neq\\phi(X_{j})$ 但 $q(X_{i})=q(X_{j})$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然后我们定义，"
+   }
+  ]
+ },
+ "S4.p13.2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "它衡量的是与具有相同合法下一词元的不同状态相关联的输入的外推结果的可预测程度。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "类似地，将 $\\text{Diff}(X_{i},X_{j})$ 定义为事件：$\\phi(X_{i})\\neq\\phi(X_{j})$ 且 $q(X_{i})\\neq q(X_{j})$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "类似地，"
+   }
+  ]
+ },
+ "S4.p13.3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "它衡量的是与具有不同合法下一 token 的不同状态相关联的输入的外推可预测性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如果具有相同合法下一 token 的不同状态输入比具有不同合法下一 token 的不同状态输入更可预测（即 $\\text{D-IB}_{q=}<\\text{D-IB}_{q\\neq}$），那么这表明模型是基于下一 token 划分而非真实棋盘状态进行外推的。"
+   }
+  ]
+ },
+ "S4.p14.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们为格子和奥赛罗计算这些细化指标。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "每个都有合法的下一步移动的自然定义（对应于边界和游戏规则）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "结果如表8所示。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "hedge"
+    ],
+    "issue": "原文“suggesting”语气较弱，译成“表明”略有加强。",
+    "suggestion": "对于所有模型，$\\text{D-IB}_{q=}$ 和 $\\text{D-IB}_{q\\neq}$ 之间的差距在统计上显著，暗示模型将具有相同合法下一标记集合的不同状态分组在一起。",
+    "zh_reviewed": "对于所有模型，$\\text{D-IB}_{q=}$ 和 $\\text{D-IB}_{q\\neq}$ 之间的差距在统计上显著，表明模型将具有相同合法下一标记集合的不同状态分组在一起。"
+   }
+  ]
+ },
+ "S5.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "本文研究预测模型是否形成世界模型（LeCun, 2022）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "世界模型研究的一个分支通过研究固定模型的输出来研究固定模型的输出是否与已知世界模型一致（Vafa et al., 2024）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例如，Toshniwal et al. (2022) 和 Li et al. (2023) 研究世界模型的一种方式是评估在序列游戏数据上训练的模型是否总是预测底层游戏中的合法走法。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们研究的问题是一个不同但相关的问题：不是研究固定模型的世界模型属性，而是研究测试一个学习算法——一个基础模型——是否内嵌了世界模型意味着什么。"
+   }
+  ]
+ },
+ "S5.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "另一支文献脉络评估模型的参数化表征是否编码了世界模型（Abdou et al., 2021; Patel & Pavlick, 2022; Gurnee & Tegmark, 2023; Nanda et al., 2023a）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例如，一种常见方法使用探针或稀疏自编码器（SAEs）（Cunningham et al., 2023; Bricken et al., 2023）来评估神经网络使用的中间表征是否对状态具有预测性（Hewitt & Liang, 2019; Li et al., 2021; Abdou et al., 2021; Jin & Rinard, 2023; Li et al., 2023; Spies et al., 2024; Karvonen, 2024）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，关于探针的可靠性存在一些未解决的问题（Belinkov, 2022），例如适当的函数复杂度（Alain & Bengio, 2018; Cao et al., 2021; Li et al., 2023）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的方法通过询问模型如何学习，而不是其固定表征中编码了什么，来回避这些问题。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "与我们密切相关的是，jylin04 et al. (2024) 和 Nikankin et al. (2024) 发现，分别在奥赛罗和数学任务上训练的 GPT 模型执行与“启发式包”相对应的内部计算，而不是连贯的世界模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "虽然我们的程序在目标上有所不同，但这些发现支持了我们的分析，即奥赛罗模型依赖启发式而非状态作为其归纳偏置（McCoy et al., 2019）。"
+   }
+  ]
+ },
+ "S5.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "与机制可解释性对内部的关注相辅相成，其他研究使用行为探针来研究模型综合知识的能力，这种方法更接近我们自己的方法。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例如，最近的工作表明，LLM 可以从训练期间看到的不同信息中推断并内化潜在知识，然后将这些推断出的知识应用于下游任务（Berglund et al., 2023; Treutlein et al., 2024）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的归纳偏置探针提供了一个框架，用于测试这种涌现知识是否构成一个稳健的世界模型。"
+   }
+  ]
+ },
+ "S5.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "本文的方法论植根于这样一个观察：生成模型可以通过不同的方式达到相同的生成输出。"
+   },
+   {
+    "verdict": "major",
+    "category": [
+     "term"
+    ],
+    "issue": "Rashomon effect 误译为“拉什莫尔效应”，该术语通常译为“罗生门效应”，指同一现象存在多种解释，与拉什莫尔山无关。",
+    "suggestion": "这与预测模型的罗生门效应（也称为模型多重性）有关，其中可能存在许多不同的模型在预测任务上达到相似的性能（Breiman, 2001; Marx et al., 2020; D’Amour et al., 2022; Black et al., 2022）。",
+    "zh_reviewed": "这与预测模型的拉什莫尔效应（也称为模型多重性）有关，其中可能存在许多不同的模型在预测任务上达到相似的性能（Breiman, 2001; Marx et al., 2020; D’Amour et al., 2022; Black et al., 2022）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "关于因果表示学习的文献表明，模型应该学习与真实因果机制相对应的表示，以便对新任务进行稳健的泛化（Schölkopf et al., 2021; Bengio et al., 2019）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的方法基于类似的动机，因为它研究基础模型的属性不是通过其针对一个任务的生成，而是通过其归纳偏置，这种偏置通过它如何适应许多任务而揭示出来。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "一个已经学习了真实世界模型的模型应该发现新任务“信息上接近”（Achille et al., 2021）并且容易适应。"
+   }
+  ]
+ },
+ "S5.p5.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "相关文献关注的是理解Transformer和其他模型架构是否能够学习确定性有限自动机（DFA）或其他复杂度类别的语言（Suzgun et al., 2018; Merrill & Sabharwal, 2023; Merrill et al., 2024; Liu et al., 2022）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "其他研究探讨了问题的DFA复杂度概念是否与模型解决该问题所需的计算量相关（Lee et al., 2025）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "本文不是关注模型是否能在理论上表示形式语言，也不是关注DFA复杂度概念是否与模型计算相关，而是提供了一种实证方法，用于衡量基础模型是否像使用了特定归纳偏置那样进行学习。"
+   }
+  ]
+ },
+ "S5.p6.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "近期在蛋白质折叠、基因调控和分子化学等科学领域开发基础模型的工作（Chowdhury et al., 2022; Benegas et al., 2023; Boiko et al., 2023; Jablonka et al., 2024）将预测模型作为揭示更深层原理的垫脚石。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在化学背景下，Yan et al. (2025) 证明，当为同一分子提供不同表示时，LLM 会做出不一致的预测。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的轨道力学示例特别涉及研究人工智能与物理学的大量工作（Hao et al., 2022; Wu & Tegmark, 2019）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "它与研究人工智能模型能否发现物理定律的工作最为相关（Chen et al., 2022; Belyshev et al., 2024; Kansky et al., 2017; Udrescu & Tegmark, 2020; Iten et al., 2020）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "与我们最接近的是，Lemos et al. (2023) 证明，通过修改模型架构以明确施加牛顿运动定律作为归纳偏置，确实可以从在轨道数据上训练的图神经网络中恢复牛顿引力定律。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们发现，没有牛顿归纳偏置的 Transformer 无法恢复引力定律，但施加领域特定的归纳偏置是改进这些模型的一种有前景的方法。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们采用该文献中的通用工具——例如使用符号回归进行可解释性——来研究算法的归纳偏置（Liu & Tegmark, 2021; Wu & Tegmark, 2019）。"
+   }
+  ]
+ },
+ "S6.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "基础模型的前景在于，序列预测能够揭示对底层机制的更深入理解。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们开发了一个框架，通过测量基础模型在迁移到新任务时的归纳偏置，来评估其是否学到了假定的世界模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的实证结果表明，尽管许多序列模型在下一词元预测任务上表现出色，但它们通常对真实世界模型的归纳偏置有限。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们发现，这些模型可能并非学习连贯的世界模型，而是依赖于粗化的状态表示或非简约的表示。"
+   }
+  ]
+ },
+ "S6.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如第2节所述，我们的度量指标需要指定一个世界模型（world model）来检验基础模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "必须指定一个世界模型这一点与该文献中的其他例子一致（Li et al., 2023; Vafa et al., 2024），但对于正在寻找模型所使用的确切表示的分析者来说，这是一个局限。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "虽然我们提出了检验候选对象的策略（例如下一词元划分），但未来的工作应优先考虑自动构建隐含在基础模型行为中的世界模型的方法。"
+   }
+  ]
+ },
+ "A3.F8": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图8：每对面板展示了太阳系中一颗行星的轨迹及其引力矢量，将真实的牛顿力（左）与基于真实状态矩阵预测力矢量的**预言机模型**所预测的力进行比较。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "符号回归从其预测中恢复了真实的引力定律。"
+   }
+  ]
+ },
+ "A7.T6": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "表6：针对在下一词元预测上预训练的模型，下一词元测试（Toshniwal et al., 2022; Li et al., 2023）的结果。"
+   }
+  ]
+ },
+ "A7.T7": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "表7：在下一词元预测上预训练的模型的轨道轨迹预测性能（MSE）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "每一列显示从序列中第500个位置开始，向前预测1、5或100个时间步时的行星位置预测准确度。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们将Transformer模型与两个简单基线进行比较（一个总是预测行星在前一时间步的位置，另一个使用每个轨道的均值）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "所有结果都在留出的测试轨迹上评估。"
+   }
+  ]
+ },
+ "A8.T8": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "表8：用于评估模型归纳偏置是否偏向其合法下一词元划分的指标。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "较低的 $\\text{D-IB}_{q=}$ 值和较高的 ${\\text{D-IB}}_{q\\neq}$ 值表明，无法区分状态是由模型具有偏向合法下一词元划分的归纳偏置所导致的。"
+   }
+  ]
+ }
+}

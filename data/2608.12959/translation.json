@@ -1,0 +1,1458 @@
+{
+ "__meta__": {
+  "translator": "deepseek-v4-pro（关思考）",
+  "usage": {
+   "calls": 97,
+   "prompt_tokens": 66066,
+   "completion_tokens": 11205,
+   "seconds": 193.2,
+   "cached_tokens": 50304
+  }
+ },
+ "abs.p1": {
+  "sentences": [
+   {
+    "zh": "潜在世界模型以其预测能力的好坏来评判，因此当基于某个世界模型进行规划在长时程上失败时，自然的解读是预测器性能下降。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在 TwoRoom 上对 LeWorldModel 的复现中，我们表明约束瓶颈在于规划器的目标函数。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "abs.p2": {
+  "sentences": [
+   {
+    "zh": "预测器并非限制：在真实验证片段上展开时，其想象状态在环境前推七十五步后，与假设世界冻结相比，误差仍仅为0.189，而规划器从未想象超过二十五步。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "目标函数才是限制。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "交叉熵方法规划最小化平方潜在距离，该距离与真实距离的相关性为r = 0.426，在约八十个竞技场单位后停止上升，并在约一百二十个单位后**下降**——因此远离目标可能降低规划器的成本。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "信息始终存在：岭回归探针从相同的冻结嵌入中恢复位置，$R^{2}$为0.9922。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "abs.p3": {
+  "sentences": [
+   {
+    "zh": "这一病态属于方法本身，而非某一重新实现。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "它存在于作者发布的权重中，并且在四个检查点上，长时程成功与这一度量的质量完全按序相关，而与一步预测准确度呈反向关系——这是再现报告所报告但未解释的一种分离现象的机制。",
+    "conf": "mid",
+    "note": "rank-orders exactly with 译为“完全按序相关”可能不够精确，原文强调排序完全一致，可考虑“排序完全一致”；“a mechanism for a dissociation the reproduction reports and leaves unexplained”结构复杂，译文基本准确但可商榷。"
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "abs.p4": {
+  "sentences": [
+   {
+    "zh": "仅替换目标函数，无需重新训练任何内容，也无需 GPU，就将偏移量 100 处达到的目标从 26.0% 提升至 **98.0%**，与偏移量 25 处达到的 98.0% 持平，并且在预算的三分之一下仍能达到 92.0%：规划不再依赖于时间范围。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "最佳代价并非最准确的代价。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "仅从帧分离中学习到的头部预测空间距离的能力比位置探针差（r = 0.819 对 0.9897），但规划效果更好，因为它在穿越环境的分隔墙时多收取 24% 的代价，而平方潜在距离则少收取 4%。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "它学到的是可达性，而非邻近性。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "abs.p5": {
+  "sentences": [
+   {
+    "zh": "我们还报告了修复失败的情况：在作者的权重上，学习到的代价被线性代价击败，34.0% 对 70.0%，因为一个在编码帧上拟合的头部在想象帧上进行评估，而它们的预测器漂移得足够远，以至于 MLP 需要外推。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "学习到的规划代价必须在规划器评分的分布上进行训练。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx1.p1.1": {
+  "sentences": [
+   {
+    "zh": "潜在世界模型被训练来进行预测。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "一个能准确预测下一个潜在状态的模型被认为已经学会了动力学，并且在其上进行规划预期会随之而来。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "当它没有做到时，通常的怀疑对象是预测器的视野、其容量或训练量。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx1.p2.1": {
+  "sentences": [
+   {
+    "zh": "本文报告了一个案例，其中这些原因都不是成因。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "基于已发表的 LeWorldModel 在 TwoRoom 环境中的复现（arXiv:2608.10145），其中规划在二十五步远的目标上达到 94.0% 的成功率，在一百步远的目标上达到 26.0% 的成功率，我们探究了模型需要什么才能缩小这一差距。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "答案竟然是：什么都不需要。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx1.p3.1": {
+  "sentences": [
+   {
+    "zh": "该复现论文报告了这一差距，并且有意不为其提供机制解释。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "它还报告了更奇怪的现象：在三个检查点中，一步预测准确率对短期规划成功率的排序是单调的，但对长期规划成功率完全无法排序，其中准确率最低的检查点反而是最强的长期规划器。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这两个观察结果有相同的解释，而且与预测无关。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx1.I1.i1": {
+  "sentences": [
+   {
+    "zh": "1. **预测器不是瓶颈。** 想象至少在七十五个环境步骤内保持信息量；规划器使用二十五个步骤（§3）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx1.I1.i2": {
+  "sentences": [
+   {
+    "zh": "2. **规划目标饱和然后反转。** 平方潜在距离——CEM 最小化的量——在真实距离超过约一百二十个单位后不再单调，因此远离目标可能降低规划器的代价（§4）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx1.I1.i3": {
+  "sentences": [
+   {
+    "zh": "3. **该病态属于方法本身，而非某一重新实现。** 它存在于原作者发布的权重中（§5）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx1.I1.i4": {
+  "sentences": [
+   {
+    "zh": "4. **准确度/规划分离的机制。** 在四个检查点上，长时程成功率的排序与度量质量完全一致，而与预测准确度相反（§5）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx1.I1.i5": {
+  "sentences": [
+   {
+    "zh": "5. **信息是存在的；只有度量失败了。** 位置从冻结的嵌入中解码，$R^{2}$ 为 0.9922（§6）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx1.I1.i6": {
+  "sentences": [
+   {
+    "zh": "6. **一种无需重新训练的修复方法**，在作者自己的权重上有效，并且不依赖于环境具有可读状态（§7、§8）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx1.I1.i7": {
+  "sentences": [
+   {
+    "zh": "7. **可达性而非邻近性，才是正确的目标。** 一个预测空间距离更差的代价函数反而规划得更好，因为它对墙壁收费。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "三个目标上的规划成功率按各自捕捉可达性的好坏排序（§7.3、§8）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx1.I1.i8": {
+  "sentences": [
+   {
+    "zh": "8. **学习到的代价必须基于规划器所评分的内容进行训练**——即想象的嵌入，而非编码的帧。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在开发该方法所用的检查点上不可见；在另一个检查点上则具有决定性（§7.4）。",
+    "conf": "mid",
+    "note": "“checkpoint”在此处可能指模型检查点或实验设置，但根据上下文，更可能指用于评估的某个检查点或数据集。翻译为“检查点”以保持术语一致性。"
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx1.I1.i9": {
+  "sentences": [
+   {
+    "zh": "9. **一个条件性处方，包括修复失效之处。** 学习到的代价在预测器支持它的地方获胜，而在预测器不支持它的地方输给线性代价（§8.2）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx1.SSx2.p1.1": {
+  "sentences": [
+   {
+    "zh": "一个环境，每个检查点一个种子，共四个检查点。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "TwoRoom 是一个诊断性环境，本文最强的论断均针对它。第 9 节说明了这能支持什么、不能支持什么。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx2.p1.1": {
+  "sentences": [
+   {
+    "zh": "所有实验均使用随复现发布的检查点和评估框架。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "世界模型是一个具有1803万参数的联合嵌入预测架构：一个在224像素下产生192维嵌入的ViT-Tiny编码器，以及一个以动作编码为条件的六层预测器。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx2.p2.1": {
+  "sentences": [
+   {
+    "zh": "规划是在学习到的动力学上进行的交叉熵方法搜索，采用发布的配置：300个候选序列、30次细化迭代、30个精英样本、规划时域5，以及滚动时域5。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "规划器输出一个二维动作，环境以 `frameskip` = 5 步执行该动作，因此规划时域5对应于25个环境步的想象。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx2.p3.1": {
+  "sentences": [
+   {
+    "zh": "**目标。** CEM 对每个候选序列的评分依据是",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx2.p5.1": {
+  "sentences": [
+   {
+    "zh": "想象出的最终嵌入与目标图像嵌入之间的平方欧几里得距离。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这就是本文所讨论的量。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx2.p6.1": {
+  "sentences": [
+   {
+    "zh": "**协议。** 发布的材料公布了两种评估协议。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "仓库配置将目标置于前方25帧处，预算为50步；论文附录则将目标置于前方100帧处，预算为150步。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们报告两者，并始终使用已发布的运行作为基线。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "下面的每次比较都抽取与其基线相同的回合，使用相同的种子，我们通过复现抽取过程验证了这一点。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx2.p7.1": {
+  "sentences": [
+   {
+    "zh": "**计算资源。** 本文中的每个实验均在一台四核笔记本电脑 CPU 上运行。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "没有训练或微调任何模型。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx3.p1.1": {
+  "sentences": [
+   {
+    "zh": "如果长时程规划因想象退化而失败，那么这种退化应该在展开中可见。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们将发布的检查点在真实验证片段上按记录的动作自回归地向前展开，将每个想象的潜在状态与该帧编码器的真实潜在状态进行比较，并与预测一切静止的静态基线进行比较。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx3.p2.1": {
+  "sentences": [
+   {
+    "zh": "来自 `followup/rollout_h15_phase2_recal.txt`。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx3.p3.1": {
+  "sentences": [
+   {
+    "zh": "在十五个规划步骤时，想象的状态仍然只有假设世界冻结时错误的19%，并且误差增长缓慢而平滑。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在规划者所需的任何范围内都没有崩溃。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx3.p4.1": {
+  "sentences": [
+   {
+    "zh": "20步的预测范围根本无法测量。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "一个跨越三个历史帧和二十个预测器步骤、帧跳过为5的片段需要102个原始帧，而数据集的回合长度上限为101——正是这个上限使得复现实验的§4.2中偏移100协议退化。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx3.p5.1": {
+  "sentences": [
+   {
+    "zh": "规划器从未要求这一点。在视野为5时，它想象25个环境步骤，朝向100步之外的目标。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "该模型能看到比它被要求看到的远三倍的距离。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx4.p1.1": {
+  "sentences": [
+   {
+    "zh": "规划器的目标只有在潜在距离在其必须覆盖的范围内随真实距离上升时才有意义。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们直接测量了这一点，不涉及任何规划：渲染真实记录的位置，对它们进行编码，并将成对的潜在距离与成对的真实距离进行比较。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx4.p2.1": {
+  "sentences": [
+   {
+    "zh": "来自 `followup/latent_metric_phase2_recal.txt` 的 7,140 对。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx4.p3.1": {
+  "sentences": [
+   {
+    "zh": "总体皮尔逊相关系数 r = 0.426。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "由此得出三点。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx4.p4.1": {
+  "sentences": [
+   {
+    "zh": "**目标仅在短距离内具有信息量。** 在二十个单位以内，带内相关性为0.668，而在四十个单位以上则低于0.13。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx4.p5.1": {
+  "sentences": [
+   {
+    "zh": "**它饱和了。** 在80–300单位范围内，均值变化为$-3.3\\%$。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "两个状态，一个距离目标八十单位，另一个三百单位，得到的分数几乎相同。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx4.p6.1": {
+  "sentences": [
+   {
+    "zh": "**它发生反转。** 超过约一百二十个单位后，关系变为负向。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "最小化该代价的规划器可能被引导远离其目标，并认为自己正在改进。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx4.SSx1.p1.1": {
+  "sentences": [
+   {
+    "zh": "复现报告指出，偏移量为100的失败案例超出了目标。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "重新分析其提交的回合数据：37个失败案例中有26个结束时离目标的距离比开始时更远，中位数为原始距离的1.41倍。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "成功率随距离下降，恰好发生在度量失效的地方——60单位以内为100%，60至100单位之间为37%，100至140单位之间为6%。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx4.SSx1.p2.1": {
+  "sentences": [
+   {
+    "zh": "一个饱和并最终反转的目标函数预测了所有这些现象：短距离目标被解决，长距离目标未被解决，并且规划器不仅停滞不前，还自信地朝错误方向行进。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx5.SSx1.p1.1": {
+  "sentences": [
+   {
+    "zh": "对原作者发布的检查点——即我们未参与训练的权重——进行同样的测量：",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx5.SSx1.p2.1": {
+  "sentences": [
+   {
+    "zh": "来自 `followup/latent_metric_authors.txt`。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx5.SSx1.p3.1": {
+  "sentences": [
+   {
+    "zh": "这几乎正是我们检查点的问题所在。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "无论是什么导致了它，都是所发布方法本身的一个属性，而不是重新实现选择的结果。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx5.SSx2.p1.1": {
+  "sentences": [
+   {
+    "zh": "测量所有四个可用的检查点，并将它们与其已发表的规划结果并排放置：",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx5.SSx2.p2.1": {
+  "sentences": [
+   {
+    "zh": "长时程规划成功率与度量质量完全按相同顺序排列，而与单步预测准确度呈相反顺序。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx5.SSx2.p3.1": {
+  "sentences": [
+   {
+    "zh": "这为再现报告所指出但未予解释的分离现象提供了一种机制。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "最准确的预测器是最差的长程规划器，不是因为准确性与规划无关，而是在这些运行中准确性和度量可用性朝相反方向变化。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "基于预测损失进行选择，会淘汰规划器所依赖的几何结构。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx5.SSx3.p1.1": {
+  "sentences": [
+   {
+    "zh": "这种分化与训练流程相对应。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "两个具有可用几何结构的检查点都使用了 `history_size` 1 和 `action_dim` 2；而两个病态的检查点——我们的和作者的——都使用了参考流程，即 `history_size` 3 和密集的十维动作。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx5.SSx3.p2.1": {
+  "sentences": [
+   {
+    "zh": "有效秩随之变化。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "复现实验的已提交探针记录到 Run 0 的有效维度为 192 中的 18.6，phase2 为 67.8，在指标退化的同一区间内相差 3.6 倍。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这是对复现实验明确拒绝描述的维度的部分说明：无论它们编码什么，都与距离无关，并且它稀释了对全部 192 维取的 L2——这与二维线性读出从 L2 无法排序的同一向量中以 R² 0.99 恢复位置是一致的。",
+    "conf": "mid",
+    "note": "句子结构复杂，包含多个从句和插入语，需确保逻辑关系准确。"
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx5.SSx3.p3.1": {
+  "sentences": [
+   {
+    "zh": "我们无法分离这些因素。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这是一个值得解释的对应关系，而非已证明的原因。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx6.p1.1": {
+  "sentences": [
+   {
+    "zh": "如果嵌入中不包含几何信息，任何目标都无法恢复它。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "它确实包含。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在350个渲染位置的冻结嵌入上拟合岭回归探针，并在150个留出位置上评估：",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx6.p2.1": {
+  "sentences": [
+   {
+    "zh": "探针在留出集上的 $R^{2}$ 为 **0.9922**，平均绝对误差为 **1.72** 个场地单位。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "来自 `followup/probe_metric_phase2_recal.txt`。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx6.p3.1": {
+  "sentences": [
+   {
+    "zh": "在作者的检查点上也同样成立：探针 $R^{2}$ 为 0.9627，解码位置距离在 r = 0.9573 处单调，而他们的潜在 L2 两者都不是。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx6.p4.1": {
+  "sentences": [
+   {
+    "zh": "编码器表征了规划器所需的信息。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "目标函数丢弃了这些信息。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx7.p1.1": {
+  "sentences": [
+   {
+    "zh": "我们只改变规划器的目标，其他什么都不变。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "编码器和预测器是已发布的权重，保持冻结。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx7.p2.1": {
+  "sentences": [
+   {
+    "zh": "**解码位置代价。** 从嵌入到位置拟合一个岭回归探针，并根据解码位置之间的距离而非嵌入之间的距离来对候选者评分。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "该探针在启动时基于渲染位置进行拟合。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx7.p3.1": {
+  "sentences": [
+   {
+    "zh": "**学习的时间距离代价。** 解码位置代价依赖于 TwoRoom 恰好提供的东西——一个线性探针可以读取的低维状态。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "为了检验修复是否依赖于这一点，我们从部署系统始终拥有的唯一信号中学习代价：两个观测帧相隔多少步。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx7.p4.1": {
+  "sentences": [
+   {
+    "zh": "训练对是来自同一回合的真实记录帧，由其帧间隔监督。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "一个小型 MLP 将 (z_t, z_goal) 映射到预测的到达步数，并在两种顺序上对称化。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "回合在训练和评估之间不相交地划分。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "**监督中不出现位置。**",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx7.p5.1": {
+  "sentences": [
+   {
+    "zh": "在不相交的剧集上，留出的 MAE 为 12.80 帧。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "来自 `followup/temporal_head_phase2.txt`。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx7.p6.1": {
+  "sentences": [
+   {
+    "zh": "仅从时间分离中学习到的代价，在嵌入度量无法排序的地方对距离进行了排序。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这种修复并不是TwoRoom具有可读状态的结果。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx7.SSx1.p1.1": {
+  "sentences": [
+   {
+    "zh": "时间头预测空间距离的表现比位置探针更差——r = 0.819 对 0.9897——但规划效果却更好：偏移 100 的目标成功率为 **98.0%**，而探针为 88.0%（§8）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "空间距离并不是规划器所需要的东西。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx7.SSx1.p2.1": {
+  "sentences": [
+   {
+    "zh": "TwoRoom 有一面带门的隔墙，因此两个状态可能在空间上接近，但在可达性上相距很远。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们测试了时间头是否知道这一点，方法是在真实空间距离上匹配状态对，并根据它们位于同一房间还是隔墙两侧来划分：",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx7.SSx1.p3.1": {
+  "sentences": [
+   {
+    "zh": "来自 `followup/wall_reachability.txt`，共 460,320 对。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx7.SSx1.p4.1": {
+  "sentences": [
+   {
+    "zh": "在匹配的空间间隔下，时间头穿过墙壁的代价高出24%。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "平方潜在距离的代价低4%——它不仅对墙壁视而不见，而且略微偏向错误的方向。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx7.SSx1.p5.1": {
+  "sentences": [
+   {
+    "zh": "这恰好按照三种目标的规划结果对它们进行了排序：",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx7.SSx1.p6.1": {
+  "sentences": [
+   {
+    "zh": "解码位置代价完全无法表示墙壁：无论位置之间是否有障碍物，位置之间的欧氏距离都相同。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "它恢复了大部分差距，因为在开放空间中，邻近性是可达性的良好代理。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "时间头恢复了其余部分，因为它不是代理。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx7.SSx2.p1.1": {
+  "sentences": [
+   {
+    "zh": "上述头部是在成对的编码**真实**帧上拟合的。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在规划时，CEM 对（**想象的**嵌入，编码的目标）进行评分。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这些只有在预测器准确的情况下才会一致，而且差异是可测量的。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在相同的留出对上评估：",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx7.SSx2.p2.1": {
+  "sentences": [
+   {
+    "zh": "来自 `followup/temporal_head_v2_*.txt`，以帧为单位的 MAE。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx7.SSx2.p3.1": {
+  "sentences": [
+   {
+    "zh": "我们的预测器使想象的状态足够接近编码流形，以至于在真实对上拟合的头部可以迁移。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "作者的预测器则不然，成本恰好在规划需要它的地方变得不可靠。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx7.SSx2.p4.1": {
+  "sentences": [
+   {
+    "zh": "在两种配对上进行训练——在记录的块均值动作下向前滚动预测器，正如规划器驱动它的方式——消除了作者检查点上的不匹配：真实为7.37，想象为8.21，+11%而非+74%。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx7.SSx2.p5.1": {
+  "sentences": [
+   {
+    "zh": "我们报告这一点，是因为在我们开发该方法所用的检查点上，这一现象不可见，因为在那里两种分布恰好重合。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "直到第二个检查点才显现出来，而且这是对任何学习到的规划代价的一个条件，并非这一个的细节。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx8.p1.1": {
+  "sentences": [
+   {
+    "zh": "每个比较都是配对的：相同的检查点、相同的协议、相同的回合抽取，与其已发表的基线相同，并通过复现抽取来验证。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "所有三个基线列都精确复现了其已发表的数字——94.0%、26.0%和14.0%——这使得该测试框架值得信赖，而不仅仅是自洽。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "McNemar检验在不一致对上是精确的。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx8.p2.1": {
+  "sentences": [
+   {
+    "zh": "所有五个基线列都精确复现了其已发表的数字——94.0%、26.0%、20.0%、14.0%和14.0%。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx8.SSx1.p1.1": {
+  "sentences": [
+   {
+    "zh": "在已发表的目标下，成功率从目标偏移25时的94.0%下降到偏移100时的26.0%。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在时间成本下，两者均为**98.0%**。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "对规划时长的依赖是目标函数的性质，而非模型或任务的性质。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx8.SSx1.p2.1": {
+  "sentences": [
+   {
+    "zh": "这也不是用时间换来的。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在偏移量100下，按照仓库自身的50步预算——附录预算的三分之一——时间成本达到**92.0%**，而基线为20.0%。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "百步目标在五十个环境步骤内即可到达。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx8.SSx2.p1.1": {
+  "sentences": [
+   {
+    "zh": "在作者发布的检查点上，排序反转：线性解码位置代价达到70.0%，而学习的时间头只有34.0%。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "两者都超过了14.0%的基线；粗糙的目标获胜。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx8.SSx2.p2.1": {
+  "sentences": [
+   {
+    "zh": "原因见§7.4。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "学习到的头部是在想象的嵌入上评估的MLP，而作者的预测器漂移得足够远离真实编码的流形，以至于头部进行了外推。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "线性映射在相同的漂移下退化得远为平缓。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在想象的配对（v2）上训练头部在度量上缩小了差距——退化+11%而不是+74%——并将规划从v1头部的表现提升到34.0%，但没有消除差距。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx8.SSx2.p3.1": {
+  "sentences": [
+   {
+    "zh": "",
+    "conf": "low",
+    "note": "自动翻译失败：条数 4 与输入 3 不一致"
+   },
+   {
+    "zh": "",
+    "conf": "low",
+    "note": "自动翻译失败：条数 4 与输入 3 不一致"
+   },
+   {
+    "zh": "",
+    "conf": "low",
+    "note": "自动翻译失败：条数 4 与输入 3 不一致"
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx8.SSx2.p4.1": {
+  "sentences": [
+   {
+    "zh": "**变化的形式。** 基线失败耗尽了150步的预算，从距离目标71–170个单位出发，最终距离目标115–193个单位。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "修复通常需要24–49步到达，即预算的三分之一。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx8.SSx2.p5.1": {
+  "sentences": [
+   {
+    "zh": "**三个值得说明的比较。** 88.0% 已经超过了 Run 2 的 80.0%，后者是已发布检查点中最好的长程规划器；在合理的目标下，最准确的预测器成为最好的长程规划器，§5.2 的分离现象不仅得到了解释，而且消失了。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx8.SSx2.p6.1": {
+  "sentences": [
+   {
+    "zh": "在偏移100处达到98.0%，超过了同一检查点在已发布目标下于偏移25处取得的94.0%。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "长时程的不足根本不是时程问题。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx8.SSx2.p7.1": {
+  "sentences": [
+   {
+    "zh": "而且，26.0% → 88.0% → 98.0% 的顺序与 §7.3 的跨/同比率（0.96 → 1.00 → 1.24）一致，而不是与基于空间距离的准确率（0.437 → 0.9897 → 0.819）一致。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "规划目标必须正确把握的是可达性。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx9.p1.1": {
+  "sentences": [
+   {
+    "zh": "**单一环境。** TwoRoom 是一个二维诊断环境。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在该环境中目标是瓶颈，这并不能证明在其他环境中也是如此，而且解码位置代价仅在能够读出低维状态的情况下才可用。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "时间距离结果（§7）是其中旨在具有普适性的部分，并且它是在同一环境中得到验证的。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx9.p2.1": {
+  "sentences": [
+   {
+    "zh": "**每个检查点一个种子。** 第5.2节的四个检查点对应关系基于四个模型，每个模型使用一个种子。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这是一种对应关系，而非定律，我们也没有对种子方差进行估计。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx9.p3.1": {
+  "sentences": [
+   {
+    "zh": "**混杂条件。** 历史大小、动作宽度和像素归一化在具有可用几何结构的检查点与不具有可用几何结构的检查点之间同时存在差异。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "如果不进行我们未开展的训练运行，我们无法将指标退化归因于其中任何一个因素。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx9.p4.1": {
+  "sentences": [
+   {
+    "zh": "**未对饱和原因作出断言。** 我们表明嵌入度量会饱和并反转，且这一点很重要。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们并未解释表征为何以那种方式组织。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx9.p5.1": {
+  "sentences": [
+   {
+    "zh": "**修复方法是更换规划器。** 它不改变模型自身的目标。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "针对可达性感知的标准进行训练是否会产生一个其普通 L2 距离可用的表示，这是一个悬而未决且更有趣的问题。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx10.p1.1": {
+  "sentences": [
+   {
+    "zh": "本文所识别的失效模式正是 Li, Wang and Liu (2026) 基于一般理由所论证的：潜在空间中的欧氏邻近性是对可达性的一个糟糕代理，潜在世界模型需要与时间范围相匹配的度量。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "他们的论证针对作为一类的潜在世界模型；本文在一个具体已发表模型上——包括原作者自己发布的权重——对该现象提供了直接测量，量化了该度量失效的范围，并展示了修复它在规划成功率方面的价值。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx10.p2.1": {
+  "sentences": [
+   {
+    "zh": "本工作所基于的复现研究（arXiv:2608.10145）确立了已发表规划数字对协议的依赖性、四个未记录的训练惯例，以及第5节所处理机制的准确率/规划分离现象。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "该复现研究明确拒绝提供这一机制，这正是本文填补的空白。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx11.p1.1": {
+  "sentences": [
+   {
+    "zh": "一个预测良好的潜在世界模型可能规划得很差，而原因不一定在模型本身。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在这一点上，预测器保持信息性的距离是规划器所要求的三倍，表示几乎完美地编码了位置，而长时程规划仍然失败——因为规划器最小化的目标在约八十个单位之外就不再区分状态，并在一百二十个单位之外发生反转。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx11.p2.1": {
+  "sentences": [
+   {
+    "zh": "仅修正目标函数，而不做其他任何改动，就能将长时域下达到目标的比例从我们检查点上的26.0%提高到98.0%，从原作者检查点上的14.0%提高到70.0%。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在短时域下，这不会带来任何代价。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "它不需要重新训练、GPU或具有可读状态的环境——我们尝试的三种目标函数中最好的那种完全不使用任何状态监督。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx11.p3.1": {
+  "sentences": [
+   {
+    "zh": "更深刻的教训在于目标函数必须衡量什么。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "按预测空间距离的优劣排序，三个目标函数分别为0.437、0.9897、0.819；按规划成功率排序，它们分别为26.0%、88.0%、98.0%。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "排序既不遵循准确性也不遵循接近度，而是遵循可达性——即代价是否对两个状态之间的墙进行惩罚。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "规划器需要知道某物在步数上有多远，而在欧氏距离上表现出色的度量在开放空间中只是对此的一个良好近似。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx11.p4.1": {
+  "sentences": [
+   {
+    "zh": "实际后果是一个选择标准。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在这些运行中，通过预测损失选择世界模型，反而选出了不利于规划实际所依赖性质的结果。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "如果要在一个潜在模型上进行规划，那么在其嵌入空间中、在规划器自身目标下的几何结构才是需要衡量的东西——而且这种衡量成本低廉，完全不需要进行规划。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx12.p1.1": {
+  "sentences": [
+   {
+    "zh": "Liangyu Li、Shengzhi Wang 和 Qingwen Liu。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "超越欧几里得邻近性：用水平匹配的轨迹可达性度量修复潜在世界模型。arXiv:2605.22164，2026年。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx12.p2.1": {
+  "sentences": [
+   {
+    "zh": "Lucas Maes、Quentin Le Lidec、Damien Scieur、Yann LeCun 和 Randall Balestriero。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "LeWorldModel：从像素出发的稳定端到端联合嵌入预测架构。arXiv:2603.19312，2026年。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx12.p3.1": {
+  "sentences": [
+   {
+    "zh": "Joyjeet Singh。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "评估协议决定结果：LeWorldModel 在 TwoRoom 上的独立复现。arXiv:2608.10145，2026。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "Sx12.p4.1": {
+  "sentences": [
+   {
+    "zh": "代码、发布的检查点以及本文报告的所有测量结果：github.com/joyjeet-singh/tinylab",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "__sections__": {
+  "__title__": "目标才是瓶颈：潜在世界模型编码了其规划器无法使用的内容",
+  "Abstract": "摘要",
+  "1 Introduction": "1 引言",
+  "Contributions": "贡献",
+  "Scope": "范围",
+  "2 Setup": "2 设置",
+  "3 The predictor is not the bottleneck": "3 预测器并非瓶颈",
+  "4 The objective saturates, then inverts": "4 目标饱和，然后反转",
+  "4.1 This is the observed failure": "4.1 这就是观察到的失败",
+  "5 The pathology is the method’s, and it explains the dissociation": "5 病理是方法本身的，并且它解释了这种分离",
+  "5.1 The authors’ own weights": "5.1 作者自己的权重",
+  "5.2 Metric quality orders long-horizon planning": "5.2 度量质量决定了长时程规划的顺序",
+  "5.3 A correlate, not a cause": "5.3 一个相关因素，而非原因",
+  "6 The information is present": "6 信息是存在的",
+  "7 Repair": "7 修复",
+  "7.3 The better objective is the less accurate one": "7.3 更好的目标反而是更不准确的那个",
+  "7.4 A learned cost must be trained on what the planner scores": "7.4 学习到的代价必须基于规划器所评分的来训练",
+  "8 Results": "8 结果",
+  "8.1 Planning becomes horizon-independent": "8.1 规划变得与时间范围无关",
+  "8.2 Where the learned cost loses, and why": "8.2 学习到的代价在哪里失败，以及为什么",
+  "9 Limitations": "9 局限性",
+  "10 Related work": "10 相关工作",
+  "11 Conclusion": "11 结论",
+  "References": "参考文献"
+ }
+}

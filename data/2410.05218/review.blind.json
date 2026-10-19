@@ -1,0 +1,2011 @@
+{
+ "__meta__": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "models": {
+   "reviewer": "deepseek-v4-pro"
+  },
+  "translator": "deepseek-v4-pro（关思考）",
+  "independence": "same-model",
+  "usage": {
+   "calls": 89,
+   "prompt_tokens": 73250,
+   "completion_tokens": 61651,
+   "seconds": 836.6,
+   "cached_tokens": 54400
+  }
+ },
+ "abs.p1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "大型语言模型（LLMs）展现出在各种任务中进行上下文学习的显著涌现能力，包括时间序列预测。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这项工作研究了LLMs从上下文中观察到的数据估计概率密度函数（PDFs）的能力；这种密度估计（DE）是许多概率建模问题的基础任务。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们使用密集主成分分析（InPCA）来可视化和分析LLaMA-2、Gemma和Mistral的上下文学习动态。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的主要发现是，这些LLMs在低维InPCA空间中均遵循相似的学习轨迹，这与直方图和高斯核密度估计（KDE）等传统密度估计方法的轨迹不同。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们将这些LLMs的上下文DE过程解释为一种具有自适应核宽度和形状的KDE算法。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "尽管只有两个参数，这个自定义核模型捕捉了LLMs行为的很大一部分。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们进一步推测为什么LLMs的核宽度和形状与经典算法不同，为LLMs中上下文概率推理的机制提供了见解。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的代码库以及LLM上下文学习轨迹的3D可视化可在`https://github.com/AntonioLiu97/LLMICL_inPCA`公开获取。"
+   }
+  ]
+ },
+ "S1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "现代大型语言模型（LLMs）展现出令人惊讶的涌现能力，这些能力并非它们被明确训练的目标（Brown et al., 2020; Dong et al., 2024），例如从示例中学习（Si et al., 2023）和自然语言中的类比（Hu et al., 2023）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这种直接从输入文本字符串中提取模式、而不依赖额外训练数据的能力，通常被称为上下文学习（ICL）。"
+   }
+  ]
+ },
+ "S1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "最近，LLM 已被证明在各种数学问题上取得了有竞争力的表现，包括时间序列预测（Gruver et al., 2024）、从动力系统推断物理规则（Kantamneni et al., 2024; Liu et al., 2024）以及学习随机语言（Bigelow et al., 2024）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了解决这些任务，LLM 必须具备一定的概率建模能力——即通过从上下文示例中收集相关统计数据来推断条件或无条件概率分布结构的能力（Akyürek et al., 2024）。"
+   }
+  ]
+ },
+ "S1.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们研究大语言模型执行密度估计（DE）的能力，这涉及根据上下文中观察到的数据来估计概率密度函数（PDF）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的核心实验非常简单。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如图1所示，我们向LLaMA-2（Touvron et al., 2023）、Gemma（GemmaTeam et al., 2024）和Mistral（Jiang et al., 2023）等大语言模型提供一系列数据点 $\\{X_{i}\\}_{i=1}^{n}$，这些数据点是从底层分布 $p(x)$ 中独立同分布地采样得到的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然后我们观察到，随着上下文长度 $n$（上下文数据点的数量）的增加，大语言模型对下一个数据点预测的PDF $\\hat{p}_{n}(x)$ 逐渐收敛到真实分布。{fn1}"
+   }
+  ]
+ },
+ "fn1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的提示完全由逗号分隔的多位数字组成，不含任何自然语言指令。"
+   }
+  ]
+ },
+ "S1.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了解释LLM在上下文密度估计过程背后的内部机制（Olsson et al., 2022; Bietti et al., 2023; Dai et al., 2023; von Oswald et al., 2023），我们使用密集主成分分析（InPCA）（Teoh et al., 2020; Quinn et al., 2019; Mao et al., 2024）将每个上下文长度下的估计PDF $\\{\\hat{P}_{n}\\}$ 嵌入到概率空间中（图2）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的可视化结果表明，所测试LLM的上下文密度估计过程都遵循相似的低维路径，这与直方图和高斯核密度估计（KDE）等传统密度估计方法的路径不同。"
+   }
+  ]
+ },
+ "S1.p5.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "通过研究这些上下文狄利克雷能量轨迹的几何特征，我们识别出对高斯性的强烈偏置，我们认为这是基于核的密度估计的一个标志性特征（Rosenblat, 1956; Wand & Jones, 1994; Silverman, 2018）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这一观察启发我们将LLM的上下文狄利克雷能量过程建模为具有自适应核的核密度估计器。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "尽管只有两个参数，核形状和宽度，这个定制的KDE模型以高精度捕捉了上下文学习轨迹。"
+   }
+  ]
+ },
+ "S1.F1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图1：上下文密度估计实验。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "LLaMA-2 13b 被提示以从 $p(x)$ 中采样的200个数字（左侧红色）（附录A.9），并预测下一个数字的PDF $\\hat{p}(x)$（右侧蓝色）。"
+   }
+  ]
+ },
+ "S1.I1.i1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "minor",
+    "category": [
+     "term"
+    ],
+    "issue": "probing 按术语表应译为「线性探针」，此处译为「探测」，与项目规定译法不一致。",
+    "suggestion": "我们引入了一个框架，使用线性探针来探测大语言模型从上下文数据中估计无条件概率密度函数的能力。",
+    "zh_reviewed": "我们引入了一个框架，用于探测大语言模型从上下文数据中估计无条件概率密度函数的能力。"
+   }
+  ]
+ },
+ "S1.I1.i2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "2. 我们应用 InPCA 来分析各种 LLM 的上下文学习轨迹中的低维特征。"
+   }
+  ]
+ },
+ "S1.I1.i3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "3. 我们将大语言模型的上下文狄利克雷能量算法解释为一种自适应核密度估计形式，为分散归纳头机制提供了证据（Olsson et al., 2022; Akyürek et al., 2024）。"
+   }
+  ]
+ },
+ "S2.SS0.SSS0.Px1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Gruver等人（2024）开创了基于LLM的时间序列预测，通过将时间序列数据序列化为逗号分隔的多位数字来提示LLM。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "他们观察到，对编码为softmax概率的未来状态，预测具有竞争力。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "他们的数据序列化方案被证明简单而有效，便于对预测的下一个数字进行对数似然评估。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此后，它已成为评估LLM数值能力的常用提示方法（Jin等人，2024；Requeima等人，2024；Zhang等人，2024；Liu等人，2024）。"
+   }
+  ]
+ },
+ "S2.SS0.SSS0.Px1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "基于这种提示技术，Liu et al. (2024) 测试了 LLM 在上下文学习各种随机和混沌动力系统转换规则的能力。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "他们引入了一种递归算法，称为 Hierarchy-PDF，用于根据上下文中观察到的历史提取 LLM 对下一个数据点的预测 PDF：$\\hat{p}(x_{t}|X_{0},\\dots,X_{t-1})$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这使得他们能够严格地将预测的 PDF 与真实转换概率 $p(x_{t}|x_{t-1})$ 进行比较。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的工作利用了 Gruver et al. (2024) 提出的数据序列化技术，并使用 Liu et al. (2024) 引入的 Hierarchy-PDF 算法提取 LLM 的概率预测。"
+   }
+  ]
+ },
+ "S2.SS0.SSS0.Px2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "DE（Izenman, 1991）是一个长期存在的统计问题，既有经典解法（Silverman, 2018; Rosenblat, 1956; Scott, 1979; Lugosi & Nobel, 1996; Parzen, 1962），也有现代机器学习解法（Papamakarios et al., 2021; Sohl-Dickstein et al., 2015）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "它是学习更复杂随机过程的基础。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例如，在（Liu et al., 2024; Bigelow et al., 2024; Zekri et al., 2024）研究的一阶马尔可夫过程中，转移概率 $p(x_{t}|x_{t-1})$ 必须在上下文中进行估计。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这可以看作一个条件密度估计问题，其中对于 $x_{t-1}$ 的每个可能取值，都必须估计 $x_{t}$ 的密度。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "换句话说，学习马尔可夫过程涉及执行多次密度估计；每个条件状态对应一次。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，我们当前对无条件密度估计的关注，是理解这些更复杂学习任务的垫脚石。"
+   }
+  ]
+ },
+ "S2.F2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图2：**LLM上下文密度估计过程的可视化流程。**（a）数据点从真实分布（本例中为高斯分布）中独立采样，然后序列化为逗号分隔的两位数字，以提示LLM，如LLaMA-2、Mistral-v0.3和Gemma。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（b）Hierarchy-PDF在每个上下文长度$n$处提取每个LLM的估计密度函数$\\hat{p}_{n}$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（c）InPCA揭示密度估计轨迹中的低维结构，在2维中捕获91%的成对Hellinger距离。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "视觉指南：灰色-表示最大无知的均匀PDF，深蓝色-真实PDF，粉红色-中心高斯分布的1D子流形，方差范围从$\\infty$到0。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "本工作中研究的所有LLM都表现出类似的DE轨迹，这些轨迹在几何上被限制在测地线和高斯子流形之间。"
+   }
+  ]
+ },
+ "S3.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在这里，我们解释如何提示 LLM 对上下文数据执行密度估计，以及如何利用 InPCA 提取和分析其上下文学习轨迹。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的方法包括 5 个步骤，其中前 3 个步骤如图 2 所示。"
+   }
+  ]
+ },
+ "S3.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**1."
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "采样与提示生成。从真实概率密度函数 $p(x)$ 出发，我们生成一系列独立样本 $X_{0},\\dots,X_{t-1}$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "与 Gruver et al. (2024) 一致，我们随后将该序列序列化并分词为一个文本字符串，该字符串由逗号分隔的两位数字序列组成，形成类似“6 1, 4 2, 5 9, …, 8 1, 3 2, 5 8, ”的提示（图 2 (a)）。"
+   }
+  ]
+ },
+ "S3.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**2."
+   },
+   {
+    "verdict": "major",
+    "category": [
+     "omission"
+    ],
+    "issue": "漏译了原文开头的标题“Extracting estimated densities with Hierarchy-PDF.”",
+    "suggestion": "用 Hierarchy-PDF 提取估计密度。在用这样的文本字符串提示后，我们读出 LLM 对下一个 token 的 softmax 预测，得到 10 个 token（0-9）的概率{fn2}，从而创建一个跨越 $x\\in(0,100)$ 的粗略 10 箱 PDF。",
+    "zh_reviewed": "在用这样的文本字符串提示后，我们读出 LLM 对下一个 token 的 softmax 预测，得到 10 个 token（0-9）的概率{fn2}，从而创建一个跨越 $x\\in(0,100)$ 的粗略 10 箱 PDF。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "“tens bins”应指“十位箱”而非“十个箱”，译文丢失了“十位”这一层含义。",
+    "suggestion": "然后我们读出下一个 token，它将十位箱中的一个进一步细分为 10 个一位数箱。",
+    "zh_reviewed": "然后我们读出下一个 token，它将十个箱中的一个进一步细分为 10 个一位数箱。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这个过程递归地重复 10 次，直到所有箱都被细化，从而得到下一个状态 $p(x_{t})$ 的预测 PDF，它是一个由 $10^{N}$ 个箱组成的离散 PDF 对象，其中 $N$ 是表示每个数字所用的位数。{fn3} 我们将提取的 PDF $\\hat{p}(x_{t})$ 解释为 LLM 对真实 $p(x)$ 的估计。"
+   }
+  ]
+ },
+ "fn2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "所有其他标记的 logits 被忽略。"
+   }
+  ]
+ },
+ "fn3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们使用 Hierarchy-PDF 算法（Liu et al., 2024），该算法为 transformer 高效地执行这种递归搜索。"
+   }
+  ]
+ },
+ "S3.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**3."
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "用 InPCA 可视化 DE 轨迹。** 当上下文数据非常少时，LLM 估计的 $\\hat{p}_{0}(x)$ 接近域 $(0,100)$ 上的均匀分布，表现出中性无知的状态，这是一个合理的贝叶斯先验（Xie et al., 2022）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，随着上下文数据数量（$n$）的增加，LLM 收集到更多关于底层分布的信息。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "结果，估计的 $\\hat{p}_{n}(x)$ 逐渐收敛到真实分布 $p(x)$（图 2 (b)）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "估计的 PDF 序列 $\\hat{p}_{0}(x),\\hat{p}_{1}(x),...,\\hat{p}_{n}(x)$ 随上下文长度 $n$ 的变化形成了我们所说的“上下文 DE 轨迹”。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们认为，这些轨迹为 LLM 如何进行上下文学习提供了重要线索。"
+   }
+  ]
+ },
+ "S3.p5.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，在我们的两位数表示下，每个 $\\hat{p}(x)$ 是生活在 99 维空间中的向量{fn4}，这使得直接分析轨迹具有挑战性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，我们使用 InPCA 将这些 PDF 对象嵌入到低维欧几里得空间中（图 2 (c)），然后分析它们的几何特征。{fn5}"
+   }
+  ]
+ },
+ "fn4": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "$10^{2}-1$，其中 $-1$ 维来自归一化约束 $\\int p(x)dx=1$。"
+   }
+  ]
+ },
+ "fn5": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "使用 InPCA 可视化机器学习系统训练动态的想法已在 Quinn et al. (2019); Mao et al. (2024) 中探讨过，附录 A.2 对此有进一步讨论。"
+   }
+  ]
+ },
+ "S3.p6.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**4.**"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**与经典DE算法比较。** 为了解释InPCA揭示的低维几何特征，我们将著名算法——具体为核密度估计（KDE）和贝叶斯直方图——的DE轨迹嵌入到同一个二维（2D）空间中。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "令人惊讶的是，我们发现LLM、KDE和贝叶斯直方图的DE轨迹可以同时嵌入到这个相同的低维子空间中。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此外，LLM的DE轨迹在几何上被限制在KDE和贝叶斯直方图的轨迹之间。"
+   }
+  ]
+ },
+ "S3.p7.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**5."
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "用定制 KDE 解释 LLaMA-2。** 我们观察到，LLM 的上下文内 DE 轨迹始终与 KDE 的轨迹保持接近，这表明 LLM 可能在内部采用了类似核的算法。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了研究这一假设，我们优化了一个带有拟合核参数（仅使用两个参数）的 KDE 算法。"
+   }
+  ]
+ },
+ "S3.p8.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们现在详细说明如何应用 InPCA 来分析上下文中的狄利克雷能量轨迹。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们还将介绍两种经典的狄利克雷能量算法，作为有启发性的比较。"
+   }
+  ]
+ },
+ "S3.SS1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了在低维空间中可视化各种算法的密度估计（DE）轨迹，我们采用密集主成分分析（InPCA）（Quinn et al., 2019; Mao et al., 2024; Teoh et al., 2020）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "给定一组PDF $\\{p_{i}\\}_{i=1}^{m}$，InPCA旨在将它们嵌入为低维空间$\\mathbb{R}^{d}$（$d\\ll m$）中的点$\\{P_{i}\\}_{i=1}^{m}$，使得嵌入点之间的欧氏距离紧密近似相应PDF之间的统计距离："
+   }
+  ]
+ },
+ "S3.SS1.p1.2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "其中 $D(\\cdot,\\cdot)$ 是所选择的概率密度函数之间的统计距离度量。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在这项工作中，我们选择 $D(\\cdot,\\cdot)$ 为 Hellinger 距离（Hellinger, 1909），其定义为："
+   }
+  ]
+ },
+ "S3.SS1.p1.3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Hellinger 距离非常适合可视化我们的 PDF 轨迹，原因如下{fn6}：1) 它在局部上与 KL 散度一致（Liese & Vajda, 2006），KL 散度是一种非负度量，常用于训练现代机器学习系统，包括 LLM（Touvron et al., 2023），2) 它是对称的且满足三角不等式，使其成为适合几何分析的恰当距离度量（Quinn et al., 2019; Teoh et al., 2020）。"
+   }
+  ]
+ },
+ "fn6": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "关于使用其他距离度量（如 L2 和对称化 KL 散度）的可视化，请参见第 A.5 和 A.6 节。"
+   }
+  ]
+ },
+ "S3.SS1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在选择了合适的距离度量之后，我们继续进行包含三个步骤的InPCA："
+   }
+  ]
+ },
+ "S3.SS1.p2.2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "$\\Sigma$ 中的特征值表示嵌入概率空间中每个维度所解释的方差量。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "随着维度数量的增加，所捕获的总方差的累积比例显示在图 2 (c) 中。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在我们的主要实验中，大约 90% 的 Hellinger 距离方差可以在仅两个维度中被捕获，从而能够对 DE 轨迹进行忠实的二维可视化。"
+   }
+  ]
+ },
+ "S3.I1.i1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "计算每对PDF之间的Hellinger距离，$D^{2}_{\\text{Hel}}(p_{i},p_{j})$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这得到一个成对距离矩阵 $\\boldsymbol{D}\\in\\mathbb{R}^{m\\times m}$，其 $\\boldsymbol{D}_{ij}$ 项等于 $D^{2}_{\\text{Hel}}(p_{i},p_{j})$。"
+   }
+  ]
+ },
+ "S3.I1.i2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "2. 获得一个“中心化”矩阵 $W=-\\frac{1}{2}L\\boldsymbol{D}L$，其中 $L_{ij}=\\delta_{ij}-1/m$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这一步与多维缩放（MDS）密切相关（Chen et al., 2007）。"
+   }
+  ]
+ },
+ "S3.I1.i3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "3. 执行特征值分解 $W=U\\Sigma U^{T}$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "$\\Sigma$ 中的对角元素按降序排列，表示 $W$ 的特征值。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "PDF 的嵌入坐标由 $U\\Sigma^{1/2}$ 给出，其中 $U$ 的列是对应的特征向量。"
+   }
+  ]
+ },
+ "S3.SS2.SSS0.Px1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "核密度估计（KDE）是一种基于有限数据样本估计随机变量概率密度函数的非参数方法。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "给定从某个具有未知密度函数 $f$ 的分布中抽取的 $n$ 个样本 $X_{1},X_{2},\\ldots,X_{n}$，核密度估计量 $\\hat{p}_{h}(x)$ 是定义在 $x$ 的支撑集上的函数，其定义为："
+   }
+  ]
+ },
+ "S3.SS2.SSS0.Px1.p1.2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "其中 $K$ 是核函数，$h>0$ 是带宽（平滑参数）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "核函数 $K$ 通常选择为对称的概率密度函数，例如高斯核 $K(u)=\\frac{1}{\\sqrt{2\\pi}}e^{-\\frac{1}{2}u^{2}}$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们在附录 A.7.2 中讨论其他核形状。"
+   }
+  ]
+ },
+ "S3.SS2.SSS0.Px1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "minor",
+    "category": [
+     "omission",
+     "term"
+    ],
+    "issue": "“optimal bandwidth schedule”中的“schedule”（带宽随样本量或迭代变化的序列/计划）被译成“选择”，丢失了序列/计划含义，变成单纯的最优带宽选择。",
+    "suggestion": "最优带宽计划（schedule）是经典核密度估计文献中的一个核心研究对象（附录A.7）。",
+    "zh_reviewed": "最优带宽的选择是经典核密度估计文献中的一个核心研究对象（附录A.7）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "通过分析渐近均方积分误差（AMISE）（公式15），研究者们推导出了一个被广泛接受的最优带宽缩放规律。"
+   }
+  ]
+ },
+ "S3.SS2.SSS0.Px1.p2.2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "其中 $n$ 是样本量，$C$ 是前置系数（公式 16）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在低数据量情况下，较大的带宽会提供更多的平滑偏差，以弥补数据稀疏性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "虽然 $n^{-1/5}$ 的缩放比例被广泛接受，但确定前置系数 $C$ 更具挑战性（Wand & Jones, 1994; Silverman, 2018）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "除非另有说明，本文中经典 KDE 使用 $C=1${fn7}。"
+   }
+  ]
+ },
+ "fn7": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在实践中，人们提出了各种启发式方法来确定 $C$，例如 Silverman 的经验法则（Silverman, 2018）（见附录 A.7.1 和 A.13）。"
+   }
+  ]
+ },
+ "S3.SS2.SSS0.Px2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "贝叶斯直方图（Lugosi & Nobel, 1996）是另一种用于密度估计的非参数方法，其可表述如下："
+   }
+  ]
+ },
+ "S3.SS2.SSS0.Px2.p1.2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "其中 $\\hat{p}_{n}(x)$ 是包含 $x$ 的箱 $i$ 的估计概率密度，$n_{i}$ 是箱 $i$ 中观测到的数据点数量，$n$ 是观测到的数据点总数，$M$ 是箱的总数{fn8}，$\\alpha$ 是每个箱的先验计数。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们设置 $\\alpha=1$，实际上是在观测任何数据之前，为每个箱填充一个“幻觉”数据点（Jeffreys, 1946）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这一选择确保直方图算法从最大无知状态开始，与 LLaMA 在低数据区间的上下文内 DE 一致{fn9}。"
+   }
+  ]
+ },
+ "fn8": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "$M=100$，因为我们从 Hierarchy-PDF 得到的最精细估计由 100 个一位数区间组成。"
+   }
+  ]
+ },
+ "fn9": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "minor",
+    "category": [
+     "omission"
+    ],
+    "issue": "漏译了“throughout”，中文只说了“在第4节中”，没有体现“贯穿整个第4节”的范围含义。",
+    "suggestion": "我们在第3节中预示过、并在第4节中通篇进一步讨论的一个有趣特征",
+    "zh_reviewed": "我们在第3节中预示过、并在第4节中进一步讨论的一个有趣特征"
+   }
+  ]
+ },
+ "S4.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们可视化并分析LLM在两类目标（真实）分布上的学习轨迹：均匀分布和高斯分布。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了提供背景并便于解释二维空间，我们嵌入以下额外的参考点和轨迹："
+   }
+  ]
+ },
+ "S4.I1.i1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• **无知**：一个表示最大熵（在整个支撑集上的均匀分布）的点。"
+   }
+  ]
+ },
+ "S4.I1.i2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• **真相**：一个代表真实分布的点。"
+   }
+  ]
+ },
+ "S4.I1.i3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• **测地线**：连接无知点与真值点的最短轨迹（Mao et al., 2024）。"
+   }
+  ]
+ },
+ "S4.I1.i4": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• **高斯子流形**：一个由中心化高斯分布构成的一维流形，其方差范围从 $\\infty$ 到 0。"
+   }
+  ]
+ },
+ "S4.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为简洁起见，本节重点讨论 LLaMA-2 13B，因为其他 LLM 产生的结果在性质上相似，详见附录 A.4。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "公式 $n=200$ 的 LaTeX 标记丢失。",
+    "suggestion": "虽然 LLaMA-2 的上下文窗口为 4096 个 token（相当于约 1365 个逗号分隔的 2 位数字数据点），但我们将分析限制在上下文长度 $n=200$。",
+    "zh_reviewed": "虽然 LLaMA-2 的上下文窗口为 4096 个 token（相当于约 1365 个逗号分隔的 2 位数字数据点），但我们将分析限制在上下文长度 n=200。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这一限制基于我们的观察：LLaMA 的 DE 准确率通常在此点之后趋于平稳。"
+   }
+  ]
+ },
+ "S4.F3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图3：高斯目标下的上下文密度估计轨迹。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "顶行：宽度递减的高斯目标（从左到右）的DE轨迹的2D InPCA嵌入。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "底行：对应的真实分布。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些2D嵌入捕获了概率分布之间成对Hellinger距离的92%。"
+   }
+  ]
+ },
+ "S4.SS1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们首先分析不同宽度的 Gaussian 目标分布。"
+   }
+  ]
+ },
+ "S4.SS1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "宽高斯目标。宽高斯分布作为我们最简单的目标，因为它在Hellinger距离上接近均匀分布（完全无知）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在这种情况下，LLaMA和高斯KDE都能在200个数据点内成功近似目标PDF。"
+   }
+  ]
+ },
+ "S4.SS1.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**窄高斯目标。** 然而，随着高斯目标变窄，高斯核密度估计逐渐落后，而 LLaMA 保持其紧密逼近目标分布的能力。"
+   }
+  ]
+ },
+ "S4.SS1.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在所有三种情况下，贝叶斯直方图按设计从完全无知状态开始，然后沿着测地线轨迹前进。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "尽管沿着这条几何上最短的路径，贝叶斯直方图收敛到目标分布的速度却是最慢的；这可能是由于其均匀先验的强烈影响。"
+   }
+  ]
+ },
+ "S4.SS1.p5.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "另一方面，高斯核密度估计（Gaussian KDE）由于拥有高斯形状核的不公平优势，从一开始就更接近目标分布。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "有趣的是，高斯核密度估计在整个狄利克雷能量（DE）过程中始终停留在高斯子流形上。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这种停留在高斯子流形上的行为并非高斯核所独有；如图16所示，具有其他核形状（例如指数核和抛物线核）的核密度估计也表现出对高斯子流形的强烈倾向。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对这一现象的一个可能解释在于核密度估计本身的性质。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "核密度估计可以表示为两个分布的卷积：经验数据分布和核形状，如下所示"
+   }
+  ]
+ },
+ "S4.SS1.p5.2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "其中 $F_{n}$ 是经验分布，$K_{h}$ 是缩放后的核。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "由于中心极限定理，这种卷积运算往往会产生类似高斯的分布（Fischer, 2011）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，**靠近高斯流形的狄利克雷能量轨迹可能表明一种核式密度估计算法。**"
+   }
+  ]
+ },
+ "S4.SS2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "高斯分布很容易出现在具有加性噪声的数据中（Fischer, 2011），因此很可能在训练数据中占主导地位（Touvron et al., 2023）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此外，高斯分布处处光滑，从函数逼近的角度来看，这使得它非常容易估计（DeVore, 1993）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "另一方面，均匀分布具有不可微的边界；无论是参数化方法（DeVore, 1993）还是基于核的方法（Wand & Jones, 1994，第2.9章）都难以表示。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "基于这些原因，我们现在研究目标为均匀分布时的上下文内DE轨迹。"
+   }
+  ]
+ },
+ "S4.F4": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图4：均匀分布目标的上下文内密度估计轨迹。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "顶行：宽度递减的均匀目标（从左到右）的DE轨迹的2D InPCA嵌入。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "底行：对应的真实分布。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些2D嵌入捕获了概率分布之间89%的成对Hellinger距离。"
+   }
+  ]
+ },
+ "S4.SS2.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**宽均匀目标。** 对于宽均匀目标，LLaMA 和高斯 KDE 最初都迅速向目标分布移动。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，它们随后停留在高斯子流形上最接近均匀目标的点。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "随着更多数据流入，它们缓慢离开子流形并收敛到目标分布。"
+   }
+  ]
+ },
+ "S4.SS2.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**窄均匀目标。** 随着均匀目标变窄，高斯 KDE 的性能恶化，而基于 LLM 的上下文 DE 成功到达目标。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "值得注意的是，与窄高斯目标情形相比，LLM 对高斯子流形的偏置更小。"
+   }
+  ]
+ },
+ "S4.SS2.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在低数据量情况下，高斯核密度估计和贝叶斯直方图遵循与之前针对窄高斯目标时相同的轨迹。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，LLM 似乎已经通过采取一条更远离高斯子流形、更接近测地线的路径来区分这一目标。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这种行为表明，LLM 的上下文内密度估计算法比具有预定宽度计划和形状的经典核密度估计更灵活、更具适应性。"
+   }
+  ]
+ },
+ "S4.SS3.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "基于我们在4.1和4.2节中的观察，我们提出了一种基于核的LLaMA上下文密度估计算法解释。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "LLaMA轨迹中对高斯子流形的偏置表明了一种类似KDE的方法。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了检验这一假设，我们开发了一个定制的KDE模型，具有自适应核形状和带宽，并优化以模拟LLaMA的学习轨迹。"
+   }
+  ]
+ },
+ "S4.SS3.SSS1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们分两步构建定制的KDE模型："
+   }
+  ]
+ },
+ "S4.SS3.SSS1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**步骤 1：参数化核形状**"
+   }
+  ]
+ },
+ "S4.SS3.SSS1.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们引入一个由形状参数 $s$ 参数化的灵活核函数 $K_{s}(x)$："
+   }
+  ]
+ },
+ "S4.SS3.SSS1.p3.2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "其中 $Z(s)=2\\Gamma(\\frac{1}{s}+1)$ 将核归一化使其积分为 1，而 $b(s)=\\sqrt{\\frac{\\Gamma(\\frac{3}{s}+1)}{3\\Gamma(\\frac{1}{s}+1)}}$ 对其进行缩放以保持单位方差。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这种参数化使我们能够在常见核形状之间进行插值，例如指数核（$s=1$）、高斯核（$s=2$）和顶帽核（$s\\to\\infty$），如图 5 所示。"
+   }
+  ]
+ },
+ "S4.F5": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图5：定制核插值了各种常见核形状。"
+   }
+  ]
+ },
+ "S4.SS3.SSS1.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们在附录 A.7.2 的图 16 中可视化了使用这三种常见核（$s=1,2$ 和 $\\infty$）的 DE 轨迹。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "随着形状参数（$s$）减小，DE 轨迹逐渐从高斯子流形外部移动到内部，更接近 LLaMA 的轨迹。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "译文将“extending beyond the range”译为“扩展了常见核形状的范围”，带有主动扩大范围的意味，而原文是描述 s 取小于 1 的值本身处于常见核形状范围之外，语义略有偏差。",
+    "suggestion": "这一趋势表明，我们的参数化（方程 7）可能能够通过允许 $s$ 取小于 1 的值（这超出了常见核形状的范围）来捕捉 LLaMA 的行为。",
+    "zh_reviewed": "这一趋势表明，我们的参数化（方程 7）可能能够通过允许 $s$ 取小于 1 的值来捕捉 LLaMA 的行为，从而扩展了常见核形状的范围。"
+   }
+  ]
+ },
+ "S4.SS3.SSS1.p5.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们通过引入核形状来增强标准核密度估计公式，从而得到两个超参数：$h$ 和 $s$。"
+   }
+  ]
+ },
+ "S4.SS3.SSS1.p6.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**步骤2：优化核带宽（h）和形状（s）**"
+   }
+  ]
+ },
+ "S4.SS3.SSS1.p7.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于给定的DE轨迹 $\\hat{p}_{1}(x),\\ldots,\\hat{p}_{n}(x)$，我们优化定制的KDE，以最小化每个上下文长度 $i$ 处的海林格距离："
+   }
+  ]
+ },
+ "S4.SS3.SSS1.p7.2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "从而得到“定制 KDE”带宽序列 $\\{h_{i}\\}_{i=1}^{n}$ 和形状序列 $\\{s_{i}\\}_{i=1}^{n}$，它们共同规定了一系列宽度和形状不断变化的拟合核。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们将这些拟合核序列可视化，并在附录 A.8 和 A.9 中将其与具有标准 $n^{-1/5}$ 宽度序列的高斯核进行比较。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们使用 SciPy 数值实现这一优化，并根据损失函数（KL 散度）在最优处的逆 Hessian 矩阵估计参数不确定性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这为拟合的核形状和带宽参数提供了误差条（图 7）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在 A.12 节中，我们详细阐述了这种不确定性量化方法的信息论动机。"
+   }
+  ]
+ },
+ "S4.F7": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图6：为定制KDE模型优化的核形状（$s$）和带宽（$h$）调度，拟合于LLaMA-2 13b在窄高斯目标上的DE轨迹。"
+   }
+  ]
+ },
+ "S4.SS3.SSS2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图7展示了为我们定制的KDE模型优化的核形状和带宽调度，该模型拟合了LLaMA-2 13b在窄高斯目标（第4.1节）上的上下文内DE轨迹。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "出现了两个关键观察结果："
+   }
+  ]
+ },
+ "S4.SS3.SSS2.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "拟合的核宽度衰减速度显著快于标准 KDE 带宽计划（$n^{-\\frac{1}{5}}$）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这种快速衰减解释了 LLaMA 在 inPCA 嵌入中的上下文内 DE 轨迹比标准高斯 KDE 长得多（图 3）。"
+   }
+  ]
+ },
+ "S4.SS3.SSS2.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "与固定形状的KDE方法（例如，$s=2$的高斯KDE）不同，LLaMA似乎隐式地采用了自适应核。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "形状参数$s$从约0.1演变到约1，且当$n\\gtrsim 20$时不确定性增加。"
+   }
+  ]
+ },
+ "S4.SS3.SSS2.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图7比较了LLaMA-2 13b的上下文狄利克雷能量轨迹与其定制KDE对应轨迹，展示了我们的模型所实现的紧密拟合。"
+   }
+  ]
+ },
+ "S4.SS3.SSS2.p5.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**定制 KDE 的意义** 存在一个能密切模仿 LLM 上下文内狄利克雷能量过程的定制 KDE，这一点意义重大且并非平凡。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "并非所有狄利克雷能量过程都能被 KDE 方法忠实表示；例如，贝叶斯直方图尽管表面上类似于固定宽度的顶帽核 KDE，却难以被准确建模为定制 KDE 过程（附录 A.3）。"
+   }
+  ]
+ },
+ "S4.SS3.SSS2.p6.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "虽然我们最初的实验集中在高斯分布和均匀分布等规则分布上，但为了更好的通用性，我们将实验扩展到了随机生成的PDF（附录A.9）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "值得注意的是，LLM在这些不规则分布上的DE性能仍然可以用我们的定制KDE过程有效描述（附录A.8和A.9）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "尽管这些随机PDF的DE轨迹缺乏低维嵌入，因此提供的几何洞察较少，但它们仍然证实了我们在更规则分布情况下的发现。"
+   }
+  ]
+ },
+ "S4.SS3.SSS2.p7.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这种跨不同目标PDF类型的一致性加强了我们对LLM中上下文狄利克雷能量机制的核心假设。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "具体来说，我们假设LLM的上下文狄利克雷能量算法与核密度估计共享基本特征，尽管其自适应核形状和带宽调度使其区别于经典KDE方法。"
+   }
+  ]
+ },
+ "S5.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "受大语言模型在延续随机时间序列方面涌现的上下文能力启发，当前工作探索了基础模型作为核密度估计器运行的效能；这是此类时间序列预测中的一个关键要素。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "通过应用 InPCA，我们确定这种上下文核密度估计在一个共同的低维概率空间内进行；沿着有意义的轨迹，允许在直方图、高斯核密度估计和大语言模型上下文核密度估计之间进行比较。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "通过 InPCA 的视角，可以清楚地看到，对这种上下文学习的一个有益刻画可以用一个双参数、自适应核密度估计框架来表述；这暗示了机制基础（附录 A.1），为未来研究指明了方向。"
+   }
+  ]
+ },
+ "S5.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**未来方向：迈向弥散归纳头**。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "近期研究已确定归纳头是许多离散状态随机系统中上下文学习行为的基础电路（Olsson et al., 2022; Bigelow et al., 2024）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些涌现电路提高了在上下文中观察到的标记组合的预测概率。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，这种离散机制不足以解释连续随机系统的上下文学习，例如我们研究的密度估计任务。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了弥补这一差距，我们在第4.3.2节的定制KDE分析揭示，LLM可能具备一种类似核的归纳机制，我们称之为**弥散归纳头**。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这是对归纳头概念的扩展，其运作方式如下："
+   }
+  ]
+ },
+ "S5.I1.i1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• 与标准归纳头（Akyürek et al., 2024）不同，分散归纳头不仅提高精确匹配的预测概率，还提高相似标记或单词的预测概率。"
+   }
+  ]
+ },
+ "S5.I1.i2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• 这种“相似性”由一个自适应核决定，类似于我们定制的KDE模型。"
+   }
+  ]
+ },
+ "S5.I1.i3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "minor",
+    "category": [
+     "addition"
+    ],
+    "issue": "译文多出原文没有的“定制”，给 KDE 模型增加了“定制/customized”这一预设。",
+    "suggestion": "• 每个观测对不相似标记的影响随上下文长度衰减，这反映了我们 KDE 模型中带宽的递减。",
+    "zh_reviewed": "• 每个观测对不相似标记的影响随上下文长度衰减，这反映了我们定制 KDE 模型中带宽的递减。"
+   }
+  ]
+ },
+ "S5.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这种分散归纳头的概念可能弥合Transformer中离散（Akyürek et al., 2024）和连续（Gruver et al., 2024; Liu et al., 2024）上下文学习机制之间的差距（Dong et al., 2024）。"
+   }
+  ]
+ },
+ "A1.F16": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图16：LLaMA-13b与不同核形状的KDE的密度估计轨迹的2D InPCA嵌入：指数核（$s=1$）、高斯核（$s=2$）和顶帽核（$s=\\infty$）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "随着$s$减小，DE轨迹逐渐从高斯子流形外部移动到内部，更接近LLaMA的轨迹。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "真实分布是一个窄高斯分布。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "该可视化捕捉了概率分布之间87%的成对Hellinger距离。"
+   }
+  ]
+ }
+}

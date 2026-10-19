@@ -1,0 +1,1741 @@
+{
+ "__meta__": {
+  "translator": "deepseek-v4-pro（关思考）",
+  "usage": {
+   "calls": 102,
+   "prompt_tokens": 72417,
+   "completion_tokens": 13187,
+   "seconds": 200.8,
+   "cached_tokens": 52992
+  }
+ },
+ "abs.p1": {
+  "sentences": [
+   {
+    "zh": "序列模型如何表征其决策过程？",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "先前的研究表明，下奥赛罗的神经网络学习了棋盘状态的非线性模型（Li et al., 2023a）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在这项工作中，我们提供了棋盘的一种密切相关的线性表征的证据。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "特别是，我们表明，探测“我的颜色”与“对手的颜色”可能是一种简单而强大的方式来解释模型的内部状态。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "对内部表征的这种精确理解使我们能够通过简单的向量算术来控制模型的行为。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "线性表征使得可解释性取得重大进展，我们通过进一步探索世界模型是如何计算的来证明这一点。{fn1}",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "fn1": {
+  "sentences": [
+   {
+    "zh": "代码可在 `https://github.com/ajyl/mech_int_othelloGPT` 获取。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S1.p1.1": {
+  "sentences": [
+   {
+    "zh": "序列模型如何表示其决策过程？",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "大型语言模型能够实现前所未有的壮举，但在很大程度上仍然是难以理解的黑箱。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然而，越来越多的证据表明，模型充当特征提取器：识别输入中日益复杂的属性，并在内部激活中表示这些属性（Geva et al., 2021; Bau et al., 2020; Gurnee et al., 2023; Belinkov, 2022a; Burns et al., 2022; Goh et al., 2021; Elhage et al., 2022a）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "解释它们的关键第一步是理解这些特征是如何表示的。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "Mikolov et al. (2013c) 提出了**线性表示假设**：特征在激活空间中作为方向被线性地表示。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "如果这是真的，将具有重大意义，但这仍然存在争议，并且缺乏确凿的经验证据。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在这项工作中，我们提出了线性表示的新证据，并表明这一假设具有真正的预测能力。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S1.p2.1": {
+  "sentences": [
+   {
+    "zh": "我们以 Li 等人 (2023a) 的工作为基础，他们证明了序列模型中世界模型的出现。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "具体来说，作者训练了 OthelloGPT，一个自回归 transformer 模型，在给定先前走法序列的情况下预测奥赛罗游戏中的合法走法（第 2.2 节）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "他们表明，尽管从未被告知棋盘的存在，该模型会自发地学会跟踪正确的棋盘状态，并通过非线性探针恢复出来。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "他们进一步通过模型编辑展示了模型内部棋盘状态与其走法预测之间的因果关系。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "具体来说，他们表明，编辑后的网络会走出在编辑后的棋盘状态下合法的走法，即使在原始棋盘下不合法，甚至编辑后的棋盘状态无法通过合法走法达到（即分布外）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S1.F1": {
+  "sentences": [
+   {
+    "zh": "图1：OthelloGPT的涌现世界模型是线性表示的。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们发现棋盘状态是相对于当前玩家的颜色（我的与你的）编码的，而不是绝对颜色（黑与白）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S1.p3.1": {
+  "sentences": [
+   {
+    "zh": "关键的是，原始作者声称 OthelloGPT 使用非线性表示来编码棋盘状态，因为非线性探针达到了高准确率，而线性探针未能做到。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在我们的工作中，我们证明了一个密切相关的世界模型实际上是线性编码的。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们的关键见解是，序列模型不是编码棋盘的颜色（黑、白、空），而是相对于每个时间步的当前玩家来编码棋盘（我的、你的、空）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "换句话说，对于奇数时间步，模型将黑色棋子视为我的，白色棋子视为你的，而对于偶数时间步则相反（第 3 节）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "利用这一见解，我们证明可以以近乎完美的准确率学习一个线性投影来推导棋盘状态。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S1.p4.1": {
+  "sentences": [
+   {
+    "zh": "我们进一步证明，只需使用我们的线性向量进行向量运算，就能操控序列模型的预测（第4节）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "换句话说，通过将模型的激活推向“我的”、“你的”或“空”的方向，我们可以改变模型对棋盘状态的信念，并相应地改变其预测。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们的干预方法比Li等人（2023a）的方法简单得多，也更具可解释性，后者依赖梯度来更新模型的激活（第4.1节）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们的结果证实了我们对每个探针方向解释的正确性，同时也表明对模型表征的机制性理解可以带来更好的控制。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们的结果并不与Li等人（2023a）的结果相矛盾，而是增进了我们对涌现世界模型的理解。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S1.p5.1": {
+  "sentences": [
+   {
+    "zh": "我们使用线性运算对序列模型提供了额外的解释。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "例如，我们提供了模型如何推导棋盘上空格的经验证据，并发现了额外的线性表示，例如每个时间步被翻转的格子。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S1.p6.1": {
+  "sentences": [
+   {
+    "zh": "最后，我们简要讨论一下我们的想法。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们应该如何看待线性表示与非线性表示？",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "也许最有趣的是，为什么会出现线性表示？",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S2.p1.1": {
+  "sentences": [
+   {
+    "zh": "在本节中，我们简要描述奥赛罗、OthelloGPT 以及我们的符号表示。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S2.SS1.p1.1": {
+  "sentences": [
+   {
+    "zh": "奥赛罗是一种在8x8网格上进行的双人游戏。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "玩家轮流在棋盘上放置黑色或白色棋子，目标是在游戏结束时拥有多数己方颜色的棋子。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S2.SS1.p2.1": {
+  "sentences": [
+   {
+    "zh": "每一回合，当落下一枚棋子时，对手所有被夹在当前玩家两枚棋子之间的水平、垂直或对角线方向上的棋子都会被翻转。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "当双方都没有合法棋步时，游戏结束。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S2.SS2.p1.1": {
+  "sentences": [
+   {
+    "zh": "OthelloGPT 是一个 8 层的 GPT 模型（Radford et al., 2019），每层由 8 个注意力头和 512 维隐藏空间组成。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们使用 Li et al. (2023a) 提供的模型权重，在那里被标记为合成模型。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "词汇空间由 60 个 token 组成，每个 token 对应棋盘上一个可下的位置（例如 A4）。{fn2}",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "fn2": {
+  "sentences": [
+   {
+    "zh": "游戏开始时，棋盘中央总是已有4个棋子被填好。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S2.SS2.p2.1": {
+  "sentences": [
+   {
+    "zh": "该模型以自回归方式进行训练，即对于给定的走法序列 $m_{<t}$，模型必须预测下一个有效走法 $m_{t}$。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S2.SS2.p3.1": {
+  "sentences": [
+   {
+    "zh": "注意，模型没有获得关于游戏或其规则的任何先验知识。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "相反，模型只被给予移动序列，训练目标是预测下一个有效移动。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "进一步注意，这些有效移动是均匀选择的，并且这个训练目标不同于像 AlphaZero（Silver et al., 2018）这样的模型，后者被训练来下出战略性的移动以赢得游戏。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S2.T1": {
+  "sentences": [
+   {
+    "zh": "表1：棋盘状态的线性探针准确率。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "OthelloGPT在每个时间步线性编码相对于当前玩家的棋盘状态（我的与你的，而非黑或白颜色）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S2.SS3.SSS0.Px1.p1.1": {
+  "sentences": [
+   {
+    "zh": "我们的Transformer架构（Vaswani et al., 2017）由嵌入层和解嵌层 $Emb$ 和 $Unemb$ 组成，中间夹着一系列 $L$ 个Transformer层。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "每个Transformer层 $l$ 由 $H$ 个多头注意力和一个多层感知器（MLP）层组成。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S2.SS3.SSS0.Px1.p2.1": {
+  "sentences": [
+   {
+    "zh": "模型中的前向传播首先使用嵌入层 $Emb$ 将时间步 $t$ 的输入 token 嵌入到高维空间 $x_{t}^{0}\\in\\mathbb{R}^{D}$。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们将 $x_{t\\in T}^{0}$ 称为残差流的起点。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然后，每个注意力头 $Att_{l}^{h},\\forall h\\in H$ 和第 $l$ 层的 MLP 块都会向残差流中添加信息：",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S2.SS3.SSS0.Px1.p4.1": {
+  "sentences": [
+   {
+    "zh": "每个注意力头 $Att^{h}_{l}$ 通过使用 $Att^{h}_{l}.V$ 将残差流投影到较低维度来计算值向量，使用 $Att^{h}_{l}.A$ 线性组合值向量，并使用 $Att^{h}_{l}.O$ 投影回残差流：",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S2.SS3.SSS0.Px1.p6.1": {
+  "sentences": [
+   {
+    "zh": "最终预测通过将 $Unemb$ 应用于 $x^{L-1}$，然后进行 softmax 来做出。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S2.SS3.SSS0.Px2.p1.1": {
+  "sentences": [
+   {
+    "zh": "我们将线性探针和非线性探针分别记作 $p^{\\lambda}$ 和 $p^{\\nu}$。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们的线性探针是从残差流进行的简单线性投影：$p^{\\lambda}(x_{t}^{l})=\\text{softmax}(Wx_{t}^{l}),W\\in\\mathbb{R}^{D\\times 3}$。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "维度 $D\\times 3$ 来自进行三分类。{fn3} 非线性探针是两层 MLP 模型：$p^{\\nu}(x_{t}^{l})=\\text{softmax}(W_{1}\\text{ReLU}(W_{2}x_{t}^{l}))$，$W_{1}\\in\\mathbb{R}^{H\\times 3},W_{2}\\in\\mathbb{R}^{D\\times H}$。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "Li et al. (2023a) 对每个格子上的颜色进行分类（黑、白、空）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们的见解是相对于当前回合的玩家对颜色进行分类（我的、你的、空）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "fn3": {
+  "sentences": [
+   {
+    "zh": "在实践中，由于我们预测所有64个格子的状态，探针的形状为 $D\\times 64\\times 3$。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.p1.1": {
+  "sentences": [
+   {
+    "zh": "在本节中，我们描述寻找线性棋盘状态表示的实验。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS1.p1.1": {
+  "sentences": [
+   {
+    "zh": "OthelloGPT 不是编码每个棋子的颜色（黑、白、空），而是相对于每个时间步的玩家来编码每个棋子（我的、你的、空）——对于奇数时间步，我们将黑视为我的，白视为你的，对于偶数时间步则相反。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS1.p2.1": {
+  "sentences": [
+   {
+    "zh": "为了学习线性探针的权重，我们在3,500,000个游戏序列上进行训练。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们使用512局游戏的验证集，并根据耐心值10进行训练，直到验证损失收敛。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "实际上，我们的线性探针在大约100,000个训练样本后收敛。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们在1,000局游戏的留出测试集上测试探针。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS1.p3.1": {
+  "sentences": [
+   {
+    "zh": "我们为每一层 $l$ 训练一个不同的探针。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "超参数在附录中给出。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS2.p1.1": {
+  "sentences": [
+   {
+    "zh": "表1显示了各种探针的准确率。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS2.p2.1": {
+  "sentences": [
+   {
+    "zh": "我们纳入了四个基线。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "第一个是在随机初始化的GPT模型上训练的线性探针。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们还纳入了一个概率基线，在该基线中，我们根据训练数据中的60,000局游戏，在每个时间步总是为每个格子选择最可能的颜色。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "接下来的两个基线是Li等人（2023a）中使用的探针模型：一个线性探针和一个非线性探针，它们被训练用于在{黑、白、空}之间进行分类。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS2.p3.1": {
+  "sentences": [
+   {
+    "zh": "我们的线性探针在第4层就达到了高准确率。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "此前未知的是，我们表明涌现的棋盘状态是线性编码的。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.F2": {
+  "sentences": [
+   {
+    "zh": "图2：干预方法：我们通过向残差流的每一层添加 Empty、Mine 或 Yours 方向来进行干预。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "每个棋盘中的红色方块表示已被干预的格子，青色方块表示模型预测的干预后新的合法走法。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.p1.1": {
+  "sentences": [
+   {
+    "zh": "在本节中，我们演示如何使用线性探针对 OthelloGPT 的棋盘状态进行干预。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS1.p1.1": {
+  "sentences": [
+   {
+    "zh": "线性探针的一个固有问题在于它是相关性的，而非因果性的（Belinkov, 2022b）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "为了验证我们的探针确实找到了一个真正的世界模型，我们确认模型在预测时使用了编码的棋盘状态。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS1.p2.1": {
+  "sentences": [
+   {
+    "zh": "为了验证这一点，我们进行了与 Li et al. (2023a) 相同的干预实验。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "即，给定一个输入游戏序列（及其对应的棋盘状态 $B$），我们进行干预，使模型相信一个被改变的棋盘状态 $B^{\\prime}$。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然后我们观察模型的预测反映的是被相信的棋盘状态 $B^{\\prime}$ 还是原始棋盘状态 $B$。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS1.p3.1": {
+  "sentences": [
+   {
+    "zh": "我们的干预方法很简单：我们将线性向量加到每一层的残差流中：",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS1.p5.1": {
+  "sentences": [
+   {
+    "zh": "其中 $d$ 表示 {Mine, Yours, Empty} 中的一个方向，$\\alpha$ 是一个缩放因子。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "换句话说，要将一个方块从 Yours 翻转为 Mine，我们只需在每一层将残差流推向 Mine 方向；或者要“擦除”一个之前放置的方块，我们推向 Empty 方向。{fn4}{fn5}",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "fn4": {
+  "sentences": [
+   {
+    "zh": "我们尝试在不同层上进行干预。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "更多细节见附录。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "fn5": {
+  "sentences": [
+   {
+    "zh": "我们使用 TransformerLens 库：`https://github.com/neelnanda-io/TransformerLens`。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS1.p6.1": {
+  "sentences": [
+   {
+    "zh": "请注意，这种干预比 Li et al. (2023a) 的干预简单得多。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "即，Li et al. (2023a) 使用其非线性探针通过多次梯度下降迭代来编辑 OthelloGPT 的激活空间（$x$）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "相反，我们执行单次向量加法。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS2.p1.1": {
+  "sentences": [
+   {
+    "zh": "对于我们的干预实验，我们采用与 Li et al. (2023a) 相同的设置和指标。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们使用一个由 1,000 个测试用例组成的评估基准。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "每个测试用例包含一个部分游戏序列（$B$）和一个目标棋盘状态 $B^{\\prime}$。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS2.p2.1": {
+  "sentences": [
+   {
+    "zh": "我们将该任务视为多标签分类问题来衡量干预的效果。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "即，我们将干预后的前 $N$ 个预测与状态 $B^{\\prime}$ 下的合法走法真实集合进行比较，其中 $N$ 是 $B^{\\prime}$ 处的合法走法数量。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然后我们计算错误率，即假阳性和假阴性的数量。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS2.p3.1": {
+  "sentences": [
+   {
+    "zh": "Li et al. (2023a) 只考虑了翻转一个格子颜色的情形。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "为了也验证我们的空方向，我们还实验了通过将一个之前放置的格子变为空来“擦除”它。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.T2": {
+  "sentences": [
+   {
+    "zh": "表2：干预的错误率。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS3.p1.1": {
+  "sentences": [
+   {
+    "zh": "表2显示了我们的干预后的平均错误率。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们的干预与基于梯度的编辑同样有效，并证实了我们对每个线性方向的解释与模型使用这些方向的方式一致。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.p1.1": {
+  "sentences": [
+   {
+    "zh": "线性表征假说之所以引起机制可解释性领域的兴趣，是因为它为理解一个系统提供了立足点。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "Transformer 的内部状态，即残差流，是所有先前组件（头、层、嵌入和神经元）输出的总和（Elhage et al., 2021），因此残差流的任何线性函数都可以线性分解为每个组件的贡献，使我们能够追溯计算的来源。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.p2.1": {
+  "sentences": [
+   {
+    "zh": "在本节中，我们利用新发现的棋盘状态线性表示来提供对 OthelloGPT 的额外解释，作为发现线性表示如何解锁下游可解释性应用的概念验证。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.SS1.p1.1": {
+  "sentences": [
+   {
+    "zh": "这里我们解释 OthelloGPT 如何推导空格的状态。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.SS1.SSS0.Px1.p1.1": {
+  "sentences": [
+   {
+    "zh": "关于空（Empty）的一个关键见解是，输入标记各自对应棋盘上的一个格子（即 A4），并且一旦落子，该格子只能改变颜色，但保持非空。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.SS1.SSS0.Px1.p2.1": {
+  "sentences": [
+   {
+    "zh": "我们认为 OthelloGPT 使用注意力头来“广播”哪些着法已经下过：给定时间步 $t$ 的一个着法，注意力头将此信息写入其他残差流。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这一信息（已下）可以表示如下。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "首先，每个着法 $m$（A4）被嵌入：$Emb[m]$。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然后模型使用线性投影 $Att.V$ 和 $Att.O$（第 2.3 节）将此信息写入其他残差流：",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.SS1.SSS0.Px1.p4.1": {
+  "sentences": [
+   {
+    "zh": "对于第一层中的每个注意力头，{fn6} 我们计算 Played 与 $p^{\\lambda}_{\\textsc{empty}}$ 方向之间的余弦相似度：",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "fn6": {
+  "sentences": [
+   {
+    "zh": "知道哪些着法被下过（即出现在输入序列中）不应依赖于任何其他计算，因此我们预期这一信息由第一层的注意力头写入。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.SS1.SSS0.Px1.p6.1": {
+  "sentences": [
+   {
+    "zh": "由于这两项编码了相反的信息，我们预期会有一个很高的负余弦相似度。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.SS1.SSS0.Px1.p7.1": {
+  "sentences": [
+   {
+    "zh": "我们观察到所有60个方格上的平均相似度得分为 **-0.862**，{fn7}，证实 $p_{\\textsc{Empty}}$ 编码的是「未下棋」。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这告诉我们 $p_{\\textsc{Empty}}$ 是词元嵌入的线性函数。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "fn7": {
+  "sentences": [
+   {
+    "zh": "中心4个方格永远不可能为空。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.SS1.SSS0.Px1.p8.1": {
+  "sentences": [
+   {
+    "zh": "这也意味着 OthelloGPT 在 $x^{0\\_mid}$ 阶段就知道哪些格子是空的：即在第一个注意力头之后、MLP 层之前。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在从测试集的 1,000 局游戏中进行的空与非空二分类任务上，当分别从 $X^{0\\_pre}$ 和 $x^{0\\_mid}$ 投影时，我们的探针达到了 **76.8%** 和 **98.9%** 的准确率。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.F3": {
+  "sentences": [
+   {
+    "zh": "图3：在干净序列与损坏序列之间，A4 为空的概率差异，在每个注意力头中测量。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.F4": {
+  "sentences": [
+   {
+    "zh": "图4：注意力头关注你的（左）或我的（右）走法的示例。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.T3": {
+  "sentences": [
+   {
+    "zh": "表3：翻转棋子的线性探针F1分数。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "除了棋盘状态之外，模型还线性编码了诸如每个时间步翻转棋子等概念。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.SS1.SSS0.Px2.p1.1": {
+  "sentences": [
+   {
+    "zh": "之前的分析基于模型的权重。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这里我们通过研究推理过程中的激活来提供另一种分析。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.SS1.SSS0.Px2.p2.1": {
+  "sentences": [
+   {
+    "zh": "首先，我们选择一个我们希望解释的走法 $m$（A4）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然后，我们构建一组“干净”和“损坏”的部分棋局序列（N=4,569）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们的干净集合总是包含 $m$，而我们的损坏集合将干净集合中所有时间步的 $m$ 替换为另一种走法。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们确保损坏集合中的所有棋局仍然是合法序列。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "最后，我们研究根据我们的探针，$m$ 为空的概率在这两个集合中的差异。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "也就是说，我们将每个注意力头的输出投影到“空”方向上，并应用 softmax：",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.SS1.SSS0.Px2.p4.1": {
+  "sentences": [
+   {
+    "zh": "其中 $\\sigma$ 是每个注意力头的输出。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.SS1.SSS0.Px2.p5.1": {
+  "sentences": [
+   {
+    "zh": "图3展示了在我们的干净输入和损坏输入之间，A4为空的概率差异，该差异在第一层的每个注意力头中测量。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "该图分解了两种情形：当A4最初由我或你落子时。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这是因为一些注意力头只关注我的落子（4, 7），而一些只关注你的落子（1, 3, 8），我们将在下面展示。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.F5": {
+  "sentences": [
+   {
+    "zh": "图5：在移动预测之前/之后计算棋盘状态的比例（第一y轴）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "**浅灰色：** 棋盘在比移动更早的层中被计算。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "**深灰色、黑色：** 棋盘在与移动相同或更晚的层中被计算。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "**红色：** 模型从未计算出正确的棋盘状态。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "**水绿色、青柠色（曲线）：** 正确计算出棋盘或移动的平均最早层（第二y轴）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "从中局开始，我们开始观察到模型在棋盘之前计算移动（黑色条），并且随着游戏进行，这种情况发生得更频繁。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.SS2.p1.1": {
+  "sentences": [
+   {
+    "zh": "我们发现一些注意力头只关注我的或你的着法。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "图4展示了两个例子：在每个时间步，每个头在关注偶数或奇数时间步之间交替。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这种行为进一步表明模型如何基于我的和你的（而非黑方和白方）来计算其世界模型。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.SS3.p1.1": {
+  "sentences": [
+   {
+    "zh": "除了线性表示棋盘状态外，我们发现 OthelloGPT 还编码了每个时间步哪些棋子被翻转或吃掉。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "为了检验这一点，我们将线性探针任务修改为区分「翻转」与「未翻转」，训练设置与上文相同。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "考虑到类别不平衡，本实验我们报告 $F1$ 分数。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "表 3 显示，到第 3 层时 $F1$ 分数已经很高。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.SS3.p2.1": {
+  "sentences": [
+   {
+    "zh": "我们还进行了干预实验的修改版本，其中我们总是在当前时间步随机选择一个被翻转的棋子进行干预。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然后，我们不是加上 $p^{\\lambda}_{\\textsc{Mine}}$、$p^{\\lambda}_{\\textsc{Yours}}$ 或 $p^{\\lambda}_{\\textsc{Empty}}$，而是减去 $p^{\\lambda}_{\\textsc{Flipped}}$。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这通过探索这是否足以使模型在新棋盘状态下走出合法着法，来检验 Flipped 特征是否在计算下一步着法时具有因果相关性。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们得到的平均错误率为 **0.486**，而空干预基线的错误率为 **1.686**。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.SS3.p3.1": {
+  "sentences": [
+   {
+    "zh": "可以将翻转的格子视为上一棋盘状态与当前棋盘状态之间的差异。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "人们可能自然地认为，循环计算可以通过迭代应用这些差异来推导出当前棋盘状态。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然而，Transformer 模型并不进行递归计算！{fn8} 我们认为翻转既是一种出乎意料的编码，也是其余棋盘电路的一个线索。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "fn8": {
+  "sentences": [
+   {
+    "zh": "这样做将要求我们的 transformer 模型具有与最大游戏序列长度 60 相同的层数。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.SS4.p1.1": {
+  "sentences": [
+   {
+    "zh": "尽管我们找到了棋盘状态电路及其对走子预测的因果作用，但我们发现它并不能解释整个模型。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "如果我们的理解是正确的，我们预期模型在计算合法走法之前先计算棋盘状态。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然而，我们发现在残局中情况并非如此。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.SS4.p2.1": {
+  "sentences": [
+   {
+    "zh": "为了检查正确的棋盘状态，我们在每一层上应用线性探针，并检查所有64个格子都被正确预测的最早层。{fn9} 为了检查正确的走法预测，我们使用反嵌入层从每一层进行投影，并检查前N个走法预测全部正确的最早层，其中N是真实合法走法的数量。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "fn9": {
+  "sentences": [
+   {
+    "zh": "可能存在这样的情况：合法走法可以在棋盘状态并非100%准确的情况下被预测出来。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们尝试了多种变体（见附录），但观察到类似的趋势。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.SS4.p3.1": {
+  "sentences": [
+   {
+    "zh": "图5绘制了棋盘状态在合法走法之前（或之后）被计算出来的比例（第一个y轴）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们还叠加了棋盘或走法被正确计算的平均最早层（第二个y轴，水绿色和青柠色曲线）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "令我们惊讶的是，我们发现在残局中，模型经常在棋盘状态之前计算合法走法（黑色条）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们此后将这种行为称为MoveFirst，并分享一些想法。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.SS4.SSS0.Px1.p1.1": {
+  "sentences": [
+   {
+    "zh": "首先，MoveFirst 大约在第 30 步开始出现，这是游戏的中点。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "其次，随着我们接近游戏结束，MoveFirst 出现得更频繁（黑色条增加）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "有趣的是，在奥赛罗中，从中点开始，随着棋盘填满，空格的数目逐渐少于已填满的格子。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "还要注意，随着游戏进行，每个空格成为合法走法的可能性越来越大。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.SS4.SSS0.Px1.p2.1": {
+  "sentences": [
+   {
+    "zh": "对这一现象的一种可能解释是，在终局阶段，可能可以用不需要整个棋盘状态的更简单电路来预测合法走法。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "例如，也许它将 Empty 与其他特征（如 Is-Surrounded-By-Mine 或 Is-Border 等）结合起来。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.SS4.SSS0.Px2.p1.1": {
+  "sentences": [
+   {
+    "zh": "有趣的是，模型在终局阶段仍然使用棋盘电路。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "为了证明这一点，我们在1,000个终局上运行了干预实验{fn10}，并且仍然实现了**0.112**的低错误率。{fn11}因此，我们假设OthelloGPT（以及更广泛的序列模型）由多个电路组成。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "另一个假设是，残差网络进行“迭代推理”（第5.5节），对于终局，OthelloGPT在早期层使用更简单的电路，并在后期层使用棋盘状态来细化其预测。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "fn10": {
+  "sentences": [
+   {
+    "zh": "我们在时间步 ¿ 30 进行干预",
+    "conf": "low",
+    "note": "原文包含特殊字符 '¿'，可能为排版错误或占位符，无法确定其确切含义，故保留原样。"
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "fn11": {
+  "sentences": [
+   {
+    "zh": "无干预基线：1.988。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.SS4.SSS0.Px3.p1.1": {
+  "sentences": [
+   {
+    "zh": "我们观察到棋盘状态准确率在接近终局时下降。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这可以通过不断增长的红色条看出，也可以通过测量我们探针的每时间步准确率看出（见附录）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "目前尚不清楚是 1) 模型没有费心去计算完美的棋盘状态，因为替代电路使模型仍能正确预测合法走法，还是 2) 模型学习了一种替代电路，因为它在终局时难以计算出正确的棋盘状态。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.SS4.SSS0.Px4.p1.1": {
+  "sentences": [
+   {
+    "zh": "注意，在最初几个时间步中，棋盘状态和合法走法有时在同一层中计算（深灰色条）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这可能是由于记忆：1）这些预测都发生在第一层，2）奥赛罗游戏中的开局数量有限。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.F6": {
+  "sentences": [
+   {
+    "zh": "图6：迭代细化：顶行显示使用我们的线性探针投影的每一层。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "底行显示模型在每一层对合法走法的预测，方法是在每一层上应用反嵌入层。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.SS5.p1.1": {
+  "sentences": [
+   {
+    "zh": "图6可视化了OthelloGPT的“迭代推理”（Jastrzebski et al., 2018; Belrose et al., 2023; Veit et al., 2016; nostalgebraist, 2020），即特征的迭代细化。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "对于每一层，我们使用探针绘制投影的棋盘状态，并使用解嵌入层绘制投影的下一步预测。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "附录中提供了迭代细化的多项证据。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S6.SS1.p1.1": {
+  "sentences": [
+   {
+    "zh": "线性探针的一个挑战是知道要寻找哪些特征。{fn12} 例如，分类 {黑方, 白方} 与 {我的, 你的} 会得出不同的结论，这说明了投射我们先入之见的危险。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "对人类解释者来说看似“合理”的（黑方, 白方）可能对模型来说并非如此。{fn13}",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "fn12": {
+  "sentences": [
+   {
+    "zh": "关于线性探针的更详细讨论，见附录。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "fn13": {
+  "sentences": [
+   {
+    "zh": "事后看来，鉴于奥赛罗的对称性游戏玩法，对模型来说，编码 Mine、Yours 是完全“合理的”。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S6.SS1.p2.1": {
+  "sentences": [
+   {
+    "zh": "更广泛地说，什么是“合理的”，或者换句话说，我们如何选择解释线性或非线性编码，可能相对于我们如何看待世界。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "假设我们有一个完美的物理世界模型。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "进一步假设，当它计算两个物体之间的引力（牛顿定律）时，我们发现一个神经元，其平方根是两个物体之间的距离。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这是距离的非线性表示吗？",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "或者，考虑到牛顿定律的形式，距离的平方是否是模型表示该特征的更自然方式，因此被视为线性表示？",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "正如这个例子所示，什么构成自然特征可能取决于观察者的视角。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S6.SS2.p1.1": {
+  "sentences": [
+   {
+    "zh": "序列模型中的线性表示此前已被观察到：iGPT（Chen et al., 2020）以自回归方式训练来预测图像的下一个像素，产生了稳健的线性图像表示。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "问题仍然存在：为什么会出现线性特征表示？",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "当前大型语言模型中编码了哪些线性表示？",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "一个原因可能仅仅是矩阵乘法可以轻松地为每个神经元提取不同的线性特征子集。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然而，我们将完整的解释留给未来的工作。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S7.p1.1": {
+  "sentences": [
+   {
+    "zh": "我们讨论三个广泛的相关领域：理解内部表征、干预和机制可解释性。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S7.SS1.p1.1": {
+  "sentences": [
+   {
+    "zh": "多位研究者已经研究了序列模型中的世界表示。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "Li 等人（2021）在合成任务上训练序列模型，并在其激活中发现了世界模型。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "Patel 和 Pavlick（2022）证明语言模型可以学习将概念（例如方向、颜色）与现实世界表示联系起来。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "Burns 等人（2022）找到了编码“真实性”的线性向量。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S7.SS1.p2.1": {
+  "sentences": [
+   {
+    "zh": "许多研究也构建或研究语言的线性表示。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "词嵌入（Mikolov et al., 2013b; Mikolov et al., 2013a）构建了向量化的词表示。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "线性探针也被用于提取句子嵌入中的语言特征（Conneau et al., 2018; Tenney et al., 2019）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S7.SS1.p3.1": {
+  "sentences": [
+   {
+    "zh": "线性表征也出现在语言模型之外。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "Merullo et al. (2022) 表明，视觉模型的图像表征可以线性投影到语言模型的输入空间中。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "McGrath et al. (2022) 和 Lovering et al. (2022) 在 AlphaZero 中发现了国际象棋或 Hex 概念的可解释表征。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S7.SS2.p1.1": {
+  "sentences": [
+   {
+    "zh": "越来越多的研究对语言模型进行了干预，我们所说的干预是指通过改变其激活来控制其行为。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S7.SS2.p2.1": {
+  "sentences": [
+   {
+    "zh": "我们考虑两大类。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "参数化方法通常使用优化（即梯度下降）来定位和改变激活（Li et al., 2023a; Meng et al., 2022a; Meng et al., 2022b; Hernandez et al., 2023; Hase et al., 2023）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "同时，推理时干预通常应用线性算术，例如使用“真实”向量（Li et al., 2023b）、“任务向量”（Ilharco et al., 2022）或其他“导向向量”（Subramani et al., 2022; Turner et al., 2023）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S7.SS3.p1.1": {
+  "sentences": [
+   {
+    "zh": "机制可解释性（MI）通过逆向工程神经网络的行为来研究它们（Olah et al., 2020; Elhage et al., 2021）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "MI 的目标是理解模型底层的计算和表征，更广泛的目标是验证其行为与研究者意图一致。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这样的框架使研究者能够理解 grokking（Nanda et al., 2023）、叠加（Elhage et al., 2022b; Scherlis et al., 2022; Arora et al., 2018），或研究单个神经元（Mu and Andreas, 2020; Antverg and Belinkov, 2021; Gurnee et al., 2023）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S8.p1.1": {
+  "sentences": [
+   {
+    "zh": "在这项工作中，我们证明了在玩奥赛罗的序列模型中涌现出的世界模型充满了线性表示。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "此前未知的是，我们证明了OthelloGPT中的棋盘状态是通过在每个时间步编码每个格子相对于玩家的颜色（我的、你的、空）来线性表示的，而不是绝对颜色（黑、白、空）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们展示了可以通过对内部世界模型进行简单的向量算术来准确控制模型的行为。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "最后，我们对序列模型的多个方面进行了机制解释，分析了空格子是如何被检测到的，以及哪些棋子被翻转的线性表示。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们发现了一些线索，表明在残局中预测合法走法可能存在多个回路，以及进一步的证据表明残差网络在层间迭代地细化其特征。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S9.p1.1": {
+  "sentences": [
+   {
+    "zh": "我们感谢 Li 等人（2023a）的原始作者开源了他们的工作，使我们的研究得以进行。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S9.p2.1": {
+  "sentences": [
+   {
+    "zh": "我们感谢 Chris Olah 的宝贵讨论和鼓励，并提醒我们注意这些结果对线性表征假说的启示。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S10.p1.1": {
+  "sentences": [
+   {
+    "zh": "Neel Nanda 发现了以相对棋盘状态表示的线性表征，并表明简单的向量算术足以进行因果干预。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "他主导了实验和写作的初始版本，并在整个过程中提供建议。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S10.p2.1": {
+  "sentences": [
+   {
+    "zh": "Andrew Lee 主导了本文的撰写，并完成了本文中的所有实验。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "他发现了翻转的线性表示、空结果以及多电路假设的结果。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S10.p3.1": {
+  "sentences": [
+   {
+    "zh": "Martin Wattenberg 协助了论文的编辑和提炼，并贡献了关于距离的线性与二次表示的类比。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A0.T4": {
+  "sentences": [
+   {
+    "zh": "表4：用于我们的线性探针的超参数。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "__sections__": {
+  "__title__": "自监督序列模型的世界模型中涌现的线性表征",
+  "Abstract": "摘要",
+  "1 Introduction": "1 引言",
+  "2 Preliminaries": "2 预备知识",
+  "2.1 Othello": "2.1 奥赛罗",
+  "2.2 OthelloGPT": "2.2 OthelloGPT",
+  "Transformers.": "Transformer。",
+  "Probe Models.": "探针模型。",
+  "3 Linearly Encoded Board States": "3 线性编码的棋盘状态",
+  "3.1 Experiment Setup": "3.1 实验设置",
+  "3.2 Results": "3.2 结果",
+  "4 Intervening with Linear Directions": "4 用线性方向进行干预",
+  "4.1 Method": "4.1 方法",
+  "4.2 Experiment Setup": "4.2 实验设置",
+  "4.3 Results": "4.3 结果",
+  "5 Additional Linear Interpretations": "5 额外的线性解释",
+  "5.1 Interpreting Empty Tiles": "5.1 解释空格",
+  "The Empty Circuit.": "空格回路。",
+  "Logit Attribute for Empty.": "空格的 logit 归因。",
+  "5.2 Attending to My & Your Timesteps": "5.2 关注我的和你的时间步",
+  "5.3 Additional Linear Concepts: Flipped": "5.3 额外的线性概念：翻转",
+  "5.4 Multiple Circuits Hypothesis": "5.4 多回路假说",
+  "End Game Circuits.": "终局回路。",
+  "Multiple Circuits.": "多回路。",
+  "End Game Board Accuracy.": "终局棋盘准确率。",
+  "Memorization.": "记忆。",
+  "5.5 Iterative Feature Refinements": "5.5 迭代特征细化",
+  "6 Discussions": "6 讨论",
+  "6.1 On Linear vs. Non-Linear Interpretations": "6.1 关于线性与非线性解释",
+  "6.2 On the Emergence of Linear Representations": "6.2 关于线性表征的涌现",
+  "7 Related Work": "7 相关工作",
+  "7.1 Understanding Internal Representations": "7.1 理解内部表征",
+  "7.2 Intervening On Language Models": "7.2 对语言模型进行干预",
+  "7.3 Mechanistic Interpretability": "7.3 机制可解释性",
+  "8 Conclusion": "8 结论",
+  "9 Acknowledgements": "9 致谢",
+  "10 Author Contributions": "10 作者贡献"
+ }
+}

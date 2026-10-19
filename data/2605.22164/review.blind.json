@@ -1,0 +1,2197 @@
+{
+ "__meta__": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "models": {
+   "reviewer": "deepseek-v4-pro"
+  },
+  "translator": "deepseek-v4-pro（关思考）",
+  "independence": "same-model",
+  "usage": {
+   "calls": 67,
+   "prompt_tokens": 58766,
+   "completion_tokens": 66017,
+   "seconds": 756.0,
+   "cached_tokens": 39168
+  }
+ },
+ "abs.p1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "潜在世界模型可以学习包含控制所需信息的表示，而下游控制器如果仅依赖终端潜在距离，可能仍然会对候选动作排序不佳。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们在固定编码器中研究这种失败，并引入轨迹可达性度量（TRM），这是一种从记录轨迹中训练的小型时间成对代价，用于将候选动作序列的预测终点与目标进行排序。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在来自高距离范围的100个回合的TwoRoom评估中，使用LeWorldModel的原始控制器达到7.0%的平均成功率。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在排除所有评估回合后训练的时间TRM达到96.7%，打乱标签的对照保持在0.0%，并且TRM还将PLDM从32.7%提高到84.0%。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "TopoNav，一个独立的像素导航任务，显示了修复的排序与闭环控制之间的相同联系。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "使用共享候选者的选择审计（SASC）和行空间干预表明，增益来自重新加权携带行动决策的潜在方向。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "XY行空间对终端潜在MSE的贡献不到1%，但携带了控制所需的大部分信息。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "覆盖率和边界测试定义了范围。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "平衡的门口覆盖率将0.0%的覆盖率失败恢复到100.0%的成功率，而未见过的墙壁方向和接触丰富的PushT暴露了布局、动力学和恢复限制。"
+   }
+  ]
+ },
+ "p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "李良宇、王圣智、熊明亮、刘庆文：同济大学，中国上海"
+   }
+  ]
+ },
+ "p1.2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Libin Qiu：阿里巴巴集团，中国杭州"
+   }
+  ]
+ },
+ "p1.3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Liangyu Li：`2550703@tongji.edu.cn` Shengzhi Wang：`2311806@tongji.edu.cn`Libin Qiu：`libin.qlb@alibaba-inc.com` Mingliang Xiong：`mlx@tongji.edu.cn`Qingwen Liu：`qliu@tongji.edu.cn`"
+   }
+  ]
+ },
+ "Sx1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "潜在世界模型有望从像素中学习紧凑表示，在候选动作序列下向前滚动它们，并通过在潜在空间中优化来选择动作。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这一前景支撑着基于模型的强化学习和视觉规划系统，范围从具有轨迹采样的概率动力学模型到潜在想象方法和基于JEPA的世界模型（Chua et al. 2018; Hafner et al. 2020; Zhou et al. 2025; Maes et al. 2026b）。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "hedge"
+    ],
+    "issue": "译文增加了原文没有的“可能”，将确定性的陈述弱化为可能性，改变了语气。",
+    "suggestion": "然而，潜在世界模型可以学习包含控制所需信息的表示，而下游控制器仅依赖终端潜在距离时仍会对候选动作排序不佳。",
+    "zh_reviewed": "然而，潜在世界模型可以学习包含控制所需信息的表示，而下游控制器仅依赖终端潜在距离时仍可能对候选动作排序不佳。"
+   }
+  ]
+ },
+ "Sx1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "一系列实验将这一问题追溯到CEM终端代价。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在许多潜在MPC控制器中，CEM控制器在学习的潜在预测器中展开候选动作序列，并通过终端代价（通常是到目标潜在状态的欧氏距离）对其预测的终点进行排序。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们研究了该接口的一种失效模式：学习到的状态包含控制所需的信息，但终端代价赋予它的决策权重过小。"
+   }
+  ]
+ },
+ "Sx1.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们认为，常见的终端代价公式假定学习到的潜在空间中的欧氏距离是任务进展的良好代理。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这一假设比乍看起来更强。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "它不仅仅要求潜在空间包含控制变量。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "它还要求控制器的度量对这些变量进行加权，使得终端代价能够跟踪现实世界中当前状态与目标状态之间的差距。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如果控制所需的变量占据一个小子空间，那么欧氏潜在距离可能被对预测无用的残差方向、干扰变化或局部判别所主导（Gelada et al. 2019; Zhang et al. 2021a）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在这种情况下，模型可能知道状态，而控制器的终端代价却低估了选择正确动作序列所需的信息。"
+   }
+  ]
+ },
+ "Sx1.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们在 LeWorldModel (LeWM) 中研究这个问题，这是一个从像素训练的端到端联合嵌入预测架构 (Maes et al. 2026b)。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "LeWM 提供了一个受控的测试环境。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "它被呈现为一个稳定的基于像素的 JEPA 风格世界模型，在视觉丰富的环境中可以具有竞争力，然而高距离 TwoRoom 评估暴露了一个明显的失败。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "结果排除了两个简单的解释。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "该设置并非仅仅过于困难，因为当候选成本与可达性对齐时，相同的评估回合可以由相同的 CEM 控制器解决。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "表示并非简单地缺少位置，因为 LeWM 潜在状态在线性读出下几乎完美地编码了 XY 位置。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "失败点是控制器使用的终端成本。"
+   }
+  ]
+ },
+ "Sx1.F1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图1：终端排序失败与TRM修复的概述。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（A）原始潜在MSE选择了不成功的序列，而TRM遵循门口路线。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（B）时间对训练TRM头，在固定的世界模型和控制器下仅改变终端排序。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（C）在完整缓存上训练的TRM将高距离评估的成功率从$7.0{\\pm}8.2$%提高到$97.0{\\pm}3.5$%，并将种子3072 SASC最佳排名百分位数从31.7提高到3.9。"
+   }
+  ]
+ },
+ "Sx1.p5.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "major",
+    "category": [
+     "other",
+     "omission"
+    ],
+    "issue": "原文命名的对象是“我们的干预轨迹可达性度量”，中文误将“这种干预”作为命名对象，并遗漏了“我们的”，意思发生实质偏差。",
+    "suggestion": "我们称我们的干预轨迹可达性度量为 TRM。",
+    "zh_reviewed": "我们将这种干预称为轨迹可达性度量（TRM）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "TRM 是为固定潜在世界模型控制器添加的终端代价。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "TRM 从记录的轨迹结构中学习一个标量成对距离代理，并将其用作预测的终端潜在状态与目标潜在状态之间的终端代价。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "该方法保持模型训练不变，仅改变候选动作序列的排序。"
+   }
+  ]
+ },
+ "Sx1.p6.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "核心设计原则是，终端代价必须在其将被使用的时间尺度上进行训练。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "局部时间头在短对上可能准确，但无法对长时域候选的端点进行排序。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们在TwoRoom中使用跨整个时域的平衡轨迹对采样，并评估替换代价和混合代价。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "实验首先暴露控制器故障，然后仅改变终端代价，定位原始终端MSE代价为何低估有用状态，并测试修复在何处不再有帮助。"
+   }
+  ]
+ },
+ "Sx1.p7.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们围绕最小干预方法和机制研究来组织本文。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "干预是终端可达性代价。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "机制研究探究该代价是否改变了CEM所见的候选排序，而不仅仅是改善离线辅助损失或利用隐藏的任务状态。"
+   }
+  ]
+ },
+ "Sx1.p8.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "本文做出了四点贡献。"
+   }
+  ]
+ },
+ "Sx1.I1.i1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "1. TRM用于终端候选排序。我们提出TRM作为一种终端时间代价，它在保持世界模型和评估设置不变的情况下利用时间邻近性。"
+   }
+  ]
+ },
+ "Sx1.I1.i2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "2. **全时域轨迹监督。** 我们表明采样是方法的一部分，而非实现细节。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "广泛的轨迹覆盖和全时域的时间差在消融中至关重要。"
+   }
+  ]
+ },
+ "Sx1.I1.i3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "3. **来自候选排名的证据。** 我们使用 SASC 和行空间干预来检验时间 TRM 是否通过纠正候选排名来发挥作用。"
+   }
+  ]
+ },
+ "Sx1.I1.i4": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "4. **导航基准与边界条件。** 在排除评估回合后训练的TRM，在LeWM的高距离TwoRoom评估中达到96.7%，在相同评估集上改进了PLDM，并在TopoNav（一个独立的像素导航任务）上重现了修复效果。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "压力测试表明，均衡的门口覆盖可以同时恢复排序和成功率，而在未见过的墙壁方向和PushT上的测试则标明了修复的明确局限。"
+   }
+  ]
+ },
+ "Sx2.SS0.SSS0.Px1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "基于模型的控制通常训练一个动力学模型，并通过该模型优化候选动作序列，从数据高效的概率模型（Deisenroth and Rasmussen 2011; Chua et al. 2018; Janner et al. 2019）到视觉预见系统（Ebert et al. 2018）以及学习到的潜在动力学（Watter et al. 2015; Hafner et al. 2019）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "潜在世界模型将这种优化移入紧凑表示中，要么通过想象推演来学习策略（Ha and Schmidhuber 2018; Hafner et al. 2020; Hansen et al. 2022; Hansen et al. 2024），要么在学习到的视觉特征中对目标条件动作序列进行排序（Zhou et al. 2025; Maes et al. 2026b）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的重点不是一般意义上的基于模型的控制，而是一个特定假设，即在学习到的潜在空间中最小化终端欧氏距离是一个可靠的终端代价（Lambert et al. 2020）。"
+   }
+  ]
+ },
+ "Sx2.SS0.SSS0.Px2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "目标条件强化学习早已认识到，表征距离可能是可达性的一个糟糕代理。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "关于通用价值函数（Schaul et al. 2015）、事后重放（Andrychowicz et al. 2017）、分层目标（Nachum et al. 2018）、想象视觉目标（Nair et al. 2018）以及覆盖驱动的目标采样（Pong et al. 2020; Eysenbach et al. 2021; Eysenbach et al. 2022; Ma et al. 2023）的研究表明，仅凭目标表征并不能告诉控制器哪些动作能够到达目标。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "重放缓冲区图搜索、拓扑记忆和潜在路标世界模型利用图或价值结构来实现长时程目标到达（Savinov et al. 2018; Eysenbach et al. 2019; Zhang et al. 2021b）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "REPlan 将紧凑表征学习与估计时间距离的可达性模块分离开来（Qian et al. 2023）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "近期工作学习时间距离感知的表征、与后继结构相关的时间度量，或准度量目标到达距离（Dayan 1993; Bae et al. 2025; Park et al. 2024b; Park et al. 2024a; Myers et al. 2024; Myers et al. 2025）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们使用相同的可达性思想来定义控制器终端代价，然后审计它是否改变候选排序。"
+   }
+  ]
+ },
+ "Sx2.SS0.SSS0.Px3.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "基于采样的控制器，如 CEM（Rubinstein 1999；Pinneri et al. 2021）和路径积分控制（Williams et al. 2017），反复对许多候选动作序列进行评分，然后根据排名最高的候选执行动作。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这使得学习到的表示与标量终端成本之间的接口成为控制问题的一部分。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "最近的工作通过缩小基于梯度的世界模型控制的训练测试差距（Parthasarathy et al. 2025）或通过学习改变想象采样的先验（Wang et al. 2026）来改进相邻接口。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "TRM 保持采样器和固定的世界模型不变，仅改变控制器使用的标量端点成本。"
+   }
+  ]
+ },
+ "Sx2.SS0.SSS0.Px4.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "RC-aux 并行预印本与我们的工作都指出了联合嵌入世界模型中一个类似的问题。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "潜在世界模型可以学习到包含控制所需信息的表示，而下游控制器仍可能对候选动作的排序不佳（Li et al. 2026; Maes et al. 2026b）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "RC-aux 保持 LeWM 主干架构不变，但通过添加多步开环预测、带时间硬负样本的预算条件可达性监督，以及可选的可达性感知控制器来改变训练或继续训练。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "相比之下，TRM 冻结已训练的编码器和预测器，然后为候选动作序列和终点学习一个连续的成对排序信号。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "hedge"
+    ],
+    "issue": "“evidence that”被译为“证明……的证据”，语气比原文的“证据”更强，原文并未声称已经证明。",
+    "suggestion": "我们的贡献是一种对候选动作序列进行排序的最小方法，以及表明在学习到的潜在空间中终端欧氏距离是所研究失败中的瓶颈的证据。",
+    "zh_reviewed": "我们的贡献是一种对候选动作序列进行排序的最小方法，以及证明在学习到的潜在空间中终端欧氏距离是所研究失败中的瓶颈的证据。"
+   }
+  ]
+ },
+ "Sx3.SS0.SSS0.Px1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们用 $o_{t}$ 表示时间 $t$ 的观测。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "设编码器将观测映射到潜在状态，$\\mathbf{z}_{t}=f_{\\theta}(o_{t})$，并设潜在动力学模型产生预测的潜在状态"
+   }
+  ]
+ },
+ "Sx3.SS0.SSS0.Px1.p1.2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "给定目标观测 $o_{g}$ 及其潜在状态 $\\mathbf{z}_{g}=f_{\\theta}(o_{g})$，通常的终端目标是使最小化"
+   }
+  ]
+ },
+ "Sx3.SS0.SSS0.Px1.p1.3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "CEM 控制器（Rubinstein 1999）采样候选动作序列，用式 2 对它们排序，执行第一个动作块，并重新规划。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "只有当较低的终端潜在距离意味着较高的到达目标概率时，该目标才是合理的。"
+   }
+  ]
+ },
+ "Sx3.SS0.SSS0.Px2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "当潜在状态包含任务所需信息、控制器的度量对候选动作序列的任务进展排序不佳，并且替换或限制该度量能改善控制，而检查点、评估集和控制器保持不变时，我们检验终端度量失效。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这一定义将不良终端代价与两种较弱的观察区分开来。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "其一是潜在状态仅仅可解码。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "其二是下游代价改善，但未改变分配给候选计划的排名。"
+   }
+  ]
+ },
+ "Sx3.F2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图2：在固定起点、目标、检查点和控制器预算下，高距离 TwoRoom 评估中的代表性轨迹。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "原始潜在 MSE 在墙附近停止，而时间 TRM 沿着门口路线前进并成功。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "潜在面板是共享的 PCA 可视化。"
+   }
+  ]
+ },
+ "Sx4.SS0.SSS0.Px1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "TRM 是使用固定世界模型和 CEM 的潜在控制器的终端代价。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "它改变了用于对预测的终端潜在状态与目标潜在状态进行排序的标量代价。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "编码器、动力学、候选采样器和 CEM 更新规则保持不变。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们保留术语“度量”作为方法标签，但学习到的头部在形式意义上并不是度量。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "它不受不可区分者的同一性、三角不等式或其他度量公理的约束。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "它是用于端点排序的非负成对距离替代。"
+   }
+  ]
+ },
+ "Sx4.SS0.SSS0.Px2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了避免依赖特定的预言信息，TRM 在编码状态对上训练一个小型成对头 $m_{\\phi}(\\mathbf{z}_{i},\\mathbf{z}_{j})$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "默认的特征映射是"
+   }
+  ]
+ },
+ "Sx4.SS0.SSS0.Px2.p1.2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在主要的 TwoRoom 方法实验中，我们使用同一回合内配对的时间标签来监督距离头，"
+   }
+  ]
+ },
+ "Sx4.SS0.SSS0.Px2.p1.3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些标签作为沿记录轨迹的可达性的对称代理。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "时间间隔捕获了在记录动态下两个状态之间的累积转移差距。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "较小的差距表明这些状态可以通过较少的可行动作连接，而较大的差距通常意味着任务所需的配置变化更大。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "当记录分布遗漏了对连通性至关重要的区域时，这种代理可能会失效。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在覆盖率压力测试中，我们直接测量这种失效。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于 PushT 和一些压力测试基线，我们还使用任务状态或 oracle 测地标签训练相同的成对架构，以测试更强的监督能否表达缺失的排序。"
+   }
+  ]
+ },
+ "Sx4.SS0.SSS0.Px3.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "采样规则是该方法的一部分。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们采样一个回合，在整个回合时间范围内选择一个时间间隔，选择一个有效的起始时间，并以随机顺序在样本对上训练。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在整个时间范围内的均衡采样防止头部被局部邻居主导。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "它还使头部暴露于终端成本将对CEM候选进行排序的时间尺度。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "表4给出了关键比较。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在整个回合上的广泛随机覆盖达到90.0%，在整个回合上的均衡对达到97.5%，而最大$\\Delta=50$的短时间范围头部即使有100,000个训练对也仅达到35.0%。"
+   }
+  ]
+ },
+ "Sx4.SS0.SSS0.Px4.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在控制时，CEM 提出候选方案，固定世界模型将每个候选方案滚动到预测的终端潜在状态 $\\hat{\\mathbf{z}}^{(i)}_{t+H}$，TRM 针对目标潜在状态计算时间终端代价。"
+   }
+  ]
+ },
+ "Sx4.SS0.SSS0.Px4.p1.2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在可达性占主导的设置中，我们使用 $c_{\\mbox{TRM}}$ 作为替代终端代价。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在原始潜在距离可能保留有用的局部物理信息的设置中，我们使用下面标准化的混合代价。"
+   }
+  ]
+ },
+ "Sx4.SS0.SSS0.Px4.p1.3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这里 $\\mathrm{std}$ 对当前候选集内的代价进行标准化，$\\mathrm{std}(c_{i})=(c_{i}-\\mu_{c})/(\\sigma_{c}+\\epsilon)$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "PushT 在补充材料中对 $\\lambda$ 进行了扫描，而 TwoRoom 主要使用替代代价。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "TRM 是一个标量端点终端代价，由 CEM 用于动作选择。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "表 1 总结了评估任务以及每个任务所使用的证据。"
+   }
+  ]
+ },
+ "Sx4.T1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "表1：论文中使用的评估套件。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "每一行在比较中保持控制器预算固定，仅改变终端成本或文中描述的诊断设置。"
+   }
+  ]
+ },
+ "Sx5.SS0.SSS0.Px1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "TwoRoom 包含两个由一堵墙隔开并通过一个门洞相连的房间。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "addition"
+    ],
+    "issue": "译文添加了“生成”的动作，原文仅表示这些评估集用于起点和目标对。",
+    "suggestion": "我们使用平衡评估集和距离受控评估集来评估起点和目标对。",
+    "zh_reviewed": "我们使用平衡评估集和距离受控评估集来生成起点和目标对。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "距离受控集从同一房间和跨墙的相同欧氏距离范围内抽取案例，防止拓扑与更长的欧氏距离混淆。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "主要的高距离评估包含同一房间内的 50 个回合和跨墙的 50 个回合。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在跨墙的 50 个目标中，47 个需要经过门洞，成功率是在每个种子的 100 个闭环回合上测量的。"
+   }
+  ]
+ },
+ "Sx5.SS0.SSS0.Px2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "主要研究对象是带有三个种子的 LeWM。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们还评估了来自稳定世界模型生态系统的 PLDM 世界模型基线（Maes et al. 2026a），使用从同一完整缓存中抽取的评估集，以测试相同的终端代价变化（TRM）是否有助于另一个固定模型。"
+   }
+  ]
+ },
+ "Sx5.SS0.SSS0.Px3.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "除非另有说明，比较均使用相同的检查点家族、HDF5缓存、评估集、随机种子、评估预算和CEM设置。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于高距离TwoRoom评估，这意味着300个候选样本、10次CEM迭代、top-$k$为30，以及评估预算为50。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们报告固定评估集上的成功百分比以及跨种子的均值。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "证据链结合了闭环成功率、对匹配候选集的审计、阴性对照和针对性压力测试。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "主表检验TRM是否有效，消融实验检验哪些设计选择重要，SASC检验候选排名如何变化，PLDM和TopoNav检验该模式是否在主要LeWM TwoRoom设置之外重现，PushT检验具有丰富接触动力学的边界情况。"
+   }
+  ]
+ },
+ "Sx5.SS0.SSS0.Px4.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于一组候选动作 $\\{\\mathbf{a}^{(i)}_{0:H-1}\\}_{i=1}^{N}$，令 $c(i)$ 为控制器代价，并令 $c^{\\star}(i)$ 为根据实际状态计算出的预言机诊断代价。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "共享候选集的选择审计（SASC）是一种反事实评估，其中检查点、评估集、采样器和 CEM 预算保持不变，仅选择器发生变化。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "候选排名上的 Spearman 相关性是 $\\{c(i)\\}_{i=1}^{N}$ 和 $\\{c^{\\star}(i)\\}_{i=1}^{N}$ 的并列平均排名之间的 Pearson 相关性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们在每个候选集内计算该相关性，并按照表格说明中所述在回合或种子上取平均。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "由于两者都是需要最小化的代价，较大的正值意味着较低的控制器代价往往与较低的诊断代价同时出现。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们还报告了 $c$ 分配给具有最佳预言机代价的候选者的排名，以及执行所选动作后的最终距离。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些量测试的是 TRM 是否改变了控制器诱导的排名，而不仅仅是度量头的离线损失。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "更多审计细节见补充材料。"
+   }
+  ]
+ },
+ "Sx5.SS0.SSS0.Px5.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "成对头使用两个隐藏层，每层256个单元，SiLU非线性，以及Softplus标量输出。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "它们使用AdamW（学习率$10^{-3}$，权重衰减$10^{-4}$）、批量大小1024和Smooth-L1损失进行训练，距离按224缩放。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "该缩放与TwoRoom图像和坐标尺度匹配，仅用于调节回归损失。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "主要时间头使用100,000个平衡训练对和与训练不相交的验证对，从相同的完整缓存协议中采样。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "打乱对照仅置换训练标签，同时保留架构、数据量和评估。"
+   }
+  ]
+ },
+ "Sx5.F3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图3：控制与共享候选排序。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（A）在三个LeWM种子上高距离TwoRoom评估的成功率。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（B）种子3072在相同评估的固定候选上的SASC排名分布，其中左侧更好。"
+   }
+  ]
+ },
+ "Sx5.SS0.SSS0.Px6.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "TRM 使用记录下的轨迹对，而不是评估成功、闭环 rollout、SASC 候选结果或测试对的标签。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于高距离 TwoRoom 评估的主要泄漏审计，所有 200 个评估起点和终点行及其 193 个源 episode 均被排除在用于训练和验证时间对的端点之外，使得行重叠为 0，episode 重叠为 0。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这种 episode 排除审计保留了修复效果（96.7$\\pm$2.1% 成功率和 $\\rho_{\\mathrm{geo}}=0.577$），而相应的打乱头仍为 0.0%。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "表 2 中在完整缓存上训练的行被保留为相同缓存设置下的参考。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "带有 episode 排除的结果是所报告的主要 TwoRoom 结果。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于 TopoNav，用于评估的确切起点和终点对也被排除在 TRM 和打乱对照的训练和验证对之外。"
+   }
+  ]
+ },
+ "Sx5.SS0.SSS0.Px7.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为了将时间性 TRM 主张与更强的度量替代方案区分开，我们还在相同的检查点、高距离评估集、控制器预算和候选池下，训练了使用排序损失训练的标准化潜在、线性、对角马氏、成对 MLP 和度量基线。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "使用排序损失训练的成对 MLP 和压力测试头在 TwoRoom 中使用 oracle 测地距离进行监督，因此我们将它们用作诊断性度量基线，近似上界，而不是作为可部署的时间性头。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们还通过再次渲染起点和目标像素，并在改变的墙和门参数下重置 rollout 环境，构建了训练期间未见过的布局变体。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "两个变体保留原始垂直墙但移动门洞，一个变体旋转墙的方向。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "编码器、动力学、策略检查点、控制器、CEM 预算和候选预算均固定。"
+   }
+  ]
+ },
+ "Sx5.SS0.SSS0.Px8.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于 PushT，我们使用从公开工件转换而来的官方 LeWM 检查点以及完整的专家训练数据集。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们评估三种协议：目标偏移 25 且动作预算为 50，目标偏移 50 且动作预算为 50，以及目标偏移 75 且动作预算为 75。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "每个协议在每个报告的评估种子下使用 50 个评估回合。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们按目标偏移来指代这些协议。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "由于 TRM 成本对 PushT 的改进不如 TwoRoom 成功率那样清晰，我们使用相同的 SASC 指标来解释偏移 50 和 75。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "候选排名上的 Spearman 相关性检验成本是否按实现的最终任务距离对采样动作序列进行排序，分配给具有最佳 oracle 成本的候选者的排名检验最佳采样候选者被成本放置的位置，而选定的最终距离检验所选动作是否更接近目标。"
+   }
+  ]
+ },
+ "Sx6.SSx1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们首先询问，仅改变终端选择器是否能修复高距离 TwoRoom 评估。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "表 2 给出了该方法的主要结果。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "原始 LeWM 潜在 MSE 仅达到 7.0% 的平均成功率。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "带回合排除的时间 TRM 达到 96.7%，而在相同缓存设置下，在完整缓存上训练的时间 TRM 作为参考达到 97.0%。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "错误房间和卡在墙边类别的失败几乎消失。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "使用打乱标签和相同架构及数据量训练的头部保持在 0.0%，表明增益并非由添加任意学习的标量成本引起。"
+   }
+  ]
+ },
+ "Sx6.T2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "表2：高距离TwoRoom评估的结果。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "成功率为三个种子的均值$\\pm$样本标准差，其余列为平均百分比。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "episode exclusion行从配对训练和验证中移除所有评估起点和目标episode。"
+   }
+  ]
+ },
+ "Sx6.T3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "表3：种子3072 SASC审计，针对固定候选的高距离评估。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "$\\rho$列是与oracle终端质量的Spearman相关性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "最佳排名百分位是分配给oracle最佳候选的百分位，其中越低越好。"
+   }
+  ]
+ },
+ "Sx6.SSx1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "TRM 在此设置下并非仅适用于 LeWM。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在相同的高距离评估集上，对三个 PLDM 种子采用相同的全时域时间配方，成功率从 32.7% 提升至 84.0%。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这支持将 TRM 视为一种终端代价，而非仅针对 LeWM 的补救措施。"
+   }
+  ]
+ },
+ "Sx6.SSx1.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "minor",
+    "category": [
+     "addition"
+    ],
+    "issue": "原文是 success，未明确为“成功率”，中文多加“率”可能改变指标含义。",
+    "suggestion": "图3总结了成功和候选排名。",
+    "zh_reviewed": "图3总结了成功率和候选排名。"
+   },
+   {
+    "verdict": "major",
+    "category": [
+     "omission",
+     "scope"
+    ],
+    "issue": "原文的 oracle 被漏译，丢失了限定信息，无法体现是 oracle 标准下的最佳采样候选。",
+    "suggestion": "在种子3072的高距离审计中，TRM将测地线斯皮尔曼相关系数从0.018提高到0.729，并将oracle最佳采样候选的排名百分位从31.71移动到3.86。",
+    "zh_reviewed": "在种子3072的高距离审计中，TRM将测地线斯皮尔曼相关系数从0.018提高到0.729，并将最佳采样候选的排名百分位从31.71移动到3.86。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "打乱标签不能修复排名，测地线斯皮尔曼相关系数为0.119，最佳排名百分位为34.00（表3）。"
+   }
+  ]
+ },
+ "Sx6.SSx2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们接下来探究修复是否来自与时间范围相匹配的时间监督，而不仅仅是添加一个学习到的标量头。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "表4和图4C给出了在三个种子上、动作预算为50时，针对关键时间范围选择的距离控制比较。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "原始潜在MSE仅达到1.7%的平均成功率，而在完整回合上使用100,000对进行平衡时间监督则达到97.5%。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "更广泛的覆盖范围和配对数量扫描是单种子诊断，报告在补充材料中。"
+   }
+  ]
+ },
+ "Sx6.F4": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "minor",
+    "category": [
+     "term"
+    ],
+    "issue": "horizon 在此上下文中应指时间范围/时域，译为「视界」可能误导为物理视界。",
+    "suggestion": "图4：机制与时域证据。",
+    "zh_reviewed": "图4：机制与视界证据。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "（A）XY行空间和残差成本的潜在MSE份额与控制成功率。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "term"
+    ],
+    "issue": "short horizon 在强化学习语境下通常指短时间范围/短时域，译为「短视界」可能误导。",
+    "suggestion": "（C）在原始、完整回合和短时域成本下，动作预算为50的距离控制评估中的成功率。",
+    "zh_reviewed": "（C）在原始、完整回合和短视界成本下，动作预算为50的距离控制评估中的成功率。"
+   }
+  ]
+ },
+ "Sx6.T4": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "表4：在动作预算为50的距离控制评估中，跨三个LeWM种子的时间范围比较。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "更广泛的覆盖范围和配对数量扫描是补充材料中的单种子诊断。"
+   }
+  ]
+ },
+ "Sx6.SSx2.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "打乱标签的对照实验支持相同的结论。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在匹配的架构、数据量和评估协议下，它们在所有三个 LeWM 种子和所有三个 PLDM 种子的高距离评估中达到 0.0% 的成功率。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于 LeWM 种子 3072，打乱标签将成功率从 99.0% 降低到 0.0%，并且表 3 显示它也无法修复候选排名。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，增益取决于适当尺度上的时间结构。"
+   }
+  ]
+ },
+ "Sx6.SSx3.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们在固定的控制器预算下，通过改变任务、终端代价类别、记录对覆盖率和布局来进行测试。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "TopoNav 使用冻结的编码器、精确的冻结动力学，以及所有选择器共享的固定路线偏置候选提议。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "度量基线在每个种子内使用相同的高距离评估集、控制器预算和匹配的候选池。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "覆盖率检查改变记录对中的门口示例，而布局检查在不重新训练固定世界模型的情况下移动门口或旋转墙壁。"
+   }
+  ]
+ },
+ "Sx6.T5": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "表5：在匹配的高距离候选池上的度量基线，在三个种子上取平均。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "测地线学习行使用预言机监督；较低的排名和距离更好。"
+   }
+  ]
+ },
+ "Sx6.T6": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "表6：固定控制器预算下的支持性评估。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "完整设置见补充材料。"
+   }
+  ]
+ },
+ "Sx6.SSx3.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些结果界定了有效区域。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "TopoNav 表明，一个独特的视觉导航拓扑重现了相同的模式。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在 TopoNav 中，原始终端潜在代价在 15.0% 的回合中成功，时间 TRM 达到 87.5%，且 $\\rho_{\\mathrm{geo}}=0.848$，而打乱标签后降至 1.1%。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "门口覆盖结果是恢复性测试。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "增加门口覆盖使之前的 0.0% 覆盖失败变为 100.0% 成功，将具有最佳预言代价的候选者的排名从 34.62 移至 0.49，并将最终距离从 124.36 降至 9.61。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "具有未见几何的布局结果是边界测试。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "沿同一垂直墙移动门口比原始潜在规划有所改善，但旋转墙的方向会使排名和成功率都崩溃。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "完整的压力测试表在补充材料中。"
+   }
+  ]
+ },
+ "Sx6.SSx4.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "机制证据表明，原始潜在MSE失败是因为它低估了对决策重要的状态方向。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在完整缓存中的20,000个状态上训练的线性XY探针，对于所有三个LeWM种子，测试RMSE约为1.8像素，$R^{2}=0.998$，因此TwoRoom路线决策所需的位置是存在的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，原始潜在MSE在动作预算为50的距离控制评估中仍然崩溃，LeWM仅达到1.7%的平均成功率。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "解码的XY终端成本将此项评估的成功率提高到94.2%，在评估时仅使用预测的终端潜在变量和学习的读出，而不是oracle状态。"
+   }
+  ]
+ },
+ "Sx6.SSx4.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "更强的检验是行空间干预。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "设 XY 探针为 $W\\mathbf{z}+b$，并定义 $P_{W}=W^{\\top}(WW^{\\top})^{\\dagger}W$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在采样的候选终端代价上，XY 行空间仅占总潜在 MSE 的 0.5–0.7%。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "然而，仅使用行空间潜在 MSE 进行规划可达到 90.8% 的平均成功率，而使用正交残差进行规划仍为 1.7%。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图 4A 总结了这种不对称性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "控制器失败不是因为相关坐标不在潜在空间中，而是因为原始欧氏距离对其影响微乎其微。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "其他对照实验得出相同结论。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "一个预言任务状态代价解决了高距离评估问题，而将原始潜在搜索增加到 1000 个样本、20 次 CEM 迭代和 top-$k$ 100 仍保持在 2.5%。"
+   }
+  ]
+ },
+ "Sx6.SSx4.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们还研究了TRM的边界。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "PushT支持TRM风格的任务状态头作为辅助排序信号，而不是作为控制已解决的证据。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在目标偏移25时，原始潜在规划已经接近饱和，达到88.0%，学习到的替代或混合成本并没有显著改善它。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在更难的目标偏移50和75时，任务状态头显著提高了SASC排名和选定的最终距离，但闭环成功率仅略有改善。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "偏移50的比较是原始40.0%对任务状态混合52.7%，偏移75的比较是原始16.0%对任务状态混合22.0%。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图5总结了这一边界。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "学习到的任务状态度量是有意义的，而连续接触操作仍然依赖于展开保真度、接触执行、动作搜索和恢复。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "详细的机制表和PushT扫描在补充材料中。"
+   }
+  ]
+ },
+ "Sx6.F5": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图5：PushT边界证据。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "闭环成功率仅小幅提升，而SASC在所选最终距离上显示出更大幅度的降低。"
+   }
+  ]
+ },
+ "Sx7.SSx4.SSS0.Px1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "XY 位置很容易从 LeWM 潜在状态中解码，而原始潜在 MSE 作为控制器目标仍然失败，因此瓶颈不仅仅是缺失的状态。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "暴露的候选排序是错误的，因为原始距离低估了承载路径决策的小行空间。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "动力学误差仍然真实存在，尤其是对于较长的 LeWM 推演和接触丰富的 PushT，但糟糕的终端代价仍然可能埋没好的候选。"
+   }
+  ]
+ },
+ "Sx7.SSx4.SSS0.Px2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "TwoRoom 和 TopoNav 主要由可达性主导，因此当候选池包含可行路线时，用时间代价替换原始潜在 MSE 可以修复选择器。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "PushT 更具连续性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "原始潜在代价保留了有用的物理信号，学习到的任务状态头最适合作为混合辅助代价。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如果在 oracle 下表现良好的候选不存在，那么采样、动力学或预算可能是瓶颈。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如果排序改善但成功率没有提高，那么 rollout 校准、接触执行或恢复仍然是限制因素。"
+   }
+  ]
+ },
+ "Sx7.SSx4.SSS0.Px3.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "时间头是从记录在案的回合内间隔 $y_{ij}=|t_{i}-t_{j}|$ 训练的，而不是从评估成功标签、oracle 测地线或测试对身份训练的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "带有打乱标签的对照组保留了架构和状态暴露，但未能恢复控制和 SASC 排名。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "addition"
+    ],
+    "issue": "原文 \"closed loop success\" 未出现 \"率\"，译文 \"闭环成功率\" 添加了 \"率\"，可能多出成功率这一概念，建议与原文保持一致。",
+    "suggestion": "门口覆盖稀少的日志失败，而围绕门口平衡的日志恢复了 oracle 最佳排名和闭环成功。",
+    "zh_reviewed": "门口覆盖稀少的日志失败，而围绕门口平衡的日志恢复了 oracle 最佳排名和闭环成功率。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "看到环境是不够的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "日志必须覆盖对连通性至关重要的区域。"
+   }
+  ]
+ },
+ "Sx7.SSx4.SSS0.Px4.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "PLDM 运行提供了受控的第二个模型检查。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "主要的 TwoRoom 审计排除了评估回合，而完整的缓存行在相同的缓存设置下仍作为参考。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "TopoNav 使用三个种子，并排除每个评估起点和终点对。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "布局和覆盖压力测试仍然是单检查点探针。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "门位置偏移部分转移，水平墙方向失败，PushT 仍然是一个边界情况，其中 SASC 排名比闭环成功更明显地改善。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "回合内时间标签是一个对称的标量代理，而不是一个以预算为条件的定向目标达成值。"
+   }
+  ]
+ },
+ "Sx8.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们识别出固定潜在控制器中的终端排序失败，并通过与时间范围匹配的时间成本来修复候选选择。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "当存在可行的候选者和连通性覆盖时，该方法恢复了强大的导航性能。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "共享候选审计和行空间干预表明，该修复重新加权了与决策相关的潜在方向。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "布局和接触测试设定了其局限性。"
+   }
+  ]
+ },
+ "Sx8.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "本补充材料提供了主论文的可复现细节和支持性结果。"
+   }
+  ]
+ }
+}

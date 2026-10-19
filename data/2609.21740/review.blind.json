@@ -1,0 +1,1971 @@
+{
+ "__meta__": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "models": {
+   "reviewer": "deepseek-v4-pro"
+  },
+  "translator": "deepseek-v4-pro（关思考）",
+  "independence": "same-model",
+  "usage": {
+   "calls": 65,
+   "prompt_tokens": 58810,
+   "completion_tokens": 50019,
+   "seconds": 540.4,
+   "cached_tokens": 39040
+  }
+ },
+ "abs.p1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "潜在世界模型通过在学习的表示空间中预测动作的效果来实现规划，但当测试时条件与训练时不同时，其预测可能变得不可靠。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "现有的测试时适应方法通过更新预训练模型的部分来解决这一问题，通常修改数百万个参数，并且需要选择要适应的内部组件。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们引入了 Sandwich-Residuals，这是一种轻量级替代方案，它保持预训练世界模型冻结，仅在预测器周围学习小的残差校正。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "残差使用模型的自监督预测误差在线优化，不需要奖励、标签或源域数据。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在 AdaJEPA 基准的 21 个条件下，我们的方法实现了冻结模型成功率的 $1.3\\times$，同时保留了最强 AdaJEPA 变体 95% 的性能，并且适应的参数少 97–99%。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在复合偏移下，这一优势增加到冻结模型成功率的 $1.9\\times$，同时保持与内部块适应相当。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们进一步在用于 3-D 操作的 DINO-WM 模型上展示了相同的适应原理。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些结果表明，世界模型的有效测试时适应不一定需要修改其预训练的内部权重。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "项目页面：`https://sandwich-residuals.github.io/`"
+   }
+  ]
+ },
+ "S1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "世界模型提供了一种紧凑的机制，用于学习环境在智能体动作下如何演化。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "潜在世界模型不是直接在高维观测空间中推理，而是将观测编码为结构化表示，并预测它们在动作条件下的未来演化 [1, 2, 3]。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "联合嵌入预测架构（JEPAs）[4, 5] 通过从无奖励轨迹中学习动作条件潜在动力学来扩展这一思想，并且最近在视觉模型预测控制方面显示出强大的结果 [6, 7, 8]。"
+   }
+  ]
+ },
+ "S1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这类模型背后的一个核心假设是，冻结的世界模型在测试时仍然有效，即测试时遇到的环境与训练时的分布保持足够接近。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在现实的机器人场景中，这一假设很容易被违反，训练与测试之间的分布偏移可能严重降低所学预测和下游控制的质量 [9]。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这类偏移可能通过光照、背景、相机视角或与任务无关的干扰物的变化影响观测，而底层任务并未改变 [10, 11]。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此外，动作与状态转移之间的物理交互也可能发生变化：摩擦、质量、执行器响应、负载或其他系统属性会改变同一动作对环境的影响方式 [12]。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这两种形式的分布偏移带来了根本不同的挑战。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "外观偏移扰动观测映射，同时可能保留动力学，而动力学偏移则直接使所学到的动作条件转移模型失效。"
+   }
+  ]
+ },
+ "S1.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "现有方法应对分布偏移的方式，要么是学习能够泛化到训练分布之外的表示，例如通过状态抽象、互模拟或解耦世界模型，要么是利用测试时遇到的数据来适应预训练模型 [13, 14]。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于观测侧的偏移，Toso 等人 [11] 利用互模拟显式塑造基于 JEPA 的世界模型的潜在几何结构，抑制视觉上无关的变化，同时保留与转移相关的结构，从而提高规划对外观变化的鲁棒性。"
+   }
+  ]
+ },
+ "S1.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "测试时自适应提供了一种利用在线收集的转移来纠正测试时不匹配的自然方法。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "例如，AdaJEPA [10] 利用模型自身的潜在预测误差来更新一个预测器块和视觉编码器的投影头。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "虽然有效，但该策略修改了数百万个预训练参数，并且需要选择要自适应的内部预测器块。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Wang 等人 [10] 发现，最佳自适应目标取决于环境，尽管性能通常对所自适应的特定层不太敏感。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "他们的 LoRA 变体在预测器和编码器的每个线性层中插入低秩适配器，同时保持预训练权重冻结，也比冻结模型有所改进，但并不总是优于对选定层的直接更新。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在我们的实验中，两个选定层的 AdaJEPA 变体同样在有效性上存在差异：`predfirst+enclast` 在总体上优于 `predlast+enclast`，但两者都需要更新近 $10^{7}$ 个预训练参数。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些结果留下了一个更基本的问题尚未解决：有效的测试时自适应是否需要修改预训练世界模型本身，如果不需要，那么必要的校正可以在哪里引入？"
+   }
+  ]
+ },
+ "S1.p5.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们研究是否可以在不修改预训练世界模型本身的情况下实现测试时自适应。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如图1所示，我们的方法冻结所有编码器和预测器参数，并在预测器周围插入轻量级残差模块，在冻结的动力学模型前后形成可学习校正的“三明治”结构。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在输入侧，残差在视觉和动作嵌入传递给预测器之前对其进行修改；动作残差还以本体感受为条件，使得同一命令可以根据当前系统状态进行不同的校正。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在输出侧，残差在预测的视觉和本体感受潜变量被重新用于推演和规划之前对其进行校正。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "只有这些残差模块在线更新，使用与AdaJEPA相同的自监督潜变量预测误差，不需要奖励、标签或源域数据。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们将这种架构称为三明治残差（Sandwich-Residuals）。"
+   }
+  ]
+ },
+ "S1.p6.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们使用已发布的检查点和环境 [10]，在扩展的基于 AdaJEPA 的评估套件上评估 Sandwich-Residuals，该套件包含 21 个主要条件和 7 个复合条件，并在为 OGBench-Cube 操作 [15] 训练的 DINO-WM 模型上进行评估。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "评估涵盖动力学、外观、物体形状、布局和复合偏移的变化。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的主要贡献是："
+   }
+  ]
+ },
+ "S1.I1.i1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• 我们引入了三明治残差（Sandwich-Residuals），这是一种测试时自适应方法，它保持预训练的编码器和预测器冻结，仅更新轻量级残差模块。"
+   }
+  ]
+ },
+ "S1.I1.i2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• 我们表明，接口级自适应恢复了 AdaJEPA 的大部分性能增益，同时更新的参数减少了 97–99%，在动力学和复合偏移下结果尤其强劲，且无需选择预测器块。"
+   }
+  ]
+ },
+ "S1.I1.i3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "• 我们证明，相同的适应原理可以从 AdaJEPA 风格的世界模型迁移到用于三维机器人操作的 DINO-WM 模型，并在不同架构间使用单一的残差设计。"
+   }
+  ]
+ },
+ "S2.SS1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "世界模型学习环境动态的紧凑预测模型，支持规划或策略学习，而无需反复与环境交互 [1, 2, 3]。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "近期工作越来越多地直接在学习的表示空间中进行预测，避免了昂贵的像素重建 [4, 6, 8]。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "DINO-WM [6] 在该潜在空间中直接预测以动作和规划为条件的未来冻结 DINOv2 特征，而 Wang 等人 [7] 则在曲率惩罚下联合训练编码器和预测器，该惩罚拉直潜在轨迹，使其更易于规划。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的工作关注的是，当测试时条件发生变化时，此类以动作为条件的世界模型应如何适应。"
+   }
+  ]
+ },
+ "S2.SS2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "测试时训练和适应利用测试后遇到的无标签观测来更新预训练模型 [16, 17, 18]。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "现有方法通过自监督目标、熵最小化、选择性参数更新或测试时特征和分类器调整来适应模型 [19, 18, 20]。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "虽然有效，但在线基于梯度的适应可能引入大量计算开销，并且当模型的大部分被更新时可能降低预训练表示的质量 [18, 20]。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这促使了越来越轻量级的适应策略，将测试时更新限制在选定的参数或辅助组件上 [21]。"
+   },
+   {
+    "verdict": "major",
+    "category": [
+     "omission"
+    ],
+    "issue": "漏译了“in latent world models”这一限定，未说明是在潜在世界模型中的工作。",
+    "suggestion": "我们的工作在潜在世界模型中遵循这一方向，但将适应限制在预测器输入和输出接口处的轻量级残差模块上，而不是修改预训练的编码器或预测器。",
+    "zh_reviewed": "我们的工作遵循这一方向，但将适应限制在预测器输入和输出接口处的轻量级残差模块上，而不是修改预训练的编码器或预测器。"
+   }
+  ]
+ },
+ "S2.SS3.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "世界模型的自适应已通过在线微调、系统辨识和动力学特定更新进行了研究 [12, 22]。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "SimDist [22] 冻结了迁移的表示、奖励和价值模型，同时根据真实世界转移微调潜在动力学，在自适应过程中明确保持一个固定的潜在目标。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "AdaJEPA [10] 将测试时自适应直接引入基于 JEPA 的 MPC：在执行动作后，产生的转移为在重新规划前更新选定的编码器和预测器参数提供了一个自监督预测目标。"
+   }
+  ]
+ },
+ "S2.SS4.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "残差动力学模型提供了一种互补策略，在保留预训练模型的同时纠正模型不匹配[23, 24]。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "ReDRAW [24]与我们的设置最接近：它冻结预训练的世界模型，并从一个小型离线目标域数据集中学习对其潜在状态动力学的残差校正。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "近期工作还强调显式地构建以动作为条件的动力学。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "AdaWorld [25]学习可迁移的潜在动作表示，而DWM [26]在训练期间将动作驱动的转换与动作无关的世界效应分开。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些方法改善了迁移或动力学建模，但在部署之前或部署之间纠正模型，而不是在规划循环内在线纠正，并且没有联合纠正动作和观测通路。"
+   }
+  ]
+ },
+ "S3.F1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图1：**三明治残差（SR）的概览与机制。** **左：** 在每个重新规划步骤中，世界模型在所选动作 $a_{t}$ 下预测下一观测的潜在表示，示意为 $\\hat{o}_{t+1}$，而执行该动作则产生观测到的下一观测 $o_{t+1}$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "随着测试时适应的进行，来自这些观测转移的更新减少了预测不匹配，展示了模型的渐进式在线重校准。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "**右：** 带圆圈的 $+$ 符号表示加性残差连接。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "橙色残差块在测试时适应期间被调整，而编码器和预测器保持冻结。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "符号和变量定义见第三节。"
+   }
+  ]
+ },
+ "S3.SS1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们考虑用于视觉模型预测控制的预训练联合嵌入预测架构（JEPA）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在时间步 $t$，智能体接收观测 $\\mathbf{o}_{t}$ 并执行动作 $\\mathbf{a}_{t}$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "观测编码器和动作编码器产生潜在表示，这些表示沿其特征维度拼接成预测器输入 $\\mathbf{x}_{t}$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于 $K$ 个连续时间步的上下文，因果预测器在每个上下文位置产生一步超前预测："
+   }
+  ]
+ },
+ "S3.SS1.p1.2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在递归展开过程中，最终预测 $\\widehat{\\mathbf{x}}_{t+1}$ 被追加到上下文中，然后再预测下一步。"
+   }
+  ]
+ },
+ "S3.SS1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们考虑该架构的两种实例化。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在 AdaJEPA 的预训练世界模型中，观测 $\\mathbf{o}_{t}=(\\mathbf{v}_{t},\\mathbf{p}_{t})$ 由图像 $\\mathbf{v}_{t}$ 和本体感受状态 $\\mathbf{p}_{t}$ 组成，分别由带有 MLP 投影头的小型 ResNet 和本体感受编码器编码："
+   }
+  ]
+ },
+ "S3.SS1.p2.2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "其中 $\\mathbf{z}^{v}_{t}\\in\\mathbb{R}^{384}$，且 $\\mathbf{z}^{p}_{t},\\mathbf{z}^{a}_{t}\\in\\mathbb{R}^{10}$，并且"
+   }
+  ]
+ },
+ "S3.SS1.p2.3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在 DINO-WM 中，观测仅为图像，由冻结的 DINOv2 [27] 骨干网络编码为一组补丁令牌 $\\mathbf{z}^{v}_{t}\\in\\mathbb{R}^{P\\times 384}$；动作嵌入被平铺到每个令牌上，使得每个令牌的 $\\mathbf{x}_{t}=[\\mathbf{z}^{v}_{t};\\,\\mathbf{z}^{a}_{t}]$，并且预测器在上下文的 $K\\times P$ 个令牌上运行。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "hedge"
+    ],
+    "issue": "原文的 'simply' 带有弱化语气，表示“就是没有”，译文“完全不存在”加强了语气，丢失了原文的轻描淡写。",
+    "suggestion": "在下文中，对于 DINO-WM，$\\mathbf{z}^{p}_{t}$ 和本体感觉项就是没有。",
+    "zh_reviewed": "在下文中，对于 DINO-WM，$\\mathbf{z}^{p}_{t}$ 和本体感觉项完全不存在。"
+   }
+  ]
+ },
+ "S3.SS1.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "世界模型（world model）的训练目标以在潜在空间中预测未来观测表示为核心。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "其完整的预训练目标还包括底层JEPA公式所使用的辅助损失和正则化项。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "训练完成后，可以通过递归应用预测器并测量预测表示与编码目标观测之间的距离来评估候选动作序列。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们使用交叉熵方法（CEM）在滚动时域控制回路中优化这些动作序列。"
+   }
+  ]
+ },
+ "S3.SS1.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "AdaJEPA 在此控制循环中利用最近观测到的转移来适配预训练的世界模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "为清晰起见，考虑在时间 $i+1$ 结束的单步预测。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "由 $f_{\\Theta}(\\mathbf{x}_{i-K+1:i})$ 产生的最终预测的观测分量被拼接为"
+   }
+  ]
+ },
+ "S3.SS1.p4.2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "相应的目标表示通过编码观测到的图像和本体感受状态来形成："
+   }
+  ]
+ },
+ "S3.SS1.p4.3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "利用式（4）和式（5）中分别给出的预测观测表示和目标观测表示，AdaJEPA 最小化自监督潜在预测损失"
+   }
+  ]
+ },
+ "S3.SS1.p4.4": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "其中 $\\mathcal{B}$ 包含最近五次观测到的转移，$\\ell$ 是观测特征上的均方误差，$\\operatorname{sg}(\\cdot)$ 表示停止梯度。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "`predfirst+enclast` 变体更新第一个预测器 Transformer 块，而 `predlast+enclast` 更新最后一个预测器 Transformer 块和最终的预测器 LayerNorm。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "两种变体还更新编码器的最终投影头（如果存在）；冻结的 DINOv2 编码器没有投影头。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "尽管这允许世界模型适应测试时条件，但它需要修改预训练编码器和预测器的参数。"
+   }
+  ]
+ },
+ "S3.SS2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如图1所示，我们冻结预训练编码器和预测器的所有参数，并在预测器周围引入轻量级残差模块。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些残差模块修改其输入和输出，在冻结的动力学模型周围形成一个三明治结构。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这提供了可学习的接口，用于补偿输入侧分布偏移和系统性预测误差，而无需改变预训练的世界模型本身。"
+   }
+  ]
+ },
+ "S3.SS2.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们使用动作以及（在可用时）本体感受表征来校正动作嵌入："
+   }
+  ]
+ },
+ "S3.SS2.p2.2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "其中 $r^{a}_{\\phi}$ 是一个线性残差映射。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "以本体感觉表示为条件进行校正，使得相同的编码动作能够根据当前状态进行不同的调整。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这种输入侧的校正旨在补偿动力学偏移，例如阻尼的变化，这些变化会改变给定动作对下一状态的影响方式。"
+   }
+  ]
+ },
+ "S3.SS2.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们还对视觉表征应用了一个残差 MLP："
+   }
+  ]
+ },
+ "S3.SS2.p3.2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "该残差在视觉编码器之后立即应用，因此它作用于每个编码图像：上下文帧、作为适应目标的观测下一帧，以及规划目标所使用的目标图像。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，预测和目标在相同的校正表示中进行比较，类似于 AdaJEPA。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于 DINO-WM，残差应用于每个补丁标记。"
+   }
+  ]
+ },
+ "S3.SS2.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们不修改输入的本体感觉嵌入，这反映了我们的设置。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "本体感觉观测映射保持不变，而分布偏移影响视觉观测或从动作到状态转移的映射。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如第 III-A 节所述，以下方程针对 AdaJEPA 模型编写；对于 DINO-WM，$\\mathbf{z}^{p}_{t}$ 项和本体感觉输出残差不存在。"
+   }
+  ]
+ },
+ "S3.SS2.p5.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，校正后的预测器输入为"
+   }
+  ]
+ },
+ "S3.SS2.p5.2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于 $K$ 个时间步的上下文，冻结的预测器产生"
+   }
+  ]
+ },
+ "S3.SS2.p5.3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "令 $\\widehat{\\mathbf{z}}^{v}_{t+1}$ 和 $\\widehat{\\mathbf{z}}^{p}_{t+1}$ 表示预测表示的视觉和本体感觉分量。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "第二对残差模块校正这些预测器输出："
+   }
+  ]
+ },
+ "S3.SS2.p5.4": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "输出视觉残差是另一个MLP，而输出本体感觉残差是线性的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些输出残差直接补偿预测后仍然存在的误差。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "校正后的表示既在模型展开过程中递归使用，也被潜在规划目标使用。"
+   }
+  ]
+ },
+ "S3.SS2.p6.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "两个视觉残差均为两层 MLP，具有 64 维隐藏层和 GELU 激活，$\\mathbb{R}^{384}\\rightarrow\\mathbb{R}^{64}\\rightarrow\\mathbb{R}^{384}$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于 AdaJEPA 模型，动作输入残差映射 $\\mathbb{R}^{20}\\rightarrow\\mathbb{R}^{10}$，而本体感觉输出残差映射 $\\mathbb{R}^{10}\\rightarrow\\mathbb{R}^{10}$，总共产生 99,520 个可训练参数。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这对应于迷宫模型中 AdaJEPA 更新的 9.93M 参数的 1.0%，以及推动模型中更新的 3.66M 参数的 2.7%。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于 DINO-WM，动作残差映射 $\\mathbb{R}^{10}\\rightarrow\\mathbb{R}^{10}$，本体感觉输出残差被省略，产生 99,310 个可训练参数，即 AdaJEPA 更新的 3.23M 参数的 3.1%。"
+   }
+  ]
+ },
+ "S3.SS2.p7.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "对于 Sandwich-Residuals，式 (6) 使用残差校正后的预测 $\\widetilde{\\widehat{\\mathbf{z}}}^{o}_{i+1}=[\\widetilde{\\widehat{\\mathbf{z}}}^{v}_{i+1};\\widetilde{\\widehat{\\mathbf{z}}}^{p}_{i+1}]$ 和目标 $\\widetilde{\\mathbf{z}}^{o}_{i+1}=[\\widetilde{\\mathbf{z}}^{v}_{i+1};\\mathbf{z}^{p}_{i+1}]$ 进行评估，并对目标应用停止梯度。"
+   }
+  ]
+ },
+ "S3.SS2.p8.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "线性残差初始化为零，每个 MLP 残差的最后一层初始化为 $\\mathcal{N}(0,10^{-4})$，因此自适应模型在每个 episode 开始时与冻结的预训练模型一致。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在测试时仅优化残差参数 $\\phi$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在每个计划-执行循环之后，我们执行一次 Adam 更新："
+   }
+  ]
+ },
+ "S3.SS2.p8.2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在所有实验中，我们对线性残差使用 $10^{-2}$ 的学习率，对视觉 MLP 使用 $5\\times 10^{-4}$ 的学习率。"
+   },
+   {
+    "verdict": "minor",
+    "category": [
+     "scope"
+    ],
+    "issue": "“所有最多 $K$ 个连续转移窗口”有歧义，可能被理解为窗口数量最多 $K$ 个，而原文强调每个窗口由最多 $K$ 个连续转移构成。",
+    "suggestion": "预测损失在由这些转移形成的所有长度最多为 $K$ 个连续转移的窗口上取平均。",
+    "zh_reviewed": "自适应缓冲区保留最近的五次转移，预测损失在由这些转移形成的所有最多 $K$ 个连续转移窗口上取平均。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "残差参数在一个回合内的重新规划周期之间持续存在，并在每个新回合开始时重置为其初始值，与 AdaJEPA 的协议一致。"
+   }
+  ]
+ },
+ "S4.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们探究仅调整三明治残差是否能在测试时分布偏移下像 AdaJEPA 更新预训练权重那样有效地恢复规划性能，以及答案如何取决于偏移类型。"
+   }
+  ]
+ },
+ "S4.SS1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "环境和预训练模型：我们使用已发布的 AdaJEPA 检查点、环境和规划器；唯一的代码改动是添加了残差臂。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "基准包含四个目标条件视觉控制任务，每个任务都有自己的预训练世界模型：Medium Maze，一个 MuJoCo 质点智能体在固定迷宫中导航；Diverse Maze，同一智能体在留出的布局上；PushT，一个 pymunk 推手将 T 形块移动到目标位姿（模型仅在 T 块上训练）；以及 PushObj，同一推手，模型在四种形状 {T, L, Z, +} 上训练。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "回合以目标图像（和本体感觉）为目标条件；起始/目标对按 AdaJEPA 中的方式采样（迷宫：单元格至少相距 3 个，或留出布局的最短路径距离为 3–5；推动：留出轨迹上相隔 25 步的两个状态）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "成功的定义与 AdaJEPA 相同。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "测试时偏移：偏移仅在测试时应用，分为三组。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "动力学偏移改变模拟器：在 Medium Maze 中关节阻尼 $\\times 50$ 和身体密度 $0.2$–$10\\times$；在 PushT 中推手的 PD 控制器增益 $k_{v}$ 加倍。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "外观偏移改变渲染图像（对观察帧和目标帧同样应用）：高斯模糊（$\\sigma=2$）、椒盐噪声（1%）、亮度缩放 0.9，以及将智能体、块或目标锚点重新着色为红色。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "任务偏移改变必须操作的对象或位置：PushObj 在 4 个训练形状之外评估 3 个未见形状（I、小 T、正方形），Diverse Maze 使用未见布局。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "七个复合条件将一种损坏与一种动力学变化相结合。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们总共评估 21 个主要条件和 7 个复合条件。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "规划协议：所有臂共享 AdaJEPA 的滚动时域循环。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "世界模型每 5 个模拟步骤观察一张图像（每块 5 个低级动作），上下文 $K=3$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "每个周期，CEM 根据预测潜在轨迹与编码目标之间的距离优化 5 个动作块（200 个候选、30 个精英、10 次迭代）；执行第一个块，其余部分热启动下一个周期，最多 20 个周期。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "基线：使用预训练模型冻结规划，无适应。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "AdaJEPA 在每个执行块之后，用 $\\mathcal{L}_{\\mathrm{pred}}$ 上的一步 Adam 适应预训练权重的子集。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "`predlast+enclast` 更新最后一个预测器块、其最终 LayerNorm 和编码器的投影头；`predfirst+enclast` 更新第一个预测器块和投影头（学习率与原始工作相同；迷宫模型中 9.93M 参数，推动模型中 3.66M）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的方法冻结所有预训练权重，仅更新第 III-B 节的残差模块（99,520 个参数），使用相同的缓冲区、更新计划和每回合重置。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "每个（条件，臂）单元在 5 个种子上各评估 50 个回合；除了每个条件的均值外，我们还报告配对差异及其标准误。"
+   }
+  ]
+ },
+ "S4.T1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "表 I：成功率（%），5 个种子各 50 个回合的均值 ± 标准差。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "`pl`：`predlast+enclast`；`pf`：`predfirst+enclast`；∗：训练期间未见过的形状；$\\Delta$：我们的方法相对于冻结模型的增益（百分比）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "粗体表示每个条件下最好的方法。"
+   }
+  ]
+ },
+ "S4.SS1.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "结果：表 I 和表 II 分别总结了 21 个主要条件和 7 个复合条件下的性能，表 III 报告了配对比较。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在 21 个主要条件中，我们的方法平均成功率为 65.0%，而 Frozen 为 49.2%，`predlast+enclast` 为 63.4%，`predfirst+enclast` 为 68.2%。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这是在迷宫模型中仅调整 AdaJEPA 更新参数的 1.0%、在推动模型中仅调整 2.7% 的情况下实现的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "总体而言，我们的方法比 Frozen 提高了 $15.8\\pm 1.2$，比 `predlast` 提高了 $1.6\\pm 0.7$，同时与 `predfirst` 的差距保持在 $3.2\\pm 0.8$ 以内。"
+   }
+  ]
+ },
+ "S4.F2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图2：复合偏移下的示例回合，使用四种模型分别规划，从相同的起始状态和目标出发：(a) 中型迷宫，模糊 $\\sigma=2$ + 阻尼 $50\\times$；(b) PushT，模糊 $\\sigma=2$ + 控制器 $k_{v}$ $2\\times$；(c) PushObj T，模糊 $\\sigma=2$ + 控制器 $k_{v}$ $2\\times$；(d) PushObj 方形，模糊 $\\sigma=2$ + 控制器 $k_{v}$ $2\\times$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "绿色虚线描绘了执行的轨迹。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Frozen 在所有四个回合中均失败；我们的方法在所有四个回合中均成功，在 (a) 中在 $50\\times$ 阻尼下独特地到达目标，而 `predfirst` 在 (c) 中失败，`predlast` 在 (d) 中失败。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些是说明性的单个回合，并不代表表 I 和表 II 中的总体比率。"
+   }
+  ]
+ },
+ "S4.T2": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "表II：复合偏移下的成功率（%），报告为5个种子各50个回合的均值±标准差。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "`pl`和`pf`的定义见表I。粗体表示每个条件下最好的方法。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "$\\Delta$表示我们的方法相对于冻结模型的增益（以百分比计）。"
+   }
+  ]
+ },
+ "S4.T3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "表III：成功率（百分点）的配对差异，计算方式为我们的方法减去每个基线，并以配对上的均值 $\\pm$ 标准误报告。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "`pl` 和 `pf` 在表I中定义。"
+   }
+  ]
+ },
+ "S4.SS1.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "相对性能在很大程度上取决于偏移的类型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在动力学变化下，我们的方法与 `predfirst` 相当（$+0.5\\pm 1.3$），而在外观、形状和未偏移条件下差距更大（$-4.1\\pm 0.9$）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "最大的增益出现在大幅动力学变化下。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在 Medium Maze 中阻尼为 $50\\times$ 时，我们的方法达到 66.0% 的成功率，而 `predfirst` 为 59.2%，Frozen 为 46.4%。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在模糊与 $50\\times$ 阻尼结合的条件下，它达到 65.6%，而两者分别为 56.0% 和 46.8%。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如第 V 节的消融所示，这些改进源于不同环境中不同的残差通路：输出侧校正主导 Medium Maze，而动作残差在 PushT 控制器偏移下更为重要。"
+   }
+  ]
+ },
+ "S4.SS1.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "同样的趋势在复合偏移下更为明显。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在七个复合条件下，我们的方法相比 Frozen 和 `predlast` 有大幅提升，同时与 `predfirst` 保持相当（$+0.8\\pm 1.4$）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "它在七个条件中的四个上取得了最高的成功率，并在所有七个条件上都优于 `predlast`。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "相比之下，`predfirst` 在几个纯外观偏移上保持了更明显的优势，特别是在 PushT 中，这表明当偏移主要影响视觉编码时，直接适应预训练表示仍然是有益的。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "红块条件对所有方法来说仍然具有挑战性，成功率低于 15%。"
+   }
+  ]
+ },
+ "S4.SS1.p5.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图2提供了四种复合偏移下的定性示例。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这些轨迹展示了总体结果中观察到的行为；特别是，在所示的$50\\times$阻尼回合中，我们的方法成功到达目标，而其他适应策略均失败。"
+   }
+  ]
+ },
+ "S4.SS2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "任务与世界模型：为了测试向三维操作任务和具有不同编码器的世界模型的迁移，我们使用 OGBench 的单立方体任务，其中带有平行夹爪的 UR5e 机械臂必须将立方体移动到目标位置。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "动作是 5 维的（末端执行器位移、偏航、夹爪命令），观测是来自固定前置摄像头的 $224\\times 224$ 图像，并且没有本体感觉输入。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们使用 LeWorldModel [8] 发布的数据集，并在 2,000 个回合上按照 `stable-worldmodel` 的参考配方训练 DINO-WM 世界模型：冻结的 DINOv2-small 编码器、在 $K=3$ 帧上的 6 块因果 ViT 预测器、每 5 个仿真步取一帧且每块 5 个动作。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "评估协议与偏移：我们遵循 LeWorldModel 协议：起始状态是数据集轨迹的随机状态，目标图像是 25 步之后的帧，前两帧和已执行的动作块构成初始上下文。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "如果立方体到达目标位置 4 厘米范围内，则该回合成功。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "规划使用第 IV-A 节的 CEM 设置，采用 DINO-WM 的成本（预测块标记与目标块标记之间的均方距离），最多 10 个循环。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "通过仿真器施加三种训练数据中不存在的偏移：光照偏移（强度从 0.7 到 0.3）、视角偏移（相机在偏航和俯仰方向旋转 $10^{\\circ}$）和动力学偏移（机械臂关节位置增益减半）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "基线：四个臂的定义与第 IV-A 节相同。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "由于 DINOv2 [27] 编码器被冻结且没有投影头，`predlast` 更新最后一个预测器块及其最终的 LayerNorm，`predfirst` 更新第一个预测器块（各 3.23M 参数）；我们的方法更新残差模块，不含本体感觉项（99,310 个参数）。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "每个单元在 3 个种子上各评估 50 个回合。"
+   }
+  ]
+ },
+ "S4.SS2.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "结果：表IV总结了四种OGBench-Cube条件下的性能。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在无偏移条件下，Frozen达到62.7%的成功率，`predfirst`达到64.0%，而`predlast`和我们的方法均为60.7%。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在所有条件下平均，我们的方法达到60.0%，相比之下Frozen为58.7%，`predlast`为57.8%，`predfirst`为58.0%，而我们仅调整99,310个参数，而AdaJEPA变体为3.23M。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在十二个（条件，种子）对中，我们的方法与Frozen相差$+1.3\\pm 1.5$，与`predlast`相差$+2.2\\pm 1.2$，与`predfirst`相差$+2.0\\pm 1.8$。"
+   }
+  ]
+ },
+ "S4.F3": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "minor",
+    "category": [
+     "other"
+    ],
+    "issue": "数学公式 $10^{\\circ}$ 未保留 LaTeX 格式，写成了普通文本 10°。",
+    "suggestion": "图3：DINO-WM在$10^{\\circ}$相机偏移下的OGBench-Cube示例回合。",
+    "zh_reviewed": "图3：DINO-WM在10°相机偏移下的OGBench-Cube示例回合。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "所有方法使用相同的起始状态、目标和随机种子。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "PredLast执行十次重规划步骤；然而，立方体在前两次之后位移可忽略不计，导致后续轨迹标记在其最终位置附近重叠。"
+   }
+  ]
+ },
+ "S4.T4": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "表 IV：使用我们的 DINO-WM 的 OGBench-Cube：成功率（%），报告为 3 个种子、每个种子 50 个回合的均值 $\\pm$ 标准差。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "`pl`：`predlast`；`pf`：`predfirst`。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "粗体表示每个条件下最佳的方法。"
+   }
+  ]
+ },
+ "S4.SS2.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在测试时偏移下，我们的方法是唯一一种在所有三种条件下都优于 Frozen 的适应策略：光照偏移下为 61.3% 对 58.7%，相机偏移下为 56.0% 对 54.0%，臂增益偏移下为 62.0% 对 59.3%。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这相当于相对于 Frozen 的 $+2.4\\pm 1.4$，而两种 AdaJEPA 变体在视角偏移下均低于冻结模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "图 3 展示了该条件下的一个代表性回合以及由此产生的重新规划到重新规划的立方体轨迹。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "总体而言，这些结果表明，相同的接口级适应原理可以迁移到补丁令牌世界模型和三维操作设置中，尽管性能差异仍然不大。"
+   }
+  ]
+ },
+ "S5.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "表 V 分析了在两种复合偏移下每条残差路径的贡献：带模糊 $\\sigma=2$ 和阻尼 $50\\times$ 的 Medium Maze，以及带模糊 $\\sigma=2$ 和加倍控制器增益 $k_{v}$ 的 PushT。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "从完整的 Sandwich-Residual 配置出发，我们移除动作残差 $r^{a}$、两个输出残差 $r^{\\mathrm{out}}$，或两个输入侧残差 $r^{\\mathrm{in}}$。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "所有剩余的适应和规划设置保持不变。"
+   }
+  ]
+ },
+ "S5.T5": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "表 V：复合偏移下的残差通路消融。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "成功率（%）以 50 个回合、五个随机种子的均值 ± 标准差报告。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "括号内表示相对于完整配置的变化。"
+   }
+  ]
+ },
+ "S5.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "消融揭示了两个环境中不同的适应机制。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在 Medium Maze 中，输出侧校正贡献了大部分改进：移除 $r^{\\mathrm{out}}$ 使成功率从 65.6% 降至 56.4%，而仅保留输出残差（$-r^{\\mathrm{in}}$）达到 64.4%，接近完整配置。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "仅移除动作残差影响很小，得到 63.6%。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这表明复合偏移可以在很大程度上在预测之后得到补偿，而不是通过动作重映射。"
+   }
+  ]
+ },
+ "S5.p3.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在 PushT 中，残差通路在很大程度上更具互补性。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "移除 210 个参数的动作残差使成功率从 87.6% 降至 77.6%，这与控制器偏移直接改变所命令动作的效果一致。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "移除所有输出残差或所有输入侧残差会进一步将成功率分别降至 72.0% 和 71.2%。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，预测器的任何一侧单独都不足以恢复完整的适应性能。"
+   }
+  ]
+ },
+ "S5.p4.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "总体而言，结果表明主导的校正通路取决于测试时的偏移。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在 Medium Maze 中，输出侧的自适应几乎就足够了，而 PushT 则受益于同时校正预测器的输入和输出。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "这支持了当测试时不匹配的来源事先未知时，将完整的 Sandwich-Residual 配置作为一种固定的自适应机制。"
+   }
+  ]
+ },
+ "S6.SS1.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Sandwich-Residuals 假设预训练的表征在测试时偏移后仍然足够，并且本体感觉观测映射保持不变；我们还评估了在一个回合内近似平稳的偏移。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "我们的实验仅限于仿真；真实机器人部署还会引入传感和驱动噪声、延迟以及可能随时间变化的动力学。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "残差架构和学习率在所有任务中固定，这可能部分解释了视觉偏移下仍然存在的差距。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "OGBench-Cube 实验使用了缩减的训练和评估设置，观察到的增益不大。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "最后，减少可训练参数的数量并不会成比例地降低适应成本，因为输入侧残差的梯度仍然必须通过冻结的预测器传播。"
+   }
+  ]
+ },
+ "S6.SS2.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "结果表明，测试时的不匹配并不总是需要修改内部动力学模型。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "当预训练的表示和转移结构仍然有用时，适应可以改为重新校准预测器的输入或纠正其输出。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，残差应被视为轻量级补偿器，而不是显式的系统辨识模块：它们只需要使冻结的模型对规划有用，而不需要恢复真实的变化动力学。"
+   }
+  ]
+ },
+ "S6.SS2.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "消融表明，主导的校正路径取决于偏移。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Medium Maze 大多在预测之后得到校正，而 PushT 控制器偏移则更重视动作路径。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "外观偏移更难处理，因为在冻结编码器内部被扭曲或丢失的信息无法在下游完全恢复。"
+   }
+  ]
+ },
+ "S6.SS3.p1.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "Sandwich-Residuals 保持预训练世界模型冻结，仅围绕其预测器从自监督转移误差中学习小的校正。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在 21 个主要 AdaJEPA 条件下，我们的方法实现了冻结模型成功率的 $1.3\\times$，同时保留了最强 AdaJEPA 变体性能的 95%，并且适配的参数少 97–99%。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "在复合偏移下，这一数字提高到冻结模型成功率的 $1.9\\times$，性能与适配第一个预测器块相当。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "同样的原理迁移到 DINO-WM，我们的方法是唯一在所有三种测试偏移下均优于冻结模型的适配变体。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "因此，接口级适配可以在不修改预训练权重或选择要更新的预测器块的情况下恢复大量性能。"
+   }
+  ]
+ },
+ "S6.SS3.p2.1": {
+  "reviewer": "deepseek-v4-pro",
+  "mode": "blind",
+  "reviews": [
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "未来的工作可以跨回合保留残差以应对持续性偏移，或在视觉编码器中更早地引入校正，以更好地处理表征偏移。"
+   },
+   {
+    "verdict": "ok",
+    "category": [],
+    "issue": "",
+    "suggestion": "",
+    "zh_reviewed": "此外，在物理机械臂上评估这些扩展是一个重要的下一步。"
+   }
+  ]
+ }
+}

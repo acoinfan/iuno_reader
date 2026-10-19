@@ -1,0 +1,1269 @@
+{
+ "__meta__": {
+  "translator": "deepseek-v4-pro（关思考）",
+  "usage": {
+   "calls": 66,
+   "prompt_tokens": 51702,
+   "completion_tokens": 11493,
+   "seconds": 164.0,
+   "cached_tokens": 34688
+  }
+ },
+ "abs.p1": {
+  "sentences": [
+   {
+    "zh": "代码：https://github.com/X1AOX1A/Word2World 智能体强化学习越来越依赖于经验驱动的扩展，但现实世界环境仍然是非自适应的、覆盖范围有限且难以扩展。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "世界模型提供了一种通过模拟经验来提高学习效率的潜在方法，但大型语言模型能否可靠地扮演这一角色，以及在什么条件下它们能真正使智能体受益，目前仍不清楚。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们在基于文本的环境中研究这些问题，这些环境提供了一个受控的设置，将语言建模重新解释为交互下的下一状态预测。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们引入了一个三级框架来评估基于LLM的世界模型：（i）保真度和一致性，（ii）可扩展性和鲁棒性，以及（iii）智能体效用。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在五个代表性环境中，我们发现经过充分训练的世界模型能够保持连贯的潜在状态，随着数据和模型规模的增加而可预测地扩展，并通过动作验证、合成轨迹生成和强化学习的热启动来提高智能体性能。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "同时，这些收益关键取决于行为覆盖率和环境复杂性，这划定了世界建模何时有效支持智能体学习的明确边界。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S0.F1": {
+  "sentences": [
+   {
+    "zh": "图1：**LLM作为基于文本的世界模型用于智能体学习。**（A）我们将世界建模形式化为在固定的基于文本的交互协议下的下一状态预测。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "（B）沿三个轴评估世界模型能力：保真度/一致性、可扩展性/鲁棒性和智能体效用。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "（C）世界模型在单步预测和长时程推演中均表现出高保真度和一致性。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "（D）性能随着文本环境中训练数据的增加而可预测地扩展。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "（E）忠实的世界模型通过验证、合成数据生成以及通过更强的初始化改进强化学习来增强智能体。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S1.p1.1": {
+  "sentences": [
+   {
+    "zh": "近期智能体强化学习（RL）的进展日益依赖于**经验驱动的扩展**：随着智能体的改进，进一步的提升需要更大、更多样且更具挑战性的环境（Zeng et al., 2025; Zhang et al., 2025a; Tong et al., 2025）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然而，与静态预训练语料库不同，经验必须通过交互来收集。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "随着智能体的扩展，这种依赖暴露出一个根本性的**经验瓶颈**：现实环境不具有适应性、难以扩展且覆盖范围有限，这成为智能体RL进展的关键限制因素（Wei et al., 2025; Jiang et al., 2025; Guo et al., 2025）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S1.p2.1": {
+  "sentences": [
+   {
+    "zh": "缓解这一瓶颈的一个关键杠杆是世界建模（Hafner et al., 2024; Hafner et al., 2025; Zhao et al., 2025; Hu et al., 2025a）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "从交互中有效学习要求智能体维护环境的内部模型，以跟踪潜在状态、预测动作结果，并超越即时观察进行学习。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "通过内化环境动态并支持从想象交互中学习，世界模型有助于闭合交互循环，并实现更高效和更有效的学习。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "与此同时，通过大规模下一词预测训练的LLM表现出强大的泛化能力，并编码了丰富的世界知识（Grattafiori et al., 2024; Qwen et al., 2025; Hu et al., 2025b）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这自然引出了一个问题：",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S1.p3.1": {
+  "sentences": [
+   {
+    "zh": "大型语言模型能否充当有效的世界模型，从而帮助智能体从经验中学习？",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S1.p4.1": {
+  "sentences": [
+   {
+    "zh": "尽管先前的工作已经探索了将LLM用作模拟器、经验生成器或规划接口（Chen et al., 2025; Li et al., 2025b; Wu et al., 2025; Gu et al., 2025; Wang et al., 2025; He et al., 2025），但如何学习一个世界模型以及何时它足够可靠以改进下游智能体仍不清楚。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "一个有用的世界模型必须超越局部合理的文本，随时间保持连贯的状态，对分布偏移保持稳健，并提供可衡量的效用。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "为了在受控环境中解决这些问题，我们专注于基于文本的环境，将其作为语言建模和世界建模之间的统一接口。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这种抽象保留了智能体-环境交互的核心挑战，同时将目标从下一个标记预测重新定义为固定交互协议下的下一个状态预测。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S1.p5.1": {
+  "sentences": [
+   {
+    "zh": "通过这一视角，我们形式化了一个三层框架，用于刻画智能体学习中的世界建模能力。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S1.p7.1": {
+  "sentences": [
+   {
+    "zh": "通过研究五个具有代表性的基于文本的环境，我们的分析得出三个主要发现：（i）LLM 可以作为可靠的世界模型：它们表现出支持上下文世界建模的内部潜在动态，并且监督微调显著提高了短期预测保真度，并在结构良好的领域中实现一致的长时程推演。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "（ii）可靠世界模型的开发需要模型容量和数据量随环境复杂度进行系统性扩展，并通过广泛的行为覆盖和多样化的环境暴露来保持对分布偏移的鲁棒性。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "（iii）高保真世界模型通过验证高风险动作以防止不可逆失败，以及生成合成轨迹和热启动强化学习以提高学习效率和效果，为智能体提供了实际益处。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S1.p8.1": {
+  "sentences": [
+   {
+    "zh": "综合来看，这些发现既揭示了基于LLM的世界模型在文本环境中的前景，也揭示了其局限性。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "从词语到世界，从下一个词元到下一状态预测，我们为将LLM视为用于智能体学习的通用世界模型提供了实证基础，并规划了一条通往文本之外领域的路径。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S2.p1.1": {
+  "sentences": [
+   {
+    "zh": "大型语言模型最近已被探索用作各种基于文本和结构化环境中的世界模型。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "先前在世界建模方面的工作大多侧重于通过结构化或离散的状态表示来预测环境动态。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "基于补丁的方法提示LLM在ByteSized32（Wang et al., 2024; Yang et al., 2024）中估计状态增量，而在网页导航中，诸如WMA（Chae et al., 2025）和RLVR-World（Wu et al., 2025）等系统则对可访问性树的更新进行推理。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "其他工作采用封闭形式的预测方案，模型输出预定义的符号标签或类别，包括烹饪环境中的前提条件和效果（Xie et al., 2024）、灾害影响评级（Li et al., 2025a），或在LLM嵌入上训练的分类器头预测（Yang et al., 2025）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "尽管这些方法展示了结构化预测在特定环境中的实用性，但它们通常依赖于特定环境的抽象以及针对特定领域定制的固定输出空间。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "相比之下，我们将世界建模表述为多轮自然语言模拟任务，其中LLM以自由文本生成下一状态转换，从而实现更通用和组合性的交互模式。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S2.p2.1": {
+  "sentences": [
+   {
+    "zh": "关于模型适配，许多先前的工作采用零样本或少量示例提示（Wang et al., 2024; Yang et al., 2024; Li et al., 2025a; Zuo et al., 2025），或附加轻量级分类器头进行闭式预测（Yang et al., 2025）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "虽然这些设置凸显了LLM的潜在能力，但它们通常精度有限，并限制了其在下游任务中的适用性。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "超越基于提示的适配，我们在大规模多轮交互轨迹上微调LLM，以更好地内化长期环境动态。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S2.p3.1": {
+  "sentences": [
+   {
+    "zh": "先前的评估工作大多集中在有限环境和领域中的单步预测准确率上（Wang et al., 2024; Xie et al., 2024; Chae et al., 2025; Li et al., 2025a），很少考察长期一致性或复合误差——这些因素对于将世界模型用作可靠模拟器至关重要。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "因此，基于LLM的世界模型能否生成在真实环境中可执行的连贯多步轨迹，仍然是一个悬而未决的问题。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "为了弥补这一空白，我们在五个代表性环境中进行了系统评估，不仅测量单步保真度，还测量了 rollout 稳定性、WM 到 Real 的迁移，以及跨智能体、环境和规模的泛化能力。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS1.p1.1": {
+  "sentences": [
+   {
+    "zh": "我们将智能体与基于文本的世界模型之间的交互形式化为一个多轮基于语言的决策过程，其中感知和动作均以自然语言表示。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS1.SSS0.Px1.p1.1": {
+  "sentences": [
+   {
+    "zh": "文本智能体 $\\mathcal{A}$ 以 ReAct 风格运行（Yao et al., 2023b），产生一个简单统一的接口，其中每一步都涉及内部推理和外部动作。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "形式上，智能体定义为：",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS1.SSS0.Px1.p1.2": {
+  "sentences": [
+   {
+    "zh": "其中 $S_{i}$ 表示第 $i$ 步的文本观察（或环境响应），$T_{i}$ 表示智能体的内部推理轨迹，$A_{i}$ 表示以自然语言表达的显式动作。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS1.SSS0.Px2.p1.1": {
+  "sentences": [
+   {
+    "zh": "环境或其替代世界模型 $\\mathcal{W}$ 定义了互补的映射：",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS1.SSS0.Px2.p2.1": {
+  "sentences": [
+   {
+    "zh": "其中 $S_{n}^{\\prime}$ 表示世界模型预测的下一个状态，$R_{n}^{\\prime}\\in\\{0,1\\}$ 是一个二元奖励，指示任务成功或终止。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "$R_{n}^{\\prime}=1$ 的值对应于成功完成，而 $R_{n}^{\\prime}=0$ 表示未完成或失败状态（例如，在错误的时间触发验证）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "通过这些文本转换，世界模型充当环境动态的隐式**下一状态预测器**。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这种能力可以通过**上下文学习**实现，其中模型利用其提示中状态转换的少量示例，或通过对轨迹数据进行**监督微调**来学习底层动态。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS1.SSS0.Px2.p3.1": {
+  "sentences": [
+   {
+    "zh": "请注意，在实践中，基于文本的环境本质上是部分可观测马尔可夫决策过程（POMDP）：真实的环境状态比文本中描述给智能体的内容更丰富。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "例如，在 ALFWorld 中，一个房间可能包含从未被提及的物体和空间细节（例如，关闭的抽屉里有什么），然而这些隐藏因素对于预测世界如何演变很重要。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "因此，尽管智能体只接收到初始状态 $S_{0}$ 的部分视图，但世界模型可以用更完整的上下文进行初始化，例如完整的环境配置或随机化设置，使其能够更好地近似环境的潜在动态。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS1.SSS0.Px3.p1.1": {
+  "sentences": [
+   {
+    "zh": "智能体和世界模型共同构成一个迭代过程：",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS1.SSS0.Px3.p1.2": {
+  "sentences": [
+   {
+    "zh": "该过程在世界模型内部展开为多轮文本轨迹：",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS1.SSS0.Px3.p1.3": {
+  "sentences": [
+   {
+    "zh": "相应地，真实环境产生轨迹",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS1.SSS0.Px3.p1.4": {
+  "sentences": [
+   {
+    "zh": "该轨迹作为评估 $\\mathcal{W}$ 的保真度和一致性的参考。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS1.SSS0.Px3.p2.1": {
+  "sentences": [
+   {
+    "zh": "通过将基于文本的环境形式化为多轮交互过程，世界模型可以通过少量示例进行提示，或在真实轨迹 $\\tau_{\\text{real}}$ 上进行训练，以预测下一状态转移。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这种形式化使 $\\mathcal{W}$ 能够捕捉跨交互步骤的长期依赖关系和累积效应。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "虽然先前的工作（Wang et al., 2024; Xie et al., 2024; Yang et al., 2025）主要关注下一状态预测的准确性，但我们明确地建模、训练和评估世界模型的长期一致性，这对于数据合成、测试时模拟器和基于模型的强化学习等应用至关重要。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S3.SS2.p1.1": {
+  "sentences": [
+   {
+    "zh": "为了广泛考察基于文本的世界建模所需的知识和动态范围，我们采用了五个代表性环境，涵盖结构化和开放式两种设置。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "结构化环境 ALFWorld (Shridhar et al., 2021)、SciWorld (Wang et al., 2022) 和 TextWorld (Côté et al., 2018) 具有有界状态空间。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "它们提供基于具身、科学或叙事规律的确定性或规则支配的转移。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "相比之下，开放式环境 WebShop (Yao et al., 2023a) 和 StableToolBench (Guo et al., 2025) 表现出广泛、组合式和开放世界的动态，具有多样的实体和灵活的任务表述，需要超越固定模式的更强泛化能力。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "附录 A.1 中的表 5 总结了这些环境及其关键特征，附录 B 中给出了示例。总之，这些设置为评估语言模型作为基于文本的世界模拟器提供了一个全面且多样化的测试平台。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.p1.1": {
+  "sentences": [
+   {
+    "zh": "我们总结了世界模型训练和评估的设置，并将完整的实现细节推迟到附录 A.1。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "除非另有说明，所有实验均遵循本节所述的默认设置。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS0.SSS0.Px1.p1.1": {
+  "sentences": [
+   {
+    "zh": "我们使用 GPT-4o 作为行为策略来收集交互轨迹。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "为了匹配环境复杂度（见第 6.1 节），我们为 ALFWorld、SciWorld 和 TextWorld 各收集 40K 条轨迹，为 WebShop 收集 70K 条轨迹。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们保留成功和失败的回合，以扩大世界模型训练的行为覆盖范围。{fn1} 对于 StableToolBench，我们使用包含 160K 样本的公开单轮数据集。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "fn1": {
+  "sentences": [
+   {
+    "zh": "成功/失败的混合是由GPT-4o的原始成功率引起的，没有进行额外的过滤。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS0.SSS0.Px2.p1.1": {
+  "sentences": [
+   {
+    "zh": "对于 ALFWorld 和 SciWorld，世界模型被提供完整的初始状态描述（见附录 A.4 中的图 8 和图 9）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "相比之下，TextWorld 不暴露完整的初始状态，而 WebShop/StableToolBench 本质上部分可观测。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这种设置对基于历史的状态跟踪和先验知识提出了更高的要求，以推断未观测到的状态变量。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS0.SSS0.Px3.p1.1": {
+  "sentences": [
+   {
+    "zh": "我们使用 Qwen2.5-7B（基础版）和 Llama-3.1-8B（基础版）作为基于文本的世界模型的骨干模型。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "不同模型规模的比较见第 6.2 节。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS0.SSS0.Px4.p1.1": {
+  "sentences": [
+   {
+    "zh": "每条轨迹被格式化为交替出现智能体动作和环境响应的多轮对话（见公式 5）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在监督微调期间，世界模型基于对话历史和当前动作预测下一个环境响应。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S4.SS0.SSS0.Px5.p1.1": {
+  "sentences": [
+   {
+    "zh": "我们沿两个维度评估世界模型：单步预测保真度和多步推演一致性。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "**保真度。** 我们通过以真实轨迹前缀 $\\{S_{0},(A_{i},S_{i})_{i=1}^{n-1},A_{n}\\}$ 为条件并预测下一状态和奖励 $(S_{n}^{\\prime},R_{n}^{\\prime})$ 来计算精确匹配（EM）准确率。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "如果 $(S_{n}^{\\prime},R_{n}^{\\prime})$ 与真实值 $(S_{n},R_{n})$ 匹配，则预测正确。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "对于 TextWorld，EM 是一个保守的下界，因为多种表面形式可以描述相同的底层状态。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "对于输出高度开放式的 StableToolBench，我们额外报告词级 F1。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "**一致性。** 我们报告：（1）**真实**：在真实环境中的成功率；（2）**WM**：在世界模型内部的成功率；（3）**W2R**：在真实环境中重放世界模型动作时的成功率；以及（4）**一致性比率**：$\\text{CR}=\\text{W2R}/\\text{Real}$，其中值越高表明长期迁移越好（当世界模型推演比真实世界更成功时，CR 可能超过 1）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.SS1.p1.1": {
+  "sentences": [
+   {
+    "zh": "表1表明，预训练的大语言模型展现出有意义的上下文世界建模能力。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "像Gemini-2.5-flash和Claude-sonnet-4.5这样的模型在ALFWorld和SciWorld等结构化环境中实现了强大的下一状态预测，其中少量示例提供了显著改进（例如，仅用三个示例，Claude在SciWorld上的准确率从56.83上升到73.08）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这表明当代大语言模型编码了环境动态的潜在知识，并且能够在最小监督下快速调整其转换规则。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然而，这些能力并未完全迁移到诸如WebShop之类的开放式环境中，在WebShop中，少量示例提示在50多分左右趋于稳定，这表明仅靠隐式世界知识不足以生成无约束的、依赖上下文的状态更新。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.SS1.p2.1": {
+  "sentences": [
+   {
+    "zh": "监督微调带来了显著提升。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "直接在转移轨迹上训练的开源模型在 ALFWorld 和 SciWorld 上达到了 99%/98% 的准确率，并在 StableToolBench 上达到了 49% 的 F1 分数。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这些结果表明，稳健的世界建模需要与动态对齐的训练：仅靠提示无法捕捉转移模式的全部多样性，而监督微调使即使相对较小的模型也能有效地将其内化。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.T1": {
+  "sentences": [
+   {
+    "zh": "表1：基于提示和微调模型在五个环境中的下一状态预测EM准确率（%）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "AW、SW、TW、WS和STB分别表示ALFWorld、SciWorld、TextWorld、WebShop和StableToolBench。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "STB${}_{\\text{F1}}$表示StableToolBench的词级F1分数，因为其输出空间是开放式的。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.T2": {
+  "sentences": [
+   {
+    "zh": "表2：不同智能体在四个环境中的任务成功率（%）。“Real”、“WM”和“W2R”分别表示在真实环境、世界模型以及世界模型到真实执行下的成功率。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "最后一列报告一致性比率（CR=W2R/Real），数值越高（绿色越深）表示 rollout 保真度越好。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.SS2.p1.1": {
+  "sentences": [
+   {
+    "zh": "一个可靠的世界模型不仅需要较高的单步预测准确率，更关键的是，在与智能体进行长时间交互过程中保持一致性。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们考察两个关键维度：（1）小的局部错误是否会在长时程推演中累积成重大失败，以及（2）世界模型是否能在其训练分布之外的不同智能体行为上泛化。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "表2报告了四个环境和多个智能体上的一致性指标；StableToolBench因其单轮性质而被省略。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.SS2.SSS0.Px1.p1.1": {
+  "sentences": [
+   {
+    "zh": "世界模型在长时程推演中大多保持单步保真度，尤其是在结构化环境中。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在 ALFWorld、SciWorld 和 TextWorld 中，微调后的 Qwen2.5 世界模型达到了 96%、91% 和 92% 的高一致性比率，表明在世界模型内生成的多步轨迹转移到真实环境时仍然可执行。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然而，WebShop 表现出较低的一致性（通常低于 80%），主要由于其开放性特征和多样化的搜索结果，世界模型难以准确模拟。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "通过用真实观察来锚定模型推演，可以大幅减轻这种误差。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "当推演以真实搜索结果初始化时，与 GPT-4o 智能体的一致性从 56% 急剧增加到接近 100%，表明部分真实环境锚定有效地减少了模拟漂移。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S5.SS2.SSS0.Px2.p1.1": {
+  "sentences": [
+   {
+    "zh": "除了环境特定因素外，世界模型的一致性还取决于智能体行为与训练分布的匹配程度。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "较低能力的智能体（如 GPT-4o-mini）产生的一致性比率经常低于 70%，而较强的智能体（如 GPT-4.1、GPT-5 和 Claude）则可靠地超过 90%。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这种差距源于较弱智能体采取与任务目标不一致的行动，导致其轨迹偏离训练分布。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "相比之下，较高能力的智能体保持与用于轨迹采样的专家策略（GPT-4o）一致的目标导向行为，从而实现更高的一致性。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这些结果凸显了多样化训练轨迹的重要性，而不是仅仅依赖单一强智能体，正如第 6.5 节进一步讨论的那样。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S6.F2": {
+  "sentences": [
+   {
+    "zh": "图2：Qwen2.5-7B在不同训练数据规模下的下一状态预测准确率。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "结构化设置在适度的数据量（约20K）下趋于饱和，而开放式设置则持续受益于更大的数据集。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "**注。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们应用非线性y轴变换 $f(y)=100-20\\log_{10}(\\max(100-y,0.01)+1)$ 以更好地揭示增长趋势。**",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S6.F3": {
+  "sentences": [
+   {
+    "zh": "图3：Qwen2.5系列上的下一状态预测准确率。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "较小的模型（约1.5B）能有效捕捉结构化动态，而更复杂的设置则明显受益于模型容量的增加。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S6.SS1.p1.1": {
+  "sentences": [
+   {
+    "zh": "为了研究世界模型性能如何随数据扩展，我们将训练轨迹从1K变化到160K，并评估单步准确率。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "如图2所示，结构化环境（ALFWorld、SciWorld、TextWorld）改进迅速，并在约20K轨迹处饱和，这与其低熵、规则驱动的动态一致。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "相比之下，开放式环境的扩展更为渐进：WebShop从额外数据中受益，直到约70K轨迹，而StableToolBench在160K样本时仍未显示饱和，这是由于长尾语言变异和高度组合的API行为。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这些结果表明，世界建模表现出环境依赖的扩展：结构化环境数据效率高，而开放式领域需要更大的数据集。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S6.SS2.p1.1": {
+  "sentences": [
+   {
+    "zh": "我们接下来分析模型容量如何塑造世界模型性能（图3）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "与数据扩展趋势相呼应，模型大小与环境复杂度强烈交互。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在结构化环境中，性能迅速饱和：1.5B模型已经捕捉到核心转移动态，进一步扩展仅带来边际改进。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然而，在开放式环境中，容量至关重要。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "较小的模型难以表示丰富的语言变异性和组合式工具使用，而较大的模型则提供稳定的准确率提升。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "结合数据扩展结果，这些发现表明，在开放式世界建模中取得成功既需要大量的轨迹，也需要足够的模型容量来内化长尾、高熵的动态。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S6.F4": {
+  "sentences": [
+   {
+    "zh": "图4：ALFWorld在不同OOD设置下的任务成功率（%）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "成功率在不同智能体上取平均，完整结果见附录C的表10。即使布局或房间类型发生变化，世界模型仍保持强劲性能。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S6.SS3.p1.1": {
+  "sentences": [
+   {
+    "zh": "世界模型设计中的一个核心问题是它们在未见过的环境设置下的泛化能力如何。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "以 ALFWorld 作为代表性案例，我们按照原始环境设置（Shridhar et al., 2021）分析了两个分布外测试分割：OOD-Seen 保持房间类型但改变布局，OOD-Unseen 引入全新的房间类型或未见过的布局配置。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "如图 4 所示，即使在空间配置发生变化或出现新房间类型的情况下，世界模型在两个 OOD 设置下都保持了与真实环境紧密一致的成功率。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这些结果表明，LLM 世界模型捕捉到的是可迁移的转移动态，而不是记忆特定的布局，展现出对环境状态空间中结构变化的强大鲁棒性。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S6.F5": {
+  "sentences": [
+   {
+    "zh": "图5：Qwen2.5-7B在混合训练与分别训练下的下一状态预测准确率，每个环境使用1K样本。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们首先混合结构化环境（ALFWorld、SciWorld、TextWorld），然后逐步纳入开放式环境（WebShop、StableToolBench），得到Mix3、Mix4和Mix5设置。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S6.SS4.p1.1": {
+  "sentences": [
+   {
+    "zh": "孤立地训练世界模型通常限制其泛化到单一环境之外的能力，这促使我们研究在多个环境上联合训练是否能产生可迁移的收益。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "因此，我们评估了三种混合训练配置：Mix3（ALFWorld、SciWorld、TextWorld）、Mix4（加入WebShop）和Mix5（加入StableToolBench），每个环境分配1K条轨迹以匹配单独训练模型的数据预算。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "如图5所示，混合训练持续加速学习并提高最终准确率，在TextWorld和WebShop中收益尤为显著，表明模型有效地内化并复用了跨任务的共享物理、程序和叙事动态。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "例外是StableToolBench，其以模式为中心的单轮结构在混合数据中代表性不足，导致单独训练的模型表现更优。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "总体而言，这些结果表明混合数据提供了稳定的正向收益，并且重要的是，实现了单个世界模型能够稳健地服务于多个环境的实际部署。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S6.T3": {
+  "sentences": [
+   {
+    "zh": "表3：不同训练数据组成下SciWorld中的任务成功率（%）。“Single Agent Traj”仅使用4K条GPT-4o轨迹进行训练，而“Mix Agent Traj”结合了来自ID智能体的轨迹，每个智能体各1K条轨迹。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S6.SS5.p1.1": {
+  "sentences": [
+   {
+    "zh": "随着行为偏移降低一致性，我们探究更广泛的行为覆盖是否能改善泛化。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们在混合智能体轨迹上训练一个世界模型，并将其与仅使用 GPT-4o 的基线进行比较。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "表 3 显示较弱智能体的分布外增益显著：GPT-4o-mini 的一致性比率从 0.49 上升到 0.81，GPT-4-turbo 也有所改善。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这表明仅由专家轨迹在分布偏移下是不充分的；纳入多样化的智能体行为对于改善泛化和 rollout 稳定性至关重要。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S7.T4": {
+  "sentences": [
+   {
+    "zh": "表4：在WebShop中，使用世界模型进行不同次数最大预执行验证尝试时，不同智能体的任务成功率（%）。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "括号中的数字表示相对于无验证基线的改进。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S7.SS1.p1.1": {
+  "sentences": [
+   {
+    "zh": "在现实世界的决策中，有些行动是不可逆且代价高昂的，这造成了一个安全瓶颈：一次错误的承诺就可能结束一个回合或造成无法挽回的损失。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "这促使我们将世界模型用作一个可回退的想象世界，在执行高风险行动之前对其进行评估。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "WebShop 就是这种场景的典型例子：一旦智能体结账，回合就结束，错误无法撤销。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "因此，我们将世界模型用作轻量级的执行前验证器。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在承诺结账之前，智能体会模拟结果；只有当预测表明成功时，它才执行该行动，否则它继续与环境交互。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "我们改变验证预算（0、2、4、10、50）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S7.SS1.p2.1": {
+  "sentences": [
+   {
+    "zh": "如表4所示，验证提高了所有代理的成功率，其中中等容量模型的提升最大。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "然而，回报并非单调递增，因为重复验证改变了轨迹上下文并改变了代理的动作分布，导致分布偏移，从而可能削弱想象结果与真实结果之间的一致性。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在实践中，适度的预算（例如2-10次检查）提供了最佳权衡，在不破坏行为稳定性的情况下减少了不可逆的失败。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S7.SS2.p1.1": {
+  "sentences": [
+   {
+    "zh": "当真实交互昂贵、缓慢或受限时，智能体面临经验瓶颈。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "世界模型可能通过合成轨迹来替代部分真实经验，从而缓解这一瓶颈。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "为了检验这一点，我们从真实环境或世界模型{fn2}中收集1,000条成功轨迹，并为Qwen2.5-7B-Instruct构建四个SFT数据集：Real 1K、Syn 1K、0.5K+0.5K以及1K+1K混合数据集，所有数据集均在相同流程下训练。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "图6显示，世界模型生成的轨迹与真实数据相比具有很强的竞争力。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在SciWorld中，Syn 1K与Real 1K相当，而1K+1K混合数据集优于任一单独来源。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "在WebShop中，合成数据同样有效，混合方案带来最稳定的提升。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "总体而言，这些结果表明合成经验可以减少对真实环境交互的依赖，在真实经验有限时为扩展智能体学习提供另一条途径。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "fn2": {
+  "sentences": [
+   {
+    "zh": "实现细节见附录 A.2。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S7.SS2.fig3": {
+  "sentences": [
+   {
+    "zh": "图6：在SciWorld和WebShop中，采用不同数据合成策略训练的Qwen2.5-7B-Instruct SFT智能体的任务成功率（%）。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S7.SS3.p1.1": {
+  "sentences": [
+   {
+    "zh": "近期工作（Zhang et al., 2025b）表明，在显式策略学习之前让模型接触环境动态可能提供有用的归纳偏置：预测后果可能减少无引导探索并稳定早期强化学习。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "为了在我们的基于文本的决策环境中研究这一点，我们比较了（1）标准 Agent-SFT $\\rightarrow$ RL 基线；以及（2）世界模型预热流程（WM-SFT $\\rightarrow$ Agent-SFT $\\rightarrow$ RL），其中智能体首先以与世界模型训练相同的目标接触环境动态{fn3}。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "fn3": {
+  "sentences": [
+   {
+    "zh": "实现细节见附录 A.3。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S7.SS3.p2.1": {
+  "sentences": [
+   {
+    "zh": "图7表明，早期经验在ALFWorld和SciWorld上均带来一致的提升。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "通过在策略学习之前让智能体接触环境动态，早期经验稳定了强化学习训练，减少了由错误的常识先验导致的失败，并最终获得了比基线更高的最终成功率。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "总体而言，早期经验为提高学习效果提供了一个有前景的方向。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S8.p1.1": {
+  "sentences": [
+   {
+    "zh": "本研究旨在探讨一个简单但影响深远的问题：使大语言模型能够对词语进行建模的范式，是否也能使它们对世界进行建模，并进而支持更有效的智能体从经验中学习？",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "以基于文本的环境作为受控测试平台，我们将世界建模重新表述为交互下的多轮次下一状态预测，并引入一个系统框架来评估保真度、可扩展性和智能体效用。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S8.p2.1": {
+  "sentences": [
+   {
+    "zh": "我们的结果提供了强有力的证据，表明大语言模型可以作为隐式的基于文本的世界模型。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "当在足够的规模和覆盖范围内使用与动态对齐的监督进行训练时，它们能在较长的视野内保持连贯的潜在状态，并为下游智能体带来切实的好处，包括更安全的决策、可扩展的经验生成以及提高的学习效率。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "与此同时，这些收益并非普遍存在：鲁棒性关键取决于行为覆盖、分布对齐和环境复杂性，这划定了世界模型能够有意义地支持智能体学习的具体范围。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S8.p3.1": {
+  "sentences": [
+   {
+    "zh": "综合来看，这些发现为将大语言模型不仅视为序列预测器，而且视为交互世界的学习模拟器奠定了实证基础。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "通过将下一词元预测与下一状态建模联系起来，这项工作指向了一种将语言模型作为智能体世界模型的统一观点，并为将这些思想扩展到文本之外更丰富、多模态和具身领域打开了大门。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "S8.p4.2": {
+  "sentences": [
+   {
+    "zh": "*",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A1.T5": {
+  "sentences": [
+   {
+    "zh": "表5：本文使用的五个基于文本的环境的总结，突出了对智能体和世界模型提出的知识需求。",
+    "conf": "high",
+    "note": ""
+   },
+   {
+    "zh": "任务示例见附录B中的图14–18。",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "A1.F8": {
+  "sentences": [
+   {
+    "zh": "图8：ALFWorld的初始化上下文示例",
+    "conf": "high",
+    "note": ""
+   }
+  ],
+  "translator": "deepseek-v4-pro（关思考）"
+ },
+ "__sections__": {
+  "__title__": "从词到世界：大型语言模型能否成为隐式的基于文本的世界模型？",
+  "Abstract": "摘要",
+  "1 Introduction": "1 引言",
+  "2 Related Works": "2 相关工作",
+  "3 LLM as Text-based World Models": "3 作为基于文本的世界模型的LLM",
+  "3.1 Formalization of World Models": "3.1 世界模型的形式化",
+  "Agent": "智能体",
+  "World Model": "世界模型",
+  "Interactive Process": "交互过程",
+  "3.2 Text-based Environments": "3.2 基于文本的环境",
+  "4 World Model Training and Evaluation": "4 世界模型的训练与评估",
+  "Data": "数据",
+  "Initialization Context": "初始化上下文",
+  "Finetuning Models": "微调模型",
+  "Training": "训练",
+  "Metrics": "指标",
+  "5 Fidelity & Consistency": "5 保真度与一致性",
+  "5.1 Next-state Prediction Fidelity": "5.1 下一状态预测的保真度",
+  "5.2 Rollout Consistency": "5.2 推演一致性",
+  "Consistency Across Environments": "跨环境一致性",
+  "How does behavior shift affect consistency?": "行为转变如何影响一致性？",
+  "6 Scalability & Robustness": "6 可扩展性与鲁棒性",
+  "6.1 Data Scaling Laws for World Models": "6.1 世界模型的数据缩放定律",
+  "6.2 Model Size Effects": "6.2 模型规模效应",
+  "6.3 Beyond Memorized Environments": "6.3 超越记忆的环境",
+  "6.4 Cross-Env Transfer via Joint Training": "6.4 通过联合训练实现跨环境迁移",
+  "6.5 Behavioral Coverage for Robust World Modeling": "6.5 面向鲁棒世界建模的行为覆盖",
+  "7 Agent Utility": "7 智能体效用",
+  "7.1 Can World Models Prevent Irreversible Mistakes?": "7.1 世界模型能否防止不可逆的错误？",
+  "7.2 Synthetic Data Competes with Real": "7.2 合成数据与真实数据竞争",
+  "7.3 Early Experience for Policy Learning": "7.3 用于策略学习的早期经验",
+  "8 Conclusion": "8 结论",
+  "Appendix A Implementation Details": "附录 A 实现细节",
+  "Environments": "环境",
+  "A.4 World Model Initialization Context": "A.4 世界模型初始化上下文"
+ }
+}
