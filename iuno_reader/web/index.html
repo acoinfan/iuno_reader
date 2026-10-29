@@ -27,6 +27,10 @@ button:hover{border-color:#c9cdd3}
 button.pri{background:var(--acc);border-color:var(--acc);color:#fff}
 button.sm{padding:2px 9px;font-size:12.5px}
 button.danger{color:var(--err)}
+.tip{position:relative}
+.tip::after{content:attr(data-tip);position:absolute;right:0;bottom:calc(100% + 8px);width:max-content;max-width:min(320px,80vw);white-space:pre-line;text-align:left;background:#1f2328;color:#fff;font-size:12.5px;font-weight:400;line-height:1.55;padding:8px 11px;border-radius:8px;opacity:0;transition:opacity .15s;pointer-events:none;z-index:10}
+.tip::before{content:'';position:absolute;right:16px;bottom:calc(100% - 4px);border:6px solid transparent;border-top-color:#1f2328;opacity:0;transition:opacity .15s;pointer-events:none;z-index:10}
+.tip:hover::after,.tip:hover::before,.tip:focus-visible::after,.tip:focus-visible::before{opacity:1}
 a{color:var(--acc)}
 .ch{display:flex;justify-content:space-between;gap:8px;align-items:baseline;flex-wrap:wrap}
 .ti{font-weight:600}.id{color:var(--sub);font-size:12px;margin-left:6px}
@@ -62,9 +66,10 @@ label.f+input,label.f+select{width:100%}
 
 <!-- 任务 -->
 <div class="pane on" id="jobs">
- <div class="drop" id="drop"><b>把论文 PDF 拖到这里</b><br>从文件名里认 arXiv 编号（例如 2602.04212_xxx.pdf）；也可以拖链接或文字进来</div>
- <div class="row"><input type="text" class="grow" id="ids" placeholder="或粘贴 arXiv 编号、DOI、论文页面链接（多个用空格分开），或者一个标题">
-  <select id="jobPreset"></select><button class="pri" id="add">添加</button></div>
+ <div class="drop" id="drop"><b>把论文 PDF 拖到这里</b>，或者 <a href="#" id="pick">选择文件</a><br>文件名里有 arXiv 编号的（例如 2602.04212_xxx.pdf）翻 arXiv 网页版；其他 PDF 直接从 PDF 翻（准确度较低）；也可以拖链接或文字进来</div>
+ <input type="file" id="file" accept=".pdf,application/pdf" multiple hidden>
+ <div class="row"><input type="text" class="grow" id="ids" placeholder="或粘贴 arXiv 编号、DOI、论文页面链接（多个用空格分开），或者一个标题；空着点「添加」选本地 PDF">
+  <select id="jobPreset"></select><button class="pri tip" id="add" data-tip="填了编号、DOI、链接或标题：点这里添加&#10;框空着：点这里选本地 PDF，可以多选&#10;· 只收 .pdf 文件&#10;· 文件名里有 arXiv 编号的（如 2602.04212_xxx.pdf）翻 arXiv 网页版&#10;· 其他 PDF 直接从 PDF 翻，准确度较低">添加</button></div>
  <div class="small" id="presetNote" style="margin-top:6px"></div>
  <div id="list"></div>
 </div>
@@ -160,15 +165,25 @@ async function addIds(text){if(!text.trim()){toast('请填 arXiv 编号、DOI、
  toast('正在查找论文…');
  try{const d=await api('POST','/api/jobs',{ids:[text],preset:$('#jobPreset').value});
   toast('已添加 '+d.added.join('、')+(d.unresolved&&d.unresolved.length?'；'+d.unresolved.join('；'):''));refresh();}catch(e){toast(e.message);}}
-$('#add').onclick=()=>{addIds($('#ids').value);$('#ids').value='';};
+// 本地 PDF 一个个传给服务端（/api/upload）：文件名里有 arXiv 编号的走网页版，其他的从 PDF 翻
+async function uploadPdfs(files){const pdfs=files.filter(f=>/\.pdf$/i.test(f.name)||f.type==='application/pdf');
+ const skip=files.filter(f=>!pdfs.includes(f)).map(f=>f.name);if(skip.length)toast('只收 PDF，跳过了：'+skip.join('、'));
+ const added=[],bad=[];
+ for(const f of pdfs){toast(`正在上传 ${f.name}…`);
+  try{const r=await fetch(`/api/upload?name=${encodeURIComponent(f.name)}&preset=${encodeURIComponent($('#jobPreset').value)}`,
+    {method:'POST',headers:{'Content-Type':'application/pdf'},body:f});
+   const d=await r.json().catch(()=>({}));if(!r.ok)throw new Error(d.error||r.status);added.push(...d.added);}
+  catch(e){bad.push(f.name+'：'+e.message);}}
+ if(pdfs.length)toast([added.length?'已添加 '+added.join('、'):'',...bad].filter(Boolean).join('；'));refresh();}
+$('#add').onclick=()=>{const t=$('#ids').value;if(!t.trim()){$('#file').click();return;}addIds(t);$('#ids').value='';};
 $('#ids').onkeydown=e=>{if(e.key==='Enter')$('#add').click();};
+$('#pick').onclick=e=>{e.preventDefault();$('#file').click();};
+$('#file').onchange=e=>{uploadPdfs([...e.target.files]);e.target.value='';};
 const dz=$('#drop');
 ['dragenter','dragover'].forEach(e=>dz.addEventListener(e,ev=>{ev.preventDefault();dz.classList.add('over');}));
 ['dragleave','drop'].forEach(e=>dz.addEventListener(e,ev=>{ev.preventDefault();dz.classList.remove('over');}));
-dz.addEventListener('drop',ev=>{const names=[...ev.dataTransfer.files].map(f=>f.name);
- const txt=ev.dataTransfer.getData('text')||'';const bad=names.filter(n=>!/\d{4}\.\d{4,5}/.test(n));
- if(bad.length)toast('这些文件名里没有 arXiv 编号，请改填 DOI、链接或标题：'+bad.join('、'));
- const ok=names.filter(n=>/\d{4}\.\d{4,5}/.test(n));if(ok.length||txt.trim())addIds(ok.join(' ')+' '+txt);});
+dz.addEventListener('drop',ev=>{const files=[...ev.dataTransfer.files];const txt=ev.dataTransfer.getData('text')||'';
+ if(files.length)uploadPdfs(files);else if(txt.trim())addIds(txt);});
 
 /* ---------- 方案 ---------- */
 const provName=id=>(S.providers.find(p=>p.id===id)||{}).name||id+'（找不到）';

@@ -62,6 +62,35 @@ try:
     assert server.Q.find(j["n"])["status"] == "queued"
     print("任务：添加、暂停、继续 通过")
 
+    # 上传 PDF：没有 arXiv 编号的存进 cache/；有编号的走 arXiv；同名不同内容不覆盖；之后可以直接填编号
+    up = "Zz-UploadTest"
+    up_pdf = os.path.join(ROOT, "cache", f"{up}.pdf")
+    n_jobs = len(server.Q.jobs)
+    try:
+        code, r = call("POST", f"/api/upload?name=06_{up}.pdf&preset=我的", b"%PDF-1.5 fake")
+        assert code == 200 and r["added"] == [up], r
+        assert open(up_pdf, "rb").read() == b"%PDF-1.5 fake"
+        assert call("POST", f"/api/upload?name={up}.pdf&preset=我的", b"%PDF-1.5 fake")[0] == 200  # 同一份再传一次
+        code, r = call("POST", f"/api/upload?name={up}.pdf&preset=我的", b"%PDF-1.5 other")
+        assert code == 400 and "改个名" in r["error"], r
+        assert open(up_pdf, "rb").read() == b"%PDF-1.5 fake"
+        code, r = call("POST", f"/api/upload?name={PID}_x.pdf&preset=我的", b"%PDF-1.5 fake")
+        assert code == 200 and r["added"] == [PID], r
+        assert not os.path.exists(os.path.join(ROOT, "cache", f"{PID}.pdf"))
+        assert call("POST", f"/api/upload?name=a.pdf&preset=我的", b"<html>")[0] == 400
+        assert call("POST", f"/api/upload?name=a.pdf&preset=没有这个方案", b"%PDF-1.5")[0] == 400
+        old_max, server.MAX_UPLOAD = server.MAX_UPLOAD, 4
+        assert call("POST", f"/api/upload?name=a.pdf&preset=我的", b"%PDF-1.5")[0] == 413
+        server.MAX_UPLOAD = old_max
+        code, r = call("POST", "/api/jobs", {"ids": [up], "preset": "我的"})
+        assert code == 200 and r["added"] == [up], r
+    finally:
+        if os.path.exists(up_pdf):
+            os.remove(up_pdf)
+        for j2 in list(server.Q.jobs[n_jobs:]):
+            call("POST", f"/api/jobs/{j2['n']}/delete")
+    print("上传 PDF：存进 cache/、arXiv 编号走网页版、同名不覆盖、短编号可直接填 通过")
+
     # 进度和花费：直接数数据文件（正文 3 段，附录 1 段不算）
     os.makedirs(D, exist_ok=True)
     segs = [{"id": f"p{i}", "kind": "para", "section": "1 Intro", "en": "A.", "sentences": ["A."]} for i in range(3)]

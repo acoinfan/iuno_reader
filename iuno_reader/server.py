@@ -36,9 +36,46 @@ PID = r"([A-Za-z0-9][A-Za-z0-9._-]{1,99})"  # arXiv 编号，或者来自 PDF �
 def _to_arxiv(texts):
     """输入框或拖进来的文字 → 流水线编号（见 pipeline.to_pids）：DOI、论文页面链接、标题先找 arXiv 版本，
     找不到但有开放获取 PDF 的改用 PDF；都不行的连同原因返回。"""
-    from .pipeline import to_pids
+    from .pipeline import PID_OK, to_pids
     from .resolve import find_inputs
-    return to_pids(ROOT, [x for t in texts for x in find_inputs(t)], log=lambda s: None)
+    items = []
+    for t in texts:
+        rest = []
+        for w in (t or "").split():
+            # 以前放进 cache/ 的 PDF 编号（如 Orca-OSDI22）：find_inputs 认不出，太短也不会被当成标题，这里先挑出来
+            if PID_OK.fullmatch(w) and os.path.isfile(os.path.join(ROOT, "cache", f"{w}.pdf")):
+                items.append(w)
+            else:
+                rest.append(w)
+        items += find_inputs(" ".join(rest))
+    return to_pids(ROOT, items, log=lambda s: None)
+
+
+MAX_UPLOAD = 200_000_000
+
+
+def add_upload(name, data):
+    """网页上传的 PDF → 流水线编号（规则同 pipeline.add_pdf）：文件名里有 arXiv 编号的走 arXiv（先找网页版）；
+    其他的存成 cache/<编号>.pdf。同一编号已经有一份内容不同的 PDF 时不覆盖（以前的拆分和译文对着的是旧文件），请改名再传。"""
+    from .library import pid_from_name
+    from .pipeline import ARXIV_PID, PID_OK
+    if data[:5] != b"%PDF-":
+        raise ValueError(f"{name} 不是 PDF")
+    pid = pid_from_name(name)
+    if not PID_OK.fullmatch(pid):
+        raise ValueError(f"从文件名认不出编号：{name}")
+    if ARXIV_PID.fullmatch(pid):
+        return pid
+    dst = os.path.join(ROOT, "cache", f"{pid}.pdf")
+    if os.path.exists(dst):
+        with open(dst, "rb") as f:
+            if f.read() != data:
+                raise ValueError(f"cache/ 里已经有一份内容不同的 {pid}.pdf；请把文件改个名再上传")
+        return pid
+    os.makedirs(os.path.dirname(dst), exist_ok=True)
+    with open(dst, "wb") as f:
+        f.write(data)
+    return pid
 
 
 def _why(r):
@@ -394,6 +431,17 @@ class Handler(BaseHTTPRequestHandler):
                     return self._send(400, {"error": msg, "unresolved": bad})
                 Q.add(ids, b.get("preset", ""))
                 return self._send(200, {"added": ids, "unresolved": [_why(r) for r in bad]})
+            if method == "POST" and path == "/api/upload":
+                # 网页里选的或拖进来的 PDF：请求体就是文件本身，文件名和方案放在查询参数里
+                preset = q.get("preset", [""])[0]
+                if not pv.preset(preset):
+                    return self._send(400, {"error": f"没有叫「{preset}」的方案"})
+                n = int(self.headers.get("Content-Length") or 0)
+                if n > MAX_UPLOAD:
+                    return self._send(413, {"error": f"文件太大（{n // 1_000_000} MB），最多 {MAX_UPLOAD // 1_000_000} MB"})
+                pid = add_upload(q.get("name", [""])[0], self.rfile.read(n))
+                Q.add([pid], preset)
+                return self._send(200, {"added": [pid]})
             m = re.fullmatch(r"/api/jobs/(\d+)/(pause|resume|retry|delete)", path)
             if method == "POST" and m:
                 Q.action(int(m.group(1)), m.group(2))
@@ -443,7 +491,7 @@ def handle(method, path, body=None):
 
     class _Fake(Handler):
         def __init__(self):  # 不走 BaseHTTPRequestHandler 的套接字初始化
-            data = json.dumps(body).encode() if body is not None else b""
+            data = body if isinstance(body, bytes) else json.dumps(body).encode() if body is not None else b""
             self.path, self.rfile, self.wfile = path, io.BytesIO(data), io.BytesIO()
             self.headers = {"Content-Length": str(len(data))}
             self.out = {}
